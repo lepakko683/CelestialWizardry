@@ -1,0 +1,16 @@
+[
+{
+  "modid": "celestialwizardry",
+  "name": "Celestial Wizardry",
+  "description": "Diipa daapa duu!",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authors": ["le683","PizzAna"],
+  "credits": "",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]
