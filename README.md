@@ -20,9 +20,9 @@ Also make sure you know EXACTLY what you're doing!  It's not any of our faults i
 
 [Setup Git](#setup-git)
 
-[Setup Mod](#setup-ee3)
+[Setup Mod](#setup-celestial-wizardry)
 
-[Compile Mod](#compile-ee3)
+[Compile Mod](#compile-celestial-wizardry)
 
 [Updating Your Repository](#updating-your-repository)
 
