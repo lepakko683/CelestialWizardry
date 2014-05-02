@@ -2,7 +2,7 @@
 {
   "modid": "celestialwizardry",
   "name": "Celestial Wizardry",
-  "description": "Diipa daapa duu!",
+  "description": "Celestial Wizardry is about using your charge of celestial energy to cast spells and writing spells with runic characters.",
   "version": "${version}",
   "mcversion": "${mcversion}",
   "url": "",
