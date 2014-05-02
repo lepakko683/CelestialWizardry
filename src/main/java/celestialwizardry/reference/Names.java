@@ -11,6 +11,8 @@ public class Names
     {
         public static final String MAGICAL_INK = "magicalInk";
         public static final String STAFF = "staff";
+        public static final String SCROLL = "scroll";
+        public static final String SPELL_SCROLL = "spellScroll";
     }
 
     public static class NBT
