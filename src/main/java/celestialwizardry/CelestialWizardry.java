@@ -46,7 +46,10 @@ public class CelestialWizardry
         log.info("Starting pre-initialization");
 
         // Initialize the configuration
-        ConfigHandler.init(event.getModConfigurationDirectory().getAbsolutePath() + File.separator + Reference.MOD_ID.toLowerCase() + File.separator);
+        ConfigHandler.init(
+                event.getModConfigurationDirectory().getAbsolutePath() + File.separator + Reference.MOD_ID.toLowerCase()
+                        + File.separator
+                          );
 
         // Initialize mod items
         ModItems.init();

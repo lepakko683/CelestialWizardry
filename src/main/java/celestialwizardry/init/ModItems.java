@@ -1,10 +1,6 @@
 package celestialwizardry.init;
 
-import celestialwizardry.item.ItemCW;
-import celestialwizardry.item.ItemMagicalInk;
-import celestialwizardry.item.ItemScroll;
-import celestialwizardry.item.ItemSpellScroll;
-import celestialwizardry.item.ItemStaff;
+import celestialwizardry.item.*;
 import celestialwizardry.reference.Names;
 import cpw.mods.fml.common.registry.GameRegistry;
 

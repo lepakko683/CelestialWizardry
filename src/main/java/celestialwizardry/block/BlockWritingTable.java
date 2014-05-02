@@ -1,6 +1,7 @@
 package celestialwizardry.block;
 
 import celestialwizardry.reference.Names;
+import celestialwizardry.tileentity.TileEntityWritingTable;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.ITileEntityProvider;
@@ -9,6 +10,7 @@ import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
+import net.minecraftforge.common.util.ForgeDirection;
 
 public class BlockWritingTable extends BlockCW implements ITileEntityProvider
 {
@@ -44,11 +46,11 @@ public class BlockWritingTable extends BlockCW implements ITileEntityProvider
     @SideOnly(Side.CLIENT)
     public IIcon getIcon(int side, int meta)
     {
-        if (side == 0)
+        if (side == ForgeDirection.DOWN.ordinal())
         {
             return bottomIcon;
         }
-        else if (side == 1)
+        else if (side == ForgeDirection.UP.ordinal())
         {
             return topIcon;
         }
@@ -67,6 +69,6 @@ public class BlockWritingTable extends BlockCW implements ITileEntityProvider
     @Override
     public TileEntity createNewTileEntity(World world, int meta)
     {
-        return null; // TODO
+        return new TileEntityWritingTable();
     }
 }
