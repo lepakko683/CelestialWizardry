@@ -8,8 +8,6 @@ CelestialWizardry
 
 [Contributing](#contributing) - For those that want to help out.
 
-THIS README IS BASED ON EE3'S README FILE! IT HAS INCORRECT STUFF IN IT, AND PIZZANA WILL CLEAN IT UP AS SOON AS POSSIBLE!
-
 ###Compiling Celestial Wizardry
 IMPORTANT: Please report any issues you have, there might be some problems with the documentation!
 Also make sure you know EXACTLY what you're doing!  It's not any of our faults if your OS crashes, becomes corrupted, etc.
@@ -47,6 +45,7 @@ The Java JDK is used to compile Celestial Wizardry.
 3. Open up your command line and run `javac`.  If it spews out a bunch of possible options and the usage, then you're good to go.  If not, try the steps again.
 
 ####Setup Gradle
+**Celestial Wizardry has Gradle in its repository, so if you want to, can skip this part!**
 Gradle is used to execute the various build tasks when compiling Celestial Wizardry.
 
 1. Download and install Gradle.
@@ -86,12 +85,11 @@ This section assumes that you're using the command-line version of Git.
 
 ####Compile Celestial Wizardry
 1. Execute `gradle setupCIWorkspace`. This sets up Forge and downloads the necessary libraries to build Celestial Wizardry.  This might take some time, be patient.
-	* You will generally only have to do this once until the Forge version in `build.properties` changes.
+	* You will generally only have to do this once until the Forge version in `build.gradle` changes.
 2. Execute `gradle build`. If you did everything right, `BUILD SUCCESSFUL` will be displayed after it finishes.  This should be relatively quick.
     * If you see `BUILD FAILED`, check the error output (it should be right around `BUILD FAILED`), fix everything (if possible), and try again.
 3. Navigate to `mcdev\CelestialWizardry\build\libs`.
-    *  You should see a `.jar` file named `celestialwizardry-1.7.2-0.0.1.jar`, where # is the `build_number` value in `build.properties`.
-		* NOTE: `null` means that you are missing a `build_number` value in `build.properties` or that your CI environment is set up incorrectly.
+    *  You should see a `.jar` file named `celestialwizardry-1.7.2-0.0.1.jar`.
 4. Copy the jar into your Minecraft mods folder, and you are done!
 
 ####Updating Your Repository
@@ -106,7 +104,7 @@ In order to get the most up-to-date builds, you'll have to periodically update y
 ###Contributing
 ***
 ####Submitting a PR
-So you found a bug in our's code?  Think you can make it more efficient?  Want to help in general?  Great!
+So you found a bug in our code? Think you can make it more efficient? Want to help in general? Great!
 
 1. If you haven't already, create a GitHub account.
 2. Click the `Fork` icon located at the top-right of this page (below your username).
@@ -117,9 +115,9 @@ So you found a bug in our's code?  Think you can make it more efficient?  Want t
 6. Click `Send pull request`, and wait for feedback!
 
 ####Creating an Issue
-Celestial Wizardry crashes every time?  Have a suggestion?  Found a bug?  Create an issue now!
+Celestial Wizardry crashes every time? Have a suggestion? Found a bug? Create an issue now!
 
-1. Make sure your issue hasn't already been answered or fixed.  Also think about whether your issue is a valid one before submitting it.
+1. Make sure your issue hasn't already been answered or fixed. Also think about whether your issue is a valid one before submitting it.
 2. Go to [the issues page](https://github.com/PizzAna/CelestialWizardry/issues).
 3. Click `New Issue` right below `Star` and `Fork`.
 4. Enter your Issue's title (something that summarizes your issue), and then create a detailed description ("Hey, could you add/change xxx?" or "Hey, found an exploit:  stuff").
