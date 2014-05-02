@@ -67,16 +67,35 @@ public class CelestialWizardry
     @Mod.EventHandler
     public void init(FMLInitializationEvent event)
     {
+        // Set the start time for tracking
+        long start = System.currentTimeMillis();
+
+        // Tell everyone that we are starting initialization
+        log.info("Starting initialization");
+
         // Register gui handler
         NetworkRegistry.INSTANCE.registerGuiHandler(instance, new GuiHandler());
 
+        // Register mod tile entities
+        proxy.registerTileEntities();
+
         // Initialize crafting handler
         CraftingHandler.init(); // TODO Add the class to FML event subscription
+
+        // Tell everyone that we have successfully initialized
+        log.info("Finished initialization after " + (System.currentTimeMillis() - start) + " ms");
     }
 
     @Mod.EventHandler
     public void postInit(FMLPostInitializationEvent event)
     {
+        // Set the start time for tracking
+        long start = System.currentTimeMillis();
 
+        // Tell everyone that we are starting post-initialization
+        log.info("Starting post-initialization");
+
+        // Tell everyone that we have successfully post-initialized
+        log.info("Finished post-initialization after " + (System.currentTimeMillis() - start) + " ms");
     }
 }
