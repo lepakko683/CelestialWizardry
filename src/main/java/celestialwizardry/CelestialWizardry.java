@@ -1,5 +1,7 @@
 package celestialwizardry;
 
+import celestialwizardry.handler.CraftingHandler;
+import celestialwizardry.handler.GuiHandler;
 import celestialwizardry.init.ModBlocks;
 import celestialwizardry.init.ModItems;
 import celestialwizardry.network.PacketHandler;
@@ -11,6 +13,7 @@ import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.network.NetworkRegistry;
 import org.apache.logging.log4j.Logger;
 
 /**
@@ -55,7 +58,11 @@ public class CelestialWizardry
     @Mod.EventHandler
     public void init(FMLInitializationEvent event)
     {
-
+        // Register gui handler
+        NetworkRegistry.INSTANCE.registerGuiHandler(instance, new GuiHandler());
+        
+        // Initialize crafting handler
+        CraftingHandler.init(); // TODO Add the class to FML event subscription
     }
 
     @Mod.EventHandler
