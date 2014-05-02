@@ -10,6 +10,7 @@ public class Names
     public static class Items
     {
         public static final String MAGICAL_INK = "magicalInk";
+        public static final String STAFF = "staff";
     }
 
     public static class NBT
