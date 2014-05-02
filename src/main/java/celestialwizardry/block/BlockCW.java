@@ -1,5 +1,6 @@
 package celestialwizardry.block;
 
+import celestialwizardry.creativetab.CreativeTab;
 import celestialwizardry.reference.Resources;
 import celestialwizardry.tileentity.TileEntityCW;
 import cpw.mods.fml.relauncher.Side;
@@ -29,6 +30,7 @@ public abstract class BlockCW extends Block
     public BlockCW(Material material)
     {
         super(material);
+        setCreativeTab(CreativeTab.CW_TAB);
     }
 
     @Override
