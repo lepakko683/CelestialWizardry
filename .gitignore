@@ -26,3 +26,8 @@
 
 # Links
 /*.lnk
+
+# Keystore
+/keystore
+/*.jks
+/*.private
