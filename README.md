@@ -84,6 +84,8 @@ This section assumes that you're using the command-line version of Git.
 ***
 
 ####Compile Celestial Wizardry
+
+#####With Gradle Installed
 1. Execute `gradle setupCIWorkspace`. This sets up Forge and downloads the necessary libraries to build Celestial Wizardry.  This might take some time, be patient.
 	* You will generally only have to do this once until the Forge version in `build.gradle` changes.
 2. Execute `gradle build`. If you did everything right, `BUILD SUCCESSFUL` will be displayed after it finishes.  This should be relatively quick.
@@ -91,6 +93,9 @@ This section assumes that you're using the command-line version of Git.
 3. Navigate to `mcdev\CelestialWizardry\build\libs`.
     *  You should see a `.jar` file named `celestialwizardry-1.7.2-0.0.1.jar`.
 4. Copy the jar into your Minecraft mods folder, and you are done!
+
+#####Without Gradle Installed
+The same as above, but replace `gradle` with `gradlew.bat` on Windows and with `gradlew` on Linux.
 
 ####Updating Your Repository
 In order to get the most up-to-date builds, you'll have to periodically update your local repository.
