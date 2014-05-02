@@ -30,7 +30,7 @@ public abstract class BlockCW extends Block
     public BlockCW(Material material)
     {
         super(material);
-        setCreativeTab(CreativeTab.CW_TAB);
+        this.setCreativeTab(CreativeTab.CW_TAB);
     }
 
     @Override

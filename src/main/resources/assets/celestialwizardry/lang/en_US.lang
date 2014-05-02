@@ -1,2 +1,5 @@
 # Item localizations
 item.celestialwizardry:magicalInk.name=Magical Ink
+
+# Block localizations
+tile.celestialwizardry:writingTable.name=Writing Table
