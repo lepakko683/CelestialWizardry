@@ -1,5 +1,6 @@
 package celestialwizardry;
 
+import celestialwizardry.config.ConfigHandler;
 import celestialwizardry.handler.CraftingHandler;
 import celestialwizardry.handler.GuiHandler;
 import celestialwizardry.init.ModBlocks;
@@ -15,6 +16,8 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import org.apache.logging.log4j.Logger;
+
+import java.io.File;
 
 /**
  * The main mod class of Minecraft mod Celestial Wizardry
@@ -42,6 +45,9 @@ public class CelestialWizardry
         // Tell everyone that we are starting pre-initialization
         log.info("Starting pre-initialization");
 
+        // Initialize the configuration
+        ConfigHandler.init(event.getModConfigurationDirectory().getAbsolutePath() + File.separator + Reference.MOD_ID.toLowerCase() + File.separator);
+
         // Initialize mod items
         ModItems.init();
 
@@ -60,7 +66,7 @@ public class CelestialWizardry
     {
         // Register gui handler
         NetworkRegistry.INSTANCE.registerGuiHandler(instance, new GuiHandler());
-        
+
         // Initialize crafting handler
         CraftingHandler.init(); // TODO Add the class to FML event subscription
     }
