@@ -13,6 +13,7 @@ public class ModItems
     public static final ItemCW staff = new ItemStaff();
     public static final ItemCW scroll = new ItemScroll();
     public static final ItemCW spellScroll = new ItemSpellScroll();
+    public static final ItemCW spellBook = new ItemSpellBook();
 
     public static void init()
     {
@@ -20,5 +21,6 @@ public class ModItems
         GameRegistry.registerItem(staff, "item." + Names.Items.STAFF);
         GameRegistry.registerItem(scroll, "item." + Names.Items.SCROLL);
         GameRegistry.registerItem(spellScroll, "item." + Names.Items.SPELL_SCROLL);
+        GameRegistry.registerItem(spellBook, "item." + Names.Items.SPELL_BOOK);
     }
 }

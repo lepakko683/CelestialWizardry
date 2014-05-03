@@ -13,6 +13,7 @@ public class Names
         public static final String STAFF = "staff";
         public static final String SCROLL = "scroll";
         public static final String SPELL_SCROLL = "spellScroll";
+        public static final String SPELL_BOOK = "spellBook";
     }
 
     public static class NBT

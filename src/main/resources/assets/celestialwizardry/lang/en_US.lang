@@ -3,6 +3,7 @@ item.celestialwizardry:magicalInk.name=Magical Ink
 item.celestialwizardry:staff.name=Staff
 item.celestialwizardry:scroll.name=Scroll
 item.celestialwizardry:spellScroll.name=Spell Scroll
+item.celestialwizardry:spellBook.name=Spell Book
 
 # Block localizations
 tile.celestialwizardry:writingTable.name=Writing Table

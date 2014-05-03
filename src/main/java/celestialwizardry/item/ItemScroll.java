@@ -4,7 +4,6 @@ import celestialwizardry.reference.Names;
 
 public class ItemScroll extends ItemCW
 {
-
     public ItemScroll()
     {
         super();

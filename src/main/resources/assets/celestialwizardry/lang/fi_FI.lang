@@ -3,6 +3,7 @@ item.celestialwizardry:magicalInk.name=Maaginen Muste
 item.celestialwizardry:staff.name=Taikasauva WIP
 item.celestialwizardry:scroll.name=Käärö
 item.celestialwizardry:spellScroll.name=Taikakäärö
+item.celestialwizardry:spellBook.name=Loitsukirja
 
 # Block localizations
 tile.celestialwizardry:writingTable.name=Kirjoituspöytä
