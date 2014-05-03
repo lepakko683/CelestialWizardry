@@ -17,6 +17,7 @@ buildscript {
 
 apply plugin: 'forge'
 group = "celestialwizardry" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
+archivesBaseName = "celestialwizardry"
 
 // Define properties file
 ext.configFile = file "build.properties"
