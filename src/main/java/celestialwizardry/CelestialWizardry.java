@@ -34,6 +34,7 @@ public class CelestialWizardry
     @Mod.Instance
     public static CelestialWizardry instance;
 
+    // Mod logger
     public static Logger log;
 
     @Mod.EventHandler
@@ -42,15 +43,15 @@ public class CelestialWizardry
         if (Reference.FINGERPRINT.equals("@FINGERPRINT@"))
         {
             FMLLog.severe("The copy of " + Reference.MOD_NAME
-                                + " that you are running is a development version of the mod, " +
-                                "and as such may be unstable and/or incomplete.");
+                                  + " that you are running is a development version of the mod, " +
+                                  "and as such may be unstable and/or incomplete.");
         }
         else
         {
             FMLLog.severe("The copy of " + Reference.MOD_NAME
-                             + " that you are running has been modified from the original, " +
-                             "and unpredictable things may happen. Please consider re-downloading the original " +
-                             "version of the mod.");
+                                  + " that you are running has been modified from the original, " +
+                                  "and unpredictable things may happen. Please consider re-downloading the original " +
+                                  "version of the mod.");
         }
     }
 

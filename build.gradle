@@ -15,6 +15,17 @@ buildscript {
     }
 }
 
+repositories {
+    maven {
+        name 'chickenbones'
+        url "http://chickenbones.net/maven/"
+    }
+    maven {
+        name 'forge'
+        url 'http://files.minecraftforge.net/maven'
+    }
+}
+
 apply plugin: 'forge'
 group = "celestialwizardry" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "CelestialWizardry"
@@ -35,6 +46,9 @@ configurations {
 
 
 dependencies {
+    compile "codechicken:CodeChickenLib:${config.minecraft_version}-${config.cclib_version}:dev"
+    compile "codechicken:CodeChickenCore:${config.minecraft_version}-${config.ccc_version}:dev"
+    compile "codechicken:NotEnoughItems:${config.minecraft_version}-${config.nei_version}:dev"
     deployerJars 'org.apache.maven.wagon:wagon-ssh:2.2'
 }
 

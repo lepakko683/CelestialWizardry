@@ -22,7 +22,8 @@ public class ClientConfig
             /* KeyBindings */
             configuration.addCustomCategoryComment(CATEGORY_KEYBIND,
                                                    "See http://www.minecraftwiki.net/wiki/Key_codes for mapping of " +
-                                                           "key codes to keyboard keys");
+                                                           "key codes to keyboard keys"
+                                                  );
         }
         catch (Exception e)
         {

@@ -22,7 +22,8 @@ public class ItemSpellBook extends ItemCW
             // Set a UUID, if one doesn't exist already
             NBTHelper.setUUID(itemStack);
             NBTHelper.setBoolean(itemStack, Names.NBT.SPELL_BOOK_GUI_OPEN, true);
-            // entityPlayer.openGui(CelestialWizardry.instance, GuiIds.SPELL_BOOK, entityPlayer.worldObj, (int) entityPlayer.posX, (int) entityPlayer.posY, (int) entityPlayer.posZ);
+            // entityPlayer.openGui(CelestialWizardry.instance, GuiIds.SPELL_BOOK, entityPlayer.worldObj,
+            // (int) entityPlayer.posX, (int) entityPlayer.posY, (int) entityPlayer.posZ);
         }
 
         return itemStack;
