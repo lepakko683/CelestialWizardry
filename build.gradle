@@ -55,29 +55,44 @@ task buildInfo {
         props.load(new FileInputStream(file(project.property("CelestialWizardry.signing"))))
 
         if (Boolean.valueOf((String) props['release'])) {
-            ext.buildNum = "a" + props['build_number']
+            ext.buildNum = "alpha." + props['build_number']
         } else {
-            ext.buildNum = "dev${project.buildInfo.revision}"
+            ext.buildNum = "DEV.${project.buildInfo.revision}"
         }
 
     } else {
-        ext.buildNum = "dev${project.buildInfo.revision}"
+        ext.buildNum = "DEV.${project.buildInfo.revision}"
     }
 }
-ext.artifact_version = 'NFG'
-if (System.getenv().ARTIFACT_VERSION == null) {
-    artifact_version = "${config.mod_version}-${project.buildInfo.buildNum}"
-}
-if (System.getenv().ARTIFACT_VERSION != null) {
-    artifact_version = "${system.getenv().ARTIFACT_VERSION}"
+
+if (project.hasProperty("CelestialWizardry.signing")
+        && new File(project.property("CelestialWizardry.signing")).exists()) {
+
+    Properties props = new Properties()
+    props.load(new FileInputStream(file(project.property("CelestialWizardry.signing"))))
+
+    if (Boolean.valueOf((String) props['release'])) {
+	
+        ext.artifact_version = "${config.mod_version}-${project.buildInfo.buildNum}"
+		
+    } else {
+	
+        ext.artifact_version = "${project.buildInfo.buildNum}"
+		
+    }
+
+} else {
+
+    ext.artifact_version = "${project.buildInfo.buildNum}"
+	
 }
 
-version = "${artifact_version}" // "${config.minecraft_version}-${artifact_version}"
+version = "${config.minecraft_version}-${artifact_version}"
 
 minecraft {
     version = config.minecraft_version + "-" + config.forge_version
     assetDir = 'eclipse/assets' // TODO Change to run/assets with next forge update
-    // replace '${version}', project.version
+    replace '${version}', project.version
 
     replaceIn "reference/Reference.java"
     if (project.hasProperty("CelestialWizardry.signing")
@@ -92,7 +107,7 @@ minecraft {
     }
 
     replaceIn "reference/Version.java"
-        replace "@VERSION@", project.version
+        replace "@VERSION@", artifact_version
 }
 
 processResources
