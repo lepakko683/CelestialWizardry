@@ -21,12 +21,13 @@ group = "celestialwizardry" // http://maven.apache.org/guides/mini/guide-naming-
 // Define properties file
 ext.configFile = file "build.properties"
 
+// Load config. It shall from now be referenced simply as config or project.config.
 configFile.withReader {
-    // Load config.  It shall from now be referenced as simply config or project.config
     def prop = new Properties()
     prop.load(it)
     project.ext.config = new ConfigSlurper().parse prop
 }
+
 configurations {
     deployerJars
 }
@@ -36,7 +37,7 @@ dependencies {
     deployerJars 'org.apache.maven.wagon:wagon-ssh:2.2'
 }
 
-// Finds and sets version data
+// Finds and sets version data.
 task buildInfo {
     def cmd = "git rev-parse --short HEAD"
     def proc = cmd.execute()
@@ -47,51 +48,76 @@ task buildInfo {
         ext.revision = "GITBORK"
     }
 
-    if (System.getenv().BUILD_NUMBER != null) {
-        ext.buildNum = "jenkins${System.getenv().BUILD_NUMBER}"
+    if (project.hasProperty("CelestialWizardry.signing")
+            && new File(project.property("CelestialWizardry.signing")).exists()) {
+
+        Properties props = new Properties()
+        props.load(new FileInputStream(file(project.property("CelestialWizardry.signing"))))
+
+        if (Boolean.valueOf((String) props['release'])) {
+            ext.buildNum = "a" + props['build_number']
+        } else {
+            ext.buildNum = "dev${project.buildInfo.revision}"
+        }
+
     } else {
-        ext.buildNum = "dev.${project.buildInfo.revision}"
+        ext.buildNum = "dev${project.buildInfo.revision}"
     }
 }
 ext.artifact_version = 'NFG'
 if (System.getenv().ARTIFACT_VERSION == null) {
-    artifact_version = "${config.mod_version}.${project.buildInfo.buildNum}"
+    artifact_version = "${config.mod_version}-${project.buildInfo.buildNum}"
 }
 if (System.getenv().ARTIFACT_VERSION != null) {
     artifact_version = "${system.getenv().ARTIFACT_VERSION}"
 }
 
-version = "${config.minecraft_version}-${artifact_version}"
+version = "${artifact_version}" // "${config.minecraft_version}-${artifact_version}"
 
 minecraft {
     version = config.minecraft_version + "-" + config.forge_version
-    assetDir = 'eclipse/assets' // TODO Change to run/assets
-    replace '${version}', project.version
+    assetDir = 'eclipse/assets' // TODO Change to run/assets with next forge update
+    // replace '${version}', project.version
+
+    replaceIn "reference/Reference.java"
+    if (project.hasProperty("CelestialWizardry.signing")
+            && new File(project.property("CelestialWizardry.signing")).exists()) {
+
+        Properties props = new Properties()
+        props.load(new FileInputStream(file(project.property("CelestialWizardry.signing"))))
+
+        println "Valid jar fingerprint properties found"
+
+        replace "@FINGERPRINT@", props['signature']
+    }
+
+    replaceIn "reference/Version.java"
+        replace "@VERSION@", project.version
 }
 
 processResources
         {
-            // replace stuff in mcmod.info, nothing else
+            // Replace values only in mcmod.info.
             from(sourceSets.main.resources.srcDirs) {
                 include 'mcmod.info'
 
-                // replace version and mcversion
+                // Replace version and mcversion.
                 expand 'version': project.version, 'mcversion': project.minecraft.version
             }
 
-            // copy everything else, thats not the mcmod.info
+            // Copy everything excluding mcmod.info.
             from(sourceSets.main.resources.srcDirs) {
                 exclude 'mcmod.info'
             }
         }
 
-// Create deobf dev jars
+// Create deobf dev jars.
 task deobfJar(type: Jar) {
     from sourceSets.main.output
     classifier = 'deobf'
 }
 
-// Create API jar
+// Create API jar.
 task apiJar(type: Jar) {
     from(sourceSets.main.java) {
         include "celestialwizardry/api/*"
@@ -104,13 +130,23 @@ artifacts {
     archives apiJar
 }
 
-// verify the properties exist.. or initialize.
-if (!project.hasProperty("keystore_location")) // keystore location
-    ext.keystore_location = ".";
-if (!project.hasProperty("keystore_user_alias")) // keystore user alias
-    ext.keystore_user_alias = "";
-if (!project.hasProperty("keystore_user_password")) // keystore user pass
-    ext.keystore_user_password = "";
+if (project.hasProperty("CelestialWizardry.signing")
+        && new File(project.property("CelestialWizardry.signing")).exists()) {
+
+    Properties props = new Properties()
+    props.load(new FileInputStream(file(project.property("CelestialWizardry.signing"))))
+
+    ext.keystore_location = file(props['keystore_location'])
+    ext.keystore_user_alias = props['keystore_alias']
+    ext.keystore_user_password = props['keystore_password']
+
+    println "Valid jar signing properties found"
+
+} else {
+    ext.keystore_location = "."
+    ext.keystore_user_alias = ""
+    ext.keystore_user_password = ""
+}
 
 task("signJar", dependsOn: "build")
         {
@@ -120,13 +156,15 @@ task("signJar", dependsOn: "build")
             inputs.property "keystore_user_password", keystore_user_password
             outputs.file jar.getArchivePath()
 
-            // only sign if the keystore exists
+            // Only sign the jar if the keystore exists
             onlyIf {
                 return keystore_location != "."
             }
+
             println "archive path >> " + jar.getArchivePath()
             println jar.getArchivePath()
-            // the actual action.. sign the jar.
+
+            // Sign the jar.
             doLast {
                 ant.signjar(
                         destDir: jar.destinationDir,
@@ -137,4 +175,10 @@ task("signJar", dependsOn: "build")
                         keypass: keystore_user_password
                 )
             }
+        }
+
+// TODO Include uploading to server here
+task("release", dependsOn: "signJar")
+        {
+
         }

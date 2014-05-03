@@ -12,4 +12,6 @@ public class Reference
 
     public static final String SERVER_PROXY_CLASS = "celestialwizardry.proxy.ServerProxy";
     public static final String CLIENT_PROXY_CLASS = "celestialwizardry.proxy.ClientProxy";
+
+    public static final String FINGERPRINT = "@FINGERPRINT@";
 }

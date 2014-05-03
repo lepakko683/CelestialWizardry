@@ -11,6 +11,7 @@ import celestialwizardry.reference.Reference;
 import celestialwizardry.reference.Version;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
+import cpw.mods.fml.common.event.FMLFingerprintViolationEvent;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
@@ -22,7 +23,8 @@ import java.io.File;
 /**
  * The main mod class of Minecraft mod Celestial Wizardry
  */
-@Mod(modid = Reference.MOD_ID, name = Reference.MOD_NAME, version = Version.VERSION)
+@Mod(modid = Reference.MOD_ID, name = Reference.MOD_NAME, version = Version.VERSION,
+     certificateFingerprint = Reference.FINGERPRINT)
 public class CelestialWizardry
 {
     @SidedProxy(clientSide = Reference.CLIENT_PROXY_CLASS, serverSide = Reference.SERVER_PROXY_CLASS)
@@ -32,6 +34,24 @@ public class CelestialWizardry
     public static CelestialWizardry instance;
 
     public static Logger log;
+
+    @Mod.EventHandler
+    public void invalidFingerprint(FMLFingerprintViolationEvent event)
+    {
+        if (Reference.FINGERPRINT.equals("@FINGERPRINT@"))
+        {
+            log.warn("The copy of " + Reference.MOD_NAME
+                             + " that you are running is a development version of the mod, " +
+                             "and as such may be unstable and/or incomplete.");
+        }
+        else
+        {
+            log.warn("The copy of " + Reference.MOD_NAME
+                             + " that you are running has been modified from the original, " +
+                             "and unpredictable things may happen. Please consider re-downloading the original " +
+                             "version of the mod.");
+        }
+    }
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event)
