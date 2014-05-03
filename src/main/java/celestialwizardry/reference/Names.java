@@ -14,6 +14,7 @@ public class Names
         public static final String SCROLL = "scroll";
         public static final String SPELL_SCROLL = "spellScroll";
         public static final String SPELL_BOOK = "spellBook";
+        public static final String CONCENTRATION_RING = "concentrationRing";
     }
 
     public static class NBT

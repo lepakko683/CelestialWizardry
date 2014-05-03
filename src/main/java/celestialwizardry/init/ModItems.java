@@ -14,6 +14,7 @@ public class ModItems
     public static final ItemCW scroll = new ItemScroll();
     public static final ItemCW spellScroll = new ItemSpellScroll();
     public static final ItemCW spellBook = new ItemSpellBook();
+    public static final ItemCW concentrationRing = new ItemConcentrationRing();
 
     public static void init()
     {
@@ -22,5 +23,6 @@ public class ModItems
         GameRegistry.registerItem(scroll, "item." + Names.Items.SCROLL);
         GameRegistry.registerItem(spellScroll, "item." + Names.Items.SPELL_SCROLL);
         GameRegistry.registerItem(spellBook, "item." + Names.Items.SPELL_BOOK);
+        GameRegistry.registerItem(concentrationRing, "item." + Names.Items.CONCENTRATION_RING);
     }
 }
