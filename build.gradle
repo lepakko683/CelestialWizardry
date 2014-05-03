@@ -106,7 +106,7 @@ version = "${config.minecraft_version}-${artifact_version}"
 
 minecraft {
     version = config.minecraft_version + "-" + config.forge_version
-    assetDir = 'eclipse/assets' // TODO Change to run/assets with next forge update
+    assetDir = 'run/assets'
     replace '${version}', project.version
 
     replaceIn "reference/Reference.java"
