@@ -9,6 +9,7 @@ import celestialwizardry.network.PacketHandler;
 import celestialwizardry.proxy.IProxy;
 import celestialwizardry.reference.Reference;
 import celestialwizardry.reference.Version;
+import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLFingerprintViolationEvent;
@@ -40,13 +41,13 @@ public class CelestialWizardry
     {
         if (Reference.FINGERPRINT.equals("@FINGERPRINT@"))
         {
-            log.warn("The copy of " + Reference.MOD_NAME
-                             + " that you are running is a development version of the mod, " +
-                             "and as such may be unstable and/or incomplete.");
+            FMLLog.severe("The copy of " + Reference.MOD_NAME
+                                + " that you are running is a development version of the mod, " +
+                                "and as such may be unstable and/or incomplete.");
         }
         else
         {
-            log.warn("The copy of " + Reference.MOD_NAME
+            FMLLog.severe("The copy of " + Reference.MOD_NAME
                              + " that you are running has been modified from the original, " +
                              "and unpredictable things may happen. Please consider re-downloading the original " +
                              "version of the mod.");
