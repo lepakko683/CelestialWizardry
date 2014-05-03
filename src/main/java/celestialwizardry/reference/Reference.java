@@ -14,4 +14,6 @@ public class Reference
     public static final String CLIENT_PROXY_CLASS = "celestialwizardry.proxy.ClientProxy";
 
     public static final String FINGERPRINT = "@FINGERPRINT@";
+
+    public static final String DEPENDENCIES = "required-after:Baubles";
 }

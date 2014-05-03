@@ -25,7 +25,7 @@ import java.io.File;
  * The main mod class of Minecraft mod Celestial Wizardry
  */
 @Mod(modid = Reference.MOD_ID, name = Reference.MOD_NAME, version = Version.VERSION,
-     certificateFingerprint = Reference.FINGERPRINT)
+     certificateFingerprint = Reference.FINGERPRINT, dependencies = Reference.DEPENDENCIES)
 public class CelestialWizardry
 {
     @SidedProxy(clientSide = Reference.CLIENT_PROXY_CLASS, serverSide = Reference.SERVER_PROXY_CLASS)
