@@ -4,7 +4,13 @@ item.celestialwizardry:staff.name=Staff
 item.celestialwizardry:scroll.name=Scroll
 item.celestialwizardry:spellScroll.name=Spell Scroll
 item.celestialwizardry:spellBook.name=Spell Book
-item.celestialwizardry:concentrationRing.name=Ring of Concentration
+item.celestialwizardry:concentrationRing.normal.name=Ring of Concentration
+item.celestialwizardry:concentrationRing.lunar.name=Ring of Concentration
+item.celestialwizardry:concentrationRing.solar.name=Ring of Concentration
 
 # Block localizations
 tile.celestialwizardry:writingTable.name=Writing Table
+
+# Tooltip localizations
+tooltip.celestialwizardry:lunar=Lunar
+tooltip.celestialwizardry:solar=Solar

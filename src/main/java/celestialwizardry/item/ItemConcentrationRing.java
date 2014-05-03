@@ -4,12 +4,23 @@ import baubles.api.BaubleType;
 import baubles.api.IBauble;
 import baubles.common.container.InventoryBaubles;
 import baubles.common.lib.PlayerHandler;
+import celestialwizardry.reference.Messages;
 import celestialwizardry.reference.Names;
+import celestialwizardry.reference.Resources;
+import celestialwizardry.util.StringHelper;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.IIcon;
+import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
+
+import java.util.List;
 
 public class ItemConcentrationRing extends ItemCW implements IBauble
 {
@@ -17,6 +28,59 @@ public class ItemConcentrationRing extends ItemCW implements IBauble
     {
         super();
         this.setUnlocalizedName(Names.Items.CONCENTRATION_RING);
+        this.setHasSubtypes(true);
+        this.setMaxDamage(0);
+    }
+
+    @Override
+    @SideOnly(Side.CLIENT)
+    public IIcon getIconFromDamage(int meta)
+    {
+        return itemIcon;
+    }
+
+    @Override
+    public String getUnlocalizedName()
+    {
+        return String.format("item.%s%s", Resources.RESOURCE_PREFIX, Names.Items.CONCENTRATION_RING);
+    }
+
+    @Override
+    public String getUnlocalizedName(ItemStack itemStack)
+    {
+        return String.format("item.%s%s.%s", Resources.RESOURCE_PREFIX, Names.Items.CONCENTRATION_RING,
+                             Names.Items.CONCENTRATION_RING_SUBTYPES[MathHelper.clamp_int(
+                                     itemStack.getItemDamage(), 0,
+                                     Names.Items.CONCENTRATION_RING_SUBTYPES.length - 1)]
+                            );
+    }
+
+    @Override
+    @SideOnly(Side.CLIENT)
+    @SuppressWarnings("unchecked")
+    public void getSubItems(Item item, CreativeTabs tabs, List list)
+    {
+        for (int meta = 0; meta < Names.Items.CONCENTRATION_RING_SUBTYPES.length; meta++) // Maybe ++meta
+        {
+            list.add(new ItemStack(this, 1, meta));
+        }
+    }
+
+    @Override
+    @SuppressWarnings("unchecked")
+    public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean adv)
+    {
+        int meta = stack.getItemDamage();
+
+        // if meta == 0
+        if (meta == 1)
+        {
+            list.add(StringHelper.BLUE + StringHelper.localize(Messages.LUNAR) + StringHelper.END);
+        }
+        else if (meta == 2)
+        {
+            list.add(StringHelper.YELLOW + StringHelper.localize(Messages.SOLAR) + StringHelper.END);
+        }
     }
 
     @Override
