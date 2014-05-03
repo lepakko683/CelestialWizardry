@@ -104,7 +104,7 @@ In order to get the most up-to-date builds, you'll have to periodically update y
 2. Navigate to `mcdev` in the console.
 3. Make sure you have not made any changes to the local repository, or else there might be issues with Git.
 	* If you have, try reverting them to the status that they were when you last updated your repository.
-4. Execute `git pull master`.  This pulls all commits from the official repository that do not yet exist on your local repository and updates it.
+4. Execute `git pull origin`.  This pulls all commits from the official repository that do not yet exist on your local repository and updates it.
 
 ###Contributing
 ***
