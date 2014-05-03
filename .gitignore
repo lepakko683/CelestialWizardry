@@ -23,6 +23,7 @@
 
 # ForgeGradle
 /run
+/libs
 
 # Links
 /*.lnk
