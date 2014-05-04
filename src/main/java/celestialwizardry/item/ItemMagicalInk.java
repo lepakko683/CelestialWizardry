@@ -1,8 +1,9 @@
 package celestialwizardry.item;
 
+import celestialwizardry.api.writing.IInk;
 import celestialwizardry.reference.Names;
 
-public class ItemMagicalInk extends ItemCW
+public class ItemMagicalInk extends ItemCW implements IInk
 {
     public ItemMagicalInk()
     {

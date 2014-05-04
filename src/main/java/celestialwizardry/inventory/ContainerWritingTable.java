@@ -5,6 +5,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
+import net.minecraft.item.ItemStack;
 
 public class ContainerWritingTable extends Container
 {
@@ -13,7 +14,7 @@ public class ContainerWritingTable extends Container
 
     public ContainerWritingTable(InventoryPlayer inventoryPlayer, TileEntityWritingTable tileEntityWritingTable)
     {
-        this.addSlotToContainer(new Slot(tileEntityWritingTable, TileEntityWritingTable.SCROLL_INVENTORY_INDEX, 8, 8));
+        this.addSlotToContainer(new SlotInk(tileEntityWritingTable, TileEntityWritingTable.SCROLL_INVENTORY_INDEX, 8, 8));
 
         // Add the player's inventory slots to the container
         for (int inventoryRowIndex = 0; inventoryRowIndex < PLAYER_INVENTORY_ROWS; ++inventoryRowIndex)
@@ -29,6 +30,45 @@ public class ContainerWritingTable extends Container
         {
             this.addSlotToContainer(new Slot(inventoryPlayer, actionBarSlotIndex, 30 + actionBarSlotIndex * 18, 176));
         }
+    }
+
+    @Override
+    public ItemStack transferStackInSlot(EntityPlayer player, int slotIndex)
+    {
+        ItemStack itemStack = null;
+        Slot slot = (Slot) inventorySlots.get(slotIndex);
+
+        if (slot != null && slot.getHasStack())
+        {
+            ItemStack slotItemStack = slot.getStack();
+            itemStack = slotItemStack.copy();
+
+            if (slotIndex < TileEntityWritingTable.INVENTORY_SIZE)
+            {
+                if (!this.mergeItemStack(slotItemStack, 1, inventorySlots.size(), true))
+                {
+                    return null;
+                }
+            }
+            else
+            {
+                if (!this.mergeItemStack(slotItemStack, 0, TileEntityWritingTable.INVENTORY_SIZE, false))
+                {
+                    return null;
+                }
+            }
+
+            if (slotItemStack.stackSize == 0)
+            {
+                slot.putStack(null);
+            }
+            else
+            {
+                slot.onSlotChanged();
+            }
+        }
+
+        return itemStack;
     }
 
     @Override

@@ -1,6 +1,6 @@
 package celestialwizardry.tileentity;
 
-import celestialwizardry.item.ItemScroll;
+import celestialwizardry.api.writing.IInk;
 import celestialwizardry.network.PacketHandler;
 import celestialwizardry.network.message.MessageTileEntityWritingTable;
 import celestialwizardry.reference.Names;
@@ -33,39 +33,39 @@ public class TileEntityWritingTable extends TileEntityCW implements IInventory
     /**
      * Returns the stack in slot i
      *
-     * @param var1
+     * @param slot
      */
     @Override
-    public ItemStack getStackInSlot(int var1)
+    public ItemStack getStackInSlot(int slot)
     {
-        return inventory[var1];
+        return inventory[slot];
     }
 
     /**
      * Removes from an inventory slot (first arg) up to a specified number (second arg) of items and returns them in a
      * new stack.
      *
-     * @param var1
-     * @param var2
+     * @param slot
+     * @param amount
      */
     @Override
-    public ItemStack decrStackSize(int var1, int var2)
+    public ItemStack decrStackSize(int slot, int amount)
     {
-        ItemStack itemStack = getStackInSlot(var1);
+        ItemStack itemStack = getStackInSlot(slot);
 
         if (itemStack != null)
         {
-            if (itemStack.stackSize <= var2)
+            if (itemStack.stackSize <= amount)
             {
-                setInventorySlotContents(var1, null);
+                setInventorySlotContents(slot, null);
             }
             else
             {
-                itemStack = itemStack.splitStack(var2);
+                itemStack = itemStack.splitStack(amount);
 
                 if (itemStack.stackSize == 0)
                 {
-                    setInventorySlotContents(var1, null);
+                    setInventorySlotContents(slot, null);
                 }
             }
         }
@@ -77,16 +77,16 @@ public class TileEntityWritingTable extends TileEntityCW implements IInventory
      * When some containers are closed they call this on each slot, then drop whatever it returns as an EntityItem -
      * like when you close a workbench GUI.
      *
-     * @param var1
+     * @param slot
      */
     @Override
-    public ItemStack getStackInSlotOnClosing(int var1)
+    public ItemStack getStackInSlotOnClosing(int slot)
     {
-        ItemStack itemStack = getStackInSlot(var1);
+        ItemStack itemStack = getStackInSlot(slot);
 
         if (itemStack != null)
         {
-            setInventorySlotContents(var1, null);
+            setInventorySlotContents(slot, null);
         }
 
         return itemStack;
@@ -95,17 +95,17 @@ public class TileEntityWritingTable extends TileEntityCW implements IInventory
     /**
      * Sets the given item stack to the specified slot in the inventory (can be crafting or armor sections).
      *
-     * @param var1
-     * @param var2
+     * @param slot
+     * @param stack
      */
     @Override
-    public void setInventorySlotContents(int var1, ItemStack var2)
+    public void setInventorySlotContents(int slot, ItemStack stack)
     {
-        inventory[var1] = var2;
+        inventory[slot] = stack;
 
-        if (var2 != null && var2.stackSize > getInventoryStackLimit())
+        if (stack != null && stack.stackSize > getInventoryStackLimit())
         {
-            var2.stackSize = getInventoryStackLimit();
+            stack.stackSize = getInventoryStackLimit();
         }
     }
 
@@ -139,10 +139,10 @@ public class TileEntityWritingTable extends TileEntityCW implements IInventory
     /**
      * Do not make give this method the name canInteractWith because it clashes with Container
      *
-     * @param var1
+     * @param player
      */
     @Override
-    public boolean isUseableByPlayer(EntityPlayer var1)
+    public boolean isUseableByPlayer(EntityPlayer player)
     {
         return true;
     }
@@ -162,13 +162,13 @@ public class TileEntityWritingTable extends TileEntityCW implements IInventory
     /**
      * Returns true if automation is allowed to insert the given stack (ignoring stack size) into the given slot.
      *
-     * @param var1
-     * @param var2
+     * @param slot
+     * @param stack
      */
     @Override
-    public boolean isItemValidForSlot(int var1, ItemStack var2)
+    public boolean isItemValidForSlot(int slot, ItemStack stack)
     {
-        return var2.getItem() instanceof ItemScroll;
+        return (stack.getItem() instanceof IInk);
     }
 
     @Override
