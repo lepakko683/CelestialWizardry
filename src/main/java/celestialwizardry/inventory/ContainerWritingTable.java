@@ -36,7 +36,7 @@ public class ContainerWritingTable extends Container
     public ItemStack transferStackInSlot(EntityPlayer player, int slotIndex)
     {
         ItemStack itemStack = null;
-        Slot slot = (Slot) inventorySlots.get(slotIndex);
+        /* Slot slot = (Slot) inventorySlots.get(slotIndex);
 
         if (slot != null && slot.getHasStack())
         {
@@ -66,7 +66,7 @@ public class ContainerWritingTable extends Container
             {
                 slot.onSlotChanged();
             }
-        }
+        } */
 
         return itemStack;
     }

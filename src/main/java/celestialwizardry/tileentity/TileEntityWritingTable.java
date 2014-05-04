@@ -7,6 +7,8 @@ import celestialwizardry.reference.Names;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
 import net.minecraft.network.Packet;
 
 public class TileEntityWritingTable extends TileEntityCW implements IInventory
@@ -157,6 +159,46 @@ public class TileEntityWritingTable extends TileEntityCW implements IInventory
     public void closeInventory()
     {
 
+    }
+
+    @Override
+    public void readFromNBT(NBTTagCompound nbtTagCompound)
+    {
+        super.readFromNBT(nbtTagCompound);
+        NBTTagList nbttaglist = nbtTagCompound.getTagList("Items", 10);
+        this.inventory = new ItemStack[this.getSizeInventory()];
+
+        for (int i = 0; i < nbttaglist.tagCount(); ++i)
+        {
+            NBTTagCompound nbttagcompound1 = nbttaglist.getCompoundTagAt(i);
+            byte b0 = nbttagcompound1.getByte("Slot");
+
+            if (b0 >= 0 && b0 < this.inventory.length)
+            {
+                this.inventory[b0] = ItemStack.loadItemStackFromNBT(nbttagcompound1);
+            }
+        }
+    }
+
+    @Override
+    public void writeToNBT(NBTTagCompound nbtTagCompound)
+    {
+        super.writeToNBT(nbtTagCompound);
+
+        NBTTagList nbttaglist = new NBTTagList();
+
+        for (int i = 0; i < this.inventory.length; ++i)
+        {
+            if (this.inventory[i] != null)
+            {
+                NBTTagCompound nbttagcompound1 = new NBTTagCompound();
+                nbttagcompound1.setByte("Slot", (byte) i);
+                this.inventory[i].writeToNBT(nbttagcompound1);
+                nbttaglist.appendTag(nbttagcompound1);
+            }
+        }
+
+        nbtTagCompound.setTag("Items", nbttaglist);
     }
 
     /**
