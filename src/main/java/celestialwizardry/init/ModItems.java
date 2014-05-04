@@ -16,6 +16,7 @@ public class ModItems
     public static final ItemCW spellBook = new ItemSpellBook();
     public static final ItemCW concentrationRing = new ItemConcentrationRing();
     public static final ItemCW seasonRing = new ItemSeasonRing();
+    public static final ItemCW page = new ItemPage();
 
     public static void init()
     {
@@ -26,5 +27,6 @@ public class ModItems
         GameRegistry.registerItem(spellBook, "item." + Names.Items.SPELL_BOOK);
         GameRegistry.registerItem(concentrationRing, "item." + Names.Items.CONCENTRATION_RING);
         GameRegistry.registerItem(seasonRing, "item." + Names.Items.SEASON_RING);
+        GameRegistry.registerItem(page, "item." + Names.Items.PAGE);
     }
 }
