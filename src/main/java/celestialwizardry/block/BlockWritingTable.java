@@ -77,7 +77,8 @@ public class BlockWritingTable extends BlockCW implements ITileEntityProvider
         {
             if (!world.isRemote)
             {
-                if (player.getCurrentEquippedItem() != null && player.getCurrentEquippedItem().getItem() instanceof ItemMagicalInk)
+                if (player.getCurrentEquippedItem() != null && player.getCurrentEquippedItem()
+                        .getItem() instanceof ItemMagicalInk)
                 {
                     ItemStack ink = player.getCurrentEquippedItem();
 

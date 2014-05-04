@@ -1,7 +1,6 @@
 package celestialwizardry.config;
 
 import celestialwizardry.CelestialWizardry;
-import celestialwizardry.api.CWApi;
 import celestialwizardry.reference.Settings;
 
 /**

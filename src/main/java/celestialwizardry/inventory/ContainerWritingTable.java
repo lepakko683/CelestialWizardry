@@ -21,7 +21,8 @@ public class ContainerWritingTable extends Container
         {
             for (int inventoryColumnIndex = 0; inventoryColumnIndex < PLAYER_INVENTORY_COLUMNS; ++inventoryColumnIndex)
             {
-                this.addSlotToContainer(new Slot(inventoryPlayer, inventoryColumnIndex + inventoryRowIndex * 9 + 9, 30 + inventoryColumnIndex * 18, 118 + inventoryRowIndex * 18));
+                this.addSlotToContainer(new Slot(inventoryPlayer, inventoryColumnIndex + inventoryRowIndex * 9 + 9,
+                                                 30 + inventoryColumnIndex * 18, 118 + inventoryRowIndex * 18));
             }
         }
 

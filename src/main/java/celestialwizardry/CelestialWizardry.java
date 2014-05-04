@@ -1,6 +1,5 @@
 package celestialwizardry;
 
-import celestialwizardry.api.CWApi;
 import celestialwizardry.config.ConfigHandler;
 import celestialwizardry.config.SettingHandler;
 import celestialwizardry.handler.CraftingHandler;
@@ -10,7 +9,6 @@ import celestialwizardry.init.ModItems;
 import celestialwizardry.network.PacketHandler;
 import celestialwizardry.proxy.IProxy;
 import celestialwizardry.reference.Reference;
-import celestialwizardry.reference.Settings;
 import celestialwizardry.reference.Version;
 import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.Mod;

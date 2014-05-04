@@ -1,6 +1,6 @@
 package celestialwizardry.inventory;
 
-import celestialwizardry.item.ItemMagicalInk;
+import celestialwizardry.api.writing.IWriter;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
@@ -24,6 +24,6 @@ public class SlotInk extends Slot
     @Override
     public boolean isItemValid(ItemStack stack)
     {
-        return (stack.getItem() instanceof ItemMagicalInk);
+        return (stack.getItem() instanceof IWriter);
     }
 }

@@ -1,6 +1,6 @@
 package celestialwizardry.tileentity;
 
-import celestialwizardry.item.ItemMagicalInk;
+import celestialwizardry.api.writing.IWriter;
 import celestialwizardry.network.PacketHandler;
 import celestialwizardry.network.message.MessageTileEntityWritingTable;
 import celestialwizardry.reference.Names;
@@ -210,7 +210,7 @@ public class TileEntityWritingTable extends TileEntityCW implements IInventory
     @Override
     public boolean isItemValidForSlot(int slot, ItemStack stack)
     {
-        return (stack.getItem() instanceof ItemMagicalInk);
+        return (stack.getItem() instanceof IWriter);
     }
 
     @Override

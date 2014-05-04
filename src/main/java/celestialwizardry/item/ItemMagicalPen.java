@@ -3,12 +3,12 @@ package celestialwizardry.item;
 import celestialwizardry.api.writing.IWriter;
 import celestialwizardry.reference.Names;
 
-public class ItemMagicalInk extends ItemCW implements IWriter
+public class ItemMagicalPen extends ItemCW implements IWriter
 {
     // TODO set to have damage value
-    public ItemMagicalInk()
+    public ItemMagicalPen()
     {
         super();
-        this.setUnlocalizedName(Names.Items.MAGICAL_INK);
+        this.setUnlocalizedName(Names.Items.MAGICAL_PEN);
     }
 }
