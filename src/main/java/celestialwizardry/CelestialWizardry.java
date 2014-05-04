@@ -1,6 +1,7 @@
 package celestialwizardry;
 
 import celestialwizardry.config.ConfigHandler;
+import celestialwizardry.config.SettingHandler;
 import celestialwizardry.handler.CraftingHandler;
 import celestialwizardry.handler.GuiHandler;
 import celestialwizardry.init.ModBlocks;
@@ -72,10 +73,13 @@ public class CelestialWizardry
         log.info("Starting pre-initialization");
 
         // Initialize the configuration
-        config.setConfiguration(new Configuration(new File(event.getModConfigurationDirectory(),
-                                                           File.separator + Reference.MOD_ID.toLowerCase()
-                                                                   + File.separator + Reference.MOD_ID.toLowerCase()
-                                                                   + ".cfg")));
+        config.setConfiguration(new Configuration(new File(event.getModConfigurationDirectory(), "/celestialwizardry/celestialwizardry.cfg")));
+
+        // Initialize configuration settings
+        SettingHandler.init();
+
+        // Save configuration
+        config.save();
 
         // Initialize mod items
         ModItems.init();

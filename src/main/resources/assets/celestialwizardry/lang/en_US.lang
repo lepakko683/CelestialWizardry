@@ -7,6 +7,7 @@ item.celestialwizardry:spellBook.name=Spell Book
 item.celestialwizardry:concentrationRing.normal.name=Ring of Concentration
 item.celestialwizardry:concentrationRing.lunar.name=Ring of Concentration
 item.celestialwizardry:concentrationRing.solar.name=Ring of Concentration
+item.celestialwizardry:seasonRing.name=Ring of Seasons
 
 # Block localizations
 tile.celestialwizardry:writingTable.name=Writing Table

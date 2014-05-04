@@ -16,6 +16,7 @@ public class Names
         public static final String SPELL_BOOK = "spellBook";
         public static final String CONCENTRATION_RING = "concentrationRing";
         public static final String[] CONCENTRATION_RING_SUBTYPES = {"normal", "lunar", "solar"};
+        public static final String SEASON_RING = "seasonRing";
     }
 
     public static class NBT
