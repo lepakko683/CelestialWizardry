@@ -17,6 +17,7 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
+import net.minecraftforge.common.config.Configuration;
 import org.apache.logging.log4j.Logger;
 
 import java.io.File;
@@ -36,6 +37,9 @@ public class CelestialWizardry
 
     // Mod logger
     public static Logger log;
+
+    // Mod configuration
+    public static final ConfigHandler config = new ConfigHandler(Version.VERSION);
 
     @Mod.EventHandler
     public void invalidFingerprint(FMLFingerprintViolationEvent event)
@@ -68,10 +72,10 @@ public class CelestialWizardry
         log.info("Starting pre-initialization");
 
         // Initialize the configuration
-        ConfigHandler.init(
-                event.getModConfigurationDirectory().getAbsolutePath() + File.separator + Reference.MOD_ID.toLowerCase()
-                        + File.separator
-                          );
+        config.setConfiguration(new Configuration(new File(event.getModConfigurationDirectory(),
+                                                           File.separator + Reference.MOD_ID.toLowerCase()
+                                                                   + File.separator + Reference.MOD_ID.toLowerCase()
+                                                                   + ".cfg")));
 
         // Initialize mod items
         ModItems.init();
