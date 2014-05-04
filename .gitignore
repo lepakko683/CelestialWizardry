@@ -32,3 +32,6 @@
 /keystore
 /*.jks
 /private.properties
+
+# I don't think logs are needed :) -OkkapeL
+/logs

@@ -1,12 +1,21 @@
-WritingTable (done)
+WritingTable (done) {
 
  L
 BPB
 S S
 
-Scroll (done)
+}
+
+
+Scroll (done) {
 
   P
   P
   P
+
   
+Magical Ink (done) {
+
+[Water Bottle, 2*Ink sac, Lapis Lazuli]
+
+}
