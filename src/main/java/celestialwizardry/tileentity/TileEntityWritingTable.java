@@ -1,6 +1,6 @@
 package celestialwizardry.tileentity;
 
-import celestialwizardry.api.writing.IInk;
+import celestialwizardry.item.ItemMagicalInk;
 import celestialwizardry.network.PacketHandler;
 import celestialwizardry.network.message.MessageTileEntityWritingTable;
 import celestialwizardry.reference.Names;
@@ -14,7 +14,7 @@ import net.minecraft.network.Packet;
 public class TileEntityWritingTable extends TileEntityCW implements IInventory
 {
     public static final int INVENTORY_SIZE = 1;
-    public static final int SCROLL_INVENTORY_INDEX = 0;
+    public static final int INK_INVENTORY_INDEX = 0;
 
     private ItemStack[] inventory;
 
@@ -210,7 +210,7 @@ public class TileEntityWritingTable extends TileEntityCW implements IInventory
     @Override
     public boolean isItemValidForSlot(int slot, ItemStack stack)
     {
-        return (stack.getItem() instanceof IInk);
+        return (stack.getItem() instanceof ItemMagicalInk);
     }
 
     @Override

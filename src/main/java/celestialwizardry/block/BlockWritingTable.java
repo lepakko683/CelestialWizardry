@@ -1,6 +1,7 @@
 package celestialwizardry.block;
 
 import celestialwizardry.CelestialWizardry;
+import celestialwizardry.item.ItemMagicalInk;
 import celestialwizardry.reference.GuiIds;
 import celestialwizardry.reference.Names;
 import celestialwizardry.tileentity.TileEntityWritingTable;
@@ -10,6 +11,7 @@ import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
@@ -75,9 +77,33 @@ public class BlockWritingTable extends BlockCW implements ITileEntityProvider
         {
             if (!world.isRemote)
             {
-                if (world.getTileEntity(x, y, z) instanceof TileEntityWritingTable)
+                if (player.getCurrentEquippedItem() != null && player.getCurrentEquippedItem().getItem() instanceof ItemMagicalInk)
                 {
-                    player.openGui(CelestialWizardry.instance, GuiIds.WRITING_TABLE, world, x, y, z);
+                    ItemStack ink = player.getCurrentEquippedItem();
+
+                    if (world.getTileEntity(x, y, z) instanceof TileEntityWritingTable)
+                    {
+                        TileEntityWritingTable table = (TileEntityWritingTable) world.getTileEntity(x, y, z);
+
+                        ItemStack slot = table.getStackInSlot(TileEntityWritingTable.INK_INVENTORY_INDEX);
+
+                        if (slot == null)
+                        {
+                            table.setInventorySlotContents(TileEntityWritingTable.INK_INVENTORY_INDEX, ink.copy());
+                            player.destroyCurrentEquippedItem();
+                        }
+                        else
+                        {
+                            player.openGui(CelestialWizardry.instance, GuiIds.WRITING_TABLE, world, x, y, z);
+                        }
+                    }
+                }
+                else
+                {
+                    if (world.getTileEntity(x, y, z) instanceof TileEntityWritingTable)
+                    {
+                        player.openGui(CelestialWizardry.instance, GuiIds.WRITING_TABLE, world, x, y, z);
+                    }
                 }
             }
 

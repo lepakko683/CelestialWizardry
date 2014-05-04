@@ -14,7 +14,7 @@ public class ContainerWritingTable extends Container
 
     public ContainerWritingTable(InventoryPlayer inventoryPlayer, TileEntityWritingTable tileEntityWritingTable)
     {
-        this.addSlotToContainer(new SlotInk(tileEntityWritingTable, TileEntityWritingTable.SCROLL_INVENTORY_INDEX, 8, 8));
+        this.addSlotToContainer(new SlotInk(tileEntityWritingTable, TileEntityWritingTable.INK_INVENTORY_INDEX, 8, 8));
 
         // Add the player's inventory slots to the container
         for (int inventoryRowIndex = 0; inventoryRowIndex < PLAYER_INVENTORY_ROWS; ++inventoryRowIndex)
