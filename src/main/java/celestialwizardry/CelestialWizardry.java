@@ -73,7 +73,8 @@ public class CelestialWizardry
         log.info("Starting pre-initialization");
 
         // Initialize the configuration
-        config.setConfiguration(new Configuration(new File(event.getModConfigurationDirectory(), "/celestialwizardry/celestialwizardry.cfg")));
+        config.setConfiguration(new Configuration(
+                new File(event.getModConfigurationDirectory(), "/celestialwizardry/celestialwizardry.cfg")));
 
         // Initialize configuration settings
         SettingHandler.init();

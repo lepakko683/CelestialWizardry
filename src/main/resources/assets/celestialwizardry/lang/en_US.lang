@@ -12,6 +12,9 @@ item.celestialwizardry:seasonRing.name=Ring of Seasons
 # Block localizations
 tile.celestialwizardry:writingTable.name=Writing Table
 
+# GUI localizations
+container.celestialwizardry:writingTable=Writing Table
+
 # Tooltip localizations
 tooltip.celestialwizardry:lunar=Lunar
 tooltip.celestialwizardry:solar=Solar

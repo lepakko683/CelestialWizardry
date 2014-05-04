@@ -1,5 +1,7 @@
 package celestialwizardry.block;
 
+import celestialwizardry.CelestialWizardry;
+import celestialwizardry.reference.GuiIds;
 import celestialwizardry.reference.Names;
 import celestialwizardry.tileentity.TileEntityWritingTable;
 import cpw.mods.fml.relauncher.Side;
@@ -7,6 +9,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
@@ -57,6 +60,28 @@ public class BlockWritingTable extends BlockCW implements ITileEntityProvider
         else
         {
             return sideIcon;
+        }
+    }
+
+    @Override
+    public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int par6, float par7,
+                                    float par8, float par9)
+    {
+        if (player.isSneaking())
+        {
+            return false;
+        }
+        else
+        {
+            if (!world.isRemote)
+            {
+                if (world.getTileEntity(x, y, z) instanceof TileEntityWritingTable)
+                {
+                    player.openGui(CelestialWizardry.instance, GuiIds.WRITING_TABLE, world, x, y, z);
+                }
+            }
+
+            return true;
         }
     }
 

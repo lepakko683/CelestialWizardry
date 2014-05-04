@@ -1,5 +1,9 @@
 package celestialwizardry.handler;
 
+import celestialwizardry.client.gui.inventory.GuiWritingTable;
+import celestialwizardry.inventory.ContainerWritingTable;
+import celestialwizardry.reference.GuiIds;
+import celestialwizardry.tileentity.TileEntityWritingTable;
 import cpw.mods.fml.common.network.IGuiHandler;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
@@ -20,6 +24,12 @@ public class GuiHandler implements IGuiHandler
     @Override
     public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z)
     {
+        if (ID == GuiIds.WRITING_TABLE)
+        {
+            TileEntityWritingTable tileEntityWritingTable = (TileEntityWritingTable) world.getTileEntity(x, y, z);
+            return new ContainerWritingTable(player.inventory, tileEntityWritingTable);
+        }
+
         return null;
     }
 
@@ -39,6 +49,12 @@ public class GuiHandler implements IGuiHandler
     @Override
     public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z)
     {
+        if (ID == GuiIds.WRITING_TABLE)
+        {
+            TileEntityWritingTable tileEntityWritingTable = (TileEntityWritingTable) world.getTileEntity(x, y, z);
+            return new GuiWritingTable(player.inventory, tileEntityWritingTable);
+        }
+
         return null;
     }
 }

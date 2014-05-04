@@ -79,7 +79,8 @@ public class ItemSeasonRing extends ItemCW implements IBauble
             {
                 player.worldObj.spawnEntityInWorld(
                         new EntityItem(player.worldObj, player.posX, player.posY + 2, player.posZ,
-                                       new ItemStack(Items.cake)));
+                                       new ItemStack(Items.cake))
+                                                  );
             }
 
             count++;
