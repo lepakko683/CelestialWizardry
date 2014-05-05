@@ -37,5 +37,6 @@ public class Names
         public static final String VANILLA_INVENTORY = "container.inventory";
 
         public static final String WRITING_TABLE = "container." + Resources.RESOURCE_PREFIX + Blocks.WRITING_TABLE;
+        public static final String SPELL_BOOK = "container." + Resources.RESOURCE_PREFIX + Items.SPELL_BOOK;
     }
 }

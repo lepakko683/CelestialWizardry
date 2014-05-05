@@ -32,7 +32,8 @@ public class RecipesVanilla
         add(new ItemStack(ModItems.scroll), "p", "p", "p", 'p', Items.paper);
 
         // Magical Ink
-        addShapeless(new ItemStack(ModItems.magicalInk), new ItemStack(Items.dye, 1, 4), "dyeBlack", "dyeBlack", new ItemStack(Items.potionitem, 1, 0));
+        addShapeless(new ItemStack(ModItems.magicalInk), new ItemStack(Items.dye, 1, 4), "dyeBlack", "dyeBlack",
+                     new ItemStack(Items.potionitem, 1, 0));
     }
 
     private static void add(ItemStack output, Object... input)
