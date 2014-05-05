@@ -1,5 +1,6 @@
 package celestialwizardry.inventory;
 
+import celestialwizardry.api.writing.IWriter;
 import celestialwizardry.tileentity.TileEntityWritingTable;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -36,30 +37,51 @@ public class ContainerWritingTable extends Container
     @Override
     public ItemStack transferStackInSlot(EntityPlayer player, int slotIndex)
     {
-        ItemStack itemStack = null;
-        /* Slot slot = (Slot) inventorySlots.get(slotIndex);
+        ItemStack newItemStack = null;
+        Slot slot = (Slot) inventorySlots.get(slotIndex);
 
         if (slot != null && slot.getHasStack())
         {
-            ItemStack slotItemStack = slot.getStack();
-            itemStack = slotItemStack.copy();
+            ItemStack itemStack = slot.getStack();
+            newItemStack = itemStack.copy();
 
+            // Attempt to shift click something from the ink inventory into the player inventory
             if (slotIndex < TileEntityWritingTable.INVENTORY_SIZE)
             {
-                if (!this.mergeItemStack(slotItemStack, 1, inventorySlots.size(), true))
+                if (!this
+                        .mergeItemStack(itemStack, TileEntityWritingTable.INVENTORY_SIZE, inventorySlots.size(), false))
                 {
                     return null;
                 }
             }
-            else
+            // Special case if we are dealing with an non-valid being shift clicked
+            else if (!(itemStack.getItem() instanceof IWriter))
             {
-                if (!this.mergeItemStack(slotItemStack, 0, TileEntityWritingTable.INVENTORY_SIZE, false))
+                // Attempt to shift click a item from the player inventory into the hot bar inventory
+                if (slotIndex < (TileEntityWritingTable.INVENTORY_SIZE) + (PLAYER_INVENTORY_ROWS
+                        * PLAYER_INVENTORY_COLUMNS))
+                {
+                    if (!this.mergeItemStack(itemStack, (TileEntityWritingTable.INVENTORY_SIZE) + (PLAYER_INVENTORY_ROWS
+                            * PLAYER_INVENTORY_COLUMNS), inventorySlots.size(), false))
+                    {
+                        return null;
+                    }
+                }
+                // Attempt to shift click a item from the hot bar inventory into the player inventory
+                else if (!this.mergeItemStack(itemStack, TileEntityWritingTable.INVENTORY_SIZE,
+                                              (TileEntityWritingTable.INVENTORY_SIZE) + (PLAYER_INVENTORY_ROWS
+                                                      * PLAYER_INVENTORY_COLUMNS), false))
                 {
                     return null;
                 }
+            }
+            // Attempt to shift click a ink into the ink inventory
+            else if (!this.mergeItemStack(itemStack, 0, TileEntityWritingTable.INVENTORY_SIZE, false))
+            {
+                return null;
             }
 
-            if (slotItemStack.stackSize == 0)
+            if (itemStack.stackSize == 0)
             {
                 slot.putStack(null);
             }
@@ -67,13 +89,13 @@ public class ContainerWritingTable extends Container
             {
                 slot.onSlotChanged();
             }
-        } */
+        }
 
-        return itemStack;
+        return newItemStack;
     }
 
     @Override
-    public boolean canInteractWith(EntityPlayer var1)
+    public boolean canInteractWith(EntityPlayer player)
     {
         return true;
     }
