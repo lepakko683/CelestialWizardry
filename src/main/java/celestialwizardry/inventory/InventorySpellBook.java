@@ -13,36 +13,36 @@ import java.util.UUID;
 
 public class InventorySpellBook implements IInventory, INBTTaggable
 {
-    public ItemStack parentItemStack;
+    public ItemStack theBook;
     protected ItemStack[] inventory;
     protected String customName;
 
     public InventorySpellBook(ItemStack stack)
     {
-        parentItemStack = stack;
+        theBook = stack;
 
         int size = ContainerSpellBook.INVENTORY_ROWS * ContainerSpellBook.INVENTORY_COLUMNS;
         inventory = new ItemStack[size];
 
-        readFromNBT(parentItemStack.getTagCompound());
+        readFromNBT(theBook.getTagCompound());
     }
 
     public void onGuiSaved(EntityPlayer player)
     {
-        parentItemStack = findParentItemStack(player);
+        theBook = findParentStack(player);
 
-        if (parentItemStack != null)
+        if (theBook != null)
         {
             save();
         }
     }
 
-    public ItemStack findParentItemStack(EntityPlayer player)
+    public ItemStack findParentStack(EntityPlayer player)
     {
-        if (NBTHelper.hasUUID(parentItemStack))
+        if (NBTHelper.hasUUID(theBook))
         {
-            UUID parentItemStackUUID = new UUID(parentItemStack.getTagCompound().getLong(Names.NBT.UUID_MOST_SIG),
-                                                parentItemStack.getTagCompound().getLong(Names.NBT.UUID_LEAST_SIG));
+            UUID parentItemStackUUID = new UUID(theBook.getTagCompound().getLong(Names.NBT.UUID_MOST_SIG),
+                                                theBook.getTagCompound().getLong(Names.NBT.UUID_LEAST_SIG));
 
             for (int i = 0; i < player.inventory.getSizeInventory(); i++)
             {
@@ -66,14 +66,14 @@ public class InventorySpellBook implements IInventory, INBTTaggable
 
     public boolean matchesUUID(UUID uuid)
     {
-        return NBTHelper.hasUUID(parentItemStack)
-                && parentItemStack.getTagCompound().getLong(Names.NBT.UUID_LEAST_SIG) == uuid.getLeastSignificantBits()
-                && parentItemStack.getTagCompound().getLong(Names.NBT.UUID_MOST_SIG) == uuid.getMostSignificantBits();
+        return NBTHelper.hasUUID(theBook)
+                && theBook.getTagCompound().getLong(Names.NBT.UUID_LEAST_SIG) == uuid.getLeastSignificantBits()
+                && theBook.getTagCompound().getLong(Names.NBT.UUID_MOST_SIG) == uuid.getMostSignificantBits();
     }
 
     public void save()
     {
-        NBTTagCompound tagCompound = parentItemStack.getTagCompound();
+        NBTTagCompound tagCompound = theBook.getTagCompound();
 
         if (tagCompound == null)
         {
@@ -85,7 +85,7 @@ public class InventorySpellBook implements IInventory, INBTTaggable
         }
 
         writeToNBT(tagCompound);
-        parentItemStack.setTagCompound(tagCompound);
+        theBook.setTagCompound(tagCompound);
     }
 
     /**

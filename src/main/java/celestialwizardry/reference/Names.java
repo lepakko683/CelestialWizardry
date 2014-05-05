@@ -30,6 +30,7 @@ public class Names
         public static final String SPELL_BOOK_GUI_OPEN = "spellBookGuiOpen";
         public static final String UUID_MOST_SIG = "UUIDMostSig";
         public static final String UUID_LEAST_SIG = "UUIDLeastSig";
+        public static final String MODE = "mode";
     }
 
     public static class Containers

@@ -1,5 +1,6 @@
 package celestialwizardry.util;
 
+import celestialwizardry.item.ItemSpellBook;
 import celestialwizardry.reference.Names;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
