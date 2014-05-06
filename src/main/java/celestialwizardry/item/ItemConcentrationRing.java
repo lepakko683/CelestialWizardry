@@ -70,6 +70,8 @@ public class ItemConcentrationRing extends ItemCW implements IBauble
     @SuppressWarnings("unchecked")
     public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean adv)
     {
+        super.addInformation(stack, player, list, adv);
+
         int meta = stack.getItemDamage();
 
         // if meta == 0

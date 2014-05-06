@@ -16,6 +16,7 @@ public class SettingHandler
         String category = Settings.Categories.GENERAL;
 
         Settings.enableSeasonal = CelestialWizardry.config.get(category, "enableSeasonal", true);
+        Settings.debugMode = CelestialWizardry.config.get(category, "debugMode", true); // TODO
 
         /**
          * Spells

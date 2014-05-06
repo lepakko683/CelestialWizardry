@@ -1,12 +1,20 @@
 package celestialwizardry.item;
 
 import celestialwizardry.creativetab.CreativeTab;
+import celestialwizardry.reference.Messages;
 import celestialwizardry.reference.Resources;
+import celestialwizardry.reference.Settings;
+import celestialwizardry.util.NBTHelper;
+import celestialwizardry.util.StringHelper;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+
+import java.util.List;
 
 public class ItemCW extends Item
 {
@@ -43,5 +51,29 @@ public class ItemCW extends Item
     protected String getUnwrappedUnlocalizedName(String unlocalizedName)
     {
         return unlocalizedName.substring(unlocalizedName.indexOf(".") + 1);
+    }
+
+    @Override
+    @SuppressWarnings("unchecked")
+    public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean adv)
+    {
+        if (Settings.debugMode)
+        {
+            if (stack.hasTagCompound())
+            {
+                list.add(StringHelper.localize(Messages.NBT));
+                NBTTagCompound tagCompound = stack.getTagCompound();
+
+                for (Object o : tagCompound.func_150296_c())
+                {
+                    String s = String.valueOf(o) + ":" + tagCompound.getTag(String.valueOf(o)).toString();
+                    list.add(s);
+                }
+            }
+            else
+            {
+                list.add(StringHelper.localize(Messages.NO_NBT));
+            }
+        }
     }
 }

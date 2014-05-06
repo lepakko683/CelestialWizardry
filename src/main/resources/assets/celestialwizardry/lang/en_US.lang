@@ -20,3 +20,10 @@ container.celestialwizardry:writingTable=Writing Table
 # Tooltip localizations
 tooltip.celestialwizardry:lunar=Lunar
 tooltip.celestialwizardry:solar=Solar
+tooltip.celestialwizardry:noNBT=No NBT Tags found
+tooltip.celestialwizardry:NBT=NBT Tags found
+
+# Book mode localizations
+mode.celestialwizardry:guide=Guide
+mode.celestialwizardry:inventory=Inventory
+mode.celestialwizardry:spell=Casting

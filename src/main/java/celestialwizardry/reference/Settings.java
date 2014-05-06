@@ -7,7 +7,15 @@ import net.minecraftforge.common.config.Configuration;
  */
 public class Settings
 {
+    /**
+     * General
+     */
     public static boolean enableSeasonal;
+    public static boolean debugMode;
+
+    /**
+     * Spells
+     */
     public static float spellCostMultiplier;
 
     public static class Categories
