@@ -134,14 +134,16 @@ processResources
             // Replace values only in mcmod.info.
             from(sourceSets.main.resources.srcDirs) {
                 include 'mcmod.info'
+				include 'dependencies.info'
 
                 // Replace version and mcversion.
-                expand 'version': project.version, 'mcversion': project.minecraft.version
+                expand 'version': project.version, 'mcversion': project.minecraft.version, 'baublesversion': config.baubles_version
             }
 
             // Copy everything excluding mcmod.info.
             from(sourceSets.main.resources.srcDirs) {
                 exclude 'mcmod.info'
+				exclude 'dependencies.info'
             }
         }
 
