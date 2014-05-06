@@ -177,7 +177,7 @@ public class InventorySpellBook implements IInventory, INBTTaggable
     @Override
     public String getInventoryName()
     {
-        return this.hasCustomName() ? this.getCustomName() : Names.Containers.SPELL_BOOK;
+        return this.hasCustomName() ? this.getCustomName() : Names.Containers.SPELL_BOOK_INVENTORY;
     }
 
     public boolean hasCustomName()

@@ -4,7 +4,6 @@ import celestialwizardry.creativetab.CreativeTab;
 import celestialwizardry.reference.Messages;
 import celestialwizardry.reference.Resources;
 import celestialwizardry.reference.Settings;
-import celestialwizardry.util.NBTHelper;
 import celestialwizardry.util.StringHelper;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;

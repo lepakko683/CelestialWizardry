@@ -28,6 +28,7 @@ public class Names
         public static final String DIRECTION = "teDirection";
         public static final String OWNER = "owner";
         public static final String SPELL_BOOK_GUI_OPEN = "spellBookGuiOpen";
+        public static final String SPELL_BOOK_INVENTORY_OPEN = "spellBookInventoryOpen";
         public static final String UUID_MOST_SIG = "UUIDMostSig";
         public static final String UUID_LEAST_SIG = "UUIDLeastSig";
         public static final String MODE = "mode";
@@ -38,6 +39,7 @@ public class Names
         public static final String VANILLA_INVENTORY = "container.inventory";
 
         public static final String WRITING_TABLE = "container." + Resources.RESOURCE_PREFIX + Blocks.WRITING_TABLE;
-        public static final String SPELL_BOOK = "container." + Resources.RESOURCE_PREFIX + Items.SPELL_BOOK;
+        public static final String SPELL_BOOK_INVENTORY = "container." + Resources.RESOURCE_PREFIX + Items.SPELL_BOOK
+                + "Inventory";
     }
 }

@@ -36,8 +36,22 @@ public class ItemSpellBook extends ItemCW
             }
             else
             {
-                // NBTHelper.setBoolean(stack, Names.NBT.SPELL_BOOK_GUI_OPEN, true);
-                // player.openGui(CelestialWizardry.instance, GuiIds.SPELL_BOOK_INVENTORY, player.worldObj, (int) player.posX, (int) player.posY, (int) player.posZ);
+                if (getMode(stack) == 0)
+                {
+                    NBTHelper.setBoolean(stack, Names.NBT.SPELL_BOOK_GUI_OPEN, true);
+                    player.openGui(CelestialWizardry.instance, GuiIds.SPELL_BOOK, player.worldObj, (int) player.posX,
+                                   (int) player.posY, (int) player.posZ);
+                }
+                else if (getMode(stack) == 1)
+                {
+                    NBTHelper.setBoolean(stack, Names.NBT.SPELL_BOOK_INVENTORY_OPEN, true);
+                    player.openGui(CelestialWizardry.instance, GuiIds.SPELL_BOOK_INVENTORY, player.worldObj,
+                                   (int) player.posX, (int) player.posY, (int) player.posZ);
+                }
+                else if (getMode(stack) == 2)
+                {
+                    // TODO Cast spell
+                }
             }
         }
 
@@ -51,7 +65,8 @@ public class ItemSpellBook extends ItemCW
         String open = " (";
         String close = ")";
 
-        return NBTHelper.hasUUID(stack) ? super.getItemStackDisplayName(stack) + open + getLocalizedModeWithColor(stack) + close : super.getItemStackDisplayName(stack);
+        return NBTHelper.hasUUID(stack) ? super.getItemStackDisplayName(stack) + open + getLocalizedModeWithColor(stack)
+                + close : super.getItemStackDisplayName(stack);
     }
 
     protected static void initSpellBook(ItemStack stack)

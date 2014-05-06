@@ -16,6 +16,7 @@ tile.celestialwizardry:writingTable.name=Writing Table
 
 # GUI localizations
 container.celestialwizardry:writingTable=Writing Table
+container.celestialwizardry:spellBookInventory=Spells
 
 # Tooltip localizations
 tooltip.celestialwizardry:lunar=Lunar

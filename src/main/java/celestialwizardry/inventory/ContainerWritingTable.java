@@ -70,7 +70,8 @@ public class ContainerWritingTable extends Container
                 // Attempt to shift click a item from the hot bar inventory into the player inventory
                 else if (!this.mergeItemStack(itemStack, TileEntityWritingTable.INVENTORY_SIZE,
                                               (TileEntityWritingTable.INVENTORY_SIZE) + (PLAYER_INVENTORY_ROWS
-                                                      * PLAYER_INVENTORY_COLUMNS), false))
+                                                      * PLAYER_INVENTORY_COLUMNS), false
+                                             ))
                 {
                     return null;
                 }

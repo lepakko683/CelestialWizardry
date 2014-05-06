@@ -12,4 +12,6 @@ public class Resources
 
     public static final ResourceLocation GUI_WRITING_TABLE = ResourceLocationHelper.getResourceLocation(
             GUI_SHEET_LOCATION + "writingTable.png");
+    public static final ResourceLocation GUI_SPELL_BOOK_INVENTORY = ResourceLocationHelper
+            .getResourceLocation(GUI_SHEET_LOCATION + "spellBookInventory.png");
 }

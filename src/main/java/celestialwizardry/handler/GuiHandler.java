@@ -1,7 +1,10 @@
 package celestialwizardry.handler;
 
+import celestialwizardry.client.gui.inventory.GuiSpellBookInventory;
 import celestialwizardry.client.gui.inventory.GuiWritingTable;
+import celestialwizardry.inventory.ContainerSpellBook;
 import celestialwizardry.inventory.ContainerWritingTable;
+import celestialwizardry.inventory.InventorySpellBook;
 import celestialwizardry.reference.GuiIds;
 import celestialwizardry.tileentity.TileEntityWritingTable;
 import cpw.mods.fml.common.network.IGuiHandler;
@@ -29,6 +32,14 @@ public class GuiHandler implements IGuiHandler
             TileEntityWritingTable tileEntityWritingTable = (TileEntityWritingTable) world.getTileEntity(x, y, z);
             return new ContainerWritingTable(player.inventory, tileEntityWritingTable);
         }
+        else if (ID == GuiIds.SPELL_BOOK)
+        {
+
+        }
+        else if (ID == GuiIds.SPELL_BOOK_INVENTORY)
+        {
+            return new ContainerSpellBook(player, new InventorySpellBook(player.getHeldItem()));
+        }
 
         return null;
     }
@@ -53,6 +64,14 @@ public class GuiHandler implements IGuiHandler
         {
             TileEntityWritingTable tileEntityWritingTable = (TileEntityWritingTable) world.getTileEntity(x, y, z);
             return new GuiWritingTable(player.inventory, tileEntityWritingTable);
+        }
+        else if (ID == GuiIds.SPELL_BOOK)
+        {
+
+        }
+        else if (ID == GuiIds.SPELL_BOOK_INVENTORY)
+        {
+            return new GuiSpellBookInventory(player, new InventorySpellBook(player.getHeldItem()));
         }
 
         return null;
