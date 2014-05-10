@@ -43,7 +43,7 @@ public class GuiSpellBookInventory extends GuiContainer
     {
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 
-        this.mc.getTextureManager().bindTexture(Resources.GUI_SPELL_BOOK_INVENTORY);
+        this.mc.getTextureManager().bindTexture(Resources.Textures.GUI_SPELL_BOOK_INVENTORY);
 
         int xStart = (width - xSize) / 2;
         int yStart = (height - ySize) / 2;
