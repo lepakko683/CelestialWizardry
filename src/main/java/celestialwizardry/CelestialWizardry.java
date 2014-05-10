@@ -1,5 +1,6 @@
 package celestialwizardry;
 
+import celestialwizardry.api.CWApi;
 import celestialwizardry.config.ConfigHandler;
 import celestialwizardry.config.SettingHandler;
 import celestialwizardry.handler.CraftingHandler;
@@ -19,6 +20,7 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import net.minecraftforge.common.config.Configuration;
+import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.io.File;
@@ -65,6 +67,9 @@ public class CelestialWizardry
     {
         // Set the start time for tracking
         long start = System.currentTimeMillis();
+
+        // Initialize mod api logger
+        CWApi.apiLog = LogManager.getLogger("CWApi");
 
         // Initialize mod logger
         log = event.getModLog();
