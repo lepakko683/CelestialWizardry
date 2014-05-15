@@ -6,6 +6,12 @@ import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 public class SpellEventHandler
 {
     @SubscribeEvent
+    public void onCastingStart(SpellEvent.CastingStartEvent event)
+    {
+        event.spell.cast(event.item, event.player);
+    }
+
+    @SubscribeEvent
     public void onPreCast(SpellEvent.PreCastEvent event)
     {
         // TODO Something here
@@ -14,7 +20,7 @@ public class SpellEventHandler
     @SubscribeEvent
     public void onCast(SpellEvent.CastEvent event)
     {
-        // TODO The actual spell here
+        // TODO Something here
     }
 
     @SubscribeEvent
