@@ -1,6 +1,5 @@
 package celestialwizardry.api.spell;
 
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 /**
@@ -8,11 +7,21 @@ import net.minecraft.item.ItemStack;
  */
 public interface ISpellContainer
 {
+    public static final String SPELL_NBT_TAG = "cwSpell";
+
     /**
-     * Returns the spell that is in the {@link net.minecraft.item.ItemStack}
+     * Returns the spell that is in the ItemStack
      *
-     * @param stack the {@link net.minecraft.item.ItemStack} containing the {@link celestialwizardry.api.spell.Spell}
-     * @return the {@link celestialwizardry.api.spell.Spell} that is in the {@link net.minecraft.item.ItemStack}
+     * @param stack the ItemStack containing the Spell
+     * @return the Spell that is in the stack
      */
     public Spell getSpell(ItemStack stack);
+
+    /**
+     * Sets spell to given ItemStack
+     *
+     * @param stack the ItemStack to receive the Spell
+     * @param spell the Spell to set
+     */
+    public void setSpell(ItemStack stack, Spell spell);
 }

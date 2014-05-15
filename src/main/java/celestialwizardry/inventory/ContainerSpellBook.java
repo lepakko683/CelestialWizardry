@@ -39,7 +39,8 @@ public class ContainerSpellBook extends Container
             {
                 this.addSlotToContainer(
                         new SlotSpellBook(this, inventorySpellBook, player, columnIndex + rowIndex * inventoryColumns,
-                                          8 + columnIndex * 18, 18 + rowIndex * 18));
+                                          8 + columnIndex * 18, 18 + rowIndex * 18)
+                                       );
             }
         }
 
@@ -124,7 +125,8 @@ public class ContainerSpellBook extends Container
                 // Attempt to shift click a book from the hot bar inventory into the player inventory
                 else if (!this.mergeItemStack(itemStack, inventoryRows * inventoryColumns,
                                               (inventoryRows * inventoryColumns) + (PLAYER_INVENTORY_ROWS
-                                                      * PLAYER_INVENTORY_COLUMNS), false))
+                                                      * PLAYER_INVENTORY_COLUMNS), false
+                                             ))
                 {
                     return null;
                 }

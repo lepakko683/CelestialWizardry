@@ -3,6 +3,7 @@ package celestialwizardry.init;
 import celestialwizardry.item.*;
 import celestialwizardry.reference.Names;
 import cpw.mods.fml.common.registry.GameRegistry;
+import net.minecraft.item.Item;
 
 /**
  * Just a class containing all mod items
@@ -21,14 +22,19 @@ public class ModItems
 
     public static void init()
     {
-        GameRegistry.registerItem(magicalInk, "item." + Names.Items.MAGICAL_INK);
-        GameRegistry.registerItem(staff, "item." + Names.Items.STAFF);
-        GameRegistry.registerItem(scroll, "item." + Names.Items.SCROLL);
-        GameRegistry.registerItem(spellScroll, "item." + Names.Items.SPELL_SCROLL);
-        GameRegistry.registerItem(spellBook, "item." + Names.Items.SPELL_BOOK);
-        GameRegistry.registerItem(concentrationRing, "item." + Names.Items.CONCENTRATION_RING);
-        GameRegistry.registerItem(seasonRing, "item." + Names.Items.SEASON_RING);
-        GameRegistry.registerItem(page, "item." + Names.Items.PAGE);
-        GameRegistry.registerItem(magicalPen, "item." + Names.Items.MAGICAL_PEN);
+        register(magicalInk, "item." + Names.Items.MAGICAL_INK);
+        register(staff, "item." + Names.Items.STAFF);
+        register(scroll, "item." + Names.Items.SCROLL);
+        register(spellScroll, "item." + Names.Items.SPELL_SCROLL);
+        register(spellBook, "item." + Names.Items.SPELL_BOOK);
+        register(concentrationRing, "item." + Names.Items.CONCENTRATION_RING);
+        register(seasonRing, "item." + Names.Items.SEASON_RING);
+        register(page, "item." + Names.Items.PAGE);
+        register(magicalPen, "item." + Names.Items.MAGICAL_PEN);
+    }
+
+    private static void register(Item item, String name)
+    {
+        GameRegistry.registerItem(item, "item." + name);
     }
 }
