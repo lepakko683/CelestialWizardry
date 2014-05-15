@@ -24,5 +24,12 @@ public class SettingHandler
         category = Settings.Categories.SPELLS;
 
         Settings.spellCostMultiplier = (float) CelestialWizardry.config.get(category, "spellCostMultiplier", 1.0f);
+
+        /**
+         * Client
+         */
+        category = Settings.Categories.CLIENT;
+
+        Settings.spellBook3dModel = CelestialWizardry.config.get(category, "enableSpellBook3dModel", true);
     }
 }

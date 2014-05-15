@@ -121,6 +121,12 @@ public class CelestialWizardry
         // Initialize crafting handler
         CraftingHandler.init(); // TODO Add the class to FML event subscription
 
+        // Register render tick handlers
+        proxy.registerRenderTickHandler();
+
+        // Register mod renders
+        proxy.registerRenderer();
+
         // Tell everyone that we have successfully initialized
         log.info("Finished initialization after " + (System.currentTimeMillis() - start) + " ms");
     }
