@@ -138,6 +138,10 @@ public class CelestialWizardry
         // Register mod renders
         proxy.registerRenderer();
 
+        // Register spell casting event handler
+        FMLCommonHandler.instance().bus().register(EventHandlers.SPELL_EVENT_HANDLER);
+        MinecraftForge.EVENT_BUS.register(EventHandlers.SPELL_EVENT_HANDLER);
+
         // Tell everyone that we have successfully initialized
         log.info("Finished initialization after " + (System.currentTimeMillis() - start) + " ms");
     }

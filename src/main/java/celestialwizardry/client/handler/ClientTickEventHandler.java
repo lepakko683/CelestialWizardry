@@ -1,6 +1,7 @@
 package celestialwizardry.client.handler;
 
 import celestialwizardry.client.gui.GuiSpellBook;
+import celestialwizardry.client.gui.inventory.GuiSpellBookInventory;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.TickEvent;
 import cpw.mods.fml.relauncher.Side;
@@ -22,7 +23,7 @@ public class ClientTickEventHandler
             GuiScreen gui = Minecraft.getMinecraft().currentScreen;
             int ticksToOpen = 10;
 
-            if (gui instanceof GuiSpellBook)
+            if (gui instanceof GuiSpellBook || gui instanceof GuiSpellBookInventory)
             {
                 if (ticksWithBookOpen < 0)
                 {
