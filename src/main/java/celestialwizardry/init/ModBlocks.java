@@ -2,8 +2,12 @@ package celestialwizardry.init;
 
 import celestialwizardry.block.BlockCW;
 import celestialwizardry.block.BlockWritingTable;
+import celestialwizardry.item.ItemBlockCW;
 import celestialwizardry.reference.Names;
 import cpw.mods.fml.common.registry.GameRegistry;
+import net.minecraft.block.Block;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
 
 /**
  * Just a class containing all mod blocks
@@ -14,6 +18,16 @@ public class ModBlocks
 
     public static void init()
     {
-        GameRegistry.registerBlock(writingTable, "tile." + Names.Blocks.WRITING_TABLE);
+        register(writingTable, Names.Blocks.WRITING_TABLE);
+    }
+
+    private static void register(Block block, String name)
+    {
+        register(block, name, ItemBlockCW.class);
+    }
+
+    private static void register(Block block, String name, Class<? extends ItemBlock> item)
+    {
+        GameRegistry.registerBlock(block, item, "tile." + name);
     }
 }

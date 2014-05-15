@@ -22,15 +22,15 @@ public class ModItems
 
     public static void init()
     {
-        register(magicalInk, "item." + Names.Items.MAGICAL_INK);
-        register(staff, "item." + Names.Items.STAFF);
-        register(scroll, "item." + Names.Items.SCROLL);
-        register(spellScroll, "item." + Names.Items.SPELL_SCROLL);
-        register(spellBook, "item." + Names.Items.SPELL_BOOK);
-        register(concentrationRing, "item." + Names.Items.CONCENTRATION_RING);
-        register(seasonRing, "item." + Names.Items.SEASON_RING);
-        register(page, "item." + Names.Items.PAGE);
-        register(magicalPen, "item." + Names.Items.MAGICAL_PEN);
+        register(magicalInk, Names.Items.MAGICAL_INK);
+        register(staff, Names.Items.STAFF);
+        register(scroll, Names.Items.SCROLL);
+        register(spellScroll, Names.Items.SPELL_SCROLL);
+        register(spellBook, Names.Items.SPELL_BOOK);
+        register(concentrationRing, Names.Items.CONCENTRATION_RING);
+        register(seasonRing, Names.Items.SEASON_RING);
+        register(page, Names.Items.PAGE);
+        register(magicalPen, Names.Items.MAGICAL_PEN);
     }
 
     private static void register(Item item, String name)

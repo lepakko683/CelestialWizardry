@@ -63,6 +63,8 @@ public class PlayerEventHandler
                 list.appendTag(new NBTTagString("\u00A72\u00A7o" + "and what you do!"));
                 tagCompound.getCompoundTag("display").setTag("Lore", list);
                 stack.setTagCompound(tagCompound);
+
+                SpawnHelper.spawnItemAtPlayer(event.player, stack);
             }
         }
     }
