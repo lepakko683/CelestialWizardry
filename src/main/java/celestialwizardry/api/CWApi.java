@@ -1,12 +1,19 @@
 package celestialwizardry.api;
 
 import celestialwizardry.api.spell.Spell;
+import celestialwizardry.api.spellbook.SpellBookCategory;
+import celestialwizardry.api.spellbook.SpellBookEntry;
 import org.apache.logging.log4j.Logger;
 
 import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.List;
 
-public class CWApi
+public final class CWApi
 {
+    private static List<SpellBookCategory> categories = new ArrayList<SpellBookCategory>();
+    private static List<SpellBookEntry> allEntries = new ArrayList<SpellBookEntry>();
+
     public static Logger apiLog = null;
 
     private static final String REGISTRY_PACKAGE = "celestialwizardry.registry.";
@@ -48,5 +55,30 @@ public class CWApi
         }
 
         return null;
+    }
+
+    /**
+     * Adds a category to the list of registered categories to appear in the spell book.
+     */
+    public static void addCategory(SpellBookCategory category)
+    {
+        categories.add(category);
+    }
+
+    /**
+     * Gets all registered categories.
+     */
+    public static List<SpellBookCategory> getAllCategories()
+    {
+        return categories;
+    }
+
+    /**
+     * Registers a spell book entry and adds it to the category passed in.
+     */
+    public static void addEntry(SpellBookEntry entry, SpellBookCategory category)
+    {
+        allEntries.add(entry);
+        category.entries.add(entry);
     }
 }

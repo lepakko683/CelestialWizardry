@@ -16,5 +16,14 @@ public class Resources
                 GUI_SHEET_LOCATION + "writingTable.png");
         public static final ResourceLocation GUI_SPELL_BOOK_INVENTORY = ResourceLocationHelper
                 .getResourceLocation(GUI_SHEET_LOCATION + "spellBookInventory.png");
+        public static final ResourceLocation GUI_SPELL_BOOK = ResourceLocationHelper.getResourceLocation(GUI_SHEET_LOCATION + "spellBook.png");
+    }
+
+    public static class Models
+    {
+        // Model textures
+        public static final String MODEL_LOCATION = "textures/models/";
+
+        public static final ResourceLocation MODEL_SPELL_BOOK = ResourceLocationHelper.getResourceLocation(MODEL_LOCATION + "spellBook.png");
     }
 }
