@@ -41,9 +41,10 @@ public class Spell
      * @param item   the ISpellContainer that holds the spell
      * @param player the player that is casting the spell
      */
-    public void onPreCasting(ISpellContainer item, EntityPlayer player)
+    public boolean onPreCasting(ISpellContainer item, EntityPlayer player)
     {
         FMLCommonHandler.instance().bus().post(new SpellEvent.PreCastEvent(this, player, item));
+        return true;
     }
 
     /**
@@ -54,9 +55,10 @@ public class Spell
      * @param item   the ISpellContainer that holds the spell
      * @param player the player that is casting the spell
      */
-    public void onCasting(ISpellContainer item, EntityPlayer player)
+    public boolean onCasting(ISpellContainer item, EntityPlayer player)
     {
         FMLCommonHandler.instance().bus().post(new SpellEvent.CastEvent(this, player, item));
+        return true;
     }
 
     /**
@@ -67,9 +69,10 @@ public class Spell
      * @param item   the ISpellContainer that holds the spell
      * @param player the player that is casting the spell
      */
-    public void onPostCasting(ISpellContainer item, EntityPlayer player)
+    public boolean onPostCasting(ISpellContainer item, EntityPlayer player)
     {
         FMLCommonHandler.instance().bus().post(new SpellEvent.PostCastEvent(this, player, item));
+        return true;
     }
 
     /**
