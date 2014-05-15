@@ -23,6 +23,12 @@ public class Settings
      */
     public static boolean spellBook3dModel;
 
+    /**
+     * Tweaks
+     */
+    // Difficulty
+    public static boolean spawnBook;
+
     public static class Categories
     {
         public static final String SEPARATOR = Configuration.CATEGORY_SPLITTER;
@@ -30,5 +36,7 @@ public class Settings
         public static final String GENERAL = Configuration.CATEGORY_GENERAL;
         public static final String SPELLS = "spells";
         public static final String CLIENT = "client";
+        public static final String TWEAKS = "tweaks";
+        public static final String DIFFICULTY = TWEAKS + SEPARATOR + "difficulty";
     }
 }

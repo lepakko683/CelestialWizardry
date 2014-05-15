@@ -9,8 +9,10 @@ import celestialwizardry.init.ModBlocks;
 import celestialwizardry.init.ModItems;
 import celestialwizardry.network.PacketHandler;
 import celestialwizardry.proxy.IProxy;
+import celestialwizardry.reference.EventHandlers;
 import celestialwizardry.reference.Reference;
 import celestialwizardry.reference.Version;
+import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
@@ -19,6 +21,7 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -98,6 +101,14 @@ public class CelestialWizardry
 
         // Register mod key bindings
         proxy.registerKeys();
+
+        // Register player event handler
+        FMLCommonHandler.instance().bus().register(EventHandlers.PLAYER_EVENT_HANDLER);
+        MinecraftForge.EVENT_BUS.register(EventHandlers.PLAYER_EVENT_HANDLER);
+
+        // Register entity event handler
+        FMLCommonHandler.instance().bus().register(EventHandlers.ENTITY_EVENT_HANDLER);
+        MinecraftForge.EVENT_BUS.register(EventHandlers.ENTITY_EVENT_HANDLER);
 
         // Tell everyone that we have successfully pre-initialized
         log.info("Finished pre-initialization after " + (System.currentTimeMillis() - start) + " ms");
