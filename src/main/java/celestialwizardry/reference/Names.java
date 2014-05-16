@@ -32,6 +32,11 @@ public class Names
         public static final String UUID_MOST_SIG = "UUIDMostSig";
         public static final String UUID_LEAST_SIG = "UUIDLeastSig";
         public static final String MODE = "mode";
+        public static final String IS_CUSTOM = "isCustom";
+        public static final String DISPLAY = "display";
+        public static final String NAME = "Name";
+        public static final String LORE = "Lore";
+        public static final String BACKUP_NAME = "backupName";
     }
 
     public static class Containers

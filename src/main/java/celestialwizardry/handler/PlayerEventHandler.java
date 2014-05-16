@@ -3,8 +3,11 @@ package celestialwizardry.handler;
 import celestialwizardry.CelestialWizardry;
 import celestialwizardry.entity.ModEntityProperties;
 import celestialwizardry.init.ModItems;
+import celestialwizardry.reference.Names;
 import celestialwizardry.reference.Settings;
+import celestialwizardry.util.PlayerHelper;
 import celestialwizardry.util.SpawnHelper;
+import celestialwizardry.util.StringHelper;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent;
 import net.minecraft.init.Items;
@@ -45,38 +48,84 @@ public class PlayerEventHandler
 
                 CelestialWizardry.log.info("Giving spellBook to " + event.player.getDisplayName());
 
+                if (PlayerHelper.isPizzAna(event.player))
+                {
+                    NBTTagCompound tagCompound = new NBTTagCompound();
+                    String name = StringHelper.ORANGE + "PizzAna's Spell Book" + StringHelper.END;
+                    String lore1 = StringHelper.RED + StringHelper.ITALIC + "You should not touch this!";
+
+                    tagCompound.setTag(Names.NBT.DISPLAY, new NBTTagCompound());
+                    tagCompound.getCompoundTag(Names.NBT.DISPLAY).setString(Names.NBT.NAME, name);
+
+                    NBTTagList list = new NBTTagList();
+
+                    list.appendTag(new NBTTagString(lore1));
+                    tagCompound.getCompoundTag(Names.NBT.DISPLAY).setTag(Names.NBT.LORE, list);
+
+                    tagCompound.setBoolean(Names.NBT.IS_CUSTOM, true);
+                    tagCompound.setString(Names.NBT.BACKUP_NAME, name);
+
+                    stack.setTagCompound(tagCompound);
+                }
+
+                if (PlayerHelper.isForgeDevName(event.player))
+                {
+                    NBTTagCompound tagCompound = new NBTTagCompound();
+                    String name = StringHelper.WHITE + "Forge Developer's Spell Book" + StringHelper.END;
+
+                    tagCompound.setTag(Names.NBT.DISPLAY, new NBTTagCompound());
+                    tagCompound.getCompoundTag(Names.NBT.DISPLAY).setString(Names.NBT.NAME, name);
+
+                    tagCompound.setBoolean(Names.NBT.IS_CUSTOM, true);
+                    tagCompound.setString(Names.NBT.BACKUP_NAME, name);
+
+                    stack.setTagCompound(tagCompound);
+                }
+
                 if (!event.player.inventory.addItemStackToInventory(stack))
                 {
                     SpawnHelper.spawnItemAtPlayer(event.player, stack);
                 }
             }
 
-            if (event.player.getDisplayName().toLowerCase().equals("pizzana"))
+            if (PlayerHelper.isPizzAna(event.player))
             {
                 ItemStack stack = new ItemStack(Items.spider_eye);
+                String name = StringHelper.WHITE + "PizzAna's Eye" + StringHelper.END;
+                String lore1 = StringHelper.GREEN + StringHelper.ITALIC + "He is everywhere, he sees you" + StringHelper.END;
+                String lore2 = StringHelper.GREEN + StringHelper.ITALIC + "and what you do!" + StringHelper.END;
 
                 NBTTagCompound tagCompound = new NBTTagCompound();
-                tagCompound.setTag("display", new NBTTagCompound());
-                tagCompound.getCompoundTag("display").setString("Name", "\u00A7f" + "PizzAna' Seeing Stuff");
+
+                tagCompound.setTag(Names.NBT.DISPLAY, new NBTTagCompound());
+                tagCompound.getCompoundTag(Names.NBT.DISPLAY).setString(Names.NBT.NAME, name);
+
                 NBTTagList list = new NBTTagList();
-                list.appendTag(new NBTTagString("\u00A72\u00A7o" + "He is everywhere, he sees you"));
-                list.appendTag(new NBTTagString("\u00A72\u00A7o" + "and what you do!"));
-                tagCompound.getCompoundTag("display").setTag("Lore", list);
+
+                list.appendTag(new NBTTagString(lore1));
+                list.appendTag(new NBTTagString(lore2));
+                tagCompound.getCompoundTag(Names.NBT.DISPLAY).setTag(Names.NBT.LORE, list);
+
                 stack.setTagCompound(tagCompound);
 
                 SpawnHelper.spawnItemAtPlayer(event.player, stack);
             }
             
-            if (event.player.getDisplayName().toLowerCase().equals("lepakko683"))
+            if (PlayerHelper.isLepakko683(event.player))
             {
                 ItemStack stack = new ItemStack(Items.feather);
+                String name = StringHelper.WHITE + "Feather Of a Phoenix Disguised As a Chicken Aka a Chicken's Feather" + StringHelper.END;
+                String lore1 = StringHelper.GREEN + StringHelper.ITALIC + "Nothing special, really.";
 
                 NBTTagCompound tagCompound = new NBTTagCompound();
-                tagCompound.setTag("display", new NBTTagCompound());
-                tagCompound.getCompoundTag("display").setString("Name", "\u00A7f" + "Feather Of a Phoenix Disguised As a Chicken Aka a Chicken's Feather");
+                tagCompound.setTag(Names.NBT.DISPLAY, new NBTTagCompound());
+                tagCompound.getCompoundTag(Names.NBT.DISPLAY).setString(Names.NBT.NAME, name);
+
                 NBTTagList list = new NBTTagList();
-                list.appendTag(new NBTTagString("\u00A72\u00A7o" + "Nothing special, really."));
-                tagCompound.getCompoundTag("display").setTag("Lore", list);
+
+                list.appendTag(new NBTTagString(lore1));
+                tagCompound.getCompoundTag(Names.NBT.DISPLAY).setTag(Names.NBT.LORE, list);
+
                 stack.setTagCompound(tagCompound);
 
                 SpawnHelper.spawnItemAtPlayer(event.player, stack);

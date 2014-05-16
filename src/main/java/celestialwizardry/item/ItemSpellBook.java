@@ -10,6 +10,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 
 public class ItemSpellBook extends ItemCW
@@ -36,19 +37,19 @@ public class ItemSpellBook extends ItemCW
             }
             else
             {
-                if (getMode(stack) == 0)
+                if (getMode(stack) == 0) // GUIDE
                 {
                     NBTHelper.setBoolean(stack, Names.NBT.SPELL_BOOK_GUI_OPEN, true);
                     player.openGui(CelestialWizardry.instance, GuiIds.SPELL_BOOK, player.worldObj, (int) player.posX,
                                    (int) player.posY, (int) player.posZ);
                 }
-                else if (getMode(stack) == 1)
+                else if (getMode(stack) == 1) // INVENTORY
                 {
                     NBTHelper.setBoolean(stack, Names.NBT.SPELL_BOOK_INVENTORY_OPEN, true);
                     player.openGui(CelestialWizardry.instance, GuiIds.SPELL_BOOK_INVENTORY, player.worldObj,
                                    (int) player.posX, (int) player.posY, (int) player.posZ);
                 }
-                else if (getMode(stack) == 2)
+                else if (getMode(stack) == 2) // SPELL CASTING
                 {
                     // TODO Cast spell
                 }
@@ -90,6 +91,20 @@ public class ItemSpellBook extends ItemCW
         else
         {
             setMode(stack, 0);
+        }
+
+        if (NBTHelper.getBoolean(stack, Names.NBT.IS_CUSTOM) && NBTHelper.hasTag(stack, Names.NBT.DISPLAY))
+        {
+            NBTTagCompound tagCompound = stack.getTagCompound();
+            String name = tagCompound.getString(Names.NBT.BACKUP_NAME);
+
+            String open = " (";
+            String close = ")";
+            String append = " " + open + getLocalizedModeWithColor(stack) + close;
+
+            tagCompound.getCompoundTag(Names.NBT.DISPLAY).setString(Names.NBT.NAME, name + append);
+
+            stack.setTagCompound(tagCompound);
         }
     }
 

@@ -21,6 +21,7 @@ public class GuiButtonBackWithShift extends GuiButtonBack
     public List<String> getTooltip()
     {
         return Arrays.asList(StringHelper.localize("misc." + Resources.RESOURCE_PREFIX + "back"),
-                             EnumChatFormatting.GRAY + StringHelper.localize("misc." + Resources.RESOURCE_PREFIX + "clickToIndex"));
+                             EnumChatFormatting.GRAY + StringHelper
+                                     .localize("misc." + Resources.RESOURCE_PREFIX + "clickToIndex"));
     }
 }
