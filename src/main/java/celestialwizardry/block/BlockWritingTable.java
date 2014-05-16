@@ -115,8 +115,8 @@ public class BlockWritingTable extends BlockCW implements ITileEntityProvider
     /**
      * Returns a new instance of a block's tile entity class. Called on placing the block.
      *
-     * @param world
-     * @param meta
+     * @param world the world to create the tile entity
+     * @param meta  the metadata of the block
      */
     @Override
     public TileEntity createNewTileEntity(World world, int meta)

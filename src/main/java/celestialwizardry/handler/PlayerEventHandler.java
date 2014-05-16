@@ -92,7 +92,8 @@ public class PlayerEventHandler
             {
                 ItemStack stack = new ItemStack(Items.spider_eye);
                 String name = StringHelper.WHITE + "PizzAna's Eye" + StringHelper.END;
-                String lore1 = StringHelper.GREEN + StringHelper.ITALIC + "He is everywhere, he sees you" + StringHelper.END;
+                String lore1 = StringHelper.GREEN + StringHelper.ITALIC + "He is everywhere, he sees you"
+                        + StringHelper.END;
                 String lore2 = StringHelper.GREEN + StringHelper.ITALIC + "and what you do!" + StringHelper.END;
 
                 NBTTagCompound tagCompound = new NBTTagCompound();
@@ -110,11 +111,12 @@ public class PlayerEventHandler
 
                 SpawnHelper.spawnItemAtPlayer(event.player, stack);
             }
-            
+
             if (PlayerHelper.isLepakko683(event.player))
             {
                 ItemStack stack = new ItemStack(Items.feather);
-                String name = StringHelper.WHITE + "Feather Of a Phoenix Disguised As a Chicken Aka a Chicken's Feather" + StringHelper.END;
+                String name = StringHelper.WHITE + "Feather Of a Phoenix Disguised As a Chicken Aka a Chicken's Feather"
+                        + StringHelper.END;
                 String lore1 = StringHelper.GREEN + StringHelper.ITALIC + "Nothing special, really.";
 
                 NBTTagCompound tagCompound = new NBTTagCompound();

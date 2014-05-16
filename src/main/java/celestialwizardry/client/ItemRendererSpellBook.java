@@ -60,8 +60,8 @@ public class ItemRendererSpellBook implements IItemRenderer
         Minecraft mc = Minecraft.getMinecraft();
         mc.renderEngine.bindTexture(Resources.Models.MODEL_SPELL_BOOK);
 
-        float opening = 0F;
-        float pageFlip = 0F;
+        float opening;
+        float pageFlip;
 
         int ticks = ClientTickEventHandler.ticksWithBookOpen;
         GL11.glTranslatef(0.3F + 0.02F * ticks, 0.475F + 0.01F * ticks, -0.2F - 0.01F * ticks);

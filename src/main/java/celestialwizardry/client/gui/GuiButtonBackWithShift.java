@@ -22,6 +22,7 @@ public class GuiButtonBackWithShift extends GuiButtonBack
     {
         return Arrays.asList(StringHelper.localize("misc." + Resources.RESOURCE_PREFIX + "back"),
                              EnumChatFormatting.GRAY + StringHelper
-                                     .localize("misc." + Resources.RESOURCE_PREFIX + "clickToIndex"));
+                                     .localize("misc." + Resources.RESOURCE_PREFIX + "clickToIndex")
+                            );
     }
 }

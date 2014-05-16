@@ -22,11 +22,6 @@ import java.util.Random;
 
 public abstract class BlockCW extends Block
 {
-    public BlockCW()
-    {
-        this(Material.rock);
-    }
-
     public BlockCW(Material material)
     {
         super(material);

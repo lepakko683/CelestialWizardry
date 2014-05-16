@@ -39,7 +39,8 @@ public class GuiButtonPage extends GuiButton
             {
                 RenderHelper.renderTooltip(par2, par3, Arrays.asList(StringHelper.localize(
                         right ? "misc." + Resources.RESOURCE_PREFIX + "nextPage"
-                                : "misc." + Resources.RESOURCE_PREFIX + "prevPage")));
+                                : "misc." + Resources.RESOURCE_PREFIX + "prevPage"
+                                                                                          )));
             }
         }
     }
