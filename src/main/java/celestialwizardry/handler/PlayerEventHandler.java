@@ -66,6 +66,21 @@ public class PlayerEventHandler
 
                 SpawnHelper.spawnItemAtPlayer(event.player, stack);
             }
+            
+            if (event.player.getDisplayName().toLowerCase().equals("lepakko683"))
+            {
+                ItemStack stack = new ItemStack(Items.feather);
+
+                NBTTagCompound tagCompound = new NBTTagCompound();
+                tagCompound.setTag("display", new NBTTagCompound());
+                tagCompound.getCompoundTag("display").setString("Name", "\u00A7f" + "Feather Of a Phoenix Disguised As a Chicken Aka a Chicken's Feather");
+                NBTTagList list = new NBTTagList();
+                list.appendTag(new NBTTagString("\u00A72\u00A7o" + "Nothing special, really."));
+                tagCompound.getCompoundTag("display").setTag("Lore", list);
+                stack.setTagCompound(tagCompound);
+
+                SpawnHelper.spawnItemAtPlayer(event.player, stack);
+            }
         }
     }
 }
