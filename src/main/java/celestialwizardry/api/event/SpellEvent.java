@@ -7,7 +7,7 @@ import cpw.mods.fml.common.eventhandler.Event;
 import net.minecraft.entity.player.EntityPlayer;
 
 @Cancelable
-public class SpellEvent extends Event
+public abstract class SpellEvent extends Event
 {
     public final Spell spell;
     public final EntityPlayer player;

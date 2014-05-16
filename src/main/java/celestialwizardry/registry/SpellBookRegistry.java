@@ -1,0 +1,38 @@
+package celestialwizardry.registry;
+
+import celestialwizardry.api.spellbook.SpellBookCategory;
+import celestialwizardry.api.spellbook.SpellBookEntry;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public abstract class SpellBookRegistry
+{
+    private static List<SpellBookCategory> categories = new ArrayList<SpellBookCategory>();
+    private static List<SpellBookEntry> allEntries = new ArrayList<SpellBookEntry>();
+
+    /**
+     * Adds a category to the list of registered categories to appear in the spell book.
+     */
+    public static void addCategory(SpellBookCategory category)
+    {
+        categories.add(category);
+    }
+
+    /**
+     * Gets all registered categories.
+     */
+    public static List<SpellBookCategory> getAllCategories()
+    {
+        return categories;
+    }
+
+    /**
+     * Registers a spell book entry and adds it to the category passed in.
+     */
+    public static void addEntry(SpellBookEntry entry, SpellBookCategory category)
+    {
+        allEntries.add(entry);
+        category.entries.add(entry);
+    }
+}
