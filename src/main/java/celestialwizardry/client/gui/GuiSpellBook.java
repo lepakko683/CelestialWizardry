@@ -1,10 +1,11 @@
 package celestialwizardry.client.gui;
 
-import celestialwizardry.api.CWApi;
 import celestialwizardry.api.spellbook.SpellBookCategory;
+import celestialwizardry.api.spellbook.SpellBookEntry;
 import celestialwizardry.client.handler.ClientTickEventHandler;
 import celestialwizardry.init.ModItems;
 import celestialwizardry.reference.Resources;
+import celestialwizardry.registry.SpellBookRegistry;
 import celestialwizardry.util.StringHelper;
 
 import net.minecraft.client.gui.GuiButton;
@@ -88,7 +89,7 @@ public class GuiSpellBook extends GuiScreen
             return;
         }
 
-        List<SpellBookCategory> categoryList = CWApi.getAllCategories();
+        List<SpellBookCategory> categoryList = SpellBookRegistry.getAllCategories();
         SpellBookCategory category = i >= categoryList.size() ? null : categoryList.get(i);
 
         if (category != null)
@@ -116,7 +117,7 @@ public class GuiSpellBook extends GuiScreen
 
     void populateIndex()
     {
-        List<SpellBookCategory> categoryList = CWApi.getAllCategories();
+        List<SpellBookCategory> categoryList = SpellBookRegistry.getAllCategories();
 
         for (int i = 3; i < 12; i++)
         {
@@ -133,5 +134,10 @@ public class GuiSpellBook extends GuiScreen
                 button.displayString = "";
             }
         }
+    }
+
+    public static void setEntryToOpen(SpellBookEntry entry)
+    {
+        currentOpen = new GuiSpellBookEntry(entry, new GuiSpellBookIndex(entry.category));
     }
 }

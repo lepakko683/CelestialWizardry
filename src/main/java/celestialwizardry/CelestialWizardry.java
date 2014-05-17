@@ -12,6 +12,7 @@ import celestialwizardry.proxy.IProxy;
 import celestialwizardry.reference.EventHandlers;
 import celestialwizardry.reference.Reference;
 import celestialwizardry.reference.Version;
+import celestialwizardry.spellbook.SpellBook;
 
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
@@ -133,6 +134,9 @@ public class CelestialWizardry
 
         // Initialize crafting handler
         CraftingHandler.init(); // TODO Add the class to FML event subscription
+
+        // Initialize spell book data
+        SpellBook.init();
 
         // Register render tick handlers
         proxy.registerRenderTickHandler();

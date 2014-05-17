@@ -1,7 +1,7 @@
 package celestialwizardry.client.gui;
 
-import celestialwizardry.client.renderer.RenderHelper;
 import celestialwizardry.reference.Resources;
+import celestialwizardry.util.RenderHelper;
 import celestialwizardry.util.StringHelper;
 
 import net.minecraft.client.Minecraft;

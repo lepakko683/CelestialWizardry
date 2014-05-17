@@ -1,4 +1,4 @@
-package celestialwizardry.client.renderer;
+package celestialwizardry.util;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;

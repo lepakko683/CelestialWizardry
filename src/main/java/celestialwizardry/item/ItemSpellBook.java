@@ -27,33 +27,28 @@ public class ItemSpellBook extends ItemCW
     @Override
     public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player)
     {
-        if (!world.isRemote)
-        {
-            // Set a UUID, if one doesn't exist already
-            initSpellBook(stack);
+        // Set a UUID, if one doesn't exist already
+        initSpellBook(stack);
 
-            if (player.isSneaking())
+        if (player.isSneaking())
+        {
+            changeMode(stack);
+        }
+        else
+        {
+            if (getMode(stack) == 0) // GUIDE
             {
-                changeMode(stack);
+                player.openGui(CelestialWizardry.instance, GuiIds.SPELL_BOOK, player.worldObj, 0, 0, 0);
             }
-            else
+            else if (getMode(stack) == 1) // INVENTORY
             {
-                if (getMode(stack) == 0) // GUIDE
-                {
-                    NBTHelper.setBoolean(stack, Names.NBT.SPELL_BOOK_GUI_OPEN, true);
-                    player.openGui(CelestialWizardry.instance, GuiIds.SPELL_BOOK, player.worldObj, (int) player.posX,
-                                   (int) player.posY, (int) player.posZ);
-                }
-                else if (getMode(stack) == 1) // INVENTORY
-                {
-                    NBTHelper.setBoolean(stack, Names.NBT.SPELL_BOOK_INVENTORY_OPEN, true);
-                    player.openGui(CelestialWizardry.instance, GuiIds.SPELL_BOOK_INVENTORY, player.worldObj,
-                                   (int) player.posX, (int) player.posY, (int) player.posZ);
-                }
-                else if (getMode(stack) == 2) // SPELL CASTING
-                {
-                    // TODO Cast spell
-                }
+                NBTHelper.setBoolean(stack, Names.NBT.SPELL_BOOK_INVENTORY_OPEN, true);
+                player.openGui(CelestialWizardry.instance, GuiIds.SPELL_BOOK_INVENTORY, player.worldObj,
+                               (int) player.posX, (int) player.posY, (int) player.posZ);
+            }
+            else if (getMode(stack) == 2) // SPELL CASTING
+            {
+                // TODO Cast spell
             }
         }
 
@@ -94,7 +89,7 @@ public class ItemSpellBook extends ItemCW
             setMode(stack, 0);
         }
 
-        if (NBTHelper.getBoolean(stack, Names.NBT.IS_CUSTOM) && NBTHelper.hasTag(stack, Names.NBT.DISPLAY))
+        if (NBTHelper.hasTag(stack, Names.NBT.DISPLAY))
         {
             NBTTagCompound tagCompound = stack.getTagCompound();
             String name = tagCompound.getString(Names.NBT.BACKUP_NAME);
