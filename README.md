@@ -113,7 +113,7 @@ You think you can improve our code? Good! Just make sure you follow these few si
 
 1. Always keep your code clean and well documented, so it's easier for us to see what you have done.
 2. It is discouraged to copy other people's code. Believe it or not, we don't need you to do that.
-3. While it is not very important, you should follow the formatting settings located [here](https://github.com/PizzAna/CelestialWizardry/settings.jar). They are exported from PizzAna's IntelliJ Idea workspace and I'm not sure if they work in Eclipse. If they don't work for you or you don't want to use them, PizzAna does clean the code up pretty frequently.
+3. While it is not very important, you should follow the formatting settings located [here](https://github.com/PizzAna/CelestialWizardry/blob/master/settings.jar). They are exported from PizzAna's IntelliJ Idea workspace and I'm not sure if they work in Eclipse. If they don't work for you or you don't want to use them, PizzAna does clean the code up pretty frequently.
 
 ####Submitting a PR
 So you found a bug in our code? Think you can make it more efficient? Want to help in general? Great!
