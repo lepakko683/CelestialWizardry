@@ -2,6 +2,7 @@ package celestialwizardry.proxy;
 
 import celestialwizardry.reference.Names;
 import celestialwizardry.tileentity.TileEntityWritingTable;
+
 import cpw.mods.fml.common.registry.GameRegistry;
 
 public abstract class CommonProxy implements IProxy

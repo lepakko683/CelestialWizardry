@@ -3,6 +3,7 @@ package celestialwizardry.inventory;
 import celestialwizardry.reference.Names;
 import celestialwizardry.util.INBTTaggable;
 import celestialwizardry.util.NBTHelper;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;

@@ -4,14 +4,17 @@ import celestialwizardry.api.CWApi;
 import celestialwizardry.config.ConfigHandler;
 import celestialwizardry.config.SettingHandler;
 import celestialwizardry.handler.CraftingHandler;
-import celestialwizardry.handler.GuiHandler;
 import celestialwizardry.init.ModBlocks;
 import celestialwizardry.init.ModItems;
+import celestialwizardry.network.GuiHandler;
 import celestialwizardry.network.PacketHandler;
 import celestialwizardry.proxy.IProxy;
 import celestialwizardry.reference.EventHandlers;
 import celestialwizardry.reference.Reference;
 import celestialwizardry.reference.Version;
+
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.config.Configuration;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.Mod;
@@ -21,8 +24,7 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.common.config.Configuration;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

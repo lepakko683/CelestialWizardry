@@ -5,6 +5,7 @@ import celestialwizardry.api.spell.Spell;
 import celestialwizardry.reference.Names;
 import celestialwizardry.registry.SpellRegistry;
 import celestialwizardry.util.NBTHelper;
+
 import net.minecraft.item.ItemStack;
 
 public class ItemSpellScroll extends ItemScroll implements ISpellContainer
@@ -19,6 +20,7 @@ public class ItemSpellScroll extends ItemScroll implements ISpellContainer
      * Returns the spell that is in the ItemStack
      *
      * @param stack the ItemStack containing the Spell
+     *
      * @return the Spell that is in the stack
      */
     @Override

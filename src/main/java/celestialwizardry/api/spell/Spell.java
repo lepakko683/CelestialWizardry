@@ -2,8 +2,9 @@ package celestialwizardry.api.spell;
 
 import celestialwizardry.api.MagicType;
 import celestialwizardry.api.event.SpellEvent;
-import cpw.mods.fml.common.FMLCommonHandler;
+
 import net.minecraft.entity.player.EntityPlayer;
+import cpw.mods.fml.common.FMLCommonHandler;
 
 public class Spell
 {

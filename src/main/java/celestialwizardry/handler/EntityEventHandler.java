@@ -1,9 +1,10 @@
 package celestialwizardry.handler;
 
 import celestialwizardry.entity.ModEntityProperties;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.event.entity.EntityEvent;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 public class EntityEventHandler
 {

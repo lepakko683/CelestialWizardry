@@ -1,18 +1,20 @@
 package celestialwizardry.item;
 
-import baubles.api.BaubleType;
-import baubles.api.IBauble;
-import baubles.common.container.InventoryBaubles;
-import baubles.common.lib.PlayerHandler;
 import celestialwizardry.reference.Names;
 import celestialwizardry.reference.Settings;
 import celestialwizardry.util.HolidayHelper;
+
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+
+import baubles.api.BaubleType;
+import baubles.api.IBauble;
+import baubles.common.container.InventoryBaubles;
+import baubles.common.lib.PlayerHandler;
 
 public class ItemSeasonRing extends ItemCW implements IBauble
 {
@@ -53,8 +55,7 @@ public class ItemSeasonRing extends ItemCW implements IBauble
     }
 
     /**
-     * This method return the type of bauble this is.
-     * Type is used to determine the slots it can go into.
+     * This method return the type of bauble this is. Type is used to determine the slots it can go into.
      *
      * @param itemstack
      */

@@ -4,8 +4,9 @@ import celestialwizardry.client.ItemRendererSpellBook;
 import celestialwizardry.init.ModItems;
 import celestialwizardry.reference.EventHandlers;
 import celestialwizardry.reference.Settings;
-import cpw.mods.fml.common.FMLCommonHandler;
+
 import net.minecraftforge.client.MinecraftForgeClient;
+import cpw.mods.fml.common.FMLCommonHandler;
 
 public class ClientProxy extends CommonProxy
 {

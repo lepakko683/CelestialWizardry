@@ -2,6 +2,7 @@ package celestialwizardry.inventory;
 
 import celestialwizardry.api.spell.ISpellContainer;
 import celestialwizardry.item.ItemSpellBook;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;

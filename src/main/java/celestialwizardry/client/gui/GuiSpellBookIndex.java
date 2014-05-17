@@ -4,10 +4,11 @@ import celestialwizardry.api.spellbook.SpellBookCategory;
 import celestialwizardry.api.spellbook.SpellBookEntry;
 import celestialwizardry.client.handler.ClientTickEventHandler;
 import celestialwizardry.util.StringHelper;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.util.EnumChatFormatting;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 import java.util.ArrayList;
 import java.util.Collections;

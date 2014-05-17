@@ -1,6 +1,7 @@
 package celestialwizardry.spell.handler;
 
 import celestialwizardry.api.event.SpellEvent;
+
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 public class SpellEventHandler

@@ -1,6 +1,7 @@
 package celestialwizardry.api.spellbook;
 
 import celestialwizardry.api.spellbook.internal.IGuiSpellBookEntry;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 

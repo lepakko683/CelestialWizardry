@@ -1,15 +1,10 @@
 package celestialwizardry.item;
 
-import baubles.api.BaubleType;
-import baubles.api.IBauble;
-import baubles.common.container.InventoryBaubles;
-import baubles.common.lib.PlayerHandler;
 import celestialwizardry.reference.Messages;
 import celestialwizardry.reference.Names;
 import celestialwizardry.reference.Resources;
 import celestialwizardry.util.StringHelper;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -19,6 +14,13 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
+import baubles.api.BaubleType;
+import baubles.api.IBauble;
+import baubles.common.container.InventoryBaubles;
+import baubles.common.lib.PlayerHandler;
 
 import java.util.List;
 
@@ -114,8 +116,7 @@ public class ItemConcentrationRing extends ItemCW implements IBauble
     }
 
     /**
-     * This method return the type of bauble this is.
-     * Type is used to determine the slots it can go into.
+     * This method return the type of bauble this is. Type is used to determine the slots it can go into.
      *
      * @param itemstack
      */

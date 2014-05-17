@@ -4,6 +4,7 @@ import celestialwizardry.api.writing.IWriter;
 import celestialwizardry.network.PacketHandler;
 import celestialwizardry.network.message.MessageTileEntityWritingTable;
 import celestialwizardry.reference.Names;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;

@@ -3,6 +3,7 @@ package celestialwizardry.network;
 import celestialwizardry.network.message.MessageTileEntityCW;
 import celestialwizardry.network.message.MessageTileEntityWritingTable;
 import celestialwizardry.reference.Reference;
+
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import cpw.mods.fml.relauncher.Side;

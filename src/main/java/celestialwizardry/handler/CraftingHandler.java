@@ -1,6 +1,7 @@
 package celestialwizardry.handler;
 
 import celestialwizardry.item.crafting.RecipesVanilla;
+
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent;
 

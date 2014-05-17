@@ -4,9 +4,10 @@ import celestialwizardry.block.BlockCW;
 import celestialwizardry.block.BlockWritingTable;
 import celestialwizardry.item.ItemBlockCW;
 import celestialwizardry.reference.Names;
-import cpw.mods.fml.common.registry.GameRegistry;
+
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemBlock;
+import cpw.mods.fml.common.registry.GameRegistry;
 
 /**
  * Just a class containing all mod blocks

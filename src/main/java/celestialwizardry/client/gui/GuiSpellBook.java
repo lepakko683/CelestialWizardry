@@ -6,10 +6,12 @@ import celestialwizardry.client.handler.ClientTickEventHandler;
 import celestialwizardry.init.ModItems;
 import celestialwizardry.reference.Resources;
 import celestialwizardry.util.StringHelper;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 import org.lwjgl.opengl.GL11;
 
 import java.util.List;

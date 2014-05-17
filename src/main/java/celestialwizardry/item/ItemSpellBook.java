@@ -6,12 +6,13 @@ import celestialwizardry.reference.Names;
 import celestialwizardry.reference.Resources;
 import celestialwizardry.util.NBTHelper;
 import celestialwizardry.util.StringHelper;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class ItemSpellBook extends ItemCW
 {

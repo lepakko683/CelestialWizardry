@@ -1,4 +1,4 @@
-package celestialwizardry.handler;
+package celestialwizardry.network;
 
 import celestialwizardry.client.gui.inventory.GuiSpellBookInventory;
 import celestialwizardry.client.gui.inventory.GuiWritingTable;
@@ -7,9 +7,10 @@ import celestialwizardry.inventory.ContainerWritingTable;
 import celestialwizardry.inventory.InventorySpellBook;
 import celestialwizardry.reference.GuiIds;
 import celestialwizardry.tileentity.TileEntityWritingTable;
-import cpw.mods.fml.common.network.IGuiHandler;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
+import cpw.mods.fml.common.network.IGuiHandler;
 
 public class GuiHandler implements IGuiHandler
 {
@@ -22,6 +23,7 @@ public class GuiHandler implements IGuiHandler
      * @param x      X Position
      * @param y      Y Position
      * @param z      Z Position
+     *
      * @return A GuiScreen/Container to be displayed to the user, null if none.
      */
     @Override
@@ -45,9 +47,8 @@ public class GuiHandler implements IGuiHandler
     }
 
     /**
-     * Returns a Container to be displayed to the user. On the client side, this
-     * needs to return a instance of GuiScreen On the server side, this needs to
-     * return a instance of Container
+     * Returns a Container to be displayed to the user. On the client side, this needs to return a instance of GuiScreen
+     * On the server side, this needs to return a instance of Container
      *
      * @param ID     The Gui ID Number
      * @param player The player viewing the Gui
@@ -55,6 +56,7 @@ public class GuiHandler implements IGuiHandler
      * @param x      X Position
      * @param y      Y Position
      * @param z      Z Position
+     *
      * @return A GuiScreen/Container to be displayed to the user, null if none.
      */
     @Override

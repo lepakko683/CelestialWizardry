@@ -3,6 +3,7 @@ package celestialwizardry.api;
 import celestialwizardry.api.spell.Spell;
 import celestialwizardry.api.spellbook.SpellBookCategory;
 import celestialwizardry.api.spellbook.SpellBookEntry;
+
 import org.apache.logging.log4j.Logger;
 
 import java.lang.reflect.Method;
@@ -54,6 +55,7 @@ public final class CWApi
      * Get a registered spell for name
      *
      * @param name
+     *
      * @return
      */
     public static Spell getSpell(String name)

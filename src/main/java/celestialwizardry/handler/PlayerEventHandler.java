@@ -8,13 +8,14 @@ import celestialwizardry.reference.Settings;
 import celestialwizardry.util.PlayerHelper;
 import celestialwizardry.util.SpawnHelper;
 import celestialwizardry.util.StringHelper;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.common.gameevent.PlayerEvent;
+
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.nbt.NBTTagString;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.common.gameevent.PlayerEvent;
 
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;

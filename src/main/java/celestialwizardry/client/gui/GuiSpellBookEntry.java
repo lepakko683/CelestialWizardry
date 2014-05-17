@@ -5,10 +5,11 @@ import celestialwizardry.api.spellbook.SpellBookPage;
 import celestialwizardry.api.spellbook.internal.IGuiSpellBookEntry;
 import celestialwizardry.client.handler.ClientTickEventHandler;
 import celestialwizardry.util.StringHelper;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class GuiSpellBookEntry extends GuiSpellBook implements IGuiSpellBookEntry

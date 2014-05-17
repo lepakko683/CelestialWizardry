@@ -3,10 +3,12 @@ package celestialwizardry.client.gui;
 import celestialwizardry.client.renderer.RenderHelper;
 import celestialwizardry.reference.Resources;
 import celestialwizardry.util.StringHelper;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 import org.lwjgl.opengl.GL11;
 
 import java.util.Arrays;

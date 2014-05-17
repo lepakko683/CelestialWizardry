@@ -27,8 +27,8 @@ public class ModEntityProperties implements IExtendedEntityProperties
     }
 
     /**
-     * Called when the entity that this class is attached to is saved.
-     * Any custom entity data that needs saving should be saved here.
+     * Called when the entity that this class is attached to is saved. Any custom entity data that needs saving should
+     * be saved here.
      *
      * @param compound The compound to save to.
      */
@@ -41,9 +41,8 @@ public class ModEntityProperties implements IExtendedEntityProperties
     }
 
     /**
-     * Called when the entity that this class is attached to is loaded.
-     * In order to hook into this, you will need to subscribe to the EntityConstructing event.
-     * Otherwise, you will need to initialize manually.
+     * Called when the entity that this class is attached to is loaded. In order to hook into this, you will need to
+     * subscribe to the EntityConstructing event. Otherwise, you will need to initialize manually.
      *
      * @param compound The compound to load from.
      */
@@ -55,8 +54,7 @@ public class ModEntityProperties implements IExtendedEntityProperties
     }
 
     /**
-     * Used to initialize the extended properties with the entity that this is attached to, as well
-     * as the world object.
+     * Used to initialize the extended properties with the entity that this is attached to, as well as the world object.
      * Called automatically if you register with the EntityConstructing event.
      *
      * @param entity The entity that this extended properties is attached to

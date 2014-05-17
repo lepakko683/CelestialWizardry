@@ -2,11 +2,12 @@ package celestialwizardry.item.crafting;
 
 import celestialwizardry.init.ModBlocks;
 import celestialwizardry.init.ModItems;
-import cpw.mods.fml.common.registry.GameRegistry;
+
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
+import cpw.mods.fml.common.registry.GameRegistry;
 
 public class RecipesVanilla
 {

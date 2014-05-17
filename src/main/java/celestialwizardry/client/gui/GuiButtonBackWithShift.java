@@ -2,9 +2,10 @@ package celestialwizardry.client.gui;
 
 import celestialwizardry.reference.Resources;
 import celestialwizardry.util.StringHelper;
+
+import net.minecraft.util.EnumChatFormatting;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.util.EnumChatFormatting;
 
 import java.util.Arrays;
 import java.util.List;

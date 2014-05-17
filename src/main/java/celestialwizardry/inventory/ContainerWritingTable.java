@@ -2,6 +2,7 @@ package celestialwizardry.inventory;
 
 import celestialwizardry.api.writing.IWriter;
 import celestialwizardry.tileentity.TileEntityWritingTable;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;

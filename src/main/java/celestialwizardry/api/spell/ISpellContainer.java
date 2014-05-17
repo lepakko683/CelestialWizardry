@@ -13,6 +13,7 @@ public interface ISpellContainer
      * Returns the spell that is in the ItemStack
      *
      * @param stack the ItemStack containing the Spell
+     *
      * @return the Spell that is in the stack
      */
     public Spell getSpell(ItemStack stack);

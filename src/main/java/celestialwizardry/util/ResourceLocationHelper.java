@@ -1,6 +1,7 @@
 package celestialwizardry.util;
 
 import celestialwizardry.reference.Reference;
+
 import net.minecraft.util.ResourceLocation;
 
 public class ResourceLocationHelper

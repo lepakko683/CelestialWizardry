@@ -16,6 +16,7 @@ public class ItemApi
      *
      * @param field the item field name
      * @param meta  the metadata
+     *
      * @return the item
      */
     public static ItemStack getItemStack(String field, int meta)
@@ -48,6 +49,7 @@ public class ItemApi
      * Allows you to get item from string. You should NOT use this, use the above method instead
      *
      * @param field the item field name
+     *
      * @return the item
      */
     public static Item getItem(String field)
@@ -73,6 +75,7 @@ public class ItemApi
      *
      * @param field the block field name
      * @param meta  the metadata
+     *
      * @return the block
      */
     public static ItemStack getBlockStack(String field, int meta)
@@ -105,6 +108,7 @@ public class ItemApi
      * Allows you to get block from string. You should NOT use this, use the above method instead
      *
      * @param field the block field name
+     *
      * @return the block
      */
     public static Block getBlock(String field)

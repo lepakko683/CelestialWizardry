@@ -2,9 +2,10 @@ package celestialwizardry.api.event;
 
 import celestialwizardry.api.spell.ISpellContainer;
 import celestialwizardry.api.spell.Spell;
+
+import net.minecraft.entity.player.EntityPlayer;
 import cpw.mods.fml.common.eventhandler.Cancelable;
 import cpw.mods.fml.common.eventhandler.Event;
-import net.minecraft.entity.player.EntityPlayer;
 
 @Cancelable
 public abstract class SpellEvent extends Event

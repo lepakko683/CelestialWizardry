@@ -5,10 +5,12 @@ import celestialwizardry.reference.Names;
 import celestialwizardry.reference.Resources;
 import celestialwizardry.tileentity.TileEntityWritingTable;
 import celestialwizardry.util.StringHelper;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 import org.lwjgl.opengl.GL11;
 
 @SideOnly(Side.CLIENT)

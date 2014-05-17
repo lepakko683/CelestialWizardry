@@ -3,6 +3,7 @@ package celestialwizardry.tileentity;
 import celestialwizardry.network.PacketHandler;
 import celestialwizardry.network.message.MessageTileEntityCW;
 import celestialwizardry.reference.Names;
+
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.Packet;
 import net.minecraft.tileentity.TileEntity;

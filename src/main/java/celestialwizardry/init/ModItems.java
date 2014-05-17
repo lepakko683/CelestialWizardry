@@ -2,8 +2,9 @@ package celestialwizardry.init;
 
 import celestialwizardry.item.*;
 import celestialwizardry.reference.Names;
-import cpw.mods.fml.common.registry.GameRegistry;
+
 import net.minecraft.item.Item;
+import cpw.mods.fml.common.registry.GameRegistry;
 
 /**
  * Just a class containing all mod items
