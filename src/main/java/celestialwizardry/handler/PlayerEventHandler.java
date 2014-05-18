@@ -144,5 +144,16 @@ public class PlayerEventHandler
                     .info("Initialized intelligence (" + properties.intelligence + ") for player " + event.player
                             .getDisplayName());
         }
+
+        if (!properties.hasExp)
+        {
+            properties.hasExp = true;
+            properties.exp = 0;
+
+            CelestialWizardry.log.info(
+                    "Initialized experience (" + properties.intelligence + ") for player " + event.player
+                            .getDisplayName()
+                                      );
+        }
     }
 }

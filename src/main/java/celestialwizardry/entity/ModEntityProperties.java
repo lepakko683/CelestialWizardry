@@ -14,11 +14,15 @@ public class ModEntityProperties implements IExtendedEntityProperties
     public static final String SPELL_BOOK = "spellBook";
     public static final String HAS_INTELLIGENCE = "hasIntelligence";
     public static final String INTELLIGENCE = "intelligence";
+    public static final String HAS_EXP = "hasExp";
+    public static final String EXP = "expCw";
 
     public WeakReference<EntityPlayer> playerWeakReference;
     public boolean spellBook;
     public boolean hasIntelligence;
     public int intelligence;
+    public boolean hasExp;
+    public int exp;
 
     public ModEntityProperties()
     {
@@ -42,6 +46,8 @@ public class ModEntityProperties implements IExtendedEntityProperties
         nbtTagCompound.setBoolean(SPELL_BOOK, spellBook);
         nbtTagCompound.setBoolean(HAS_INTELLIGENCE, hasIntelligence);
         nbtTagCompound.setInteger(INTELLIGENCE, intelligence);
+        nbtTagCompound.setBoolean(HAS_EXP, hasExp);
+        nbtTagCompound.setInteger(EXP, exp);
         compound.setTag(NAME, nbtTagCompound);
     }
 
@@ -58,6 +64,8 @@ public class ModEntityProperties implements IExtendedEntityProperties
         spellBook = nbtTagCompound.getBoolean(SPELL_BOOK);
         hasIntelligence = nbtTagCompound.getBoolean(HAS_INTELLIGENCE);
         intelligence = nbtTagCompound.getInteger(INTELLIGENCE);
+        hasExp = nbtTagCompound.getBoolean(HAS_EXP);
+        exp = nbtTagCompound.getInteger(EXP);
     }
 
     /**
@@ -77,10 +85,12 @@ public class ModEntityProperties implements IExtendedEntityProperties
     {
         spellBook = modEntityProperties.spellBook;
         hasIntelligence = modEntityProperties.hasIntelligence;
+        hasExp = modEntityProperties.hasExp;
 
         if (all)
         {
             intelligence = modEntityProperties.intelligence;
+            exp = modEntityProperties.exp;
         }
     }
 
