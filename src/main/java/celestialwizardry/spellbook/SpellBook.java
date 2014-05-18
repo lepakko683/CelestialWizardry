@@ -3,20 +3,24 @@ package celestialwizardry.spellbook;
 import celestialwizardry.api.CWApi;
 import celestialwizardry.api.spellbook.SpellBookCategory;
 import celestialwizardry.api.spellbook.SpellBookEntry;
+import celestialwizardry.reference.Resources;
 import celestialwizardry.spellbook.page.PageText;
 
 public final class SpellBook
 {
-    public static SpellBookCategory categoryTest = new SpellBookCategory("Test");
+    public static SpellBookCategory categoryBasics = new SpellBookCategory("category." + Resources.RESOURCE_PREFIX + "basics");
 
-    public static SpellBookEntry test;
+    /**
+     * Basics
+     */
+    public static SpellBookEntry spellBook;
 
     public static void init()
     {
-        CWApi.addCategory(categoryTest);
+        CWApi.addCategory(categoryBasics);
 
-        test = new CWSpellBookEntry("TestEntry", categoryTest);
-        test.setPriority().setSpellBookPages(new PageText("0"));
+        spellBook = new CWSpellBookEntry("spellBook", categoryBasics);
+        spellBook.setPriority().setSpellBookPages(new PageText("index"));
 
     }
 }

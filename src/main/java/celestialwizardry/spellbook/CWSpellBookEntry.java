@@ -19,8 +19,7 @@ public class CWSpellBookEntry extends SpellBookEntry
     {
         for (SpellBookPage page : pages)
         {
-            page.unlocalizedName = "page." + Resources.RESOURCE_PREFIX + getLazyUnlocalizedName()
-                    + page.unlocalizedName;
+            page.unlocalizedName = "page." + Resources.RESOURCE_PREFIX + getLazyUnlocalizedName() + "." + page.unlocalizedName;
         }
 
         return super.setSpellBookPages(pages);

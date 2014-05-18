@@ -35,7 +35,7 @@ public class GuiSpellBookIndex extends GuiSpellBook
     @Override
     void drawHeader()
     {
-        // NOOP
+        // NO-OP
     }
 
     @Override

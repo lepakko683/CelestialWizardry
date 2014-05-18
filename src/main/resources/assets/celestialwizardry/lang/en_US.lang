@@ -28,3 +28,15 @@ tooltip.celestialwizardry:NBT=NBT Tags found
 mode.celestialwizardry:guide=Guide
 mode.celestialwizardry:inventory=Inventory
 mode.celestialwizardry:spell=Casting
+
+# SPELL BOOK
+
+# Index
+spellBook.celestialwizardry:header=Welcome to the world of magic! You'll find everything you need in this book.
+
+# Basics
+category.celestialwizardry:basics=Basics
+
+# About the Spell Book
+entry.celestialwizardry:spellBook=About the Spell Book
+page.celestialwizardry:spellBook.index=The &1Spell Book&0 is your guide in the world of magic.<br>The information is located in entries which are located in categories. You can find all categories from the index of the book. To navigate back, use the arrows located in the bottom of the book.
