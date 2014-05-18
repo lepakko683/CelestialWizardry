@@ -2,7 +2,6 @@ package celestialwizardry;
 
 import celestialwizardry.api.CWApi;
 import celestialwizardry.config.Config;
-import celestialwizardry.config.ConfigBase;
 import celestialwizardry.config.SettingHandler;
 import celestialwizardry.handler.CraftingHandler;
 import celestialwizardry.init.ModBlocks;

@@ -140,7 +140,9 @@ public class PlayerEventHandler
             properties.hasIntelligence = true;
             properties.intelligence = Settings.startingIntelligence;
 
-            CelestialWizardry.log.info("Initialized intelligence (" + properties.intelligence + ") for player " + event.player.getDisplayName());
+            CelestialWizardry.log
+                    .info("Initialized intelligence (" + properties.intelligence + ") for player " + event.player
+                            .getDisplayName());
         }
     }
 }

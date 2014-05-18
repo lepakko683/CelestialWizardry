@@ -34,7 +34,8 @@ public class Config extends ConfigBase
 
     public boolean get(String category, String key, boolean defaultValue, String comment)
     {
-        return modConfiguration.get(category, key, defaultValue, comment + " Default: " + defaultValue).getBoolean(defaultValue);
+        return modConfiguration.get(category, key, defaultValue, comment + " Default: " + defaultValue)
+                .getBoolean(defaultValue);
     }
 
     public String get(String category, String key, String defaultValue)

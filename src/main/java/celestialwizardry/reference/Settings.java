@@ -104,7 +104,8 @@ public class Settings
          * Tweaks
          */
         // Difficulty
-        public static final String SPAWN_SPELL_BOOK = "If true, players get spell book when they enter the world first time.";
+        public static final String SPAWN_SPELL_BOOK
+                = "If true, players get spell book when they enter the world first time.";
         public static final String STARTING_INTELLIGENCE = "The intelligence new players will have.";
     }
 
