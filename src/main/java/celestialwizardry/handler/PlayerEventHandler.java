@@ -43,7 +43,7 @@ public class PlayerEventHandler
         {
             properties.spellBook = true;
 
-            if (Settings.spawnBook)
+            if (Settings.spawnSpellBook)
             {
                 ItemStack stack = new ItemStack(ModItems.spellBook);
 
@@ -133,6 +133,14 @@ public class PlayerEventHandler
 
                 SpawnHelper.spawnItemAtPlayer(event.player, stack);
             }
+        }
+
+        if (!properties.hasIntelligence)
+        {
+            properties.hasIntelligence = true;
+            properties.intelligence = Settings.startingIntelligence;
+
+            CelestialWizardry.log.info("Initialized intelligence (" + properties.intelligence + ") for player " + event.player.getDisplayName());
         }
     }
 }

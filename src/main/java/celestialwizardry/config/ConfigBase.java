@@ -6,12 +6,12 @@ import net.minecraftforge.common.config.Property;
 
 import java.util.Set;
 
-public class ConfigHandler
+public class ConfigBase
 {
     Configuration modConfiguration;
     String modVersion;
 
-    public ConfigHandler(String version)
+    public ConfigBase(String version)
     {
         modVersion = version;
     }

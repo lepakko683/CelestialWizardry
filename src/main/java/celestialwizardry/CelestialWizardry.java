@@ -1,7 +1,8 @@
 package celestialwizardry;
 
 import celestialwizardry.api.CWApi;
-import celestialwizardry.config.ConfigHandler;
+import celestialwizardry.config.Config;
+import celestialwizardry.config.ConfigBase;
 import celestialwizardry.config.SettingHandler;
 import celestialwizardry.handler.CraftingHandler;
 import celestialwizardry.init.ModBlocks;
@@ -48,7 +49,7 @@ public class CelestialWizardry
     public static Logger log;
 
     // Mod configuration
-    public static final ConfigHandler config = new ConfigHandler(Version.VERSION);
+    public static final Config config = new Config(Version.VERSION);
 
     @Mod.EventHandler
     public void invalidFingerprint(FMLFingerprintViolationEvent event)
@@ -105,13 +106,13 @@ public class CelestialWizardry
         // Register mod key bindings
         proxy.registerKeys();
 
-        // Register player event handler
-        FMLCommonHandler.instance().bus().register(EventHandlers.PLAYER_EVENT_HANDLER);
-        MinecraftForge.EVENT_BUS.register(EventHandlers.PLAYER_EVENT_HANDLER);
-
         // Register entity event handler
         FMLCommonHandler.instance().bus().register(EventHandlers.ENTITY_EVENT_HANDLER);
         MinecraftForge.EVENT_BUS.register(EventHandlers.ENTITY_EVENT_HANDLER);
+
+        // Register player event handler
+        FMLCommonHandler.instance().bus().register(EventHandlers.PLAYER_EVENT_HANDLER);
+        MinecraftForge.EVENT_BUS.register(EventHandlers.PLAYER_EVENT_HANDLER);
 
         // Tell everyone that we have successfully pre-initialized
         log.info("Finished pre-initialization after " + (System.currentTimeMillis() - start) + " ms");
