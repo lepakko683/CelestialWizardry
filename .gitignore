@@ -1,4 +1,4 @@
-# PizzAna's folder for forge stuff
+# MinecraftForge
 /forge
 
 # Eclipse
@@ -33,5 +33,8 @@
 /*.jks
 /private.properties
 
-# I don't think logs are needed :) -OkkapeL
+# Logs
 /logs
+
+# PizzAna
+/pizzanaIdeas.txt
