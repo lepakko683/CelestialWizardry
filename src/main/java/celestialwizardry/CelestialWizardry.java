@@ -45,7 +45,7 @@ public class CelestialWizardry
     public static CelestialWizardry instance;
 
     // Mod logger
-    public static Logger log;
+    public static final Logger log = LogManager.getLogger(Reference.MOD_NAME.replace(" ", ""));
 
     // Mod configuration
     public static final Config config = new Config(Version.VERSION);
@@ -76,9 +76,6 @@ public class CelestialWizardry
 
         // Initialize mod api logger
         CWApi.apiLog = LogManager.getLogger("CWApi");
-
-        // Initialize mod logger
-        log = event.getModLog();
 
         // Tell everyone that we are starting pre-initialization
         log.info("Starting pre-initialization");
