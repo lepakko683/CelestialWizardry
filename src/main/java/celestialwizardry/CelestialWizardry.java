@@ -1,8 +1,12 @@
 package celestialwizardry;
 
 import celestialwizardry.api.CWApi;
+import celestialwizardry.api.rune.Rune;
+import celestialwizardry.api.spell.Spell;
 import celestialwizardry.config.Config;
+import celestialwizardry.config.ConfigBase;
 import celestialwizardry.config.SettingHandler;
+import celestialwizardry.config.spell.ConfigSpells;
 import celestialwizardry.handler.CraftingHandler;
 import celestialwizardry.init.ModBlocks;
 import celestialwizardry.init.ModItems;
@@ -12,6 +16,7 @@ import celestialwizardry.proxy.IProxy;
 import celestialwizardry.reference.EventHandlers;
 import celestialwizardry.reference.Reference;
 import celestialwizardry.reference.Version;
+import celestialwizardry.registry.SpellRegistry;
 import celestialwizardry.spellbook.SpellBook;
 
 import net.minecraftforge.common.MinecraftForge;
@@ -50,6 +55,9 @@ public class CelestialWizardry
     // Mod configuration
     public static final Config config = new Config(Version.VERSION);
 
+    // Spell configuration
+    public static final ConfigSpells configSpells = new ConfigSpells(Version.VERSION);
+
     @Mod.EventHandler
     public void invalidFingerprint(FMLFingerprintViolationEvent event)
     {
@@ -80,9 +88,14 @@ public class CelestialWizardry
         // Tell everyone that we are starting pre-initialization
         log.info("Starting pre-initialization");
 
+        // Set configuration directory
+        config.setConfigDir(event, Reference.MOD_ID.toLowerCase());
+
         // Initialize the configuration
-        config.setConfiguration(new Configuration(
-                new File(event.getModConfigurationDirectory(), "/celestialwizardry/celestialwizardry.cfg")));
+        config.setConfiguration(Reference.MOD_NAME.replace(" ", ""));
+
+        // Initialize the spell configuration
+        configSpells.setConfiguration("Spells");
 
         // Initialize configuration settings
         SettingHandler.init();
@@ -157,6 +170,9 @@ public class CelestialWizardry
 
         // Tell everyone that we are starting post-initialization
         log.info("Starting post-initialization");
+
+        // Initialize the spell configuration
+        ConfigSpells.init();
 
         // Tell everyone that we have successfully post-initialized
         log.info("Finished post-initialization after " + (System.currentTimeMillis() - start) + " ms");

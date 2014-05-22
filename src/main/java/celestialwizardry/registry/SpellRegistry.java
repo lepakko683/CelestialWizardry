@@ -12,11 +12,8 @@ public abstract class SpellRegistry
 
     public static void registerSpell(Spell spell)
     {
-        registerSpell(spell, spell.getName());
-    }
+        String name = spell.getName();
 
-    public static void registerSpell(Spell spell, String name)
-    {
         if (!spellMap.containsKey(name))
         {
             CelestialWizardry.log.info("Registering spell " + name);

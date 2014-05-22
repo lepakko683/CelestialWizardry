@@ -13,9 +13,15 @@ public final class CWApi
 {
     public static Logger apiLog = null;
 
-    private static final String REGISTRY_PACKAGE = "celestialwizardry.registry.";
+    private static final String CW_PACKAGE = "celestialwizardry.";
+
+    private static final String REGISTRY_PACKAGE = CW_PACKAGE + "registry.";
     private static final String SPELL_REGISTRY = REGISTRY_PACKAGE + "SpellRegistry";
     private static final String SPELL_BOOK_REGISTRY = REGISTRY_PACKAGE + "SpellBookRegistry";
+
+    private static final String CONFIG_PACKAGE = CW_PACKAGE + "config.";
+    private static final String SPELL_CONFIG_PACKAGE = CONFIG_PACKAGE + "spell.";
+    private static final String CONFIG_SPELLS = SPELL_CONFIG_PACKAGE + "ConfigSpells";
 
     ////////// SPELLS ////////////////////
 
@@ -26,23 +32,12 @@ public final class CWApi
      */
     public static void registerSpell(Spell spell)
     {
-        registerSpell(spell, spell.getName());
-    }
-
-    /**
-     * Register a spell
-     *
-     * @param spell
-     * @param name
-     */
-    public static void registerSpell(Spell spell, String name)
-    {
         try
         {
             Class<?> clazz = Class.forName(SPELL_REGISTRY);
-            Class[] args = new Class[]{Spell.class, String.class};
+            Class[] args = new Class[]{Spell.class};
             Method method = clazz.getDeclaredMethod("registerSpell", args);
-            method.invoke(null, spell, name);
+            method.invoke(null, spell);
         }
         catch (Exception e)
         {
@@ -70,9 +65,26 @@ public final class CWApi
         catch (Exception e)
         {
             CWApi.apiLog.warn("Failed to invoke method " + SPELL_REGISTRY + ".getSpell");
+            e.printStackTrace();
         }
 
         return null;
+    }
+
+    public static void handleSpellConfiguration(Spell spell)
+    {
+        try
+        {
+            Class<?> clazz = Class.forName(CONFIG_SPELLS);
+            Class[] args = new Class[]{Spell.class};
+            Method method = clazz.getDeclaredMethod("handleSpellCost", args);
+            method.invoke(null, spell);
+        }
+        catch (Exception e)
+        {
+            CWApi.apiLog.warn("Failed to invoke method " + CONFIG_SPELLS + ".handleSpellCost");
+            e.printStackTrace();
+        }
     }
 
     ////////// SPELL BOOK ////////////////////

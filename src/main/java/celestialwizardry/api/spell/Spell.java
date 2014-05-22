@@ -1,22 +1,34 @@
 package celestialwizardry.api.spell;
 
+import celestialwizardry.api.CWApi;
 import celestialwizardry.api.MagicType;
 import celestialwizardry.api.event.SpellEvent;
+import celestialwizardry.api.rune.Rune;
 
 import net.minecraft.entity.player.EntityPlayer;
 import cpw.mods.fml.common.FMLCommonHandler;
 
 public class Spell
 {
-    protected final String name;
-    protected final float cost;
-    protected final MagicType magicType;
+    private final String name;
+    private final double defaultCost;
+    private double cost;
+    private final MagicType magicType;
+    private final Rune[] runes;
 
-    public Spell(String name, float cost, MagicType magicType)
+    public Spell(String name, double defaultCost, Rune[] runes)
+    {
+        this(name, defaultCost, runes, MagicType.DEFAULT);
+    }
+
+    public Spell(String name, double defaultCost, Rune[] runes, MagicType magicType)
     {
         this.name = name;
-        this.cost = cost;
+        this.defaultCost = defaultCost;
+        this.runes = runes;
         this.magicType = magicType;
+
+        handleConfiguration();
     }
 
     public String getName()
@@ -24,7 +36,24 @@ public class Spell
         return name;
     }
 
-    public float getCost()
+    public double getDefaultCost()
+    {
+        return defaultCost;
+    }
+
+    public Rune[] getRunes()
+    {
+        return runes;
+    }
+
+    public Spell setCost(double cost)
+    {
+        this.cost = cost;
+
+        return this;
+    }
+
+    public double getCost()
     {
         return cost;
     }
@@ -90,5 +119,10 @@ public class Spell
         onPreCasting(item, player);
         onCasting(item, player);
         onPostCasting(item, player);
+    }
+
+    public void handleConfiguration()
+    {
+        CWApi.handleSpellConfiguration(this);
     }
 }
