@@ -1,5 +1,6 @@
 package celestialwizardry.api;
 
+import celestialwizardry.api.rune.Rune;
 import celestialwizardry.api.spell.Spell;
 import celestialwizardry.api.spellbook.SpellBookCategory;
 import celestialwizardry.api.spellbook.SpellBookEntry;
@@ -19,6 +20,7 @@ public final class CWApi
     private static final String REGISTRY_PACKAGE = CW_PACKAGE + "registry.";
     private static final String SPELL_REGISTRY = REGISTRY_PACKAGE + "SpellRegistry";
     private static final String SPELL_BOOK_REGISTRY = REGISTRY_PACKAGE + "SpellBookRegistry";
+    private static final String RUNE_REGISTRY = REGISTRY_PACKAGE + "RuneRegistry";
 
     private static final String CONFIG_PACKAGE = CW_PACKAGE + "config.";
     private static final String SPELL_CONFIG_PACKAGE = CONFIG_PACKAGE + "spell.";
@@ -308,5 +310,102 @@ public final class CWApi
             CWApi.apiLog.warn("Failed to invoke method " + SPELL_BOOK_REGISTRY + ".addEntry");
             e.printStackTrace();
         }
+    }
+
+    ////////// RUNES ////////////////////
+
+    /**
+     * Registers a rune
+     *
+     * @param rune
+     */
+    public static void registerRune(Rune rune)
+    {
+        try
+        {
+            Class<?> clazz = Class.forName(RUNE_REGISTRY);
+            Class[] args = new Class[]{Rune.class};
+            Method method = clazz.getDeclaredMethod("registerRune", args);
+            method.invoke(null, rune);
+        }
+        catch (ClassNotFoundException e)
+        {
+            CWApi.apiLog.warn("Failed to invoke method " + RUNE_REGISTRY + ".registerRune");
+            e.printStackTrace();
+        }
+        catch (IllegalAccessException e)
+        {
+            CWApi.apiLog.warn("Failed to invoke method " + RUNE_REGISTRY + ".registerRune");
+            e.printStackTrace();
+        }
+        catch (IllegalArgumentException e)
+        {
+            CWApi.apiLog.warn("Failed to invoke method " + RUNE_REGISTRY + ".registerRune");
+            e.printStackTrace();
+        }
+        catch (NoSuchMethodException e)
+        {
+            CWApi.apiLog.warn("Failed to invoke method " + RUNE_REGISTRY + ".registerRune");
+            e.printStackTrace();
+        }
+        catch (SecurityException e)
+        {
+            CWApi.apiLog.warn("Failed to invoke method " + RUNE_REGISTRY + ".registerRune");
+            e.printStackTrace();
+        }
+        catch (InvocationTargetException e)
+        {
+            CWApi.apiLog.warn("Failed to invoke method " + RUNE_REGISTRY + ".registerRune");
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Gets a registered rune
+     *
+     * @param name
+     * @return
+     */
+    public static Rune getRune(String name)
+    {
+        try
+        {
+            Class<?> clazz = Class.forName(RUNE_REGISTRY);
+            Class[] args = new Class[]{String.class};
+            Method method = clazz.getDeclaredMethod("getRune", args);
+            return (Rune) method.invoke(null, name);
+        }
+        catch (ClassNotFoundException e)
+        {
+            CWApi.apiLog.warn("Failed to invoke method " + RUNE_REGISTRY + ".getRune");
+            e.printStackTrace();
+        }
+        catch (IllegalAccessException e)
+        {
+            CWApi.apiLog.warn("Failed to invoke method " + RUNE_REGISTRY + ".getRune");
+            e.printStackTrace();
+        }
+        catch (IllegalArgumentException e)
+        {
+            CWApi.apiLog.warn("Failed to invoke method " + RUNE_REGISTRY + ".getRune");
+            e.printStackTrace();
+        }
+        catch (NoSuchMethodException e)
+        {
+            CWApi.apiLog.warn("Failed to invoke method " + RUNE_REGISTRY + ".getRune");
+            e.printStackTrace();
+        }
+        catch (SecurityException e)
+        {
+            CWApi.apiLog.warn("Failed to invoke method " + RUNE_REGISTRY + ".getRune");
+            e.printStackTrace();
+        }
+        catch (InvocationTargetException e)
+        {
+            CWApi.apiLog.warn("Failed to invoke method " + RUNE_REGISTRY + ".getRune");
+            e.printStackTrace();
+        }
+
+        return null;
     }
 }
