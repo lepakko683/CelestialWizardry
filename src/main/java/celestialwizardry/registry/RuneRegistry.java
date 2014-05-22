@@ -1,7 +1,7 @@
 package celestialwizardry.registry;
 
 import celestialwizardry.CelestialWizardry;
-import celestialwizardry.api.rune.Rune;
+import celestialwizardry.api.spellgrammar.Rune;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -12,7 +12,7 @@ public abstract class RuneRegistry
 
     public static void registerSpell(Rune rune)
     {
-        String name = rune.getName();
+        String name = "";// rune.getName();
 
         if (!runeMap.containsKey(name))
         {
