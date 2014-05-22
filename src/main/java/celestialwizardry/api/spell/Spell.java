@@ -3,7 +3,6 @@ package celestialwizardry.api.spell;
 import celestialwizardry.api.CWApi;
 import celestialwizardry.api.MagicType;
 import celestialwizardry.api.event.SpellEvent;
-import celestialwizardry.api.rune.Rune;
 
 import net.minecraft.entity.player.EntityPlayer;
 import cpw.mods.fml.common.FMLCommonHandler;
@@ -13,14 +12,14 @@ public class Spell
     private final String name;
     private final double cost;
     private final MagicType magicType;
-    private final Rune[] runes;
+    private final int[] runes;
 
-    public Spell(String name, double defaultCost, Rune[] runes)
+    public Spell(String name, double defaultCost, int[] runes)
     {
         this(name, defaultCost, runes, MagicType.DEFAULT);
     }
 
-    public Spell(String name, double defaultCost, Rune[] runes, MagicType magicType)
+    public Spell(String name, double defaultCost, int[] runes, MagicType magicType)
     {
         this.name = name;
         this.cost = handleCost(defaultCost);
@@ -33,7 +32,7 @@ public class Spell
         return name;
     }
 
-    public Rune[] getRunes()
+    public int[] getRunes()
     {
         return runes;
     }

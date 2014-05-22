@@ -8,7 +8,8 @@ import celestialwizardry.spellbook.page.PageText;
 
 public final class SpellBook
 {
-    public static SpellBookCategory categoryBasics = new SpellBookCategory("category." + Resources.RESOURCE_PREFIX + "basics");
+    public static SpellBookCategory categoryBasics = new SpellBookCategory(
+            "category." + Resources.RESOURCE_PREFIX + "basics");
 
     /**
      * Basics

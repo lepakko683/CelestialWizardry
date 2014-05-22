@@ -1,9 +1,9 @@
 package celestialwizardry.api;
 
-import celestialwizardry.api.rune.Rune;
 import celestialwizardry.api.spell.Spell;
 import celestialwizardry.api.spellbook.SpellBookCategory;
 import celestialwizardry.api.spellbook.SpellBookEntry;
+import celestialwizardry.api.spellgrammar.Rune;
 
 import org.apache.logging.log4j.Logger;
 
@@ -129,6 +129,7 @@ public final class CWApi
      *
      * @param spell
      * @param defaultCost
+     *
      * @return
      */
     public static double handleSpellCost(Spell spell, Double defaultCost)
@@ -364,6 +365,7 @@ public final class CWApi
      * Gets a registered rune
      *
      * @param name
+     *
      * @return
      */
     public static Rune getRune(String name)

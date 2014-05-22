@@ -1,7 +1,6 @@
 package celestialwizardry.config;
 
 import net.minecraftforge.common.config.Configuration;
-
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 
 import java.io.File;
@@ -29,7 +28,8 @@ public class Config extends ConfigBase
 
     public void setConfiguration(String file)
     {
-        super.setConfiguration(new Configuration(new File(configDir, File.pathSeparator + domain + File.separator + file + ".cfg")));
+        super.setConfiguration(
+                new Configuration(new File(configDir, File.pathSeparator + domain + File.separator + file + ".cfg")));
     }
 
     public double get(String category, String key, double defaultValue)

@@ -1,10 +1,7 @@
 package celestialwizardry;
 
 import celestialwizardry.api.CWApi;
-import celestialwizardry.api.rune.Rune;
-import celestialwizardry.api.spell.Spell;
 import celestialwizardry.config.Config;
-import celestialwizardry.config.ConfigBase;
 import celestialwizardry.config.SettingHandler;
 import celestialwizardry.config.spell.ConfigSpells;
 import celestialwizardry.handler.CraftingHandler;
@@ -16,11 +13,9 @@ import celestialwizardry.proxy.IProxy;
 import celestialwizardry.reference.EventHandlers;
 import celestialwizardry.reference.Reference;
 import celestialwizardry.reference.Version;
-import celestialwizardry.registry.SpellRegistry;
 import celestialwizardry.spellbook.SpellBook;
 
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.common.config.Configuration;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.Mod;
@@ -33,8 +28,6 @@ import cpw.mods.fml.common.network.NetworkRegistry;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
-import java.io.File;
 
 /**
  * The main mod class of Minecraft mod Celestial Wizardry
