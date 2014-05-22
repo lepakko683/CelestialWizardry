@@ -38,3 +38,6 @@
 
 # PizzAna
 /pizzanaIdeas.txt
+
+# Unfinished techne models
+*.wip.tcn

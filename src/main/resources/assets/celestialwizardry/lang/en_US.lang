@@ -13,6 +13,7 @@ item.celestialwizardry:magicalPen.name=Magical Pen
 
 # Block localizations
 tile.celestialwizardry:writingTable.name=Writing Table
+tile.celestialwizardry:livingOre.name=Living Ore
 
 # GUI localizations
 container.celestialwizardry:writingTable=Writing Table
