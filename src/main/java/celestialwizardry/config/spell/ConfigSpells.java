@@ -32,10 +32,8 @@ public class ConfigSpells extends Config
         }
     }
 
-    public static void handleSpellCost(Spell spell)
+    public static double handleSpellCost(Spell spell, double defaultCost)
     {
-        double defCost = spell.getDefaultCost();
-        double cost = CelestialWizardry.configSpells.get("costs", spell.getName(), defCost);
-        spell.setCost(cost);
+        return CelestialWizardry.configSpells.get("costs", spell.getName(), defaultCost);
     }
 }

@@ -6,6 +6,7 @@ import celestialwizardry.api.spellbook.SpellBookEntry;
 
 import org.apache.logging.log4j.Logger;
 
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.List;
 
@@ -39,7 +40,32 @@ public final class CWApi
             Method method = clazz.getDeclaredMethod("registerSpell", args);
             method.invoke(null, spell);
         }
-        catch (Exception e)
+        catch (ClassNotFoundException e)
+        {
+            CWApi.apiLog.warn("Failed to invoke method " + SPELL_REGISTRY + ".registerSpell");
+            e.printStackTrace();
+        }
+        catch (IllegalAccessException e)
+        {
+            CWApi.apiLog.warn("Failed to invoke method " + SPELL_REGISTRY + ".registerSpell");
+            e.printStackTrace();
+        }
+        catch (IllegalArgumentException e)
+        {
+            CWApi.apiLog.warn("Failed to invoke method " + SPELL_REGISTRY + ".registerSpell");
+            e.printStackTrace();
+        }
+        catch (NoSuchMethodException e)
+        {
+            CWApi.apiLog.warn("Failed to invoke method " + SPELL_REGISTRY + ".registerSpell");
+            e.printStackTrace();
+        }
+        catch (SecurityException e)
+        {
+            CWApi.apiLog.warn("Failed to invoke method " + SPELL_REGISTRY + ".registerSpell");
+            e.printStackTrace();
+        }
+        catch (InvocationTargetException e)
         {
             CWApi.apiLog.warn("Failed to invoke method " + SPELL_REGISTRY + ".registerSpell");
             e.printStackTrace();
@@ -62,7 +88,32 @@ public final class CWApi
             Method method = clazz.getDeclaredMethod("getSpell", args);
             return (Spell) method.invoke(null, name);
         }
-        catch (Exception e)
+        catch (ClassNotFoundException e)
+        {
+            CWApi.apiLog.warn("Failed to invoke method " + SPELL_REGISTRY + ".getSpell");
+            e.printStackTrace();
+        }
+        catch (IllegalAccessException e)
+        {
+            CWApi.apiLog.warn("Failed to invoke method " + SPELL_REGISTRY + ".getSpell");
+            e.printStackTrace();
+        }
+        catch (IllegalArgumentException e)
+        {
+            CWApi.apiLog.warn("Failed to invoke method " + SPELL_REGISTRY + ".getSpell");
+            e.printStackTrace();
+        }
+        catch (NoSuchMethodException e)
+        {
+            CWApi.apiLog.warn("Failed to invoke method " + SPELL_REGISTRY + ".getSpell");
+            e.printStackTrace();
+        }
+        catch (SecurityException e)
+        {
+            CWApi.apiLog.warn("Failed to invoke method " + SPELL_REGISTRY + ".getSpell");
+            e.printStackTrace();
+        }
+        catch (InvocationTargetException e)
         {
             CWApi.apiLog.warn("Failed to invoke method " + SPELL_REGISTRY + ".getSpell");
             e.printStackTrace();
@@ -71,20 +122,54 @@ public final class CWApi
         return null;
     }
 
-    public static void handleSpellConfiguration(Spell spell)
+    /**
+     * Handles spell cost configuration for you
+     *
+     * @param spell
+     * @param defaultCost
+     * @return
+     */
+    public static double handleSpellCost(Spell spell, Double defaultCost)
     {
         try
         {
             Class<?> clazz = Class.forName(CONFIG_SPELLS);
-            Class[] args = new Class[]{Spell.class};
+            Class[] args = new Class[]{Spell.class, Double.class};
             Method method = clazz.getDeclaredMethod("handleSpellCost", args);
-            method.invoke(null, spell);
+            return (Double) method.invoke(null, spell, defaultCost);
         }
-        catch (Exception e)
+        catch (ClassNotFoundException e)
         {
             CWApi.apiLog.warn("Failed to invoke method " + CONFIG_SPELLS + ".handleSpellCost");
             e.printStackTrace();
         }
+        catch (IllegalAccessException e)
+        {
+            CWApi.apiLog.warn("Failed to invoke method " + CONFIG_SPELLS + ".handleSpellCost");
+            e.printStackTrace();
+        }
+        catch (IllegalArgumentException e)
+        {
+            CWApi.apiLog.warn("Failed to invoke method " + CONFIG_SPELLS + ".handleSpellCost");
+            e.printStackTrace();
+        }
+        catch (NoSuchMethodException e)
+        {
+            CWApi.apiLog.warn("Failed to invoke method " + CONFIG_SPELLS + ".handleSpellCost");
+            e.printStackTrace();
+        }
+        catch (SecurityException e)
+        {
+            CWApi.apiLog.warn("Failed to invoke method " + CONFIG_SPELLS + ".handleSpellCost");
+            e.printStackTrace();
+        }
+        catch (InvocationTargetException e)
+        {
+            CWApi.apiLog.warn("Failed to invoke method " + CONFIG_SPELLS + ".handleSpellCost");
+            e.printStackTrace();
+        }
+
+        return 1.0d;
     }
 
     ////////// SPELL BOOK ////////////////////
@@ -103,7 +188,32 @@ public final class CWApi
             Method method = clazz.getDeclaredMethod("addCategory", args);
             method.invoke(null, category);
         }
-        catch (Exception e)
+        catch (ClassNotFoundException e)
+        {
+            CWApi.apiLog.warn("Failed to invoke method " + SPELL_BOOK_REGISTRY + ".addCategory");
+            e.printStackTrace();
+        }
+        catch (IllegalAccessException e)
+        {
+            CWApi.apiLog.warn("Failed to invoke method " + SPELL_BOOK_REGISTRY + ".addCategory");
+            e.printStackTrace();
+        }
+        catch (IllegalArgumentException e)
+        {
+            CWApi.apiLog.warn("Failed to invoke method " + SPELL_BOOK_REGISTRY + ".addCategory");
+            e.printStackTrace();
+        }
+        catch (NoSuchMethodException e)
+        {
+            CWApi.apiLog.warn("Failed to invoke method " + SPELL_BOOK_REGISTRY + ".addCategory");
+            e.printStackTrace();
+        }
+        catch (SecurityException e)
+        {
+            CWApi.apiLog.warn("Failed to invoke method " + SPELL_BOOK_REGISTRY + ".addCategory");
+            e.printStackTrace();
+        }
+        catch (InvocationTargetException e)
         {
             CWApi.apiLog.warn("Failed to invoke method " + SPELL_BOOK_REGISTRY + ".addCategory");
             e.printStackTrace();
@@ -125,7 +235,27 @@ public final class CWApi
             Method method = clazz.getDeclaredMethod("getAllCategories", args);
             return (List<SpellBookCategory>) method.invoke(null);
         }
-        catch (Exception e)
+        catch (ClassNotFoundException e)
+        {
+            CWApi.apiLog.warn("Failed to invoke method " + SPELL_BOOK_REGISTRY + ".getAllCategories");
+        }
+        catch (IllegalAccessException e)
+        {
+            CWApi.apiLog.warn("Failed to invoke method " + SPELL_BOOK_REGISTRY + ".getAllCategories");
+        }
+        catch (IllegalArgumentException e)
+        {
+            CWApi.apiLog.warn("Failed to invoke method " + SPELL_BOOK_REGISTRY + ".getAllCategories");
+        }
+        catch (NoSuchMethodException e)
+        {
+            CWApi.apiLog.warn("Failed to invoke method " + SPELL_BOOK_REGISTRY + ".getAllCategories");
+        }
+        catch (SecurityException e)
+        {
+            CWApi.apiLog.warn("Failed to invoke method " + SPELL_BOOK_REGISTRY + ".getAllCategories");
+        }
+        catch (InvocationTargetException e)
         {
             CWApi.apiLog.warn("Failed to invoke method " + SPELL_BOOK_REGISTRY + ".getAllCategories");
         }
@@ -148,7 +278,32 @@ public final class CWApi
             Method method = clazz.getDeclaredMethod("addEntry", args);
             method.invoke(null, entry, category);
         }
-        catch (Exception e)
+        catch (ClassNotFoundException e)
+        {
+            CWApi.apiLog.warn("Failed to invoke method " + SPELL_BOOK_REGISTRY + ".addEntry");
+            e.printStackTrace();
+        }
+        catch (IllegalAccessException e)
+        {
+            CWApi.apiLog.warn("Failed to invoke method " + SPELL_BOOK_REGISTRY + ".addEntry");
+            e.printStackTrace();
+        }
+        catch (IllegalArgumentException e)
+        {
+            CWApi.apiLog.warn("Failed to invoke method " + SPELL_BOOK_REGISTRY + ".addEntry");
+            e.printStackTrace();
+        }
+        catch (NoSuchMethodException e)
+        {
+            CWApi.apiLog.warn("Failed to invoke method " + SPELL_BOOK_REGISTRY + ".addEntry");
+            e.printStackTrace();
+        }
+        catch (SecurityException e)
+        {
+            CWApi.apiLog.warn("Failed to invoke method " + SPELL_BOOK_REGISTRY + ".addEntry");
+            e.printStackTrace();
+        }
+        catch (InvocationTargetException e)
         {
             CWApi.apiLog.warn("Failed to invoke method " + SPELL_BOOK_REGISTRY + ".addEntry");
             e.printStackTrace();

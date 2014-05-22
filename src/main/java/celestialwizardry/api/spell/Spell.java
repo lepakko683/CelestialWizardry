@@ -11,8 +11,7 @@ import cpw.mods.fml.common.FMLCommonHandler;
 public class Spell
 {
     private final String name;
-    private final double defaultCost;
-    private double cost;
+    private final double cost;
     private final MagicType magicType;
     private final Rune[] runes;
 
@@ -24,11 +23,9 @@ public class Spell
     public Spell(String name, double defaultCost, Rune[] runes, MagicType magicType)
     {
         this.name = name;
-        this.defaultCost = defaultCost;
+        this.cost = handleCost(defaultCost);
         this.runes = runes;
         this.magicType = magicType;
-
-        handleConfiguration();
     }
 
     public String getName()
@@ -36,21 +33,9 @@ public class Spell
         return name;
     }
 
-    public double getDefaultCost()
-    {
-        return defaultCost;
-    }
-
     public Rune[] getRunes()
     {
         return runes;
-    }
-
-    public Spell setCost(double cost)
-    {
-        this.cost = cost;
-
-        return this;
     }
 
     public double getCost()
@@ -121,8 +106,8 @@ public class Spell
         onPostCasting(item, player);
     }
 
-    public void handleConfiguration()
+    public double handleCost(double defaultCost)
     {
-        CWApi.handleSpellConfiguration(this);
+        return CWApi.handleSpellCost(this, defaultCost);
     }
 }
