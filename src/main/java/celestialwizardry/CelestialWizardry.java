@@ -40,7 +40,7 @@ public class CelestialWizardry
     @SidedProxy(clientSide = Reference.CLIENT_PROXY_CLASS, serverSide = Reference.SERVER_PROXY_CLASS)
     public static IProxy proxy;
 
-    @Mod.Instance
+    @Mod.Instance(Reference.MOD_ID)
     public static CelestialWizardry instance;
 
     // Mod logger
