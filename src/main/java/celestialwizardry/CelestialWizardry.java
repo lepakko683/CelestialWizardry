@@ -1,11 +1,13 @@
 package celestialwizardry;
 
 import celestialwizardry.api.CWApi;
+import celestialwizardry.client.model.OBJmodels;
 import celestialwizardry.config.Config;
 import celestialwizardry.config.SettingHandler;
 import celestialwizardry.config.spell.ConfigSpells;
 import celestialwizardry.handler.CraftingHandler;
 import celestialwizardry.init.ModBlocks;
+import celestialwizardry.init.ModEntities;
 import celestialwizardry.init.ModItems;
 import celestialwizardry.network.GuiHandler;
 import celestialwizardry.network.PacketHandler;
@@ -14,7 +16,6 @@ import celestialwizardry.reference.EventHandlers;
 import celestialwizardry.reference.Reference;
 import celestialwizardry.reference.Version;
 import celestialwizardry.spellbook.SpellBook;
-
 import net.minecraftforge.common.MinecraftForge;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.FMLLog;
@@ -101,6 +102,9 @@ public class CelestialWizardry
 
         // Initialize mod blocks
         ModBlocks.init();
+        
+        // Initialize mod entities
+//        ModEntities.init(); DISABLED!!!
 
         // Initialize mod packet handler
         PacketHandler.init();
@@ -146,6 +150,9 @@ public class CelestialWizardry
 
         // Register mod renders
         proxy.registerRenderer();
+        
+        // Initialize models
+        OBJmodels.init();
 
         // Register spell casting event handler
         FMLCommonHandler.instance().bus().register(EventHandlers.SPELL_EVENT_HANDLER);
