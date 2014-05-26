@@ -6,16 +6,14 @@ import celestialwizardry.item.ItemMagicalInk;
 import celestialwizardry.reference.GuiIds;
 import celestialwizardry.reference.Names;
 import celestialwizardry.tileentity.TileEntityWritingTable;
+
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
-import net.minecraftforge.common.util.ForgeDirection;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -113,61 +111,66 @@ public class BlockWritingTable extends BlockCW implements ITileEntityProvider
             return true;
         }
     }
-    
+
 //    @Override
-//	public int onBlockPlaced(World world, int x, int y, int z, int side, float hitx, float hity, float hitz, int metadata) {
+//	public int onBlockPlaced(World world, int x, int y, int z, int side, float hitx, float hity, float hitz,
+// int metadata) {
 //		System.out.println();
 //		return super.onBlockPlaced(world, x, y, z, side, hitx, hity, hitz, metadata);
 //	}
-    
+
     @Override
-	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entityLiving, ItemStack itemStack) {
-		if(!world.isRemote) {
-			int dir = Math.abs(Math.round(entityLiving.rotationYaw/90));
-			dir = dir == 4 ? 0 : dir;
-			
-			
-			switch(dir) {
-			case 0:
-				world.setBlockMetadataWithNotify(x, y, z, 2, 0);
-				break;
-			case 1:
-				world.setBlockMetadataWithNotify(x, y, z, 5, 0);
-				break;
-			case 2:
-				world.setBlockMetadataWithNotify(x, y, z, 3, 0);
-				break;
-			case 3:
-				world.setBlockMetadataWithNotify(x, y, z, 4, 0);
-				break;
-			}
-			
+    public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entityLiving, ItemStack itemStack)
+    {
+        if (!world.isRemote)
+        {
+            int dir = Math.abs(Math.round(entityLiving.rotationYaw / 90));
+            dir = dir == 4 ? 0 : dir;
+
+
+            switch (dir)
+            {
+                case 0:
+                    world.setBlockMetadataWithNotify(x, y, z, 2, 0);
+                    break;
+                case 1:
+                    world.setBlockMetadataWithNotify(x, y, z, 5, 0);
+                    break;
+                case 2:
+                    world.setBlockMetadataWithNotify(x, y, z, 3, 0);
+                    break;
+                case 3:
+                    world.setBlockMetadataWithNotify(x, y, z, 4, 0);
+                    break;
+            }
+
 //			System.out.println("Real:" + ForgeDirection.getOrientation(world.getBlockMetadata(x, y, z)).toString());
 //			for(int i=0;i<6;i++) {
 //				System.out.println("FDIR " + i + " - " + ForgeDirection.getOrientation(i).toString());
 //			}
 //			System.out.println(ForgeDirection.getOrientation(dir).toString());
-		}
-    	super.onBlockPlacedBy(world, x, y, z, entityLiving, itemStack);
-	}
-    
-	@Override
-	public boolean isOpaqueCube()
-	{
-		return false;
-	}
-	
-	@Override
-	public boolean renderAsNormalBlock()
-	{
-		return false;
-	}
-	
-	@SideOnly(Side.CLIENT)
-	@Override
-	public int getRenderType() {
-		return RenderOBJblock.ID;
-	}
+        }
+        super.onBlockPlacedBy(world, x, y, z, entityLiving, itemStack);
+    }
+
+    @Override
+    public boolean isOpaqueCube()
+    {
+        return false;
+    }
+
+    @Override
+    public boolean renderAsNormalBlock()
+    {
+        return false;
+    }
+
+    @SideOnly(Side.CLIENT)
+    @Override
+    public int getRenderType()
+    {
+        return RenderOBJblock.ID;
+    }
 
     /**
      * Returns a new instance of a block's tile entity class. Called on placing the block.

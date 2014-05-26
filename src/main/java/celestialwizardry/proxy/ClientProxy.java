@@ -2,13 +2,12 @@ package celestialwizardry.proxy;
 
 import celestialwizardry.client.ItemRendererSpellBook;
 import celestialwizardry.client.render.RenderOBJblock;
-import celestialwizardry.client.render.RenderOreGolem;
 import celestialwizardry.client.render.RenderWritingTable;
-import celestialwizardry.entity.EntityLivingOre;
 import celestialwizardry.init.ModItems;
 import celestialwizardry.reference.EventHandlers;
 import celestialwizardry.reference.Settings;
 import celestialwizardry.tileentity.TileEntityWritingTable;
+
 import net.minecraftforge.client.MinecraftForgeClient;
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
@@ -36,7 +35,7 @@ public class ClientProxy extends CommonProxy
             MinecraftForgeClient.registerItemRenderer(ModItems.spellBook, new ItemRendererSpellBook());
         }
         RenderingRegistry.registerBlockHandler(new RenderOBJblock());
-        
+
 //        RenderingRegistry.registerEntityRenderingHandler(EntityLivingOre.class, new RenderOreGolem());
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityWritingTable.class, new RenderWritingTable());
     }

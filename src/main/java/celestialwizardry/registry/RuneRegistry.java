@@ -8,7 +8,7 @@ import java.util.Map;
 
 public abstract class RuneRegistry
 {
-    public static Map<String, Rune> runeMap = new HashMap<String, Rune>();
+    public static Map<Integer, Rune> runeMap = new HashMap<Integer, Rune>();
 
     public static void registerSpell(Rune rune)
     {
@@ -17,7 +17,7 @@ public abstract class RuneRegistry
         if (!runeMap.containsKey(name))
         {
             CelestialWizardry.log.info("Registering rune " + name);
-            runeMap.put(name, rune);
+            runeMap.put(rune.hashCode(), rune);
         }
         else
         {
