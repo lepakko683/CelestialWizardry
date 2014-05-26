@@ -1,6 +1,6 @@
 package celestialwizardry.client.render;
 
-import celestialwizardry.client.model.OBJmodels;
+import celestialwizardry.client.model.OBJModels;
 
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
@@ -54,10 +54,11 @@ public class RenderWritingTable extends TileEntitySpecialRenderer
                 GL11.glRotatef(90F, 0.0F, 1.0F, 0.0F);
                 break;
             default:
-//			System.out.println("Something unexpected happened while rendering WritingTable. Please report to Okkapel(@Le683)!");
+//			System.out.println("Something unexpected happened while rendering WritingTable. Please report to Okkapel
+// (@Le683)!");
                 break;
         }
-        OBJmodels.modelWritingTable.renderAll();
+        OBJModels.modelWritingTable.renderAll();
 //		System.out.println(var8);
 
         GL11.glPopMatrix();

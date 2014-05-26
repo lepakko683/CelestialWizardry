@@ -1,7 +1,7 @@
 package celestialwizardry.block;
 
 import celestialwizardry.CelestialWizardry;
-import celestialwizardry.client.render.RenderOBJblock;
+import celestialwizardry.client.render.RenderOBJBlock;
 import celestialwizardry.item.ItemMagicalInk;
 import celestialwizardry.reference.GuiIds;
 import celestialwizardry.reference.Names;
@@ -169,7 +169,7 @@ public class BlockWritingTable extends BlockCW implements ITileEntityProvider
     @Override
     public int getRenderType()
     {
-        return RenderOBJblock.ID;
+        return RenderOBJBlock.ID;
     }
 
     /**

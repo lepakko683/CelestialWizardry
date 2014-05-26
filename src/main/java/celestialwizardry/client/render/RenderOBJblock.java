@@ -1,7 +1,7 @@
 package celestialwizardry.client.render;
 
 import celestialwizardry.block.BlockWritingTable;
-import celestialwizardry.client.model.OBJmodels;
+import celestialwizardry.client.model.OBJModels;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
@@ -15,7 +15,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 import org.lwjgl.opengl.GL11;
 
 @SideOnly(Side.CLIENT)
-public class RenderOBJblock implements ISimpleBlockRenderingHandler
+public class RenderOBJBlock implements ISimpleBlockRenderingHandler
 {
 
     public static final int ID = RenderingRegistry.getNextAvailableRenderId();
@@ -34,7 +34,7 @@ public class RenderOBJblock implements ISimpleBlockRenderingHandler
                 GL11.glTranslated(0, -0.5, 0);
 //				GL11.glRotatef(180F, 0.0F, 0.0F, 1.0F);
                 GL11.glScalef(1f, 1f, 1f);
-                OBJmodels.modelWritingTable.renderAll();
+                OBJModels.modelWritingTable.renderAll();
             }
 
             GL11.glPopMatrix();

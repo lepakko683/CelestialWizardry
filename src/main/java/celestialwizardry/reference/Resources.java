@@ -26,7 +26,9 @@ public class Resources
         // Model textures
         public static final String MODEL_LOCATION = "textures/models/";
 
-        public static final ResourceLocation MODEL_SPELL_BOOK = ResourceLocationHelper
+        public static final ResourceLocation SPELL_BOOK = ResourceLocationHelper
                 .getResourceLocation(MODEL_LOCATION + "spellBook.png");
+        public static final ResourceLocation WRITING_TABLE = ResourceLocationHelper
+                .getResourceLocation(MODEL_LOCATION + "WritingTable3.obj");
     }
 }

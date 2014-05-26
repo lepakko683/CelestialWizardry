@@ -1,11 +1,12 @@
 package celestialwizardry.client.model;
 
-import net.minecraft.util.ResourceLocation;
+import celestialwizardry.reference.Resources;
+
 import net.minecraftforge.client.model.obj.WavefrontObject;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class OBJmodels
+public class OBJModels
 {
 
     public static WavefrontObject modelWritingTable;
@@ -13,6 +14,6 @@ public class OBJmodels
     @SideOnly(Side.CLIENT)
     public static void init()
     {
-        modelWritingTable = new WavefrontObject(new ResourceLocation("celestialwizardry", "models/WritingTable3.obj"));
+        modelWritingTable = new WavefrontObject(Resources.Models.WRITING_TABLE);
     }
 }
