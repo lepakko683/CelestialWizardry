@@ -24,12 +24,17 @@ public class Resources
     public static class Models
     {
         // Model textures
-        public static final String MODEL_LOCATION = "textures/models/";
+        public static final String MODEL_TEXTURE_LOCATION = "textures/models/";
+        public static final String MODEL_LOCATION = "models/";
 
-        public static final ResourceLocation MODEL_SPELL_BOOK = ResourceLocationHelper
-                .getResourceLocation(MODEL_LOCATION + "spellBook.png");
+        public static final ResourceLocation SPELL_BOOK = ResourceLocationHelper
+                .getResourceLocation(MODEL_TEXTURE_LOCATION + "spellBook.png");
         
+        public static final ResourceLocation TEXTURE_WRITING_TABLE = ResourceLocationHelper
+        		.getResourceLocation(MODEL_TEXTURE_LOCATION + "writingTable.png");
+        
+        // Model files (.OBJs)
         public static final ResourceLocation MODEL_WRITING_TABLE = ResourceLocationHelper
-        		.getResourceLocation(MODEL_LOCATION + "writingTable.png");
+                .getResourceLocation(MODEL_LOCATION + "WritingTable.obj");
     }
 }

@@ -1,22 +1,21 @@
 package celestialwizardry.client.render;
 
-import org.lwjgl.opengl.GL11;
+import celestialwizardry.client.model.OBJModels;
 
 import cpw.mods.fml.client.FMLClientHandler;
-import celestialwizardry.client.model.OBJmodels;
-import celestialwizardry.client.model.WritingTableB;
 import celestialwizardry.reference.Resources;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.common.util.ForgeDirection;
 
-public class RenderWritingTable extends TileEntitySpecialRenderer {
-	
-	@Override
-	public void renderTileEntityAt(TileEntity var1, double var2, double var4, double var6, float var8) {
+import org.lwjgl.opengl.GL11;
 
-		//FDIR 0 - DOWN
+public class RenderWritingTable extends TileEntitySpecialRenderer
+{
+    @Override
+    public void renderTileEntityAt(TileEntity var1, double var2, double var4, double var6, float var8)
+    {
+
+    	//FDIR 0 - DOWN
 		//FDIR 1 - UP
 		//FDIR 2 - NORTH
 		//FDIR 3 - SOUTH
@@ -41,9 +40,9 @@ public class RenderWritingTable extends TileEntitySpecialRenderer {
 		default:
 			break;
 		}
-		OBJmodels.modelWritingTable.renderAll();
+		OBJModels.modelWritingTable.renderAll();
 		
 		GL11.glPopMatrix();
-	}
+    }
 
 }
