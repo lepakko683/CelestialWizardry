@@ -11,6 +11,6 @@ public class OBJmodels {
 	
 	@SideOnly(Side.CLIENT)
 	public static void init() {
-		modelWritingTable = new WavefrontObject(new ResourceLocation("celestialwizardry", "models/WritingTable3.obj"));
+		modelWritingTable = new WavefrontObject(new ResourceLocation("celestialwizardry", "models/WritingTable.obj"));
 	}
 }

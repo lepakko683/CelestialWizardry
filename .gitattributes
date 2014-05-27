@@ -8,6 +8,11 @@
 *.md text
 *.properties text
 
+# 3D model stuff
+*.mtl eol=lf
+*.obj eol=lf
+
+
 # Binary
 *.dat binary
 *.bin binary

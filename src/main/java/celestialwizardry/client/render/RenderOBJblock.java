@@ -4,6 +4,7 @@ import org.lwjgl.opengl.GL11;
 
 import celestialwizardry.block.BlockWritingTable;
 import celestialwizardry.client.model.OBJmodels;
+import celestialwizardry.reference.Resources;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.world.IBlockAccess;
@@ -23,12 +24,10 @@ public class RenderOBJblock implements ISimpleBlockRenderingHandler {
 	{
 		if (modelID == ID) {
 			GL11.glPushMatrix();
-		//	FMLClientHandler.instance().getClient().renderEngine.bindTexture(RenderCoercionDeriver.TEXTURE_ON);
 			
 			if(block instanceof BlockWritingTable) {
-				FMLClientHandler.instance().getClient().renderEngine.bindTexture(RenderWritingTable.texture);
+				FMLClientHandler.instance().getClient().renderEngine.bindTexture(Resources.Models.MODEL_WRITING_TABLE);
 				GL11.glTranslated(0, -0.5, 0);
-//				GL11.glRotatef(180F, 0.0F, 0.0F, 1.0F);
 				GL11.glScalef(1f, 1f, 1f);
 				OBJmodels.modelWritingTable.renderAll();
 			}

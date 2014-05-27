@@ -28,5 +28,8 @@ public class Resources
 
         public static final ResourceLocation MODEL_SPELL_BOOK = ResourceLocationHelper
                 .getResourceLocation(MODEL_LOCATION + "spellBook.png");
+        
+        public static final ResourceLocation MODEL_WRITING_TABLE = ResourceLocationHelper
+        		.getResourceLocation(MODEL_LOCATION + "writingTable.png");
     }
 }
