@@ -1,10 +1,10 @@
 package celestialwizardry.tileentity;
 
 import celestialwizardry.api.writing.IWriter;
+import celestialwizardry.client.IRenderableObject;
 import celestialwizardry.network.PacketHandler;
 import celestialwizardry.network.message.MessageTileEntityWritingTable;
 import celestialwizardry.reference.Names;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
@@ -219,4 +219,22 @@ public class TileEntityWritingTable extends TileEntityCW implements IInventory
     {
         return PacketHandler.INSTANCE.getPacketFrom(new MessageTileEntityWritingTable(this));
     }
+    
+    //Get data for rendering details
+    public IRenderableObject getInk() {
+    	return null;
+    }
+    
+    public IRenderableObject getMainObject() {
+    	return null;
+    }
+    
+    public IRenderableObject getTopLeft() {
+    	return null;
+    }
+    
+    public IRenderableObject getTopRight() {
+    	return null;
+    }
+    
 }

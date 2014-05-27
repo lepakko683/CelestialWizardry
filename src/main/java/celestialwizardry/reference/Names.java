@@ -5,6 +5,7 @@ public class Names
     public static class Blocks
     {
         public static final String WRITING_TABLE = "writingTable";
+        public static final String LIVING_ORE = "livingOre";
     }
 
     public static class Items
