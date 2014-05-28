@@ -21,7 +21,7 @@ public class RenderWritingTable extends TileEntitySpecialRenderer
 		//FDIR 3 - SOUTH
 		//FDIR 4 - WEST
 		//FDIR 5 - EAST
-		FMLClientHandler.instance().getClient().renderEngine.bindTexture(Resources.Models.MODEL_WRITING_TABLE);
+		FMLClientHandler.instance().getClient().renderEngine.bindTexture(Resources.Models.TEXTURE_WRITING_TABLE);
 		
 		GL11.glPushMatrix();
 		GL11.glTranslated(var2+.5, var4, var6+.5);
