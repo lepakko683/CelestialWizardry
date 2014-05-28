@@ -91,8 +91,8 @@ This section assumes that you're using the command-line version of Git.
 2. Execute `gradle build`. If you did everything right, `BUILD SUCCESSFUL` will be displayed after it finishes.  This should be relatively quick.
     * If you see `BUILD FAILED`, check the error output (it should be right around `BUILD FAILED`), fix everything (if possible), and try again.
 3. Navigate to `mcdev\CelestialWizardry\build\libs`.
-    *  You should see `.jar` files named `celestialwizardry-1.7.2-0.0.1.dev*.jar`, `celestialwizardry-1.7.2-0.0.1.dev*-deobf.jar` and `celestialwizardry-1.7.2-0.0.1.dev*-api.jar`.
-4. Copy the `celestialwizardry-1.7.2-0.0.1.dev*.jar` jar into your Minecraft mods folder, and you are done!
+    *  You should see `.jar` files named `CelestialWizardry-1.7.2-*.jar`, `CelestialWizardry-1.7.2-*-deobf.jar`, `CelestialWizardry-1.7.2-*-api.jar` and `CelestialWizardry-1.7.2-*-src.jar`.
+4. Copy the `CelestialWizardry-1.7.2-*.jar` jar into your Minecraft mods folder, and you are done!
 
 #####Without Gradle Installed
 The same as above, but replace `gradle` with `gradlew.bat` on Windows and with `gradlew` on Linux.
