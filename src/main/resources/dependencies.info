@@ -1,7 +1,7 @@
 {
     "repo": "https://dl.dropboxusercontent.com/u/47135879/",
-    "file": "Baubles-1.7.2-${baublesversion}.jar",
-    "dev": "Baubles-deobf-1.7.2-${baublesversion}.jar",
+    "file": "Baubles-${mc_version}-${baubles_version}.jar",
+    "dev": "Baubles-deobf-${mc_version}-${baubles_version}.jar",
     "class": "baubles.common.Baubles",
-    "version": "${baublesversion}"
+    "version": "${baubles_version}"
 }

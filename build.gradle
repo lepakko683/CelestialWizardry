@@ -1,4 +1,13 @@
+/**
+ * CelestialWizardry
+ * Master build file
+ *
+ * @author PizzAna
+ */
+
 buildscript {
+
+    // Add dependencies for the build script
     repositories {
         mavenCentral()
         maven {
@@ -15,190 +24,179 @@ buildscript {
     }
 }
 
+// Add dependency repositories
 repositories {
     maven {
-        name 'chickenbones'
-        url "http://chickenbones.net/maven/"
-    }
-    maven {
-        name 'forge'
-        url 'http://files.minecraftforge.net/maven'
+        name = "chickenbones"
+        url = "http://chickenbones.net/maven/"
     }
 }
 
 apply plugin: 'forge'
-group = "celestialwizardry" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
+
+// http://maven.apache.org/guides/mini/guide-naming-conventions.html
+group 'celestialwizardry'
+
+// The name used in final archive artifacts
 archivesBaseName = "CelestialWizardry"
 
-// Define properties file
+// The main property file
 ext.configFile = file "build.properties"
 
-// Load config. It shall from now be referenced simply as config or project.config.
+// Load the main property file. It shall from now be referenced as simply config or project.config
 configFile.withReader {
     def prop = new Properties()
     prop.load(it)
     project.ext.config = new ConfigSlurper().parse prop
 }
 
-configurations {
-    deployerJars
-}
-
-
+// Add code dependencies
 dependencies {
-    compile "codechicken:CodeChickenLib:${config.minecraft_version}-${config.cclib_version}:dev"
-    compile "codechicken:CodeChickenCore:${config.minecraft_version}-${config.ccc_version}:dev"
-    compile "codechicken:NotEnoughItems:${config.minecraft_version}-${config.nei_version}:dev"
-    deployerJars 'org.apache.maven.wagon:wagon-ssh:2.2'
+    /**
+     * You may put jars on which you depend on in ./libs
+     * or you may define them like so:
+     *
+     * compile "some.group:artifact:version:classifier"
+     * compile "some.group:artifact:version"
+     *
+     * Real examples:
+     *
+     * compile 'com.mod-buildcraft:buildcraft:6.0.8:dev'  // Adds BuildCraft to the development environment
+     * compile 'com.googlecode.efficient-java-matrix-library:ejml:0.24' // Adds ejml to the development environment
+     *
+     * For more info:
+     *
+     * http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
+     * http://www.gradle.org/docs/current/userguide/dependency_management.html
+     */
 }
 
-// Finds and sets version data.
+// Find and set the version info from git for the build
 task buildInfo {
+
+    // Run the command to get the git revision
     def cmd = "git rev-parse --short HEAD"
-    def proc = cmd.execute()
-    proc.waitFor()
-    if (proc.exitValue() == 0)
+    def run = cmd.execute()
+    run.waitFor()
+
+    // Set the revision depending on the result of command execution
+    if (run.exitValue() == 0)
     {
-        ext.revision = proc.text.trim()
+        ext.revision = run.text.trim()
     }
     else
     {
-        ext.revision = "GITBORK"
-    }
-
-    if (project.hasProperty("CelestialWizardry.signing")
-            && new File(project.property("CelestialWizardry.signing")).exists())
-    {
-
-        Properties props = new Properties()
-        props.load(new FileInputStream(file(project.property("CelestialWizardry.signing"))))
-
-        if (Boolean.valueOf((String) props['release']))
-        {
-            ext.buildNum = "alpha." + props['build_number']
-        }
-        else
-        {
-            ext.buildNum = "DEV.${project.buildInfo.revision}"
-        }
-
-    }
-    else
-    {
-        ext.buildNum = "DEV.${project.buildInfo.revision}"
+        ext.revision = "NULL"
     }
 }
 
-if (project.hasProperty("CelestialWizardry.signing")
-        && new File(project.property("CelestialWizardry.signing")).exists())
+// Sets the version for the mod
+version = "${config.mod_version}.${config.build_number}"
+
+// Set the version for the mod
+if (project.hasProperty("CelestialWizardry.signing") &&
+        new File(project.property("CelestialWizardry.signing")).exists())
 {
 
+    // Load the private property file if one is found
     Properties props = new Properties()
     props.load(new FileInputStream(file(project.property("CelestialWizardry.signing"))))
 
-    if (Boolean.valueOf((String) props['release']))
+    if (!Boolean.valueOf((String) props['release']))
     {
-
-        ext.artifact_version = "${config.mod_version}-${project.buildInfo.buildNum}"
-
+        version = "${project.buildInfo.revision}"
     }
-    else
-    {
-
-        ext.artifact_version = "${project.buildInfo.buildNum}"
-
-    }
-
 }
 else
 {
-
-    ext.artifact_version = "${project.buildInfo.buildNum}"
-
+    version = "${project.buildInfo.revision}"
 }
 
-version = "${config.minecraft_version}-${artifact_version}"
+// Print out the minecraft forge version
+println config.mc_version + "-" + config.forge_version
 
+// Setup the forge minecraft plugin data. Specify the preferred forge/minecraft version and assets directory here
 minecraft {
-    version = config.minecraft_version + "-" + config.forge_version
+    version = config.mc_version + "-" + config.forge_version
     assetDir = 'run/assets'
-    replace '${version}', project.version
-
-    replaceIn "reference/Reference.java"
-    if (project.hasProperty("CelestialWizardry.signing")
-            && new File(project.property("CelestialWizardry.signing")).exists())
-    {
-
-        Properties props = new Properties()
-        props.load(new FileInputStream(file(project.property("CelestialWizardry.signing"))))
-
-        println "Valid jar fingerprint properties found"
-
-        replace "@FINGERPRINT@", props['signature']
-    }
-
-    replaceIn "reference/Version.java"
-    replace "@VERSION@", artifact_version
 }
 
-processResources
-        {
-            // this will ensure that this task is redone when the versions change.
-            inputs.property "version", project.version
-            inputs.property "mcversion", project.minecraft.version
+processResources {
 
-            // Replace values only in mcmod.info.
-            from(sourceSets.main.resources.srcDirs) {
-                include 'mcmod.info'
-                include 'dependencies.info'
+    // This will ensure that this task is redone when the versions change.
+    inputs.property "version", project.version
+    inputs.property "mc_version", config.mc_version
+    inputs.property "baubles_version", config.baubles_version
 
-                // Replace version and mcversion.
-                expand 'version': project.version, 'mcversion': project.minecraft.version,
-                       'baublesversion': config.baubles_version
-            }
+    // Replace properties in info files
+    from(sourceSets.main.resources.srcDirs) {
 
-            // Copy everything excluding mcmod.info.
-            from(sourceSets.main.resources.srcDirs) {
-                exclude 'mcmod.info'
-                exclude 'dependencies.info'
-            }
-        }
+        // Include only info files
+        include '*.info'
 
-// Add Coremod Manifest
+        // Replace version, mc_vrsion and baubles_version
+        expand 'version': project.version, 'mc_version': config.mc_version, 'baubles_version': config.baubles_version
+    }
+
+    // Copy everything excluding info files
+    from(sourceSets.main.resources.srcDirs) {
+
+        // Exclude info files
+        exclude '*.info'
+    }
+}
+
+// Set the version for archive names
+version = "${project.minecraft.version}-${project.version}"
+
+// Set the common manifest for archives
+def commonManifest = {
+    attributes 'FMLCorePlugin': 'celestialwizardry.codechicken.core.launch.DepLoader'
+    attributes 'FMLCorePluginContainsFMLMod': 'true'
+}
+
+// Make the universal jar
 jar {
-    manifest {
-        attributes 'FMLCorePlugin': 'celestialwizardry.codechicken.core.launch.DepLoader'
-        attributes 'FMLCorePluginContainsFMLMod': 'true'
-    }
+    manifest commonManifest
 }
 
-// Create deobf dev jars.
-task deobfJar(type: Jar) {
-    from sourceSets.main.output
-    classifier = 'deobf'
-    manifest {
-        attributes 'FMLCorePlugin': 'celestialwizardry.codechicken.core.launch.DepLoader'
-        attributes 'FMLCorePluginContainsFMLMod': 'true'
-    }
+// Make the source jar
+task sourceJar(type: Jar) {
+    from sourceSets.main.java
+    classifier = "src"
 }
 
-// Create API jar.
+// Make the api jar
 task apiJar(type: Jar) {
     from(sourceSets.main.java) {
-        include "celestialwizardry/api/*"
+
+        // Include only the api package
+        include 'celestialwizardry/api/*'
     }
-    classifier = 'api'
+
+    classifier = "api"
 }
 
+// Make the deobsfucated developer jar
+task devJar(type: Jar) {
+    from sourceSets.main.output
+    classifier = "deobf"
+    manifest commonManifest
+}
+
+// Tell the archive system about the extra archives
 artifacts {
-    archives deobfJar
+    archives sourceJar
     archives apiJar
+    archives devJar
 }
 
-if (project.hasProperty("CelestialWizardry.signing")
-        && new File(project.property("CelestialWizardry.signing")).exists())
+// Set the information for signing the jar
+if (project.hasProperty("CelestialWizardry.signing") &&
+        new File(project.property("CelestialWizardry.signing")).exists())
 {
 
+    // Load the private property file if one is found
     Properties props = new Properties()
     props.load(new FileInputStream(file(project.property("CelestialWizardry.signing"))))
 
@@ -216,37 +214,71 @@ else
     ext.keystore_user_password = ""
 }
 
-task("signJar", dependsOn: "build")
-        {
-            inputs.file jar.getArchivePath()
-            inputs.file keystore_location
-            inputs.property "keystore_user_alias", keystore_user_alias
-            inputs.property "keystore_user_password", keystore_user_password
-            outputs.file jar.getArchivePath()
+// Sign the final jar
+task signJar(dependsOn: "build") {
 
-            // Only sign the jar if the keystore exists
-            onlyIf {
-                return keystore_location != "."
-            }
+    // This will ensure that this task is redone when the some of these properties change.
+    inputs.file jar.getArchivePath()
+    inputs.file keystore_location
+    inputs.property "keystore_user_alias", keystore_user_alias
+    inputs.property "keystore_user_password", keystore_user_password
+    outputs.file jar.getArchivePath()
 
-            println "Path to archive: " + jar.getArchivePath()
-            println jar.getArchivePath()
+    // Only sign the jar if the keystore exists
+    onlyIf {
+        return keystore_location != "."
+    }
 
-            // Sign the jar.
-            doLast {
-                ant.signjar(
-                        destDir: jar.destinationDir,
-                        jar: jar.getArchivePath(),
-                        keystore: keystore_location,
-                        alias: keystore_user_alias,
-                        storepass: keystore_user_password,
-                        keypass: keystore_user_password
-                )
-            }
-        }
+    println "Path to archive: " + jar.getArchivePath()
+    // println jar.getArchivePath()
 
-// TODO Include uploading to server here
-task("release", dependsOn: "signJar")
-        {
+    // Sign the jar.
+    doLast {
+        ant.signjar(
+                destDir: jar.destinationDir,
+                jar: jar.getArchivePath(),
+                keystore: keystore_location,
+                alias: keystore_user_alias,
+                storepass: keystore_user_password,
+                keypass: keystore_user_password
+        )
+    }
+}
 
-        }
+// Set the information for releasing the jar
+if (project.hasProperty("CelestialWizardry.signing") &&
+        new File(project.property("CelestialWizardry.signing")).exists())
+{
+
+    // Load the private property file if one is found
+    Properties props = new Properties()
+    props.load(new FileInputStream(file(project.property("CelestialWizardry.signing"))))
+
+    ext.release_location = props['release_location']
+
+    ext.release_location = release_location.replace("{MC}", project.minecraft.version).
+            replace("{VERSION}", "${project.config.mod_version}.${project.config.build_number}")
+
+    println "Valid jar uploading properties found"
+
+}
+else
+{
+    ext.release_location = "."
+}
+
+task release(type: Copy, dependsOn: "signJar") {
+    from project.tasks.jar.destinationDir
+    into project.file(project.release_location)
+
+    println "Release location: " + project.release_location
+
+    eachFile {file ->
+        logger.info "copying ${file}"
+    }
+
+    // Copy only if the release location isn't empty
+    onlyIf {
+        return project.release_location != "."
+    }
+}
