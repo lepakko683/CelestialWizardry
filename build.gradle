@@ -256,8 +256,8 @@ if (project.hasProperty("CelestialWizardry.signing") &&
 
     ext.release_location = props['release_location']
 
-    ext.release_location =
-            release_location.replace("{MC}", project.minecraft.version).replace("{VERSION}", "${project.version}")
+    ext.release_location = release_location.replace("{MC}", project.minecraft.version).
+            replace("{VERSION}", "${project.version}".replace("${config.mc_version}-", ""))
 
     println "Valid jar uploading properties found"
 
