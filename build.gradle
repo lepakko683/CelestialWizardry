@@ -50,6 +50,8 @@ configFile.withReader {
     project.ext.config = new ConfigSlurper().parse prop
 }
 
+ext.mod_version = "${config.major_number}.${config.minor_number}"
+
 // Add code dependencies
 dependencies {
     /**
@@ -91,7 +93,7 @@ task buildInfo {
 }
 
 // Sets the version for the mod
-version = "${config.mod_version}.${config.build_number}"
+version = "${mod_version}.${config.patch_number}"
 
 // Set the version for the mod
 if (project.hasProperty("CelestialWizardry.signing") &&
@@ -267,7 +269,78 @@ else
     ext.release_location = "."
 }
 
-task release(type: Copy, dependsOn: "signJar") {
+// Increments the build number
+task incrementBuildNumber(dependsOn: "signJar") {
+
+    // Print the version information
+    println "CelestialWizardry: version ${version}".replace("${config.mc_version}-", "") +
+                    " build ${config.build_number}"
+
+    // Check if this is final version
+    if (project.hasProperty("CelestialWizardry.signing") &&
+            new File(project.property("CelestialWizardry.signing")).exists())
+    {
+
+        // Load the private property file if one is found
+        Properties props = new Properties()
+        props.load(new FileInputStream(file(project.property("CelestialWizardry.signing"))))
+
+        if (Boolean.valueOf((String) props['release']))
+        {
+            if (!Boolean.valueOf((String) props['final_patch']) && !Boolean.valueOf((String) props['final_minor']))
+            {
+
+                ant.propertyfile(file: 'build.properties') {
+                    entry(key: 'patch_number', type: 'int', operation: '+', value: '1')
+                }
+
+            }
+            else
+            {
+                if (Boolean.valueOf((String) props['final_minor']))
+                {
+
+                    // Print this is the final build of current major version
+                    println "Final build of version ${config.major_number}"
+
+                    ant.propertyfile(file: 'build.properties') {
+                        entry(key: 'patch_number', type: 'int', operation: '=', value: '0')
+                        entry(key: 'minor_number', type: 'int', operation: '=', value: '0')
+                        entry(key: 'major_number', type: 'int', operation: '+', value: '1')
+                    }
+
+                    ant.propertyfile(file: 'private.properties') {
+                        entry(key: 'final_patch', operation: '=', value: 'false')
+                        entry(key: 'final_minor', operation: '=', value: 'false')
+                    }
+                }
+                else if (Boolean.valueOf((String) props['final_patch']))
+                {
+
+                    // Print this is the final build of current minor version
+                    println "Final build of version ${config.minor_number}"
+
+                    ant.propertyfile(file: 'build.properties') {
+                        entry(key: 'patch_number', type: 'int', operation: '=', value: '0')
+                        entry(key: 'minor_number', type: 'int', operation: '+', value: '1')
+                    }
+
+                    ant.propertyfile(file: 'private.properties') {
+                        entry(key: 'final_patch', operation: '=', value: 'false')
+                    }
+                }
+            }
+        }
+    }
+
+    doLast {
+        ant.propertyfile(file: 'build.properties') {
+            entry(key: 'build_number', type: 'int', operation: '+', value: '1')
+        }
+    }
+}
+
+task release(type: Copy, dependsOn: "incrementBuildNumber") {
     from(project.tasks.jar.destinationDir) {
         include "*-${project.version}*"
     }
