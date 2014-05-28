@@ -18,10 +18,12 @@ public final class SpellBook
 
     public static void init()
     {
+        /**
+         * Basics
+         */
         CWApi.addCategory(categoryBasics);
 
         spellBook = new CWSpellBookEntry("spellBook", categoryBasics);
         spellBook.setPriority().setSpellBookPages(new PageText("index"));
-
     }
 }

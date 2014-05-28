@@ -74,9 +74,9 @@ public class GuiSpellBookEntry extends GuiSpellBook implements IGuiSpellBookEntr
     }
 
     @Override
-    protected void actionPerformed(GuiButton par1GuiButton)
+    protected void actionPerformed(GuiButton button)
     {
-        switch (par1GuiButton.id)
+        switch (button.id)
         {
             case 0:
                 mc.displayGuiScreen(GuiScreen.isShiftKeyDown() ? new GuiSpellBook() : parent);
