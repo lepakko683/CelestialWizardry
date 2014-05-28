@@ -251,7 +251,7 @@ public class DepLoader implements IFMLLoadingPlugin, IFMLCallHook
                 }
             });
 
-            JOptionPane.showMessageDialog(null, ep, "A download error has occured", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, ep, "A download error has occurred", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -426,7 +426,7 @@ public class DepLoader implements IFMLLoadingPlugin, IFMLCallHook
 
                 if (!GraphicsEnvironment.isHeadless())
                 {
-                    JOptionPane.showMessageDialog(null, msg, "An update error has occured", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null, msg, "An update error has occurred", JOptionPane.ERROR_MESSAGE);
                 }
 
                 System.exit(1);
@@ -468,7 +468,7 @@ public class DepLoader implements IFMLLoadingPlugin, IFMLCallHook
 
                 downloadMonitor.showErrorDialog(dep.file.filename, dep.url + '/' + dep.file.filename);
 
-                throw new RuntimeException("A download error occured", e);
+                throw new RuntimeException("A download error occurred", e);
             }
         }
 
@@ -598,7 +598,7 @@ public class DepLoader implements IFMLLoadingPlugin, IFMLCallHook
                     return f.getName();
                 }
 
-                return f.getName();//found dependency
+                return f.getName(); // Found dependency
             }
 
             return null;
@@ -656,7 +656,7 @@ public class DepLoader implements IFMLLoadingPlugin, IFMLCallHook
         {
             dep.existing = checkExisting(dep);
 
-            if (dep.existing == null)//download dep
+            if (dep.existing == null) // Download dep
             {
                 download(dep);
                 dep.existing = dep.file.filename;
