@@ -28,7 +28,6 @@ tooltip.celestialwizardry:NBT=NBT Tags found
 # Book mode localizations
 mode.celestialwizardry:guide=Guide
 mode.celestialwizardry:inventory=Inventory
-mode.celestialwizardry:spell=Casting
 
 # SPELL BOOK
 

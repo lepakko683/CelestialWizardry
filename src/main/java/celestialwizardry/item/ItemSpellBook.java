@@ -16,7 +16,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class ItemSpellBook extends ItemCW
 {
-    public static final String[] modes = {"guide", "inventory", "spell"};
+    public static final String[] modes = {"guide", "inventory"};
 
     public ItemSpellBook()
     {
@@ -45,10 +45,6 @@ public class ItemSpellBook extends ItemCW
                 NBTHelper.setBoolean(stack, Names.NBT.SPELL_BOOK_INVENTORY_OPEN, true);
                 player.openGui(CelestialWizardry.instance, GuiIds.SPELL_BOOK_INVENTORY, player.worldObj,
                                (int) player.posX, (int) player.posY, (int) player.posZ);
-            }
-            else if (getMode(stack) == 2) // SPELL CASTING
-            {
-                // TODO Cast spell
             }
         }
 
@@ -94,7 +90,7 @@ public class ItemSpellBook extends ItemCW
             NBTTagCompound tagCompound = stack.getTagCompound();
             String name = tagCompound.getString(Names.NBT.BACKUP_NAME);
 
-            String open = " (";
+            String open = "(";
             String close = ")";
             String append = " " + open + getLocalizedModeWithColor(stack) + close;
 
