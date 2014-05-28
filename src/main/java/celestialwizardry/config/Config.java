@@ -7,8 +7,8 @@ import java.io.File;
 
 public class Config extends ConfigBase
 {
-    public File configDir;
-    public String domain;
+    public static File configDir;
+    public static String domain;
 
     public Config(String version)
     {
@@ -22,53 +22,53 @@ public class Config extends ConfigBase
 
     public void setConfigDir(File configDir, String domain)
     {
-        this.configDir = configDir;
-        this.domain = domain;
+        Config.configDir = configDir;
+        Config.domain = domain;
     }
 
     public void setConfiguration(String file)
     {
         super.setConfiguration(
-                new Configuration(new File(configDir, File.pathSeparator + domain + File.separator + file + ".cfg")));
+                new Configuration(new File(configDir, File.separator + domain + File.separator + file + ".cfg")));
     }
 
     public double get(String category, String key, double defaultValue)
     {
-        return super.get(category, key, defaultValue, "Default: " + defaultValue);
+        return super.get(category, key, defaultValue, "Default value: " + defaultValue);
     }
 
     public double get(String category, String key, double defaultValue, String comment)
     {
-        return super.get(category, key, defaultValue, comment + " Default: " + defaultValue);
+        return super.get(category, key, defaultValue, comment + " Default value: " + defaultValue);
     }
 
     public int get(String category, String key, int defaultValue)
     {
-        return super.get(category, key, defaultValue, "Default: " + defaultValue);
+        return super.get(category, key, defaultValue, "Default value: " + defaultValue);
     }
 
     public int get(String category, String key, int defaultValue, String comment)
     {
-        return super.get(category, key, defaultValue, comment + " Default: " + defaultValue);
+        return super.get(category, key, defaultValue, comment + " Default value: " + defaultValue);
     }
 
     public boolean get(String category, String key, boolean defaultValue)
     {
-        return super.get(category, key, defaultValue, "Default: " + defaultValue);
+        return super.get(category, key, defaultValue, "Default value: " + defaultValue);
     }
 
     public boolean get(String category, String key, boolean defaultValue, String comment)
     {
-        return super.get(category, key, defaultValue, comment + " Default: " + defaultValue);
+        return super.get(category, key, defaultValue, comment + " Default value: " + defaultValue);
     }
 
     public String get(String category, String key, String defaultValue)
     {
-        return super.get(category, key, defaultValue, "Default: " + defaultValue);
+        return super.get(category, key, defaultValue, "Default value: " + defaultValue);
     }
 
     public String get(String category, String key, String defaultValue, String comment)
     {
-        return super.get(category, key, defaultValue, comment + " Default: " + defaultValue);
+        return super.get(category, key, defaultValue, comment + " Default value: " + defaultValue);
     }
 }

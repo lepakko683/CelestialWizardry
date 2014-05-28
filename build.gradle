@@ -57,49 +57,64 @@ task buildInfo {
     def cmd = "git rev-parse --short HEAD"
     def proc = cmd.execute()
     proc.waitFor()
-    if (proc.exitValue() == 0) {
+    if (proc.exitValue() == 0)
+    {
         ext.revision = proc.text.trim()
-    } else {
+    }
+    else
+    {
         ext.revision = "GITBORK"
     }
 
     if (project.hasProperty("CelestialWizardry.signing")
-            && new File(project.property("CelestialWizardry.signing")).exists()) {
+            && new File(project.property("CelestialWizardry.signing")).exists())
+    {
 
         Properties props = new Properties()
         props.load(new FileInputStream(file(project.property("CelestialWizardry.signing"))))
 
-        if (Boolean.valueOf((String) props['release'])) {
+        if (Boolean.valueOf((String) props['release']))
+        {
             ext.buildNum = "alpha." + props['build_number']
-        } else {
+        }
+        else
+        {
             ext.buildNum = "DEV.${project.buildInfo.revision}"
         }
 
-    } else {
+    }
+    else
+    {
         ext.buildNum = "DEV.${project.buildInfo.revision}"
     }
 }
 
 if (project.hasProperty("CelestialWizardry.signing")
-        && new File(project.property("CelestialWizardry.signing")).exists()) {
+        && new File(project.property("CelestialWizardry.signing")).exists())
+{
 
     Properties props = new Properties()
     props.load(new FileInputStream(file(project.property("CelestialWizardry.signing"))))
 
-    if (Boolean.valueOf((String) props['release'])) {
-	
+    if (Boolean.valueOf((String) props['release']))
+    {
+
         ext.artifact_version = "${config.mod_version}-${project.buildInfo.buildNum}"
-		
-    } else {
-	
+
+    }
+    else
+    {
+
         ext.artifact_version = "${project.buildInfo.buildNum}"
-		
+
     }
 
-} else {
+}
+else
+{
 
     ext.artifact_version = "${project.buildInfo.buildNum}"
-	
+
 }
 
 version = "${config.minecraft_version}-${artifact_version}"
@@ -111,7 +126,8 @@ minecraft {
 
     replaceIn "reference/Reference.java"
     if (project.hasProperty("CelestialWizardry.signing")
-            && new File(project.property("CelestialWizardry.signing")).exists()) {
+            && new File(project.property("CelestialWizardry.signing")).exists())
+    {
 
         Properties props = new Properties()
         props.load(new FileInputStream(file(project.property("CelestialWizardry.signing"))))
@@ -122,7 +138,7 @@ minecraft {
     }
 
     replaceIn "reference/Version.java"
-        replace "@VERSION@", artifact_version
+    replace "@VERSION@", artifact_version
 }
 
 processResources
@@ -134,16 +150,17 @@ processResources
             // Replace values only in mcmod.info.
             from(sourceSets.main.resources.srcDirs) {
                 include 'mcmod.info'
-				include 'dependencies.info'
+                include 'dependencies.info'
 
                 // Replace version and mcversion.
-                expand 'version': project.version, 'mcversion': project.minecraft.version, 'baublesversion': config.baubles_version
+                expand 'version': project.version, 'mcversion': project.minecraft.version,
+                       'baublesversion': config.baubles_version
             }
 
             // Copy everything excluding mcmod.info.
             from(sourceSets.main.resources.srcDirs) {
                 exclude 'mcmod.info'
-				exclude 'dependencies.info'
+                exclude 'dependencies.info'
             }
         }
 
@@ -179,7 +196,8 @@ artifacts {
 }
 
 if (project.hasProperty("CelestialWizardry.signing")
-        && new File(project.property("CelestialWizardry.signing")).exists()) {
+        && new File(project.property("CelestialWizardry.signing")).exists())
+{
 
     Properties props = new Properties()
     props.load(new FileInputStream(file(project.property("CelestialWizardry.signing"))))
@@ -190,7 +208,9 @@ if (project.hasProperty("CelestialWizardry.signing")
 
     println "Valid jar signing properties found"
 
-} else {
+}
+else
+{
     ext.keystore_location = "."
     ext.keystore_user_alias = ""
     ext.keystore_user_password = ""
