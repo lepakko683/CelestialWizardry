@@ -31,7 +31,7 @@
 # Releasing
 /keystore
 /*.jks
-/private.properties
+/release.properties
 /dest
 
 # Logs
