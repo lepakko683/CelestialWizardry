@@ -6,7 +6,7 @@ import net.minecraftforge.client.model.obj.WavefrontObject;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class OBJModels
+public class OBJmodels
 {
 
     public static WavefrontObject modelWritingTable;

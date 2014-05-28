@@ -1,8 +1,13 @@
 WritingTable (done) {
 
- L
-BPB
-S S
+RST
+SIS
+TST
+
+S=Wooden Slab
+T=Wooden Stair
+I=Iron Ingot
+R=Wooden Stick
 
 }
 

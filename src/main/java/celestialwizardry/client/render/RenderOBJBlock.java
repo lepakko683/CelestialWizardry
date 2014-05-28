@@ -15,7 +15,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 import org.lwjgl.opengl.GL11;
 
 @SideOnly(Side.CLIENT)
-public class RenderOBJBlock implements ISimpleBlockRenderingHandler
+public class RenderOBJblock implements ISimpleBlockRenderingHandler
 {
 	
 	public static final int ID = RenderingRegistry.getNextAvailableRenderId();
