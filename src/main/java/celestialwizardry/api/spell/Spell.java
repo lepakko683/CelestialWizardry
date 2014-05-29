@@ -13,6 +13,7 @@ public class Spell
     private final double cost;
     private final MagicType magicType;
     private final int[] runes;
+    private final int id;
 
     public Spell(String name, double defaultCost, int[] runes)
     {
@@ -25,6 +26,7 @@ public class Spell
         this.cost = handleCost(defaultCost);
         this.runes = runes;
         this.magicType = magicType;
+        this.id = this.hashCode(); // TODO
     }
 
     public String getName()
