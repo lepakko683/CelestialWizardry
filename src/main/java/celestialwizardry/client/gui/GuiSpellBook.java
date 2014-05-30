@@ -2,7 +2,7 @@ package celestialwizardry.client.gui;
 
 import celestialwizardry.api.spellbook.SpellBookCategory;
 import celestialwizardry.api.spellbook.SpellBookEntry;
-import celestialwizardry.client.handler.ClientTickEventHandler;
+import celestialwizardry.handler.ClientTickEventHandler;
 import celestialwizardry.init.ModItems;
 import celestialwizardry.reference.Resources;
 import celestialwizardry.registry.SpellBookRegistry;

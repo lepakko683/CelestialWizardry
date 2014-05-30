@@ -1,6 +1,6 @@
 package celestialwizardry.reference;
 
-import celestialwizardry.client.handler.ClientTickEventHandler;
+import celestialwizardry.handler.ClientTickEventHandler;
 import celestialwizardry.handler.EntityEventHandler;
 import celestialwizardry.handler.PlayerEventHandler;
 import celestialwizardry.spell.handler.SpellEventHandler;

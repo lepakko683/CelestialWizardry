@@ -1,7 +1,6 @@
 package celestialwizardry;
 
 import celestialwizardry.api.CWApi;
-import celestialwizardry.client.model.OBJModels;
 import celestialwizardry.config.Config;
 import celestialwizardry.config.SettingHandler;
 import celestialwizardry.config.spell.ConfigSpells;
@@ -150,9 +149,6 @@ public class CelestialWizardry
 
         // Register mod renders
         proxy.registerRenderer();
-
-        // Initialize models
-        OBJModels.init();
 
         // Register spell casting event handler
         FMLCommonHandler.instance().bus().register(EventHandlers.SPELL_EVENT_HANDLER);

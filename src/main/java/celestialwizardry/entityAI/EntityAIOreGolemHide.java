@@ -1,30 +1,32 @@
 package celestialwizardry.entityAI;
 
-import java.util.List;
-import java.util.Random;
-
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.ai.EntityAIBase;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.Vec3;
 
-public class EntityAIOreGolemHide extends EntityAIBase {
+import java.util.Random;
 
-	private EntityCreature entity;
-	
-	public EntityAIOreGolemHide(EntityCreature ent) {
-		this.entity = ent;
-	}
-	
-	@Override
-	public boolean shouldExecute() {
-		if(entity.getAITarget() != null) {
-			return false;
-		}
-		return false;
+public class EntityAIOreGolemHide extends EntityAIBase
+{
+
+    private EntityCreature entity;
+
+    public EntityAIOreGolemHide(EntityCreature ent)
+    {
+        this.entity = ent;
+    }
+
+    @Override
+    public boolean shouldExecute()
+    {
+        if (entity.getAITarget() != null)
+        {
+            return false;
+        }
+        return false;
 //		long start = System.currentTimeMillis();
-//		List ents = entity.worldObj.getEntitiesWithinAABB(EntityPlayer.class, AxisAlignedBB.getBoundingBox(entity.posX, entity.posY, entity.posZ, entity.posX, entity.posY, entity.posZ)); 
+//		List ents = entity.worldObj.getEntitiesWithinAABB(EntityPlayer.class, AxisAlignedBB.getBoundingBox(entity
+// .posX, entity.posY, entity.posZ, entity.posX, entity.posY, entity.posZ));
 //		for(int i=0;i<ents.size();i++) {
 //			if(!((EntityPlayer)ents.get(i)).capabilities.isCreativeMode){
 //				System.out.println("Found a player in " + (System.currentTimeMillis()-start) + " ms");
@@ -33,20 +35,14 @@ public class EntityAIOreGolemHide extends EntityAIBase {
 //		}
 //		
 //		return false;
-	}
-	
-	private Vec3 findHidingHole(EntityCreature ec) {
-		Random rand = ec.getRNG(); //#RNG!
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		return null;
-	}
+    }
+
+    private Vec3 findHidingHole(EntityCreature ec)
+    {
+        Random rand = ec.getRNG(); //#RNG!
+
+
+        return null;
+    }
 
 }

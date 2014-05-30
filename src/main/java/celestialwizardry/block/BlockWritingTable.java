@@ -165,8 +165,8 @@ public class BlockWritingTable extends BlockCW implements ITileEntityProvider
         return false;
     }
 
-    @SideOnly(Side.CLIENT)
     @Override
+    @SideOnly(Side.CLIENT)
     public int getRenderType()
     {
         return RenderOBJBlock.ID;

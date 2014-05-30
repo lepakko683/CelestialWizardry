@@ -1,8 +1,9 @@
 package celestialwizardry.client.render;
 
 import celestialwizardry.block.BlockWritingTable;
-import celestialwizardry.reference.Resources;
 import celestialwizardry.client.model.OBJModels;
+import celestialwizardry.reference.Resources;
+
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.world.IBlockAccess;
@@ -17,49 +18,51 @@ import org.lwjgl.opengl.GL11;
 @SideOnly(Side.CLIENT)
 public class RenderOBJBlock implements ISimpleBlockRenderingHandler
 {
-	
-	public static final int ID = RenderingRegistry.getNextAvailableRenderId();
 
-	@Override
-	public void renderInventoryBlock(Block block, int metadata, int modelID, RenderBlocks renderer)
-	{
-		if (modelID == ID)
-		{
-			GL11.glPushMatrix();
-			
-			if(block instanceof BlockWritingTable)
-			{
-				FMLClientHandler.instance().getClient().renderEngine.bindTexture(Resources.Models.TEXTURE_WRITING_TABLE);
-				GL11.glTranslated(0, -0.5, 0);
-				GL11.glScalef(1f, 1f, 1f);
-				OBJModels.modelWritingTable.renderAll();
-			}
-		
-			GL11.glPopMatrix();
-		}
-		else
-		{
-			//RenderUtility.renderNormalBlockAsItem(block, metadata, renderer);
-			System.out.println("renderNormalBlockAsItem");
-		}
-	}
+    public static final int ID = RenderingRegistry.getNextAvailableRenderId();
 
-	@Override
-	public boolean renderWorldBlock(IBlockAccess iBlockAccess, int x, int y, int z, Block block, int modelID, RenderBlocks renderer)
-	{
-		return false;
-	}
-	
-	@Override
-	public boolean shouldRender3DInInventory(int modelId)
-	{
-		return true;
-	}
+    @Override
+    public void renderInventoryBlock(Block block, int metadata, int modelID, RenderBlocks renderer)
+    {
+        if (modelID == ID)
+        {
+            GL11.glPushMatrix();
 
-	@Override
-	public int getRenderId()
-	{
-		return ID;
-	}
-	
+            if (block instanceof BlockWritingTable)
+            {
+                FMLClientHandler.instance().getClient().renderEngine
+                        .bindTexture(Resources.Models.TEXTURE_WRITING_TABLE);
+                GL11.glTranslated(0, -0.5, 0);
+                GL11.glScalef(1f, 1f, 1f);
+                OBJModels.modelWritingTable.renderAll();
+            }
+
+            GL11.glPopMatrix();
+        }
+        else
+        {
+            //RenderUtility.renderNormalBlockAsItem(block, metadata, renderer);
+            System.out.println("renderNormalBlockAsItem");
+        }
+    }
+
+    @Override
+    public boolean renderWorldBlock(IBlockAccess iBlockAccess, int x, int y, int z, Block block, int modelID,
+                                    RenderBlocks renderer)
+    {
+        return false;
+    }
+
+    @Override
+    public boolean shouldRender3DInInventory(int modelId)
+    {
+        return true;
+    }
+
+    @Override
+    public int getRenderId()
+    {
+        return ID;
+    }
+
 }

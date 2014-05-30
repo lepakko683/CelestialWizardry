@@ -29,10 +29,10 @@ public class Resources
 
         public static final ResourceLocation SPELL_BOOK = ResourceLocationHelper
                 .getResourceLocation(MODEL_TEXTURE_LOCATION + "spellBook.png");
-        
+
         public static final ResourceLocation TEXTURE_WRITING_TABLE = ResourceLocationHelper
-        		.getResourceLocation(MODEL_TEXTURE_LOCATION + "writingTable.png");
-        
+                .getResourceLocation(MODEL_TEXTURE_LOCATION + "writingTable.png");
+
         // Model files (.OBJs)
         public static final ResourceLocation MODEL_WRITING_TABLE = ResourceLocationHelper
                 .getResourceLocation(MODEL_LOCATION + "WritingTable.obj");
