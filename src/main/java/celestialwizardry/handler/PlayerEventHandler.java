@@ -155,5 +155,7 @@ public class PlayerEventHandler
                             .getDisplayName()
                                       );
         }
+        
+        //TODO: send rune configuration
     }
 }

@@ -7,4 +7,6 @@ public interface IRenderableObject {
 	public WavefrontObject getModel();
 	
 	public ResourceLocation getTexture();
+	
+	
 }

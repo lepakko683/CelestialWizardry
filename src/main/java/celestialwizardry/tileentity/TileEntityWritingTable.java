@@ -1,5 +1,8 @@
 package celestialwizardry.tileentity;
 
+import java.util.List;
+import java.util.ArrayList;
+
 import celestialwizardry.api.writing.IWriter;
 import celestialwizardry.client.IRenderableObject;
 import celestialwizardry.network.PacketHandler;
@@ -16,6 +19,11 @@ public class TileEntityWritingTable extends TileEntityCW implements IInventory
 {
     public static final int INVENTORY_SIZE = 1;
     public static final int INK_INVENTORY_INDEX = 0;
+    public static final int PEN_INVENTORY_INDEX = 1;
+    /**The current item on the middle of the table*/
+    public static final int MIDDLE_INVENTORY_INDEX = 2;
+    public static final int LEFT_TOP_INVENTORY_INDEX = 3;
+    public static final int RIGHT_TOP_INVENTORY_INDEX = 4;
 
     private ItemStack[] inventory;
 
@@ -220,13 +228,18 @@ public class TileEntityWritingTable extends TileEntityCW implements IInventory
         return PacketHandler.INSTANCE.getPacketFrom(new MessageTileEntityWritingTable(this));
     }
     
-    //Get data for rendering details
+    /**Checks whether it is possible to continue writing. Used when copying books if it should continue copying.*/
+    public boolean canWrite() {
+    	return false; //
+    }
+    
+    //Get data for rendering details TODO: organize into a single method 
     public IRenderableObject getInk() {
     	return null;
     }
     
-    public IRenderableObject getMainObject() {
-    	return null;
+    public String getMainObjectType() {
+    	return "book";
     }
     
     public IRenderableObject getTopLeft() {
@@ -235,6 +248,13 @@ public class TileEntityWritingTable extends TileEntityCW implements IInventory
     
     public IRenderableObject getTopRight() {
     	return null;
+    }
+    
+    public List<IRenderableObject> getRenderables() {
+    	List<IRenderableObject> ret = new ArrayList<IRenderableObject>(3); //TODO: 3 + Items in the top slots
+    	
+    	
+    	return ret;
     }
     
 }

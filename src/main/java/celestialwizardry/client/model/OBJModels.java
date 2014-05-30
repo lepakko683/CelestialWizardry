@@ -8,9 +8,15 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class OBJModels
 {
-
+	//BLOCKS
     public static WavefrontObject modelWritingTable;
+    
+    //ITEMS
+    public static WavefrontObject modelSpellBookOpen;
 
+    //ENTITIES
+    public static WavefrontObject modelOreGolem;
+    
     @SideOnly(Side.CLIENT)
     public static void init()
     {

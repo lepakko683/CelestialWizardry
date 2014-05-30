@@ -10,7 +10,7 @@ public abstract class RuneRegistry
 {
     public static Map<Integer, Rune> runeMap = new HashMap<Integer, Rune>();
 
-    public static void registerSpell(Rune rune)
+    public static void registerRune(Rune rune)
     {
         String name = "";// rune.getName();
 

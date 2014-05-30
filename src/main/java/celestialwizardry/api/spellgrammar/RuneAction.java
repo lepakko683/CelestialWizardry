@@ -1,6 +1,23 @@
 package celestialwizardry.api.spellgrammar;
 
-public class RuneAction
+import java.util.List;
+
+public class RuneAction extends Rune
 {
-    //SPAWN, TELEPORT, ACCELERATE
+	//SPAWN, TELEPORT, ACCELERATE
+	@Override
+	public int getRuneType() {
+		return 0;
+	}
+
+	@Override
+	public float getRuneComplexity() {
+		return 0;
+	}
+
+	@Override
+	public List validRuneAttributeTypes() {
+		return null;
+	}
+   
 }

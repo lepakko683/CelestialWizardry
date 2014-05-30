@@ -6,6 +6,7 @@ import celestialwizardry.config.Config;
 import celestialwizardry.config.SettingHandler;
 import celestialwizardry.config.spell.ConfigSpells;
 import celestialwizardry.handler.CraftingHandler;
+import celestialwizardry.handler.GlobalRuneConfigurationHandler;
 import celestialwizardry.init.ModBlocks;
 import celestialwizardry.init.ModItems;
 import celestialwizardry.network.GuiHandler;
@@ -15,7 +16,6 @@ import celestialwizardry.reference.EventHandlers;
 import celestialwizardry.reference.Reference;
 import celestialwizardry.reference.Version;
 import celestialwizardry.spellbook.SpellBook;
-
 import net.minecraftforge.common.MinecraftForge;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.FMLLog;
@@ -51,6 +51,9 @@ public class CelestialWizardry
 
     // Spell configuration
     public static final ConfigSpells configSpells = new ConfigSpells(Version.VERSION);
+    
+    // Rune Configuration (per world)
+    public static final GlobalRuneConfigurationHandler runeConfig = new GlobalRuneConfigurationHandler();
 
     @Mod.EventHandler
     public void invalidFingerprint(FMLFingerprintViolationEvent event)
@@ -119,7 +122,11 @@ public class CelestialWizardry
         // Register player event handler
         FMLCommonHandler.instance().bus().register(EventHandlers.PLAYER_EVENT_HANDLER);
         MinecraftForge.EVENT_BUS.register(EventHandlers.PLAYER_EVENT_HANDLER);
-
+        
+        //Register world event handler
+        FMLCommonHandler.instance().bus().register(runeConfig);
+        MinecraftForge.EVENT_BUS.register(runeConfig);
+        
         // Tell everyone that we have successfully pre-initialized
         log.info("Finished pre-initialization after " + (System.currentTimeMillis() - start) + " ms");
     }
