@@ -1,5 +1,7 @@
 package celestialwizardry.util;
 
+import celestialwizardry.reference.Resources;
+
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.util.StatCollector;
@@ -39,12 +41,13 @@ public class StringHelper
     public static final String ITALIC = (char) 167 + "o";
     public static final String END = (char) 167 + "r";
 
-    /**
-     * This is from CoFH core and probably won't be used
-     */
-    public static String shiftForInfo = LIGHT_GRAY + localize("message.cofh.holdShift1") + " " + YELLOW + ITALIC
-            + localize("message.cofh.holdShift2") + " "
-            + END + LIGHT_GRAY + localize("message.cofh.holdShift3") + END;
+    private static String shiftForInfo = LIGHT_GRAY + localize("message." + Resources.RESOURCE_PREFIX + "holdShift1")
+            + " " + YELLOW + ITALIC + localize("message." + Resources.RESOURCE_PREFIX + "holdShift2") + " " + END
+            + LIGHT_GRAY + localize("message." + Resources.RESOURCE_PREFIX + "holdShift3") + END;
+    private static String controlForInfo = LIGHT_GRAY + localize(
+            "message." + Resources.RESOURCE_PREFIX + "holdControl1") + " " + BRIGHT_GREEN + ITALIC + localize(
+            "message." + Resources.RESOURCE_PREFIX + "holdControl2") + " " + END + LIGHT_GRAY + localize(
+            "message." + Resources.RESOURCE_PREFIX + "holdControl3") + END;
 
     private StringHelper()
     {
@@ -145,6 +148,11 @@ public class StringHelper
     public static String getShiftText()
     {
         return shiftForInfo;
+    }
+
+    public static String getControlText()
+    {
+        return controlForInfo;
     }
 
     public static String getActivationText(String key)

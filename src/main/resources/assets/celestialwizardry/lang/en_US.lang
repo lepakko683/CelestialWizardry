@@ -26,6 +26,14 @@ tooltip.celestialwizardry:solar=Solar
 tooltip.celestialwizardry:noNBT=No NBT Tags found
 tooltip.celestialwizardry:NBT=NBT Tags found
 
+# Messages
+message.celestialwizardry:holdShift1=Hold
+message.celestialwizardry:holdShift2=Shift
+message.celestialwizardry:holdShift3=for Info
+message.celestialwizardry:holdControl1=Hold
+message.celestialwizardry:holdControl2=Control
+message.celestialwizardry:holdControl3=for Info
+
 # Book mode localizations
 mode.celestialwizardry:guide=Guide
 mode.celestialwizardry:inventory=Inventory
