@@ -60,6 +60,12 @@ public class CelestialWizardry
                                   + " that you are running is a development version of the mod, " +
                                   "and as such may be unstable and/or incomplete.");
         }
+        else if (Reference.FINGERPRINT.equals("dev"))
+        {
+            FMLLog.severe("The copy of " + Reference.MOD_NAME
+                                  + " that you are running is a official development version of the mod, " +
+                                  "and as such it should be pretty stable.");
+        }
         else
         {
             FMLLog.severe("The copy of " + Reference.MOD_NAME

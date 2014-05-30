@@ -9,6 +9,7 @@ public class Reference
 {
     public static final String MOD_ID = "celestialwizardry";
     public static final String MOD_NAME = "Celestial Wizardry";
+    public static final String MOD_VERSION = Version.VERSION;
 
     public static final String SERVER_PROXY_CLASS = "celestialwizardry.proxy.ServerProxy";
     public static final String CLIENT_PROXY_CLASS = "celestialwizardry.proxy.ClientProxy";
