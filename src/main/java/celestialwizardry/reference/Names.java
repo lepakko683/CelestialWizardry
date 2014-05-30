@@ -20,6 +20,7 @@ public class Names
         public static final String SEASON_RING = "seasonRing";
         public static final String PAGE = "page";
         public static final String MAGICAL_PEN = "magicalPen";
+        public static final String MATRIX = "matrix";
     }
 
     public static class NBT

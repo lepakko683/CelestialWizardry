@@ -20,6 +20,7 @@ public class ModItems
     public static final ItemCW seasonRing = new ItemSeasonRing();
     public static final ItemCW page = new ItemPage();
     public static final ItemCW magicalPen = new ItemMagicalPen();
+    public static final ItemCW matrix = new ItemMatrix();
 
     public static void init()
     {
@@ -32,6 +33,7 @@ public class ModItems
         register(seasonRing, Names.Items.SEASON_RING);
         register(page, Names.Items.PAGE);
         register(magicalPen, Names.Items.MAGICAL_PEN);
+        register(matrix, Names.Items.MATRIX);
     }
 
     private static void register(Item item, String name)
