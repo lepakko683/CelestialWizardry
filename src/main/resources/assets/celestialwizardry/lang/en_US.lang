@@ -10,6 +10,7 @@ item.celestialwizardry:concentrationRing.solar.name=Ring of Concentration
 item.celestialwizardry:seasonRing.name=Ring of Seasons
 item.celestialwizardry:page.name=Lost Page
 item.celestialwizardry:magicalPen.name=Magical Pen
+item.celestialwizardry:matrix.name=Celestial Matrix
 
 # Block localizations
 tile.celestialwizardry:writingTable.name=Writing Table
@@ -24,6 +25,14 @@ tooltip.celestialwizardry:lunar=Lunar
 tooltip.celestialwizardry:solar=Solar
 tooltip.celestialwizardry:noNBT=No NBT Tags found
 tooltip.celestialwizardry:NBT=NBT Tags found
+
+# Messages
+message.celestialwizardry:holdShift1=Hold
+message.celestialwizardry:holdShift2=Shift
+message.celestialwizardry:holdShift3=for Info
+message.celestialwizardry:holdControl1=Hold
+message.celestialwizardry:holdControl2=Control
+message.celestialwizardry:holdControl3=for Info
 
 # Book mode localizations
 mode.celestialwizardry:guide=Guide

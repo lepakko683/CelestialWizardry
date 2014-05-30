@@ -59,6 +59,12 @@ public class ItemCW extends Item
     {
         if (Settings.debugMode)
         {
+            if (!StringHelper.isControlKeyDown())
+            {
+                list.add(StringHelper.getControlText());
+                return;
+            }
+
             if (stack.hasTagCompound())
             {
                 list.add(StringHelper.localize(Messages.NBT));

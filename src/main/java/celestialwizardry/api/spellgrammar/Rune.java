@@ -10,9 +10,9 @@ public abstract class Rune
 	
 	private int numbericID = -1;
 	
-	public Rune() {
-	}
-	
+    public Rune()
+    {
+    }
 	
     public abstract int getRuneType(); //TODO: return type likely not final
 
@@ -20,23 +20,32 @@ public abstract class Rune
 
     public abstract List validRuneAttributeTypes();
     
-    /**id must be the full "extend path" in lower case Example: "Teleport Rune" would be "rune.action.teleport".*/
-	public void setRuneID(String id) {
-		System.out.println(this.getClass().toString());
-		if(this.runeid == null) {
-			this.runeid = id.toLowerCase();
-		}
-	}
-	
-	public boolean subRuneOf(Rune r) {
-		return false; //TODO 
-	}
-	
-	public String getRuneID() {
+
+	public String getRuneID()
+	{
 		return runeid;
 	}
+	
     /**Returns -1 if rune config haven't been loaded yet*/
-    public int getRuneNumbericID() {
+    public int getRuneNumbericID()
+    {
     	return numbericID;
     }
+    
+    /**
+     * id must be the full "extend path" in lower case Example: "Teleport Rune" would be "rune.action.teleport".
+     */
+    public void setRuneID(String id)
+    {
+        System.out.println(this.getClass().toString());
+        if (this.runeid == null)
+        {
+            this.runeid = id.toLowerCase();
+        }
+    }
+    
+	public boolean subRuneOf(Rune r)
+	{
+		return false; //TODO 
+	}
 }

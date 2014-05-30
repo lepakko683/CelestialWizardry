@@ -1,6 +1,6 @@
 package celestialwizardry.client;
 
-import celestialwizardry.client.handler.ClientTickEventHandler;
+import celestialwizardry.handler.ClientTickEventHandler;
 import celestialwizardry.reference.Resources;
 
 import net.minecraft.client.Minecraft;

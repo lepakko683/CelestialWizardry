@@ -1,4 +1,4 @@
-package celestialwizardry.client.handler;
+package celestialwizardry.handler;
 
 import celestialwizardry.client.gui.GuiSpellBook;
 import celestialwizardry.client.gui.inventory.GuiSpellBookInventory;
@@ -7,10 +7,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.TickEvent;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
-@SideOnly(Side.CLIENT)
 public class ClientTickEventHandler
 {
     public static int ticksWithBookOpen = 0;

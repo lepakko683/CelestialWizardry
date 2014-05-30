@@ -50,7 +50,7 @@ configFile.withReader {
     project.ext.config = new ConfigSlurper().parse prop
 }
 
-ext.mod_version = "${config.major_number}.${config.minor_number}"
+ext.mod_version = "${config.major_number}.${config.minor_number}.${config.patch_number}"
 
 // Add code dependencies
 dependencies {
@@ -93,16 +93,16 @@ task buildInfo {
 }
 
 // Sets the version for the mod
-version = "${mod_version}.${config.patch_number}"
+version = "${mod_version}"
 
 // Set the version for the mod
-if (project.hasProperty("CelestialWizardry.signing") &&
-        new File(project.property("CelestialWizardry.signing")).exists())
+if (project.hasProperty("CelestialWizardry.release") &&
+        new File(project.property("CelestialWizardry.release")).exists())
 {
 
     // Load the private property file if one is found
     Properties props = new Properties()
-    props.load(new FileInputStream(file(project.property("CelestialWizardry.signing"))))
+    props.load(new FileInputStream(file(project.property("CelestialWizardry.release"))))
 
     if (!Boolean.valueOf((String) props['release']))
     {
@@ -121,6 +121,28 @@ println config.mc_version + "-" + config.forge_version
 minecraft {
     version = config.mc_version + "-" + config.forge_version
     assetDir = 'run/assets'
+
+    replaceIn "reference/Reference.java"
+    if (project.hasProperty("CelestialWizardry.release") &&
+            new File(project.property("CelestialWizardry.release")).exists())
+    {
+
+        // Load the private property file if one is found
+        Properties props = new Properties()
+        props.load(new FileInputStream(file(project.property("CelestialWizardry.release"))))
+
+        if (Boolean.valueOf((String) props['release']))
+        {
+            replace "@FINGERPRINT@", props['signature']
+        }
+        else
+        {
+            replace "@FINGERPRINT@", "dev"
+        }
+    }
+
+    replaceIn "reference/Version.java"
+    replace "@VERSION@", project.version
 }
 
 processResources {
@@ -194,13 +216,13 @@ artifacts {
 }
 
 // Set the information for signing the jar
-if (project.hasProperty("CelestialWizardry.signing") &&
-        new File(project.property("CelestialWizardry.signing")).exists())
+if (project.hasProperty("CelestialWizardry.release") &&
+        new File(project.property("CelestialWizardry.release")).exists())
 {
 
     // Load the private property file if one is found
     Properties props = new Properties()
-    props.load(new FileInputStream(file(project.property("CelestialWizardry.signing"))))
+    props.load(new FileInputStream(file(project.property("CelestialWizardry.release"))))
 
     ext.keystore_location = file(props['keystore_location'])
     ext.keystore_user_alias = props['keystore_alias']
@@ -248,13 +270,13 @@ task signJar(dependsOn: "build") {
 }
 
 // Set the information for releasing the jar
-if (project.hasProperty("CelestialWizardry.signing") &&
-        new File(project.property("CelestialWizardry.signing")).exists())
+if (project.hasProperty("CelestialWizardry.release") &&
+        new File(project.property("CelestialWizardry.release")).exists())
 {
 
     // Load the private property file if one is found
     Properties props = new Properties()
-    props.load(new FileInputStream(file(project.property("CelestialWizardry.signing"))))
+    props.load(new FileInputStream(file(project.property("CelestialWizardry.release"))))
 
     ext.release_location = props['release_location']
 
@@ -277,13 +299,13 @@ task incrementBuildNumber(dependsOn: "signJar") {
                     " build ${config.build_number}"
 
     // Check if this is final version
-    if (project.hasProperty("CelestialWizardry.signing") &&
-            new File(project.property("CelestialWizardry.signing")).exists())
+    if (project.hasProperty("CelestialWizardry.release") &&
+            new File(project.property("CelestialWizardry.release")).exists())
     {
 
         // Load the private property file if one is found
         Properties props = new Properties()
-        props.load(new FileInputStream(file(project.property("CelestialWizardry.signing"))))
+        props.load(new FileInputStream(file(project.property("CelestialWizardry.release"))))
 
         if (Boolean.valueOf((String) props['release']))
         {

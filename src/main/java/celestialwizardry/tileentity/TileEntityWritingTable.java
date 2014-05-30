@@ -8,6 +8,7 @@ import celestialwizardry.client.IRenderableObject;
 import celestialwizardry.network.PacketHandler;
 import celestialwizardry.network.message.MessageTileEntityWritingTable;
 import celestialwizardry.reference.Names;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
@@ -233,28 +234,37 @@ public class TileEntityWritingTable extends TileEntityCW implements IInventory
     	return false; //
     }
     
-    //Get data for rendering details TODO: organize into a single method 
-    public IRenderableObject getInk() {
-    	return null;
-    }
-    
     public String getMainObjectType() {
     	return "book";
     }
-    
-    public IRenderableObject getTopLeft() {
-    	return null;
+
+    //Get data for rendering details TODO: organize into a single method 
+    public IRenderableObject getInk()
+    {
+        return null;
+    }
+
+    public IRenderableObject getMainObject()
+    {
+        return null;
+    }
+
+    public IRenderableObject getTopLeft()
+    {
+        return null;
+    }
+
+    public IRenderableObject getTopRight()
+    {
+        return null;
     }
     
-    public IRenderableObject getTopRight() {
-    	return null;
-    }
-    
-    public List<IRenderableObject> getRenderables() {
+    public List<IRenderableObject> getRenderables() 
+    {
     	List<IRenderableObject> ret = new ArrayList<IRenderableObject>(3); //TODO: 3 + Items in the top slots
-    	
     	
     	return ret;
     }
     
+
 }

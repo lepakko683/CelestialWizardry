@@ -12,7 +12,10 @@ import net.minecraftforge.client.MinecraftForgeClient;
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
+@SideOnly(Side.CLIENT)
 public class ClientProxy extends CommonProxy
 {
     @Override
@@ -34,6 +37,7 @@ public class ClientProxy extends CommonProxy
         {
             MinecraftForgeClient.registerItemRenderer(ModItems.spellBook, new ItemRendererSpellBook());
         }
+
         RenderingRegistry.registerBlockHandler(new RenderOBJBlock());
 
 //        RenderingRegistry.registerEntityRenderingHandler(EntityLivingOre.class, new RenderOreGolem());

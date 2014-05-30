@@ -1,16 +1,17 @@
 package celestialwizardry.registry;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import celestialwizardry.CelestialWizardry;
 import celestialwizardry.api.energy.IEnergy;
 
-public class EnergyRegistry {
-	
-	public static Map<String, IEnergy> energyMap = new HashMap<String, IEnergy>();
-	
-	public static void registerEnergyType(IEnergy energy)
+import java.util.HashMap;
+import java.util.Map;
+
+public class EnergyRegistry
+{
+
+    public static Map<String, IEnergy> energyMap = new HashMap<String, IEnergy>();
+
+    public static void registerEnergyType(IEnergy energy)
     {
         String name = "";// rune.getName();
 

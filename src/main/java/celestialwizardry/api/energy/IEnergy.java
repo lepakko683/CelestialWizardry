@@ -18,4 +18,5 @@ public interface IEnergy {
 	public float crossEnergyTypeTransformLoss();
 	
 //	public float crossEnergyTypeTransformLoss(IEnergy target); TODO
+	
 }

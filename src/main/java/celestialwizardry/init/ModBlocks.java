@@ -5,6 +5,7 @@ import celestialwizardry.block.BlockLivingOre;
 import celestialwizardry.block.BlockWritingTable;
 import celestialwizardry.item.ItemBlockCW;
 import celestialwizardry.reference.Names;
+
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemBlock;
 import cpw.mods.fml.common.registry.GameRegistry;
