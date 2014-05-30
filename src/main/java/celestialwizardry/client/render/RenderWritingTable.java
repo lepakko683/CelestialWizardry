@@ -45,15 +45,15 @@ public class RenderWritingTable extends TileEntitySpecialRenderer
 		switch (var1.getBlockMetadata())
         {
             case 2: //NORTH
-                GL11.glRotatef(180F, 0.0F, 1.0F, 0.0F);
+                rot = 180f;
                 break;
             case 3: //SOUTH
                 break;
             case 4: //WEST
-                GL11.glRotatef(270F, 0.0F, 1.0F, 0.0F);
+                rot = 270f;
                 break;
             case 5: //EAST
-                GL11.glRotatef(90F, 0.0F, 1.0F, 0.0F);
+                rot = 90f;
                 break;
             default:
                 break;
@@ -74,7 +74,7 @@ public class RenderWritingTable extends TileEntitySpecialRenderer
 
 		GL11.glScalef(.15f, .15f, .15f);
 		book.render((Entity)null, 5f, 1f, 0f, 1.2f, 0f, 6f / 16f);
-		
+		GL11.glPopMatrix();
     }
     
     @Override
