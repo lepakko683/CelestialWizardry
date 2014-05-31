@@ -5,7 +5,8 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class Keybindings
+public class KeyBindings
 {
-    public static KeyBinding toggle;
+    public static KeyBinding cast;
+    public static KeyBinding change;
 }

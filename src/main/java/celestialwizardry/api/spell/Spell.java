@@ -2,10 +2,8 @@ package celestialwizardry.api.spell;
 
 import celestialwizardry.api.CWApi;
 import celestialwizardry.api.MagicType;
-import celestialwizardry.api.event.SpellEvent;
 
 import net.minecraft.entity.player.EntityPlayer;
-import cpw.mods.fml.common.FMLCommonHandler;
 
 public class Spell
 {
@@ -59,7 +57,6 @@ public class Spell
      */
     public boolean onPreCasting(ISpellContainer item, EntityPlayer player)
     {
-        FMLCommonHandler.instance().bus().post(new SpellEvent.PreCastEvent(this, player, item));
         return true;
     }
 
@@ -73,7 +70,6 @@ public class Spell
      */
     public boolean onCasting(ISpellContainer item, EntityPlayer player)
     {
-        FMLCommonHandler.instance().bus().post(new SpellEvent.CastEvent(this, player, item));
         return true;
     }
 
@@ -87,7 +83,6 @@ public class Spell
      */
     public boolean onPostCasting(ISpellContainer item, EntityPlayer player)
     {
-        FMLCommonHandler.instance().bus().post(new SpellEvent.PostCastEvent(this, player, item));
         return true;
     }
 

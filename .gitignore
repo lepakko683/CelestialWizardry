@@ -20,6 +20,8 @@
 # Gradle
 /.gradle
 /build
+/temp
+/tmp
 
 # ForgeGradle
 /run

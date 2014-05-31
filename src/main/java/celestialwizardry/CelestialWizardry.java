@@ -11,12 +11,9 @@ import celestialwizardry.init.ModItems;
 import celestialwizardry.network.GuiHandler;
 import celestialwizardry.network.PacketHandler;
 import celestialwizardry.proxy.IProxy;
-import celestialwizardry.reference.EventHandlers;
 import celestialwizardry.reference.Reference;
 import celestialwizardry.reference.Version;
 import celestialwizardry.spellbook.SpellBook;
-import net.minecraftforge.common.MinecraftForge;
-import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
@@ -118,19 +115,7 @@ public class CelestialWizardry
         PacketHandler.init();
 
         // Register mod key bindings
-        proxy.registerKeys();
-
-        // Register entity event handler
-        FMLCommonHandler.instance().bus().register(EventHandlers.ENTITY_EVENT_HANDLER);
-        MinecraftForge.EVENT_BUS.register(EventHandlers.ENTITY_EVENT_HANDLER);
-
-        // Register player event handler
-        FMLCommonHandler.instance().bus().register(EventHandlers.PLAYER_EVENT_HANDLER);
-        MinecraftForge.EVENT_BUS.register(EventHandlers.PLAYER_EVENT_HANDLER);
-        
-        //Register world event handler
-        FMLCommonHandler.instance().bus().register(runeConfig);
-        MinecraftForge.EVENT_BUS.register(runeConfig);
+        proxy.registerKeyBindings();
         
         // Tell everyone that we have successfully pre-initialized
         log.info("Finished pre-initialization after " + (System.currentTimeMillis() - start) + " ms");
@@ -151,21 +136,17 @@ public class CelestialWizardry
         // Register mod tile entities
         proxy.registerTileEntities();
 
+        // Register Event Handlers
+        proxy.registerEventHandlers();
+
         // Initialize crafting handler
         CraftingHandler.init(); // TODO Add the class to FML event subscription
 
         // Initialize spell book data
         SpellBook.init();
 
-        // Register render tick handlers
-        proxy.registerRenderTickHandler();
-
         // Register mod renders
         proxy.registerRenderer();
-
-        // Register spell casting event handler
-        FMLCommonHandler.instance().bus().register(EventHandlers.SPELL_EVENT_HANDLER);
-        MinecraftForge.EVENT_BUS.register(EventHandlers.SPELL_EVENT_HANDLER);
 
         // Tell everyone that we have successfully initialized
         log.info("Finished initialization after " + (System.currentTimeMillis() - start) + " ms");

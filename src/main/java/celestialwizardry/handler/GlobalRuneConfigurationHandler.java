@@ -6,6 +6,8 @@ import java.util.Set;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.event.world.WorldEvent;
+
+import celestialwizardry.CelestialWizardry;
 import celestialwizardry.api.spellgrammar.Rune;
 import celestialwizardry.registry.RuneRegistry;
 
@@ -34,12 +36,12 @@ public class GlobalRuneConfigurationHandler {
 	
 	@SubscribeEvent
 	public void onWorldLoad(WorldEvent.Load event) {
-		System.out.println("WORLD LOAD EVENT!!!!!");
+		CelestialWizardry.log.info("WORLD LOAD EVENT!!!!!");
 	}
 	
 	@SubscribeEvent
 	public void onWorldSave(WorldEvent.Save event) {
-		System.out.println("WORLD SAVE EVENT!!!!!");
+        CelestialWizardry.log.info("WORLD SAVE EVENT!!!!!");
 	}
 	
 	private static boolean configExistsAlready() {

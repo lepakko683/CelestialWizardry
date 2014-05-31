@@ -2,11 +2,11 @@ package celestialwizardry.proxy;
 
 public interface IProxy
 {
+    public void registerEventHandlers();
+
     public void registerTileEntities();
 
-    public void registerKeys();
-
-    public void registerRenderTickHandler();
+    public void registerKeyBindings();
 
     public void registerRenderer();
 }

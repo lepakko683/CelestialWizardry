@@ -3,6 +3,7 @@ package celestialwizardry.proxy;
 import celestialwizardry.client.ItemRendererSpellBook;
 import celestialwizardry.client.render.RenderOBJBlock;
 import celestialwizardry.client.render.RenderWritingTable;
+import celestialwizardry.client.settings.KeyBindings;
 import celestialwizardry.init.ModItems;
 import celestialwizardry.reference.EventHandlers;
 import celestialwizardry.reference.Settings;
@@ -19,15 +20,22 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class ClientProxy extends CommonProxy
 {
     @Override
-    public void registerKeys()
+    public void registerEventHandlers()
     {
+        super.registerEventHandlers();
 
+        // Register client tick handler
+        FMLCommonHandler.instance().bus().register(EventHandlers.CLIENT_TICK_EVENT_HANDLER);
+
+        // Register key input handler
+        FMLCommonHandler.instance().bus().register(EventHandlers.KEY_INPUT_EVENT_HANDLER);
     }
 
     @Override
-    public void registerRenderTickHandler()
+    public void registerKeyBindings()
     {
-        FMLCommonHandler.instance().bus().register(EventHandlers.CLIENT_TICK_EVENT_HANDLER);
+        ClientRegistry.registerKeyBinding(KeyBindings.cast);
+        ClientRegistry.registerKeyBinding(KeyBindings.change);
     }
 
     @Override
