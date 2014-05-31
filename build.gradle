@@ -185,6 +185,7 @@ processResources {
 
     // This will ensure that this task is redone when the versions or Baubles root directory change.
     inputs.property "version", project.version
+    inputs.property "build_number", config.build_number
     inputs.property "mc_version", config.mc_version
     inputs.property "baubles_version", config.baubles_version
     inputs.property "baubles_root", config.baubles_root
@@ -195,14 +196,13 @@ processResources {
         // Include only info files
         include '*.info'
 
-        // Replace version, mc_vrsion and baubles_version
-        expand 'version': project.version, 'mc_version': config.mc_version, 'baubles_version': config.baubles_version,
-               'baubles_root': config.baubles_root
+        // Replace version, build_number, mc_vrsion, baubles_version and baubles_root
+        expand 'version': project.version, 'build_number': config.build_number, 'mc_version': config.mc_version,
+               'baubles_version': config.baubles_version, 'baubles_root': config.baubles_root
     }
 
     // Copy everything excluding info files
     from(sourceSets.main.resources.srcDirs) {
-
         // Exclude info files
         exclude '*.info'
     }
@@ -210,6 +210,18 @@ processResources {
 
 // Set the version for archive names
 version = "${project.minecraft.version}-${project.version}"
+
+// Add custom source sets so gradle takes right sources to api and source archives
+sourceSets {
+    out {
+        java {
+            srcDir './build/sources/java/'
+        }
+        resources {
+            srcDir './build/resources/main/'
+        }
+    }
+}
 
 // Set the common manifest for archives
 def commonManifest = {
@@ -224,18 +236,16 @@ jar {
 
 // Make the source jar
 task sourceJar(type: Jar) {
-    from sourceSets.main.allSource
+    from sourceSets.out.allSource
     classifier = "src"
 }
 
 // Make the api jar
 task apiJar(type: Jar) {
-    from(sourceSets.main.allSource) {
-
+    from(sourceSets.out.allSource) {
         // Include only the api package
         include 'celestialwizardry/api/*'
     }
-
     classifier = "api"
 }
 
@@ -252,6 +262,9 @@ artifacts {
     archives deobfJar
     archives sourceJar
 }
+
+tasks.apiJar.shouldRunAfter deobfJar
+tasks.sourceJar.shouldRunAfter deobfJar
 
 ext.baubles_file = "Baubles-deobf-${config.mc_version}-${config.baubles_version}.jar"
 ext.baubles_url = "${config.baubles_root}${project.baubles_file}"
