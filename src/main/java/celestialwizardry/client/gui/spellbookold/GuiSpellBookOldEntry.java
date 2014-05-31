@@ -1,4 +1,4 @@
-package celestialwizardry.client.gui;
+package celestialwizardry.client.gui.spellbookold;
 
 import celestialwizardry.api.spellbook.SpellBookEntry;
 import celestialwizardry.api.spellbook.SpellBookPage;
@@ -12,7 +12,8 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class GuiSpellBookEntry extends GuiSpellBook implements IGuiSpellBookEntry
+@Deprecated
+public class GuiSpellBookOldEntry extends GuiSpellBookOld implements IGuiSpellBookEntry
 {
     public int page = 0;
     SpellBookEntry entry;
@@ -22,7 +23,7 @@ public class GuiSpellBookEntry extends GuiSpellBook implements IGuiSpellBookEntr
     GuiButton leftButton;
     GuiButton rightButton;
 
-    public GuiSpellBookEntry(SpellBookEntry entry, GuiScreen parent)
+    public GuiSpellBookOldEntry(SpellBookEntry entry, GuiScreen parent)
     {
         this.entry = entry;
         this.parent = parent;
@@ -79,7 +80,7 @@ public class GuiSpellBookEntry extends GuiSpellBook implements IGuiSpellBookEntr
         switch (button.id)
         {
             case 0:
-                mc.displayGuiScreen(GuiScreen.isShiftKeyDown() ? new GuiSpellBook() : parent);
+                mc.displayGuiScreen(isShiftKeyDown() ? new GuiSpellBookOld() : parent);
                 ClientTickEventHandler.notifyPageChange();
                 break;
             case 1:

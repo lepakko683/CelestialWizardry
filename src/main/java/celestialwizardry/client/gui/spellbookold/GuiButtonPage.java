@@ -1,4 +1,4 @@
-package celestialwizardry.client.gui;
+package celestialwizardry.client.gui.spellbookold;
 
 import celestialwizardry.reference.Resources;
 import celestialwizardry.util.RenderHelper;
@@ -14,6 +14,7 @@ import org.lwjgl.opengl.GL11;
 import java.util.Arrays;
 
 @SideOnly(Side.CLIENT)
+@Deprecated
 public class GuiButtonPage extends GuiButton
 {
     boolean right;

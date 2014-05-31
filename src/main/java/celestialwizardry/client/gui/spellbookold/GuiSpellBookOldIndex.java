@@ -1,4 +1,4 @@
-package celestialwizardry.client.gui;
+package celestialwizardry.client.gui.spellbookold;
 
 import celestialwizardry.api.spellbook.SpellBookCategory;
 import celestialwizardry.api.spellbook.SpellBookEntry;
@@ -15,7 +15,8 @@ import java.util.Collections;
 import java.util.List;
 
 @SideOnly(Side.CLIENT)
-public class GuiSpellBookIndex extends GuiSpellBook
+@Deprecated
+public class GuiSpellBookOldIndex extends GuiSpellBookOld
 {
     SpellBookCategory category;
     String title;
@@ -26,7 +27,7 @@ public class GuiSpellBookIndex extends GuiSpellBook
 
     List<SpellBookEntry> entriesToDisplay = new ArrayList<SpellBookEntry>();
 
-    public GuiSpellBookIndex(SpellBookCategory category)
+    public GuiSpellBookOldIndex(SpellBookCategory category)
     {
         this.category = category;
         title = StringHelper.localize(category.getUnlocalizedName());
@@ -87,7 +88,7 @@ public class GuiSpellBookIndex extends GuiSpellBook
         switch (par1GuiButton.id)
         {
             case 12:
-                mc.displayGuiScreen(new GuiSpellBook());
+                mc.displayGuiScreen(new GuiSpellBookOld());
                 ClientTickEventHandler.notifyPageChange();
                 break;
             case 13:
@@ -110,7 +111,7 @@ public class GuiSpellBookIndex extends GuiSpellBook
                 }
 
                 SpellBookEntry entry = entriesToDisplay.get(index);
-                mc.displayGuiScreen(new GuiSpellBookEntry(entry, this));
+                mc.displayGuiScreen(new GuiSpellBookOldEntry(entry, this));
                 ClientTickEventHandler.notifyPageChange();
         }
     }
