@@ -61,7 +61,7 @@ public class ItemRendererSpellBook implements IItemRenderer
     {
         GL11.glPushMatrix();
         Minecraft mc = Minecraft.getMinecraft();
-        mc.renderEngine.bindTexture(Resources.Models.SPELL_BOOK_OLD);
+        mc.renderEngine.bindTexture(Resources.Models.TEXTURE_SPELL_BOOK);
 
         float opening;
         float pageFlip;

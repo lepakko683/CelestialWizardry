@@ -34,7 +34,7 @@ public class GuiButtonPage extends GuiButton
                     && par3 < yPosition + height;
             int k = getHoverState(field_146123_n);
 
-            mc.renderEngine.bindTexture(Resources.Textures.GUI_SPELL_BOOK);
+            mc.renderEngine.bindTexture(Resources.Textures.GUI_SPELL_BOOK_OLD);
             GL11.glColor4f(1F, 1F, 1F, 1F);
             drawTexturedModalRect(xPosition, yPosition, k == 2 ? 18 : 0, right ? 180 : 190, 18, 10);
 

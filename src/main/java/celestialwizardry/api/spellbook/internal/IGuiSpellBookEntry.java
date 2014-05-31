@@ -2,6 +2,7 @@ package celestialwizardry.api.spellbook.internal;
 
 import celestialwizardry.api.spellbook.SpellBookEntry;
 
+@Deprecated // TODO
 public interface IGuiSpellBookEntry
 {
     /**

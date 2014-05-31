@@ -2,6 +2,7 @@ package celestialwizardry.client.gui.spellbookold;
 
 import celestialwizardry.api.spellbook.SpellBookCategory;
 import celestialwizardry.api.spellbook.SpellBookEntry;
+import celestialwizardry.client.gui.GuiButtonInvisible;
 import celestialwizardry.handler.ClientTickEventHandler;
 import celestialwizardry.util.StringHelper;
 

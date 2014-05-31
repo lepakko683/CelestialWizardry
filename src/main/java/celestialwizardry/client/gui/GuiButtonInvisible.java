@@ -1,4 +1,4 @@
-package celestialwizardry.client.gui.spellbookold;
+package celestialwizardry.client.gui;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
@@ -6,7 +6,6 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-@Deprecated
 public class GuiButtonInvisible extends GuiButton
 {
     public GuiButtonInvisible(int par1, int par2, int par3, int par4, int par5, String par6Str)

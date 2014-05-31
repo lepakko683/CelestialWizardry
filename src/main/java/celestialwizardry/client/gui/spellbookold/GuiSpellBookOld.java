@@ -2,6 +2,7 @@ package celestialwizardry.client.gui.spellbookold;
 
 import celestialwizardry.api.spellbook.SpellBookCategory;
 import celestialwizardry.api.spellbook.SpellBookEntry;
+import celestialwizardry.client.gui.GuiButtonInvisible;
 import celestialwizardry.handler.ClientTickEventHandler;
 import celestialwizardry.init.ModItems;
 import celestialwizardry.reference.Resources;
@@ -61,7 +62,7 @@ public class GuiSpellBookOld extends GuiScreen
     public void drawScreen(int par1, int par2, float par3)
     {
         GL11.glColor4f(1F, 1F, 1F, 1F);
-        mc.renderEngine.bindTexture(Resources.Textures.GUI_SPELL_BOOK);
+        mc.renderEngine.bindTexture(Resources.Textures.GUI_SPELL_BOOK_OLD);
         drawTexturedModalRect(left, top, 0, 0, xSize, ySize);
         drawCenteredString(fontRendererObj, getTitle(), left + xSize / 2, top - 12, 0x00FF00);
 
