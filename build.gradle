@@ -185,11 +185,9 @@ processResources {
 
     // This will ensure that this task is redone when the versions or Baubles root directory change.
     inputs.property "version", project.version
-    inputs.property "build_number", config.build_number
     inputs.property "mc_version", config.mc_version
     inputs.property "baubles_version", config.baubles_version
     inputs.property "baubles_root", config.baubles_root
-    inputs.property "revision", project.revision
 
     // Replace properties in info files
     from(sourceSets.main.resources.srcDirs) {
@@ -197,9 +195,9 @@ processResources {
         // Include only info files
         include '*.info'
 
-        // Replace version, build_number, mc_vrsion, baubles_version, baubles_root and revision
-        expand 'version': project.version, 'build_number': config.build_number, 'mc_version': config.mc_version,
-               'baubles_version': config.baubles_version, 'baubles_root': config.baubles_root, 'revision': project.revision
+        // Replace version, mc_vrsion, baubles_version and baubles_root
+        expand 'version': project.version, 'mc_version': config.mc_version,
+               'baubles_version': config.baubles_version, 'baubles_root': config.baubles_root
     }
 
     // Copy everything excluding info files
@@ -274,8 +272,10 @@ ext.baubles_temp = "${project.temp_dir}${project.baubles_file}"
 
 // Download baubles from azanor's mirror
 task getBaubles(dependsOn: "extractUserDev") {
-    ant.mkdir(dir: project.temp_dir)
-    ant.get(src: project.baubles_url, dest: project.baubles_temp)
+    doLast {
+		ant.mkdir(dir: project.temp_dir)
+		ant.get(src: project.baubles_url, dest: project.baubles_temp)
+	}
 }
 
 // Copy baubles into libs folder
