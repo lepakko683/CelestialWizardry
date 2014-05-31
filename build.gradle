@@ -50,8 +50,6 @@ configFile.withReader {
     project.ext.config = new ConfigSlurper().parse prop
 }
 
-ext.mod_version = "${config.major_number}.${config.minor_number}.${config.patch_number}"
-
 // Add code dependencies
 dependencies {
     /**
@@ -92,8 +90,7 @@ task buildInfo {
     }
 }
 
-// Sets the version for the mod
-version = "${mod_version}"
+version = "${config.major_number}.${config.minor_number}.${config.patch_number}"
 
 // Set the version for the mod
 if (project.hasProperty("CelestialWizardry.release") &&
@@ -104,14 +101,29 @@ if (project.hasProperty("CelestialWizardry.release") &&
     Properties props = new Properties()
     props.load(new FileInputStream(file(project.property("CelestialWizardry.release"))))
 
-    if (!Boolean.valueOf((String) props['release']))
+    if (Boolean.valueOf((String) props['release']) && !Boolean.valueOf((String) props['pre_release']))
+    {
+        version = "${config.major_number}.${config.minor_number}.${config.patch_number}"
+        ext.isRelease = true
+    }
+    else if (Boolean.valueOf((String) props['pre_release']) ||
+            (Boolean.valueOf((String) props['release']) && Boolean.valueOf((String) props['pre_release'])))
+    {
+        version =
+                "${config.major_number}.${config.minor_number}.${config.patch_number}-${config.pre_release_prefix}" +
+                        ".${config.pre_release_number}"
+        ext.isRelease = true
+    }
+    else
     {
         version = "${project.buildInfo.revision}"
+        ext.isRelease = false
     }
 }
 else
 {
     version = "${project.buildInfo.revision}"
+    ext.isRelease = false
 }
 
 // Print out the minecraft forge version
@@ -131,7 +143,7 @@ minecraft {
         Properties props = new Properties()
         props.load(new FileInputStream(file(project.property("CelestialWizardry.release"))))
 
-        if (Boolean.valueOf((String) props['release']))
+        if (Boolean.valueOf((String) props['release']) || Boolean.valueOf((String) props['pre_release']))
         {
             replace "@FINGERPRINT@", props['signature']
         }
@@ -143,14 +155,39 @@ minecraft {
 
     replaceIn "reference/Version.java"
     replace "@VERSION@", project.version
+
+    replaceIn "api/CWApi.java"
+    if (project.hasProperty("CelestialWizardry.release") &&
+            new File(project.property("CelestialWizardry.release")).exists())
+    {
+
+        // Load the private property file if one is found
+        Properties props = new Properties()
+        props.load(new FileInputStream(file(project.property("CelestialWizardry.release"))))
+
+        if (Boolean.valueOf((String) props['release']) && !Boolean.valueOf((String) props['pre_release']))
+        {
+            replace "@API_VERSION@", project.version.replace(".${config.patch_number}", "")
+        }
+        else if (Boolean.valueOf((String) props['pre_release']) ||
+                (Boolean.valueOf((String) props['release']) && Boolean.valueOf((String) props['pre_release'])))
+        {
+            replace "@API_VERSION@", project.version.replace(".${config.patch_number}", "")
+        }
+        else
+        {
+            replace "@API_VERSION@", "dev"
+        }
+    }
 }
 
 processResources {
 
-    // This will ensure that this task is redone when the versions change.
+    // This will ensure that this task is redone when the versions or Baubles root directory change.
     inputs.property "version", project.version
     inputs.property "mc_version", config.mc_version
     inputs.property "baubles_version", config.baubles_version
+    inputs.property "baubles_root", config.baubles_root
 
     // Replace properties in info files
     from(sourceSets.main.resources.srcDirs) {
@@ -159,7 +196,8 @@ processResources {
         include '*.info'
 
         // Replace version, mc_vrsion and baubles_version
-        expand 'version': project.version, 'mc_version': config.mc_version, 'baubles_version': config.baubles_version
+        expand 'version': project.version, 'mc_version': config.mc_version, 'baubles_version': config.baubles_version,
+               'baubles_root': config.baubles_root
     }
 
     // Copy everything excluding info files
@@ -186,13 +224,13 @@ jar {
 
 // Make the source jar
 task sourceJar(type: Jar) {
-    from sourceSets.main.java
+    from sourceSets.main.allSource
     classifier = "src"
 }
 
 // Make the api jar
 task apiJar(type: Jar) {
-    from(sourceSets.main.java) {
+    from(sourceSets.main.allSource) {
 
         // Include only the api package
         include 'celestialwizardry/api/*'
@@ -202,7 +240,7 @@ task apiJar(type: Jar) {
 }
 
 // Make the deobsfucated developer jar
-task devJar(type: Jar) {
+task deobfJar(type: Jar) {
     from sourceSets.main.output
     classifier = "deobf"
     manifest commonManifest
@@ -210,10 +248,36 @@ task devJar(type: Jar) {
 
 // Tell the archive system about the extra archives
 artifacts {
-    archives sourceJar
     archives apiJar
-    archives devJar
+    archives deobfJar
+    archives sourceJar
 }
+
+ext.baubles_file = "Baubles-deobf-${config.mc_version}-${config.baubles_version}.jar"
+ext.baubles_url = "${config.baubles_root}${project.baubles_file}"
+ext.temp_dir = "./temp/"
+ext.baubles_temp = "${project.temp_dir}${project.baubles_file}"
+
+// Download baubles from azanor's mirror
+task getBaubles(dependsOn: "extractUserDev") {
+    ant.mkdir(dir: project.temp_dir)
+    ant.get(src: project.baubles_url, dest: project.baubles_temp)
+}
+
+// Copy baubles into libs folder
+task copyBaubles(type: Copy, dependsOn: "getBaubles") {
+    from project.baubles_temp
+    into file("./libs/")
+
+    doLast {
+        // Delete the temp dir
+        ant.delete(dir: project.temp_dir)
+    }
+}
+
+// Make getting baubles dependency for setting up the workspace
+tasks.setupDevWorkspace.dependsOn copyBaubles
+tasks.setupDecompWorkspace.dependsOn copyBaubles
 
 // Set the information for signing the jar
 if (project.hasProperty("CelestialWizardry.release") &&
@@ -254,9 +318,8 @@ task signJar(dependsOn: "build") {
     }
 
     println "Path to archive: " + jar.getArchivePath()
-    // println jar.getArchivePath()
 
-    // Sign the jar.
+    // Sign the jar
     doLast {
         ant.signjar(
                 destDir: jar.destinationDir,
@@ -294,71 +357,92 @@ else
 // Increments the build number
 task incrementBuildNumber(dependsOn: "signJar") {
 
+    // This will ensure that this task is redone when the versions change.
+    inputs.property "version", project.version
+
     // Print the version information
     println "CelestialWizardry: version ${version}".replace("${config.mc_version}-", "") +
                     " build ${config.build_number}"
 
-    // Check if this is final version
-    if (project.hasProperty("CelestialWizardry.release") &&
-            new File(project.property("CelestialWizardry.release")).exists())
-    {
+    // These are here in doLast so they aren't called when you set up workspace
+    doLast {
 
-        // Load the private property file if one is found
-        Properties props = new Properties()
-        props.load(new FileInputStream(file(project.property("CelestialWizardry.release"))))
-
-        if (Boolean.valueOf((String) props['release']))
+        // Check if this is final version
+        if (project.hasProperty("CelestialWizardry.release") &&
+                new File(project.property("CelestialWizardry.release")).exists())
         {
-            if (!Boolean.valueOf((String) props['final_patch']) && !Boolean.valueOf((String) props['final_minor']))
+
+            // Load the private property file if one is found
+            Properties props = new Properties()
+            props.load(new FileInputStream(file(project.property("CelestialWizardry.release"))))
+
+            if (Boolean.valueOf((String) props['release']) && !Boolean.valueOf((String) props['pre_release']))
             {
-
-                ant.propertyfile(file: 'build.properties') {
-                    entry(key: 'patch_number', type: 'int', operation: '+', value: '1')
+                if (!Boolean.valueOf((String) props['final_patch']) && !Boolean.valueOf((String) props['final_minor']))
+                {
+                    ant.propertyfile(file: 'build.properties') {
+                        entry(key: 'patch_number', type: 'int', operation: '+', value: '1')
+                    }
                 }
+                else
+                {
+                    if (Boolean.valueOf((String) props['final_minor']))
+                    {
+                        // Print this is the final build of current major version
+                        println "Final build of version ${config.major_number}"
 
+                        ant.propertyfile(file: 'build.properties') {
+                            entry(key: 'patch_number', type: 'int', operation: '=', value: '0')
+                            entry(key: 'minor_number', type: 'int', operation: '=', value: '0')
+                            entry(key: 'major_number', type: 'int', operation: '+', value: '1')
+                        }
+
+                        ant.propertyfile(file: 'private.properties') {
+                            entry(key: 'final_patch', operation: '=', value: 'false')
+                            entry(key: 'final_minor', operation: '=', value: 'false')
+                        }
+                    }
+                    else if (Boolean.valueOf((String) props['final_patch']))
+                    {
+                        // Print this is the final build of current minor version
+                        println "Final build of version ${config.minor_number}"
+
+                        ant.propertyfile(file: 'build.properties') {
+                            entry(key: 'patch_number', type: 'int', operation: '=', value: '0')
+                            entry(key: 'minor_number', type: 'int', operation: '+', value: '1')
+                        }
+
+                        ant.propertyfile(file: 'private.properties') {
+                            entry(key: 'final_patch', operation: '=', value: 'false')
+                        }
+                    }
+                }
             }
-            else
+            else if (Boolean.valueOf((String) props['pre_release']) ||
+                    (Boolean.valueOf((String) props['release']) && Boolean.valueOf((String) props['pre_release'])))
             {
-                if (Boolean.valueOf((String) props['final_minor']))
-                {
-
-                    // Print this is the final build of current major version
-                    println "Final build of version ${config.major_number}"
-
-                    ant.propertyfile(file: 'build.properties') {
-                        entry(key: 'patch_number', type: 'int', operation: '=', value: '0')
-                        entry(key: 'minor_number', type: 'int', operation: '=', value: '0')
-                        entry(key: 'major_number', type: 'int', operation: '+', value: '1')
-                    }
-
-                    ant.propertyfile(file: 'private.properties') {
-                        entry(key: 'final_patch', operation: '=', value: 'false')
-                        entry(key: 'final_minor', operation: '=', value: 'false')
-                    }
-                }
-                else if (Boolean.valueOf((String) props['final_patch']))
-                {
-
-                    // Print this is the final build of current minor version
-                    println "Final build of version ${config.minor_number}"
-
-                    ant.propertyfile(file: 'build.properties') {
-                        entry(key: 'patch_number', type: 'int', operation: '=', value: '0')
-                        entry(key: 'minor_number', type: 'int', operation: '+', value: '1')
-                    }
-
-                    ant.propertyfile(file: 'private.properties') {
-                        entry(key: 'final_patch', operation: '=', value: 'false')
-                    }
+                ant.propertyfile(file: 'build.properties') {
+                    entry(key: 'pre_release_number', type: 'int', operation: '+', value: '1')
                 }
             }
         }
-    }
 
-    doLast {
         ant.propertyfile(file: 'build.properties') {
             entry(key: 'build_number', type: 'int', operation: '+', value: '1')
         }
+
+        // The new property file
+        ext.newFile = file "build.properties"
+
+        // Load the new property file. It shall from now be referenced as simply new_config or project.new_config
+        newFile.withReader {
+            def prop = new Properties()
+            prop.load(it)
+            project.ext.new_config = new ConfigSlurper().parse prop
+        }
+
+        println "Next release: ${new_config.major_number}.${new_config.minor_number}.${new_config.patch_number} build" +
+                        " ${new_config.build_number} if not pre-release"
     }
 }
 
