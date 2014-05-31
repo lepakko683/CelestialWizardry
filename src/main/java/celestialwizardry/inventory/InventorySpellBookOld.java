@@ -12,17 +12,18 @@ import net.minecraft.nbt.NBTTagList;
 
 import java.util.UUID;
 
-public class InventorySpellBook implements IInventory, INBTTaggable
+@Deprecated
+public class InventorySpellBookOld implements IInventory, INBTTaggable
 {
     public ItemStack theBook;
     protected ItemStack[] inventory;
     protected String customName;
 
-    public InventorySpellBook(ItemStack stack)
+    public InventorySpellBookOld(ItemStack stack)
     {
         theBook = stack;
 
-        int size = ContainerSpellBook.INVENTORY_ROWS * ContainerSpellBook.INVENTORY_COLUMNS;
+        int size = ContainerSpellBookOld.INVENTORY_ROWS * ContainerSpellBookOld.INVENTORY_COLUMNS;
         inventory = new ItemStack[size];
 
         readFromNBT(theBook.getTagCompound());

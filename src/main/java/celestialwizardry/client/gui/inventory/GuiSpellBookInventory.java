@@ -1,7 +1,7 @@
 package celestialwizardry.client.gui.inventory;
 
-import celestialwizardry.inventory.ContainerSpellBook;
-import celestialwizardry.inventory.InventorySpellBook;
+import celestialwizardry.inventory.ContainerSpellBookOld;
+import celestialwizardry.inventory.InventorySpellBookOld;
 import celestialwizardry.reference.Names;
 import celestialwizardry.reference.Resources;
 import celestialwizardry.util.NBTHelper;
@@ -19,14 +19,14 @@ import org.lwjgl.opengl.GL11;
 public class GuiSpellBookInventory extends GuiContainer
 {
     private final ItemStack theBook;
-    private final InventorySpellBook inventorySpellBook;
+    private final InventorySpellBookOld inventorySpellBookOld;
 
-    public GuiSpellBookInventory(EntityPlayer player, InventorySpellBook inventorySpellBook)
+    public GuiSpellBookInventory(EntityPlayer player, InventorySpellBookOld inventorySpellBookOld)
     {
-        super(new ContainerSpellBook(player, inventorySpellBook));
+        super(new ContainerSpellBookOld(player, inventorySpellBookOld));
 
-        this.theBook = inventorySpellBook.theBook;
-        this.inventorySpellBook = inventorySpellBook;
+        this.theBook = inventorySpellBookOld.theBook;
+        this.inventorySpellBookOld = inventorySpellBookOld;
 
         xSize = 230;
         ySize = 186;
@@ -35,7 +35,7 @@ public class GuiSpellBookInventory extends GuiContainer
     @Override
     protected void drawGuiContainerForegroundLayer(int x, int y)
     {
-        fontRendererObj.drawString(StringHelper.localize(inventorySpellBook.getInventoryName()), 8, 6, 4210752);
+        fontRendererObj.drawString(StringHelper.localize(inventorySpellBookOld.getInventoryName()), 8, 6, 4210752);
         fontRendererObj
                 .drawString(StringHelper.localize(Names.Containers.VANILLA_INVENTORY), 35, ySize - 95 + 2, 4210752);
     }

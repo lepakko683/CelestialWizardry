@@ -1,4 +1,4 @@
-package celestialwizardry.client.gui;
+package celestialwizardry.client.gui.spellbookold;
 
 import celestialwizardry.reference.Resources;
 import celestialwizardry.util.RenderHelper;
@@ -15,6 +15,7 @@ import java.util.Arrays;
 import java.util.List;
 
 @SideOnly(Side.CLIENT)
+@Deprecated
 public class GuiButtonBack extends GuiButton
 {
     public GuiButtonBack(int par1, int par2, int par3)

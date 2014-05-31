@@ -18,7 +18,7 @@ public class Resources
         public static final ResourceLocation GUI_SPELL_BOOK_INVENTORY = ResourceLocationHelper
                 .getResourceLocation(GUI_SHEET_LOCATION + "spellBookInventory.png");
         public static final ResourceLocation GUI_SPELL_BOOK = ResourceLocationHelper
-                .getResourceLocation(GUI_SHEET_LOCATION + "spellBook.png");
+                .getResourceLocation(GUI_SHEET_LOCATION + "spellBookOld.png");
     }
 
     public static class Models
@@ -27,8 +27,9 @@ public class Resources
         public static final String MODEL_TEXTURE_LOCATION = "textures/models/";
         public static final String MODEL_LOCATION = "models/";
 
-        public static final ResourceLocation SPELL_BOOK = ResourceLocationHelper
-                .getResourceLocation(MODEL_TEXTURE_LOCATION + "spellBook.png");
+        @Deprecated
+        public static final ResourceLocation SPELL_BOOK_OLD = ResourceLocationHelper
+                .getResourceLocation(MODEL_TEXTURE_LOCATION + "spellBookOld.png");
 
         public static final ResourceLocation TEXTURE_WRITING_TABLE = ResourceLocationHelper
                 .getResourceLocation(MODEL_TEXTURE_LOCATION + "writingTable.png");

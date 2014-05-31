@@ -10,13 +10,14 @@ import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
-public class ContainerSpellBook extends Container
+@Deprecated
+public class ContainerSpellBookOld extends Container
 {
     public static final int INVENTORY_ROWS = 4;
     public static final int INVENTORY_COLUMNS = 12;
 
     private final EntityPlayer player;
-    private final InventorySpellBook inventorySpellBook;
+    private final InventorySpellBookOld inventorySpellBookOld;
 
     // Player Inventory
     private final int PLAYER_INVENTORY_ROWS = 3;
@@ -25,10 +26,10 @@ public class ContainerSpellBook extends Container
     private int inventoryRows;
     private int inventoryColumns;
 
-    public ContainerSpellBook(EntityPlayer player, InventorySpellBook inventorySpellBook)
+    public ContainerSpellBookOld(EntityPlayer player, InventorySpellBookOld inventorySpellBookOld)
     {
         this.player = player;
-        this.inventorySpellBook = inventorySpellBook;
+        this.inventorySpellBookOld = inventorySpellBookOld;
 
         inventoryRows = INVENTORY_ROWS;
         inventoryColumns = INVENTORY_COLUMNS;
@@ -39,7 +40,7 @@ public class ContainerSpellBook extends Container
             for (int columnIndex = 0; columnIndex < inventoryColumns; ++columnIndex)
             {
                 this.addSlotToContainer(
-                        new SlotSpellBook(this, inventorySpellBook, player, columnIndex + rowIndex * inventoryColumns,
+                        new SlotSpellBookOld(this, inventorySpellBookOld, player, columnIndex + rowIndex * inventoryColumns,
                                           8 + columnIndex * 18, 18 + rowIndex * 18)
                                        );
             }
@@ -154,6 +155,6 @@ public class ContainerSpellBook extends Container
 
     public void saveInventory(EntityPlayer player)
     {
-        inventorySpellBook.onGuiSaved(player);
+        inventorySpellBookOld.onGuiSaved(player);
     }
 }

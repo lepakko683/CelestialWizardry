@@ -1,4 +1,4 @@
-package celestialwizardry.client.gui;
+package celestialwizardry.client.gui.spellbookold;
 
 import celestialwizardry.api.spellbook.SpellBookCategory;
 import celestialwizardry.api.spellbook.SpellBookEntry;
@@ -18,9 +18,10 @@ import org.lwjgl.opengl.GL11;
 import java.util.List;
 
 @SideOnly(Side.CLIENT)
-public class GuiSpellBook extends GuiScreen
+@Deprecated
+public class GuiSpellBookOld extends GuiScreen
 {
-    public static GuiSpellBook currentOpen = new GuiSpellBook();
+    public static GuiSpellBookOld currentOpen = new GuiSpellBookOld();
 
     public static final String UNLOCALIZED_HEADER = "spellBook." + Resources.RESOURCE_PREFIX + "header";
 
@@ -94,7 +95,7 @@ public class GuiSpellBook extends GuiScreen
 
         if (category != null)
         {
-            mc.displayGuiScreen(new GuiSpellBookIndex(category));
+            mc.displayGuiScreen(new GuiSpellBookOldIndex(category));
             ClientTickEventHandler.notifyPageChange();
         }
     }
@@ -138,6 +139,6 @@ public class GuiSpellBook extends GuiScreen
 
     public static void setEntryToOpen(SpellBookEntry entry)
     {
-        currentOpen = new GuiSpellBookEntry(entry, new GuiSpellBookIndex(entry.category));
+        currentOpen = new GuiSpellBookOldEntry(entry, new GuiSpellBookOldIndex(entry.category));
     }
 }

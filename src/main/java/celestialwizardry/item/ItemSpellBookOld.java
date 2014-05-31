@@ -16,11 +16,11 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 @Deprecated
 @SuppressWarnings("unused")
-public class ItemSpellBookLegacy extends ItemCW
+public class ItemSpellBookOld extends ItemCW
 {
     public static final String[] modes = {"guide", "inventory"};
 
-    public ItemSpellBookLegacy()
+    public ItemSpellBookOld()
     {
         super();
         this.setUnlocalizedName(Names.Items.SPELL_BOOK);
