@@ -16,12 +16,13 @@ import cpw.mods.fml.relauncher.SideOnly;
 import org.lwjgl.opengl.GL11;
 
 @SideOnly(Side.CLIENT)
-public class GuiSpellBookInventory extends GuiContainer
+@Deprecated
+public class GuiSpellBookOldInventory extends GuiContainer
 {
     private final ItemStack theBook;
     private final InventorySpellBookOld inventorySpellBookOld;
 
-    public GuiSpellBookInventory(EntityPlayer player, InventorySpellBookOld inventorySpellBookOld)
+    public GuiSpellBookOldInventory(EntityPlayer player, InventorySpellBookOld inventorySpellBookOld)
     {
         super(new ContainerSpellBookOld(player, inventorySpellBookOld));
 
