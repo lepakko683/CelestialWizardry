@@ -32,9 +32,15 @@ public class Resources
 
         public static final ResourceLocation TEXTURE_WRITING_TABLE = ResourceLocationHelper
                 .getResourceLocation(MODEL_TEXTURE_LOCATION + "writingTable.png");
+        
+        public static final ResourceLocation TEXTURE_BELL = ResourceLocationHelper
+                .getResourceLocation("textures/blocks/gold_block.png");
 
         // Model files (.OBJs)
         public static final ResourceLocation MODEL_WRITING_TABLE = ResourceLocationHelper
                 .getResourceLocation(MODEL_LOCATION + "WritingTable.obj");
+        
+        public static final ResourceLocation MODEL_BELL = ResourceLocationHelper
+                .getResourceLocation(MODEL_LOCATION + "RandomBell.obj");
     }
 }

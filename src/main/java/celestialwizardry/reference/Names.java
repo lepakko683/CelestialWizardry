@@ -6,6 +6,7 @@ public class Names
     {
         public static final String WRITING_TABLE = "writingTable";
         public static final String LIVING_ORE = "livingOre";
+        public static final String BELL = "bell";
     }
 
     public static class Items

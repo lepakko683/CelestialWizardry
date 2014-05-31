@@ -1,11 +1,12 @@
 package celestialwizardry.client.render;
 
+import celestialwizardry.block.BlockBell;
 import celestialwizardry.block.BlockWritingTable;
 import celestialwizardry.client.model.OBJModels;
 import celestialwizardry.reference.Resources;
-
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.IBlockAccess;
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
@@ -20,6 +21,8 @@ public class RenderOBJBlock implements ISimpleBlockRenderingHandler
 {
 
     public static final int ID = RenderingRegistry.getNextAvailableRenderId();
+    
+    
 
     @Override
     public void renderInventoryBlock(Block block, int metadata, int modelID, RenderBlocks renderer)
@@ -36,6 +39,13 @@ public class RenderOBJBlock implements ISimpleBlockRenderingHandler
                 GL11.glScalef(1f, 1f, 1f);
                 OBJModels.modelWritingTable.renderAll();
             }
+            if (block instanceof BlockBell)
+            {
+            	FMLClientHandler.instance().getClient().renderEngine.bindTexture(Resources.Models.TEXTURE_BELL);
+            	GL11.glTranslatef(0f, 0, 0f);
+//            	OBJModels.modelBell.renderPart("dinger_Planee");
+            	OBJModels.modelBell.renderAll();
+            }
 
             GL11.glPopMatrix();
         }
@@ -50,7 +60,7 @@ public class RenderOBJBlock implements ISimpleBlockRenderingHandler
     public boolean renderWorldBlock(IBlockAccess iBlockAccess, int x, int y, int z, Block block, int modelID,
                                     RenderBlocks renderer)
     {
-        return false;
+    	return false;
     }
 
     @Override

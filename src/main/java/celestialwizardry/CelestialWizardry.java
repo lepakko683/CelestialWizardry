@@ -115,7 +115,7 @@ public class CelestialWizardry
         PacketHandler.init();
 
         // Register mod key bindings
-        proxy.registerKeyBindings();
+//        proxy.registerKeyBindings(); >:)
         
         // Tell everyone that we have successfully pre-initialized
         log.info("Finished pre-initialization after " + (System.currentTimeMillis() - start) + " ms");
