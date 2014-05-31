@@ -189,6 +189,7 @@ processResources {
     inputs.property "mc_version", config.mc_version
     inputs.property "baubles_version", config.baubles_version
     inputs.property "baubles_root", config.baubles_root
+    inputs.property "revision", project.revision
 
     // Replace properties in info files
     from(sourceSets.main.resources.srcDirs) {
@@ -196,9 +197,9 @@ processResources {
         // Include only info files
         include '*.info'
 
-        // Replace version, build_number, mc_vrsion, baubles_version and baubles_root
+        // Replace version, build_number, mc_vrsion, baubles_version, baubles_root and revision
         expand 'version': project.version, 'build_number': config.build_number, 'mc_version': config.mc_version,
-               'baubles_version': config.baubles_version, 'baubles_root': config.baubles_root
+               'baubles_version': config.baubles_version, 'baubles_root': config.baubles_root, 'revision': project.revision
     }
 
     // Copy everything excluding info files
