@@ -7,20 +7,14 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class ServerProxy extends CommonProxy
 {
     @Override
-    public void registerKeys()
+    public void registerKeyBindings()
     {
-        // NOOP
-    }
-
-    @Override
-    public void registerRenderTickHandler()
-    {
-        // NOOP
+        // NO-OP
     }
 
     @Override
     public void registerRenderer()
     {
-        // NOOP
+        // NO-OP
     }
 }
