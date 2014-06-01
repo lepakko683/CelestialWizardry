@@ -94,9 +94,9 @@ task buildInfo {
         ext.revision = "NULL"
     }
 
-    if (System.getenv().BUILD_NUMBER != null)
+    if (System.getenv("BUILD_NUMBER") != null)
     {
-        ext.build_number = "${System.getenv().BUILD_NUMBER}"
+        ext.build_number = "${System.getenv("BUILD_NUMBER")}"
     }
     else
     {
@@ -226,6 +226,7 @@ artifacts {
     archives sourceJar
 }
 
+// Make the api and sources archives after compiled archive to make sure they have correct constant values
 tasks.apiJar.shouldRunAfter project.tasks.deobfJar
 tasks.sourceJar.shouldRunAfter project.tasks.deobfJar
 
@@ -268,7 +269,7 @@ else
 }
 
 // Sign the final jar
-task signJar(dependsOn: "build") {
+task signJar {
 
     // This will ensure that this task is redone when the some of these properties change.
     inputs.file jar.getArchivePath()
@@ -297,24 +298,8 @@ task signJar(dependsOn: "build") {
     }
 }
 
-// Set the information for releasing the jar
-if (project.hasProperty("CelestialWizardry.release") &&
-        new File(project.property("CelestialWizardry.release")).exists())
-{
-
-    // Load the private property file if one is found
-    Properties props = new Properties()
-    props.load(new FileInputStream(file(project.property("CelestialWizardry.release"))))
-
-    ext.release_location = props['release_location']
-
-    println "Valid jar uploading properties found"
-
-}
-else
-{
-    ext.release_location = "."
-}
+// Make signing the to depend on building the jar
+tasks.signJar.dependsOn tasks.build
 
 // Configure an upload task
 uploadArchives {
@@ -330,33 +315,16 @@ uploadArchives {
     }
 }
 
-// Clean up the dest dir so a new one can be created
-task cleanDest(type: Delete) {
-    onlyIf {
-        return project.release_location != "."
-    }
+// Uploading archives should be after signing the jar
+uploadArchives.shouldRunAfter tasks.signJar
 
-    delete project.release_location
+// Mostly a dummy task for building the jars for official release
+task release {
+    println "Release the savage!"
 }
 
-// Copy the archives to dest dir
-task release(type: Copy, dependsOn: "signJar") {
-    from(project.tasks.jar.destinationDir) {
-        include "*-${project.version}*"
-    }
-    into project.file(project.release_location)
+// Make the release task dependant on signing the jar so it builds the mod when release task is called
+tasks.release.dependsOn project.tasks.signJar
 
-    println "Release location: " + project.release_location
-
-    eachFile {file ->
-        logger.info "copying ${file}"
-    }
-
-    // Copy only if the release location isn't empty
-    onlyIf {
-        return project.release_location != "."
-    }
-}
-
-tasks.release.dependsOn project.tasks.cleanDest
+// Make the release task dependant on deploying the jar so it uploads archives when release task is called
 tasks.release.dependsOn uploadArchives
