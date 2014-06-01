@@ -76,48 +76,43 @@ dependencies {
      */
 }
 
-// Find and set the version info from git for the build
+// Finds and sets version data
 task buildInfo {
 
-    // Run the command to get the git revision
     def cmd = "git rev-parse --short HEAD"
-    def run = cmd.execute()
-    run.waitFor()
-
-    ext.revision = "NULL"
-
-    // Set the revision depending on the result of command execution
-    if (run.exitValue() == 0)
+    def proc = cmd.execute()
+    proc.waitFor()
+    if (proc.exitValue() == 0)
     {
-        revision = run.text.trim()
+        ext.revision = proc.text.trim()
     }
     else
     {
-        revision = "NULL"
+        ext.revision = "GITBORK"
     }
-
-    ext.buildNum = "0"
 
     if (System.getenv().BUILD_NUMBER != null)
     {
-        build_number = "${System.getenv().BUILD_NUMBER}"
+        ext.buildNum = "jenkins${System.getenv().BUILD_NUMBER}"
     }
     else
     {
-        build_number = "${project.tasks.buildInfo.revision}"
+        ext.buildNum = "DEV.${project.buildInfo.revision}"
     }
+
+    println "CelestialWizardry revision ${project.buildInfo.revision} build ${project.buildInfo.buildNum}"
 }
 
 ext.artifact_version = 'NFG'
 
 if (System.getenv().ARTIFACT_VERSION == null)
 {
-    artifact_version = "${config.mod_version}.${project.tasks.buildInfo.buildNum}"
+    artifact_version = "${config.mod_version}.${project.buildInfo.buildNum}"
 }
-// TODO else maybe
+
 if (System.getenv().ARTIFACT_VERSION != null)
 {
-    artifact_version = "${System.getenv().ARTIFACT_VERSION}"
+    artifact_version = "${system.getenv().ARTIFACT_VERSION}"
 }
 
 version = "${artifact_version}"
