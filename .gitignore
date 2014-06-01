@@ -1,6 +1,10 @@
 # MinecraftForge
 /forge
 
+# Maven Repository
+/maven
+/mvn
+
 # Eclipse
 /eclipse
 /.settings
