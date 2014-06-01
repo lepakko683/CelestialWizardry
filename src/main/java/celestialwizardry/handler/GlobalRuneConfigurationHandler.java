@@ -18,7 +18,7 @@ public class GlobalRuneConfigurationHandler {
 	//check registered runes and loaded config
 	//assign correct rune ids for runes
 	
-	
+	public static boolean needToLoadConfig = true;
 	
 	//Load after runes have been registered
 	public static void init() {
@@ -46,5 +46,16 @@ public class GlobalRuneConfigurationHandler {
 	
 	private static boolean configExistsAlready() {
 		return false;
+	}
+	
+	public static void onPlayerJoinOrLeave(int plrCount) {
+		if(plrCount <= 0) { //It'd be a surprise to me if the player count actually went below 0
+			needToLoadConfig = true;
+		}
+		if(needToLoadConfig && plrCount > 0) {
+			needToLoadConfig = false;
+			
+			//TODO:load config
+		}
 	}
 }
