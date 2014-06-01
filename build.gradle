@@ -110,7 +110,7 @@ if (System.getenv().ARTIFACT_VERSION == null)
 {
     artifact_version = "${config.mod_version}.${project.buildInfo.buildNum}"
 }
-
+// TODO else maybe
 if (System.getenv().ARTIFACT_VERSION != null)
 {
     artifact_version = "${System.getenv().ARTIFACT_VERSION}"
@@ -330,8 +330,8 @@ uploadArchives {
     }
 }
 
+// Clean up the dest dir so a new one can be created
 task cleanDest(type: Delete) {
-
     onlyIf {
         return project.release_location != "."
     }
@@ -339,6 +339,7 @@ task cleanDest(type: Delete) {
     delete project.release_location
 }
 
+// Copy the archives to dest dir
 task release(type: Copy, dependsOn: "signJar") {
     from(project.tasks.jar.destinationDir) {
         include "*-${project.version}*"
