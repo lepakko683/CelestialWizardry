@@ -30,8 +30,13 @@ repositories {
         name = "chickenbones"
         url = "http://chickenbones.net/maven/"
     }
+    maven {
+        name = "celestialwizardry"
+        url = "http://localhost/maven/"
+    }
 }
 
+apply plugin: 'maven'
 apply plugin: 'forge'
 
 // http://maven.apache.org/guides/mini/guide-naming-conventions.html
@@ -88,43 +93,30 @@ task buildInfo {
     {
         ext.revision = "NULL"
     }
-}
 
-version = "${config.major_number}.${config.minor_number}.${config.patch_number}"
-
-// Set the version for the mod
-if (project.hasProperty("CelestialWizardry.release") &&
-        new File(project.property("CelestialWizardry.release")).exists())
-{
-
-    // Load the private property file if one is found
-    Properties props = new Properties()
-    props.load(new FileInputStream(file(project.property("CelestialWizardry.release"))))
-
-    if (Boolean.valueOf((String) props['release']) && !Boolean.valueOf((String) props['pre_release']))
+    if (System.getenv().BUILD_NUMBER != null)
     {
-        version = "${config.major_number}.${config.minor_number}.${config.patch_number}"
-        ext.isRelease = true
-    }
-    else if (Boolean.valueOf((String) props['pre_release']) ||
-            (Boolean.valueOf((String) props['release']) && Boolean.valueOf((String) props['pre_release'])))
-    {
-        version =
-                "${config.major_number}.${config.minor_number}.${config.patch_number}-${config.pre_release_prefix}" +
-                        ".${config.pre_release_number}"
-        ext.isRelease = true
+        ext.build_number = "${System.getenv().BUILD_NUMBER}"
     }
     else
     {
-        version = "${project.buildInfo.revision}"
-        ext.isRelease = false
+        ext.build_number = "${project.buildInfo.revision}"
     }
 }
-else
+
+ext.artifact_version = 'NFG'
+
+if (System.getenv().ARTIFACT_VERSION == null)
 {
-    version = "${project.buildInfo.revision}"
-    ext.isRelease = false
+    artifact_version = "${config.mod_version}.${project.buildInfo.buildNum}"
 }
+
+if (System.getenv().ARTIFACT_VERSION != null)
+{
+    artifact_version = "${System.getenv().ARTIFACT_VERSION}"
+}
+
+version = "${artifact_version}"
 
 // Print out the minecraft forge version
 println config.mc_version + "-" + config.forge_version
@@ -143,42 +135,11 @@ minecraft {
         Properties props = new Properties()
         props.load(new FileInputStream(file(project.property("CelestialWizardry.release"))))
 
-        if (Boolean.valueOf((String) props['release']) || Boolean.valueOf((String) props['pre_release']))
-        {
-            replace "@FINGERPRINT@", props['signature']
-        }
-        else
-        {
-            replace "@FINGERPRINT@", "dev"
-        }
+        replace "@FINGERPRINT@", props['signature']
     }
 
     replaceIn "reference/Version.java"
     replace "@VERSION@", project.version
-
-    replaceIn "api/CWApi.java"
-    if (project.hasProperty("CelestialWizardry.release") &&
-            new File(project.property("CelestialWizardry.release")).exists())
-    {
-
-        // Load the private property file if one is found
-        Properties props = new Properties()
-        props.load(new FileInputStream(file(project.property("CelestialWizardry.release"))))
-
-        if (Boolean.valueOf((String) props['release']) && !Boolean.valueOf((String) props['pre_release']))
-        {
-            replace "@API_VERSION@", project.version.replace(".${config.patch_number}", "")
-        }
-        else if (Boolean.valueOf((String) props['pre_release']) ||
-                (Boolean.valueOf((String) props['release']) && Boolean.valueOf((String) props['pre_release'])))
-        {
-            replace "@API_VERSION@", project.version.replace(".${config.patch_number}", "")
-        }
-        else
-        {
-            replace "@API_VERSION@", "dev"
-        }
-    }
 }
 
 processResources {
@@ -188,6 +149,9 @@ processResources {
     inputs.property "mc_version", config.mc_version
     inputs.property "baubles_version", config.baubles_version
     inputs.property "baubles_root", config.baubles_root
+
+    // Exclude .xcf files since they are not part of the mod
+    exclude '**/*.xcf'
 
     // Replace properties in info files
     from(sourceSets.main.resources.srcDirs) {
@@ -208,7 +172,7 @@ processResources {
 }
 
 // Set the version for archive names
-version = "${project.minecraft.version}-${project.version}"
+version = "${project.minecraft.version}-${artifact_version}"
 
 // Add custom source sets so gradle takes right sources to api and source archives
 sourceSets {
@@ -290,8 +254,8 @@ task copyBaubles(type: Copy, dependsOn: "getBaubles") {
 }
 
 // Make getting baubles dependency for setting up the workspace
-tasks.setupDevWorkspace.dependsOn copyBaubles
-tasks.setupDecompWorkspace.dependsOn copyBaubles
+tasks.setupDevWorkspace.dependsOn project.tasks.copyBaubles
+tasks.setupDecompWorkspace.dependsOn project.tasks.copyBaubles
 
 // Set the information for signing the jar
 if (project.hasProperty("CelestialWizardry.release") &&
@@ -357,9 +321,6 @@ if (project.hasProperty("CelestialWizardry.release") &&
 
     ext.release_location = props['release_location']
 
-    ext.release_location = release_location.replace("{MC}", project.minecraft.version).
-            replace("{VERSION}", "${project.version}".replace("${config.mc_version}-", ""))
-
     println "Valid jar uploading properties found"
 
 }
@@ -368,99 +329,24 @@ else
     ext.release_location = "."
 }
 
-// Increments the build number
-task incrementBuildNumber(dependsOn: "signJar") {
+// Configure an upload task.
+uploadArchives {
+    repositories {
+        logger.info('Publishing to local maven repo')
 
-    // This will ensure that this task is redone when the versions change.
-    inputs.property "version", project.version
-
-    // Print the version information
-    println "CelestialWizardry: version ${version}".replace("${config.mc_version}-", "") +
-                    " build ${config.build_number}"
-
-    // These are here in doLast so they aren't called when you set up workspace
-    doLast {
-
-        // Check if this is final version
-        if (project.hasProperty("CelestialWizardry.release") &&
-                new File(project.property("CelestialWizardry.release")).exists())
-        {
-
-            // Load the private property file if one is found
-            Properties props = new Properties()
-            props.load(new FileInputStream(file(project.property("CelestialWizardry.release"))))
-
-            if (Boolean.valueOf((String) props['release']) && !Boolean.valueOf((String) props['pre_release']))
-            {
-                if (!Boolean.valueOf((String) props['final_patch']) && !Boolean.valueOf((String) props['final_minor']))
-                {
-                    ant.propertyfile(file: 'build.properties') {
-                        entry(key: 'patch_number', type: 'int', operation: '+', value: '1')
-                    }
-                }
-                else
-                {
-                    if (Boolean.valueOf((String) props['final_minor']))
-                    {
-                        // Print this is the final build of current major version
-                        println "Final build of version ${config.major_number}"
-
-                        ant.propertyfile(file: 'build.properties') {
-                            entry(key: 'patch_number', type: 'int', operation: '=', value: '0')
-                            entry(key: 'minor_number', type: 'int', operation: '=', value: '0')
-                            entry(key: 'major_number', type: 'int', operation: '+', value: '1')
-                        }
-
-                        ant.propertyfile(file: 'private.properties') {
-                            entry(key: 'final_patch', operation: '=', value: 'false')
-                            entry(key: 'final_minor', operation: '=', value: 'false')
-                        }
-                    }
-                    else if (Boolean.valueOf((String) props['final_patch']))
-                    {
-                        // Print this is the final build of current minor version
-                        println "Final build of version ${config.minor_number}"
-
-                        ant.propertyfile(file: 'build.properties') {
-                            entry(key: 'patch_number', type: 'int', operation: '=', value: '0')
-                            entry(key: 'minor_number', type: 'int', operation: '+', value: '1')
-                        }
-
-                        ant.propertyfile(file: 'private.properties') {
-                            entry(key: 'final_patch', operation: '=', value: 'false')
-                        }
-                    }
-                }
-            }
-            else if (Boolean.valueOf((String) props['pre_release']) ||
-                    (Boolean.valueOf((String) props['release']) && Boolean.valueOf((String) props['pre_release'])))
-            {
-                ant.propertyfile(file: 'build.properties') {
-                    entry(key: 'pre_release_number', type: 'int', operation: '+', value: '1')
-                }
-            }
+        mavenDeployer {
+            repository(url: "file://localhost/maven")
         }
-
-        ant.propertyfile(file: 'build.properties') {
-            entry(key: 'build_number', type: 'int', operation: '+', value: '1')
-        }
-
-        // The new property file
-        ext.newFile = file "build.properties"
-
-        // Load the new property file. It shall from now be referenced as simply new_config or project.new_config
-        newFile.withReader {
-            def prop = new Properties()
-            prop.load(it)
-            project.ext.new_config = new ConfigSlurper().parse prop
-        }
-
-        println "Next release: ${new_config.major_number}.${new_config.minor_number}.${new_config.patch_number} build" +
-                        " ${new_config.build_number} if not pre-release"
     }
 }
 
-task release(type: Copy, dependsOn: "incrementBuildNumber") {
+task cleanDest {
+    doLast {
+        ant.delete(dir: project.release_location)
+    }
+}
+
+task release(type: Copy, dependsOn: "signJar") {
     from(project.tasks.jar.destinationDir) {
         include "*-${project.version}*"
     }
@@ -477,3 +363,6 @@ task release(type: Copy, dependsOn: "incrementBuildNumber") {
         return project.release_location != "."
     }
 }
+
+tasks.release.dependsOn project.tasks.cleanDest
+tasks.release.dependsOn uploadArchives

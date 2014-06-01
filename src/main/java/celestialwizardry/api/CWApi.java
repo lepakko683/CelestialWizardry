@@ -13,8 +13,6 @@ import java.util.List;
 
 public final class CWApi
 {
-    public static final String API_VERSION = "@API_VERSION@";
-
     public static Logger apiLog = null;
 
     private static final String CW_PACKAGE = "celestialwizardry.";
