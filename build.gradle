@@ -84,23 +84,27 @@ task buildInfo {
     def run = cmd.execute()
     run.waitFor()
 
+    ext.revision = "NULL"
+
     // Set the revision depending on the result of command execution
     if (run.exitValue() == 0)
     {
-        ext.revision = run.text.trim()
+        revision = run.text.trim()
     }
     else
     {
-        ext.revision = "NULL"
+        revision = "NULL"
     }
 
-    if (System.getenv("BUILD_NUMBER") != null)
+    ext.buildNum = "0"
+
+    if (System.getenv().BUILD_NUMBER != null)
     {
-        ext.build_number = "${System.getenv("BUILD_NUMBER")}"
+        build_number = "${System.getenv().BUILD_NUMBER}"
     }
     else
     {
-        ext.build_number = "${project.buildInfo.revision}"
+        build_number = "${project.tasks.buildInfo.revision}"
     }
 }
 
@@ -108,7 +112,7 @@ ext.artifact_version = 'NFG'
 
 if (System.getenv().ARTIFACT_VERSION == null)
 {
-    artifact_version = "${config.mod_version}.${project.buildInfo.buildNum}"
+    artifact_version = "${config.mod_version}.${project.tasks.buildInfo.buildNum}"
 }
 // TODO else maybe
 if (System.getenv().ARTIFACT_VERSION != null)
