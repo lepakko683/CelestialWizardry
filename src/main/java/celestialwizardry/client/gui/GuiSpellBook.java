@@ -75,8 +75,8 @@ public class GuiSpellBook extends GuiContainer
     {
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         this.mc.getTextureManager().bindTexture(Resources.Textures.GUI_SPELL_BOOK);
-        int xStart = (width - xSize) / 2;
-        int yStart = (height - ySize) / 2;
+        int xStart = guiLeft;
+        int yStart = guiTop;
         this.drawTexturedModalRect(xStart, yStart, 0, 0, xSize, ySize);
     }
 
