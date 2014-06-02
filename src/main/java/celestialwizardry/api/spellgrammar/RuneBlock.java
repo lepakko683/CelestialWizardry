@@ -2,12 +2,9 @@ package celestialwizardry.api.spellgrammar;
 
 import java.util.List;
 
-public class RuneAction extends RuneCategory
-{
-	//SPAWN, TELEPORT, ACCELERATE
-	private String actionString;
-	
-	public RuneAction(float complexity, String actionString) {
+public class RuneBlock extends RuneCategory {
+
+	public RuneBlock(float complexity) {
 		super(complexity);
 	}
 
@@ -18,7 +15,7 @@ public class RuneAction extends RuneCategory
 	
 	@Override
 	public String getCategoryIDString() {
-		return "action";
+		return "block";
 	}
-   
+
 }

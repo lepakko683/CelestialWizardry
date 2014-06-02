@@ -21,10 +21,10 @@ public abstract class CommonProxy implements IProxy
         // Register player event handler
         FMLCommonHandler.instance().bus().register(EventHandlers.PLAYER_EVENT_HANDLER);
         MinecraftForge.EVENT_BUS.register(EventHandlers.PLAYER_EVENT_HANDLER);
-
+        
         // Register world event handler
-        FMLCommonHandler.instance().bus().register(CelestialWizardry.runeConfig);
-        MinecraftForge.EVENT_BUS.register(CelestialWizardry.runeConfig);
+        FMLCommonHandler.instance().bus().register(EventHandlers.WORLD_EVENT_HANDLER);
+        MinecraftForge.EVENT_BUS.register(EventHandlers.WORLD_EVENT_HANDLER);
     }
 
     public void registerTileEntities()

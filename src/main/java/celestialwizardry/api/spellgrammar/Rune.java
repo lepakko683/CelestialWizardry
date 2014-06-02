@@ -5,19 +5,21 @@ import java.util.List;
 
 public abstract class Rune
 {
+	public class RuneConsts
+	{
+		public static final String RUNE_ACTION_TELEPORT = "teleport";
+		public static final String RUNE_ACTION_ACCELERATE = "accelerate";
+		public static final String RUNE_ACTION_SPAWN = "spawn";
+	}
 	
 	private String runeid = null;
 	
 	private int numbericID = -1;
 	
-    public Rune()
+    public Rune(float complexity)
     {
     }
 	
-    public abstract int getRuneType(); //TODO: return type likely not final
-
-    public abstract float getRuneComplexity();
-
     public abstract List validRuneAttributeTypes();
     
 
@@ -47,5 +49,15 @@ public abstract class Rune
 	public boolean subRuneOf(Rune r)
 	{
 		return false; //TODO 
+	}
+	
+	public static String getFullIdOf(Rune r) {
+		if(r instanceof RuneCategory) {
+			return "rune." + ((RuneCategory)r).getCategoryIDString() + (r.getRuneID() != null && r.getRuneID().length()>0 ? "." + r.getRuneID() : "");
+		}
+		if(r.getRuneID() != null && r.getRuneID().length()>0) {
+			return "rune." + r.getRuneID();
+		}
+		return null;
 	}
 }

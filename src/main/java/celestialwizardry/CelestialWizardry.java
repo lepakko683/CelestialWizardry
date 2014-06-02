@@ -5,7 +5,6 @@ import celestialwizardry.config.Config;
 import celestialwizardry.config.SettingHandler;
 import celestialwizardry.config.spell.ConfigSpells;
 import celestialwizardry.handler.CraftingHandler;
-import celestialwizardry.handler.GlobalRuneConfigurationHandler;
 import celestialwizardry.init.ModBlocks;
 import celestialwizardry.init.ModItems;
 import celestialwizardry.network.GuiHandler;
@@ -21,6 +20,8 @@ import cpw.mods.fml.common.event.FMLFingerprintViolationEvent;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.event.FMLServerStartingEvent;
+import cpw.mods.fml.common.event.FMLServerStoppingEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
 
 import org.apache.logging.log4j.LogManager;
@@ -48,9 +49,6 @@ public class CelestialWizardry
     // Spell configuration
     public static final ConfigSpells configSpells = new ConfigSpells(Version.VERSION);
     
-    // Rune Configuration (per world)
-    public static final GlobalRuneConfigurationHandler runeConfig = new GlobalRuneConfigurationHandler();
-
     @Mod.EventHandler
     public void invalidFingerprint(FMLFingerprintViolationEvent event)
     {
@@ -74,6 +72,17 @@ public class CelestialWizardry
                                   "version of the mod.");
         }
     }
+    
+	@Mod.EventHandler
+	public void onServerStart(FMLServerStartingEvent event) {
+		CelestialWizardry.log.info("SERVER STARTING EVENT!!!!!");
+		System.out.println("Server folder name: " + event.getServer().getFolderName());
+	}
+	
+	@Mod.EventHandler
+	public void onServerStop(FMLServerStoppingEvent event) {
+        CelestialWizardry.log.info("SERVER STOPPING EVENT!!!!!");
+	}
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event)
