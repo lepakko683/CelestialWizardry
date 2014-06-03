@@ -42,9 +42,12 @@ public class RenderOBJBlock implements ISimpleBlockRenderingHandler
             if (block instanceof BlockBell)
             {
             	FMLClientHandler.instance().getClient().renderEngine.bindTexture(Resources.Models.TEXTURE_BELL);
-            	GL11.glTranslatef(0f, 0, 0f);
+            	GL11.glTranslatef(0f, -1.3f, 0f);
+            	GL11.glScalef(2f, 2f, 2f);
 //            	OBJModels.modelBell.renderPart("dinger_Planee");
+            	GL11.glDisable(GL11.GL_CULL_FACE);
             	OBJModels.modelBell.renderAll();
+            	GL11.glEnable(GL11.GL_CULL_FACE);
             }
 
             GL11.glPopMatrix();

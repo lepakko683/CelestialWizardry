@@ -11,14 +11,17 @@ import java.util.Set;
 
 import net.minecraft.nbt.CompressedStreamTools;
 import net.minecraft.nbt.NBTTagCompound;
+import celestialwizardry.CelestialWizardry;
 import celestialwizardry.api.spellgrammar.Rune;
 import celestialwizardry.registry.RuneRegistry;
 
-public class GlobalRuneConfigurationHandler {
+public class ServerRuneConfigurationHandler {
 	public static final String CONFIG_FILE_NAME = "celestialWizardry_runeConfiguration.ini";
-	public static final String CONFIG_FILE_BACKUP_NAME = "celestialWizardry_runeConfiguration.backup.ini"; // ".ini" - Why not? :)
+	public static final String CONFIG_OLD_FILE_NAME = "celestialWizardry_runeConfiguration.old.ini";
+	public static final String CONFIG_FILE_BACKUP_NAME = "celestialWizardry_runeConfiguration.backup.ini";
+	public static final String CONFIG_OLD_FILE_BACKUP_NAME = "celestialWizardry_runeConfiguration.old.backup.ini"; // ".ini" - Why not? :)
 	
-	//TODO: USE LOGGER
+	//TODO: USE LOGGER, HANDLE SWITHING WORLDS
 	
 	//register runes
 	//load config
@@ -30,19 +33,12 @@ public class GlobalRuneConfigurationHandler {
 	private static boolean needToSave = false;
 	private static Map<String, Integer> configData = null;
 	private static int oldAvailableId = -1;
-	private static String DIRPATH = null;
+	private static String WORLD_DIR = null;
+	/**Used to prevent useless iterating through the config*/
+	private static boolean configWasJustCreated = false;
 	
 	public static void init() {
-		Set<Entry<Integer, Rune>> runes = RuneRegistry.runeMap.entrySet();
-		if(!runes.isEmpty()) {
-			Iterator<Entry<Integer, Rune>> rite = runes.iterator();
-			Entry<Integer, Rune> ent = null;
-			while(rite.hasNext()) {
-				ent = rite.next();
-			}
-		} else {
-			System.err.println("Something went terribly wrong!!!"); 
-		}
+		
 	}
 	
 	/**@return -1 if already correct*/
@@ -85,22 +81,20 @@ public class GlobalRuneConfigurationHandler {
 		worldRuneConfig.setInteger(runeStringID, runeNumbericID);
 	}
 	
-	private static File getWorldRuneConfigFile(String worldDir) {
-		try{
-			File confFile = new File(worldDir + CONFIG_FILE_NAME);
-		}catch(Exception e) {
-			e.printStackTrace();
-		}
-		return null;
+	private static File getWorldRuneConfigFile() {
+		return new File(WORLD_DIR + CONFIG_FILE_NAME);
 	}
 	
-	private static File getWorldRuneConfigBackupFile(String worldDir) {
-		try{
-			File confFile = new File(worldDir + CONFIG_FILE_BACKUP_NAME);
-		}catch(Exception e) {
-			e.printStackTrace();
-		}
-		return null;
+	private static File getWorldRuneConfigBackupFile() {
+		return new File(WORLD_DIR + CONFIG_FILE_BACKUP_NAME);
+	}
+	
+	private static File getWorldRuneConfigOLDFile() {
+		return new File(WORLD_DIR + CONFIG_OLD_FILE_NAME);
+	}
+	
+	private static File getWorldRuneConfigOLDBackupFile() {
+		return new File(WORLD_DIR + CONFIG_OLD_FILE_BACKUP_NAME);
 	}
 	
 	/**@param configFile - The file containing the config data */
@@ -132,15 +126,67 @@ public class GlobalRuneConfigurationHandler {
 			
 		return null;
 	}
-	//TODO: finish!!!
-	private static boolean saveWorldRuneConfig(File configFile) {
-		FileOutputStream fos = null;
-		
+	
+	private static boolean saveWorldRuneConfig() {
 		try {
-			fos = new FileOutputStream(configFile);
+			
+			File mainConfigFile = getWorldRuneConfigFile();
+			File backupConfigFile = getWorldRuneConfigBackupFile();
+			
+			boolean deleteSucceeded = false;
+			if(fileExists(mainConfigFile)) {
+				deleteSucceeded = mainConfigFile.delete();
+			}
+			
+			if(!deleteSucceeded) {
+				CelestialWizardry.log.warn("The deletion of the old rune configuration file failed. This might cause problems!");
+			}
+			
+			mainConfigFile = getWorldRuneConfigFile();
+			FileOutputStream fos = null;
+			try {
+				fos = new FileOutputStream(mainConfigFile);
+			} catch(Exception e) {
+				e.printStackTrace();
+				CelestialWizardry.log.error("Couldn't open FileOutputStream for mainConfigFile");
+			}
+			
+			try {
+				CompressedStreamTools.writeCompressed(worldRuneConfig, fos);
+				fos.close();
+			} catch(Exception e) {
+				e.printStackTrace();
+				CelestialWizardry.log.error("Something went wrong with writing into the world rune config file");
+			}
+			
+			// SAVE THE BACKUP
+			deleteSucceeded = false;
+			if(fileExists(backupConfigFile)) {
+				deleteSucceeded = backupConfigFile.delete();
+			}
+			
+			if(!deleteSucceeded) {
+				CelestialWizardry.log.warn("The deletion of the old rune configuration backup file failed. This might cause problems!");
+			}
+			
+			try {
+				fos = new FileOutputStream(backupConfigFile);
+			} catch(Exception e) {
+				e.printStackTrace();
+				CelestialWizardry.log.error("Couldn't open FileOutputStream for backupConfigFile");
+			}
+			
+			try {
+				CompressedStreamTools.writeCompressed(worldRuneConfig, fos);
+				fos.close();
+			} catch(Exception e) {
+				e.printStackTrace();
+				CelestialWizardry.log.error("Something went wrong with writing into the world rune config backup file");
+			}
+			
 		} catch(Exception e) {
 			e.printStackTrace();
-			System.err.println("Couldn't open ");
+			CelestialWizardry.log.error("Something went wrong with saving the world rune config!");
 		}
 		return false;
 	}
@@ -149,19 +195,36 @@ public class GlobalRuneConfigurationHandler {
 		return configFile != null && configFile.exists() && configFile.isFile();
 	}
 	
+	/**Called at creation of a new world*/
 	private static NBTTagCompound createConfigFromRegistry() {
-		return null;
+		
+		NBTTagCompound ret = new NBTTagCompound();
+		RuneRegistry.onCreateConfig();
+		
+		String runeName = null;
+		
+		for(int i=0;i<RuneRegistry.runeIds.size();i++) {
+			runeName = RuneRegistry.runeIds.get(i);
+			
+			if(runeName != null) {
+				ret.setInteger(runeName, i);
+			} else {
+				CelestialWizardry.log.error("Rune \"" + runeName + "\" wasn't added to the config!!!");
+			}
+		}
+		return ret.hasNoTags() ? null : ret;
 	}
 	
 	public static void saveConfigIfNeeded() {
 		if(needToSave) {
-			
+			saveWorldRuneConfig();
 		}
 	}
 	
 	public static void onServerStarting(String worldDir) {
-		File configFile = getWorldRuneConfigFile(worldDir);
-		File configFileBackup = getWorldRuneConfigBackupFile(worldDir);
+		WORLD_DIR = worldDir;
+		File configFile = getWorldRuneConfigFile();
+		File configFileBackup = getWorldRuneConfigBackupFile();
 		
 		if(fileExists(configFile)) {
 			// The normal case when the world has already been created and is just being loaded.
@@ -180,10 +243,10 @@ public class GlobalRuneConfigurationHandler {
 			// Config file nor backup was loaded, we assume world is just being created.
 			
 			System.out.println("No config was found, creating a new one...");
-			
+			worldRuneConfig = createConfigFromRegistry();
 			
 		}
-		if(worldRuneConfig != null && !worldRuneConfig.hasNoTags()) {
+		if((worldRuneConfig != null && !worldRuneConfig.hasNoTags())) {
 			init();
 		} else {
 			System.err.println("Something went horribly wrong, GlobalRuneConfigurationHandler was about to init, but world rune config still wasn't loaded!");
@@ -192,8 +255,8 @@ public class GlobalRuneConfigurationHandler {
 		
 	}
 	
-	public static void onServerStopping(String worldDir) {
-		
+	public static void onServerStopping() {
+		saveConfigIfNeeded();
 	}
 	
 	

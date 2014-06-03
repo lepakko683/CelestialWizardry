@@ -28,7 +28,7 @@ public class BlockBell extends BlockCW implements ITileEntityProvider
 		{
 			Random rand = new Random();
 			System.out.println("ding!");
-			world.playSoundAtEntity(player, /*"random.levelup"*/"mob.records.ward", 1f, (8+rand.nextInt(3))/10f);
+			world.playSoundAtEntity(player, /*"random.levelup"*/"records.mall", 1f, (8+rand.nextInt(3))/10f);
 			return true;
 		}
 		return super.onBlockActivated(world, x, y, z, player, unk1, unk2, unk3, unk4);

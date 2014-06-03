@@ -22,6 +22,25 @@ public class Colour
         this.red = r;
         this.green = g;
         this.blue = b;
+        this.alpha = 1f;
+    }
+    
+    /**Values between 0 and 255 (inclusive)*/
+    public Colour(int r, int g, int b)
+    {
+    	this.red = (float) r / 255f;
+    	this.green = (float) g / 255f;
+    	this.blue = (float) b / 255f;
+    	this.alpha = 1f;
+    }
+    
+    /**Values between 0 and 255 (inclusive)*/
+    public Colour(int r, int g, int b, int a)
+    {
+    	this.red = (float) r / 255f;
+    	this.green = (float) g / 255f;
+    	this.blue = (float) b / 255f;
+    	this.alpha = (float) a / 255f;
     }
 
     public static Colour fromHexString(String s)
@@ -44,6 +63,22 @@ public class Colour
             }
         }
         return null;
+    }
+    
+    public int getRedI() {
+    	return (int)Math.floor(this.red*255);
+    }
+    
+    public int getGreenI() {
+    	return (int)Math.floor(this.green*255);
+    }
+    
+    public int getBlueI() {
+    	return (int)Math.floor(this.blue*255);
+    }
+    
+    public int getAlphaI() {
+    	return (int)Math.floor(this.alpha*255);
     }
 
     public float getRed()
@@ -85,6 +120,18 @@ public class Colour
     {
         this.alpha = v;
     }
+    
+    public int getPackedRGB() {
+    	return ( getRedI() << 16 ) | ( getGreenI() << 8 ) | ( getBlueI() );
+    }
+    
+    public int getPackedRGBA() {
+    	return ( getRedI() << 24 ) | ( getGreenI() << 16 ) | ( getBlueI() << 8 ) | ( getAlphaI() );
+    }
+    
+    public int getPackedARGB() {
+    	return ( getAlphaI() << 24) | ( getRedI() << 16 ) | ( getGreenI() << 8 ) | ( getBlueI() );
+    }
 
     public String getAsHexString()
     {
@@ -106,6 +153,33 @@ public class Colour
         }
         System.err.println("invalid character \"" + c + "\"");
         return -1;
+    }
+    
+    public static int packARGB(int alpha, int red, int green, int blue) {
+    	return ( (alpha << 24) | (red << 16) | (green << 8) | (blue) );
+    }
+    
+    public static int packRGBA(int red, int green, int blue, int alpha) {
+    	return ( (red << 24) | (green << 16) | (blue << 8) | (alpha) );
+    }
+    
+    public static int packRGB(int red, int green, int blue) {
+    	return ( (red << 16) | (green << 8) | (blue) );
+    }
+    
+    /**Not tested!*/
+    public static Colour unpackRGB(int packed) {
+    	return new Colour( (packed >> 16) & 255, (packed >> 8) & 255, (packed) & 255 );
+    }
+    
+    /**Not tested!*/
+    public static Colour unpackRGBA(int packed) {
+    	return new Colour( (packed >> 24) & 255, (packed >> 16) & 255, (packed >> 8) & 255, (packed) & 255 );
+    }
+    
+    /**Not tested!*/
+    public static Colour unpackARGB(int packed) {
+    	return new Colour( (packed >> 16) & 255, (packed >> 8) & 255, (packed) & 255, (packed >> 24) & 255 );
     }
 
 }
