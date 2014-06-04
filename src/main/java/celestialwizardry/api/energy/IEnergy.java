@@ -5,6 +5,7 @@ public interface IEnergy {
 	//Mundane energy types: heat, ...
 	public boolean canBeTransformedInto(IEnergy energy);
 	
+	/**Used for the transform ratio*/
 	public float getEnergyValue();
 	
 	public String getEnergyName();
@@ -15,8 +16,6 @@ public interface IEnergy {
 	
 	public boolean isMundane();
 	
-	public float crossEnergyTypeTransformLoss();
-	
-//	public float crossEnergyTypeTransformLoss(IEnergy target); TODO
+	public float crossEnergyTypeTransformLoss(IEnergy target);
 	
 }

@@ -43,6 +43,6 @@ public class Resources
                 .getResourceLocation(MODEL_LOCATION + "WritingTable.obj");
         
         public static final ResourceLocation MODEL_BELL = ResourceLocationHelper
-                .getResourceLocation(MODEL_LOCATION + "RandomBell.obj");
+                .getResourceLocation(MODEL_LOCATION + "RandomBell2.obj");
     }
 }

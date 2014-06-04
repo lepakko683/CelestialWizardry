@@ -15,7 +15,7 @@ public class EnergyHelper
             return source.getEnergyValue() / target.getEnergyValue();
         }
         return (source.getEnergyValue() / target.getEnergyValue()) * (1 - (
-                (source.crossEnergyTypeTransformLoss() + target.crossEnergyTypeTransformLoss()) / 2));
+                (source.crossEnergyTypeTransformLoss(null) + target.crossEnergyTypeTransformLoss(null)) / 2));
     }
 
     public static boolean canTransform(IEnergy source, IEnergy target)
