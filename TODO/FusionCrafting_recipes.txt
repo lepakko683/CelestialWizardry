@@ -1,0 +1,4 @@
+Fusion Crafting - Recipes:
+	Results:
+		-Magical Intelligence Core
+		

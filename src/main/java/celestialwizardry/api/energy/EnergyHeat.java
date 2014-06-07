@@ -1,9 +1,9 @@
 package celestialwizardry.api.energy;
 
-public class EnergyHeat implements IEnergy {
+public class EnergyHeat extends EnergyType {
 
 	@Override
-	public boolean canBeTransformedInto(IEnergy energy) {
+	public boolean canBeTransformedInto(EnergyType energy) {
 		return energy.getEnergyName().equalsIgnoreCase("Elemental Fire");
 	}
 
@@ -33,7 +33,7 @@ public class EnergyHeat implements IEnergy {
 	}
 	
 	@Override
-	public float crossEnergyTypeTransformLoss(IEnergy target) {
+	public float crossEnergyTypeTransformLoss(EnergyType target) {
 		return 0f;
 	}
 

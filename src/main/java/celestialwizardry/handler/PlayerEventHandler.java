@@ -29,7 +29,7 @@ public class PlayerEventHandler
     public void onPlayerLoggedIn(PlayerEvent.PlayerLoggedInEvent event)
     {
         ModEntityProperties entityProperties = propertiesConcurrentHashMap.remove(event.player.getPersistentID());
-
+        System.out.println("PLAYER LOGIN!!!");
         if (entityProperties != null)
         {
             entityProperties.saveNBTData(event.player.getEntityData());

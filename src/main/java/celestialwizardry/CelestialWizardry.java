@@ -4,6 +4,7 @@ import celestialwizardry.api.CWApi;
 import celestialwizardry.config.Config;
 import celestialwizardry.config.SettingHandler;
 import celestialwizardry.config.spell.ConfigSpells;
+import celestialwizardry.entity.EntityBell;
 import celestialwizardry.handler.CraftingHandler;
 import celestialwizardry.init.ModBlocks;
 import celestialwizardry.init.ModItems;
@@ -23,6 +24,7 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.event.FMLServerStoppingEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
+import cpw.mods.fml.common.registry.EntityRegistry;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -119,6 +121,7 @@ public class CelestialWizardry
 
         // Initialize mod entities
 //        ModEntities.init(); DISABLED!!!
+        EntityRegistry.registerModEntity(EntityBell.class, "Bell", 1, CelestialWizardry.instance, 64, 1, true);
 
         // Initialize mod packet handler
         PacketHandler.init();

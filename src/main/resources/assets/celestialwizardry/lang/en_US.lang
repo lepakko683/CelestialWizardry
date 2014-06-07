@@ -12,6 +12,9 @@ item.celestialwizardry:page.name=Lost Page
 item.celestialwizardry:magicalPen.name=Magical Pen
 item.celestialwizardry:matrix.name=Celestial Matrix
 
+# DummyItems
+item.celestialwizardry:magicalIntelligenceCore.name=Magical Intelligence Core
+
 # Block localizations
 tile.celestialwizardry:writingTable.name=Writing Table
 tile.celestialwizardry:livingOre.name=Living Ore

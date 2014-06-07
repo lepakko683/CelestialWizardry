@@ -1,7 +1,7 @@
 package celestialwizardry.registry;
 
 import celestialwizardry.CelestialWizardry;
-import celestialwizardry.api.energy.IEnergy;
+import celestialwizardry.api.energy.EnergyType;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -9,9 +9,9 @@ import java.util.Map;
 public class EnergyRegistry
 {
 
-    public static Map<String, IEnergy> energyMap = new HashMap<String, IEnergy>();
+    public static Map<String, EnergyType> energyMap = new HashMap<String, EnergyType>();
 
-    public static void registerEnergyType(IEnergy energy)
+    public static void registerEnergyType(EnergyType energy)
     {
         String name = "";// rune.getName();
 
@@ -26,7 +26,7 @@ public class EnergyRegistry
         }
     }
 
-    public static IEnergy getEnergyType(String name)
+    public static EnergyType getEnergyType(String name)
     {
         if (energyMap.containsKey(name))
         {

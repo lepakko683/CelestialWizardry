@@ -1,6 +1,6 @@
 package celestialwizardry.api.energy;
 
-public class EnergyElemental implements IEnergy {
+public class EnergyElemental extends EnergyType {
 	
 	private String name;
 	
@@ -9,7 +9,7 @@ public class EnergyElemental implements IEnergy {
 	}
 
 	@Override
-	public boolean canBeTransformedInto(IEnergy energy) {
+	public boolean canBeTransformedInto(EnergyType energy) {
 		return false;
 	}
 
@@ -39,7 +39,7 @@ public class EnergyElemental implements IEnergy {
 	}
 
 	@Override
-	public float crossEnergyTypeTransformLoss(IEnergy target) {
+	public float crossEnergyTypeTransformLoss(EnergyType target) {
 		return 0;
 	}
 

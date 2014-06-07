@@ -18,6 +18,7 @@ public class RenderBell extends TileEntitySpecialRenderer {
 		FMLClientHandler.instance().getClient().renderEngine.bindTexture(Resources.Models.TEXTURE_BELL);
 		GL11.glPushMatrix();
 		GL11.glTranslated(x+.5d, y, z+.5d);
+//		System.out.println("x: " + x + "y: " + y + " z: " + z);
 //		System.out.println("Culling enabled: " + GL11.glIsEnabled(GL11.GL_CULL_FACE));
 		GL11.glDisable(GL11.GL_CULL_FACE);
 		

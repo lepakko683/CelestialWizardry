@@ -1,20 +1,20 @@
 package celestialwizardry.crafting;
 
-import celestialwizardry.api.energy.IEnergy;
+import celestialwizardry.api.energy.EnergyType;
 
 import net.minecraft.item.ItemStack;
 
 public class FusionCraftingRecipe
 {
     private ItemStack items[];
-    private IEnergy energy[];
+    private EnergyType energy[];
 
     public FusionCraftingRecipe()
     {
 
     }
 
-    public IEnergy[] getRequiredEnergyTypes()
+    public EnergyType[] getRequiredEnergyTypes()
     {
         return null;
     }

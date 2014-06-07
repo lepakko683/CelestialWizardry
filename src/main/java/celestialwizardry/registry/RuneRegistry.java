@@ -2,6 +2,7 @@ package celestialwizardry.registry;
 
 import celestialwizardry.CelestialWizardry;
 import celestialwizardry.api.spellgrammar.Rune;
+import celestialwizardry.config.RuneConfig;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -35,6 +36,20 @@ public abstract class RuneRegistry
     		for(int i=0;i<config.size();i++) {
         		runeIds.add(i, config.get(i));
         	}
+        	configLoaded = true;
+    	} else {
+    		CelestialWizardry.log.error("Trying to setup numberic ids and runeIds isn't empty!");
+    	}
+    }
+    
+    public static void setupNumIds(RuneConfig config) {
+    	if(!configLoaded && runeIds.isEmpty()) {
+    		Iterator<String> rNames = config.getRuneNames().iterator();
+    		String cName = null;
+    		while (rNames.hasNext()) {
+    			cName = rNames.next();
+    			runeIds.add(config.getNumId(cName), cName);
+    		}
         	configLoaded = true;
     	} else {
     		CelestialWizardry.log.error("Trying to setup numberic ids and runeIds isn't empty!");

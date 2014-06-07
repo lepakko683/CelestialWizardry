@@ -2,9 +2,11 @@ package celestialwizardry.proxy;
 
 import celestialwizardry.client.ItemRendererSpellBook;
 import celestialwizardry.client.render.RenderBell;
+import celestialwizardry.client.render.RenderEntityBell;
 import celestialwizardry.client.render.RenderOBJBlock;
 import celestialwizardry.client.render.RenderWritingTable;
 import celestialwizardry.client.settings.KeyBindings;
+import celestialwizardry.entity.EntityBell;
 import celestialwizardry.init.ModItems;
 import celestialwizardry.reference.EventHandlers;
 import celestialwizardry.reference.Settings;
@@ -30,6 +32,9 @@ public class ClientProxy extends CommonProxy
 
         // Register key input handler
         FMLCommonHandler.instance().bus().register(EventHandlers.KEY_INPUT_EVENT_HANDLER);
+        
+        // Register client render tick handler
+        FMLCommonHandler.instance().bus().register(EventHandlers.CLIENT_RENDER_TICK_EVENT_HANDLER);
     }
 
     @Override
@@ -49,6 +54,7 @@ public class ClientProxy extends CommonProxy
 
         RenderingRegistry.registerBlockHandler(new RenderOBJBlock());
 
+        RenderingRegistry.registerEntityRenderingHandler(EntityBell.class, new RenderEntityBell());
 //        RenderingRegistry.registerEntityRenderingHandler(EntityLivingOre.class, new RenderOreGolem());
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityWritingTable.class, new RenderWritingTable());
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBell.class, new RenderBell());

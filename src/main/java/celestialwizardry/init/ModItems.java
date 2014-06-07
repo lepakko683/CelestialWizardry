@@ -21,6 +21,7 @@ public class ModItems
     public static final ItemCW page = new ItemPage();
     public static final ItemCW magicalPen = new ItemMagicalPen();
     public static final ItemCW matrix = new ItemMatrix();
+    public static final ItemCW dummyItem = new ItemDummy();
 
     public static void init()
     {
@@ -34,6 +35,7 @@ public class ModItems
         register(page, Names.Items.PAGE);
         register(magicalPen, Names.Items.MAGICAL_PEN);
         register(matrix, Names.Items.MATRIX);
+        register(dummyItem, "dummyItem");
     }
 
     private static void register(Item item, String name)

@@ -4,6 +4,7 @@ import celestialwizardry.block.BlockBell;
 import celestialwizardry.block.BlockCW;
 import celestialwizardry.block.BlockLivingOre;
 import celestialwizardry.block.BlockWritingTable;
+import celestialwizardry.item.ItemBlockBell;
 import celestialwizardry.item.ItemBlockCW;
 import celestialwizardry.reference.Names;
 import net.minecraft.block.Block;
@@ -23,7 +24,7 @@ public class ModBlocks
     {
         register(writingTable, Names.Blocks.WRITING_TABLE);
         register(livingOre, Names.Blocks.LIVING_ORE);
-        register(bell, Names.Blocks.BELL);
+        register(bell, Names.Blocks.BELL, ItemBlockBell.class);
     }
 
     private static void register(Block block, String name)

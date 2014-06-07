@@ -1,12 +1,14 @@
 package celestialwizardry.proxy;
 
 import celestialwizardry.CelestialWizardry;
+import celestialwizardry.entity.EntityBell;
 import celestialwizardry.reference.EventHandlers;
 import celestialwizardry.reference.Names;
 import celestialwizardry.tileentity.TileEntityBell;
 import celestialwizardry.tileentity.TileEntityWritingTable;
 import net.minecraftforge.common.MinecraftForge;
 import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 public abstract class CommonProxy implements IProxy

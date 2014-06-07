@@ -4,7 +4,7 @@ import celestialwizardry.reference.Messages;
 import celestialwizardry.reference.Names;
 import celestialwizardry.reference.Resources;
 import celestialwizardry.util.StringHelper;
-
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -16,7 +16,6 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-
 import baubles.api.BaubleType;
 import baubles.api.IBauble;
 import baubles.common.container.InventoryBaubles;
@@ -26,6 +25,9 @@ import java.util.List;
 
 public class ItemConcentrationRing extends ItemCW implements IBauble
 {
+	
+	private IIcon itemIcons[];
+	
     public ItemConcentrationRing()
     {
         super();
@@ -38,13 +40,25 @@ public class ItemConcentrationRing extends ItemCW implements IBauble
     @SideOnly(Side.CLIENT)
     public IIcon getIconFromDamage(int meta)
     {
-        return itemIcon;
+    	int j = MathHelper.clamp_int(meta, 0, Names.Items.CONCENTRATION_RING_SUBTYPES.length-1);
+        return this.itemIcons[j];
     }
 
     @Override
     public String getUnlocalizedName()
     {
         return String.format("item.%s%s", Resources.RESOURCE_PREFIX, Names.Items.CONCENTRATION_RING);
+    }
+	
+	@SideOnly(Side.CLIENT)
+    public void registerIcons(IIconRegister par1IconRegister)
+    {
+        this.itemIcons = new IIcon[Names.Items.CONCENTRATION_RING_SUBTYPES.length];
+
+        for (int i = 0; i < itemIcons.length; ++i)
+        {
+            this.itemIcons[i] = par1IconRegister.registerIcon("celestialwizardry:" + Names.Items.CONCENTRATION_RING + "." + Names.Items.CONCENTRATION_RING_SUBTYPES[i]);
+        }
     }
 
     @Override
