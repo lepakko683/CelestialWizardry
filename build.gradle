@@ -27,10 +27,6 @@ buildscript {
 // Add dependency repositories
 repositories {
     maven {
-        name = "chickenbones"
-        url = "http://chickenbones.net/maven/"
-    }
-    maven {
         name = "celestialwizardry"
         url = "http://localhost/maven/"
     }
@@ -93,29 +89,17 @@ task buildInfo {
 
     if (System.getenv().BUILD_NUMBER != null)
     {
-        ext.buildNum = "jenkins${System.getenv().BUILD_NUMBER}"
+        ext.build_number = "${System.getenv().BUILD_NUMBER}"
     }
     else
     {
-        ext.buildNum = "DEV.${project.buildInfo.revision}"
+        ext.build_number = "DEV.${project.buildInfo.revision}"
     }
 
-    println "CelestialWizardry revision ${project.buildInfo.revision} build ${project.buildInfo.buildNum}"
+    println "CelestialWizardry revision ${project.buildInfo.revision} build ${project.buildInfo.build_number}"
 }
 
-ext.artifact_version = 'NFG'
-
-if (System.getenv().ARTIFACT_VERSION == null)
-{
-    artifact_version = "${config.mod_version}.${project.buildInfo.buildNum}"
-}
-
-if (System.getenv().ARTIFACT_VERSION != null)
-{
-    artifact_version = "${system.getenv().ARTIFACT_VERSION}"
-}
-
-version = "${artifact_version}"
+version = "${config.mod_version}.${project.buildInfo.build_number}"
 
 // Print out the minecraft forge version
 println config.mc_version + "-" + config.forge_version
@@ -125,20 +109,14 @@ minecraft {
     version = config.mc_version + "-" + config.forge_version
     assetDir = 'run/assets'
 
-    replaceIn "reference/Reference.java"
-    if (project.hasProperty("CelestialWizardry.release") &&
-            new File(project.property("CelestialWizardry.release")).exists())
-    {
-
-        // Load the private property file if one is found
-        Properties props = new Properties()
-        props.load(new FileInputStream(file(project.property("CelestialWizardry.release"))))
-
-        replace "@FINGERPRINT@", props['signature']
-    }
-
     replaceIn "reference/Version.java"
     replace "@VERSION@", project.version
+
+    replaceIn "reference/Reference.java"
+    if (project.hasProperty("cw_signature"))
+    {
+        replace "@FINGERPRINT@", project.cw_signature
+    }
 }
 
 processResources {
@@ -149,14 +127,14 @@ processResources {
     inputs.property "baubles_version", config.baubles_version
     inputs.property "baubles_root", config.baubles_root
 
-    // Exclude .xcf files since they are not part of the mod
+    // Exclude .xcf files since they are for development only
     exclude '**/*.xcf'
 
     // Replace properties in info files
     from(sourceSets.main.resources.srcDirs) {
 
         // Include only info files
-        include '*.info'
+        include '**/*.info'
 
         // Replace version, mc_vrsion, baubles_version and baubles_root
         expand 'version': project.version, 'mc_version': config.mc_version,
@@ -166,12 +144,12 @@ processResources {
     // Copy everything excluding info files
     from(sourceSets.main.resources.srcDirs) {
         // Exclude info files
-        exclude '*.info'
+        exclude '**/*.info'
     }
 }
 
 // Set the version for archive names
-version = "${project.minecraft.version}-${artifact_version}"
+version = "${project.minecraft.version}-${project.version}"
 
 // Add custom source sets so gradle takes right sources to api and source archives
 sourceSets {
@@ -226,8 +204,8 @@ artifacts {
 }
 
 // Make the api and sources archives after compiled archive to make sure they have correct constant values
-tasks.apiJar.shouldRunAfter project.tasks.deobfJar
-tasks.sourceJar.shouldRunAfter project.tasks.deobfJar
+// tasks.apiJar.shouldRunAfter project.tasks.deobfJar
+// tasks.sourceJar.shouldRunAfter project.tasks.deobfJar
 
 ext.baubles_file = "Baubles-deobf-${config.mc_version}-${config.baubles_version}.jar"
 ext.baubles_url = "${config.baubles_root}${project.baubles_file}"
@@ -245,44 +223,35 @@ task getBaubles(dependsOn: "extractUserDev") {
 tasks.setupDevWorkspace.dependsOn project.tasks.getBaubles
 tasks.setupDecompWorkspace.dependsOn project.tasks.getBaubles
 
-// Set the information for signing the jar
-if (project.hasProperty("CelestialWizardry.release") &&
-        new File(project.property("CelestialWizardry.release")).exists())
-{
-
-    // Load the private property file if one is found
-    Properties props = new Properties()
-    props.load(new FileInputStream(file(project.property("CelestialWizardry.release"))))
-
-    ext.keystore_location = file(props['keystore_location'])
-    ext.keystore_user_alias = props['keystore_alias']
-    ext.keystore_user_password = props['keystore_password']
-
-    println "Valid jar signing properties found"
-}
-else
+// Keystore location
+if (!project.hasProperty("keystore_location"))
 {
     ext.keystore_location = "."
-    ext.keystore_user_alias = ""
-    ext.keystore_user_password = ""
 }
 
-// Sign the final jar
-task signJar {
+// Keystore alias
+if (!project.hasProperty("cw_keystore_alias"))
+{
+    ext.ee3_keystore_alias = ""
+}
 
-    // This will ensure that this task is redone when the some of these properties change.
+// Keystore password
+if (!project.hasProperty("keystore_password"))
+{
+    ext.keystore_password = ""
+}
+
+task signJar {
     inputs.file jar.getArchivePath()
     inputs.file keystore_location
-    inputs.property "keystore_user_alias", keystore_user_alias
-    inputs.property "keystore_user_password", keystore_user_password
+    inputs.property "cw_keystore_alias", cw_keystore_alias
+    inputs.property "keystore_password", keystore_password
     outputs.file jar.getArchivePath()
 
-    // Only sign the jar if the keystore exists
+    // Only sign if the keystore exists
     onlyIf {
         return keystore_location != "."
     }
-
-    println "Path to archive: " + jar.getArchivePath()
 
     // Sign the jar
     doLast {
@@ -290,9 +259,8 @@ task signJar {
                 destDir: jar.destinationDir,
                 jar: jar.getArchivePath(),
                 keystore: keystore_location,
-                alias: keystore_user_alias,
-                storepass: keystore_user_password,
-                keypass: keystore_user_password
+                alias: cw_keystore_alias,
+                storepass: keystore_password
         )
     }
 }
@@ -302,14 +270,61 @@ tasks.signJar.dependsOn tasks.build
 
 // Configure an upload task
 uploadArchives {
-    if (System.getenv().MAVEN != null)
-    {
-        repositories {
-            logger.info('Publishing to maven repo')
-
+    repositories {
+        if (project.hasProperty("maven"))
+        {
             mavenDeployer {
-                repository(url: "file://${System.getenv("MAVEN")}")
+                repository(url: project.maven)
+
+                pom {
+                    groupId = project.group
+                    version = project.version
+                    artifactId = project.archivesBaseName
+
+                    project {
+                        name project.archivesBaseName
+                        packaging 'jar'
+                        description 'CelestialWizardry'
+                        url 'https://github.com/PizzAna/CelestialWizardry'
+
+                        scm {
+                            url 'https://github.com/PizzAna/CelestialWizardry'
+                            connection 'scm:git:git://github.com/PizzAna/CelestialWizardry.git'
+                            developerConnection 'scm:git:git@github.com:PizzAna/CelestialWizardry.git'
+                        }
+
+                        issueManagement {
+                            system 'github'
+                            url 'https://github.com/PizzAna/CelestialWizardry/issues'
+                        }
+
+                        licenses {
+                            license {
+                                name 'GNU GENERAL PUBLIC LICENSE v2'
+                                url 'http://www.gnu.org/licenses/gpl-2.0.html'
+                                distribution 'repo'
+                            }
+                        }
+
+                        developers {
+                            developer {
+                                id 'PizzAna'
+                                name 'PizzAna'
+                                roles { role 'developer' }
+                            }
+                            developer {
+                                id 'le683'
+                                name 'Okkapel'
+                                roles { role 'developer' }
+                            }
+                        }
+                    }
+                }
             }
+        }
+        else
+        {
+            add project.repositories.mavenLocal()
         }
     }
 }
