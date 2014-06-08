@@ -2,7 +2,7 @@ CelestialWizardry
 =================
 
 ##Welcome to CelestialWizardry GitHub repository!
-**LATEST OFFICIAL VERSION**: [0.1-DEV.11 for Minecraft 1.7.2](copy.com/RUcI6qxo3BXp/CelestialWizardry-1.7.2-0.1-DEV.11.jar)
+**LATEST OFFICIAL VERSION**: [0.1-DEV.11 for Minecraft 1.7.2](http://copy.com/RUcI6qxo3BXp/CelestialWizardry-1.7.2-0.1-DEV.11.jar)
 
 [Compiling Mod](#compiling-celestial-wizardry) - For those that want the latest unreleased features.
 
