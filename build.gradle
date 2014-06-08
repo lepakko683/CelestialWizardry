@@ -203,11 +203,12 @@ artifacts {
 ext.baubles_file = "Baubles-deobf-${config.mc_version}-${config.baubles_version}.jar"
 ext.baubles_url = "${config.baubles_root}${project.baubles_file}"
 ext.baubles_dir = "./libs/${project.baubles_file}"
+ext.libs_dir = "./libs/"
 
 // Download baubles from azanor's mirror and place it to libs folder
 task getBaubles(dependsOn: "extractUserDev") {
     doLast {
-        ant.mkdir(dir: project.baubles_dir)
+        ant.mkdir(dir: project.libs_dir)
         ant.get(src: project.baubles_url, dest: project.baubles_dir)
     }
 }
