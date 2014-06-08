@@ -8,16 +8,16 @@ import cpw.mods.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class GuiButtonInvisible extends GuiButton
 {
-    public GuiButtonInvisible(int par1, int par2, int par3, int par4, int par5, String par6Str)
+    public GuiButtonInvisible(int id, int x, int y, int width, int height, String name)
     {
-        super(par1, par2, par3, par4, par5, par6Str);
+        super(id, x, y, width, height, name);
     }
 
     @Override
-    public void drawButton(Minecraft mc, int par2, int par3)
+    public void drawButton(Minecraft mc, int x, int y)
     {
-        field_146123_n = par2 >= xPosition && par3 >= yPosition && par2 < xPosition + width
-                && par3 < yPosition + height;
+        field_146123_n = x >= xPosition && y >= yPosition && x < xPosition + width
+                && y < yPosition + height;
         int k = getHoverState(field_146123_n);
 
         boolean unicode = mc.fontRenderer.getUnicodeFlag();

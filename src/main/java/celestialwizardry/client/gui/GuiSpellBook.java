@@ -1,11 +1,13 @@
 package celestialwizardry.client.gui;
 
 import celestialwizardry.api.spellbook.SpellBookCategory;
+import celestialwizardry.handler.ClientTickEventHandler;
 import celestialwizardry.inventory.ContainerSpellBook;
 import celestialwizardry.reference.Resources;
 import celestialwizardry.registry.SpellBookRegistry;
 import celestialwizardry.util.StringHelper;
 
+import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
 import cpw.mods.fml.relauncher.Side;
@@ -19,10 +21,17 @@ import java.util.List;
 public class GuiSpellBook extends GuiContainer
 {
     public BookState state;
+    public InventoryPlayer player;
+
+    public static final int CATEGORIES_IN_COLUMN = 10;
+
+    protected GuiButton guide;
 
     public GuiSpellBook(InventoryPlayer player)
     {
         super(new ContainerSpellBook(player));
+
+        this.player = player;
 
         xSize = 216;
         ySize = 255;
@@ -38,22 +47,31 @@ public class GuiSpellBook extends GuiContainer
 
         buttonList.clear();
 
-        int x = 18;
-
-        for (int i = 0; i < 12; i++)
+        if (state == BookState.INDEX)
         {
-            int y = 16 + i * 12;
-            buttonList.add(new GuiButtonInvisible(i, guiLeft + x, guiTop + y, 110, 10, ""));
+            // TODO Continue buttons on next page if we get that far
+
+            int x = 14;
+
+            for (int i = 0; i < CATEGORIES_IN_COLUMN; i++)
+            {
+                int y = 12 + i * 12;
+                buttonList.add(new GuiButtonInvisible(i, guiLeft + x, guiTop + y, 110, 10, ""));
+            }
+
+            populateIndex();
         }
 
-        populateIndex();
+        guide = new GuiButtonBookLeft(13, guiLeft, guiTop + ySize - 10, "Test");
+
+        buttonList.add(guide);
     }
 
-    private void populateIndex()
+    protected void populateIndex()
     {
         List<SpellBookCategory> categoryList = SpellBookRegistry.getAllCategories();
 
-        for (int i = 3; i < 12; i++)
+        for (int i = 3; i < CATEGORIES_IN_COLUMN; i++)
         {
             int j = i - 3;
             GuiButtonInvisible button = (GuiButtonInvisible) buttonList.get(i);
@@ -71,13 +89,34 @@ public class GuiSpellBook extends GuiContainer
     }
 
     @Override
+    protected void actionPerformed(GuiButton button)
+    {
+        int i = button.id - 3;
+
+        if (i < 0)
+        {
+            return;
+        }
+
+        List<SpellBookCategory> categories = SpellBookRegistry.getAllCategories();
+        SpellBookCategory category = i >= categories.size() ? null : categories.get(i);
+
+        if (category != null)
+        {
+            mc.displayGuiScreen(new GuiSpellBookCategory(player, category));
+            ClientTickEventHandler.notifyPageChange();
+        }
+    }
+
+    @Override
     protected void drawGuiContainerBackgroundLayer(float var1, int var2, int var3)
     {
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         this.mc.getTextureManager().bindTexture(Resources.Textures.GUI_SPELL_BOOK);
         int xStart = guiLeft;
         int yStart = guiTop;
-        this.drawTexturedModalRect(xStart, yStart, 0, 0, xSize, ySize);
+        this.drawTexturedModalRect(xStart, yStart, 0, 0, xSize, 160);
+        this.drawTexturedModalRect(xStart, yStart + 166, 0, 166, 197, ySize - 165);
     }
 
     @Override
@@ -86,8 +125,10 @@ public class GuiSpellBook extends GuiContainer
         return false;
     }
 
-    private static enum BookState
+    protected static enum BookState
     {
-        INDEX, CATEGORY, ENTRY
+        INDEX,
+        CATEGORY,
+        ENTRY
     }
 }
