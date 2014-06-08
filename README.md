@@ -64,6 +64,7 @@ This section assumes that you're using the command-line version of Git.
 
 ####Compile Celestial Wizardry
 **Please replace `gradle` with `gradlew.bat` if you are on Windows and with `gradlew` if you are on Linux**
+
 1. Execute `gradle setupCiWorkspace`. This sets up Forge and downloads the necessary libraries to build Celestial Wizardry.  This might take some time, be patient.
 	* You will generally only have to do this once until the Forge version in `build.properties` changes.
 2. Execute `gradle build`. If you did everything right, `BUILD SUCCESSFUL` will be displayed after it finishes.  This should be relatively quick.
