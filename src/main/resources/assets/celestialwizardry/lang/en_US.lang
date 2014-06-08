@@ -10,7 +10,10 @@ item.celestialwizardry:concentrationRing.solar.name=Ring of Concentration
 item.celestialwizardry:seasonRing.name=Ring of Seasons
 item.celestialwizardry:page.name=Lost Page
 item.celestialwizardry:magicalPen.name=Magical Pen
-item.celestialwizardry:matrix.name=Celestial Matrix
+item.celestialwizardry:matrix.tier.1.name=Celestial Matrix
+item.celestialwizardry:matrix.tier.2.name=Celestial Matrix
+item.celestialwizardry:matrix.tier.3.name=Celestial Matrix
+item.celestialwizardry:matrix.tier.4.name=Celestial Matrix
 
 # DummyItems
 item.celestialwizardry:magicalIntelligenceCore.name=Magical Intelligence Core
@@ -28,6 +31,8 @@ tooltip.celestialwizardry:lunar=Lunar
 tooltip.celestialwizardry:solar=Solar
 tooltip.celestialwizardry:noNBT=No NBT Tags found
 tooltip.celestialwizardry:NBT=NBT Tags found
+tooltip.celestialwizardry:tier=Tier
+tooltip.celestialwizardry:total=Total
 
 # Messages
 message.celestialwizardry:holdShift1=Hold
