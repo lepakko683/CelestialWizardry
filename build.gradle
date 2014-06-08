@@ -297,6 +297,7 @@ uploadArchives {
                 logger.info("Deploying to maven repository")
 
                 repository(url: project.maven)
+                repository(url: project.maven_mirror)
 
                 pom {
                     groupId = project.group
