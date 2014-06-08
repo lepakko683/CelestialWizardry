@@ -139,6 +139,5 @@ public class ItemSeasonRing extends ItemCW implements IBauble
     public boolean canUnequip(ItemStack itemstack, EntityLivingBase player)
     {
         return !(Settings.enableSeasonal && HolidayHelper.isBirthday());
-
     }
 }

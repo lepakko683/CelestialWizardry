@@ -25,7 +25,6 @@ import java.util.List;
 
 public class ItemConcentrationRing extends ItemCW implements IBauble
 {
-	
 	private IIcon itemIcons[];
 	
     public ItemConcentrationRing()
@@ -57,7 +56,7 @@ public class ItemConcentrationRing extends ItemCW implements IBauble
 
         for (int i = 0; i < itemIcons.length; ++i)
         {
-            this.itemIcons[i] = par1IconRegister.registerIcon("celestialwizardry:" + Names.Items.CONCENTRATION_RING + "." + Names.Items.CONCENTRATION_RING_SUBTYPES[i]);
+            this.itemIcons[i] = par1IconRegister.registerIcon(Resources.RESOURCE_PREFIX + Names.Items.CONCENTRATION_RING + "." + Names.Items.CONCENTRATION_RING_SUBTYPES[i]);
         }
     }
 
