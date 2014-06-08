@@ -26,10 +26,7 @@ buildscript {
 
 // Add dependency repositories
 repositories {
-    maven {
-        name = "celestialwizardry"
-        url = "http://localhost/maven/"
-    }
+
 }
 
 apply plugin: 'maven'
@@ -84,7 +81,7 @@ task buildInfo {
     }
     else
     {
-        ext.revision = "GITBORK"
+        ext.revision = "NULL"
     }
 
     if (System.getenv().BUILD_NUMBER != null)
@@ -93,7 +90,7 @@ task buildInfo {
     }
     else
     {
-        ext.build_number = "DEV.${project.buildInfo.revision}"
+        ext.build_number = "${project.buildInfo.revision}"
     }
 
     println "CelestialWizardry revision ${project.buildInfo.revision} build ${project.buildInfo.build_number}"
@@ -202,10 +199,6 @@ artifacts {
     archives deobfJar
     archives sourceJar
 }
-
-// Make the api and sources archives after compiled archive to make sure they have correct constant values
-// tasks.apiJar.shouldRunAfter project.tasks.deobfJar
-// tasks.sourceJar.shouldRunAfter project.tasks.deobfJar
 
 ext.baubles_file = "Baubles-deobf-${config.mc_version}-${config.baubles_version}.jar"
 ext.baubles_url = "${config.baubles_root}${project.baubles_file}"

@@ -14,8 +14,6 @@ Also make sure you know EXACTLY what you're doing!  It's not any of our faults i
 ***
 [Setup Java](#setup-java)
 
-[Setup Gradle](#setup-gradle)
-
 [Setup Git](#setup-git)
 
 [Setup Mod](#setup-celestial-wizardry)
@@ -44,25 +42,6 @@ The Java JDK is used to compile Celestial Wizardry.
     * Append `;%JAVA_HOME%\bin` EXACTLY AS SHOWN and click `Ok`.  Make sure the location is correct; double-check just to make sure.
 3. Open up your command line and run `javac`.  If it spews out a bunch of possible options and the usage, then you're good to go.  If not, try the steps again.
 
-####Setup Gradle
-**Celestial Wizardry has Gradle in its repository, so if you want to, can skip this part!**
-Gradle is used to execute the various build tasks when compiling Celestial Wizardry.
-
-1. Download and install Gradle.
-	* [Windows/Mac download link](http://www.gradle.org/downloads).  You only need the binaries, but choose whatever flavor you want.
-		* Unzip the package and put it wherever you want, eg `C:\Gradle`.
-	* Linux: Installation methods for certain popular flavors of Linux are listed below.  If your distribution is not listed, follow the instructions specific to your package manager or install it manually [here](http://www.gradle.org/downloads).
-		* Gentoo: `emerge dev-java/gradle-bin`
-		* Archlinux: You'll have to install it from the [AUR](https://aur.archlinux.org/packages/gradle).
-		* Ubuntu/Debian: `apt-get install gradle`
-		* Fedora: Install Gradle manually from its website (see above), as Fedora ships a "broken" version of Gradle.  Use `yum install gradle` only if you know what you're doing.
-2. Windows: Set environment variables for Gradle.
-	* Go back to `Environment Variables` and then create a new system variable.
-	* For `Variable Name`, input `GRADLE_HOME`.
-	* For `Variable Value`, input something similar to `C:\Gradle-1.11` exactly as shown (or wherever your Gradle installation is), and click `Ok`.
-	* Scroll down to `Path` again, and append `;%GRADLE_HOME%\bin` EXACTLY AS SHOWN and click `Ok`.  Once again, double-check the location.
-3. Open up your command line and run `gradle`.  If it says "Welcome to Gradle [version].", then you're good to go.  If not, either try the steps again or check the [FAQ](https://github.com/pahimar/Equivalent-Exchange-3/wiki/Frequently-Asked-Questions).
-
 ####Setup Git
 Git is used to clone Celestial Wizardry and update your local copy.
 
@@ -84,8 +63,7 @@ This section assumes that you're using the command-line version of Git.
 ***
 
 ####Compile Celestial Wizardry
-
-#####With Gradle Installed
+**Please replace `gradle` with `gradlew.bat` if you are on Windows and with `gradlew` if you are on Linux**
 1. Execute `gradle setupCiWorkspace`. This sets up Forge and downloads the necessary libraries to build Celestial Wizardry.  This might take some time, be patient.
 	* You will generally only have to do this once until the Forge version in `build.properties` changes.
 2. Execute `gradle build`. If you did everything right, `BUILD SUCCESSFUL` will be displayed after it finishes.  This should be relatively quick.
@@ -93,9 +71,6 @@ This section assumes that you're using the command-line version of Git.
 3. Navigate to `mcdev\CelestialWizardry\build\libs`.
     *  You should see `.jar` files named `CelestialWizardry-1.7.2-*.jar`, `CelestialWizardry-1.7.2-*-api.jar`, `CelestialWizardry-1.7.2-*-deobf.jar` and `CelestialWizardry-1.7.2-*-src.jar`.
 4. Copy the `CelestialWizardry-1.7.2-*.jar` jar into your Minecraft mods folder, and you are done!
-
-#####Without Gradle Installed
-The same as above, but replace `gradle` with `gradlew.bat` on Windows and with `gradlew` on Linux.
 
 ####Updating Your Repository
 In order to get the most up-to-date builds, you'll have to periodically update your local repository.
