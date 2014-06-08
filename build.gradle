@@ -297,6 +297,52 @@ uploadArchives {
                 logger.info("Deploying to maven repository")
 
                 repository(url: project.maven)
+
+                pom {
+                    groupId = project.group
+                    version = project.version
+                    artifactId = project.archivesBaseName
+
+                    project {
+                        name project.archivesBaseName
+                        packaging 'jar'
+                        description 'CelestialWizardry'
+                        url 'https://github.com/PizzAna/CelestialWizardry'
+
+                        scm {
+                            url 'https://github.com/PizzAna/CelestialWizardry'
+                            connection 'scm:git:git://github.com/PizzAna/CelestialWizardry.git'
+                            developerConnection 'scm:git:git@github.com:PizzAna/CelestialWizardry.git'
+                        }
+
+                        issueManagement {
+                            system 'github'
+                            url 'https://github.com/PizzAna/CelestialWizardry/issues'
+                        }
+
+                        licenses {
+                            license {
+                                name 'GNU GENERAL PUBLIC LICENSE v2'
+                                url 'http://www.gnu.org/licenses/gpl-2.0.html'
+                                distribution 'repo'
+                            }
+                        }
+
+                        developers {
+                            developer {
+                                id 'PizzAna'
+                                name 'PizzAna'
+                                roles {role 'developer'}
+                            }
+                            developer {
+                                id 'le683'
+                                name 'Okkapel'
+                                roles {role 'developer'}
+                            }
+                        }
+                    }
+                }
+
                 repository(url: project.maven_mirror)
 
                 pom {
