@@ -294,6 +294,8 @@ uploadArchives {
         if (project.hasProperty("maven"))
         {
             mavenDeployer {
+                logger.info("Deploying to maven repository")
+
                 repository(url: project.maven)
 
                 pom {
