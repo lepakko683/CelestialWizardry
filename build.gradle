@@ -235,7 +235,7 @@ if (!project.hasProperty("keystore_password"))
     ext.keystore_password = ""
 }
 
-task signJar {
+task signJar(dependsOn: "build") {
     inputs.file jar.getArchivePath()
     inputs.file keystore_location
     inputs.property "cw_keystore_alias", cw_keystore_alias
@@ -259,8 +259,34 @@ task signJar {
     }
 }
 
-// Make signing the to depend on building the jar
-tasks.signJar.dependsOn tasks.build
+import net.minecraftforge.gradle.delayed.DelayedFile
+import net.minecraftforge.gradle.delayed.DelayedString
+import net.minecraftforge.gradle.tasks.dev.ChangelogTask
+
+task createChangelog(type: ChangelogTask) {
+
+    if (("${System.getenv().JOB_NAME}" != null) && project.hasProperty("jenkins_server") &&
+            project.hasProperty("jenkins_password"))
+    {
+        def jobName = "${System.getenv().JOB_NAME}"
+        def buildNumber = "${System.getenv().BUILD_NUMBER}"
+
+        setServerRoot(new DelayedString(project, project.jenkins_server))
+        setJobName(new DelayedString(project, jobName.toString()))
+        setAuthName(new DelayedString(project, project.jenkins_user))
+        setAuthPassword(new DelayedString(project, project.jenkins_password))
+        setTargetBuild({buildNumber.toString()});
+        setOutput(
+                new DelayedFile(project, 'build/libs/' + project.getName() + '-' + project.version + '-changelog.txt'));
+    }
+
+    onlyIf {
+        return (("${System.getenv().JOB_NAME}" != null) && project.hasProperty("jenkins_server") &&
+                project.hasProperty("jenkins_password"))
+    }
+}
+
+tasks.build.dependsOn('createChangelog')
 
 // Configure an upload task
 uploadArchives {
@@ -304,12 +330,12 @@ uploadArchives {
                             developer {
                                 id 'PizzAna'
                                 name 'PizzAna'
-                                roles { role 'developer' }
+                                roles {role 'developer'}
                             }
                             developer {
                                 id 'le683'
                                 name 'Okkapel'
-                                roles { role 'developer' }
+                                roles {role 'developer'}
                             }
                         }
                     }
