@@ -35,6 +35,10 @@ public class RecipesVanilla
         // Magical Ink
         addShapeless(new ItemStack(ModItems.magicalInk), new ItemStack(Items.dye, 1, 4), "dyeBlack", "dyeBlack",
                      new ItemStack(Items.potionitem, 1, 0));
+
+        // Matrix Tier 1
+        add(new ItemStack(ModItems.matrix, 1, 0), "sps", "pdp", "sps", 's', ModBlocks.magicalStone, 'd', Items.diamond,
+            'p', new ItemStack(ModItems.dummyItem, 1, 1));
     }
 
     private static void add(ItemStack output, Object... input)

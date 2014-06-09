@@ -7,6 +7,7 @@ public class Names
         public static final String WRITING_TABLE = "writingTable";
         public static final String LIVING_ORE = "livingOre";
         public static final String BELL = "bell";
+        public static final String MAGICAL_STONE = "magicalStone";
     }
 
     public static class Items
@@ -22,7 +23,8 @@ public class Names
         public static final String PAGE = "page";
         public static final String MAGICAL_PEN = "magicalPen";
         public static final String MATRIX = "matrix";
-        public static final String DUMMY_ITEMS[] = {"magicalIntelligenceCore"};
+        public static final String DUMMY_ITEM = "dummyItem";
+        public static final String DUMMY_ITEMS[] = {"magicalIntelligenceCore", "magicalPebble"};
     }
 
     public static class NBT

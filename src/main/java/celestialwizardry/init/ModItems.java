@@ -35,7 +35,7 @@ public class ModItems
         register(page, Names.Items.PAGE);
         register(magicalPen, Names.Items.MAGICAL_PEN);
         register(matrix, Names.Items.MATRIX);
-        register(dummyItem, "dummyItem");
+        register(dummyItem, Names.Items.DUMMY_ITEM);
     }
 
     private static void register(Item item, String name)

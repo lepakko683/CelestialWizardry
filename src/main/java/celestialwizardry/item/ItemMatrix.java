@@ -123,7 +123,30 @@ public class ItemMatrix extends ItemCW
     @SideOnly(Side.CLIENT)
     public String getItemStackDisplayName(ItemStack stack)
     {
-        return StringHelper.LIGHT_BLUE + super.getItemStackDisplayName(stack) + StringHelper.END;
+        StringBuilder ret = new StringBuilder();
+
+        /* if (getTier(stack) == 1)
+        {
+            // NO-OP
+        }
+        else */
+        if (getTier(stack) == 2)
+        {
+            ret.append(StringHelper.YELLOW);
+        }
+        else if (getTier(stack) == 3)
+        {
+            ret.append(StringHelper.BRIGHT_BLUE);
+        }
+        else if (getTier(stack) == 4)
+        {
+            ret.append(StringHelper.PINK);
+        }
+
+        ret.append(super.getItemStackDisplayName(stack));
+        ret.append(StringHelper.END);
+
+        return ret.toString();
     }
 
     @Override

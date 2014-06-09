@@ -10,17 +10,17 @@ item.celestialwizardry:concentrationRing.solar.name=Ring of Concentration
 item.celestialwizardry:seasonRing.name=Ring of Seasons
 item.celestialwizardry:page.name=Lost Page
 item.celestialwizardry:magicalPen.name=Magical Pen
-item.celestialwizardry:matrix.tier.1.name=Celestial Matrix
-item.celestialwizardry:matrix.tier.2.name=Celestial Matrix
-item.celestialwizardry:matrix.tier.3.name=Celestial Matrix
+item.celestialwizardry:matrix.tier.1.name=Stone Matrix
+item.celestialwizardry:matrix.tier.2.name=Mystical Matrix
+item.celestialwizardry:matrix.tier.3.name=Crystal Matrix
 item.celestialwizardry:matrix.tier.4.name=Celestial Matrix
-
-# DummyItems
+item.celestialwizardry:magicalPebble.name=Magical Pebble
 item.celestialwizardry:magicalIntelligenceCore.name=Magical Intelligence Core
 
 # Block localizations
 tile.celestialwizardry:writingTable.name=Writing Table
 tile.celestialwizardry:livingOre.name=Living Ore
+tile.celestialwizardry:magicalStone.name=Magical Stone
 
 # GUI localizations
 container.celestialwizardry:writingTable=Writing Table

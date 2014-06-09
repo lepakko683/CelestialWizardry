@@ -22,13 +22,13 @@ public class ItemDummy extends ItemCW {
 		this.setMaxStackSize(64);
 		this.setTextureName("texture-dummyitemCW");
 		this.setHasSubtypes(true);
-		this.setUnlocalizedName("dummyItem");
+		this.setUnlocalizedName(Names.Items.DUMMY_ITEM);
 	}
 	
 	@Override
     public String getUnlocalizedName()
     {
-        return String.format("item.%s%s", Resources.RESOURCE_PREFIX, "dummyItem");
+        return String.format("item.%s%s", Resources.RESOURCE_PREFIX, Names.Items.DUMMY_ITEM);
     }
 	
 	@Override
@@ -36,14 +36,16 @@ public class ItemDummy extends ItemCW {
     {
         return String.format("item.%s%s", Resources.RESOURCE_PREFIX, Names.Items.DUMMY_ITEMS[MathHelper.clamp_int(itemStack.getItemDamage(), 0, Names.Items.DUMMY_ITEMS.length-1)]);
     }
-	
+
+    @Override
     @SideOnly(Side.CLIENT)
     public IIcon getIconFromDamage(int par1)
     {
         int j = MathHelper.clamp_int(par1, 0, Names.Items.DUMMY_ITEMS.length-1);
         return this.itemIcons[j];
     }
-	
+
+    @Override
 	@SideOnly(Side.CLIENT)
     public void registerIcons(IIconRegister par1IconRegister)
     {
@@ -51,10 +53,11 @@ public class ItemDummy extends ItemCW {
 
         for (int i = 0; i < itemIcons.length; ++i)
         {
-            this.itemIcons[i] = par1IconRegister.registerIcon("celestialwizardry:" + Names.Items.DUMMY_ITEMS[i]);
+            this.itemIcons[i] = par1IconRegister.registerIcon(Resources.RESOURCE_PREFIX + Names.Items.DUMMY_ITEMS[i]);
         }
     }
-	
+
+    @Override
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@SideOnly(Side.CLIENT)
     public void getSubItems(Item item, CreativeTabs tab, List list) {
