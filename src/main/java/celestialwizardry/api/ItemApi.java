@@ -19,7 +19,7 @@ public class ItemApi
      *
      * @return the item
      */
-    public static ItemStack getItemStack(String field, int meta)
+    public static ItemStack getItem(String field, int meta)
     {
         ItemStack stack = null;
 
@@ -46,31 +46,6 @@ public class ItemApi
     }
 
     /**
-     * Allows you to get item from string. You should NOT use this, use the above method instead
-     *
-     * @param field the item field name
-     *
-     * @return the item
-     */
-    public static Item getItem(String field)
-    {
-        Item item = null;
-
-        try
-        {
-            String clazz = PACKAGE + "ModItems";
-            Object obj = Class.forName(clazz).getField(field).get(null);
-            item = (Item) obj;
-        }
-        catch (Exception e)
-        {
-            CWApi.apiLog.warn("Could not retrieve item identified by " + field);
-        }
-
-        return item;
-    }
-
-    /**
      * Allows you to get block from string.
      *
      * @param field the block field name
@@ -78,7 +53,7 @@ public class ItemApi
      *
      * @return the block
      */
-    public static ItemStack getBlockStack(String field, int meta)
+    public static ItemStack getBlock(String field, int meta)
     {
         ItemStack stack = null;
 
@@ -102,30 +77,5 @@ public class ItemApi
         }
 
         return stack;
-    }
-
-    /**
-     * Allows you to get block from string. You should NOT use this, use the above method instead
-     *
-     * @param field the block field name
-     *
-     * @return the block
-     */
-    public static Block getBlock(String field)
-    {
-        Block block = null;
-
-        try
-        {
-            String clazz = PACKAGE + "ModBlocks";
-            Object obj = Class.forName(clazz).getField(field).get(null);
-            block = (Block) obj;
-        }
-        catch (Exception e)
-        {
-            CWApi.apiLog.warn("Could not retrieve block identified by " + field);
-        }
-
-        return block;
     }
 }
