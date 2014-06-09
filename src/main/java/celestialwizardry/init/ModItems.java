@@ -14,9 +14,11 @@ public class ModItems
 {
     public static final ItemMaterial material = new ItemMaterial();
 
+    // Materials
     public static final ItemStack magicalIntelligenceCore = material.addItem(0, Names.Items.MATERIALS[0]);
     public static final ItemStack magicalPebble = material.addItem(1, Names.Items.MATERIALS[1]);
 
+    // Single items
     public static final ItemSingle magicalInk = new ItemMagicalInk();
     public static final ItemSingle staff = new ItemStaff();
     public static final ItemSingle scroll = new ItemScroll();
@@ -32,6 +34,7 @@ public class ModItems
     {
         register(material, Names.Items.MATERIAL);
 
+        // Single items
         register(magicalInk, Names.Items.MAGICAL_INK);
         register(staff, Names.Items.STAFF);
         register(scroll, Names.Items.SCROLL);
