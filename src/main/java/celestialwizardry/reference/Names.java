@@ -38,13 +38,14 @@ public class Names
         public static final String SPELL_BOOK_INVENTORY_OPEN = "spellBookInventoryOpen";
         public static final String UUID_MOST_SIG = "UUIDMostSig";
         public static final String UUID_LEAST_SIG = "UUIDLeastSig";
-        public static final String MODE = "mode";
         public static final String IS_CUSTOM = "isCustom";
         public static final String DISPLAY = "display";
         public static final String NAME = "Name";
         public static final String LORE = "Lore";
         public static final String BACKUP_NAME = "backupName";
         public static final String ENERGIES = "energies";
+        public static final String PLAYER = "player";
+        public static final String OPENERS = "openers";
     }
 
     public static class Containers

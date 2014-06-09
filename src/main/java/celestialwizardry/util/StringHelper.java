@@ -41,13 +41,13 @@ public class StringHelper
     public static final String ITALIC = (char) 167 + "o";
     public static final String END = (char) 167 + "r";
 
-    private static String shiftForInfo = LIGHT_GRAY + localize("message." + Resources.RESOURCE_PREFIX + "holdShift1")
-            + " " + YELLOW + ITALIC + localize("message." + Resources.RESOURCE_PREFIX + "holdShift2") + " " + END
-            + LIGHT_GRAY + localize("message." + Resources.RESOURCE_PREFIX + "holdShift3") + END;
+    private static String shiftForInfo = LIGHT_GRAY + localize("tooltip." + Resources.RESOURCE_PREFIX + "holdShift1")
+            + " " + YELLOW + ITALIC + localize("tooltip." + Resources.RESOURCE_PREFIX + "holdShift2") + " " + END
+            + LIGHT_GRAY + localize("tooltip." + Resources.RESOURCE_PREFIX + "holdShift3") + END;
     private static String controlForInfo = LIGHT_GRAY + localize(
-            "message." + Resources.RESOURCE_PREFIX + "holdControl1") + " " + BRIGHT_GREEN + ITALIC + localize(
-            "message." + Resources.RESOURCE_PREFIX + "holdControl2") + " " + END + LIGHT_GRAY + localize(
-            "message." + Resources.RESOURCE_PREFIX + "holdControl3") + END;
+            "tooltip." + Resources.RESOURCE_PREFIX + "holdControl1") + " " + BRIGHT_GREEN + ITALIC + localize(
+            "tooltip." + Resources.RESOURCE_PREFIX + "holdControl2") + " " + END + LIGHT_GRAY + localize(
+            "tooltip." + Resources.RESOURCE_PREFIX + "holdControl3") + END;
 
     private StringHelper()
     {
