@@ -148,18 +148,6 @@ processResources {
 // Set the version for archive names
 version = "${project.minecraft.version}-${project.version}"
 
-// Add custom source sets so gradle takes right sources to api and source archives
-sourceSets {
-    out {
-        java {
-            srcDir './build/sources/java/'
-        }
-        resources {
-            srcDir './build/resources/main/'
-        }
-    }
-}
-
 // Set the common manifest for archives
 def commonManifest = {
     attributes 'FMLCorePlugin': 'celestialwizardry.codechicken.core.launch.DepLoader'
@@ -171,15 +159,9 @@ jar {
     manifest commonManifest
 }
 
-// Make the source jar
-task sourceJar(type: Jar) {
-    from sourceSets.out.allSource
-    classifier = "src"
-}
-
 // Make the api jar
 task apiJar(type: Jar) {
-    from(sourceSets.out.allSource) {
+    from('./build/sources/java/') {
         // Include only the api package
         include 'celestialwizardry/api/*'
     }
@@ -193,10 +175,24 @@ task deobfJar(type: Jar) {
     manifest commonManifest
 }
 
+// Make the javadoc jar
+task javadocJar(type: Jar, dependsOn: "javadoc") {
+    classifier = "javadoc"
+    from './build/docs/javadoc'
+}
+
+// Make the source jar
+task sourceJar(type: Jar) {
+    from './build/sources/java/'
+    from './build/resources/main/'
+    classifier = "src"
+}
+
 // Tell the archive system about the extra archives
 artifacts {
     archives apiJar
     archives deobfJar
+    archives javadocJar
     archives sourceJar
 }
 
@@ -226,7 +222,7 @@ if (!project.hasProperty("keystore_location"))
 // Keystore alias
 if (!project.hasProperty("cw_keystore_alias"))
 {
-    ext.ee3_keystore_alias = ""
+    ext.cw_keystore_alias = ""
 }
 
 // Keystore password
@@ -286,7 +282,7 @@ task createChangelog(type: ChangelogTask) {
     }
 }
 
-tasks.build.dependsOn('createChangelog')
+tasks.build.dependsOn project.tasks.createChangelog
 
 // Configure an upload task
 uploadArchives {
