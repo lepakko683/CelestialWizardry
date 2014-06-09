@@ -1,10 +1,6 @@
 # MinecraftForge
 /forge
 
-# Maven Repository
-/maven
-/mvn
-
 # Eclipse
 /eclipse
 /.settings
@@ -24,8 +20,6 @@
 # Gradle
 /.gradle
 /build
-/temp
-/tmp
 
 # ForgeGradle
 /run
