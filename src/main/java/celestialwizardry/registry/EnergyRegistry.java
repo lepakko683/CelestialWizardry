@@ -6,7 +6,7 @@ import celestialwizardry.api.energy.EnergyType;
 import java.util.HashMap;
 import java.util.Map;
 
-public class EnergyRegistry
+public abstract class EnergyRegistry
 {
 
     public static Map<String, EnergyType> energyMap = new HashMap<String, EnergyType>();
