@@ -23,13 +23,14 @@ import baubles.common.lib.PlayerHandler;
 
 import java.util.List;
 
-public class ItemConcentrationRing extends ItemCW implements IBauble
+public class ItemConcentrationRing extends ItemSingle implements IBauble
 {
 	private IIcon itemIcons[];
 	
     public ItemConcentrationRing()
     {
         super();
+        this.setMaxStackSize(1);
         this.setUnlocalizedName(Names.Items.CONCENTRATION_RING);
         this.setHasSubtypes(true);
         this.setMaxDamage(0);

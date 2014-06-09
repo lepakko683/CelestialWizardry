@@ -4,6 +4,7 @@ import celestialwizardry.item.*;
 import celestialwizardry.reference.Names;
 
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 /**
@@ -11,20 +12,26 @@ import cpw.mods.fml.common.registry.GameRegistry;
  */
 public class ModItems
 {
-    public static final ItemCW magicalInk = new ItemMagicalInk();
-    public static final ItemCW staff = new ItemStaff();
-    public static final ItemCW scroll = new ItemScroll();
-    public static final ItemCW spellScroll = new ItemSpellScroll();
-    public static final ItemCW spellBook = new ItemSpellBook();
-    public static final ItemCW concentrationRing = new ItemConcentrationRing();
-    public static final ItemCW seasonRing = new ItemSeasonRing();
-    public static final ItemCW page = new ItemPage();
-    public static final ItemCW magicalPen = new ItemMagicalPen();
-    public static final ItemCW matrix = new ItemMatrix();
-    public static final ItemCW dummyItem = new ItemDummy();
+    public static final ItemMaterial material = new ItemMaterial();
+
+    public static final ItemStack magicalIntelligenceCore = material.addItem(0, Names.Items.MATERIALS[0]);
+    public static final ItemStack magicalPebble = material.addItem(1, Names.Items.MATERIALS[1]);
+
+    public static final ItemSingle magicalInk = new ItemMagicalInk();
+    public static final ItemSingle staff = new ItemStaff();
+    public static final ItemSingle scroll = new ItemScroll();
+    public static final ItemSingle spellScroll = new ItemSpellScroll();
+    public static final ItemSingle spellBook = new ItemSpellBook();
+    public static final ItemSingle concentrationRing = new ItemConcentrationRing();
+    public static final ItemSingle seasonRing = new ItemSeasonRing();
+    public static final ItemSingle page = new ItemPage();
+    public static final ItemSingle magicalPen = new ItemMagicalPen();
+    public static final ItemSingle matrix = new ItemMatrix();
 
     public static void init()
     {
+        register(material, Names.Items.MATERIAL);
+
         register(magicalInk, Names.Items.MAGICAL_INK);
         register(staff, Names.Items.STAFF);
         register(scroll, Names.Items.SCROLL);
@@ -35,7 +42,6 @@ public class ModItems
         register(page, Names.Items.PAGE);
         register(magicalPen, Names.Items.MAGICAL_PEN);
         register(matrix, Names.Items.MATRIX);
-        register(dummyItem, Names.Items.DUMMY_ITEM);
     }
 
     private static void register(Item item, String name)

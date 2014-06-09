@@ -19,12 +19,12 @@ public class BlockMagicalStone extends BlockCW
     @Override
     public Item getItemDropped(int p_149650_1_, Random p_149650_2_, int p_149650_3_)
     {
-        return ModItems.dummyItem;
+        return ModItems.material;
     }
 
     @Override
     public int damageDropped(int meta)
     {
-        return 1;
+        return ModItems.magicalPebble.getItemDamage();
     }
 }

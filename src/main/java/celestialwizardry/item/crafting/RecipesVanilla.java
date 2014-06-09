@@ -38,7 +38,7 @@ public class RecipesVanilla
 
         // Matrix Tier 1
         add(new ItemStack(ModItems.matrix, 1, 0), "sps", "pdp", "sps", 's', ModBlocks.magicalStone, 'd', Items.diamond,
-            'p', new ItemStack(ModItems.dummyItem, 1, 1));
+            'p', ModItems.magicalPebble);
     }
 
     private static void add(ItemStack output, Object... input)

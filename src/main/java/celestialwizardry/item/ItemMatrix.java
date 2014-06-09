@@ -21,7 +21,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class ItemMatrix extends ItemCW
+public class ItemMatrix extends ItemSingle
 {
     @SideOnly(Side.CLIENT)
     private IIcon icons[];
@@ -31,6 +31,7 @@ public class ItemMatrix extends ItemCW
     public ItemMatrix()
     {
         super();
+        this.setMaxStackSize(1);
         this.setUnlocalizedName(Names.Items.MATRIX);
         this.setHasSubtypes(true);
         this.setMaxDamage(0);

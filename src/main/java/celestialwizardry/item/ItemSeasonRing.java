@@ -16,13 +16,14 @@ import baubles.api.IBauble;
 import baubles.common.container.InventoryBaubles;
 import baubles.common.lib.PlayerHandler;
 
-public class ItemSeasonRing extends ItemCW implements IBauble
+public class ItemSeasonRing extends ItemSingle implements IBauble
 {
     private int count = 0;
 
     public ItemSeasonRing()
     {
         super();
+        this.setMaxStackSize(1);
         this.setUnlocalizedName(Names.Items.SEASON_RING);
     }
 

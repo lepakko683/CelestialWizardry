@@ -12,6 +12,9 @@ public class Names
 
     public static class Items
     {
+        public static final String MATERIAL = "material";
+        public static final String MATERIALS[] = {"magicalIntelligenceCore", "magicalPebble"};
+
         public static final String MAGICAL_INK = "magicalInk";
         public static final String STAFF = "staff";
         public static final String SCROLL = "scroll";
@@ -23,8 +26,6 @@ public class Names
         public static final String PAGE = "page";
         public static final String MAGICAL_PEN = "magicalPen";
         public static final String MATRIX = "matrix";
-        public static final String DUMMY_ITEM = "dummyItem";
-        public static final String DUMMY_ITEMS[] = {"magicalIntelligenceCore", "magicalPebble"};
     }
 
     public static class NBT

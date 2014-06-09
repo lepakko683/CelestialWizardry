@@ -11,11 +11,12 @@ import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class ItemSpellBook extends ItemCW
+public class ItemSpellBook extends ItemSingle
 {
     public ItemSpellBook()
     {
         super();
+        this.setMaxStackSize(1);
         this.setUnlocalizedName(Names.Items.SPELL_BOOK);
     }
 

@@ -13,6 +13,7 @@ public class ItemSpellScroll extends ItemScroll implements ISpellContainer
     public ItemSpellScroll()
     {
         super();
+        this.setMaxStackSize(1);
         this.setUnlocalizedName(Names.Items.SPELL_SCROLL);
     }
 
