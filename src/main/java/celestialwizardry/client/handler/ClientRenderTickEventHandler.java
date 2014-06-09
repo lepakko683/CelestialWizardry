@@ -17,7 +17,7 @@ public class ClientRenderTickEventHandler {
 			Gui currGui = Minecraft.getMinecraft().currentScreen;
 			
 			if(currGui == null) {
-				Gui.drawRect(0, 0, 50, 50, Colour.packARGB(90, 255, 0, 255));
+//				Gui.drawRect(0, 0, 50, 50, Colour.packARGB(90, 255, 0, 255));
 				
 			}
 		}

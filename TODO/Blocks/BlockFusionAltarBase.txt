@@ -1,0 +1,39 @@
+Celestial Wizardry - Block FusionAltarBase {
+
+	recipe {
+		QOQ
+		SCS
+		SSS
+		
+		-O = Obsidian
+		-Q = Nether Quartz
+		-C = Lunar/Solar Crystal (type has an effect)
+		-S = Enchanted Stone
+		
+		-> 1 Fusion Altar Base
+	}
+
+	usage {
+		-as 3x1x3 base for Fusion Altar
+	}
+}
+
+Celestial Wizardry - Block (FusionAltar)FusionCore {
+
+	recipe {
+		EOE
+		SSS
+		
+		-O = Obsidian
+		-E = Emerald
+		-S = Enchanted Stone
+		
+		-> 1 Fusion Core
+	}
+	
+	usage {
+		-as main component of Fusion Altar on top of the 3x1x3 base (at the center - like a beacon)
+	}
+		
+}
+

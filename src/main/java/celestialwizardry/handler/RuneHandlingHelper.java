@@ -9,6 +9,8 @@ import net.minecraft.world.World;
 
 public class RuneHandlingHelper {
 	
+	
+	
 	/*TODO: I'd like to have a dynamic system for this*/
 	public static Entity getNewEntityInstance(String name, World world) {
 		if(name.startsWith("minecraft:")){
