@@ -5,8 +5,8 @@ import celestialwizardry.handler.ClientTickEventHandler;
 import celestialwizardry.inventory.ContainerSpellBook;
 import celestialwizardry.reference.Resources;
 import celestialwizardry.registry.SpellBookRegistry;
+import celestialwizardry.util.Colour;
 import celestialwizardry.util.StringHelper;
-
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -24,6 +24,7 @@ public class GuiSpellBook extends GuiContainer
     public InventoryPlayer player;
 
     public static final int CATEGORIES_IN_COLUMN = 10;
+    private static final Colour COLOR_GUIDES = new Colour(1f,0f,0f);
 
     protected GuiButton guide;
 
@@ -110,7 +111,7 @@ public class GuiSpellBook extends GuiContainer
     }
 
     @Override
-    protected void drawGuiContainerBackgroundLayer(float var1, int var2, int var3)
+    protected void drawGuiContainerBackgroundLayer(float parTick, int mouse_x, int mouse_y)
     {
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         this.mc.getTextureManager().bindTexture(Resources.Textures.GUI_SPELL_BOOK);
@@ -118,6 +119,7 @@ public class GuiSpellBook extends GuiContainer
         int yStart = guiTop;
         this.drawTexturedModalRect(xStart, yStart, 0, 0, xSize, 160);
         this.drawTexturedModalRect(xStart, yStart + 166, 0, 166, 197, ySize - 165);
+        COLOR_GUIDES.setGLColor();
         this.drawTexturedModalRect(xStart - 48 + 8, yStart + 20, 200, 190, 48, 19);
     }
 

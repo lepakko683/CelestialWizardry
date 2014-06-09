@@ -1,5 +1,7 @@
 package celestialwizardry.util;
 
+import org.lwjgl.opengl.GL11;
+
 public class Colour
 {
 
@@ -63,6 +65,10 @@ public class Colour
             }
         }
         return null;
+    }
+    
+    public void setGLColor() {
+    	GL11.glColor4f(red, green, blue, alpha);
     }
     
     public int getRedI() {
