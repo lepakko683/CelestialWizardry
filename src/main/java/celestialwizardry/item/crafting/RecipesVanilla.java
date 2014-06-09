@@ -36,8 +36,13 @@ public class RecipesVanilla
         addShapeless(new ItemStack(ModItems.magicalInk), new ItemStack(Items.dye, 1, 4), "dyeBlack", "dyeBlack",
                      new ItemStack(Items.potionitem, 1, 0));
 
+        // Magical Stone <-> Magical Pebble
+        addCompress(new ItemStack(ModBlocks.magicalStone), ModItems.magicalPebble);
+
         // Matrix Tier 1
         add(new ItemStack(ModItems.matrix, 1, 0), "sps", "pdp", "sps", 's', ModBlocks.magicalStone, 'd', Items.diamond,
+            'p', ModItems.magicalPebble);
+        add(new ItemStack(ModItems.matrix, 1, 0), "sps", "pep", "sps", 's', ModBlocks.magicalStone, 'e', Items.emerald,
             'p', ModItems.magicalPebble);
     }
 
@@ -49,5 +54,11 @@ public class RecipesVanilla
     private static void addShapeless(ItemStack output, Object... input)
     {
         GameRegistry.addRecipe(new ShapelessOreRecipe(output, input));
+    }
+
+    private static void addCompress(ItemStack big, ItemStack small)
+    {
+        addShapeless(big, small, small, small, small, small, small, small, small, small);
+        addShapeless(new ItemStack(small.getItem(), 9, small.getItemDamage()), big);
     }
 }
