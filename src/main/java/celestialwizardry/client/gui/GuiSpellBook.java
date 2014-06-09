@@ -62,7 +62,8 @@ public class GuiSpellBook extends GuiContainer
             populateIndex();
         }
 
-        guide = new GuiButtonBookLeft(13, guiLeft, guiTop + ySize - 10, "Test");
+        guide = new GuiButtonInvisible(100, guiLeft - 48 + 8 + 2, guiTop + 20, 48, 19, "Guide");
+        guide.displayString = "Guide";
 
         buttonList.add(guide);
     }
@@ -117,6 +118,7 @@ public class GuiSpellBook extends GuiContainer
         int yStart = guiTop;
         this.drawTexturedModalRect(xStart, yStart, 0, 0, xSize, 160);
         this.drawTexturedModalRect(xStart, yStart + 166, 0, 166, 197, ySize - 165);
+        this.drawTexturedModalRect(xStart - 48 + 8, yStart + 20, 200, 190, 48, 19);
     }
 
     @Override
