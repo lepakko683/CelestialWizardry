@@ -187,5 +187,10 @@ public class Colour
     public static Colour unpackARGB(int packed) {
     	return new Colour( (packed >> 16) & 255, (packed >> 8) & 255, (packed) & 255, (packed >> 24) & 255 );
     }
+    
+    /**Resets the GL color to white*/
+    public static void resetGLColor() {
+    	GL11.glColor4f(1f,1f,1f,1f);
+    }
 
 }
