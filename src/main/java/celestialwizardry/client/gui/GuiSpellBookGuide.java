@@ -59,6 +59,12 @@ public class GuiSpellBookGuide extends GuiSpellBook
     }
 
     @Override
+    protected boolean customSecondPage()
+    {
+        return false;
+    }
+
+    @Override
     protected void actionPerformed(GuiButton button)
     {
         super.actionPerformed(button);

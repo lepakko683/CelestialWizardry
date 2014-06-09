@@ -46,12 +46,18 @@ message.celestialwizardry:stolenBook=This book belongs to %s and you have no per
 
 # SPELL BOOK
 
-# Index
-spellBook.celestialwizardry:header=Welcome to the world of magic! You'll find everything you need in this book.
+# GUIDE
+bookmark.celestialwizardry:guide=Guide
 
-# Basics
+# Category: Basics
 category.celestialwizardry:basics=Basics
 
-# About the Spell Book
+# Entry: About the Spell Book
 entry.celestialwizardry:spellBook=About the Spell Book
 page.celestialwizardry:spellBook.index=The &1Spell Book&0 is your guide in the world of magic.<br>The information is located in entries which are located in categories. You can find all categories from the index of the book. To navigate back, use the arrows located in the bottom of the book.
+
+# NOTES
+bookmark.celestialwizardry:notes=Notes
+
+# SPELLS
+bookmark.celestialwizardry:spells=Spells

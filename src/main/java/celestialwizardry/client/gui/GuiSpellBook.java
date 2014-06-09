@@ -4,6 +4,7 @@ import celestialwizardry.handler.ClientTickEventHandler;
 import celestialwizardry.inventory.ContainerSpellBook;
 import celestialwizardry.reference.Resources;
 import celestialwizardry.util.Colour;
+import celestialwizardry.util.StringHelper;
 
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
@@ -52,19 +53,16 @@ public abstract class GuiSpellBook extends GuiContainer
 
         buttonId = buttonList.size();
 
-        guide = new GuiButtonInvisible(buttonId++, guiLeft - 48 + 8 + 6, guiTop + 20, 48, 19, "Guide");
-        guide.displayString = "Guide"; // TODO Localize
-
+        guide = new GuiButtonInvisible(buttonId++, guiLeft - 48 + 8 * 2, guiTop + 20 + 2, 48, 19,
+                                       StringHelper.localize("bookmark." + Resources.RESOURCE_PREFIX + "guide"));
         buttonList.add(guide);
 
-        notes = new GuiButtonInvisible(buttonId++, guiLeft - 48 + 8 + 6, guiTop + 40, 48, 19, "Notes");
-        notes.displayString = "Notes"; // TODO Localize
-
+        notes = new GuiButtonInvisible(buttonId++, guiLeft - 48 + 8 * 2, guiTop + 40 + 2, 48, 19,
+                                       StringHelper.localize("bookmark." + Resources.RESOURCE_PREFIX + "notes"));
         buttonList.add(notes);
 
-        spells = new GuiButtonInvisible(buttonId++, guiLeft - 48 + 8 + 6, guiTop + 60, 48, 19, "Spells");
-        spells.displayString = "Spells"; // TODO Localize
-
+        spells = new GuiButtonInvisible(buttonId++, guiLeft - 48 + 8 * 2, guiTop + 60 + 2, 48, 19,
+                                        StringHelper.localize("bookmark." + Resources.RESOURCE_PREFIX + "spells"));
         buttonList.add(spells);
 
         bookmarks = buttonId;
@@ -130,6 +128,8 @@ public abstract class GuiSpellBook extends GuiContainer
     protected abstract boolean isIndex();
 
     protected abstract BookState getState();
+
+    protected abstract boolean customSecondPage();
 
     protected static enum BookState
     {

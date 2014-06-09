@@ -23,4 +23,10 @@ public class GuiSpellBookNotes extends GuiSpellBook
     {
         return BookState.NOTES;
     }
+
+    @Override
+    protected boolean customSecondPage()
+    {
+        return false; // TODO
+    }
 }

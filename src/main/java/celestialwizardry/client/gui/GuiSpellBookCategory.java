@@ -77,4 +77,10 @@ public class GuiSpellBookCategory extends GuiSpellBookGuide
     {
         return false;
     }
+
+    @Override
+    protected boolean customSecondPage()
+    {
+        return super.customSecondPage(); // TODO
+    }
 }
