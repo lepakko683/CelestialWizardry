@@ -1,12 +1,10 @@
 package celestialwizardry.client.gui;
 
-import celestialwizardry.api.spellbook.SpellBookCategory;
 import celestialwizardry.handler.ClientTickEventHandler;
 import celestialwizardry.inventory.ContainerSpellBook;
 import celestialwizardry.reference.Resources;
-import celestialwizardry.registry.SpellBookRegistry;
 import celestialwizardry.util.Colour;
-import celestialwizardry.util.StringHelper;
+
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -15,18 +13,24 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 import org.lwjgl.opengl.GL11;
 
-import java.util.List;
-
 @SideOnly(Side.CLIENT)
-public class GuiSpellBook extends GuiContainer
+public abstract class GuiSpellBook extends GuiContainer
 {
+    public GuiSpellBook current;
+
     public BookState state;
     public InventoryPlayer player;
 
-    public static final int CATEGORIES_IN_COLUMN = 10;
-    private static final Colour COLOR_GUIDES = new Colour(1f,0f,0f);
+    private static final Colour COLOR_GUIDES = new Colour(1f, 0f, 0f);
+    private static final Colour COLOR_NOTES = new Colour(0f, 1f, 0f);
+    private static final Colour COLOR_SPELLS = new Colour(0f, 0f, 1f);
 
     protected GuiButton guide;
+    protected GuiButton notes;
+    protected GuiButton spells;
+
+    protected int buttonId;
+    protected int bookmarks;
 
     public GuiSpellBook(InventoryPlayer player)
     {
@@ -44,70 +48,26 @@ public class GuiSpellBook extends GuiContainer
     {
         super.initGui();
 
-        state = BookState.INDEX;
-
         buttonList.clear();
 
-        if (state == BookState.INDEX)
-        {
-            // TODO Continue buttons on next page if we get that far
+        buttonId = buttonList.size();
 
-            int x = 14;
-
-            for (int i = 0; i < CATEGORIES_IN_COLUMN; i++)
-            {
-                int y = 12 + i * 12;
-                buttonList.add(new GuiButtonInvisible(i, guiLeft + x, guiTop + y, 110, 10, ""));
-            }
-
-            populateIndex();
-        }
-
-        guide = new GuiButtonInvisible(100, guiLeft - 48 + 8 + 2, guiTop + 20, 48, 19, "Guide");
-        guide.displayString = "Guide";
+        guide = new GuiButtonInvisible(buttonId++, guiLeft - 48 + 8 + 6, guiTop + 20, 48, 19, "Guide");
+        guide.displayString = "Guide"; // TODO Localize
 
         buttonList.add(guide);
-    }
 
-    protected void populateIndex()
-    {
-        List<SpellBookCategory> categoryList = SpellBookRegistry.getAllCategories();
+        notes = new GuiButtonInvisible(buttonId++, guiLeft - 48 + 8 + 6, guiTop + 40, 48, 19, "Notes");
+        notes.displayString = "Notes"; // TODO Localize
 
-        for (int i = 3; i < CATEGORIES_IN_COLUMN; i++)
-        {
-            int j = i - 3;
-            GuiButtonInvisible button = (GuiButtonInvisible) buttonList.get(i);
-            SpellBookCategory category = j >= categoryList.size() ? null : categoryList.get(j);
+        buttonList.add(notes);
 
-            if (category != null)
-            {
-                button.displayString = StringHelper.localize(category.getUnlocalizedName());
-            }
-            else
-            {
-                button.displayString = "";
-            }
-        }
-    }
+        spells = new GuiButtonInvisible(buttonId++, guiLeft - 48 + 8 + 6, guiTop + 60, 48, 19, "Spells");
+        spells.displayString = "Spells"; // TODO Localize
 
-    @Override
-    protected void actionPerformed(GuiButton button)
-    {
-        int i = button.id - 3;
+        buttonList.add(spells);
 
-        if (i < 0)
-        {
-            return;
-        }
-
-        List<SpellBookCategory> categories = SpellBookRegistry.getAllCategories();
-        SpellBookCategory category = i >= categories.size() ? null : categories.get(i);
-
-        if (category != null)
-        {
-            mc.displayGuiScreen(new GuiSpellBookCategory(player, category));
-            ClientTickEventHandler.notifyPageChange();
-        }
+        bookmarks = buttonId;
     }
 
     @Override
@@ -117,10 +77,48 @@ public class GuiSpellBook extends GuiContainer
         this.mc.getTextureManager().bindTexture(Resources.Textures.GUI_SPELL_BOOK);
         int xStart = guiLeft;
         int yStart = guiTop;
-        this.drawTexturedModalRect(xStart, yStart, 0, 0, xSize, 160);
-        this.drawTexturedModalRect(xStart, yStart + 166, 0, 166, 197, ySize - 165);
+
         COLOR_GUIDES.setGLColor();
         this.drawTexturedModalRect(xStart - 48 + 8, yStart + 20, 200, 190, 48, 19);
+
+        COLOR_NOTES.setGLColor();
+        this.drawTexturedModalRect(xStart - 48 + 8, yStart + 40, 200, 190, 48, 19);
+
+        COLOR_SPELLS.setGLColor();
+        this.drawTexturedModalRect(xStart - 48 + 8, yStart + 60, 200, 190, 48, 19);
+
+        Colour.resetGLColor();
+        this.drawTexturedModalRect(xStart, yStart, 0, 0, xSize, 160);
+        this.drawTexturedModalRect(xStart, yStart + 166, 0, 166, 197, ySize - 165);
+    }
+
+    @Override
+    protected void actionPerformed(GuiButton button)
+    {
+        super.actionPerformed(button);
+
+        switch (button.id)
+        {
+            case 0:
+                mc.displayGuiScreen(new GuiSpellBookGuide(player));
+                ClientTickEventHandler.notifyPageChange();
+                break;
+
+            case 1:
+                mc.displayGuiScreen(new GuiSpellBookNotes(player));
+                ClientTickEventHandler.notifyPageChange();
+                break;
+
+            case 2:
+                mc.displayGuiScreen(new GuiSpellBookSpells(player));
+                ClientTickEventHandler.notifyPageChange();
+                break;
+
+            default:
+                mc.displayGuiScreen(new GuiSpellBookGuide(player));
+                ClientTickEventHandler.notifyPageChange();
+                break;
+        }
     }
 
     @Override
@@ -129,10 +127,14 @@ public class GuiSpellBook extends GuiContainer
         return false;
     }
 
+    protected abstract boolean isIndex();
+
+    protected abstract BookState getState();
+
     protected static enum BookState
     {
-        INDEX,
-        CATEGORY,
-        ENTRY
+        GUIDE,
+        NOTES,
+        SPELLS
     }
 }

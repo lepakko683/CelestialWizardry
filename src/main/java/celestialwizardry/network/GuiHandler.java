@@ -1,8 +1,7 @@
 package celestialwizardry.network;
 
-import celestialwizardry.client.gui.GuiSpellBook;
+import celestialwizardry.client.gui.GuiSpellBookGuide;
 import celestialwizardry.client.gui.inventory.GuiSpellBookOldInventory;
-import celestialwizardry.client.gui.spellbookold.GuiSpellBookOld;
 import celestialwizardry.client.gui.inventory.GuiWritingTable;
 import celestialwizardry.inventory.ContainerSpellBook;
 import celestialwizardry.inventory.ContainerSpellBookOld;
@@ -72,7 +71,7 @@ public class GuiHandler implements IGuiHandler
         }
         else if (ID == GuiIds.SPELL_BOOK)
         {
-            return new GuiSpellBook(player.inventory);
+            return new GuiSpellBookGuide(player.inventory);
         }
         else if (ID == GuiIds.SPELL_BOOK_INVENTORY)
         {
