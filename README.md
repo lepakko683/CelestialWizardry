@@ -4,9 +4,13 @@ CelestialWizardry
 ##Welcome to CelestialWizardry GitHub repository!
 **LATEST OFFICIAL VERSION**: [N/A for Minecraft 1.7.2](https://github.com/PizzAna/CelestialWizardry)
 
+**Celestial Wizardry's IRC channel**: \#CelestialWizardryMod on irc.esper.net
+
 [Compiling Mod](#compiling-celestial-wizardry) - For those that want the latest unreleased features.
 
 [Contributing](#contributing) - For those that want to help out.
+
+[Developers](#developers) - List of developers of Celestial Wizardry.
 
 ###Compiling Celestial Wizardry
 IMPORTANT: Please report any issues you have, there might be some problems with the documentation!
@@ -115,3 +119,14 @@ Celestial Wizardry crashes every time? Have a suggestion? Found a bug? Create an
 		* Server log if applicable
 		* Detailed description of the bug (steps to reproduce possibly) and pictures if applicable
 5. Click `Submit new issue`, and wait for feedback!
+
+###Developers
+***
+* PizzAna ( [@PizzAna_](http://twitter.com/PizzAna_) on twitter)
+	* Code
+	* Design
+	
+* Okkapel (aka Lepakko683, [@Le683](http://twitter.com/Le683) on twitter)
+	* Design
+	* Textures & models
+	* Code
