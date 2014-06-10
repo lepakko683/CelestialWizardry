@@ -114,6 +114,16 @@ public class ItemMatrix extends ItemSingle
         return appendEnergy(stack, type, -amount, false);
     }
 
+    public static void setFull(ItemStack stack)
+    {
+        setFull(stack, getEnergyType(stack));
+    }
+
+    public static void setFull(ItemStack stack, EnergyType type)
+    {
+        // TODO
+    }
+
     public static float getMaxEnergy(ItemStack stack)
     {
         return MAX_ENERGIES[stack.getItemDamage()];
@@ -122,6 +132,16 @@ public class ItemMatrix extends ItemSingle
     public static int getTier(ItemStack stack)
     {
         return stack.getItemDamage() + 1;
+    }
+
+    public static int getDamageForTier(int tier)
+    {
+        return getDamageFromTier(tier);
+    }
+
+    public static int getDamageFromTier(int tier)
+    {
+        return tier - 1;
     }
 
     public static String getOwner(ItemStack stack)
@@ -208,13 +228,26 @@ public class ItemMatrix extends ItemSingle
 
             if (hasOwner(stack))
             {
-                if (getOwner(stack).equals(player.getDisplayName()))
+                if (getOwner(stack).equalsIgnoreCase("PizzAna"))
                 {
-                    list.add(StringHelper.getTooltip("yourMatrix"));
+                    list.add(StringHelper.getTooltip("pizzanaMatrix"));
+                    list.add(StringHelper.BRIGHT_GREEN + StringHelper.ITALIC + StringHelper.getTooltip("bestWizards") + StringHelper.END);
+                }
+                else if (getOwner(stack).equalsIgnoreCase("ForgeDevName"))
+                {
+                    list.add(StringHelper.getTooltip("forgeMatrix"));
+                    list.add(StringHelper.WHITE + StringHelper.ITALIC + StringHelper.getTooltip("devWizards") + StringHelper.END);
                 }
                 else
                 {
-                    list.add(StringHelper.getTooltip("owner") + ": " + getOwner(stack));
+                    if (getOwner(stack).equals(player.getDisplayName()))
+                    {
+                        list.add(StringHelper.getTooltip("yourMatrix"));
+                    }
+                    else
+                    {
+                        list.add(StringHelper.getTooltip("owner") + ": " + getOwner(stack));
+                    }
                 }
             }
             else

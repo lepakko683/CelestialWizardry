@@ -1,8 +1,10 @@
 package celestialwizardry.handler;
 
 import celestialwizardry.CelestialWizardry;
+import celestialwizardry.api.energy.EnergyElemental;
 import celestialwizardry.entity.ModEntityProperties;
 import celestialwizardry.init.ModItems;
+import celestialwizardry.item.ItemMatrix;
 import celestialwizardry.reference.Names;
 import celestialwizardry.reference.Settings;
 import celestialwizardry.util.PlayerHelper;
@@ -29,7 +31,9 @@ public class PlayerEventHandler
     public void onPlayerLoggedIn(PlayerEvent.PlayerLoggedInEvent event)
     {
         ModEntityProperties entityProperties = propertiesConcurrentHashMap.remove(event.player.getPersistentID());
+
         System.out.println("PLAYER LOGIN!!!");
+
         if (entityProperties != null)
         {
             entityProperties.saveNBTData(event.player.getEntityData());
@@ -41,8 +45,6 @@ public class PlayerEventHandler
 
         if (!properties.spellBook)
         {
-            properties.spellBook = true;
-
             if (Settings.spawnSpellBook)
             {
                 ItemStack stack = new ItemStack(ModItems.spellBook);
@@ -133,6 +135,8 @@ public class PlayerEventHandler
 
                 SpawnHelper.spawnItemAtPlayer(event.player, stack);
             }
+
+            properties.spellBook = true;
         }
 
         if (!properties.hasIntelligence)
@@ -154,6 +158,47 @@ public class PlayerEventHandler
                     "Initialized experience (" + properties.intelligence + ") for player " + event.player
                             .getDisplayName()
                                       );
+        }
+
+        if (!properties.fun)
+        {
+            if (PlayerHelper.isPizzAna(event.player))
+            {
+                ItemStack stack = new ItemStack(ModItems.matrix, 1, ItemMatrix.getDamageFromTier(5));
+                String name = StringHelper.BRIGHT_BLUE + "PizzAna's Matrix" + StringHelper.END;
+
+                NBTTagCompound tagCompound = new NBTTagCompound();
+
+                tagCompound.setTag(Names.NBT.DISPLAY, new NBTTagCompound());
+                tagCompound.getCompoundTag(Names.NBT.DISPLAY).setString(Names.NBT.NAME, name);
+
+                stack.setTagCompound(tagCompound);
+                ItemMatrix.setOwner(stack, event.player);
+
+                ItemMatrix.setFull(stack);
+
+                SpawnHelper.spawnItemAtPlayer(event.player, stack);
+            }
+
+            if (PlayerHelper.isForgeDevName(event.player))
+            {
+                ItemStack stack = new ItemStack(ModItems.matrix, 1, ItemMatrix.getDamageFromTier(1));
+                String name = StringHelper.WHITE + "ForgeDeveloper's Matrix" + StringHelper.END;
+
+                NBTTagCompound tagCompound = new NBTTagCompound();
+
+                tagCompound.setTag(Names.NBT.DISPLAY, new NBTTagCompound());
+                tagCompound.getCompoundTag(Names.NBT.DISPLAY).setString(Names.NBT.NAME, name);
+
+                stack.setTagCompound(tagCompound);
+                ItemMatrix.setOwner(stack, event.player);
+
+                ItemMatrix.setFull(stack);
+
+                SpawnHelper.spawnItemAtPlayer(event.player, stack);
+            }
+
+            properties.fun = true;
         }
         
         //TODO: send rune configuration
