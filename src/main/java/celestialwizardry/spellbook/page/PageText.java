@@ -23,7 +23,7 @@ public class PageText extends SpellBookPage
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void renderScreen(IGuiSpellBookEntry gui, int mx, int my)
+    public void renderScreen(IGuiSpellBookEntry gui, int mouseX, int mouseY)
     {
         int width = gui.getWidth() - 34;
         int x = gui.getLeft() + 16;

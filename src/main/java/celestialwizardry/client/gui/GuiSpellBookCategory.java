@@ -2,8 +2,10 @@ package celestialwizardry.client.gui;
 
 import celestialwizardry.api.spellbook.SpellBookCategory;
 import celestialwizardry.api.spellbook.SpellBookEntry;
+import celestialwizardry.handler.ClientTickEventHandler;
 import celestialwizardry.util.StringHelper;
 
+import net.minecraft.client.gui.GuiButton;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.EnumChatFormatting;
 import cpw.mods.fml.relauncher.Side;
@@ -16,6 +18,7 @@ import java.util.Collections;
 public class GuiSpellBookCategory extends GuiSpellBookGuide
 {
     public SpellBookCategory category;
+    String title;
 
     public ArrayList<SpellBookEntry> entries = new ArrayList<SpellBookEntry>();
 
@@ -26,6 +29,7 @@ public class GuiSpellBookCategory extends GuiSpellBookGuide
         super(player);
 
         this.category = category;
+        title = StringHelper.localize(category.getUnlocalizedName());
     }
 
     @Override
@@ -38,27 +42,26 @@ public class GuiSpellBookCategory extends GuiSpellBookGuide
         entries.addAll(category.entries);
         Collections.sort(entries);
 
-        int x = 14;
+        /* int x = LIST_X;
 
         for (int i = 0; i < CATEGORIES_IN_COLUMN; i++)
         {
-            // TODO Continue buttons on next page if we get that far
+            int y = LIST_Y + i * CATEGORIES_IN_COLUMN;
+            buttonList.add(new GuiButtonInvisible(i, guiLeft + x, guiTop + y, 110, 10, ""));
+            range++;
+        } */
 
-            int y = 12 + i * 12;
-            buttonList.add(new GuiButtonInvisible(buttonId++ /*i*/, guiLeft + x, guiTop + y, 110, 10, ""));
-        }
-
+        // TODO updatePageButtons();
         populateIndex();
     }
 
     @Override
     protected void populateIndex()
     {
-        for (int i = bookmarks + (CATEGORIES_IN_COLUMN * page); i < CATEGORIES_IN_COLUMN * (page + 1); i++)
+        for (int i = CATEGORIES_IN_COLUMN * page; i < CATEGORIES_IN_COLUMN * (page + 1); i++)
         {
-            int j = i - bookmarks;
             GuiButtonInvisible button = (GuiButtonInvisible) buttonList.get(i - (CATEGORIES_IN_COLUMN * page));
-            SpellBookEntry entry = j >= entries.size() ? null : entries.get(j);
+            SpellBookEntry entry = i >= entries.size() ? null : entries.get(i);
 
             if (entry != null)
             {
@@ -73,10 +76,51 @@ public class GuiSpellBookCategory extends GuiSpellBookGuide
     }
 
     @Override
+    protected void actionPerformed(GuiButton button)
+    {
+        super.actionPerformedSkip(button);
+
+        switch (button.id)
+        {
+            case 30:
+                mc.displayGuiScreen(new GuiSpellBookGuide(player));
+                flipPage();
+                break;
+
+            case 31:
+                page--;
+                // TODO updatePageButtons();
+                populateIndex();
+                flipPage();
+                break;
+
+            case 32:
+                page++;
+                // TODO updatePageButtons();
+                populateIndex();
+                flipPage();
+                break;
+
+            default:
+                int index = button.id + page * CATEGORIES_IN_COLUMN;
+
+                if (index >= entries.size())
+                {
+                    return;
+                }
+
+                SpellBookEntry entry = entries.get(index);
+                mc.displayGuiScreen(new GuiSpellBookEntry(player, entry, this));
+                flipPage();
+                break;
+        }
+    }
+
+    /* @Override
     protected boolean isIndex()
     {
         return false;
-    }
+    } */
 
     @Override
     protected boolean customSecondPage()

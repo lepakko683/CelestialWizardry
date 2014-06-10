@@ -30,8 +30,7 @@ public abstract class GuiSpellBook extends GuiContainer
     protected GuiButton notes;
     protected GuiButton spells;
 
-    protected int buttonId;
-    protected int bookmarks;
+    protected int anInteger; // TODO Come up with better name for this :P
 
     public GuiSpellBook(InventoryPlayer player)
     {
@@ -51,25 +50,23 @@ public abstract class GuiSpellBook extends GuiContainer
 
         buttonList.clear();
 
-        buttonId = buttonList.size();
-
-        guide = new GuiButtonInvisible(buttonId++, guiLeft - 48 + 8 * 2, guiTop + 20 + 2, 48, 19,
+        guide = new GuiButtonInvisible(100, guiLeft - 48 + 8 * 2, guiTop + 20 + 2, 48, 19,
                                        StringHelper.localize("bookmark." + Resources.RESOURCE_PREFIX + "guide"));
         buttonList.add(guide);
 
-        notes = new GuiButtonInvisible(buttonId++, guiLeft - 48 + 8 * 2, guiTop + 40 + 2, 48, 19,
+        notes = new GuiButtonInvisible(101, guiLeft - 48 + 8 * 2, guiTop + 40 + 2, 48, 19,
                                        StringHelper.localize("bookmark." + Resources.RESOURCE_PREFIX + "notes"));
         buttonList.add(notes);
 
-        spells = new GuiButtonInvisible(buttonId++, guiLeft - 48 + 8 * 2, guiTop + 60 + 2, 48, 19,
+        spells = new GuiButtonInvisible(102, guiLeft - 48 + 8 * 2, guiTop + 60 + 2, 48, 19,
                                         StringHelper.localize("bookmark." + Resources.RESOURCE_PREFIX + "spells"));
         buttonList.add(spells);
 
-        bookmarks = buttonId;
+        anInteger = 3;
     }
 
     @Override
-    protected void drawGuiContainerBackgroundLayer(float parTick, int mouse_x, int mouse_y)
+    protected void drawGuiContainerBackgroundLayer(float tick, int mouseX, int mouseY)
     {
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         this.mc.getTextureManager().bindTexture(Resources.Textures.GUI_SPELL_BOOK);
@@ -93,28 +90,28 @@ public abstract class GuiSpellBook extends GuiContainer
     @Override
     protected void actionPerformed(GuiButton button)
     {
-        super.actionPerformed(button);
+        // super.actionPerformed(button);
 
         switch (button.id)
         {
-            case 0:
+            case 100:
                 mc.displayGuiScreen(new GuiSpellBookGuide(player));
-                ClientTickEventHandler.notifyPageChange();
+                flipPage();
                 break;
 
-            case 1:
+            case 101:
                 mc.displayGuiScreen(new GuiSpellBookNotes(player));
-                ClientTickEventHandler.notifyPageChange();
+                flipPage();
                 break;
 
-            case 2:
+            case 102:
                 mc.displayGuiScreen(new GuiSpellBookSpells(player));
-                ClientTickEventHandler.notifyPageChange();
+                flipPage();
                 break;
 
             default:
-                mc.displayGuiScreen(new GuiSpellBookGuide(player));
-                ClientTickEventHandler.notifyPageChange();
+                // Debug
+                flipPage();
                 break;
         }
     }
@@ -123,6 +120,11 @@ public abstract class GuiSpellBook extends GuiContainer
     public boolean doesGuiPauseGame()
     {
         return false;
+    }
+
+    protected void flipPage()
+    {
+        ClientTickEventHandler.notifyPageChange();
     }
 
     protected abstract boolean isIndex();
