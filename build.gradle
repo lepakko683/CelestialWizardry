@@ -92,8 +92,6 @@ task buildInfo {
     {
         ext.build_number = "${project.buildInfo.revision}"
     }
-
-    println "CelestialWizardry revision ${project.buildInfo.revision} build ${project.buildInfo.build_number}"
 }
 
 version = "${config.mod_version}.${project.buildInfo.build_number}"
@@ -131,9 +129,9 @@ processResources {
     from(sourceSets.main.resources.srcDirs) {
 
         // Include only info files
-        include '**/*.info'
+        include '*.info'
 
-        // Replace version, mc_vrsion, baubles_version and baubles_root
+        // Replace version, mc_version, baubles_version and baubles_root
         expand 'version': project.version, 'mc_version': config.mc_version,
                'baubles_version': config.baubles_version, 'baubles_root': config.baubles_root
     }
@@ -352,7 +350,12 @@ uploadArchives.shouldRunAfter tasks.signJar
 
 // Mostly a dummy task for building the jars for official release
 task release {
-    println "Release the savage!"
+
+    println println "CelestialWizardry revision ${project.buildInfo.revision} build ${project.buildInfo.build_number}"
+
+    doLast {
+        println "Release the savage!"
+    }
 }
 
 // Make the release task dependant on signing the jar so it builds the mod when release task is called
