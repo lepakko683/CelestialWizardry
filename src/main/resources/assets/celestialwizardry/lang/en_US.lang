@@ -14,6 +14,7 @@ item.celestialwizardry:matrix.tier.1.name=Stone Matrix
 item.celestialwizardry:matrix.tier.2.name=Mystical Matrix
 item.celestialwizardry:matrix.tier.3.name=Crystal Matrix
 item.celestialwizardry:matrix.tier.4.name=Celestial Matrix
+item.celestialwizardry:matrix.tier.5.name=Perfect Matrix
 item.celestialwizardry:material.magicalPebble.name=Magical Pebble
 item.celestialwizardry:material.magicalIntelligenceCore.name=Magical Intelligence Core
 item.celestialwizardry:invalid.name=Invalid Item

@@ -1,8 +1,6 @@
 package celestialwizardry.item;
 
-import celestialwizardry.CelestialWizardry;
 import celestialwizardry.api.energy.EnergyType;
-import celestialwizardry.reference.GuiIds;
 import celestialwizardry.reference.Names;
 import celestialwizardry.reference.Resources;
 import celestialwizardry.reference.Settings;
@@ -24,16 +22,14 @@ import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class ItemMatrix extends ItemSingle
 {
     @SideOnly(Side.CLIENT)
     private IIcon icons[];
 
-    private static final float[] MAX_ENERGIES = new float[]{1000f, 10000f, 100000f, 1000000f};
+    private static final float[] MAX_ENERGIES = new float[]{1000f, 10000f, 100000f, 1000000f, 1000000000f};
 
     public ItemMatrix()
     {
