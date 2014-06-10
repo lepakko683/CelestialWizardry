@@ -73,6 +73,10 @@ public class ItemSpellBook extends ItemSingle
     protected static void initSpellBook(ItemStack stack, EntityPlayer player)
     {
         NBTHelper.setUUID(stack);
-        NBTHelper.setString(stack, Names.NBT.PLAYER, player.getDisplayName());
+
+        if (!NBTHelper.hasTag(stack, Names.NBT.PLAYER))
+        {
+            NBTHelper.setString(stack, Names.NBT.PLAYER, player.getDisplayName());
+        }
     }
 }
