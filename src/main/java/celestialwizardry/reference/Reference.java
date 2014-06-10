@@ -16,5 +16,5 @@ public class Reference
 
     public static final String FINGERPRINT = "@FINGERPRINT@";
 
-    public static final String DEPENDENCIES = "required-after:Baubles";
+    public static final String DEPENDENCIES = "required-after:Forge@[10.12.1.1110,);required-after:Baubles";
 }
