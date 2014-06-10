@@ -18,6 +18,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.IIcon;
+import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -144,12 +145,11 @@ public class ItemMatrix extends ItemSingle
     {
         StringBuilder ret = new StringBuilder();
 
-        /* if (getTier(stack) == 1)
+        if (getTier(stack) == 1)
         {
             // NO-OP
         }
-        else */
-        if (getTier(stack) == 2)
+        else if (getTier(stack) == 2)
         {
             ret.append(StringHelper.YELLOW);
         }
@@ -173,11 +173,9 @@ public class ItemMatrix extends ItemSingle
     @SuppressWarnings("unchecked")
     public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean adv)
     {
-        list.add(StringHelper.RED + "TODO" + StringHelper.END);
+        list.add(StringHelper.RED + "WIP" + StringHelper.END); // TODO Remove
 
         super.addInformation(stack, player, list, adv);
-
-        // Proper tooltips start here
 
         if (Settings.shiftForDetails && !KeyboardHelper.isShiftKeyDown())
         {
@@ -292,7 +290,7 @@ public class ItemMatrix extends ItemSingle
     @SideOnly(Side.CLIENT)
     public IIcon getIconFromDamage(int meta)
     {
-        return icons[meta]; // icons[MathHelper.clamp_int(meta, 0, MAX_ENERGIES.length - 1)];
+        return icons[MathHelper.clamp_int(meta, 0, MAX_ENERGIES.length - 1)];
     }
 
     @Override
