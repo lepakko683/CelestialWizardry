@@ -66,27 +66,37 @@ public abstract class GuiSpellBook extends GuiContainer
     }
 
     @Override
-    protected void drawGuiContainerBackgroundLayer(float tick, int mouseX, int mouseY)
+    protected void drawGuiContainerBackgroundLayer(float partialTick, int mouseX, int mouseY)
     {
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         this.mc.getTextureManager().bindTexture(Resources.Textures.GUI_SPELL_BOOK);
         int xStart = guiLeft;
         int yStart = guiTop;
 
+        // Render guides - bookmark
         COLOR_GUIDES.setGLColor();
         this.drawTexturedModalRect(xStart - 48 + 8, yStart + 20, 200, 190, 48, 19);
-
+        
+        // Render notes - bookmark
         COLOR_NOTES.setGLColor();
         this.drawTexturedModalRect(xStart - 48 + 8, yStart + 40, 200, 190, 48, 19);
-
+        
+        // Render spells - bookmark
         COLOR_SPELLS.setGLColor();
         this.drawTexturedModalRect(xStart - 48 + 8, yStart + 60, 200, 190, 48, 19);
 
         Colour.resetGLColor();
+        
+        // Render book
         this.drawTexturedModalRect(xStart, yStart, 0, 0, xSize, 160);
+        
+        // Render player inventory
         this.drawTexturedModalRect(xStart, yStart + 166, 0, 166, 197, ySize - 165);
+        
+        this.mc.getTextureManager().bindTexture(Resources.Textures.GUI_SPELL_BOOK_PAGES);
+        this.drawTexturedModalRect(xStart+11, yStart+14, 11, 13, 196, 141);
     }
-
+    //this.drawTexturedModalRect(x, y, u, v, width, height);
     @Override
     protected void actionPerformed(GuiButton button)
     {
@@ -115,6 +125,12 @@ public abstract class GuiSpellBook extends GuiContainer
                 break;
         }
     }
+    
+    @Override
+    protected void mouseMovedOrUp(int p_146286_1_, int p_146286_2_, int which) {
+    	System.out.println("Mouse up: " + (which==0 || which == 1));
+    	super.mouseMovedOrUp(p_146286_1_, p_146286_2_, which);
+    }
 
     @Override
     public boolean doesGuiPauseGame()
@@ -124,7 +140,7 @@ public abstract class GuiSpellBook extends GuiContainer
 
     protected void flipPage()
     {
-        ClientTickEventHandler.notifyPageChange();
+        ClientTickEventHandler.notifyPageChange(false);
     }
 
     protected abstract boolean isIndex();

@@ -19,6 +19,8 @@ public class Resources
                 .getResourceLocation(GUI_SHEET_LOCATION + "spellBookInventory.png");
         public static final ResourceLocation GUI_SPELL_BOOK = ResourceLocationHelper
                 .getResourceLocation(GUI_SHEET_LOCATION + "spellBook.png");
+        public static final ResourceLocation GUI_SPELL_BOOK_PAGES = ResourceLocationHelper
+                .getResourceLocation(GUI_SHEET_LOCATION + "spellBookPages.png");
 
         @Deprecated
         public static final ResourceLocation GUI_SPELL_BOOK_OLD = ResourceLocationHelper

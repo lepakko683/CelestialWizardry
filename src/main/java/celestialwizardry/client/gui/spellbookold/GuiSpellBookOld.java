@@ -97,7 +97,7 @@ public class GuiSpellBookOld extends GuiScreen
         if (category != null)
         {
             mc.displayGuiScreen(new GuiSpellBookOldIndex(category));
-            ClientTickEventHandler.notifyPageChange();
+            ClientTickEventHandler.notifyPageChange(true);
         }
     }
 

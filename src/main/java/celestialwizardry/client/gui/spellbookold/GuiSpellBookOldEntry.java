@@ -81,15 +81,15 @@ public class GuiSpellBookOldEntry extends GuiSpellBookOld implements IGuiSpellBo
         {
             case 0:
                 mc.displayGuiScreen(isShiftKeyDown() ? new GuiSpellBookOld() : parent);
-                ClientTickEventHandler.notifyPageChange();
+                ClientTickEventHandler.notifyPageChange(true);
                 break;
             case 1:
                 page--;
-                ClientTickEventHandler.notifyPageChange();
+                ClientTickEventHandler.notifyPageChange(true);
                 break;
             case 2:
                 page++;
-                ClientTickEventHandler.notifyPageChange();
+                ClientTickEventHandler.notifyPageChange(true);
                 break;
         }
 

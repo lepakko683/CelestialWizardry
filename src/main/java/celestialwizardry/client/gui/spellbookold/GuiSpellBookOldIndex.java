@@ -90,19 +90,19 @@ public class GuiSpellBookOldIndex extends GuiSpellBookOld
         {
             case 12:
                 mc.displayGuiScreen(new GuiSpellBookOld());
-                ClientTickEventHandler.notifyPageChange();
+                ClientTickEventHandler.notifyPageChange(true);
                 break;
             case 13:
                 page--;
                 updatePageButtons();
                 populateIndex();
-                ClientTickEventHandler.notifyPageChange();
+                ClientTickEventHandler.notifyPageChange(true);
                 break;
             case 14:
                 page++;
                 updatePageButtons();
                 populateIndex();
-                ClientTickEventHandler.notifyPageChange();
+                ClientTickEventHandler.notifyPageChange(true);
                 break;
             default:
                 int index = par1GuiButton.id + page * 12;
@@ -113,7 +113,7 @@ public class GuiSpellBookOldIndex extends GuiSpellBookOld
 
                 SpellBookEntry entry = entriesToDisplay.get(index);
                 mc.displayGuiScreen(new GuiSpellBookOldEntry(entry, this));
-                ClientTickEventHandler.notifyPageChange();
+                ClientTickEventHandler.notifyPageChange(true);
         }
     }
 
