@@ -39,17 +39,25 @@ public class StringHelper
     public static final String ITALIC = (char) 167 + "o";
     public static final String END = (char) 167 + "r";
 
-    private static String shiftForInfo = LIGHT_GRAY + localize("tooltip." + Resources.RESOURCE_PREFIX + "holdShift1")
-            + " " + YELLOW + ITALIC + localize("tooltip." + Resources.RESOURCE_PREFIX + "holdShift2") + " " + END
-            + LIGHT_GRAY + localize("tooltip." + Resources.RESOURCE_PREFIX + "holdShift3") + END;
-    private static String controlForInfo = LIGHT_GRAY + localize(
-            "tooltip." + Resources.RESOURCE_PREFIX + "holdControl1") + " " + BRIGHT_GREEN + ITALIC + localize(
-            "tooltip." + Resources.RESOURCE_PREFIX + "holdControl2") + " " + END + LIGHT_GRAY + localize(
-            "tooltip." + Resources.RESOURCE_PREFIX + "holdControl3") + END;
+    private static String shiftForInfo = LIGHT_GRAY + getTooltip("holdShift1") + " " + YELLOW + ITALIC + getTooltip(
+            "holdShift2") + " " + END + LIGHT_GRAY + getTooltip("holdShift3") + END;
+    private static String controlForInfo = LIGHT_GRAY + getTooltip(
+            "holdControl1") + " " + BRIGHT_GREEN + ITALIC + getTooltip(
+            "holdControl2") + " " + END + LIGHT_GRAY + getTooltip("holdControl3") + END;
 
     private StringHelper()
     {
 
+    }
+
+    public static String getTooltip(String tooltip)
+    {
+        return localize("tooltip." + Resources.RESOURCE_PREFIX + tooltip);
+    }
+
+    public static String getMessage(String message)
+    {
+        return localize("message." + Resources.RESOURCE_PREFIX + message);
     }
 
     public static int getSplitStringHeight(FontRenderer fontRenderer, String input, int width)

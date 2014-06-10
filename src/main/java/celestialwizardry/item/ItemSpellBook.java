@@ -39,7 +39,7 @@ public class ItemSpellBook extends ItemSingle
         }
         else
         {
-            player.addChatComponentMessage(new ChatComponentText(String.format(StringHelper.localize("message." + Resources.RESOURCE_PREFIX + "stolenBook"), player.getDisplayName())));
+            player.addChatComponentMessage(new ChatComponentText(String.format(StringHelper.getMessage("stolenBook"), player.getDisplayName())));
 
             NBTTagCompound openers = new NBTTagCompound();
 

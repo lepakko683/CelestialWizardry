@@ -1,7 +1,6 @@
 package celestialwizardry.item;
 
 import celestialwizardry.creativetab.CreativeTab;
-import celestialwizardry.reference.Messages;
 import celestialwizardry.reference.Resources;
 import celestialwizardry.reference.Settings;
 import celestialwizardry.util.IconRegistry;
@@ -178,7 +177,7 @@ public abstract class ItemCW extends Item
 
             if (stack.hasTagCompound())
             {
-                list.add(StringHelper.localize(Messages.NBT));
+                list.add(StringHelper.getTooltip("NBT"));
                 NBTTagCompound tagCompound = stack.getTagCompound();
 
                 for (Object o : tagCompound.func_150296_c())
@@ -189,7 +188,7 @@ public abstract class ItemCW extends Item
             }
             else
             {
-                list.add(StringHelper.localize(Messages.NO_NBT));
+                list.add(StringHelper.getTooltip("noNBT"));
             }
         }
     }

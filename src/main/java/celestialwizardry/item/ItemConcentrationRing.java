@@ -1,9 +1,9 @@
 package celestialwizardry.item;
 
-import celestialwizardry.reference.Messages;
 import celestialwizardry.reference.Names;
 import celestialwizardry.reference.Resources;
 import celestialwizardry.util.StringHelper;
+
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
@@ -16,6 +16,7 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+
 import baubles.api.BaubleType;
 import baubles.api.IBauble;
 import baubles.common.container.InventoryBaubles;
@@ -25,8 +26,8 @@ import java.util.List;
 
 public class ItemConcentrationRing extends ItemSingle implements IBauble
 {
-	private IIcon itemIcons[];
-	
+    private IIcon itemIcons[];
+
     public ItemConcentrationRing()
     {
         super();
@@ -40,7 +41,7 @@ public class ItemConcentrationRing extends ItemSingle implements IBauble
     @SideOnly(Side.CLIENT)
     public IIcon getIconFromDamage(int meta)
     {
-    	int j = MathHelper.clamp_int(meta, 0, Names.Items.CONCENTRATION_RING_SUBTYPES.length-1);
+        int j = MathHelper.clamp_int(meta, 0, Names.Items.CONCENTRATION_RING_SUBTYPES.length - 1);
         return this.itemIcons[j];
     }
 
@@ -49,15 +50,17 @@ public class ItemConcentrationRing extends ItemSingle implements IBauble
     {
         return String.format("item.%s%s", Resources.RESOURCE_PREFIX, Names.Items.CONCENTRATION_RING);
     }
-	
-	@SideOnly(Side.CLIENT)
+
+    @SideOnly(Side.CLIENT)
     public void registerIcons(IIconRegister par1IconRegister)
     {
         this.itemIcons = new IIcon[Names.Items.CONCENTRATION_RING_SUBTYPES.length];
 
         for (int i = 0; i < itemIcons.length; ++i)
         {
-            this.itemIcons[i] = par1IconRegister.registerIcon(Resources.RESOURCE_PREFIX + Names.Items.CONCENTRATION_RING + "." + Names.Items.CONCENTRATION_RING_SUBTYPES[i]);
+            this.itemIcons[i] = par1IconRegister.registerIcon(
+                    Resources.RESOURCE_PREFIX + Names.Items.CONCENTRATION_RING + "."
+                            + Names.Items.CONCENTRATION_RING_SUBTYPES[i]);
         }
     }
 
@@ -93,11 +96,11 @@ public class ItemConcentrationRing extends ItemSingle implements IBauble
         // if meta == 0
         if (meta == 1)
         {
-            list.add(StringHelper.BLUE + StringHelper.localize(Messages.LUNAR) + StringHelper.END);
+            list.add(StringHelper.BLUE + StringHelper.getTooltip("lunar") + StringHelper.END);
         }
         else if (meta == 2)
         {
-            list.add(StringHelper.YELLOW + StringHelper.localize(Messages.SOLAR) + StringHelper.END);
+            list.add(StringHelper.YELLOW + StringHelper.getTooltip("solar") + StringHelper.END);
         }
     }
 

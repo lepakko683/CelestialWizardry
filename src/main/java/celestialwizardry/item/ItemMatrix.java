@@ -193,39 +193,39 @@ public class ItemMatrix extends ItemSingle
             return;
         }
 
-        list.add(StringHelper.localize("tooltip." + Resources.RESOURCE_PREFIX + "tier") + " " + getTier(stack));
+        list.add(StringHelper.getTooltip("tier") + " " + getTier(stack));
 
         if (stack.stackTagCompound == null)
         {
-            list.add(StringHelper.localize("tooltip." + Resources.RESOURCE_PREFIX + "maxStorage") + ": " + String.valueOf(getMaxEnergy(stack)));
-            list.add(StringHelper.localize("tooltip." + Resources.RESOURCE_PREFIX + "noOwner"));
+            list.add(StringHelper.getTooltip("maxStorage") + ": " + String.valueOf(getMaxEnergy(stack)));
+            list.add(StringHelper.getTooltip("noOwner"));
         }
         else
         {
             if (getEnergyStored(stack) == 0)
             {
-                list.add(StringHelper.localize("tooltip." + Resources.RESOURCE_PREFIX + "maxStorage") + ": " + String.valueOf(getMaxEnergy(stack)));
+                list.add(StringHelper.getTooltip("maxStorage") + ": " + String.valueOf(getMaxEnergy(stack)));
             }
             else
             {
-                list.add(StringHelper.localize("tooltip." + Resources.RESOURCE_PREFIX + "energyType") + ": " + getEnergyType(stack).getEnergyName());
-                list.add(StringHelper.localize("tooltip." + Resources.RESOURCE_PREFIX + "energyStored") + ": " + getEnergyStored(stack) + '/' + String.valueOf(getMaxEnergy(stack)));
+                list.add(StringHelper.getTooltip("energyType") + ": " + getEnergyType(stack).getEnergyName());
+                list.add(StringHelper.getTooltip("energyStored") + ": " + getEnergyStored(stack) + '/' + String.valueOf(getMaxEnergy(stack)));
             }
 
             if (hasOwner(stack))
             {
                 if (getOwner(stack).equals(player.getDisplayName()))
                 {
-                    list.add(StringHelper.localize("tooltip." + Resources.RESOURCE_PREFIX + "yourMatrix"));
+                    list.add(StringHelper.getTooltip("yourMatrix"));
                 }
                 else
                 {
-                    list.add(StringHelper.localize("tooltip." + Resources.RESOURCE_PREFIX + "owner") + ": " + getOwner(stack));
+                    list.add(StringHelper.getTooltip("owner") + ": " + getOwner(stack));
                 }
             }
             else
             {
-                list.add(StringHelper.localize("tooltip." + Resources.RESOURCE_PREFIX + "noOwner"));
+                list.add(StringHelper.getTooltip("noOwner"));
             }
         }
     }
@@ -244,7 +244,7 @@ public class ItemMatrix extends ItemSingle
         }
         else
         {
-            player.addChatComponentMessage(new ChatComponentText(String.format(StringHelper.localize("message." + Resources.RESOURCE_PREFIX + "stolenMatrix"), player.getDisplayName())));
+            player.addChatComponentMessage(new ChatComponentText(String.format(StringHelper.getMessage("stolenMatrix"), player.getDisplayName())));
 
             NBTTagCompound openers = new NBTTagCompound();
 
