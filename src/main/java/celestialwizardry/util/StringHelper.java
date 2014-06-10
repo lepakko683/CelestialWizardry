@@ -8,8 +8,6 @@ import net.minecraft.util.StatCollector;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 
-import org.lwjgl.input.Keyboard;
-
 import java.util.List;
 
 public class StringHelper
@@ -52,21 +50,6 @@ public class StringHelper
     private StringHelper()
     {
 
-    }
-
-    public static boolean isAltKeyDown()
-    {
-        return Keyboard.isKeyDown(Keyboard.KEY_LMENU) || Keyboard.isKeyDown(Keyboard.KEY_RMENU);
-    }
-
-    public static boolean isControlKeyDown()
-    {
-        return Keyboard.isKeyDown(Keyboard.KEY_LCONTROL) || Keyboard.isKeyDown(Keyboard.KEY_RCONTROL);
-    }
-
-    public static boolean isShiftKeyDown()
-    {
-        return Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT);
     }
 
     public static int getSplitStringHeight(FontRenderer fontRenderer, String input, int width)

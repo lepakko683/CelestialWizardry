@@ -6,6 +6,7 @@ import celestialwizardry.reference.Resources;
 import celestialwizardry.reference.Settings;
 import celestialwizardry.util.IconRegistry;
 import celestialwizardry.util.ItemHelper;
+import celestialwizardry.util.KeyboardHelper;
 import celestialwizardry.util.StringHelper;
 
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -169,7 +170,7 @@ public abstract class ItemCW extends Item
     {
         if (Settings.debugMode)
         {
-            if (!StringHelper.isControlKeyDown())
+            if (!KeyboardHelper.isControlKeyDown())
             {
                 list.add(StringHelper.getControlText());
                 return;

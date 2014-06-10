@@ -8,6 +8,7 @@ import celestialwizardry.reference.Resources;
 import celestialwizardry.reference.Settings;
 import celestialwizardry.registry.EnergyRegistry;
 import celestialwizardry.util.EnergyHelper;
+import celestialwizardry.util.KeyboardHelper;
 import celestialwizardry.util.NBTHelper;
 import celestialwizardry.util.StringHelper;
 
@@ -182,12 +183,12 @@ public class ItemMatrix extends ItemSingle
 
         // Proper tooltips start here
 
-        if (Settings.shiftForDetails && !StringHelper.isShiftKeyDown())
+        if (Settings.shiftForDetails && !KeyboardHelper.isShiftKeyDown())
         {
             list.add(StringHelper.getShiftText());
         }
 
-        if (!StringHelper.isShiftKeyDown())
+        if (!KeyboardHelper.isShiftKeyDown())
         {
             return;
         }
