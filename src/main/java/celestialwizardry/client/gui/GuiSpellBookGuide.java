@@ -23,7 +23,7 @@ public class GuiSpellBookGuide extends GuiSpellBook
 
     public GuiSpellBookGuide(InventoryPlayer player)
     {
-        super(player);
+        super(player, "Guide");
     }
 
     @Override

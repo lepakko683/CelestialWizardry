@@ -21,7 +21,6 @@ public class ClientTickEventHandler
     {
         if (event.phase == TickEvent.Phase.END && event.type == TickEvent.Type.CLIENT)
         {
-        	System.out.println("pageFlipTicks: " + pageFlipTicks);
             GuiScreen gui = Minecraft.getMinecraft().currentScreen;
             int ticksToOpen = 10; // the number of ticks it takes to open the book
             if (gui instanceof GuiSpellBook)

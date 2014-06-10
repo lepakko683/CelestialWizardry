@@ -9,7 +9,7 @@ public class GuiSpellBookSpells extends GuiSpellBook
 {
     public GuiSpellBookSpells(InventoryPlayer player)
     {
-        super(player);
+        super(player, "Spells");
     }
 
     @Override
