@@ -33,7 +33,7 @@ apply plugin: 'maven'
 apply plugin: 'forge'
 
 // http://maven.apache.org/guides/mini/guide-naming-conventions.html
-group 'celestialwizardry'
+group 'io.github.pizzana'
 
 // The name used in final archive artifacts
 archivesBaseName = "CelestialWizardry"
