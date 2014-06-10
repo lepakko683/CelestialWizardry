@@ -30,7 +30,7 @@ public class ItemSpellBook extends ItemSingle
         // Set a UUID, if one doesn't exist already
         initSpellBook(stack, player);
 
-        if (NBTHelper.getString(stack, Names.NBT.PLAYER).equals(player.getDisplayName()))
+        if (NBTHelper.getString(stack, Names.NBT.OWNER).equals(player.getDisplayName()))
         {
             if (!player.isSneaking())
             {
@@ -74,9 +74,9 @@ public class ItemSpellBook extends ItemSingle
     {
         NBTHelper.setUUID(stack);
 
-        if (!NBTHelper.hasTag(stack, Names.NBT.PLAYER))
+        if (!NBTHelper.hasTag(stack, Names.NBT.OWNER))
         {
-            NBTHelper.setString(stack, Names.NBT.PLAYER, player.getDisplayName());
+            NBTHelper.setString(stack, Names.NBT.OWNER, player.getDisplayName());
         }
     }
 }

@@ -33,7 +33,12 @@ tooltip.celestialwizardry:solar=Solar
 tooltip.celestialwizardry:noNBT=No NBT Tags found
 tooltip.celestialwizardry:NBT=NBT Tags found
 tooltip.celestialwizardry:tier=Tier
-tooltip.celestialwizardry:total=Total
+tooltip.celestialwizardry:maxStorage=Matrix Capacity
+tooltip.celestialwizardry:energyType=Energy Type
+tooltip.celestialwizardry:energyStored=Energy Stored
+tooltip.celestialwizardry:yourMatrix=This matrix belongs to you!
+tooltip.celestialwizardry:owner=Owner
+tooltip.celestialwizardry:noOwner=This matrix has no owner. Claim it by right clicking.
 tooltip.celestialwizardry:holdShift1=Hold
 tooltip.celestialwizardry:holdShift2=Shift
 tooltip.celestialwizardry:holdShift3=for Info
@@ -43,6 +48,7 @@ tooltip.celestialwizardry:holdControl3=for Info
 
 # Messages
 message.celestialwizardry:stolenBook=This book belongs to %s and you have no permission to open it!
+message.celestialwizardry:stolenMatrix=This matrix belongs to %s and you have no permission to use it!
 
 # SPELL BOOK
 

@@ -20,6 +20,9 @@ public class SettingHandler
         Settings.debugMode = CelestialWizardry.config
                 .get(category, Settings.ConfigNames.DEBUG_MODE, Settings.DefaultValues.DEBUG_MODE,
                      Settings.Comments.DEBUG_MODE);
+        Settings.shiftForDetails = CelestialWizardry.config.get(category, Settings.ConfigNames.SHIFT_FOR_DETAILS,
+                                                                Settings.DefaultValues.SHIFT_FOR_DETAILS,
+                                                                Settings.Comments.SHIFT_FOR_DETAILS);
 
         /**
          * Spells

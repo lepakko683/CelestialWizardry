@@ -43,8 +43,8 @@ public class Names
         public static final String NAME = "Name";
         public static final String LORE = "Lore";
         public static final String BACKUP_NAME = "backupName";
-        public static final String ENERGIES = "energies";
-        public static final String PLAYER = "player";
+        public static final String ENERGY = "energy";
+        public static final String ENERGY_STORED = "energyStored";
         public static final String OPENERS = "openers";
     }
 

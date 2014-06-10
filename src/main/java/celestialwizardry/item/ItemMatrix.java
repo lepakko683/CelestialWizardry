@@ -1,9 +1,13 @@
 package celestialwizardry.item;
 
+import celestialwizardry.CelestialWizardry;
 import celestialwizardry.api.energy.EnergyType;
+import celestialwizardry.reference.GuiIds;
 import celestialwizardry.reference.Names;
 import celestialwizardry.reference.Resources;
+import celestialwizardry.reference.Settings;
 import celestialwizardry.registry.EnergyRegistry;
+import celestialwizardry.util.EnergyHelper;
 import celestialwizardry.util.NBTHelper;
 import celestialwizardry.util.StringHelper;
 
@@ -13,7 +17,9 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.IIcon;
+import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -37,25 +43,33 @@ public class ItemMatrix extends ItemSingle
         this.setMaxDamage(0);
     }
 
-    public static Map<EnergyType, Float> getEnergies(ItemStack stack)
+    public static EnergyType getEnergyType(ItemStack stack)
     {
-        Map<EnergyType, Float> ret = null;
-
-        if (stack.stackTagCompound != null && NBTHelper.hasTag(stack, Names.NBT.ENERGIES))
+        if (stack.stackTagCompound != null && NBTHelper.hasTag(stack, Names.NBT.ENERGY))
         {
-            ret = new HashMap<EnergyType, Float>();
-            NBTTagCompound energies = stack.getTagCompound().getCompoundTag(Names.NBT.ENERGIES);
+            String name = stack.stackTagCompound.getString(Names.NBT.ENERGY);
+            return EnergyRegistry.getEnergyType(name);
+        }
 
-            for (Object o : energies.func_150296_c())
+        return null;
+    }
+
+    public static float getEnergyStored(ItemStack stack)
+    {
+        if (stack.stackTagCompound != null && NBTHelper.hasTag(stack, Names.NBT.ENERGY))
+        {
+            String name = stack.stackTagCompound.getString(Names.NBT.ENERGY);
+
+            if (NBTHelper.hasTag(stack, name))
             {
-                ret.put(EnergyRegistry.getEnergyType((String) o), energies.getFloat((String) o));
+                return stack.stackTagCompound.getFloat(name);
             }
         }
 
-        return ret;
+        return 0f;
     }
 
-    public static void appendEnergy(ItemStack stack, EnergyType type, float amount)
+    public static boolean appendEnergy(ItemStack stack, EnergyType type, float amount, boolean transform)
     {
         String name = type.getEnergyName();
 
@@ -64,50 +78,42 @@ public class ItemMatrix extends ItemSingle
             stack.setTagCompound(new NBTTagCompound());
         }
 
-        if (!NBTHelper.hasTag(stack, Names.NBT.ENERGIES))
+        if (!NBTHelper.hasTag(stack, Names.NBT.ENERGY))
         {
-            stack.getTagCompound().setTag(Names.NBT.ENERGIES, new NBTTagCompound());
+            NBTHelper.setString(stack, Names.NBT.ENERGY, type.getEnergyName());
+            NBTHelper.setFloat(stack, Names.NBT.ENERGY_STORED, amount <= getMaxEnergy(stack) ? (amount < 0f ? 0f : amount) : getMaxEnergy(stack));
+            return true;
         }
 
-        NBTTagCompound energyTagCompound = stack.getTagCompound().getCompoundTag(Names.NBT.ENERGIES);
-        float old = 0f;
-
-        if (energyTagCompound.hasKey(name))
+        if (NBTHelper.getString(stack, Names.NBT.ENERGY).equals(name))
         {
-            old = energyTagCompound.getFloat(name);
+            float energyStored = NBTHelper.getFloat(stack, Names.NBT.ENERGY_STORED);
+            amount = amount + energyStored;
+            NBTHelper.setFloat(stack, Names.NBT.ENERGY_STORED, amount <= getMaxEnergy(stack) ? (amount < 0f ? 0f : amount) : getMaxEnergy(stack));
+            return true;
         }
-
-        float total = 0f;
-
-        for (float f : getEnergies(stack).values())
+        else
         {
-            total = total + f;
-        }
+            String energyName = NBTHelper.getString(stack, Names.NBT.ENERGY);
+            float energyStored = NBTHelper.getFloat(stack, Names.NBT.ENERGY_STORED);
+            EnergyType energyType = EnergyRegistry.getEnergyType(energyName);
 
-        float check = total + amount;
-
-        if (check <= getMaxEnergy(stack))
-        {
-            if (check < 0)
+            if (transform && EnergyHelper.canTransform(type, energyType))
             {
-                energyTagCompound.setFloat(name, 0f);
-            }
-            else
-            {
-                energyTagCompound.setFloat(name, old + amount);
+                float ratio = EnergyHelper.getTransformRatio(type, energyType);
+                amount = amount * ratio;
+                amount = amount + energyStored;
+                NBTHelper.setFloat(stack, Names.NBT.ENERGY_STORED, amount <= getMaxEnergy(stack) ? (amount < 0f ? 0f : amount) : getMaxEnergy(stack));
+                return true;
             }
         }
-        else if (check > getMaxEnergy(stack))
-        {
-            float add = getMaxEnergy(stack) - total;
 
-            energyTagCompound.setFloat(name, add);
-        }
+        return false;
     }
 
-    public static void decreaseEnergy(ItemStack stack, EnergyType type, float amount)
+    public static boolean decreaseEnergy(ItemStack stack, EnergyType type, float amount)
     {
-        appendEnergy(stack, type, -amount);
+        return appendEnergy(stack, type, -amount, false);
     }
 
     public static float getMaxEnergy(ItemStack stack)
@@ -118,6 +124,21 @@ public class ItemMatrix extends ItemSingle
     public static int getTier(ItemStack stack)
     {
         return stack.getItemDamage() + 1;
+    }
+
+    public static String getOwner(ItemStack stack)
+    {
+        return NBTHelper.getString(stack, Names.NBT.OWNER);
+    }
+
+    public static void setOwner(ItemStack stack, EntityPlayer player)
+    {
+        NBTHelper.setString(stack, Names.NBT.OWNER, player.getDisplayName());
+    }
+
+    public static boolean hasOwner(ItemStack stack)
+    {
+        return NBTHelper.hasTag(stack, Names.NBT.OWNER) && !getOwner(stack).equals("");
     }
 
     @Override
@@ -161,28 +182,89 @@ public class ItemMatrix extends ItemSingle
 
         // Proper tooltips start here
 
-        /* if (!StringHelper.isShiftKeyDown())
+        if (Settings.shiftForDetails && !StringHelper.isShiftKeyDown())
         {
             list.add(StringHelper.getShiftText());
-            return;
-        } */
-
-        // list.add(StringHelper.localize("tooltip." + Resources.RESOURCE_PREFIX + "tier") + " " + getTier(stack));
-
-        /* float total = 0f;
-
-        for (float f : getEnergies(stack).values())
-        {
-            total = total + f;
         }
 
-        list.add(StringHelper.localize("tooltip." + Resources.RESOURCE_PREFIX + "total") + ": " + total + "/"
-                         + getMaxEnergy(stack));
-
-        for (EnergyType type : getEnergies(stack).keySet())
+        if (!StringHelper.isShiftKeyDown())
         {
-            list.add(type.getEnergyName() + ": " + getEnergies(stack).get(type) + "/" + getMaxEnergy(stack));
-        } */
+            return;
+        }
+
+        list.add(StringHelper.localize("tooltip." + Resources.RESOURCE_PREFIX + "tier") + " " + getTier(stack));
+
+        if (stack.stackTagCompound == null)
+        {
+            list.add(StringHelper.localize("tooltip." + Resources.RESOURCE_PREFIX + "maxStorage") + ": " + String.valueOf(getMaxEnergy(stack)));
+            list.add(StringHelper.localize("tooltip." + Resources.RESOURCE_PREFIX + "noOwner"));
+        }
+        else
+        {
+            if (getEnergyStored(stack) == 0)
+            {
+                list.add(StringHelper.localize("tooltip." + Resources.RESOURCE_PREFIX + "maxStorage") + ": " + String.valueOf(getMaxEnergy(stack)));
+            }
+            else
+            {
+                list.add(StringHelper.localize("tooltip." + Resources.RESOURCE_PREFIX + "energyType") + ": " + getEnergyType(stack).getEnergyName());
+                list.add(StringHelper.localize("tooltip." + Resources.RESOURCE_PREFIX + "energyStored") + ": " + getEnergyStored(stack) + '/' + String.valueOf(getMaxEnergy(stack)));
+            }
+
+            if (hasOwner(stack))
+            {
+                if (getOwner(stack).equals(player.getDisplayName()))
+                {
+                    list.add(StringHelper.localize("tooltip." + Resources.RESOURCE_PREFIX + "yourMatrix"));
+                }
+                else
+                {
+                    list.add(StringHelper.localize("tooltip." + Resources.RESOURCE_PREFIX + "owner") + ": " + getOwner(stack));
+                }
+            }
+            else
+            {
+                list.add(StringHelper.localize("tooltip." + Resources.RESOURCE_PREFIX + "noOwner"));
+            }
+        }
+    }
+
+    @Override
+    public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player)
+    {
+        if (!NBTHelper.hasTag(stack, Names.NBT.OWNER))
+        {
+            setOwner(stack, player);
+        }
+
+        if (getOwner(stack).equals(player.getDisplayName()))
+        {
+            // TODO Some stuff later
+        }
+        else
+        {
+            player.addChatComponentMessage(new ChatComponentText(String.format(StringHelper.localize("message." + Resources.RESOURCE_PREFIX + "stolenMatrix"), player.getDisplayName())));
+
+            NBTTagCompound openers = new NBTTagCompound();
+
+            if (NBTHelper.hasTag(stack, Names.NBT.OPENERS))
+            {
+                openers = stack.stackTagCompound.getCompoundTag(Names.NBT.OPENERS);
+            }
+
+            int times = 0;
+
+            if (openers.hasKey(player.getDisplayName()))
+            {
+                times = openers.getInteger(player.getDisplayName());
+            }
+
+            times = times + 1;
+
+            openers.setInteger(player.getDisplayName(), times);
+        }
+
+        return stack;
     }
 
     @Override
