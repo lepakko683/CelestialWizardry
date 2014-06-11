@@ -1,6 +1,9 @@
 package celestialwizardry.item;
 
+import celestialwizardry.api.ILockedItem;
 import celestialwizardry.api.energy.EnergyType;
+import celestialwizardry.api.matrix.IMatrix;
+import celestialwizardry.api.matrix.internal.ICWMatrix;
 import celestialwizardry.reference.Names;
 import celestialwizardry.reference.Resources;
 import celestialwizardry.reference.Settings;
@@ -25,7 +28,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 import java.util.List;
 
-public class ItemMatrix extends ItemSingle
+public class ItemMatrix extends ItemSingle implements IMatrix, ICWMatrix, ILockedItem
 {
     @SideOnly(Side.CLIENT)
     private IIcon icons[];
@@ -41,7 +44,19 @@ public class ItemMatrix extends ItemSingle
         this.setMaxDamage(0);
     }
 
-    public static EnergyType getEnergyType(ItemStack stack)
+    /* ======================================== IMatrix START ===================================== */
+
+    /**
+     * Checks the {@link celestialwizardry.api.energy.EnergyType} stored inside this matrix.
+     *
+     * @param stack the {@link net.minecraft.item.ItemStack} to check the {@link celestialwizardry.api.energy
+     *              .EnergyType} from
+     *
+     * @return the {@link celestialwizardry.api.energy.EnergyType} stored inside the {@link net.minecraft.item
+     * .ItemStack}
+     */
+    @Override
+    public EnergyType getEnergyType(ItemStack stack)
     {
         if (stack.stackTagCompound != null && NBTHelper.hasTag(stack, Names.NBT.ENERGY))
         {
@@ -52,7 +67,16 @@ public class ItemMatrix extends ItemSingle
         return null;
     }
 
-    public static float getEnergyStored(ItemStack stack)
+    /**
+     * Checks the amount of {@link celestialwizardry.api.energy.EnergyType} stored inside this matrix.
+     *
+     * @param stack the {@link net.minecraft.item.ItemStack} to check the amount from
+     *
+     * @return the amount of {@link celestialwizardry.api.energy.EnergyType} stored inside the {@link net.minecraft
+     * .item.ItemStack} as {@link Float}
+     */
+    @Override
+    public float getEnergyStored(ItemStack stack)
     {
         if (stack.stackTagCompound != null && NBTHelper.hasTag(stack, Names.NBT.ENERGY))
         {
@@ -67,7 +91,20 @@ public class ItemMatrix extends ItemSingle
         return 0f;
     }
 
-    public static boolean appendEnergy(ItemStack stack, EnergyType type, float amount, boolean transform)
+    /**
+     * Tries to add given amount to {@link celestialwizardry.api.energy.EnergyType} stored in this matrix.
+     *
+     * @param stack     the {@link net.minecraft.item.ItemStack} to receive the {@link celestialwizardry.api.energy
+     *                  .EnergyType}
+     * @param type      the {@link celestialwizardry.api.energy.EnergyType} that is being added
+     * @param amount    the amount of {@link celestialwizardry.api.energy.EnergyType} to add
+     * @param transform if there is already another {@link celestialwizardry.api.energy.EnergyType} stored, making this
+     *                  true allows matrix to try to transform the new energy into existing one
+     *
+     * @return returns true if the {@link celestialwizardry.api.energy.EnergyType} was successfully stored
+     */
+    @Override
+    public boolean appendEnergy(ItemStack stack, EnergyType type, float amount, boolean transform)
     {
         String name = type.getEnergyName();
 
@@ -79,7 +116,8 @@ public class ItemMatrix extends ItemSingle
         if (!NBTHelper.hasTag(stack, Names.NBT.ENERGY))
         {
             NBTHelper.setString(stack, Names.NBT.ENERGY, type.getEnergyName());
-            NBTHelper.setFloat(stack, Names.NBT.ENERGY_STORED, amount <= getMaxEnergy(stack) ? (amount < 0f ? 0f : amount) : getMaxEnergy(stack));
+            NBTHelper.setFloat(stack, Names.NBT.ENERGY_STORED,
+                               amount <= getMaxEnergy(stack) ? (amount < 0f ? 0f : amount) : getMaxEnergy(stack));
             return true;
         }
 
@@ -87,7 +125,8 @@ public class ItemMatrix extends ItemSingle
         {
             float energyStored = NBTHelper.getFloat(stack, Names.NBT.ENERGY_STORED);
             amount = amount + energyStored;
-            NBTHelper.setFloat(stack, Names.NBT.ENERGY_STORED, amount <= getMaxEnergy(stack) ? (amount < 0f ? 0f : amount) : getMaxEnergy(stack));
+            NBTHelper.setFloat(stack, Names.NBT.ENERGY_STORED,
+                               amount <= getMaxEnergy(stack) ? (amount < 0f ? 0f : amount) : getMaxEnergy(stack));
             return true;
         }
         else
@@ -101,7 +140,8 @@ public class ItemMatrix extends ItemSingle
                 float ratio = EnergyHelper.getTransformRatio(type, energyType);
                 amount = amount * ratio;
                 amount = amount + energyStored;
-                NBTHelper.setFloat(stack, Names.NBT.ENERGY_STORED, amount <= getMaxEnergy(stack) ? (amount < 0f ? 0f : amount) : getMaxEnergy(stack));
+                NBTHelper.setFloat(stack, Names.NBT.ENERGY_STORED,
+                                   amount <= getMaxEnergy(stack) ? (amount < 0f ? 0f : amount) : getMaxEnergy(stack));
                 return true;
             }
         }
@@ -109,55 +149,165 @@ public class ItemMatrix extends ItemSingle
         return false;
     }
 
-    public static boolean decreaseEnergy(ItemStack stack, EnergyType type, float amount)
+    /**
+     * Tries to add given amount of already existing {@link celestialwizardry.api.energy.EnergyType} to {@link
+     * celestialwizardry.api.energy.EnergyType} stored in this matrix.
+     *
+     * @param stack  the {@link net.minecraft.item.ItemStack} to receive the {@link celestialwizardry.api.energy
+     *               .EnergyType}
+     * @param amount the amount of {@link celestialwizardry.api.energy.EnergyType} to add
+     *
+     * @return returns true if the {@link celestialwizardry.api.energy.EnergyType} was successfully stored
+     */
+    @Override
+    public boolean appendEnergy(ItemStack stack, float amount)
+    {
+        return appendEnergy(stack, getEnergyType(stack), amount, false);
+    }
+
+    /**
+     * Tries to decrease given amount of {@link celestialwizardry.api.energy.EnergyType} stored in this matrix.
+     *
+     * @param stack  the {@link net.minecraft.item.ItemStack} to lose the {@link celestialwizardry.api.energy
+     *               .EnergyType}
+     * @param type   the {@link celestialwizardry.api.energy.EnergyType} that is being decreased
+     * @param amount the amount of {@link celestialwizardry.api.energy.EnergyType} to decrease
+     *
+     * @return returns true if the {@link celestialwizardry.api.energy.EnergyType} was successfully decreased
+     */
+    @Override
+    public boolean decreaseEnergy(ItemStack stack, EnergyType type, float amount)
     {
         return appendEnergy(stack, type, -amount, false);
     }
 
-    public static void setFull(ItemStack stack)
+    /**
+     * Tries to decrease given amount of already existing {@link celestialwizardry.api.energy.EnergyType} stored in this
+     * matrix.
+     *
+     * @param stack  the {@link net.minecraft.item.ItemStack} to lose the {@link celestialwizardry.api.energy
+     *               .EnergyType}
+     * @param amount the amount of {@link celestialwizardry.api.energy.EnergyType} to decrease
+     *
+     * @return returns true if the {@link celestialwizardry.api.energy.EnergyType} was successfully decreased
+     */
+    @Override
+    public boolean decreaseEnergy(ItemStack stack, float amount)
     {
-        setFull(stack, getEnergyType(stack));
+        return decreaseEnergy(stack, getEnergyType(stack), amount);
     }
 
-    public static void setFull(ItemStack stack, EnergyType type)
+    /**
+     * Tries to set the matrix full of already existing {@link celestialwizardry.api.energy.EnergyType}
+     *
+     * @param stack the {@link net.minecraft.item.ItemStack} to be set full
+     *
+     * @return returns true if the {@link celestialwizardry.api.energy.EnergyType} was successfully filled
+     */
+    @Override
+    public boolean setFull(ItemStack stack)
     {
-        // TODO
+        return setFull(stack, getEnergyType(stack));
     }
 
-    public static float getMaxEnergy(ItemStack stack)
+    /**
+     * Tries to set the matrix full of given {@link celestialwizardry.api.energy.EnergyType}
+     *
+     * @param stack the {@link net.minecraft.item.ItemStack} to be set full
+     * @param type  the {@link celestialwizardry.api.energy.EnergyType} that the {@link net.minecraft.item.ItemStack} is
+     *              being filled with
+     *
+     * @return returns true if the {@link celestialwizardry.api.energy.EnergyType} was successfully filled
+     */
+    @Override
+    public boolean setFull(ItemStack stack, EnergyType type)
+    {
+        return false; // TODO
+    }
+
+    /**
+     * Returns the maximum amount of {@link celestialwizardry.api.energy.EnergyType} that can be stored inside this
+     * matrix
+     *
+     * @param stack the {@link net.minecraft.item.ItemStack} to check the maximum amount of {@link celestialwizardry
+     *              .api.energy.EnergyType} from
+     *
+     * @return returns the maximum amount of {@link celestialwizardry.api.energy.EnergyType} that can be stored inside
+     * this matrix
+     */
+    @Override
+    public float getMaxEnergy(ItemStack stack)
     {
         return MAX_ENERGIES[stack.getItemDamage()];
     }
 
-    public static int getTier(ItemStack stack)
+    /* ======================================== IMatrix END   ===================================== */
+
+    /* ======================================== ICWMatrix START   ===================================== */
+
+    @Override
+    public int getTier(ItemStack stack)
     {
         return stack.getItemDamage() + 1;
     }
 
-    public static int getDamageForTier(int tier)
+    @Override
+    public int getDamageForTier(int tier)
     {
         return getDamageFromTier(tier);
     }
 
-    public static int getDamageFromTier(int tier)
+    @Override
+    public int getDamageFromTier(int tier)
     {
         return tier - 1;
     }
 
-    public static String getOwner(ItemStack stack)
+    /* ======================================== ICWMatrix END   ===================================== */
+
+    /* ======================================== ILockedItem START   ===================================== */
+
+    /**
+     * Gives the owner of this item.
+     *
+     * @param stack the {@link net.minecraft.item.ItemStack} to check the owner from
+     *
+     * @return the display name of the owner ({@link net.minecraft.entity.player.EntityPlayer})
+     */
+    @Override
+    public String getOwner(ItemStack stack)
     {
         return NBTHelper.getString(stack, Names.NBT.OWNER);
     }
 
-    public static void setOwner(ItemStack stack, EntityPlayer player)
+    /**
+     * Sets the owner for this item.
+     *
+     * @param stack  the {@link net.minecraft.item.ItemStack} to set the owner to
+     * @param player the {@link net.minecraft.entity.player.EntityPlayer} that is set as owner
+     */
+    @Override
+    public void setOwner(ItemStack stack, EntityPlayer player)
     {
         NBTHelper.setString(stack, Names.NBT.OWNER, player.getDisplayName());
     }
 
-    public static boolean hasOwner(ItemStack stack)
+    /**
+     * Checks does this item have owner.
+     *
+     * @param stack the {@link net.minecraft.item.ItemStack} to check the owner from
+     *
+     * @return true if this item has owner
+     */
+    @Override
+    public boolean hasOwner(ItemStack stack)
     {
         return NBTHelper.hasTag(stack, Names.NBT.OWNER) && !getOwner(stack).equals("");
     }
+
+    /* ======================================== ILockedItem END   ===================================== */
+
+    /* ======================================== Item START   ===================================== */
 
     @Override
     @SideOnly(Side.CLIENT)
@@ -184,6 +334,7 @@ public class ItemMatrix extends ItemSingle
 
         ret.append(super.getItemStackDisplayName(stack));
         ret.append(StringHelper.END);
+        ret.append(" (WIP)");
 
         return ret.toString();
     }
@@ -223,7 +374,8 @@ public class ItemMatrix extends ItemSingle
             else
             {
                 list.add(StringHelper.getTooltip("energyType") + ": " + getEnergyType(stack).getEnergyName());
-                list.add(StringHelper.getTooltip("energyStored") + ": " + getEnergyStored(stack) + '/' + String.valueOf(getMaxEnergy(stack)));
+                list.add(StringHelper.getTooltip("energyStored") + ": " + getEnergyStored(stack) + '/' + String
+                        .valueOf(getMaxEnergy(stack)));
             }
 
             if (hasOwner(stack))
@@ -231,12 +383,14 @@ public class ItemMatrix extends ItemSingle
                 if (getOwner(stack).equalsIgnoreCase("PizzAna"))
                 {
                     list.add(StringHelper.getTooltip("pizzanaMatrix"));
-                    list.add(StringHelper.BRIGHT_GREEN + StringHelper.ITALIC + StringHelper.getTooltip("bestWizards") + StringHelper.END);
+                    list.add(StringHelper.BRIGHT_GREEN + StringHelper.ITALIC + StringHelper.getTooltip("bestWizards")
+                                     + StringHelper.END);
                 }
                 else if (getOwner(stack).equalsIgnoreCase("ForgeDevName"))
                 {
                     list.add(StringHelper.getTooltip("forgeMatrix"));
-                    list.add(StringHelper.WHITE + StringHelper.ITALIC + StringHelper.getTooltip("devWizards") + StringHelper.END);
+                    list.add(StringHelper.WHITE + StringHelper.ITALIC + StringHelper.getTooltip("devWizards")
+                                     + StringHelper.END);
                 }
                 else
                 {
@@ -271,7 +425,8 @@ public class ItemMatrix extends ItemSingle
         }
         else
         {
-            player.addChatComponentMessage(new ChatComponentText(String.format(StringHelper.getMessage("stolenMatrix"), player.getDisplayName())));
+            player.addChatComponentMessage(new ChatComponentText(
+                    String.format(StringHelper.getMessage("stolenMatrix"), player.getDisplayName())));
 
             NBTTagCompound openers = new NBTTagCompound();
 
@@ -338,4 +493,6 @@ public class ItemMatrix extends ItemSingle
                     .registerIcon(Resources.RESOURCE_PREFIX + Names.Items.MATRIX + "." + "tier." + (i + 1));
         }
     }
+
+    /* ======================================== Item END   ===================================== */
 }
