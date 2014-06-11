@@ -2,6 +2,8 @@ package celestialwizardry.handler;
 
 import celestialwizardry.CelestialWizardry;
 import celestialwizardry.api.energy.EnergyElemental;
+import celestialwizardry.api.matrix.IMatrix;
+import celestialwizardry.api.matrix.internal.ICWMatrix;
 import celestialwizardry.entity.ModEntityProperties;
 import celestialwizardry.init.ModItems;
 import celestialwizardry.item.ItemMatrix;
@@ -162,9 +164,11 @@ public class PlayerEventHandler
 
         if (!properties.fun)
         {
+            ItemMatrix matrix = ModItems.matrix;
+
             if (PlayerHelper.isPizzAna(event.player))
             {
-                ItemStack stack = new ItemStack(ModItems.matrix, 1, ItemMatrix.getDamageFromTier(5));
+                ItemStack stack = new ItemStack(ModItems.matrix, 1, matrix.getDamageFromTier(5));
                 String name = StringHelper.BRIGHT_BLUE + "PizzAna's Matrix" + StringHelper.END;
 
                 NBTTagCompound tagCompound = new NBTTagCompound();
@@ -173,16 +177,16 @@ public class PlayerEventHandler
                 tagCompound.getCompoundTag(Names.NBT.DISPLAY).setString(Names.NBT.NAME, name);
 
                 stack.setTagCompound(tagCompound);
-                ItemMatrix.setOwner(stack, event.player);
+                matrix.setOwner(stack, event.player);
 
-                ItemMatrix.setFull(stack);
+                matrix.setFull(stack);
 
                 SpawnHelper.spawnItemAtPlayer(event.player, stack);
             }
 
             if (PlayerHelper.isForgeDevName(event.player))
             {
-                ItemStack stack = new ItemStack(ModItems.matrix, 1, ItemMatrix.getDamageFromTier(1));
+                ItemStack stack = new ItemStack(ModItems.matrix, 1, matrix.getDamageFromTier(1));
                 String name = StringHelper.WHITE + "ForgeDeveloper's Matrix" + StringHelper.END;
 
                 NBTTagCompound tagCompound = new NBTTagCompound();
@@ -191,9 +195,9 @@ public class PlayerEventHandler
                 tagCompound.getCompoundTag(Names.NBT.DISPLAY).setString(Names.NBT.NAME, name);
 
                 stack.setTagCompound(tagCompound);
-                ItemMatrix.setOwner(stack, event.player);
+                matrix.setOwner(stack, event.player);
 
-                ItemMatrix.setFull(stack);
+                matrix.setFull(stack);
 
                 SpawnHelper.spawnItemAtPlayer(event.player, stack);
             }

@@ -14,7 +14,10 @@ public class Names
     public static class Items
     {
         public static final String MATERIAL = "material";
-        public static final String MATERIALS[] = {"magicalIntelligenceCore", "magicalPebble"};
+        public static final String[] MATERIALS = {"magicalIntelligenceCore", "magicalPebble"};
+
+        public static final String CRYSTAL = "crystal";
+        public static final String[] CRYSTALS = {"stone", "mystical", "pure", "celestial", "perfect"};
 
         public static final String MAGICAL_INK = "magicalInk";
         public static final String STAFF = "staff";

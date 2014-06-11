@@ -39,6 +39,13 @@ public class RecipesVanilla
         // Magical Stone <-> Magical Pebble
         addCompress(new ItemStack(ModBlocks.magicalStone), ModItems.magicalPebble);
 
+        // Crystals
+        add(ModItems.stoneCrystal, "scs", "cec", "scs", 's', ModBlocks.magicalStone, 'c', Items.diamond, 'e', Items.emerald);
+        add(ModItems.mysticalCrystal, "scs", "cec", "scs", 's', ModBlocks.magicalStone, 'c', ModItems.stoneCrystal, 'e', Items.emerald);
+        add(ModItems.pureCrystal, "scs", "cec", "scs", 's', ModItems.stoneCrystal, 'c', ModItems.mysticalCrystal, 'e', Items.emerald);
+        add(ModItems.celestialCrystal, "scs", "cec", "scs", 's', ModItems.mysticalCrystal, 'c', ModItems.pureCrystal, 'e', Items.emerald);
+        add(ModItems.perfectCrystal, "scs", "cec", "scs", 's', ModItems.pureCrystal, 'c', ModItems.celestialCrystal, 'e', Items.emerald);
+
         // Matrix Tier 1
         add(new ItemStack(ModItems.matrix, 1, 0), "sps", "pdp", "sps", 's', ModBlocks.magicalStone, 'd', Items.diamond,
             'p', ModItems.magicalPebble);

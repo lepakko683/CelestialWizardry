@@ -17,6 +17,11 @@ item.celestialwizardry:matrix.tier.4.name=Celestial Matrix
 item.celestialwizardry:matrix.tier.5.name=Perfect Matrix
 item.celestialwizardry:material.magicalPebble.name=Magical Pebble
 item.celestialwizardry:material.magicalIntelligenceCore.name=Magical Intelligence Core
+item.celestialwizardry:crystal.stone.name=Stone Crystal
+item.celestialwizardry:crystal.mystical.name=Mystical Crystal
+item.celestialwizardry:crystal.pure.name=Pure Crystal
+item.celestialwizardry:crystal.celestial.name=Celestial Crystal
+item.celestialwizardry:crystal.perfect.name=Perfect Crystal
 item.celestialwizardry:invalid.name=Invalid Item
 
 # Block localizations
