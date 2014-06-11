@@ -1,9 +1,9 @@
 package celestialwizardry.item;
 
 import celestialwizardry.CelestialWizardry;
+import celestialwizardry.api.ILockedItem;
 import celestialwizardry.reference.GuiIds;
 import celestialwizardry.reference.Names;
-import celestialwizardry.reference.Resources;
 import celestialwizardry.util.NBTHelper;
 import celestialwizardry.util.StringHelper;
 
@@ -15,7 +15,7 @@ import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class ItemSpellBook extends ItemSingle
+public class ItemSpellBook extends ItemSingle implements ILockedItem
 {
     public ItemSpellBook()
     {
@@ -24,13 +24,15 @@ public class ItemSpellBook extends ItemSingle
         this.setUnlocalizedName(Names.Items.SPELL_BOOK);
     }
 
+    /* ======================================== Item START   ===================================== */
+
     @Override
     public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player)
     {
         // Set a UUID, if one doesn't exist already
         initSpellBook(stack, player);
 
-        if (NBTHelper.getString(stack, Names.NBT.OWNER).equals(player.getDisplayName()))
+        if (getOwner(stack).equals(player.getDisplayName()))
         {
             if (!player.isSneaking())
             {
@@ -39,7 +41,8 @@ public class ItemSpellBook extends ItemSingle
         }
         else
         {
-            player.addChatComponentMessage(new ChatComponentText(String.format(StringHelper.getMessage("stolenBook"), player.getDisplayName())));
+            player.addChatComponentMessage(new ChatComponentText(
+                    String.format(StringHelper.getMessage("stolenBook"), player.getDisplayName())));
 
             NBTTagCompound openers = new NBTTagCompound();
 
@@ -70,13 +73,57 @@ public class ItemSpellBook extends ItemSingle
         return super.getItemStackDisplayName(stack);
     }
 
-    protected static void initSpellBook(ItemStack stack, EntityPlayer player)
+    protected void initSpellBook(ItemStack stack, EntityPlayer player)
     {
         NBTHelper.setUUID(stack);
 
-        if (!NBTHelper.hasTag(stack, Names.NBT.OWNER))
+        if (!hasOwner(stack))
         {
-            NBTHelper.setString(stack, Names.NBT.OWNER, player.getDisplayName());
+            setOwner(stack, player);
         }
     }
+
+    /* ======================================== Item END   ===================================== */
+
+    /* ======================================== ILockedItem START   ===================================== */
+
+    /**
+     * Gives the owner of this item.
+     *
+     * @param stack the {@link net.minecraft.item.ItemStack} to check the owner from
+     *
+     * @return the display name of the owner ({@link net.minecraft.entity.player.EntityPlayer})
+     */
+    @Override
+    public String getOwner(ItemStack stack)
+    {
+        return NBTHelper.getString(stack, Names.NBT.OWNER);
+    }
+
+    /**
+     * Sets the owner for this item.
+     *
+     * @param stack  the {@link net.minecraft.item.ItemStack} to set the owner to
+     * @param player the {@link net.minecraft.entity.player.EntityPlayer} that is set as owner
+     */
+    @Override
+    public void setOwner(ItemStack stack, EntityPlayer player)
+    {
+        NBTHelper.setString(stack, Names.NBT.OWNER, player.getDisplayName());
+    }
+
+    /**
+     * Checks does this item have owner.
+     *
+     * @param stack the {@link net.minecraft.item.ItemStack} to check the owner from
+     *
+     * @return true if this item has owner
+     */
+    @Override
+    public boolean hasOwner(ItemStack stack)
+    {
+        return NBTHelper.hasTag(stack, Names.NBT.OWNER) && !getOwner(stack).equals("");
+    }
+
+    /* ======================================== ILockedItem END   ===================================== */
 }
