@@ -21,8 +21,6 @@ public class RenderOBJBlock implements ISimpleBlockRenderingHandler
 {
 
     public static final int ID = RenderingRegistry.getNextAvailableRenderId();
-    
-    
 
     @Override
     public void renderInventoryBlock(Block block, int metadata, int modelID, RenderBlocks renderer)

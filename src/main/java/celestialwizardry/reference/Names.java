@@ -8,6 +8,7 @@ public class Names
         public static final String LIVING_ORE = "livingOre";
         public static final String BELL = "bell";
         public static final String MAGICAL_STONE = "magicalStone";
+        public static final String SMALL_CRYSTAL = "smallCrystal";
     }
 
     public static class Items
