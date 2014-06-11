@@ -1,7 +1,10 @@
 package celestialwizardry.client.gui;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.player.InventoryPlayer;
 
+@SideOnly(Side.CLIENT)
 public class GuiSpellBookMain extends GuiSpellBook {
 
 	public GuiSpellBookMain(InventoryPlayer player) {
@@ -15,7 +18,7 @@ public class GuiSpellBookMain extends GuiSpellBook {
 
 	@Override
 	protected BookState getState() {
-		return null;
+		return BookState.MAIN;
 	}
 
 	@Override

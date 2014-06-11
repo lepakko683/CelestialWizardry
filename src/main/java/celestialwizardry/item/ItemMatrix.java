@@ -135,7 +135,7 @@ public class ItemMatrix extends ItemSingle implements IMatrix, ICWMatrix, ILocke
             float energyStored = NBTHelper.getFloat(stack, Names.NBT.ENERGY_STORED);
             EnergyType energyType = EnergyRegistry.getEnergyType(energyName);
 
-            if (transform && EnergyHelper.canTransform(type, energyType))
+            if (transform && EnergyHelper.canTransformInto(type, energyType))
             {
                 float ratio = EnergyHelper.getTransformRatio(type, energyType);
                 amount = amount * ratio;

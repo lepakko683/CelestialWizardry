@@ -1,6 +1,11 @@
 package celestialwizardry.api.energy;
 
-public class MysteriousMatter extends EnergyType {
+
+public class UnformedMatter extends EnergyType {
+
+	public UnformedMatter() {
+		super(CWEnergyType.UNFORMED_MATTER, CWEnergyCategory.OTHER);
+	}
 
 	@Override
 	public boolean canBeTransformedInto(EnergyType energy) {
@@ -14,22 +19,7 @@ public class MysteriousMatter extends EnergyType {
 
 	@Override
 	public String getEnergyName() {
-		return "Mysterious Matter";
-	}
-
-	@Override
-	public boolean isMagicalEnergy() {
-		return false;
-	}
-
-	@Override
-	public boolean isElementalEnergy() {
-		return false;
-	}
-
-	@Override
-	public boolean isMundane() {
-		return true;
+		return "Unformed Matter";
 	}
 
 	@Override

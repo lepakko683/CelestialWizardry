@@ -8,6 +8,7 @@ public class FusionCraftingRecipe
 {
     private ItemStack items[];
     private EnergyType energy[];
+    private int energyAmounts[];
 
     public FusionCraftingRecipe()
     {
@@ -19,7 +20,7 @@ public class FusionCraftingRecipe
         return null;
     }
 
-    public float[] getRequiredEnergyAmounts()
+    public int[] getRequiredEnergyAmounts()
     {
         return null;
     }

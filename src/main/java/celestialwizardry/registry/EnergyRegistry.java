@@ -13,7 +13,12 @@ public abstract class EnergyRegistry
 
     public static void registerEnergyType(EnergyType energy)
     {
-        String name = "";// rune.getName();
+        String name = energy.getEnergyName();
+        
+        if(name == null || (name != null && name.length() == 0)) {
+        	CelestialWizardry.log.error("Trying to register nameless energy type of class \"" + energy.getClass().getName() + "\", Skipping.");
+        	return;
+        }
 
         if (!energyMap.containsKey(name))
         {

@@ -2,9 +2,14 @@ package celestialwizardry.api.energy;
 
 public class EnergyHeat extends EnergyType {
 
+	public EnergyHeat() {
+		super(CWEnergyType.MUNDANE_HEAT, CWEnergyCategory.MUNDANE);
+	}
+
 	@Override
 	public boolean canBeTransformedInto(EnergyType energy) {
-		return energy.getEnergyName().equalsIgnoreCase("Elemental Fire");
+//		return energy.getEnergyName().equalsIgnoreCase("Elemental Fire");
+		return energy.energyType != null && energy.energyType instanceof CWEnergyType && energy.energyType == CWEnergyType.ELEMENTAL_FIRE;
 	}
 
 	@Override
@@ -15,21 +20,6 @@ public class EnergyHeat extends EnergyType {
 	@Override
 	public String getEnergyName() {
 		return "Heat";
-	}
-
-	@Override
-	public boolean isMagicalEnergy() {
-		return false;
-	}
-
-	@Override
-	public boolean isElementalEnergy() {
-		return false;
-	}
-
-	@Override
-	public boolean isMundane() {
-		return true;
 	}
 	
 	@Override

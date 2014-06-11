@@ -26,7 +26,7 @@ public abstract class GuiSpellBook extends GuiContainer
 
     private static final Colour COLOR_GUIDES = new Colour(1f, 0f, 0f);
     private static final Colour COLOR_NOTES = new Colour(0f, 1f, 0f);
-    private static final Colour COLOR_SPELLS = new Colour(0f, 0f, 1f);
+    private static final Colour COLOR_SPELLS = new Colour(.1f, .1f, 1f);
 
     protected GuiButton guide;
     protected GuiButton notes;
@@ -186,6 +186,7 @@ public abstract class GuiSpellBook extends GuiContainer
 
     protected static enum BookState
     {
+    	MAIN,
         GUIDE,
         NOTES,
         SPELLS
