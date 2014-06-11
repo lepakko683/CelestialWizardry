@@ -14,6 +14,8 @@ import celestialwizardry.proxy.IProxy;
 import celestialwizardry.reference.Reference;
 import celestialwizardry.reference.Version;
 import celestialwizardry.spellbook.SpellBook;
+import celestialwizardry.world.WorldGenerator;
+
 import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
@@ -25,6 +27,7 @@ import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.event.FMLServerStoppingEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.EntityRegistry;
+import cpw.mods.fml.common.registry.GameRegistry;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -153,6 +156,9 @@ public class CelestialWizardry
 
         // Register mod renders
         proxy.registerRenderer();
+
+        // Register world generator
+        GameRegistry.registerWorldGenerator(new WorldGenerator(), 0);
 
         // Tell everyone that we have successfully initialized
         log.info("Finished initialization after " + (System.currentTimeMillis() - start) + " ms");
