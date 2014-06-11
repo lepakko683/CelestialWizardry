@@ -122,7 +122,7 @@ Celestial Wizardry crashes every time? Have a suggestion? Found a bug? Create an
 
 ###Developers
 ***
-* **PizzAna** ( [@PizzAna_](http://twitter.com/PizzAna_) on twitter)
+* **PizzAna** ([@PizzAna_](http://twitter.com/PizzAna_) on twitter)
 	* Code
 	* Design
 	
