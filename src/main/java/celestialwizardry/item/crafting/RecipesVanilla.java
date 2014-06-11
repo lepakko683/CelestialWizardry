@@ -2,7 +2,9 @@ package celestialwizardry.item.crafting;
 
 import celestialwizardry.init.ModBlocks;
 import celestialwizardry.init.ModItems;
+import celestialwizardry.reference.Settings;
 
+import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.ShapedOreRecipe;
@@ -11,6 +13,8 @@ import cpw.mods.fml.common.registry.GameRegistry;
 
 public class RecipesVanilla
 {
+    static boolean hc = Settings.hardcoreRecipes;
+
     public static void init()
     {
         // Initialize block crafting recipes
@@ -39,18 +43,46 @@ public class RecipesVanilla
         // Magical Stone <-> Magical Pebble
         addCompress(new ItemStack(ModBlocks.magicalStone), ModItems.magicalPebble);
 
-        // Crystals
-        add(ModItems.stoneCrystal, "scs", "cec", "scs", 's', ModBlocks.magicalStone, 'c', Items.diamond, 'e', Items.emerald);
-        add(ModItems.mysticalCrystal, "scs", "cec", "scs", 's', ModBlocks.magicalStone, 'c', ModItems.stoneCrystal, 'e', Items.emerald);
-        add(ModItems.pureCrystal, "scs", "cec", "scs", 's', ModItems.stoneCrystal, 'c', ModItems.mysticalCrystal, 'e', Items.emerald);
-        add(ModItems.celestialCrystal, "scs", "cec", "scs", 's', ModItems.mysticalCrystal, 'c', ModItems.pureCrystal, 'e', Items.emerald);
-        add(ModItems.perfectCrystal, "scs", "cec", "scs", 's', ModItems.pureCrystal, 'c', ModItems.celestialCrystal, 'e', Items.emerald);
+        // Nether Pearl
+        add(ModItems.netherPearl, " s ", "sts", " s ", 's', hc ? Items.nether_star : Items.ghast_tear, 't', hc ? Items.ghast_tear : Items.nether_star);
 
-        // Matrix Tier 1
-        add(new ItemStack(ModItems.matrix, 1, 0), "sps", "pdp", "sps", 's', ModBlocks.magicalStone, 'd', Items.diamond,
-            'p', ModItems.magicalPebble);
-        add(new ItemStack(ModItems.matrix, 1, 0), "sps", "pep", "sps", 's', ModBlocks.magicalStone, 'e', Items.emerald,
-            'p', ModItems.magicalPebble);
+        /* ======================================== CRYSTAL START ===================================== */
+
+        // TODO These aren't expensive enough >:)
+
+        // Tier 1
+        add(ModItems.stoneCrystal, "scs", "cec", "scs", 's', ModItems.magicalPebble, 'c', hc ? Items.diamond : ModBlocks.magicalStone, 'e', hc ? Items.emerald : Items.diamond);
+
+        // Tier 2
+        add(ModItems.mysticalCrystal, "scs", "cec", "scs", 's', ModBlocks.magicalStone, 'c', ModItems.stoneCrystal, 'e', Items.emerald);
+
+        // Tier 3
+        add(ModItems.pureCrystal, "scs", "cec", "scs", 's', ModItems.stoneCrystal, 'c', ModItems.mysticalCrystal, 'e', Blocks.emerald_block);
+
+        // Tier 4
+        add(ModItems.celestialCrystal, "scs", "cec", "scs", 's', ModItems.mysticalCrystal, 'c', ModItems.pureCrystal, 'e', Items.nether_star);
+
+        // Tier 5
+        add(ModItems.perfectCrystal, "scs", "cec", "scs", 's', ModItems.pureCrystal, 'c', ModItems.celestialCrystal, 'e', ModItems.netherPearl);
+
+        /* ======================================== CRYSTAL END ===================================== */
+
+        /* ======================================== MATRIX START ===================================== */
+
+        // Tier 1
+        add(new ItemStack(ModItems.matrix, 1, 0), "scs", "cec", "scs", 's', ModItems.magicalPebble, 'c', ModItems.stoneCrystal, 'e', Items.ender_pearl);
+
+        // Tier 2
+        add(new ItemStack(ModItems.matrix, 1, 1), "scs", "cmc", "scs", 's', ModBlocks.magicalStone, 'c', ModItems.mysticalCrystal, 'm', new ItemStack(ModItems.matrix, 1, 0));
+
+        // Tier 3
+        add(new ItemStack(ModItems.matrix, 1, 2), "scs", "cmc", "scs", 's', ModItems.mysticalCrystal, 'c', ModItems.pureCrystal, 'm', new ItemStack(ModItems.matrix, 1, 1));
+
+        // Tier 4
+
+        // Tier 5
+
+        /* ======================================== MATRIX END ===================================== */
     }
 
     private static void add(ItemStack output, Object... input)

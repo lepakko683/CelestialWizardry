@@ -52,5 +52,8 @@ public class SettingHandler
         Settings.startingIntelligence = CelestialWizardry.config
                 .get(category, Settings.ConfigNames.STARTING_INTELLIGENCE, Settings.DefaultValues.STARTING_INTELLIGENCE,
                      Settings.Comments.STARTING_INTELLIGENCE);
+        Settings.hardcoreRecipes = CelestialWizardry.config
+                .get(category, Settings.ConfigNames.HARDCORE_RECIPES, Settings.DefaultValues.HARDCORE_RECIPES,
+                     Settings.Comments.HARDCORE_RECIPES);
     }
 }
