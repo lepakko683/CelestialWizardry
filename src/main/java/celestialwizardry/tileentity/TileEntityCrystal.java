@@ -49,6 +49,8 @@ public class TileEntityCrystal extends TileEntityCW implements ITileCrystal
                 boundInX = x;
                 boundInY = y;
                 boundInZ = z;
+
+                return true;
             }
         }
 
@@ -76,6 +78,8 @@ public class TileEntityCrystal extends TileEntityCW implements ITileCrystal
                 boundOutX = x;
                 boundOutY = y;
                 boundOutZ = z;
+
+                return true;
             }
         }
 
@@ -124,7 +128,7 @@ public class TileEntityCrystal extends TileEntityCW implements ITileCrystal
     @Override
     public boolean canBoundTo(World world, ICrystal crystal)
     {
-        return crystal.canBoundTo(world, crystal);
+        return this.crystal.canBoundTo(world, crystal);
     }
 
     /* ======================================== ICrystal END ===================================== */
