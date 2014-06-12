@@ -18,11 +18,11 @@ import cpw.mods.fml.common.registry.GameRegistry;
  */
 public class ModBlocks
 {
-    public static final BlockCW writingTable = new BlockWritingTable();
-    public static final BlockCW livingOre = new BlockLivingOre();
-    public static final BlockCW bell = new BlockBell();
-    public static final BlockCW magicalStone = new BlockMagicalStone();
-    public static final BlockCW smallCrystal = new BlockSmallCrystal();
+    public static final BlockWritingTable writingTable = new BlockWritingTable();
+    public static final BlockLivingOre livingOre = new BlockLivingOre();
+    public static final BlockBell bell = new BlockBell();
+    public static final BlockMagicalStone magicalStone = new BlockMagicalStone();
+    public static final BlockSmallCrystal smallCrystal = new BlockSmallCrystal();
 
     public static void init()
     {
