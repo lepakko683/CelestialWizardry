@@ -32,6 +32,7 @@ tile.celestialwizardry:livingOre.name=Living Ore
 tile.celestialwizardry:magicalStone.name=Magical Stone
 tile.celestialwizardry:smallCrystal.name=Small Crystal (WIP)
 tile.celestialwizardry:containedCrystal.name=Contained Crystal
+tile.celestialwizardry:conductiveCrystal.name=Conductive Crystal (WIP)
 
 # Config localizations
 configgui.celestialwizardry:configTitle=Celestial Wizardry Configuration
@@ -66,6 +67,8 @@ tooltip.celestialwizardry:holdControl3=for Info
 # Messages
 message.celestialwizardry:stolenBook=This book belongs to %s and you have no permission to open it!
 message.celestialwizardry:stolenMatrix=This matrix belongs to %s and you have no permission to use it!
+message.celestialwizardry:crystalsBound=Crystals were successfully bounded!
+message.celestialwizardry:crystalsBoundFail=Crystals didn't bound.
 
 # SPELL BOOK
 
