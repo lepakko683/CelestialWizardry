@@ -11,12 +11,12 @@ import net.minecraft.world.World;
 /**
  * TODO I AM JUST A SMALL LITTLE PURPLE CRYSTAL WHO NEEDS MODEL ;) PROBABLY SOMETHING LIKE THAUMCRAFT CRYSTALS
  */
-public class BlockConductiveCrystal extends BlockCrystal
+public class BlockCrystalConductive extends BlockCrystal
 {
-    public BlockConductiveCrystal()
+    public BlockCrystalConductive()
     {
         super();
-        this.setBlockName(Names.Blocks.CONDUCTIVE_CRYSTAL);
+        this.setBlockName(Names.Blocks.CRYSTAL_CONDUCTIVE);
     }
 
     /* ======================================== ITileEntityProvider START ===================================== */

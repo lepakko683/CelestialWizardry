@@ -30,7 +30,6 @@ item.celestialwizardry:invalid.name=Invalid Item
 tile.celestialwizardry:writingTable.name=Writing Table
 tile.celestialwizardry:livingOre.name=Living Ore
 tile.celestialwizardry:magicalStone.name=Magical Stone
-tile.celestialwizardry:smallCrystal.name=Small Crystal (WIP)
 tile.celestialwizardry:containedCrystal.name=Contained Crystal
 tile.celestialwizardry:conductiveCrystal.name=Conductive Crystal (WIP)
 
