@@ -286,7 +286,7 @@ tasks.build.dependsOn project.tasks.createChangelog
 
 // Sign the archives for the central repository
 signing {
-    required {project.hasProperty("maven-releases") && project.hasProperty("maven-snapshots")}
+    required {project.hasProperty("releases") && project.hasProperty("snapshots")}
     sign configurations.archives
 }
 
