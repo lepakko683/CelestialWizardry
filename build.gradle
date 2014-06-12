@@ -30,6 +30,7 @@ repositories {
 }
 
 apply plugin: 'maven'
+apply plugin: 'signing'
 apply plugin: 'forge'
 
 // http://maven.apache.org/guides/mini/guide-naming-conventions.html
@@ -188,8 +189,8 @@ task sourceJar(type: Jar) {
 
 // Tell the archive system about the extra archives
 artifacts {
-    archives apiJar
-    archives deobfJar
+    // archives apiJar
+    // archives deobfJar
     archives javadocJar
     archives sourceJar
 }
@@ -283,84 +284,68 @@ task createChangelog(type: ChangelogTask) {
 
 tasks.build.dependsOn project.tasks.createChangelog
 
+// Sign the archives for the central repository
+signing {
+    required { project.hasProperty("maven-releases") && project.hasProperty("maven-snapshots") }
+    sign configurations.archives
+}
+
 // Configure an upload task
 uploadArchives {
     repositories {
-        if (project.hasProperty("maven"))
-        {
+        if (project.hasProperty("maven-releases") && project.hasProperty("maven-snapshots")){
             mavenDeployer {
-                logger.info("Deploying to maven repository")
+                beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
 
-                repository(url: project.maven)
+                repository(url: maven-releases) {
+                    authentication(userName: ossrhUsername, password: ossrhPassword)
+                }
 
-                pom {
-                    groupId = project.group
-                    version = project.version
-                    artifactId = project.archivesBaseName
+                snapshotRepository(url: maven-snapshots) {
+                    authentication(userName: ossrhUsername, password: ossrhPassword)
+                }
 
-                    project {
-                        name project.archivesBaseName
-                        packaging 'jar'
-                        description 'CelestialWizardry'
+                pom.project {
+                    name project.archivesBaseName
+                    packaging 'jar'
+                    description 'CelestialWizardry'
+                    url 'https://github.com/PizzAna/CelestialWizardry'
+
+                    scm {
                         url 'https://github.com/PizzAna/CelestialWizardry'
+                        connection 'scm:git:git://github.com/PizzAna/CelestialWizardry.git'
+                        developerConnection 'scm:git:git@github.com:PizzAna/CelestialWizardry.git'
+                    }
 
-                        scm {
-                            url 'https://github.com/PizzAna/CelestialWizardry'
-                            connection 'scm:git:git://github.com/PizzAna/CelestialWizardry.git'
-                            developerConnection 'scm:git:git@github.com:PizzAna/CelestialWizardry.git'
+                    issueManagement {
+                        system 'github'
+                        url 'https://github.com/PizzAna/CelestialWizardry/issues'
+                    }
+
+                    licenses {
+                        license {
+                            name 'GNU GENERAL PUBLIC LICENSE v2'
+                            url 'http://www.gnu.org/licenses/gpl-2.0.html'
                         }
+                    }
 
-                        issueManagement {
-                            system 'github'
-                            url 'https://github.com/PizzAna/CelestialWizardry/issues'
+                    developers {
+                        developer {
+                            id 'PizzAna'
+                            name 'PizzAna'
+                            roles {role 'developer'}
                         }
-
-                        licenses {
-                            license {
-                                name 'GNU GENERAL PUBLIC LICENSE v2'
-                                url 'http://www.gnu.org/licenses/gpl-2.0.html'
-                                distribution 'repo'
-                            }
-                        }
-
-                        developers {
-                            developer {
-                                id 'PizzAna'
-                                name 'PizzAna'
-                                roles {role 'developer'}
-                            }
-                            developer {
-                                id 'le683'
-                                name 'Okkapel'
-                                roles {role 'developer'}
-                            }
+                        developer {
+                            id 'le683'
+                            name 'Okkapel'
+                            roles {role 'developer'}
                         }
                     }
                 }
             }
         }
-        else
-        {
-            add project.repositories.mavenLocal()
-        }
     }
 }
 
 // Uploading archives should be after signing the jar
-uploadArchives.shouldRunAfter tasks.signJar
-
-// Mostly a dummy task for building the jars for official release
-task release {
-
-    println "CelestialWizardry revision ${project.buildInfo.revision} build ${project.buildInfo.build_number}"
-
-    doLast {
-        println "Release the savage!"
-    }
-}
-
-// Make the release task dependant on signing the jar so it builds the mod when release task is called
-tasks.release.dependsOn project.tasks.signJar
-
-// Make the release task dependant on deploying the jar so it uploads archives when release task is called
-tasks.release.dependsOn uploadArchives
+uploadArchives.dependsOn tasks.signJar
