@@ -59,4 +59,25 @@ public interface ICrystal
      * @return true if the bound was success
      */
     public boolean setOutputBound(int x, int y, int z);
+
+    /**
+     * The x position of the crystal tile.
+     *
+     * @return x position
+     */
+    public int getXPos();
+
+    /**
+     * The y position of the crystal tile.
+     *
+     * @return y position
+     */
+    public int getYPos();
+
+    /**
+     * The z position of the crystal tile.
+     *
+     * @return z position
+     */
+    public int getZPos();
 }

@@ -137,6 +137,39 @@ public abstract class TileEntityCrystal extends TileEntityCW implements ICrystal
         return false;
     }
 
+    /**
+     * The x position of the crystal tile.
+     *
+     * @return x position
+     */
+    @Override
+    public int getXPos()
+    {
+        return xCoord;
+    }
+
+    /**
+     * The y position of the crystal tile.
+     *
+     * @return y position
+     */
+    @Override
+    public int getYPos()
+    {
+        return yCoord;
+    }
+
+    /**
+     * The z position of the crystal tile.
+     *
+     * @return z position
+     */
+    @Override
+    public int getZPos()
+    {
+        return zCoord;
+    }
+
     /* ======================================== ICrystal END ===================================== */
 
     /* ======================================== TileEntity START ===================================== */
