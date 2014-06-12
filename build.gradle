@@ -30,6 +30,7 @@ repositories {
 }
 
 apply plugin: 'maven'
+apply plugin: 'signing'
 apply plugin: 'forge'
 
 // http://maven.apache.org/guides/mini/guide-naming-conventions.html
@@ -163,27 +164,27 @@ task apiJar(type: Jar) {
         // Include only the api package
         include 'celestialwizardry/api/*'
     }
-    classifier = "api"
+    classifier = 'api'
 }
 
 // Make the deobsfucated developer jar
 task deobfJar(type: Jar) {
     from sourceSets.main.output
-    classifier = "deobf"
+    classifier = 'deobf'
     manifest commonManifest
 }
 
 // Make the javadoc jar
 task javadocJar(type: Jar, dependsOn: "javadoc") {
-    classifier = "javadoc"
-    from './build/docs/javadoc'
+	from './build/docs/javadoc'
+    classifier = 'javadoc'
 }
 
 // Make the source jar
 task sourceJar(type: Jar) {
     from './build/sources/java/'
     from './build/resources/main/'
-    classifier = "src"
+    classifier = 'sources'
 }
 
 // Tell the archive system about the extra archives
@@ -283,12 +284,19 @@ task createChangelog(type: ChangelogTask) {
 
 tasks.build.dependsOn project.tasks.createChangelog
 
+// TODO Conditions
+signing {
+    sign configurations.archives
+}
+
 // Configure an upload task
 uploadArchives {
     repositories {
         if (project.hasProperty("maven"))
         {
             mavenDeployer {
+                beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
+
                 logger.info("Deploying to maven repository")
 
                 repository(url: project.maven)
@@ -319,7 +327,6 @@ uploadArchives {
                             license {
                                 name 'GNU GENERAL PUBLIC LICENSE v2'
                                 url 'http://www.gnu.org/licenses/gpl-2.0.html'
-                                distribution 'repo'
                             }
                         }
 

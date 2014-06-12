@@ -17,6 +17,7 @@ public class ModItems
 
     public static final ItemStack magicalIntelligenceCore = material.addItem(0, Names.Items.MATERIALS[0]);
     public static final ItemStack magicalPebble = material.addItem(1, Names.Items.MATERIALS[1]);
+    public static final ItemStack netherPearl = material.addItem(2, Names.Items.MATERIALS[2]);
 
     // Crystals
     public static final ItemCrystal crystal = new ItemCrystal();

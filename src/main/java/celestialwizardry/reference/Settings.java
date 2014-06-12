@@ -30,6 +30,7 @@ public class Settings
     // Difficulty
     public static boolean spawnSpellBook;
     public static int startingIntelligence;
+    public static boolean hardcoreRecipes;
 
     public static class DefaultValues
     {
@@ -56,6 +57,7 @@ public class Settings
         // Difficulty
         public static final boolean SPAWN_SPELL_BOOK = true;
         public static final int STARTING_INTELLIGENCE = 0;
+        public static final boolean HARDCORE_RECIPES = false;
     }
 
     public static class ConfigNames
@@ -83,6 +85,7 @@ public class Settings
         // Difficulty
         public static final String SPAWN_SPELL_BOOK = "spawnSpellBook";
         public static final String STARTING_INTELLIGENCE = "startingIntelligence";
+        public static final String HARDCORE_RECIPES = "hardcoreRecipes";
     }
 
     public static class Comments
@@ -111,6 +114,7 @@ public class Settings
         public static final String SPAWN_SPELL_BOOK
                 = "If true, players get spell book when they enter the world first time.";
         public static final String STARTING_INTELLIGENCE = "The intelligence new players will have.";
+        public static final String HARDCORE_RECIPES = "If true, the mod recipes will be much harder.";
     }
 
     public static class Categories
