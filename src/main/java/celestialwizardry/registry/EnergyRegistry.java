@@ -15,7 +15,7 @@ public abstract class EnergyRegistry
     {
         String name = energy.getEnergyName();
         
-        if(name == null || (name != null && name.length() == 0)) {
+        if(name == null || name.length() == 0) {
         	CelestialWizardry.log.error("Trying to register nameless energy type of class \"" + energy.getClass().getName() + "\", Skipping.");
         	return;
         }

@@ -1,39 +1,47 @@
 package celestialwizardry.api.energy;
 
-public class EnergyMagic extends EnergyType {
-	
-	private String name = null;
+public class EnergyMagic extends EnergyType
+{
 
-	public EnergyMagic(Object energyType) {
-		super(energyType, CWEnergyCategory.MAGIC);
-		
-		if(energyType == CWEnergyType.MAGIC_LUNAR) {
-			name = "Magic Lunar";
-		}
-		
-		if(energyType == CWEnergyType.MAGIC_SOLAR) {
-			name = "Magic Solar";
-		}
-	}
+    private String name = null;
 
-	@Override
-	public boolean canBeTransformedInto(EnergyType energy) {
-		return false;
-	}
+    public EnergyMagic(Object energyType)
+    {
+        super(energyType, CWEnergyCategory.MAGIC);
 
-	@Override
-	public float getEnergyValue() {
-		return 0;
-	}
+        if (energyType == CWEnergyType.MAGIC_LUNAR)
+        {
+            name = "Magic Lunar";
+        }
 
-	@Override
-	public String getEnergyName() {
-		return name;
-	}
+        if (energyType == CWEnergyType.MAGIC_SOLAR)
+        {
+            name = "Magic Solar";
+        }
+    }
 
-	@Override
-	public float crossEnergyTypeTransformLoss(EnergyType target) {
-		return 0;
-	}
+    @Override
+    public boolean canBeTransformedInto(EnergyType energy)
+    {
+        return false;
+    }
+
+    @Override
+    public float getEnergyValue()
+    {
+        return 0;
+    }
+
+    @Override
+    public String getEnergyName()
+    {
+        return name;
+    }
+
+    @Override
+    public float crossEnergyTypeTransformLoss(EnergyType target)
+    {
+        return 0;
+    }
 
 }
