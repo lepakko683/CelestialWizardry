@@ -53,7 +53,7 @@ public class BlockMagicalStone extends BlockCW
     
     @Override
     public void registerBlockIcons(IIconRegister iconRegister) {
-    	innerTexture = iconRegister.registerIcon("celestialwizardry:magicalStoneOLD");
+    	innerTexture = iconRegister.registerIcon("celestialwizardry:magicalStoneInner");
     	super.registerBlockIcons(iconRegister);
     }
     

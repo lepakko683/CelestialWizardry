@@ -18,6 +18,7 @@ public class BlockBell extends BlockCW implements ITileEntityProvider
 	{
 		super(Material.iron);
 		this.setHardness(4.0f);
+		this.setBlockBounds(0.25F, 0.5F, 0.25F, 0.75F, 1.0F, 0.75F);
 		this.setBlockName(Names.Blocks.BELL);
 	}
 	
