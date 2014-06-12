@@ -159,29 +159,29 @@ jar {
 }
 
 // Make the api jar
-task apiJar(type: Jar) {
+/* task apiJar(type: Jar) {
     from('./build/sources/java/') {
         // Include only the api package
         include 'celestialwizardry/api/*'
     }
     classifier = 'api'
-}
+} */
 
 // Make the deobsfucated developer jar
-task deobfJar(type: Jar) {
+/* task deobfJar(type: Jar) {
     from sourceSets.main.output
     classifier = 'deobf'
     manifest commonManifest
-}
+} */
 
 // Make the javadoc jar
 task javadocJar(type: Jar, dependsOn: "javadoc") {
-	from './build/docs/javadoc'
+    from './build/docs/javadoc'
     classifier = 'javadoc'
 }
 
 // Make the source jar
-task sourceJar(type: Jar) {
+task sourcesJar(type: Jar) {
     from './build/sources/java/'
     from './build/resources/main/'
     classifier = 'sources'
@@ -192,7 +192,7 @@ artifacts {
     // archives apiJar
     // archives deobfJar
     archives javadocJar
-    archives sourceJar
+    archives sourcesJar
 }
 
 ext.baubles_file = "Baubles-deobf-${config.mc_version}-${config.baubles_version}.jar"
@@ -286,60 +286,58 @@ tasks.build.dependsOn project.tasks.createChangelog
 
 // Sign the archives for the central repository
 signing {
-    required { project.hasProperty("maven-releases") && project.hasProperty("maven-snapshots") }
+    required {project.hasProperty("maven-releases") && project.hasProperty("maven-snapshots")}
     sign configurations.archives
 }
 
 // Configure an upload task
 uploadArchives {
     repositories {
-        if (project.hasProperty("maven-releases") && project.hasProperty("maven-snapshots")){
-            mavenDeployer {
-                beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
+        mavenDeployer {
+            beforeDeployment {MavenDeployment deployment -> signing.signPom(deployment)}
 
-                repository(url: maven-releases) {
-                    authentication(userName: ossrhUsername, password: ossrhPassword)
-                }
+            repository(url: project.releases) {
+                authentication(userName: ossrhUsername, password: ossrhPassword)
+            }
 
-                snapshotRepository(url: maven-snapshots) {
-                    authentication(userName: ossrhUsername, password: ossrhPassword)
-                }
+            snapshotRepository(url: project.snapshots) {
+                authentication(userName: project.ossrhUsername, password: project.ossrhPassword)
+            }
 
-                pom.project {
-                    name project.archivesBaseName
-                    packaging 'jar'
-                    description 'CelestialWizardry'
+            pom.project {
+                name project.archivesBaseName
+                packaging 'jar'
+                description 'CelestialWizardry'
+                url 'https://github.com/PizzAna/CelestialWizardry'
+
+                scm {
                     url 'https://github.com/PizzAna/CelestialWizardry'
+                    connection 'scm:git:git://github.com/PizzAna/CelestialWizardry.git'
+                    developerConnection 'scm:git:git@github.com:PizzAna/CelestialWizardry.git'
+                }
 
-                    scm {
-                        url 'https://github.com/PizzAna/CelestialWizardry'
-                        connection 'scm:git:git://github.com/PizzAna/CelestialWizardry.git'
-                        developerConnection 'scm:git:git@github.com:PizzAna/CelestialWizardry.git'
+                issueManagement {
+                    system 'github'
+                    url 'https://github.com/PizzAna/CelestialWizardry/issues'
+                }
+
+                licenses {
+                    license {
+                        name 'GNU GENERAL PUBLIC LICENSE v2'
+                        url 'http://www.gnu.org/licenses/gpl-2.0.html'
                     }
+                }
 
-                    issueManagement {
-                        system 'github'
-                        url 'https://github.com/PizzAna/CelestialWizardry/issues'
+                developers {
+                    developer {
+                        id 'PizzAna'
+                        name 'PizzAna'
+                        roles {role 'developer'}
                     }
-
-                    licenses {
-                        license {
-                            name 'GNU GENERAL PUBLIC LICENSE v2'
-                            url 'http://www.gnu.org/licenses/gpl-2.0.html'
-                        }
-                    }
-
-                    developers {
-                        developer {
-                            id 'PizzAna'
-                            name 'PizzAna'
-                            roles {role 'developer'}
-                        }
-                        developer {
-                            id 'le683'
-                            name 'Okkapel'
-                            roles {role 'developer'}
-                        }
+                    developer {
+                        id 'le683'
+                        name 'Okkapel'
+                        roles {role 'developer'}
                     }
                 }
             }
