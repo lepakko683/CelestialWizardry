@@ -37,4 +37,26 @@ public interface ICrystal
      * @return can this {@link ICrystal} to the {@link ICrystal}
      */
     public boolean canBoundTo(World world, ICrystal crystal);
+
+    /**
+     * Bounds the blockCrystal {@link net.minecraft.tileentity.TileEntity} to other blockCrystal {@link net.minecraft.tileentity.TileEntity} for input.
+     *
+     * @param x the x coordinate of the other blockCrystal {@link net.minecraft.tileentity.TileEntity}
+     * @param y the y coordinate of the other blockCrystal {@link net.minecraft.tileentity.TileEntity}
+     * @param z the z coordinate of the other blockCrystal {@link net.minecraft.tileentity.TileEntity}
+     *
+     * @return true if the bound was success
+     */
+    public boolean setInputBound(int x, int y, int z);
+
+    /**
+     * Bounds the blockCrystal {@link net.minecraft.tileentity.TileEntity} to other blockCrystal {@link net.minecraft.tileentity.TileEntity} for output.
+     *
+     * @param x the x coordinate of the other blockCrystal {@link net.minecraft.tileentity.TileEntity}
+     * @param y the y coordinate of the other blockCrystal {@link net.minecraft.tileentity.TileEntity}
+     * @param z the z coordinate of the other blockCrystal {@link net.minecraft.tileentity.TileEntity}
+     *
+     * @return true if the bound was success
+     */
+    public boolean setOutputBound(int x, int y, int z);
 }

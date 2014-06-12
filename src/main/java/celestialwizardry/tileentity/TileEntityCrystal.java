@@ -1,21 +1,22 @@
 package celestialwizardry.tileentity;
 
 import celestialwizardry.api.crystal.ICrystal;
-import celestialwizardry.api.crystal.ITileCrystal;
 import celestialwizardry.api.energy.EnergyType;
 import celestialwizardry.block.BlockCrystal;
 import celestialwizardry.reference.Names;
+import celestialwizardry.registry.EnergyRegistry;
 
 import net.minecraft.block.Block;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class TileEntityCrystal extends TileEntityCW implements ITileCrystal
+public abstract class TileEntityCrystal extends TileEntityCW implements ICrystal
 {
-    protected final BlockCrystal crystal;
+    protected final BlockCrystal blockCrystal;
     protected int boundInX;
     protected int boundInY;
     protected int boundInZ;
@@ -23,28 +24,76 @@ public class TileEntityCrystal extends TileEntityCW implements ITileCrystal
     protected int boundOutY;
     protected int boundOutZ;
 
-    public TileEntityCrystal(BlockCrystal crystal)
+    public TileEntityCrystal(BlockCrystal blockCrystal)
     {
-        this.crystal = crystal;
+        this.blockCrystal = blockCrystal;
     }
 
-    /* ======================================== ITileCrystal START ===================================== */
+    /* ======================================== ICrystal START ===================================== */
 
     /**
-     * Bounds the crystal {@link TileEntity} to other crystal {@link TileEntity} for input.
+     * Get the {@link celestialwizardry.api.energy.EnergyType}s this {@link ICrystal} can handle.
      *
-     * @param x the x coordinate of the other crystal {@link TileEntity}
-     * @param y the y coordinate of the other crystal {@link TileEntity}
-     * @param z the z coordinate of the other crystal {@link TileEntity}
+     * @param world the {@link net.minecraft.world.World} this {@link ICrystal} is
+     *
+     * @return A list of {@link celestialwizardry.api.energy.EnergyType} this {@link ICrystal} can handle
+     */
+    @Override
+    public List<EnergyType> acceptableEnergies(World world)
+    {
+        List<EnergyType> list = new ArrayList<EnergyType>();
+
+        for (EnergyType energyType : EnergyRegistry.energyMap.values())
+        {
+            list.add(energyType); // aka every energy type
+        }
+
+        return list;
+    }
+
+    /**
+     * The {@link net.minecraft.block.Block} instance that implements {@link ICrystal}.
+     *
+     * @return the {@link net.minecraft.block.Block}
+     */
+    @Override
+    public Block getBlock()
+    {
+        return blockCrystal;
+    }
+
+    /**
+     * Can this {@link celestialwizardry.api.crystal.ICrystal} be bounded to given {@link celestialwizardry.api
+     * .blockCrystal.ICrystal}.
+     *
+     * @param world   the {@link net.minecraft.world.World} this {@link celestialwizardry.api.crystal.ICrystal} is
+     * @param crystal the {@link celestialwizardry.api.crystal.ICrystal} this {@link celestialwizardry.api.crystal
+     * .ICrystal} is going to be bounded with
+     *
+     * @return can this {@link celestialwizardry.api.crystal.ICrystal} to the {@link celestialwizardry.api.crystal
+     * .ICrystal}
+     */
+    @Override
+    public boolean canBoundTo(World world, ICrystal crystal)
+    {
+        return true;
+    }
+
+    /**
+     * Bounds the blockCrystal {@link TileEntity} to other blockCrystal {@link TileEntity} for input.
+     *
+     * @param x the x coordinate of the other blockCrystal {@link TileEntity}
+     * @param y the y coordinate of the other blockCrystal {@link TileEntity}
+     * @param z the z coordinate of the other blockCrystal {@link TileEntity}
      *
      * @return true if the bound was success
      */
     @Override
     public boolean setInputBound(int x, int y, int z)
     {
-        if (worldObj.getTileEntity(x, y, z) instanceof ITileCrystal)
+        if (worldObj.getTileEntity(x, y, z) instanceof ICrystal)
         {
-            ITileCrystal crystal = (ITileCrystal) worldObj.getTileEntity(x, y, z);
+            ICrystal crystal = (ICrystal) worldObj.getTileEntity(x, y, z);
 
             if (canBoundTo(worldObj, crystal))
             {
@@ -60,20 +109,20 @@ public class TileEntityCrystal extends TileEntityCW implements ITileCrystal
     }
 
     /**
-     * Bounds the crystal {@link TileEntity} to other crystal {@link TileEntity} for output.
+     * Bounds the blockCrystal {@link TileEntity} to other blockCrystal {@link TileEntity} for output.
      *
-     * @param x the x coordinate of the other crystal {@link TileEntity}
-     * @param y the y coordinate of the other crystal {@link TileEntity}
-     * @param z the z coordinate of the other crystal {@link TileEntity}
+     * @param x the x coordinate of the other blockCrystal {@link TileEntity}
+     * @param y the y coordinate of the other blockCrystal {@link TileEntity}
+     * @param z the z coordinate of the other blockCrystal {@link TileEntity}
      *
      * @return true if the bound was success
      */
     @Override
     public boolean setOutputBound(int x, int y, int z)
     {
-        if (worldObj.getTileEntity(x, y, z) instanceof ITileCrystal)
+        if (worldObj.getTileEntity(x, y, z) instanceof ICrystal)
         {
-            ITileCrystal crystal = (ITileCrystal) worldObj.getTileEntity(x, y, z);
+            ICrystal crystal = (ICrystal) worldObj.getTileEntity(x, y, z);
 
             if (canBoundTo(worldObj, crystal))
             {
@@ -86,51 +135,6 @@ public class TileEntityCrystal extends TileEntityCW implements ITileCrystal
         }
 
         return false;
-    }
-
-    /* ======================================== ITileCrystal END ===================================== */
-
-    /* ======================================== ICrystal START ===================================== */
-
-    /**
-     * Get the {@link celestialwizardry.api.energy.EnergyType}s this {@link ICrystal} can handle.
-     *
-     * @param world the {@link net.minecraft.world.World} this {@link ICrystal} is
-     *
-     * @return An array of {@link celestialwizardry.api.energy.EnergyType} this {@link ICrystal} can handle
-     */
-    @Override
-    public List<EnergyType> acceptableEnergies(World world)
-    {
-        return crystal.acceptableEnergies(world);
-    }
-
-    /**
-     * The {@link net.minecraft.block.Block} instance that implements {@link ICrystal}.
-     *
-     * @return the {@link net.minecraft.block.Block}
-     */
-    @Override
-    public Block getBlock()
-    {
-        return crystal.getBlock();
-    }
-
-    /**
-     * Can this {@link celestialwizardry.api.crystal.ICrystal} be bounded to given {@link celestialwizardry.api
-     * .crystal.ICrystal}.
-     *
-     * @param world   the {@link net.minecraft.world.World} this {@link celestialwizardry.api.crystal.ICrystal} is
-     * @param crystal the {@link celestialwizardry.api.crystal.ICrystal} this {@link celestialwizardry.api.crystal
-     * .ICrystal} is going to be bounded with
-     *
-     * @return can this {@link celestialwizardry.api.crystal.ICrystal} to the {@link celestialwizardry.api.crystal
-     * .ICrystal}
-     */
-    @Override
-    public boolean canBoundTo(World world, ICrystal crystal)
-    {
-        return this.crystal.canBoundTo(world, crystal);
     }
 
     /* ======================================== ICrystal END ===================================== */
