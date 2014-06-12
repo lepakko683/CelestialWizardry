@@ -13,6 +13,8 @@ import java.util.List;
 
 public class TileEntityCrystalConductive extends TileEntityCrystal
 {
+    private static final int MAX_DISTANCE = 5;
+
     public TileEntityCrystalConductive(BlockCrystal crystal)
     {
         super(crystal);
@@ -41,11 +43,12 @@ public class TileEntityCrystalConductive extends TileEntityCrystal
     }
 
     /**
-     * Can this {@link celestialwizardry.api.crystal.ICrystal} be bounded to given {@link celestialwizardry.api.crystal.ICrystal}.
+     * Can this {@link celestialwizardry.api.crystal.ICrystal} be bounded to given {@link
+     * celestialwizardry.api.crystal.ICrystal}.
      *
      * @param world   the {@link net.minecraft.world.World} this {@link celestialwizardry.api.crystal.ICrystal} is
      * @param crystal the {@link celestialwizardry.api.crystal.ICrystal} this {@link celestialwizardry.api.crystal
-     * .ICrystal} is going to be bounded with
+     *                .ICrystal} is going to be bounded with
      *
      * @return can this {@link celestialwizardry.api.crystal.ICrystal} to the {@link celestialwizardry.api.crystal
      * .ICrystal}
@@ -53,7 +56,41 @@ public class TileEntityCrystalConductive extends TileEntityCrystal
     @Override
     public boolean canBoundTo(World world, ICrystal crystal)
     {
-        return true;
+        if (crystal.getXPos() == xCoord)
+        {
+            if (crystal.getZPos() == zCoord)
+            {
+                if (crystal.getYPos() - yCoord >= -MAX_DISTANCE && crystal.getYPos() - yCoord <= MAX_DISTANCE)
+                {
+                    return true;
+                }
+            }
+            else
+            {
+                if (crystal.getZPos() - zCoord >= -MAX_DISTANCE && crystal.getZPos() - zCoord <= MAX_DISTANCE)
+                {
+                    if (crystal.getYPos() == yCoord)
+                    {
+                        return true;
+                    }
+                }
+            }
+        }
+        else
+        {
+            if (crystal.getZPos() == zCoord)
+            {
+                if (crystal.getXPos() - xCoord >= -MAX_DISTANCE && crystal.getXPos() - xCoord <= MAX_DISTANCE)
+                {
+                    if (crystal.getYPos() == yCoord)
+                    {
+                        return true;
+                    }
+                }
+            }
+        }
+
+        return false;
     }
 
     /**
