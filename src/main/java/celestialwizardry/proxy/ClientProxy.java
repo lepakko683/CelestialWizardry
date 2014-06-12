@@ -3,6 +3,7 @@ package celestialwizardry.proxy;
 import celestialwizardry.client.ItemRendererSpellBook;
 import celestialwizardry.client.render.RenderBell;
 import celestialwizardry.client.render.RenderEntityBell;
+import celestialwizardry.client.render.RenderMagicalStone;
 import celestialwizardry.client.render.RenderOBJBlock;
 import celestialwizardry.client.render.RenderWritingTable;
 import celestialwizardry.client.settings.KeyBindings;
@@ -12,7 +13,9 @@ import celestialwizardry.reference.EventHandlers;
 import celestialwizardry.reference.Settings;
 import celestialwizardry.tileentity.TileEntityBell;
 import celestialwizardry.tileentity.TileEntityWritingTable;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraftforge.client.MinecraftForgeClient;
+import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.FMLCommonHandler;
@@ -53,10 +56,16 @@ public class ClientProxy extends CommonProxy
         }
 
         RenderingRegistry.registerBlockHandler(new RenderOBJBlock());
-
+        RenderingRegistry.registerBlockHandler(new RenderMagicalStone());
+        
         RenderingRegistry.registerEntityRenderingHandler(EntityBell.class, new RenderEntityBell());
 //        RenderingRegistry.registerEntityRenderingHandler(EntityLivingOre.class, new RenderOreGolem());
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityWritingTable.class, new RenderWritingTable());
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBell.class, new RenderBell());
     }
+
+	@Override
+	public void registerMiscTextures() {
+		IIconRegister iconRegistry = FMLClientHandler.instance().getClient().getTextureMapBlocks();
+	}
 }

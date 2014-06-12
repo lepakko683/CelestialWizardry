@@ -1,8 +1,8 @@
 package celestialwizardry.block;
 
+import celestialwizardry.client.render.RenderMagicalStone;
 import celestialwizardry.init.ModItems;
 import celestialwizardry.reference.Names;
-
 import net.minecraft.block.material.Material;
 import net.minecraft.item.Item;
 
@@ -26,5 +26,25 @@ public class BlockMagicalStone extends BlockCW
     public int damageDropped(int meta)
     {
         return ModItems.magicalPebble.getItemDamage();
+    }
+    
+    public int getRenderBlockPass()
+    {
+        return 0;
+    }
+    
+    @Override
+    public int getRenderType() {
+    	return RenderMagicalStone.ID;
+    }
+    
+    public boolean renderAsNormalBlock()
+    {
+        return false;
+    }
+    
+    public boolean isOpaqueCube()
+    {
+        return false;
     }
 }

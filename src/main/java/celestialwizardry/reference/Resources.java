@@ -25,6 +25,8 @@ public class Resources
         @Deprecated
         public static final ResourceLocation GUI_SPELL_BOOK_OLD = ResourceLocationHelper
                 .getResourceLocation(GUI_SHEET_LOCATION + "spellBookOld.png");
+        
+        
     }
 
     public static class Models
@@ -46,5 +48,12 @@ public class Resources
         
         public static final ResourceLocation MODEL_BELL = ResourceLocationHelper
                 .getResourceLocation(MODEL_LOCATION + "RandomBell2.obj");
+    }
+    
+    public static class Misc
+    {
+    	// Misc textures -- mostly OkkapeL's hacks
+    	public static final String BLOCK_TEXTURE_LOCATION = "textures/blocks/";
+    	public static final ResourceLocation TEXTURE_MAGICAL_STONE_INNER = ResourceLocationHelper.getResourceLocation(BLOCK_TEXTURE_LOCATION + "magicalStoneOLD.png");
     }
 }
