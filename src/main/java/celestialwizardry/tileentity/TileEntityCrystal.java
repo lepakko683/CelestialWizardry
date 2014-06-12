@@ -14,12 +14,12 @@ import net.minecraft.world.World;
 public class TileEntityCrystal extends TileEntityCW implements ITileCrystal
 {
     protected final BlockCrystal crystal;
-    public int boundInX;
-    public int boundInY;
-    public int boundInZ;
-    public int boundOutX;
-    public int boundOutY;
-    public int boundOutZ;
+    protected int boundInX;
+    protected int boundInY;
+    protected int boundInZ;
+    protected int boundOutX;
+    protected int boundOutY;
+    protected int boundOutZ;
 
     public TileEntityCrystal(BlockCrystal crystal)
     {
