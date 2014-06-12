@@ -4,12 +4,15 @@ import celestialwizardry.client.render.RenderMagicalStone;
 import celestialwizardry.init.ModItems;
 import celestialwizardry.reference.Names;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.item.Item;
+import net.minecraft.util.IIcon;
 
 import java.util.Random;
 
 public class BlockMagicalStone extends BlockCW
 {
+	private IIcon innerTexture;
     public BlockMagicalStone()
     {
         super(Material.rock);
@@ -46,5 +49,15 @@ public class BlockMagicalStone extends BlockCW
     public boolean isOpaqueCube()
     {
         return false;
+    }
+    
+    @Override
+    public void registerBlockIcons(IIconRegister iconRegister) {
+    	innerTexture = iconRegister.registerIcon("celestialwizardry:magicalStoneOLD");
+    	super.registerBlockIcons(iconRegister);
+    }
+    
+    public IIcon getInnerIcon() {
+    	return this.innerTexture;
     }
 }

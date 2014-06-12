@@ -17,9 +17,5 @@ public class ServerProxy extends CommonProxy
     {
         // NO-OP
     }
-
-	@Override
-	public void registerMiscTextures() {
-		// Do absolutely nothing :P
-	}
+    
 }

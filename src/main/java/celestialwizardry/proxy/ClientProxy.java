@@ -64,8 +64,4 @@ public class ClientProxy extends CommonProxy
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBell.class, new RenderBell());
     }
 
-	@Override
-	public void registerMiscTextures() {
-		IIconRegister iconRegistry = FMLClientHandler.instance().getClient().getTextureMapBlocks();
-	}
 }

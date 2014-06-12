@@ -3,6 +3,7 @@ package celestialwizardry.client.render;
 
 import org.lwjgl.opengl.GL11;
 
+import celestialwizardry.block.BlockMagicalStone;
 import celestialwizardry.util.ResourceLocationHelper;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
@@ -18,7 +19,6 @@ import cpw.mods.fml.client.registry.RenderingRegistry;
 public class RenderMagicalStone implements ISimpleBlockRenderingHandler {
 	
 	public static final int ID = RenderingRegistry.getNextAvailableRenderId();
-	private static final ResourceLocation innerTex = ResourceLocationHelper.getResourceLocation("textures/blocks/magicalStoneOLD.png");
 
 	@Override
 	public void renderInventoryBlock(Block block, int metadata, int modelId, RenderBlocks renderer) {
@@ -28,14 +28,21 @@ public class RenderMagicalStone implements ISimpleBlockRenderingHandler {
 	@Override
 	public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId, RenderBlocks renderer) {
 //		IIcon icon = block.getIcon(world.getBlockMetadata(x, y, z), 0);
-		IIcon icon2 = Blocks.lava.getIcon(0, 0);
+		IIcon inner = null;
+		if(block instanceof BlockMagicalStone) {
+			inner = ((BlockMagicalStone)block).getInnerIcon();
+		} else {
+			inner = Blocks.lava.getIcon(0, 0);
+		}
 		Tessellator tes = Tessellator.instance;
-		
 		renderer.renderStandardBlock(block, x, y, z);
-		tes.addVertexWithUV(x+.0001d, y+.9999d, z+.9999d, icon2.getMinU(), icon2.getMinV());
-		tes.addVertexWithUV(x+.0001d, y+.0001d, z+.9999d, icon2.getMinU(), icon2.getMaxV());
-		tes.addVertexWithUV(x+.9999d, y+.0001d, z+.9999d, icon2.getMaxU(), icon2.getMaxV());
-		tes.addVertexWithUV(x+.9999d, y+.9999d, z+.9999d, icon2.getMaxU(), icon2.getMinV());
+		tes.setBrightness(200);
+		tes.setColorOpaque_F(.89f, .89f, .89f);
+		
+		tes.addVertexWithUV(x+.0001d, y+.9999d, z+.9999d, inner.getMinU(), inner.getMinV());
+		tes.addVertexWithUV(x+.0001d, y+.0001d, z+.9999d, inner.getMinU(), inner.getMaxV());
+		tes.addVertexWithUV(x+.9999d, y+.0001d, z+.9999d, inner.getMaxU(), inner.getMaxV());
+		tes.addVertexWithUV(x+.9999d, y+.9999d, z+.9999d, inner.getMaxU(), inner.getMinV());
 		return true;
 	}
 

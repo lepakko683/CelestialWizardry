@@ -9,6 +9,4 @@ public interface IProxy
     public void registerKeyBindings();
 
     public void registerRenderer();
-    
-    public void registerMiscTextures();
 }
