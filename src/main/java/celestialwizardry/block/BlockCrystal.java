@@ -44,7 +44,7 @@ public abstract class BlockCrystal extends BlockCW implements ITileEntityProvide
                     {
                         ITileCrystal crystal = (ITileCrystal) world.getTileEntity(x, y, z);
 
-                        if ((crystal.canBoundTo(world, oldCrystal) && oldCrystal.canBoundTo(world, crystal)) && (crystal.setInputBound(oldX, oldY, oldZ) && oldCrystal.setOutputBound(x, y, z)))
+                        if (crystal.setInputBound(oldX, oldY, oldZ) && oldCrystal.setOutputBound(x, y, z))
                         {
                             player.addChatComponentMessage(new ChatComponentText(StringHelper.getMessage("crystalsBound")));
                             return true;
