@@ -11,6 +11,8 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
+import java.util.List;
+
 public class TileEntityCrystal extends TileEntityCW implements ITileCrystal
 {
     protected final BlockCrystal crystal;
@@ -98,7 +100,7 @@ public class TileEntityCrystal extends TileEntityCW implements ITileCrystal
      * @return An array of {@link celestialwizardry.api.energy.EnergyType} this {@link ICrystal} can handle
      */
     @Override
-    public EnergyType[] acceptableEnergies(World world)
+    public List<EnergyType> acceptableEnergies(World world)
     {
         return crystal.acceptableEnergies(world);
     }

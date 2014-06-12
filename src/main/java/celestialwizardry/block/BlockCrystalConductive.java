@@ -1,12 +1,18 @@
 package celestialwizardry.block;
 
 import celestialwizardry.api.crystal.ICrystal;
+import celestialwizardry.api.energy.EnergyMagic;
 import celestialwizardry.api.energy.EnergyType;
 import celestialwizardry.reference.Names;
+import celestialwizardry.registry.EnergyRegistry;
 import celestialwizardry.tileentity.TileEntityCrystal;
 
+import net.minecraft.block.Block;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * TODO I AM JUST A SMALL LITTLE PURPLE CRYSTAL WHO NEEDS MODEL ;) PROBABLY SOMETHING LIKE THAUMCRAFT CRYSTALS
@@ -42,12 +48,19 @@ public class BlockCrystalConductive extends BlockCrystal
      *
      * @param world the {@link net.minecraft.world.World} this {@link ICrystal} is
      *
-     * @return An array of {@link celestialwizardry.api.energy.EnergyType} this {@link ICrystal} can handle
+     * @return A list of {@link celestialwizardry.api.energy.EnergyType} this {@link ICrystal} can handle
      */
     @Override
-    public EnergyType[] acceptableEnergies(World world)
+    public List<EnergyType> acceptableEnergies(World world)
     {
-        return new EnergyType[0];
+        List<EnergyType> list = new ArrayList<EnergyType>();
+
+        for (EnergyType energyType : EnergyRegistry.energyMap.values())
+        {
+            list.add(energyType); // aka every energy type
+        }
+
+        return list;
     }
 
     /**
@@ -64,6 +77,17 @@ public class BlockCrystalConductive extends BlockCrystal
     public boolean canBoundTo(World world, ICrystal crystal)
     {
         return true;
+    }
+
+    /**
+     * The {@link net.minecraft.block.Block} instance that implements {@link ICrystal}.
+     *
+     * @return the {@link net.minecraft.block.Block}
+     */
+    @Override
+    public Block getBlock()
+    {
+        return this;
     }
 
     /* ======================================== ICrystal END ===================================== */

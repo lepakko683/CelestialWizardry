@@ -5,6 +5,8 @@ import celestialwizardry.api.energy.EnergyType;
 import net.minecraft.block.Block;
 import net.minecraft.world.World;
 
+import java.util.List;
+
 /**
  * An interface implemented by all crystals.
  */
@@ -15,9 +17,9 @@ public interface ICrystal
      *
      * @param world the {@link World} this {@link ICrystal} is
      *
-     * @return An array of {@link EnergyType} this {@link ICrystal} can handle
+     * @return A list of {@link EnergyType} this {@link ICrystal} can handle
      */
-    public EnergyType[] acceptableEnergies(World world);
+    public List<EnergyType> acceptableEnergies(World world);
 
     /**
      * The {@link Block} instance that implements {@link ICrystal}.
