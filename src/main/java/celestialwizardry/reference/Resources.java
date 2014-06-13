@@ -42,12 +42,16 @@ public class Resources
         
         public static final ResourceLocation TEXTURE_BELL = new ResourceLocation("textures/blocks/gold_block.png");
 
+        
+        
         // Model files (.OBJs)
         public static final ResourceLocation MODEL_WRITING_TABLE = ResourceLocationHelper
                 .getResourceLocation(MODEL_LOCATION + "WritingTable.obj");
         
         public static final ResourceLocation MODEL_BELL = ResourceLocationHelper
                 .getResourceLocation(MODEL_LOCATION + "RandomBell2.obj");
+		public static final ResourceLocation MODEL_CRYSTAL_COMPLEX = ResourceLocationHelper
+				.getResourceLocation(MODEL_LOCATION + "crystalComplex.obj");
     }
     
     public static class Misc

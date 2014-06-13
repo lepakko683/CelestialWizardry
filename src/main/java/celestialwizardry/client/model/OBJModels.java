@@ -12,6 +12,7 @@ public class OBJModels
 	//BLOCKS
 	public static WavefrontObject modelWritingTable = new WavefrontObject(Resources.Models.MODEL_WRITING_TABLE);
 	public static WavefrontObject modelBell = new WavefrontObject(Resources.Models.MODEL_BELL); // f 33 46
+	public static WavefrontObject modelCrystalComplex = new WavefrontObject(Resources.Models.MODEL_CRYSTAL_COMPLEX);
 	
 //    public static WavefrontObject modelWritingTable;
     
