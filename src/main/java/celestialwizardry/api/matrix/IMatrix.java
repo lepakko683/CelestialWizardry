@@ -91,6 +91,15 @@ public interface IMatrix
     public boolean setFull(ItemStack stack, EnergyType type);
 
     /**
+     * Removes all {@link EnergyType} that is stored in the {@link IMatrix}
+     *
+     * @param stack the {@link IMatrix} {@link ItemStack}
+     *
+     * @return returns true if the {@link EnergyType} was successfully emptied
+     */
+    public boolean setEmpty(ItemStack stack);
+
+    /**
      * Tries to set the matrix {@link EnergyType} to certain amount
      *
      * @param stack  the {@link ItemStack} to get {@link EnergyType} set
