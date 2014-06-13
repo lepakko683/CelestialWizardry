@@ -1,0 +1,37 @@
+Celestial Wizardry TODO for (next) release:
+	-Mechanics
+		-Spells
+			-Writing
+				-Runes
+			-Casting
+				-Spell grammar
+		
+		-Fusion Crafting
+			-Recipe handling system that handles both items and energy (Fusion Crafting)
+			
+		-PizzAna's secret mechanic that uses Energy api
+	
+	-Recipes for
+		-WritingTable (fix)
+		-Magical Pen
+		-Spell Book
+	
+	-Textures for
+		-Runes
+		-Ore Golems
+		-Concentration Ring(s)
+			-Unbound
+		-Season Ring
+		-Matricies
+		
+	-Über Graphical Stuff
+		(-Spell Particles)
+	
+	-Models
+		-Ore Golem
+		-Crystals
+	
+	-Entities
+		-Ore Golem (Living Ore)
+		
+	-ENERGY API ;) // yeah, that too :P

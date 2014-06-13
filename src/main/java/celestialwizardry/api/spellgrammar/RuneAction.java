@@ -7,8 +7,8 @@ public class RuneAction extends RuneCategory
 	//SPAWN, TELEPORT, ACCELERATE
 	private String actionString;
 	
-	public RuneAction(float complexity, String actionString) {
-		super(complexity);
+	public RuneAction(float complexity, String actionString, boolean takesAttribute) {
+		super(complexity, takesAttribute);
 	}
 
 	@Override

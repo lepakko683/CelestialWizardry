@@ -7,7 +7,7 @@ public class RuneEntity extends RuneCategory
 	private String entName;
 	
 	public RuneEntity(float complexity, String entityName) {
-		super(complexity);
+		super(complexity, false);
 		this.entName = entityName;
 	}
 	

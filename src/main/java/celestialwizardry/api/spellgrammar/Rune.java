@@ -13,19 +13,30 @@ public abstract class Rune
 	}
 	
 	private String runeid = null;
+	private boolean requiresPostfix;
+	private boolean requiresAttribute; 
 	
 	private int numbericID = -1;
 	
-    public Rune(float complexity)
+    public Rune(float complexity, boolean takesAttribute)
     {
     }
 	
     public abstract List validRuneAttributeTypes();
-    
 
 	public String getRuneID()
 	{
 		return runeid;
+	}
+	
+	public Rune setRequiresPostfix() {
+		this.requiresPostfix = true;
+		return this;
+	}
+	
+	public Rune setRequiresAttribute() {
+		this.requiresAttribute = true;
+		return this;
 	}
 	
     /**Returns -1 if rune config haven't been loaded yet*/

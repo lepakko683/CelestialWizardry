@@ -2,17 +2,15 @@ package celestialwizardry.api.spellgrammar;
 
 import java.util.List;
 
-public class RuneControl extends RuneCategory
-{
-    //AND, IF, NOT, etc
-	
-	public RuneControl(float complexity) {
-		super(complexity, false); // TODO
+public class RuneLocation extends RuneCategory {
+
+	public RuneLocation(float complexity, boolean takesAttribute) {
+		super(complexity, takesAttribute);
 	}
 
 	@Override
 	public String getCategoryIDString() {
-		return "control";
+		return "location";
 	}
 
 	@Override

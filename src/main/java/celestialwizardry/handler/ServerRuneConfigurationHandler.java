@@ -13,6 +13,7 @@ import net.minecraft.nbt.CompressedStreamTools;
 import net.minecraft.nbt.NBTTagCompound;
 import celestialwizardry.CelestialWizardry;
 import celestialwizardry.api.spellgrammar.Rune;
+import celestialwizardry.config.RuneConfig;
 import celestialwizardry.registry.RuneRegistry;
 
 public class ServerRuneConfigurationHandler {
@@ -253,6 +254,12 @@ public class ServerRuneConfigurationHandler {
 		}
 		
 		
+	}
+	
+	// TODO!
+	/**Missing method body!*/
+	public static RuneConfig getConfigToSendToClients() {
+		return null;
 	}
 	
 	public static void onServerStopping() {

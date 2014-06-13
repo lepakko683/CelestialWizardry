@@ -6,7 +6,7 @@ public class RuneMagic extends RuneCategory
 {
 	//MAGIC TYPE, MAGIC TYPE TRANSFORM
     public RuneMagic(float complexity) {
-		super(complexity);
+		super(complexity, false);
 	}
 
 	@Override

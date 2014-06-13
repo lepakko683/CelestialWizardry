@@ -1,9 +1,13 @@
 package celestialwizardry.init;
 
+import net.minecraft.init.Blocks;
+import celestialwizardry.api.spellgrammar.AttributeRune;
 import celestialwizardry.api.spellgrammar.Rune;
 import celestialwizardry.api.spellgrammar.RuneAction;
+import celestialwizardry.api.spellgrammar.RuneBlock;
 import celestialwizardry.api.spellgrammar.RuneEntity;
 import celestialwizardry.registry.RuneRegistry;
+import celestialwizardry.util.Tuple;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -35,6 +39,28 @@ public class InitRunes {
 	public static final Rune runeEntitySpider = new RuneEntity(1f, "spider");
 	public static final Rune runeEntityCaveSpider = new RuneEntity(1f, "cavespider");
 	public static final Rune runeEntityPigZombie = new RuneEntity(1f, "pigzombie");
+	
+	//Block attributes
+	public static final Rune runeAttrAir = new AttributeRune(1f, null, false); // null?
+	public static final Rune runeAttrCobblestone = new AttributeRune(1f, new Tuple(Blocks.cobblestone, 0), false);
+	public static final Rune runeAttrBricks = new AttributeRune(1f, new Tuple(Blocks.cobblestone, 0), true);
+		public static final Rune runeAttr = new AttributeRune(1f, new Tuple(Blocks.cobblestone, 0), false);
+	
+	
+	
+	public static final Rune runeBlockFull = new RuneBlock(1f, RuneBlock.BlockType.FULL_BLOCK, "fullBlock");
+	public static final Rune runeBlockSlab = new RuneBlock(1f, RuneBlock.BlockType.SLAB, "slab");
+	public static final Rune runeBlockStairs = new RuneBlock(1f, RuneBlock.BlockType.STAIRS, "stairs");
+	public static final Rune runeBlockFence = new RuneBlock(1f, RuneBlock.BlockType.FENCE, "fence");
+	public static final Rune runeBlockOther = new RuneBlock(1f, RuneBlock.BlockType.OTHER, "other");
+//	public static final Rune runeBlockAir = new RuneBlock(1f, new Tuple(Blocks.air, 0));
+//	public static final Rune runeBlockStone = new RuneBlock(1f, new Tuple(Blocks.stone, 0));
+//	public static final Rune runeBlockCobblestone = new RuneBlock(1f, new Tuple(Blocks.cobblestone, 0));
+//	public static final Rune runeBlockBricksStone = new RuneBlock(1f, new Tuple(Blocks.stonebrick, 0)); // Attributes: Mossy:1, Cracked:2, Chiseled:3
+//	public static final Rune runeBlockDirt = new RuneBlock(1f, new Tuple(Blocks.dirt, 0));
+//	public static final Rune runeBlockGrass = new RuneBlock(1f, new Tuple(Blocks.dirt, 0));
+	
+	
 	
 	@SideOnly(Side.SERVER)
 	public void serverInitRunes() {
