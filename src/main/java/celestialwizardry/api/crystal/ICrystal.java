@@ -22,6 +22,20 @@ public interface ICrystal
     public List<EnergyType> acceptableEnergies(World world);
 
     /**
+     * The maximum amount of {@link EnergyType} that can be stored in the {@link ICrystal}.
+     *
+     * @return The maximum buffer size
+     */
+    public float getMaxBuffer();
+
+    /**
+     * The current amount of {@link EnergyType} that is stored in the {@link ICrystal}.
+     *
+     * @return The current buffer size
+     */
+    public float getCurrentBuffer();
+
+    /**
      * The {@link Block} instance that implements {@link ICrystal}.
      *
      * @return the {@link Block}
@@ -39,7 +53,8 @@ public interface ICrystal
     public boolean canBoundTo(World world, ICrystal crystal);
 
     /**
-     * Bounds the blockCrystal {@link net.minecraft.tileentity.TileEntity} to other blockCrystal {@link net.minecraft.tileentity.TileEntity} for input.
+     * Bounds the blockCrystal {@link net.minecraft.tileentity.TileEntity} to other blockCrystal {@link
+     * net.minecraft.tileentity.TileEntity} for input.
      *
      * @param x the x coordinate of the other blockCrystal {@link net.minecraft.tileentity.TileEntity}
      * @param y the y coordinate of the other blockCrystal {@link net.minecraft.tileentity.TileEntity}
@@ -50,7 +65,15 @@ public interface ICrystal
     public boolean setInputBound(int x, int y, int z);
 
     /**
-     * Bounds the blockCrystal {@link net.minecraft.tileentity.TileEntity} to other blockCrystal {@link net.minecraft.tileentity.TileEntity} for output.
+     * The bounded crystal for input.
+     *
+     * @return The bounded crystal for input.
+     */
+    public ICrystal getInputBound();
+
+    /**
+     * Bounds the blockCrystal {@link net.minecraft.tileentity.TileEntity} to other blockCrystal {@link
+     * net.minecraft.tileentity.TileEntity} for output.
      *
      * @param x the x coordinate of the other blockCrystal {@link net.minecraft.tileentity.TileEntity}
      * @param y the y coordinate of the other blockCrystal {@link net.minecraft.tileentity.TileEntity}
@@ -59,6 +82,13 @@ public interface ICrystal
      * @return true if the bound was success
      */
     public boolean setOutputBound(int x, int y, int z);
+
+    /**
+     * The bounded crystal for output.
+     *
+     * @return The bounded crystal for output.
+     */
+    public ICrystal getOutputBound();
 
     /**
      * The x position of the crystal tile.

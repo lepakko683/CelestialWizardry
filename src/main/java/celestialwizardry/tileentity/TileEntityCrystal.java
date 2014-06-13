@@ -23,6 +23,7 @@ public abstract class TileEntityCrystal extends TileEntityCW implements ICrystal
     protected int boundOutX;
     protected int boundOutY;
     protected int boundOutZ;
+    protected float buffer;
 
     public TileEntityCrystal(BlockCrystal blockCrystal)
     {
@@ -52,6 +53,18 @@ public abstract class TileEntityCrystal extends TileEntityCW implements ICrystal
     }
 
     /**
+     * The current amount of {@link celestialwizardry.api.energy.EnergyType} that is stored in the {@link
+     * celestialwizardry.api.crystal.ICrystal}.
+     *
+     * @return The current buffer size
+     */
+    @Override
+    public float getCurrentBuffer()
+    {
+        return buffer;
+    }
+
+    /**
      * The {@link net.minecraft.block.Block} instance that implements {@link ICrystal}.
      *
      * @return the {@link net.minecraft.block.Block}
@@ -68,7 +81,7 @@ public abstract class TileEntityCrystal extends TileEntityCW implements ICrystal
      *
      * @param world   the {@link net.minecraft.world.World} this {@link celestialwizardry.api.crystal.ICrystal} is
      * @param crystal the {@link celestialwizardry.api.crystal.ICrystal} this {@link celestialwizardry.api.crystal
-     * .ICrystal} is going to be bounded with
+     *                .ICrystal} is going to be bounded with
      *
      * @return can this {@link celestialwizardry.api.crystal.ICrystal} to the {@link celestialwizardry.api.crystal
      * .ICrystal}
@@ -109,6 +122,19 @@ public abstract class TileEntityCrystal extends TileEntityCW implements ICrystal
     }
 
     /**
+     * The bounded crystal for input.
+     *
+     * @return The bounded crystal for input.
+     */
+    @Override
+    public ICrystal getInputBound()
+    {
+        return ((worldObj.getTileEntity(boundInX, boundInY, boundInZ) != null) && (worldObj
+                .getTileEntity(boundInX, boundInY, boundInZ) instanceof ICrystal)) ? (ICrystal) worldObj
+                .getTileEntity(boundInX, boundInY, boundInZ) : null;
+    }
+
+    /**
      * Bounds the blockCrystal {@link TileEntity} to other blockCrystal {@link TileEntity} for output.
      *
      * @param x the x coordinate of the other blockCrystal {@link TileEntity}
@@ -135,6 +161,19 @@ public abstract class TileEntityCrystal extends TileEntityCW implements ICrystal
         }
 
         return false;
+    }
+
+    /**
+     * The bounded crystal for output.
+     *
+     * @return The bounded crystal for output.
+     */
+    @Override
+    public ICrystal getOutputBound()
+    {
+        return ((worldObj.getTileEntity(boundOutX, boundOutY, boundOutZ) != null) && (worldObj
+                .getTileEntity(boundOutX, boundOutY, boundOutZ) instanceof ICrystal)) ? (ICrystal) worldObj
+                .getTileEntity(boundOutX, boundOutY, boundOutZ) : null;
     }
 
     /**
@@ -184,6 +223,7 @@ public abstract class TileEntityCrystal extends TileEntityCW implements ICrystal
         boundOutX = nbtTagCompound.getInteger(Names.NBT.BOUND_OUT_X);
         boundOutY = nbtTagCompound.getInteger(Names.NBT.BOUND_OUT_Y);
         boundOutZ = nbtTagCompound.getInteger(Names.NBT.BOUND_OUT_Z);
+        buffer = nbtTagCompound.getFloat(Names.NBT.BUFFER);
     }
 
     @Override
@@ -196,6 +236,7 @@ public abstract class TileEntityCrystal extends TileEntityCW implements ICrystal
         nbtTagCompound.setInteger(Names.NBT.BOUND_OUT_X, boundOutX);
         nbtTagCompound.setInteger(Names.NBT.BOUND_OUT_Y, boundOutY);
         nbtTagCompound.setInteger(Names.NBT.BOUND_OUT_Z, boundOutZ);
+        nbtTagCompound.setFloat(Names.NBT.BUFFER, buffer);
     }
 
     /* ======================================== TileEntity END ===================================== */

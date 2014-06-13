@@ -14,6 +14,7 @@ import java.util.List;
 public class TileEntityCrystalConductive extends TileEntityCrystal
 {
     private static final int MAX_DISTANCE = 5;
+    private static final float MAX_BUFFER = 100f;
 
     public TileEntityCrystalConductive(BlockCrystal crystal)
     {
@@ -40,6 +41,18 @@ public class TileEntityCrystalConductive extends TileEntityCrystal
         }
 
         return list;
+    }
+
+    /**
+     * The maximum amount of {@link celestialwizardry.api.energy.EnergyType} that can be stored in the {@link
+     * celestialwizardry.api.crystal.ICrystal}.
+     *
+     * @return The maximum buffer size
+     */
+    @Override
+    public float getMaxBuffer()
+    {
+        return MAX_BUFFER;
     }
 
     /**
@@ -105,4 +118,14 @@ public class TileEntityCrystalConductive extends TileEntityCrystal
     }
 
     /* ======================================== ICrystal END ===================================== */
+
+    /* ======================================== TileEntity START ===================================== */
+
+    @Override
+    public void updateEntity()
+    {
+        super.updateEntity();
+    }
+
+    /* ======================================== TileEntity END ===================================== */
 }
