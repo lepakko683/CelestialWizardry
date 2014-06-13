@@ -115,12 +115,12 @@ public class ItemMatrix extends ItemSingle implements IMatrix, ICWMatrix, ILocke
 
         if (!NBTHelper.hasTag(stack, Names.NBT.ENERGY))
         {
-            return setEnergy(stack, Math.min(amount, getMaxEnergy(stack)), type);
+            return setEnergy(stack, amount, type);
         }
 
         if (getEnergyType(stack).getEnergyName().equals(name))
         {
-            return setEnergy(stack, Math.min(getEnergyStored(stack) + amount, getMaxEnergy(stack)));
+            return setEnergy(stack, getEnergyStored(stack) + amount);
         }
         else
         {
@@ -129,7 +129,7 @@ public class ItemMatrix extends ItemSingle implements IMatrix, ICWMatrix, ILocke
             if (transform && EnergyHelper.canTransformInto(type, energyType))
             {
                 amount = amount * EnergyHelper.getTransformRatio(type, energyType);
-                return setEnergy(stack, Math.min(getEnergyStored(stack) + amount, getMaxEnergy(stack)));
+                return setEnergy(stack, getEnergyStored(stack) + amount);
             }
         }
 
@@ -215,7 +215,8 @@ public class ItemMatrix extends ItemSingle implements IMatrix, ICWMatrix, ILocke
     /**
      * Tries to set the matrix {@link celestialwizardry.api.energy.EnergyType} to certain amount
      *
-     * @param stack  the {@link net.minecraft.item.ItemStack} to get {@link celestialwizardry.api.energy.EnergyType} set
+     * @param stack  the {@link net.minecraft.item.ItemStack} to get {@link celestialwizardry.api.energy.EnergyType}
+     *               set
      * @param amount the amount of {@link celestialwizardry.api.energy.EnergyType} to set
      *
      * @return returns true if the {@link celestialwizardry.api.energy.EnergyType} was successfully set
@@ -229,9 +230,11 @@ public class ItemMatrix extends ItemSingle implements IMatrix, ICWMatrix, ILocke
     /**
      * Tries to set the matrix {@link celestialwizardry.api.energy.EnergyType} to certain amount
      *
-     * @param stack  the {@link net.minecraft.item.ItemStack} to get {@link celestialwizardry.api.energy.EnergyType} set
+     * @param stack  the {@link net.minecraft.item.ItemStack} to get {@link celestialwizardry.api.energy.EnergyType}
+     *               set
      * @param amount the amount of {@link celestialwizardry.api.energy.EnergyType} to set
-     * @param type   the {@link celestialwizardry.api.energy.EnergyType} that the {@link net.minecraft.item.ItemStack} {@link celestialwizardry.api.energy.EnergyType} is being set to
+     * @param type   the {@link celestialwizardry.api.energy.EnergyType} that the {@link net.minecraft.item.ItemStack}
+     *               {@link celestialwizardry.api.energy.EnergyType} is being set to
      *
      * @return returns true if the {@link celestialwizardry.api.energy.EnergyType} was successfully set
      */
@@ -239,7 +242,7 @@ public class ItemMatrix extends ItemSingle implements IMatrix, ICWMatrix, ILocke
     public boolean setEnergy(ItemStack stack, float amount, EnergyType type)
     {
         NBTHelper.setString(stack, Names.NBT.ENERGY, type.getEnergyName());
-        NBTHelper.setFloat(stack, Names.NBT.ENERGY_STORED, amount);
+        NBTHelper.setFloat(stack, Names.NBT.ENERGY_STORED, Math.min(amount, getMaxEnergy(stack)));
         return true;
     }
 
