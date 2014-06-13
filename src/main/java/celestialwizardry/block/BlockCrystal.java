@@ -10,6 +10,7 @@ import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ChatComponentText;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 public abstract class BlockCrystal extends BlockCW implements ITileEntityProvider
@@ -69,6 +70,12 @@ public abstract class BlockCrystal extends BlockCW implements ITileEntityProvide
         }
 
         return super.onBlockActivated(world, x, y, z, player, par6, par7, par8, par9);
+    }
+
+    @Override
+    public boolean isBlockSolid(IBlockAccess world, int x, int y, int z, int side)
+    {
+        return false;
     }
 
     /* ======================================== Block END ===================================== */
