@@ -115,34 +115,21 @@ public class ItemMatrix extends ItemSingle implements IMatrix, ICWMatrix, ILocke
 
         if (!NBTHelper.hasTag(stack, Names.NBT.ENERGY))
         {
-            NBTHelper.setString(stack, Names.NBT.ENERGY, type.getEnergyName());
-            NBTHelper.setFloat(stack, Names.NBT.ENERGY_STORED,
-                               amount <= getMaxEnergy(stack) ? (amount < 0f ? 0f : amount) : getMaxEnergy(stack));
-            return true;
+            return setEnergy(stack, Math.min(amount, getMaxEnergy(stack)), type);
         }
 
-        if (NBTHelper.getString(stack, Names.NBT.ENERGY).equals(name))
+        if (getEnergyType(stack).getEnergyName().equals(name))
         {
-            float energyStored = NBTHelper.getFloat(stack, Names.NBT.ENERGY_STORED);
-            amount = amount + energyStored;
-            NBTHelper.setFloat(stack, Names.NBT.ENERGY_STORED,
-                               amount <= getMaxEnergy(stack) ? (amount < 0f ? 0f : amount) : getMaxEnergy(stack));
-            return true;
+            return setEnergy(stack, Math.min(getEnergyStored(stack) + amount, getMaxEnergy(stack)));
         }
         else
         {
-            String energyName = NBTHelper.getString(stack, Names.NBT.ENERGY);
-            float energyStored = NBTHelper.getFloat(stack, Names.NBT.ENERGY_STORED);
-            EnergyType energyType = EnergyRegistry.getEnergyType(energyName);
+            EnergyType energyType = getEnergyType(stack);
 
             if (transform && EnergyHelper.canTransformInto(type, energyType))
             {
-                float ratio = EnergyHelper.getTransformRatio(type, energyType);
-                amount = amount * ratio;
-                amount = amount + energyStored;
-                NBTHelper.setFloat(stack, Names.NBT.ENERGY_STORED,
-                                   amount <= getMaxEnergy(stack) ? (amount < 0f ? 0f : amount) : getMaxEnergy(stack));
-                return true;
+                amount = amount * EnergyHelper.getTransformRatio(type, energyType);
+                return setEnergy(stack, Math.min(getEnergyStored(stack) + amount, getMaxEnergy(stack)));
             }
         }
 
@@ -222,7 +209,38 @@ public class ItemMatrix extends ItemSingle implements IMatrix, ICWMatrix, ILocke
     @Override
     public boolean setFull(ItemStack stack, EnergyType type)
     {
-        return false; // TODO
+        return setEnergy(stack, getMaxEnergy(stack), type);
+    }
+
+    /**
+     * Tries to set the matrix {@link celestialwizardry.api.energy.EnergyType} to certain amount
+     *
+     * @param stack  the {@link net.minecraft.item.ItemStack} to get {@link celestialwizardry.api.energy.EnergyType} set
+     * @param amount the amount of {@link celestialwizardry.api.energy.EnergyType} to set
+     *
+     * @return returns true if the {@link celestialwizardry.api.energy.EnergyType} was successfully set
+     */
+    @Override
+    public boolean setEnergy(ItemStack stack, float amount)
+    {
+        return setEnergy(stack, amount, getEnergyType(stack));
+    }
+
+    /**
+     * Tries to set the matrix {@link celestialwizardry.api.energy.EnergyType} to certain amount
+     *
+     * @param stack  the {@link net.minecraft.item.ItemStack} to get {@link celestialwizardry.api.energy.EnergyType} set
+     * @param amount the amount of {@link celestialwizardry.api.energy.EnergyType} to set
+     * @param type   the {@link celestialwizardry.api.energy.EnergyType} that the {@link net.minecraft.item.ItemStack} {@link celestialwizardry.api.energy.EnergyType} is being set to
+     *
+     * @return returns true if the {@link celestialwizardry.api.energy.EnergyType} was successfully set
+     */
+    @Override
+    public boolean setEnergy(ItemStack stack, float amount, EnergyType type)
+    {
+        NBTHelper.setString(stack, Names.NBT.ENERGY, type.getEnergyName());
+        NBTHelper.setFloat(stack, Names.NBT.ENERGY_STORED, amount);
+        return true;
     }
 
     /**
