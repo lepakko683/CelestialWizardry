@@ -1,5 +1,6 @@
 package celestialwizardry.proxy;
 
+import celestialwizardry.block.BlockCrystal;
 import celestialwizardry.client.ItemRendererSpellBook;
 import celestialwizardry.client.render.RenderBell;
 import celestialwizardry.client.render.RenderEntityBell;
@@ -62,6 +63,11 @@ public class ClientProxy extends CommonProxy
 //        RenderingRegistry.registerEntityRenderingHandler(EntityLivingOre.class, new RenderOreGolem());
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityWritingTable.class, new RenderWritingTable());
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBell.class, new RenderBell());
+
+        for (BlockCrystal crystal : BlockCrystal.crystalList)
+        {
+            ClientRegistry.bindTileEntitySpecialRenderer(crystal.getTileCrystal().getClass(), crystal.getRender());
+        }
     }
 
 	@Override
