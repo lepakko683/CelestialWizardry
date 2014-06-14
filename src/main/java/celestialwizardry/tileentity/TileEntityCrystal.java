@@ -5,6 +5,7 @@ import celestialwizardry.api.energy.EnergyType;
 import celestialwizardry.block.BlockCrystal;
 import celestialwizardry.reference.Names;
 import celestialwizardry.registry.EnergyRegistry;
+import celestialwizardry.util.MathHelper;
 
 import net.minecraft.block.Block;
 import net.minecraft.nbt.NBTTagCompound;

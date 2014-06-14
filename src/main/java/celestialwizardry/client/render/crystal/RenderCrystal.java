@@ -17,32 +17,35 @@ import org.lwjgl.opengl.GL11;
 public abstract class RenderCrystal extends TileEntitySpecialRenderer
 {
     protected final IModelCustom model;
-    protected final BlockCrystal crystal;
+    protected final ResourceLocation texture;
     protected ActiveNumber rotation = new ActiveNumber(ActiveNumber.MODE_KEEP_WITHIN_BOUNDS).setBounds(0D, 359D);
     protected ActiveNumber hover = new ActiveNumber(ActiveNumber.MODE_OSCILLATE).setBounds(0D, 2D)
             .setDirection(ActiveNumber.DIR_DEC);
 
-    public RenderCrystal(IModelCustom model, BlockCrystal crystal)
+    public RenderCrystal(IModelCustom model, ResourceLocation texture)
     {
         this.model = model;
-        this.crystal = crystal;
+        this.texture = texture;
     }
 
     @Override
-    public void renderTileEntityAt(TileEntity var1, double var2, double var4, double var6, float var8)
+    public void renderTileEntityAt(TileEntity tileEntity, double x, double y, double z, float partTick)
     {
-        FMLClientHandler.instance().getClient().renderEngine.bindTexture(crystal.getTexture());
+        FMLClientHandler.instance().getClient().renderEngine.bindTexture(texture);
 
         GL11.glPushMatrix();
-        GL11.glTranslated(0D, 3D + hover.update(0.01D), 0D);
-        GL11.glRotated(rotation.update(.5D), 0D, 1D, 0D);
+
+        gl11(tileEntity, x, y, z, partTick);
+
         model.renderAll();
         GL11.glPopMatrix();
     }
 
-    public ResourceLocation getTexture()
+    protected void gl11(TileEntity tileEntity, double x, double y, double z, float partTick)
     {
-        return crystal.getTexture();
+        GL11.glTranslated(x + .5d, y, z + .5d);
+        // GL11.glRotated(0D, 0D, 0D, 0D);
+        // GL11.glScaled(.5d, .5d, .5d);
     }
 
     public IModelCustom getModel()
@@ -50,8 +53,8 @@ public abstract class RenderCrystal extends TileEntitySpecialRenderer
         return model;
     }
 
-    public BlockCrystal getCrystal()
+    public ResourceLocation getTexture()
     {
-        return crystal;
+        return texture;
     }
 }

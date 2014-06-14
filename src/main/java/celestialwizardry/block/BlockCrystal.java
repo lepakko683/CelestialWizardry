@@ -30,25 +30,12 @@ public abstract class BlockCrystal extends BlockCW implements ITileEntityProvide
 {
     public static final List<BlockCrystal> crystalList = new ArrayList<BlockCrystal>();
 
-    protected final ResourceLocation texture;
-    protected final RenderStyle renderStyle;
-    protected final TileEntityCrystal tileCrystal;
-
-    public BlockCrystal(ResourceLocation texture, RenderStyle renderStyle, TileEntityCrystal tileCrystal)
+    public BlockCrystal()
     {
         super(Material.glass);
         this.setHardness(6.0F);
 
-        this.texture = texture;
-        this.renderStyle = renderStyle;
-        this.tileCrystal = tileCrystal;
-
         crystalList.add(this);
-    }
-
-    public BlockCrystal(String texture, RenderStyle renderStyle, TileEntityCrystal tileCrystal)
-    {
-        this(new ResourceLocation(texture), renderStyle, tileCrystal);
     }
 
     /* ======================================== Block START ===================================== */
@@ -57,7 +44,7 @@ public abstract class BlockCrystal extends BlockCW implements ITileEntityProvide
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int par6, float par7,
                                     float par8, float par9)
     {
-        if (player.getCurrentEquippedItem().getItem() instanceof IStaff)
+        if (player.getCurrentEquippedItem() != null && player.getCurrentEquippedItem().getItem() instanceof IStaff)
         {
             if (NBTHelper.getBoolean(player.getCurrentEquippedItem(), Names.NBT.BOUNDING))
             {
@@ -129,57 +116,4 @@ public abstract class BlockCrystal extends BlockCW implements ITileEntityProvide
     }
 
     /* ======================================== Block END ===================================== */
-
-    /* ======================================== ITileEntityProvider START ===================================== */
-
-    /**
-     * Returns a new instance of a block's tile entity class. Called on placing the block.
-     *
-     * @param world
-     * @param var2
-     */
-    @Override
-    public TileEntity createNewTileEntity(World world, int var2)
-    {
-        return tileCrystal;
-    }
-
-    /* ======================================== ITileEntityProvider END ===================================== */
-
-    public ResourceLocation getTexture()
-    {
-        return texture;
-    }
-
-
-    public RenderStyle getRenderStyle()
-    {
-        return renderStyle;
-    }
-
-    public TileEntityCrystal getTileCrystal()
-    {
-        return tileCrystal;
-    }
-
-    @SideOnly(Side.CLIENT)
-    public RenderCrystal getRender()
-    {
-        if (renderStyle == RenderStyle.SIMPLE)
-        {
-            return new RenderCrystalSimple(this);
-        }
-        else if (renderStyle == RenderStyle.COMPLEX)
-        {
-            return new RenderCrystalComplex(this);
-        }
-
-        return null;
-    }
-
-    public static enum RenderStyle
-    {
-        SIMPLE,
-        COMPLEX
-    }
 }

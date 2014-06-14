@@ -8,7 +8,6 @@ import celestialwizardry.api.matrix.internal.ICWMatrix;
 import celestialwizardry.reference.Names;
 import celestialwizardry.reference.Resources;
 import celestialwizardry.reference.Settings;
-import celestialwizardry.registry.EnergyRegistry;
 import celestialwizardry.util.EnergyHelper;
 import celestialwizardry.util.KeyboardHelper;
 import celestialwizardry.util.NBTHelper;
@@ -257,7 +256,9 @@ public class ItemMatrix extends ItemSingle implements IMatrix, ICWMatrix, ILocke
     public boolean setEnergy(ItemStack stack, float amount, EnergyType type)
     {
         NBTHelper.setString(stack, Names.NBT.ENERGY, type.getEnergyName());
-        NBTHelper.setFloat(stack, Names.NBT.ENERGY_STORED, Math.max(0f, Math.min(amount, getMaxEnergy(stack))));
+        NBTHelper.setFloat(stack, Names.NBT.ENERGY_STORED, celestialwizardry.util.MathHelper.clampZero_float(amount,
+                                                                                                             getMaxEnergy(
+                                                                                                                     stack)));
         return true;
     }
 
