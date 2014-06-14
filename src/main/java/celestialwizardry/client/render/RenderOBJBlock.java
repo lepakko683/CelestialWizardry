@@ -65,7 +65,7 @@ public class RenderOBJBlock implements ISimpleBlockRenderingHandler
             }
             else if (block instanceof BlockCrystalConductive)
             {
-                FMLClientHandler.instance().getClient().renderEngine.bindTexture(Resources.Models.TEXTURE_CRYSTAL_CONDUCTIVE);
+                FMLClientHandler.instance().getClient().renderEngine.bindTexture(Resources.Models.Crystals.TEXTURE_CRYSTAL_CONDUCTIVE);
                 crystalSimpleGL11();
             }
 
@@ -118,7 +118,7 @@ public class RenderOBJBlock implements ISimpleBlockRenderingHandler
 
     protected void crystalSimpleGL11()
     {
-        GL11.glTranslatef(0f, -.5f, 0f); // TODO: tweak to render correctly in inventory & in hand
+        GL11.glTranslatef(0f, -1f, 0f); // TODO: tweak to render correctly in inventory & in hand
         GL11.glScalef(.7f, .7f, .7f);
         OBJModels.modelCrystalSimple.renderAll();
     }

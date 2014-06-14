@@ -1,6 +1,5 @@
 package celestialwizardry.proxy;
 
-import celestialwizardry.block.BlockCrystal;
 import celestialwizardry.client.ItemRendererSpellBook;
 import celestialwizardry.client.render.RenderBell;
 import celestialwizardry.client.render.RenderEntityBell;
@@ -10,7 +9,6 @@ import celestialwizardry.client.render.RenderWritingTable;
 import celestialwizardry.client.render.crystal.RenderCrystalSimple;
 import celestialwizardry.client.settings.KeyBindings;
 import celestialwizardry.entity.EntityBell;
-import celestialwizardry.init.ModBlocks;
 import celestialwizardry.init.ModItems;
 import celestialwizardry.reference.EventHandlers;
 import celestialwizardry.reference.Resources;
@@ -68,7 +66,8 @@ public class ClientProxy extends CommonProxy
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityWritingTable.class, new RenderWritingTable());
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBell.class, new RenderBell());
 
-        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityCrystalConductive.class, new RenderCrystalSimple(Resources.Models.TEXTURE_CRYSTAL_CONDUCTIVE));
+        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityCrystalConductive.class, new RenderCrystalSimple(
+                Resources.Models.Crystals.TEXTURE_CRYSTAL_CONDUCTIVE));
     }
 
 	@Override

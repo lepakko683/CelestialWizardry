@@ -45,7 +45,7 @@ public abstract class RenderCrystal extends TileEntitySpecialRenderer
     {
         GL11.glTranslated(x + .5d, y, z + .5d);
         // GL11.glRotated(0D, 0D, 0D, 0D);
-        // GL11.glScaled(.5d, .5d, .5d);
+        GL11.glScaled(.5d, .4d, .5d);
     }
 
     public IModelCustom getModel()
