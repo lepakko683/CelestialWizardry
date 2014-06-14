@@ -1,6 +1,7 @@
 package celestialwizardry.item;
 
 import celestialwizardry.api.ILockedItem;
+import celestialwizardry.api.energy.EnergyMagic;
 import celestialwizardry.api.energy.EnergyType;
 import celestialwizardry.api.matrix.IMatrix;
 import celestialwizardry.api.matrix.internal.ICWMatrix;
@@ -61,10 +62,10 @@ public class ItemMatrix extends ItemSingle implements IMatrix, ICWMatrix, ILocke
         if (stack.stackTagCompound != null && NBTHelper.hasTag(stack, Names.NBT.ENERGY))
         {
             String name = stack.stackTagCompound.getString(Names.NBT.ENERGY);
-            return EnergyRegistry.getEnergyType(name);
+            // TODO return EnergyRegistry.getEnergyType(name);
         }
 
-        return null;
+        return new EnergyMagic(EnergyType.CWEnergyType.MAGIC_LUNAR);
     }
 
     /**
