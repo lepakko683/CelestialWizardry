@@ -293,51 +293,54 @@ signing {
 // Configure an upload task
 uploadArchives {
     repositories {
-        mavenDeployer {
-            beforeDeployment {MavenDeployment deployment -> signing.signPom(deployment)}
+        if (project.hasProperty("releases") && project.hasProperty("snapshots"))
+        {
+            mavenDeployer {
+                beforeDeployment {MavenDeployment deployment -> signing.signPom(deployment)}
 
-            repository(url: project.releases) {
-                authentication(userName: ossrhUsername, password: ossrhPassword)
-            }
+                repository(url: project.releases) {
+                    authentication(userName: ossrhUsername, password: ossrhPassword)
+                }
 
-            snapshotRepository(url: project.snapshots) {
-                authentication(userName: project.ossrhUsername, password: project.ossrhPassword)
-            }
+                snapshotRepository(url: project.snapshots) {
+                    authentication(userName: project.ossrhUsername, password: project.ossrhPassword)
+                }
 
-            pom.project {
-                name project.archivesBaseName
-                packaging 'jar'
-                description 'CelestialWizardry'
-                url 'https://github.com/PizzAna/CelestialWizardry'
-
-                scm {
+                pom.project {
+                    name project.archivesBaseName
+                    packaging 'jar'
+                    description 'CelestialWizardry'
                     url 'https://github.com/PizzAna/CelestialWizardry'
-                    connection 'scm:git:git://github.com/PizzAna/CelestialWizardry.git'
-                    developerConnection 'scm:git:git@github.com:PizzAna/CelestialWizardry.git'
-                }
 
-                issueManagement {
-                    system 'github'
-                    url 'https://github.com/PizzAna/CelestialWizardry/issues'
-                }
-
-                licenses {
-                    license {
-                        name 'GNU GENERAL PUBLIC LICENSE v2'
-                        url 'http://www.gnu.org/licenses/gpl-2.0.html'
+                    scm {
+                        url 'https://github.com/PizzAna/CelestialWizardry'
+                        connection 'scm:git:git://github.com/PizzAna/CelestialWizardry.git'
+                        developerConnection 'scm:git:git@github.com:PizzAna/CelestialWizardry.git'
                     }
-                }
 
-                developers {
-                    developer {
-                        id 'PizzAna'
-                        name 'PizzAna'
-                        roles {role 'developer'}
+                    issueManagement {
+                        system 'github'
+                        url 'https://github.com/PizzAna/CelestialWizardry/issues'
                     }
-                    developer {
-                        id 'le683'
-                        name 'Okkapel'
-                        roles {role 'developer'}
+
+                    licenses {
+                        license {
+                            name 'GNU GENERAL PUBLIC LICENSE v2'
+                            url 'http://www.gnu.org/licenses/gpl-2.0.html'
+                        }
+                    }
+
+                    developers {
+                        developer {
+                            id 'PizzAna'
+                            name 'PizzAna'
+                            roles {role 'developer'}
+                        }
+                        developer {
+                            id 'le683'
+                            name 'Okkapel'
+                            roles {role 'developer'}
+                        }
                     }
                 }
             }
