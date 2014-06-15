@@ -24,7 +24,7 @@ public abstract class TileEntityCrystal extends TileEntityCW implements ICrystal
     protected int boundOutX;
     protected int boundOutY;
     protected int boundOutZ;
-    protected float buffer;
+    protected float buffer = 0;
 
     public TileEntityCrystal(BlockCrystal blockCrystal)
     {

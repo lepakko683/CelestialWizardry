@@ -3,25 +3,18 @@ package celestialwizardry.block;
 import celestialwizardry.api.IStaff;
 import celestialwizardry.api.crystal.ICrystal;
 import celestialwizardry.client.render.RenderOBJBlock;
-import celestialwizardry.client.render.crystal.RenderCrystal;
-import celestialwizardry.client.render.crystal.RenderCrystalComplex;
-import celestialwizardry.client.render.crystal.RenderCrystalSimple;
+import celestialwizardry.init.ModItems;
 import celestialwizardry.reference.Names;
-import celestialwizardry.tileentity.TileEntityCrystal;
+import celestialwizardry.reference.Settings;
 import celestialwizardry.util.NBTHelper;
 import celestialwizardry.util.StringHelper;
 
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ChatComponentText;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,47 +37,59 @@ public abstract class BlockCrystal extends BlockCW implements ITileEntityProvide
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int par6, float par7,
                                     float par8, float par9)
     {
-        if (player.getCurrentEquippedItem() != null && player.getCurrentEquippedItem().getItem() instanceof IStaff)
+        if (player.getCurrentEquippedItem() != null)
         {
-            if (NBTHelper.getBoolean(player.getCurrentEquippedItem(), Names.NBT.BOUNDING))
+            if (player.getCurrentEquippedItem().getItem() instanceof IStaff)
             {
-                NBTHelper.setBoolean(player.getCurrentEquippedItem(), Names.NBT.BOUNDING, false);
-                int oldX = NBTHelper.getInt(player.getCurrentEquippedItem(), Names.NBT.BOUND_IN_X);
-                int oldY = NBTHelper.getInt(player.getCurrentEquippedItem(), Names.NBT.BOUND_IN_Y);
-                int oldZ = NBTHelper.getInt(player.getCurrentEquippedItem(), Names.NBT.BOUND_IN_Z);
-
-                if (world.getTileEntity(oldX, oldY, oldZ) instanceof ICrystal)
+                if (NBTHelper.getBoolean(player.getCurrentEquippedItem(), Names.NBT.BOUNDING))
                 {
-                    ICrystal oldCrystal = (ICrystal) world.getTileEntity(oldX, oldY, oldZ);
+                    NBTHelper.setBoolean(player.getCurrentEquippedItem(), Names.NBT.BOUNDING, false);
+                    int oldX = NBTHelper.getInt(player.getCurrentEquippedItem(), Names.NBT.BOUND_IN_X);
+                    int oldY = NBTHelper.getInt(player.getCurrentEquippedItem(), Names.NBT.BOUND_IN_Y);
+                    int oldZ = NBTHelper.getInt(player.getCurrentEquippedItem(), Names.NBT.BOUND_IN_Z);
 
-                    if (world.getTileEntity(x, y, z) instanceof ICrystal)
+                    if (world.getTileEntity(oldX, oldY, oldZ) instanceof ICrystal)
                     {
-                        ICrystal crystal = (ICrystal) world.getTileEntity(x, y, z);
+                        ICrystal oldCrystal = (ICrystal) world.getTileEntity(oldX, oldY, oldZ);
 
-                        if (crystal.setInputBound(oldX, oldY, oldZ) && oldCrystal.setOutputBound(x, y, z))
+                        if (world.getTileEntity(x, y, z) instanceof ICrystal)
                         {
-                            player.addChatComponentMessage(
-                                    new ChatComponentText(StringHelper.getMessage("crystalsBound")));
-                            return true;
+                            ICrystal crystal = (ICrystal) world.getTileEntity(x, y, z);
+
+                            if (crystal.setInputBound(oldX, oldY, oldZ) && oldCrystal.setOutputBound(x, y, z))
+                            {
+                                player.addChatComponentMessage(
+                                        new ChatComponentText(StringHelper.getMessage("crystalsBound")));
+                                return true;
+                            }
                         }
                     }
-                }
 
-                // TODO Add case specific messages
-                player.addChatComponentMessage(new ChatComponentText(StringHelper.getMessage("crystalsBoundFail")));
-            }
-            else
-            {
-                if (world.getTileEntity(x, y, z) instanceof ICrystal)
+                    // TODO Add case specific messages
+                    player.addChatComponentMessage(new ChatComponentText(StringHelper.getMessage("crystalsBoundFail")));
+                }
+                else
                 {
-                    NBTHelper.setBoolean(player.getCurrentEquippedItem(), Names.NBT.BOUNDING, true);
+                    if (world.getTileEntity(x, y, z) instanceof ICrystal)
+                    {
+                        NBTHelper.setBoolean(player.getCurrentEquippedItem(), Names.NBT.BOUNDING, true);
 
-                    NBTHelper.setInteger(player.getCurrentEquippedItem(), Names.NBT.BOUND_IN_X, x);
-                    NBTHelper.setInteger(player.getCurrentEquippedItem(), Names.NBT.BOUND_IN_Y, y);
-                    NBTHelper.setInteger(player.getCurrentEquippedItem(), Names.NBT.BOUND_IN_Z, z);
+                        NBTHelper.setInteger(player.getCurrentEquippedItem(), Names.NBT.BOUND_IN_X, x);
+                        NBTHelper.setInteger(player.getCurrentEquippedItem(), Names.NBT.BOUND_IN_Y, y);
+                        NBTHelper.setInteger(player.getCurrentEquippedItem(), Names.NBT.BOUND_IN_Z, z);
 
-                    return true;
+                        return true;
+                    }
                 }
+            }
+        }
+        else
+        {
+            if (world.getTileEntity(x, y, z) instanceof ICrystal && Settings.debugMode)
+            {
+                ICrystal crystal = (ICrystal) world.getTileEntity(x, y, z);
+                crystal.setFull();
+                return true;
             }
         }
 
