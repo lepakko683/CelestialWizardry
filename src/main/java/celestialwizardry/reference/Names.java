@@ -52,14 +52,13 @@ public class Names
         public static final String ENERGY = "energy";
         public static final String ENERGY_STORED = "energyStored";
         public static final String OPENERS = "openers";
-        public static final String BOUND_IN_X = "boundInX";
-        public static final String BOUND_OUT_X = "boundOutX";
-        public static final String BOUND_IN_Y = "boundInY";
-        public static final String BOUND_OUT_Y = "boundOutY";
-        public static final String BOUND_IN_Z = "boundInZ";
-        public static final String BOUND_OUT_Z = "boundOutZ";
+        public static final String BOUND_X = "boundX";
+        public static final String BOUND_Y = "boundY";
+        public static final String BOUND_Z = "boundZ";
+        public static final String OPEN = "open";
         public static final String BOUNDING = "bounding";
         public static final String BUFFER = "buffer";
+        public static final String BUFFER_SIZE = "bufferSize";
     }
 
     public static class Containers

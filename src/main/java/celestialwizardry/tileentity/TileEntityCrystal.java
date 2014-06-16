@@ -2,7 +2,6 @@ package celestialwizardry.tileentity;
 
 import celestialwizardry.api.crystal.ICrystal;
 import celestialwizardry.api.energy.EnergyType;
-import celestialwizardry.api.energy.internal.IEnergyBurst;
 import celestialwizardry.block.BlockCrystal;
 import celestialwizardry.reference.Names;
 import celestialwizardry.registry.EnergyRegistry;
@@ -18,8 +17,6 @@ import java.util.List;
 
 public abstract class TileEntityCrystal extends TileEntityCW implements ICrystal
 {
-    public float rotationX;
-    public float rotationY;
     protected final BlockCrystal blockCrystal;
     protected int boundInX;
     protected int boundInY;
@@ -28,6 +25,7 @@ public abstract class TileEntityCrystal extends TileEntityCW implements ICrystal
     protected int boundOutY;
     protected int boundOutZ;
     protected float buffer = 0;
+    protected EnergyType energyType = EnergyType.DEFAULT_ENERGY; // TODO Write to NBT
 
     public TileEntityCrystal(BlockCrystal blockCrystal)
     {
@@ -69,28 +67,90 @@ public abstract class TileEntityCrystal extends TileEntityCW implements ICrystal
     }
 
     /**
-     * TODO Docs and energy types
+     * The current {@link celestialwizardry.api.energy.EnergyType} stored inside the {@link celestialwizardry.api.crystal.ICrystal}.
      *
-     * @param amount
+     * @return the current {@link celestialwizardry.api.energy.EnergyType} stored inside the {@link celestialwizardry.api.crystal.ICrystal}.
+     */
+    @Override
+    public EnergyType getCurrentEnergyType()
+    {
+        return energyType;
+    }
+
+    /**
+     * Sets the {@link celestialwizardry.api.crystal.ICrystal}'s {@link celestialwizardry.api.energy.EnergyType} to
+     * given one.
      *
-     * @return
+     * @param energyType the {@link celestialwizardry.api.energy.EnergyType} to set
+     *
+     * @return true if the operation was successful
+     */
+    @Override
+    public boolean setCurrentEnergyType(EnergyType energyType)
+    {
+        if (getCurrentEnergyType() != energyType)
+        {
+            if (acceptableEnergies(worldObj).contains(energyType))
+            {
+                this.energyType = energyType;
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * Sets the energy stored inside the {@link celestialwizardry.api.crystal.ICrystal} to certain amount.
+     *
+     * @param amount the amount to set
+     *
+     * @return true if the operation was successful
      */
     @Override
     public boolean setBuffer(float amount)
     {
-        buffer = MathHelper.clampZero_float(amount, getMaxBuffer());
-        return true;
+        return setBuffer(amount, getCurrentEnergyType());
     }
 
     /**
-     * TODO Docs and energy types
+     * Sets the energy stored inside the {@link celestialwizardry.api.crystal.ICrystal} to certain amount and {@link celestialwizardry.api.energy.EnergyType}.
      *
-     * @return
+     * @param amount     the amount to set
+     * @param energyType the {@link celestialwizardry.api.energy.EnergyType} to set
+     *
+     * @return true if the operation was successful
+     */
+    @Override
+    public boolean setBuffer(float amount, EnergyType energyType)
+    {
+        setCurrentEnergyType(energyType);
+        buffer = MathHelper.clampZero_float(amount, getMaxBuffer());
+        return false;
+    }
+
+    /**
+     * Sets the {@link celestialwizardry.api.crystal.ICrystal}'s energy buffer full.
+     *
+     * @return true if the operation was successful
      */
     @Override
     public boolean setFull()
     {
-        return setBuffer(getMaxBuffer());
+        return setFull(getCurrentEnergyType());
+    }
+
+    /**
+     * Sets the {@link celestialwizardry.api.crystal.ICrystal}'s energy buffer full of certain {@link celestialwizardry.api.energy.EnergyType}.
+     *
+     * @param energyType the {@link celestialwizardry.api.energy.EnergyType} to set
+     *
+     * @return true if the operation was successful
+     */
+    @Override
+    public boolean setFull(EnergyType energyType)
+    {
+        return setBuffer(getMaxBuffer(), energyType);
     }
 
     /**
@@ -137,25 +197,10 @@ public abstract class TileEntityCrystal extends TileEntityCW implements ICrystal
         receive(-amount);
     }
 
-    /**
-     * Get the multiplier of energy to input into the block, 1.0 is the original amount of energy in the burst. 0.9, for
-     * example, is 90%, so 10% of the energy in the burst will get dissipated.
-     *
-     * @param burst
-     */
     @Override
-    public float getEnergyYieldMultiplier(IEnergyBurst burst)
+    public float getEnergyYieldMultiplier()
     {
-        return 1f; // TODO
-    }
-
-    @Override
-    public void onBurstCollision(IEnergyBurst burst, World world, int x, int y, int z)
-    {
-        if (canReceive())
-        {
-            receive(burst.getEnergy());
-        }
+        return 1f;
     }
 
     /**

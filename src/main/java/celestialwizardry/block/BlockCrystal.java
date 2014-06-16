@@ -44,22 +44,19 @@ public abstract class BlockCrystal extends BlockCW implements ITileEntityProvide
                 if (NBTHelper.getBoolean(player.getCurrentEquippedItem(), Names.NBT.BOUNDING))
                 {
                     NBTHelper.setBoolean(player.getCurrentEquippedItem(), Names.NBT.BOUNDING, false);
-                    int oldX = NBTHelper.getInt(player.getCurrentEquippedItem(), Names.NBT.BOUND_IN_X);
-                    int oldY = NBTHelper.getInt(player.getCurrentEquippedItem(), Names.NBT.BOUND_IN_Y);
-                    int oldZ = NBTHelper.getInt(player.getCurrentEquippedItem(), Names.NBT.BOUND_IN_Z);
+                    int cX = NBTHelper.getInt(player.getCurrentEquippedItem(), Names.NBT.BOUND_X);
+                    int cY = NBTHelper.getInt(player.getCurrentEquippedItem(), Names.NBT.BOUND_Y);
+                    int cZ = NBTHelper.getInt(player.getCurrentEquippedItem(), Names.NBT.BOUND_Z);
 
-                    if (world.getTileEntity(oldX, oldY, oldZ) instanceof ICrystal)
+                    if (world.getTileEntity(cX, cY, cZ) instanceof ICrystal)
                     {
-                        ICrystal oldCrystal = (ICrystal) world.getTileEntity(oldX, oldY, oldZ);
+                        ICrystal crystal = (ICrystal) world.getTileEntity(cX, cY, cZ);
 
                         if (world.getTileEntity(x, y, z) instanceof ICrystal)
                         {
-                            ICrystal crystal = (ICrystal) world.getTileEntity(x, y, z);
-
-                            if (crystal.setInputBound(oldX, oldY, oldZ) && oldCrystal.setOutputBound(x, y, z))
+                            if (crystal.setBound(x, y, z))
                             {
-                                player.addChatComponentMessage(
-                                        new ChatComponentText(StringHelper.getMessage("crystalsBound")));
+                                player.addChatComponentMessage(new ChatComponentText(StringHelper.getMessage("crystalsBound")));
                                 return true;
                             }
                         }
@@ -74,9 +71,9 @@ public abstract class BlockCrystal extends BlockCW implements ITileEntityProvide
                     {
                         NBTHelper.setBoolean(player.getCurrentEquippedItem(), Names.NBT.BOUNDING, true);
 
-                        NBTHelper.setInteger(player.getCurrentEquippedItem(), Names.NBT.BOUND_IN_X, x);
-                        NBTHelper.setInteger(player.getCurrentEquippedItem(), Names.NBT.BOUND_IN_Y, y);
-                        NBTHelper.setInteger(player.getCurrentEquippedItem(), Names.NBT.BOUND_IN_Z, z);
+                        NBTHelper.setInteger(player.getCurrentEquippedItem(), Names.NBT.BOUND_X, x);
+                        NBTHelper.setInteger(player.getCurrentEquippedItem(), Names.NBT.BOUND_Y, y);
+                        NBTHelper.setInteger(player.getCurrentEquippedItem(), Names.NBT.BOUND_Z, z);
 
                         return true;
                     }
@@ -85,12 +82,7 @@ public abstract class BlockCrystal extends BlockCW implements ITileEntityProvide
         }
         else
         {
-            if (world.getTileEntity(x, y, z) instanceof ICrystal && Settings.debugMode)
-            {
-                ICrystal crystal = (ICrystal) world.getTileEntity(x, y, z);
-                crystal.setFull();
-                return true;
-            }
+            // NO-OP
         }
 
         return super.onBlockActivated(world, x, y, z, player, par6, par7, par8, par9);

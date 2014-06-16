@@ -69,6 +69,12 @@ public abstract class EnergyType
 
     public abstract float crossEnergyTypeTransformLoss(EnergyType target);
 
+    @Override
+    public String toString()
+    {
+        return getEnergyName();
+    }
+
     public static enum CWEnergyType
     {
         MAGIC_LUNAR,

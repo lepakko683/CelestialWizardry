@@ -1,4 +1,4 @@
-package celestialwizardry.registry;
+package celestialwizardry.api.energy;
 
 import celestialwizardry.CelestialWizardry;
 import celestialwizardry.api.energy.EnergyType;
@@ -6,6 +6,7 @@ import celestialwizardry.api.energy.EnergyType;
 import java.util.HashMap;
 import java.util.Map;
 
+// TODO Move me back
 public abstract class EnergyRegistry
 {
 

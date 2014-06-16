@@ -5,7 +5,7 @@ import celestialwizardry.api.energy.EnergyHeat;
 import celestialwizardry.api.energy.EnergyMagic;
 import celestialwizardry.api.energy.EnergyType;
 import celestialwizardry.api.energy.UnformedMatter;
-import celestialwizardry.registry.EnergyRegistry;
+import celestialwizardry.api.energy.EnergyRegistry;
 
 public class ModEnergyTypes {
 	

@@ -1,9 +1,9 @@
 package celestialwizardry.api.crystal;
 
 import celestialwizardry.api.energy.EnergyType;
-import celestialwizardry.api.energy.internal.IEnergyBurst;
 
 import net.minecraft.block.Block;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
 import java.util.List;
@@ -11,9 +11,10 @@ import java.util.List;
 /**
  * An interface implemented by all crystals.
  * <p/>
- * The energy sending and receiving handling should always happen in the output (the {@link ICrystal} that SENDS energy)
- * side to avoid any conflicts.
+ * The energy sending and receiving handling should always happen in the outputting (the {@link ICrystal} that SENDS
+ * energy) side to avoid any conflicts.
  */
+@SuppressWarnings("unused") // TODO Remove (here for seeing only the real warnings)
 public interface ICrystal
 {
     /**
@@ -40,16 +41,55 @@ public interface ICrystal
     public float getCurrentBuffer();
 
     /**
-     * TODO Docs and energy types
-     * @return
+     * The current {@link EnergyType} stored inside the {@link ICrystal}.
+     *
+     * @return the current {@link EnergyType} stored inside the {@link ICrystal}.
+     */
+    public EnergyType getCurrentEnergyType();
+
+    /**
+     * Sets the {@link ICrystal}'s {@link EnergyType} to given one.
+     *
+     * @param energyType the {@link EnergyType} to set
+     *
+     * @return true if the {@link EnergyType} was changed
+     */
+    public boolean setCurrentEnergyType(EnergyType energyType);
+
+    /**
+     * Sets the energy stored inside the {@link ICrystal} to certain amount.
+     *
+     * @param amount the amount to set
+     *
+     * @return true if the operation was successful
      */
     public boolean setBuffer(float amount);
 
     /**
-     * TODO Docs and energy types
-     * @return
+     * Sets the energy stored inside the {@link ICrystal} to certain amount and {@link EnergyType}.
+     *
+     * @param amount     the amount to set
+     * @param energyType the {@link EnergyType} to set
+     *
+     * @return true if the operation was successful
+     */
+    public boolean setBuffer(float amount, EnergyType energyType);
+
+    /**
+     * Sets the {@link ICrystal}'s energy buffer full.
+     *
+     * @return true if the operation was successful
      */
     public boolean setFull();
+
+    /**
+     * Sets the {@link ICrystal}'s energy buffer full of certain {@link EnergyType}.
+     *
+     * @param energyType the {@link EnergyType} to set
+     *
+     * @return true if the operation was successful
+     */
+    public boolean setFull(EnergyType energyType);
 
     /**
      * Can this {@link ICrystal} receive energy
@@ -80,13 +120,12 @@ public interface ICrystal
     public void send(float amount);
 
     /**
-     * Get the multiplier of energy to input into the block, 1.0 is the original amount of energy
-     * in the burst. 0.9, for example, is 90%, so 10% of the energy in the burst will get
-     * dissipated.
+     * Get the multiplier of energy to input into the block, 1.0 is the original amount of energy in the packet. 0.9,
+     * for example, is 90%, so 10% of the energy in the packet will get dissipated.
+     *
+     * @return the multiplier of energy
      */
-    public float getEnergyYieldMultiplier(IEnergyBurst burst);
-
-    public void onBurstCollision(IEnergyBurst burst, World world, int x, int y, int z);
+    public float getEnergyYieldMultiplier();
 
     /**
      * The {@link Block} instance that implements {@link ICrystal}.
@@ -106,12 +145,11 @@ public interface ICrystal
     public boolean canBoundTo(World world, ICrystal crystal);
 
     /**
-     * Bounds the blockCrystal {@link net.minecraft.tileentity.TileEntity} to other blockCrystal {@link
-     * net.minecraft.tileentity.TileEntity} for input.
+     * Bounds the blockCrystal {@link TileEntity} to other blockCrystal {@link TileEntity} for input.
      *
-     * @param x the x coordinate of the other blockCrystal {@link net.minecraft.tileentity.TileEntity}
-     * @param y the y coordinate of the other blockCrystal {@link net.minecraft.tileentity.TileEntity}
-     * @param z the z coordinate of the other blockCrystal {@link net.minecraft.tileentity.TileEntity}
+     * @param x the x coordinate of the other blockCrystal {@link TileEntity}
+     * @param y the y coordinate of the other blockCrystal {@link TileEntity}
+     * @param z the z coordinate of the other blockCrystal {@link TileEntity}
      *
      * @return true if the bound was success
      */
@@ -125,12 +163,11 @@ public interface ICrystal
     public ICrystal getInputBound();
 
     /**
-     * Bounds the blockCrystal {@link net.minecraft.tileentity.TileEntity} to other blockCrystal {@link
-     * net.minecraft.tileentity.TileEntity} for output.
+     * Bounds the blockCrystal {@link TileEntity} to other blockCrystal {@link TileEntity} for output.
      *
-     * @param x the x coordinate of the other blockCrystal {@link net.minecraft.tileentity.TileEntity}
-     * @param y the y coordinate of the other blockCrystal {@link net.minecraft.tileentity.TileEntity}
-     * @param z the z coordinate of the other blockCrystal {@link net.minecraft.tileentity.TileEntity}
+     * @param x the x coordinate of the other blockCrystal {@link TileEntity}
+     * @param y the y coordinate of the other blockCrystal {@link TileEntity}
+     * @param z the z coordinate of the other blockCrystal {@link TileEntity}
      *
      * @return true if the bound was success
      */
