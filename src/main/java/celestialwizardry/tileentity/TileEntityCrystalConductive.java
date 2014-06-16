@@ -1,11 +1,17 @@
 package celestialwizardry.tileentity;
 
 import celestialwizardry.api.crystal.ICrystal;
+import celestialwizardry.api.energy.BurstProperties;
 import celestialwizardry.api.energy.EnergyType;
+import celestialwizardry.api.energy.ILensEffect;
 import celestialwizardry.block.BlockCrystal;
+import celestialwizardry.entity.EntityEnergyBurst;
 import celestialwizardry.registry.EnergyRegistry;
 
 import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 
 import java.util.ArrayList;
@@ -15,6 +21,15 @@ public class TileEntityCrystalConductive extends TileEntityCrystal
 {
     private static final int MAX_DISTANCE = 5;
     private static final float MAX_BUFFER = 100f;
+
+    protected boolean hasReceivedInitialPacket = false;
+    boolean redstoneLastTick = true;
+
+    public boolean canShootBurst;
+    public int burstParticleTick;
+    public int lastBurstDeathTick = -1;
+
+    List<EntityEnergyBurst.PositionProperties> lastTentativeBurst;
 
     public TileEntityCrystalConductive(BlockCrystal crystal)
     {
@@ -122,10 +137,88 @@ public class TileEntityCrystalConductive extends TileEntityCrystal
     /* ======================================== TileEntity START ===================================== */
 
     @Override
+    public void readFromNBT(NBTTagCompound nbtTagCompound)
+    {
+        super.readFromNBT(nbtTagCompound);
+
+        if (worldObj != null && worldObj.isRemote)
+        {
+            hasReceivedInitialPacket = true;
+        }
+    }
+
+    @Override
+    public void writeToNBT(NBTTagCompound nbtTagCompound)
+    {
+        super.writeToNBT(nbtTagCompound);
+    }
+
+    @Override
     public void updateEntity()
     {
         super.updateEntity();
+
+        tryShootBurst();
     }
 
     /* ======================================== TileEntity END ===================================== */
+
+    public void tryShootBurst()
+    {
+        if (getOutputBound() != null)
+        {
+            if (canSend() && getOutputBound().canReceive())
+            {
+                EntityEnergyBurst burst = getBurst(false);
+
+                if (burst != null)
+                {
+                    if (!worldObj.isRemote)
+                    {
+                        send(burst.getStartingEnergy());
+                        worldObj.spawnEntityInWorld(burst);
+                    }
+
+                    worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+                }
+            }
+        }
+    }
+
+    public EntityEnergyBurst getBurst(boolean fake)
+    {
+        EntityEnergyBurst burst = new EntityEnergyBurst(this, fake);
+
+        float maxEnergy = 160;
+        int color = 0x20FF20; // TODO
+        int ticksBeforeEnergyLoss = 60;
+        float energyLossPerTick = 4F;
+        float motionModifier = 1F;
+        float gravity = 0F;
+        BurstProperties props = new BurstProperties(maxEnergy, ticksBeforeEnergyLoss, energyLossPerTick, gravity,
+                                                    motionModifier, color);
+
+        ItemStack lens = new ItemStack(Blocks.stone); // getStackInSlot(0);
+        if (lens != null && lens.getItem() instanceof ILensEffect)
+        {
+            ((ILensEffect) lens.getItem()).apply(lens, props);
+        }
+
+        burst.setSourceLens(lens);
+
+        if (getCurrentBuffer() >= props.maxEnergy || fake)
+        {
+            burst.setColor(props.color);
+            burst.setEnergy(props.maxEnergy);
+            burst.setStartingEnergy(props.maxEnergy);
+            burst.setMinEnergyLoss(props.ticksBeforeEnergyLoss);
+            burst.setEnergyLossPerTick(props.energyLossPerTick);
+            burst.setGravity(props.gravity);
+            burst.setMotion(burst.motionX * props.motionModifier, burst.motionY * props.motionModifier, burst.motionZ * props.motionModifier);
+
+            return burst;
+        }
+
+        return null;
+    }
 }

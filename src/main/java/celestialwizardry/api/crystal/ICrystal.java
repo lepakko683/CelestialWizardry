@@ -1,6 +1,7 @@
 package celestialwizardry.api.crystal;
 
 import celestialwizardry.api.energy.EnergyType;
+import celestialwizardry.api.energy.internal.IEnergyBurst;
 
 import net.minecraft.block.Block;
 import net.minecraft.world.World;
@@ -9,6 +10,9 @@ import java.util.List;
 
 /**
  * An interface implemented by all crystals.
+ * <p/>
+ * The energy sending and receiving handling should always happen in the output (the {@link ICrystal} that SENDS energy)
+ * side to avoid any conflicts.
  */
 public interface ICrystal
 {
@@ -34,6 +38,55 @@ public interface ICrystal
      * @return The current buffer size
      */
     public float getCurrentBuffer();
+
+    /**
+     * TODO Docs and energy types
+     * @return
+     */
+    public boolean setBuffer(float amount);
+
+    /**
+     * TODO Docs and energy types
+     * @return
+     */
+    public boolean setFull();
+
+    /**
+     * Can this {@link ICrystal} receive energy
+     *
+     * @return is this {@link ICrystal} able to receive energy
+     */
+    public boolean canReceive();
+
+    /**
+     * Can this {@link ICrystal} send energy
+     *
+     * @return is this {@link ICrystal} able to send energy
+     */
+    public boolean canSend();
+
+    /**
+     * Receives given amount of energy
+     *
+     * @param amount the amount to receive
+     */
+    public void receive(float amount);
+
+    /**
+     * Sends (decreases) given amount of energy
+     *
+     * @param amount the amount to send (decrease)
+     */
+    public void send(float amount);
+
+    /**
+     * Get the multiplier of energy to input into the block, 1.0 is the original amount of energy
+     * in the burst. 0.9, for example, is 90%, so 10% of the energy in the burst will get
+     * dissipated.
+     */
+    public float getEnergyYieldMultiplier(IEnergyBurst burst);
+
+    public void onBurstCollision(IEnergyBurst burst, World world, int x, int y, int z);
 
     /**
      * The {@link Block} instance that implements {@link ICrystal}.

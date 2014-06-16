@@ -2,6 +2,7 @@ package celestialwizardry.tileentity;
 
 import celestialwizardry.api.crystal.ICrystal;
 import celestialwizardry.api.energy.EnergyType;
+import celestialwizardry.api.energy.internal.IEnergyBurst;
 import celestialwizardry.block.BlockCrystal;
 import celestialwizardry.reference.Names;
 import celestialwizardry.registry.EnergyRegistry;
@@ -17,6 +18,8 @@ import java.util.List;
 
 public abstract class TileEntityCrystal extends TileEntityCW implements ICrystal
 {
+    public float rotationX;
+    public float rotationY;
     protected final BlockCrystal blockCrystal;
     protected int boundInX;
     protected int boundInY;
@@ -63,6 +66,96 @@ public abstract class TileEntityCrystal extends TileEntityCW implements ICrystal
     public float getCurrentBuffer()
     {
         return buffer;
+    }
+
+    /**
+     * TODO Docs and energy types
+     *
+     * @param amount
+     *
+     * @return
+     */
+    @Override
+    public boolean setBuffer(float amount)
+    {
+        buffer = MathHelper.clampZero_float(amount, getMaxBuffer());
+        return true;
+    }
+
+    /**
+     * TODO Docs and energy types
+     *
+     * @return
+     */
+    @Override
+    public boolean setFull()
+    {
+        return setBuffer(getMaxBuffer());
+    }
+
+    /**
+     * Can this {@link celestialwizardry.api.crystal.ICrystal} receive energy
+     *
+     * @return is this {@link celestialwizardry.api.crystal.ICrystal} able to receive energy
+     */
+    @Override
+    public boolean canReceive()
+    {
+        return getCurrentBuffer() < getMaxBuffer();
+    }
+
+    /**
+     * Can this {@link celestialwizardry.api.crystal.ICrystal} send energy
+     *
+     * @return is this {@link celestialwizardry.api.crystal.ICrystal} able to send energy
+     */
+    @Override
+    public boolean canSend()
+    {
+        return getCurrentBuffer() > 0f;
+    }
+
+    /**
+     * Receives given amount of energy
+     *
+     * @param amount the amount to receive
+     */
+    @Override
+    public void receive(float amount)
+    {
+        buffer = MathHelper.clampZero_float(buffer + amount, getMaxBuffer());
+    }
+
+    /**
+     * Sends (decreases) given amount of energy
+     *
+     * @param amount the amount to send (decrease)
+     */
+    @Override
+    public void send(float amount)
+    {
+        receive(-amount);
+    }
+
+    /**
+     * Get the multiplier of energy to input into the block, 1.0 is the original amount of energy in the burst. 0.9, for
+     * example, is 90%, so 10% of the energy in the burst will get dissipated.
+     *
+     * @param burst
+     */
+    @Override
+    public float getEnergyYieldMultiplier(IEnergyBurst burst)
+    {
+        return 1f; // TODO
+    }
+
+    @Override
+    public void onBurstCollision(IEnergyBurst burst, World world, int x, int y, int z)
+    {
+        if (canReceive())
+        {
+            receive(burst.getEnergy());
+        }
     }
 
     /**

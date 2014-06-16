@@ -64,7 +64,7 @@ public class ItemMatrix extends ItemSingle implements IMatrix, ICWMatrix, ILocke
             // TODO return EnergyRegistry.getEnergyType(name);
         }
 
-        return new EnergyMagic(EnergyType.CWEnergyType.MAGIC_LUNAR);
+        return EnergyType.DEFAULT_ENERGY;
     }
 
     /**
