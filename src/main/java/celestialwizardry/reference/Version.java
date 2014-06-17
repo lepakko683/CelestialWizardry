@@ -5,5 +5,8 @@ package celestialwizardry.reference;
  */
 public class Version
 {
-    public static final String VERSION = "@VERSION@";
+    public static final String VERSION = "0.1-SNAPSHOT";
+    public static final String FORGE = "10.12.2.1121";
+    public static final String MINECRAFT = "1.7.2";
+    public static final String BAUBLES = "1.0.0.16";
 }

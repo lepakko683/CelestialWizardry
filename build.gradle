@@ -40,14 +40,11 @@ group 'io.github.pizzana'
 // The name used in final archive artifacts
 archivesBaseName = "CelestialWizardry"
 
-version = "${config.mod_version}.${project.buildInfo.build_number}"
+// Set the mod version
+version = getVersionFromJava(getProject(), "VERSION")
 
-// Setup the forge minecraft plugin data. Specify the preferred forge/minecraft version and assets directory here
 minecraft {
-    version = config.mc_version + "-" + config.forge_version
-
-    replaceIn "reference/Version.java"
-    replace "@VERSION@", project.version
+    version = getVersionFromJava(getProject(), "MINECRAFT") + "-" + getVersionFromJava(getProject(), "FORGE")
 
     replaceIn "reference/Reference.java"
     if (project.hasProperty("cw_signature"))
@@ -60,9 +57,9 @@ processResources {
 
     // This will ensure that this task is redone when the versions or Baubles root directory change.
     inputs.property "version", project.version
-    inputs.property "mc_version", config.mc_version
-    inputs.property "baubles_version", config.baubles_version
-    inputs.property "baubles_root", config.baubles_root
+    inputs.property "mc_version", getVersionFromJava(getProject(), "MINECRAFT")
+    inputs.property "baubles_version", getVersionFromJava(getProject(), "BAUBLES")
+    inputs.property "baubles_root", getPropertyFromJava(getProject(), "src/main/java/celestialwizardry/reference/Reference.java", "BAUBLES_ROOT")
 
     // Exclude .xcf files since they are for development only
     exclude '**/*.xcf'
@@ -74,8 +71,8 @@ processResources {
         include '*.info'
 
         // Replace version, mc_version, baubles_version and baubles_root
-        expand 'version': project.version, 'mc_version': config.mc_version,
-               'baubles_version': config.baubles_version, 'baubles_root': config.baubles_root
+        /* expand 'version': project.version, 'mc_version': config.mc_version,
+               'baubles_version': config.baubles_version, 'baubles_root': config.baubles_root */
     }
 
     // Copy everything excluding info files
@@ -85,9 +82,6 @@ processResources {
     }
 }
 
-// Set the version for archive names
-version = "${project.minecraft.version}-${project.version}"
-
 // Sign the archives for the central repository
 signing {
     required {project.hasProperty("releases") && project.hasProperty("snapshots")}
@@ -96,7 +90,7 @@ signing {
 
 // Configure an upload task
 uploadArchives {
-    repositories {
+    /* repositories {
         if (project.hasProperty("releases") && project.hasProperty("snapshots"))
         {
             mavenDeployer {
@@ -149,5 +143,5 @@ uploadArchives {
                 }
             }
         }
-    }
+    } */
 }
