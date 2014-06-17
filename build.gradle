@@ -6,8 +6,6 @@
  */
 
 buildscript {
-
-    // Add dependencies for the build script
     repositories {
         mavenCentral()
         maven {
@@ -28,19 +26,14 @@ buildscript {
     }
 }
 
-import static io.github.pizzana.celestialgradle.CelestialPlugin.*
+import static io.github.pizzana.celestialgradle.util.GrepJava.*
 
 apply plugin: 'maven'
 apply plugin: 'signing'
 apply plugin: 'cw'
 
-// http://maven.apache.org/guides/mini/guide-naming-conventions.html
 group 'io.github.pizzana'
-
-// The name used in final archive artifacts
-archivesBaseName = "CelestialWizardry"
-
-// Set the mod version
+archivesBaseName = project.getName()
 version = getVersionFromJava(getProject(), "VERSION")
 
 minecraft {
@@ -55,40 +48,30 @@ minecraft {
 
 processResources {
 
-    // This will ensure that this task is redone when the versions or Baubles root directory change.
     inputs.property "version", project.version
     inputs.property "mc_version", getVersionFromJava(getProject(), "MINECRAFT")
     inputs.property "baubles_version", getVersionFromJava(getProject(), "BAUBLES")
     inputs.property "baubles_root", getPropertyFromJava(getProject(), "src/main/java/celestialwizardry/reference/Reference.java", "BAUBLES_ROOT")
 
-    // Exclude .xcf files since they are for development only
     exclude '**/*.xcf'
 
-    // Replace properties in info files
     from(sourceSets.main.resources.srcDirs) {
 
-        // Include only info files
         include '*.info'
 
-        // Replace version, mc_version, baubles_version and baubles_root
-        /* expand 'version': project.version, 'mc_version': config.mc_version,
-               'baubles_version': config.baubles_version, 'baubles_root': config.baubles_root */
+        expand 'version': project.version, 'mc_version': getVersionFromJava(getProject(), "MINECRAFT"), 'baubles_version': getVersionFromJava(getProject(), "BAUBLES"), 'baubles_root': getPropertyFromJava(getProject(), "src/main/java/celestialwizardry/reference/Reference.java", "BAUBLES_ROOT")
     }
 
-    // Copy everything excluding info files
     from(sourceSets.main.resources.srcDirs) {
-        // Exclude info files
         exclude '**/*.info'
     }
 }
 
-// Sign the archives for the central repository
 signing {
     required {project.hasProperty("releases") && project.hasProperty("snapshots")}
     sign configurations.archives
 }
 
-// Configure an upload task
 uploadArchives {
     /* repositories {
         if (project.hasProperty("releases") && project.hasProperty("snapshots"))
