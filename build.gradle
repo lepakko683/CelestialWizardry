@@ -24,7 +24,7 @@ buildscript {
         }
     }
     dependencies {
-        classpath 'io.github.pizzana:CelestialGradle:0.1-SNAPSHOT'
+        classpath 'io.github.pizzana:CelestialGradle:0.1-20140617.105423-10'
     }
 }
 
