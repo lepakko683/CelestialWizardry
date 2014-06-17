@@ -4,6 +4,8 @@ CelestialWizardry
 ##Welcome to CelestialWizardry GitHub repository!
 **LATEST OFFICIAL VERSION**: [N/A for Minecraft 1.7.2](https://github.com/PizzAna/CelestialWizardry)
 
+**IF YOU WANT TO BUILD CELESTIAL WIZARDRY, YOU SHOULD WAIT BECAUSE BUILD SCRIPT IS NOT STABLE!**
+
 **Celestial Wizardry's IRC channel**: \#CelestialWizardryMod on irc.esper.net
 
 [Compiling Mod](#compiling-celestial-wizardry) - For those that want the latest unreleased features.
