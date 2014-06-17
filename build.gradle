@@ -10,10 +10,10 @@ buildscript {
     // Add dependencies for the build script
     repositories {
         mavenCentral()
-        /* maven {
+        maven {
             name = "forge"
             url = "http://files.minecraftforge.net/maven"
-        } */
+        }
         maven {
             name = "sonatype"
             url = "https://oss.sonatype.org/content/repositories/snapshots/"
