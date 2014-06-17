@@ -4,13 +4,12 @@
  *
  * @author PizzAna
  */
-
 buildscript {
     repositories {
         mavenCentral()
         maven {
             name = "forge"
-            url = "http://files.minecraftforge.net/maven"
+            url = "http://files.minecraftforge.net/maven/"
         }
         maven {
             name = "sonatype"
@@ -18,7 +17,7 @@ buildscript {
         }
         maven {
             name = "cg"
-            url = "https://raw.githubusercontent.com/PizzAna/CelestialGradle/master/maven"
+            url = "https://raw.githubusercontent.com/PizzAna/CelestialGradle/master/maven/"
         }
     }
     dependencies {
@@ -26,7 +25,7 @@ buildscript {
     }
 }
 
-import static io.github.pizzana.celestialgradle.util.GrepJava.*
+import static io.github.pizzana.celestialgradle.util.GrepJava.*;
 
 apply plugin: 'maven'
 apply plugin: 'signing'
@@ -68,7 +67,6 @@ processResources {
 }
 
 signing {
-    required {project.hasProperty("releases") && project.hasProperty("snapshots")}
     sign configurations.archives
 }
 
