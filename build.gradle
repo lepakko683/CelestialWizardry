@@ -25,7 +25,7 @@ buildscript {
     }
 }
 
-import static io.github.pizzana.celestialgradle.util.GrepJava.*;
+import static io.github.pizzana.celestialgradle.CelestialPlugin.*;
 
 apply plugin: 'maven'
 apply plugin: 'signing'
