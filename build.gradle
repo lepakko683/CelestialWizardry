@@ -17,7 +17,7 @@ buildscript {
         }
         maven {
             name = "cg"
-            url = "https://raw.githubusercontent.com/PizzAna/CelestialGradle/master/maven/"
+            url = uri('../CelestialGradle/maven/')// "https://raw.githubusercontent.com/PizzAna/CelestialGradle/master/maven/"
         }
     }
     dependencies {
@@ -42,7 +42,7 @@ ext.baubles = "1.0.0.16" // getVersionFromJava(getProject(), "BAUBLES")
 ext.baubles_root = "https://dl.dropboxusercontent.com/u/47135879/" // getPropertyFromJava(getProject(), "src/main/java/celestialwizardry/reference/Reference.java", "BAUBLES_ROOT")
 
 minecraft {
-    version = mc + "-" + forge
+    version = project.mc + "-" + project.forge
 
     replaceIn "reference/Reference.java"
     if (project.hasProperty("cw_signature"))
@@ -54,9 +54,9 @@ minecraft {
 processResources {
 
     inputs.property "version", project.version
-    inputs.property "mc_version", mc
-    inputs.property "baubles_version", baubles
-    inputs.property "baubles_root", baubles_root
+    inputs.property "mc_version", project.mc
+    inputs.property "baubles_version", project.baubles
+    inputs.property "baubles_root", project.baubles_root
 
     exclude '**/*.xcf'
 
@@ -64,7 +64,7 @@ processResources {
 
         include '*.info'
 
-        expand 'version': project.version, 'mc_version': mc, 'baubles_version': baubles, 'baubles_root': baubles_root
+        expand 'version': project.version, 'mc_version': project.mc, 'baubles_version': project.baubles, 'baubles_root': project.baubles_root
     }
 
     from(sourceSets.main.resources.srcDirs) {
