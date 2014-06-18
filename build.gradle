@@ -29,7 +29,8 @@ import static io.github.pizzana.celestialgradle.CelestialPlugin.*;
 
 apply plugin: 'maven'
 apply plugin: 'signing'
-apply plugin: 'cw'
+// apply plugin: 'cw'
+apply plugin: 'forge'
 
 group 'io.github.pizzana'
 archivesBaseName = project.getName()
