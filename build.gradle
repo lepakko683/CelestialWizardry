@@ -35,8 +35,13 @@ group 'io.github.pizzana'
 archivesBaseName = project.getName()
 version = getVersionFromJava(getProject(), "VERSION")
 
+ext.mc = getVersionFromJava(getProject(), "MINECRAFT")
+ext.forge = getVersionFromJava(getProject(), "FORGE")
+ext.baubles = getVersionFromJava(getProject(), "BAUBLES")
+ext.baubles_root = getPropertyFromJava(getProject(), "src/main/java/celestialwizardry/reference/Reference.java", "BAUBLES_ROOT")
+
 minecraft {
-    version = getVersionFromJava(getProject(), "MINECRAFT") + "-" + getVersionFromJava(getProject(), "FORGE")
+    version = mc + "-" + forge
 
     replaceIn "reference/Reference.java"
     if (project.hasProperty("cw_signature"))
@@ -48,9 +53,9 @@ minecraft {
 processResources {
 
     inputs.property "version", project.version
-    inputs.property "mc_version", getVersionFromJava(getProject(), "MINECRAFT")
-    inputs.property "baubles_version", getVersionFromJava(getProject(), "BAUBLES")
-    inputs.property "baubles_root", getPropertyFromJava(getProject(), "src/main/java/celestialwizardry/reference/Reference.java", "BAUBLES_ROOT")
+    inputs.property "mc_version", mc
+    inputs.property "baubles_version", baubles
+    inputs.property "baubles_root", baubles_root
 
     exclude '**/*.xcf'
 
@@ -58,7 +63,7 @@ processResources {
 
         include '*.info'
 
-        expand 'version': project.version, 'mc_version': getVersionFromJava(getProject(), "MINECRAFT"), 'baubles_version': getVersionFromJava(getProject(), "BAUBLES"), 'baubles_root': getPropertyFromJava(getProject(), "src/main/java/celestialwizardry/reference/Reference.java", "BAUBLES_ROOT")
+        expand 'version': project.version, 'mc_version': mc, 'baubles_version': baubles, 'baubles_root': baubles_root
     }
 
     from(sourceSets.main.resources.srcDirs) {
