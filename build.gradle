@@ -25,7 +25,7 @@ buildscript {
     }
 }
 
-// import static io.github.pizzana.celestialgradle.CelestialPlugin.*;
+import static net.minecraftforge.gradle.user.patch.UserPatchBasePlugin.*;
 
 apply plugin: 'maven'
 apply plugin: 'signing'
@@ -36,10 +36,10 @@ archivesBaseName = project.getName()
 // TODO Remove that System.getenv (potential NPE)
 version = "0.1-DEV.${System.getenv().BUILD_NUMBER}" // getVersionFromJava(getProject(), "VERSION")
 
-ext.mc = "1.7.2" // getVersionFromJava(getProject(), "MINECRAFT")
-ext.forge = "10.12.2.1121" // getVersionFromJava(getProject(), "FORGE")
-ext.baubles = "1.0.0.16" // getVersionFromJava(getProject(), "BAUBLES")
-ext.baubles_root = "https://dl.dropboxusercontent.com/u/47135879/" // getPropertyFromJava(getProject(), "src/main/java/celestialwizardry/reference/Reference.java", "BAUBLES_ROOT")
+ext.mc = getVersionFromJava(getProject(), "MINECRAFT")
+ext.forge = getVersionFromJava(getProject(), "FORGE")
+ext.baubles = getVersionFromJava(getProject(), "BAUBLES")
+ext.baubles_root = getPropertyFromJava(getProject(), "src/main/java/celestialwizardry/reference/Reference.java", "BAUBLES_ROOT")
 
 minecraft {
     version = project.mc + "-" + project.forge
@@ -66,6 +66,8 @@ processResources {
         exclude '**/*.info'
     }
 }
+
+apply plugin: 'package'
 
 signing {
     sign configurations.archives
