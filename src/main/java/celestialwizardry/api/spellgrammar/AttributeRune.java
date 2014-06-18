@@ -2,9 +2,12 @@ package celestialwizardry.api.spellgrammar;
 
 import java.util.List;
 
+import net.minecraft.entity.ai.attributes.IAttribute;
+
 public class AttributeRune extends RuneCategory implements IAttributeRune {
 
 	private Object attrData;
+	private IAttribute attrOfThis;
 	
 	public AttributeRune(float complexity, Object attrData, boolean takesAttribute) {
 		super(complexity, takesAttribute);
@@ -13,7 +16,11 @@ public class AttributeRune extends RuneCategory implements IAttributeRune {
 
 	@Override
 	public Object getAttributeData() {
-		return null;
+		return attrData;
+	}
+	
+	public IAttribute getAttributeOfThisAttr() {
+		return attrOfThis;
 	}
 
 	@Override

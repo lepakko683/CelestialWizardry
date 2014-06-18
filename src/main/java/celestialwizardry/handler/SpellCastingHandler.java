@@ -1,6 +1,7 @@
 package celestialwizardry.handler;
 
 import celestialwizardry.api.spell.Spell;
+import celestialwizardry.registry.RuneRegistry;
 import celestialwizardry.util.Tuple;
 import net.minecraft.entity.EntityLiving;
 
@@ -24,7 +25,6 @@ public class SpellCastingHandler {
 			handleUnusedEnergy(caster, spell, magicEnergy);
 			return false;
 		}
-		
 		
 		// TODO: handle casting!
 		

@@ -13,6 +13,8 @@ public abstract class Rune
 	}
 	
 	private String runeid = null;
+	/**The id of the mod that owns(/has added) this rune*/
+	private String modId = null;
 	private boolean requiresPostfix;
 	private boolean requiresAttribute; 
 	

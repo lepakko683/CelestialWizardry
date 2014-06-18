@@ -43,12 +43,14 @@ public class InitRunes {
 	//Block attributes
 	public static final Rune runeAttrAir = new AttributeRune(1f, null, false); // null?
 	public static final Rune runeAttrCobblestone = new AttributeRune(1f, new Tuple(Blocks.cobblestone, 0), false);
-	public static final Rune runeAttrBricks = new AttributeRune(1f, new Tuple(Blocks.cobblestone, 0), true);
-		public static final Rune runeAttr = new AttributeRune(1f, new Tuple(Blocks.cobblestone, 0), false);
+	public static final Rune runeAttrBricks = new AttributeRune(1f, new Tuple(Blocks.cobblestone, 0), true).setRequiresAttribute();
+	public static final Rune runeAttrMossy = new AttributeRune(1f, new Tuple(Blocks.cobblestone, 0), false);
+	public static final Rune runeAttrCracked = new AttributeRune(1f, new Tuple(Blocks.cobblestone, 0), false);
+	public static final Rune runeAttrChiseled = new AttributeRune(1f, new Tuple(Blocks.cobblestone, 0), false);
 	
 	
 	
-	public static final Rune runeBlockFull = new RuneBlock(1f, RuneBlock.BlockType.FULL_BLOCK, "fullBlock");
+	public static final Rune runeBlockFull = new RuneBlock(1f, RuneBlock.BlockType.FULL_BLOCK, "fullBlock").setRequiresAttribute();
 	public static final Rune runeBlockSlab = new RuneBlock(1f, RuneBlock.BlockType.SLAB, "slab");
 	public static final Rune runeBlockStairs = new RuneBlock(1f, RuneBlock.BlockType.STAIRS, "stairs");
 	public static final Rune runeBlockFence = new RuneBlock(1f, RuneBlock.BlockType.FENCE, "fence");

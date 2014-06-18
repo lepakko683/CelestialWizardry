@@ -96,17 +96,17 @@ public final class RenderHelper
 
         GL11.glColor4f(1F, 1F, 1F, 1F);
     }
-
-    public static void drawGradientRect(int par1, int par2, float z, int par3, int par4, int par5, int par6)
+    
+    public static void drawGradientRect(int x1, int y1, float z, int x2, int y2, int colorA, int colorB)
     {
-        float var7 = (par5 >> 24 & 255) / 255F;
-        float var8 = (par5 >> 16 & 255) / 255F;
-        float var9 = (par5 >> 8 & 255) / 255F;
-        float var10 = (par5 & 255) / 255F;
-        float var11 = (par6 >> 24 & 255) / 255F;
-        float var12 = (par6 >> 16 & 255) / 255F;
-        float var13 = (par6 >> 8 & 255) / 255F;
-        float var14 = (par6 & 255) / 255F;
+        float alphaA = (colorA >> 24 & 255) / 255F;
+        float redA = (colorA >> 16 & 255) / 255F;
+        float greenA = (colorA >> 8 & 255) / 255F;
+        float blueA = (colorA & 255) / 255F;
+        float alphaB = (colorB >> 24 & 255) / 255F;
+        float redB = (colorB >> 16 & 255) / 255F;
+        float greenB = (colorB >> 8 & 255) / 255F;
+        float blueB = (colorB & 255) / 255F;
 
         GL11.glDisable(GL11.GL_TEXTURE_2D);
         GL11.glEnable(GL11.GL_BLEND);
@@ -117,17 +117,21 @@ public final class RenderHelper
         Tessellator var15 = Tessellator.instance;
 
         var15.startDrawingQuads();
-        var15.setColorRGBA_F(var8, var9, var10, var7);
-        var15.addVertex(par3, par2, z);
-        var15.addVertex(par1, par2, z);
-        var15.setColorRGBA_F(var12, var13, var14, var11);
-        var15.addVertex(par1, par4, z);
-        var15.addVertex(par3, par4, z);
+        var15.setColorRGBA_F(redA, greenA, blueA, alphaA);
+        var15.addVertex(x2, y1, z);
+        var15.addVertex(x1, y1, z);
+        var15.setColorRGBA_F(redB, greenB, blueB, alphaB);
+        var15.addVertex(x1, y2, z);
+        var15.addVertex(x2, y2, z);
         var15.draw();
 
         GL11.glShadeModel(GL11.GL_FLAT);
         GL11.glDisable(GL11.GL_BLEND);
         GL11.glEnable(GL11.GL_ALPHA_TEST);
         GL11.glEnable(GL11.GL_TEXTURE_2D);
+    }
+    
+    public static void setupRenderingForBillboard(double yaw, double pitch) {
+    	System.out.println("Yaw: " + yaw + " pitch: " + pitch);
     }
 }
