@@ -50,6 +50,9 @@ public class Resources
         
         public static final ResourceLocation MODEL_BELL = ResourceLocationHelper
                 .getResourceLocation(MODEL_LOCATION + "RandomBell2.obj");
+        
+        public static final ResourceLocation MODEL_CRYS_ITEM_HOLDER = ResourceLocationHelper
+        		.getResourceLocation(MODEL_LOCATION + "CrystalItemHolder.obj");
     }
     
     public static class Misc
