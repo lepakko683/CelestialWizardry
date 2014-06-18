@@ -25,21 +25,21 @@ buildscript {
     }
 }
 
-import static io.github.pizzana.celestialgradle.CelestialPlugin.*;
+// import static io.github.pizzana.celestialgradle.CelestialPlugin.*;
 
 apply plugin: 'maven'
 apply plugin: 'signing'
-// apply plugin: 'cw'
-apply plugin: 'forge'
+apply plugin: 'cw'
+// apply plugin: 'forge'
 
 group 'io.github.pizzana'
 archivesBaseName = project.getName()
-version = getVersionFromJava(getProject(), "VERSION")
+version = "0.1-SNAPSHOT" // getVersionFromJava(getProject(), "VERSION")
 
-ext.mc = getVersionFromJava(getProject(), "MINECRAFT")
-ext.forge = getVersionFromJava(getProject(), "FORGE")
-ext.baubles = getVersionFromJava(getProject(), "BAUBLES")
-ext.baubles_root = getPropertyFromJava(getProject(), "src/main/java/celestialwizardry/reference/Reference.java", "BAUBLES_ROOT")
+ext.mc = "1.7.2" // getVersionFromJava(getProject(), "MINECRAFT")
+ext.forge = "10.12.2.1121" // getVersionFromJava(getProject(), "FORGE")
+ext.baubles = "1.0.0.16" // getVersionFromJava(getProject(), "BAUBLES")
+ext.baubles_root = "https://dl.dropboxusercontent.com/u/47135879/" // getPropertyFromJava(getProject(), "src/main/java/celestialwizardry/reference/Reference.java", "BAUBLES_ROOT")
 
 minecraft {
     version = mc + "-" + forge
