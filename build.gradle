@@ -34,7 +34,7 @@ apply plugin: 'forge'
 group 'io.github.pizzana'
 archivesBaseName = project.getName()
 // TODO Remove that System.getenv (potential NPE)
-version = "0.1-DEV.${System.getenv().BUILD_NUMBER}" // getVersionFromJava(getProject(), "VERSION")
+version = getVersionFromJava(getProject(), "VERSION")
 
 ext.mc = getVersionFromJava(getProject(), "MINECRAFT")
 ext.forge = getVersionFromJava(getProject(), "FORGE")
