@@ -17,7 +17,7 @@ buildscript {
         }
         maven {
             name = "cg"
-            url = uri('../CelestialGradle/maven/') // "https://raw.githubusercontent.com/PizzAna/CelestialGradle/master/maven/"
+            url = "https://raw.githubusercontent.com/PizzAna/maven/master/"
         }
     }
     dependencies {
@@ -46,8 +46,6 @@ minecraft {
     assetDir = "run/assets"
 }
 
-version = project.mc + project.version
-
 processResources {
     inputs.property "version", project.version
     inputs.property "mc_version", project.mc
@@ -66,6 +64,8 @@ processResources {
         exclude '**/*.info'
     }
 }
+
+version = project.mc + "." + project.version // TODO Maybe handle this cg side
 
 apply plugin: 'package'
 
