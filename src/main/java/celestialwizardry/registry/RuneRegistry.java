@@ -15,6 +15,7 @@ public abstract class RuneRegistry
 {
     public static Map<String, Rune> runeMap = new HashMap<String, Rune>();
     public static List<String> runeIds = new ArrayList<String>();
+    private static String[] runeIdsv = null;
     private static boolean configLoaded = false;
     
     public static void registerRune(Rune rune)
@@ -30,29 +31,48 @@ public abstract class RuneRegistry
         CelestialWizardry.log.warn("Trying to register duplicate rune, skipping!");
     }
     
-    /**Called from *RuneConfigurationHandler. Sets numeric ids for runes from config*/
-    public static void setupNumIds(ArrayList<String> config) {
-    	if(!configLoaded && runeIds.isEmpty()) {
-    		for(int i=0;i<config.size();i++) {
-        		runeIds.add(i, config.get(i));
-        	}
-        	configLoaded = true;
-    	} else {
-    		CelestialWizardry.log.error("Trying to setup numberic ids and runeIds isn't empty!");
-    	}
-    }
+//    /**Called from *RuneConfigurationHandler. Sets numeric ids for runes from config*/
+//    public static void setupNumIds(ArrayList<String> config) {
+//    	if(!configLoaded && runeIds.isEmpty()) {
+//    		for(int i=0;i<config.size();i++) {
+//        		runeIds.add(i, config.get(i));
+//        	}
+//        	configLoaded = true;
+//    	} else {
+//    		CelestialWizardry.log.error("Trying to setup numberic ids and runeIds isn't empty!"); // TODO throw exception
+//    	}
+//    }
     
     public static void setupNumIds(RuneConfig config) {
+    	int runeCount = config.getRuneCount(); 
+    	if(runeCount == 0) {
+    		CelestialWizardry.log.error("Attempted to setup runeconfig but config's runecount is zero.");
+    		return; // TODO throw exception
+    	}
+    	if(runeIdsv != null) {
+    		CelestialWizardry.log.error("Attempted to setup runeconfig but runeIdsv array wasn't null (runeconfig might have already been set up. If not you will most likely crash.).");
+    		return; // TODO throw exception
+    	}
+    	runeIdsv = new String[runeMap.size()];
     	if(!configLoaded && runeIds.isEmpty()) {
-    		Iterator<String> rNames = config.getRuneNames().iterator();
+    		Iterator<String> rNames = runeMap.keySet().iterator();
     		String cName = null;
+    		int nid = -1;
     		while (rNames.hasNext()) {
     			cName = rNames.next();
-    			runeIds.add(config.getNumId(cName), cName);
+    			nid = config.getNumId(cName);
+    			if(nid == -1) {
+    				nid = config.addEntryAuto(cName);
+    			}
+    			if(nid != -1) {
+    				runeIdsv[nid]=cName;
+    			} else {
+    				CelestialWizardry.log.error("Unable to register rune: " + cName);
+    			}
     		}
         	configLoaded = true;
     	} else {
-    		CelestialWizardry.log.error("Trying to setup numberic ids and runeIds isn't empty!");
+    		CelestialWizardry.log.error("Trying to setup numberic ids and runeIds isn't empty!"); // TODO throw exception
     	}
     }
     
@@ -60,14 +80,15 @@ public abstract class RuneRegistry
     public static void onCreateConfig() {
     	Set<String> runeNames = runeMap.keySet();
     	if(!runeNames.isEmpty()) {
+    		runeIdsv = new String[runeNames.size()];
     		Iterator<String> iter = runeNames.iterator();
-    		
+    		int i=0;
     		while(iter.hasNext()) {
-    			runeIds.add(iter.next());
+    			runeIdsv[i]=iter.next();
     		}
     		configLoaded = true;
     	} else {
-    		CelestialWizardry.log.error("Can't set ids for no runes (no runes are registered)!");
+    		CelestialWizardry.log.error("Can't set ids for no runes (no runes are registered)!"); // TODO throw exception
     	}
     }
     
@@ -89,7 +110,7 @@ public abstract class RuneRegistry
     public static Rune getRuneByNumId(int id) {
     	
     	if(!configLoaded) {
-    		CelestialWizardry.log.error("Trying to get rune by it's numberic id before config is loaded");
+    		CelestialWizardry.log.warn("Trying to get rune by it's numberic id before config is loaded");
     	}
     	
     	if(id < runeIds.size() && id >= 0 && runeMap.containsKey(runeIds.get(id))) {
@@ -99,5 +120,9 @@ public abstract class RuneRegistry
     	CelestialWizardry.log.warn("Trying to get null rune, skipping!");
     	
     	return null;
+    }
+    
+    public static void reset() {
+    	runeIdsv = null;
     }
 }

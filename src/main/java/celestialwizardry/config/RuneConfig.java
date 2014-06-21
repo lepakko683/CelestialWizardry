@@ -48,7 +48,7 @@ public class RuneConfig {
 	}
 	
 	private boolean isStrIdFree(String id) {
-		return data.containsKey(id);
+		return !data.containsKey(id);
 	}
 	
 	/**
@@ -115,5 +115,29 @@ public class RuneConfig {
 			return true;
 		}
 		return false;
+	}
+	
+	public String[] getAsStringArray() {
+		if(data.size()==0) {
+			return null;
+		}
+		String[] ret = new String[data.size()];
+		Iterator<Entry<String, Integer>> iter = this.data.entrySet().iterator();
+		Entry<String, Integer> ent = null;
+		int i = 0;
+		while(iter.hasNext()) {
+			ent = iter.next();
+			ret[i] = (ent.getKey() + "=" + ent.getValue());
+			i++;
+		}
+		return ret;
+	}
+	
+	public int getRuneCount() {
+		return data.size();
+	}
+	
+	public static RuneConfig buildConfigFromStringArray(String[] lines) {
+		return null;
 	}
 }

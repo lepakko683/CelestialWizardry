@@ -64,4 +64,14 @@ public class ClientProxy extends CommonProxy
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBell.class, new RenderBell());
     }
 
+	@Override
+	public void setupClientRuneconfig() {
+		// TODO: Do something
+	}
+
+	@Override
+	public void setupServerRuneconfig() {
+		// Do nothing
+	}
+
 }

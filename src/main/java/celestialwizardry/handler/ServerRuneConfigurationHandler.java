@@ -3,8 +3,10 @@ package celestialwizardry.handler;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
@@ -17,10 +19,10 @@ import celestialwizardry.config.RuneConfig;
 import celestialwizardry.registry.RuneRegistry;
 
 public class ServerRuneConfigurationHandler {
-	public static final String CONFIG_FILE_NAME = "celestialWizardry_runeConfiguration.ini";
-	public static final String CONFIG_OLD_FILE_NAME = "celestialWizardry_runeConfiguration.old.ini";
-	public static final String CONFIG_FILE_BACKUP_NAME = "celestialWizardry_runeConfiguration.backup.ini";
-	public static final String CONFIG_OLD_FILE_BACKUP_NAME = "celestialWizardry_runeConfiguration.old.backup.ini"; // ".ini" - Why not? :)
+	public static final String CONFIG_FILE_NAME = "celestialWizardry_runeConfiguration.dat";
+	public static final String CONFIG_OLD_FILE_NAME = "celestialWizardry_runeConfiguration.old.dat";
+	public static final String CONFIG_FILE_BACKUP_NAME = "celestialWizardry_runeConfiguration.backup.dat";
+	public static final String CONFIG_OLD_FILE_BACKUP_NAME = "celestialWizardry_runeConfiguration.old.backup.dat";
 	
 	//TODO: USE LOGGER, HANDLE SWITHING WORLDS
 	
@@ -30,53 +32,22 @@ public class ServerRuneConfigurationHandler {
 	//assign correct rune ids for runes
 	
 	//Load after runes have been registered
+	
+	private static List<String> configNeedingPlayers = new ArrayList<String>();
+	
+	private static boolean isConfigSetup = false;
 	private static NBTTagCompound worldRuneConfig = null;
 	private static boolean needToSave = false;
-	private static Map<String, Integer> configData = null;
-	private static int oldAvailableId = -1;
-	private static String WORLD_DIR = null;
+	private static RuneConfig configData = null;
+	private static String WORLD_DIR = null; // TODO: figure out the whole world path!
 	/**Used to prevent useless iterating through the config*/
 	private static boolean configWasJustCreated = false;
 	
 	public static void init() {
-		
+		RuneRegistry.setupNumIds(configData);
 	}
 	
 	/**@return -1 if already correct*/
-	private static int correctIfNeeded(int numbericID, Rune rune) {
-		String runeId = Rune.getFullIdOf(rune);
-		if(worldRuneConfig.hasKey(runeId)) {
-			return worldRuneConfig.getInteger(runeId) == numbericID ? -1 : worldRuneConfig.getInteger(runeId);
-		}
-		
-		//Key not found
-		if(configData == null) {
-			configData = new HashMap<String, Integer>();
-			
-			Iterator iter = worldRuneConfig.func_150296_c().iterator();
-			Object key = null;
-			while(iter.hasNext()) {
-				key = iter.next();
-				configData.put((String)key, worldRuneConfig.getInteger(runeId));
-			}
-		}
-		
-		int newId = getNextAvailableNumId();
-		configData.put(runeId, newId);
-		worldRuneConfig.setInteger(runeId, newId);
-		needToSave = true;
-		return newId == numbericID ? -1 : newId;
-		
-	}
-	
-	private static int getNextAvailableNumId() {
-		int id = oldAvailableId++;
-		while(configData.containsValue(id)) {
-			id++;
-		}
-		oldAvailableId = id;
-		return id;
-	}
 	
 	private static void addToConfig(String runeStringID, int runeNumbericID) {
 		worldRuneConfig.setInteger(runeStringID, runeNumbericID);
@@ -259,11 +230,30 @@ public class ServerRuneConfigurationHandler {
 	// TODO!
 	/**Missing method body!*/
 	public static RuneConfig getConfigToSendToClients() {
+		if(isConfigSetup) {
+			RuneConfig ret = new RuneConfig();
+			
+			ret.addEntry("", -1);
+		}
 		return null;
 	}
 	
 	public static void onServerStopping() {
 		saveConfigIfNeeded();
+		reset();
+		RuneRegistry.reset();
+	}
+	
+	private static void reset() {
+		configNeedingPlayers.clear();
+	}
+	
+	/**Adds userName to the list of players' usernames that still need the runeconfig.*/
+	public static void addConfigNeedingPlayer(String username) {
+		if(configNeedingPlayers == null) {
+			configNeedingPlayers = new ArrayList<String>();
+		}
+		configNeedingPlayers.add(username);
 	}
 	
 	

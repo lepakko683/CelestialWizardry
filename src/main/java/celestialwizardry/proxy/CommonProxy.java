@@ -1,14 +1,11 @@
 package celestialwizardry.proxy;
 
-import celestialwizardry.CelestialWizardry;
-import celestialwizardry.entity.EntityBell;
 import celestialwizardry.reference.EventHandlers;
 import celestialwizardry.reference.Names;
 import celestialwizardry.tileentity.TileEntityBell;
 import celestialwizardry.tileentity.TileEntityWritingTable;
 import net.minecraftforge.common.MinecraftForge;
 import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 public abstract class CommonProxy implements IProxy
@@ -27,6 +24,10 @@ public abstract class CommonProxy implements IProxy
         // Register world event handler
         FMLCommonHandler.instance().bus().register(EventHandlers.WORLD_EVENT_HANDLER);
         MinecraftForge.EVENT_BUS.register(EventHandlers.WORLD_EVENT_HANDLER);
+        
+        // Register item expire event handler
+        FMLCommonHandler.instance().bus().register(EventHandlers.ITEM_EXPIRE_EVENT_HANDLER);
+        MinecraftForge.EVENT_BUS.register(EventHandlers.ITEM_EXPIRE_EVENT_HANDLER);
     }
 
     public void registerTileEntities()
