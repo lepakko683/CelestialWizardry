@@ -14,6 +14,8 @@ CelestialWizardry
 
 [Developers](#developers) - List of developers of Celestial Wizardry.
 
+[Blamelist](#blamelist) - Just so you know who to blame when something doesn't work.
+
 ###Compiling Celestial Wizardry
 IMPORTANT: Please report any issues you have, there might be some problems with the documentation!
 Also make sure you know EXACTLY what you're doing!  It's not any of our faults if your OS crashes, becomes corrupted, etc.
@@ -132,3 +134,10 @@ Celestial Wizardry crashes every time? Have a suggestion? Found a bug? Create an
 	* Design
 	* Textures & models
 	* Code
+	
+
+###Blamelist
+***
+* **Okkapel**
+	* All rune stuff
+	* Spell system
