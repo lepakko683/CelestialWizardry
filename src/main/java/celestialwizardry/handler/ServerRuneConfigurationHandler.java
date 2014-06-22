@@ -11,6 +11,8 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
+import cpw.mods.fml.common.FMLCommonHandler;
+import net.minecraft.client.Minecraft;
 import net.minecraft.nbt.CompressedStreamTools;
 import net.minecraft.nbt.NBTTagCompound;
 import celestialwizardry.CelestialWizardry;
@@ -23,6 +25,7 @@ public class ServerRuneConfigurationHandler {
 	public static final String CONFIG_OLD_FILE_NAME = "celestialWizardry_runeConfiguration.old.dat";
 	public static final String CONFIG_FILE_BACKUP_NAME = "celestialWizardry_runeConfiguration.backup.dat";
 	public static final String CONFIG_OLD_FILE_BACKUP_NAME = "celestialWizardry_runeConfiguration.old.backup.dat";
+	public static final String CONF_DIR_NAME = "cw_runeconfig";
 	
 	//TODO: USE LOGGER, HANDLE SWITHING WORLDS
 	
@@ -39,9 +42,11 @@ public class ServerRuneConfigurationHandler {
 	private static NBTTagCompound worldRuneConfig = null;
 	private static boolean needToSave = false;
 	private static RuneConfig configData = null;
-	private static String WORLD_DIR = null; // TODO: figure out the whole world path!
+	private static String WORLD_DIR = null;
 	/**Used to prevent useless iterating through the config*/
 	private static boolean configWasJustCreated = false;
+	private static final char separatorChr = File.separatorChar;
+	private static boolean isClientServer = true; // TODO: figure out if running on client server (do we add "saves/" to the world path)
 	
 	public static void init() {
 		RuneRegistry.setupNumIds(configData);
@@ -54,19 +59,15 @@ public class ServerRuneConfigurationHandler {
 	}
 	
 	private static File getWorldRuneConfigFile() {
-		return new File(WORLD_DIR + CONFIG_FILE_NAME);
+		return new File((isClientServer ? "saves" + separatorChr : "") + WORLD_DIR + separatorChr + CONF_DIR_NAME + separatorChr + CONFIG_FILE_NAME);
 	}
 	
 	private static File getWorldRuneConfigBackupFile() {
-		return new File(WORLD_DIR + CONFIG_FILE_BACKUP_NAME);
+		return new File((isClientServer ? "saves" + separatorChr : "") + WORLD_DIR + separatorChr + CONF_DIR_NAME + separatorChr + CONFIG_FILE_BACKUP_NAME);
 	}
 	
-	private static File getWorldRuneConfigOLDFile() {
-		return new File(WORLD_DIR + CONFIG_OLD_FILE_NAME);
-	}
-	
-	private static File getWorldRuneConfigOLDBackupFile() {
-		return new File(WORLD_DIR + CONFIG_OLD_FILE_BACKUP_NAME);
+	private static File getWorldRuneConfigDir() {
+		return new File((isClientServer ? "saves" + separatorChr : "") + WORLD_DIR + separatorChr + CONF_DIR_NAME);
 	}
 	
 	/**@param configFile - The file containing the config data */
@@ -254,6 +255,23 @@ public class ServerRuneConfigurationHandler {
 			configNeedingPlayers = new ArrayList<String>();
 		}
 		configNeedingPlayers.add(username);
+	}
+	
+	public static void test(String worldDirName) {
+		isClientServer = !FMLCommonHandler.instance().getMinecraftServerInstance().isDedicatedServer();
+		System.out.println("Is singleplayer: " + isClientServer);
+		WORLD_DIR = worldDirName;
+		File runeConfMain = getWorldRuneConfigFile();
+		
+		if(!fileExists(runeConfMain)) {
+			try {
+			getWorldRuneConfigDir().mkdirs();
+			runeConfMain.createNewFile();
+			} catch(Exception e) {
+				System.err.println("Failed to create file!");
+				e.printStackTrace();
+			}
+		}
 	}
 	
 	

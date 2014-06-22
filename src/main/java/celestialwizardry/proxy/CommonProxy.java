@@ -14,20 +14,20 @@ public abstract class CommonProxy implements IProxy
     public void registerEventHandlers()
     {
         // Register entity event handler
-        FMLCommonHandler.instance().bus().register(EventHandlers.ENTITY_EVENT_HANDLER);
-        MinecraftForge.EVENT_BUS.register(EventHandlers.ENTITY_EVENT_HANDLER);
+        FMLCommonHandler.instance().bus().register(EventHandlers.Common.ENTITY_EVENT_HANDLER);
+        MinecraftForge.EVENT_BUS.register(EventHandlers.Common.ENTITY_EVENT_HANDLER);
 
         // Register player event handler
-        FMLCommonHandler.instance().bus().register(EventHandlers.PLAYER_EVENT_HANDLER);
-        MinecraftForge.EVENT_BUS.register(EventHandlers.PLAYER_EVENT_HANDLER);
+        FMLCommonHandler.instance().bus().register(EventHandlers.Common.PLAYER_EVENT_HANDLER);
+        MinecraftForge.EVENT_BUS.register(EventHandlers.Common.PLAYER_EVENT_HANDLER);
         
         // Register world event handler
-        FMLCommonHandler.instance().bus().register(EventHandlers.WORLD_EVENT_HANDLER);
-        MinecraftForge.EVENT_BUS.register(EventHandlers.WORLD_EVENT_HANDLER);
+        FMLCommonHandler.instance().bus().register(EventHandlers.Common.WORLD_EVENT_HANDLER);
+        MinecraftForge.EVENT_BUS.register(EventHandlers.Common.WORLD_EVENT_HANDLER);
         
         // Register item expire event handler
-        FMLCommonHandler.instance().bus().register(EventHandlers.ITEM_EXPIRE_EVENT_HANDLER);
-        MinecraftForge.EVENT_BUS.register(EventHandlers.ITEM_EXPIRE_EVENT_HANDLER);
+        FMLCommonHandler.instance().bus().register(EventHandlers.Common.ITEM_EXPIRE_EVENT_HANDLER);
+        MinecraftForge.EVENT_BUS.register(EventHandlers.Common.ITEM_EXPIRE_EVENT_HANDLER);
     }
 
     public void registerTileEntities()

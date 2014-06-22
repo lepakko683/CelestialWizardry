@@ -6,6 +6,7 @@ import celestialwizardry.config.SettingHandler;
 import celestialwizardry.config.spell.ConfigSpells;
 import celestialwizardry.entity.EntityBell;
 import celestialwizardry.handler.CraftingHandler;
+import celestialwizardry.handler.ServerRuneConfigurationHandler;
 import celestialwizardry.init.ModBlocks;
 import celestialwizardry.init.ModItems;
 import celestialwizardry.network.GuiHandler;
@@ -15,7 +16,6 @@ import celestialwizardry.reference.Reference;
 import celestialwizardry.reference.Version;
 import celestialwizardry.spellbook.SpellBook;
 import celestialwizardry.world.WorldGenerator;
-
 import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
@@ -28,6 +28,7 @@ import cpw.mods.fml.common.event.FMLServerStoppingEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
+import net.minecraft.client.Minecraft;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -76,6 +77,7 @@ public class CelestialWizardry
 	public void onServerStart(FMLServerStartingEvent event) {
 		CelestialWizardry.log.info("SERVER STARTING EVENT!!!!!");
 		System.out.println("Server folder name: " + event.getServer().getFolderName());
+		ServerRuneConfigurationHandler.test(event.getServer().getFolderName());
 	}
 	
 	@Mod.EventHandler

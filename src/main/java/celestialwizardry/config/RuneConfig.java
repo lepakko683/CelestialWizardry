@@ -36,6 +36,7 @@ public class RuneConfig {
 		return data==null ? true : data.isEmpty();
 	}
 	
+	/**Warning: missing method body!*/
 	private String getStrId(int numId) {
 		if(!isEmpty() && !isNumIdFree(numId)) {
 //			return;
@@ -138,6 +139,21 @@ public class RuneConfig {
 	}
 	
 	public static RuneConfig buildConfigFromStringArray(String[] lines) {
-		return null;
+		if(lines == null || lines.length == 0) {
+			return null;
+		}
+		
+		RuneConfig ret = new RuneConfig();
+		String[] parts = null;
+		
+		for(String s : lines) {
+			parts = s.split("=");
+			
+			if(parts.length == 2) {
+				ret.addEntry(parts[0], Integer.parseInt(parts[1]));
+			}
+		}
+		
+		return ret;
 	}
 }
