@@ -30,6 +30,7 @@ tile.celestialwizardry:writingTable.name=Writing Table
 tile.celestialwizardry:livingOre.name=Living Ore
 tile.celestialwizardry:magicalStone.name=Magical Stone
 tile.celestialwizardry:smallCrystal.name=Small Crystal (WIP)
+tile.celestialwizardry:containedCrystal.name=Contained Crystal
 
 # GUI localizations
 container.celestialwizardry:writingTable=Writing Table

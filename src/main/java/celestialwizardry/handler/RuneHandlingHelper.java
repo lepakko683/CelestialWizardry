@@ -1,5 +1,6 @@
 package celestialwizardry.handler;
 
+import celestialwizardry.util.Location3D;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.monster.*;
@@ -85,5 +86,9 @@ public class RuneHandlingHelper {
 	public static Tuple getBlock(String name) {
 //		return new Tuple(Block.);
 		return null;
+	}
+	
+	public static Location3D getLocationFor(Entity e) {
+		return new Location3D(e.posX, e.posY, e.posZ);
 	}
 }

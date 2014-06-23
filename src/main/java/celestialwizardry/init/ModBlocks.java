@@ -2,6 +2,7 @@ package celestialwizardry.init;
 
 import celestialwizardry.block.BlockBell;
 import celestialwizardry.block.BlockCW;
+import celestialwizardry.block.BlockContainedCrystal;
 import celestialwizardry.block.BlockLivingOre;
 import celestialwizardry.block.BlockMagicalStone;
 import celestialwizardry.block.BlockWritingTable;
@@ -21,6 +22,7 @@ public class ModBlocks
     public static final BlockLivingOre livingOre = new BlockLivingOre();
     public static final BlockBell bell = new BlockBell();
     public static final BlockMagicalStone magicalStone = new BlockMagicalStone();
+    public static final BlockContainedCrystal containedCrystal = new BlockContainedCrystal();
 
     public static void init()
     {
@@ -28,6 +30,7 @@ public class ModBlocks
         register(livingOre, Names.Blocks.LIVING_ORE);
         register(bell, Names.Blocks.BELL, ItemBlockBell.class);
         register(magicalStone, Names.Blocks.MAGICAL_STONE);
+        register(containedCrystal, Names.Blocks.CONTAINED_CRYSTAL);
     }
 
     private static void register(Block block, String name)

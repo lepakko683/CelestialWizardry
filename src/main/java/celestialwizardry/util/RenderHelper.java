@@ -3,6 +3,8 @@ package celestialwizardry.util;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.util.ResourceLocation;
+import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -103,6 +105,7 @@ public final class RenderHelper
         float redA = (colorA >> 16 & 255) / 255F;
         float greenA = (colorA >> 8 & 255) / 255F;
         float blueA = (colorA & 255) / 255F;
+        
         float alphaB = (colorB >> 24 & 255) / 255F;
         float redB = (colorB >> 16 & 255) / 255F;
         float greenB = (colorB >> 8 & 255) / 255F;
@@ -114,21 +117,29 @@ public final class RenderHelper
         GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
         GL11.glShadeModel(GL11.GL_SMOOTH);
 
-        Tessellator var15 = Tessellator.instance;
+        Tessellator tes = Tessellator.instance;
 
-        var15.startDrawingQuads();
-        var15.setColorRGBA_F(redA, greenA, blueA, alphaA);
-        var15.addVertex(x2, y1, z);
-        var15.addVertex(x1, y1, z);
-        var15.setColorRGBA_F(redB, greenB, blueB, alphaB);
-        var15.addVertex(x1, y2, z);
-        var15.addVertex(x2, y2, z);
-        var15.draw();
+        tes.startDrawingQuads();
+        tes.setColorRGBA_F(redA, greenA, blueA, alphaA);
+        tes.addVertex(x2, y1, z);
+        tes.addVertex(x1, y1, z);
+        tes.setColorRGBA_F(redB, greenB, blueB, alphaB);
+        tes.addVertex(x1, y2, z);
+        tes.addVertex(x2, y2, z);
+        tes.draw();
 
         GL11.glShadeModel(GL11.GL_FLAT);
         GL11.glDisable(GL11.GL_BLEND);
         GL11.glEnable(GL11.GL_ALPHA_TEST);
         GL11.glEnable(GL11.GL_TEXTURE_2D);
+    }
+    
+    public static double scaleUVCoord(double coord, double c1, double c2) {
+    	return Math.min(c1, c2)+(Math.abs(c2-c1)*coord);
+    }
+    
+    public static void bindTexture(ResourceLocation rl) {
+    	FMLClientHandler.instance().getClient().renderEngine.bindTexture(rl);
     }
     
     public static void setupRenderingForBillboard(double yaw, double pitch) {
