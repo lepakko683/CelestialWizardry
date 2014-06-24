@@ -13,9 +13,11 @@ import java.util.Set;
 
 public abstract class RuneRegistry
 {
+	// Rune id 0 is intentionally unused!!!
     public static Map<String, Rune> runeMap = new HashMap<String, Rune>();
-    public static List<String> runeIds = new ArrayList<String>();
     private static String[] runeIdsv = null;
+    
+    /**Are the numIds set up*/
     private static boolean configLoaded = false;
     
     public static void registerRune(Rune rune)
@@ -31,18 +33,7 @@ public abstract class RuneRegistry
         CelestialWizardry.log.warn("Trying to register duplicate rune, skipping!");
     }
     
-//    /**Called from *RuneConfigurationHandler. Sets numeric ids for runes from config*/
-//    public static void setupNumIds(ArrayList<String> config) {
-//    	if(!configLoaded && runeIds.isEmpty()) {
-//    		for(int i=0;i<config.size();i++) {
-//        		runeIds.add(i, config.get(i));
-//        	}
-//        	configLoaded = true;
-//    	} else {
-//    		CelestialWizardry.log.error("Trying to setup numberic ids and runeIds isn't empty!"); // TODO throw exception
-//    	}
-//    }
-    
+    /**Called from *RuneConfigurationHandler. Sets numeric ids for runes from config*/
     public static void setupNumIds(RuneConfig config) {
     	int runeCount = config.getRuneCount(); 
     	if(runeCount == 0) {
@@ -54,19 +45,33 @@ public abstract class RuneRegistry
     		return; // TODO throw exception
     	}
     	runeIdsv = new String[runeMap.size()];
-    	if(!configLoaded && runeIds.isEmpty()) {
+    	if(!configLoaded) {
     		Iterator<String> rNames = runeMap.keySet().iterator();
+    		runeIdsv = new String[runeMap.size()+1];
     		String cName = null;
     		int nid = -1;
     		while (rNames.hasNext()) {
     			cName = rNames.next();
     			nid = config.getNumId(cName);
+    			
+    			if(nid == 0) {
+    				nid = config.setNumIdAutoFor(cName);
+    				System.out.println("setNumIdAutoFor: " + cName);
+    			}
     			if(nid == -1) {
     				nid = config.addEntryAuto(cName);
+    				System.out.println("addEntryAuto: " + cName);
     			}
-    			if(nid != -1) {
-    				runeIdsv[nid]=cName;
-    			} else {
+    			if(nid != -1 && nid != 0) {
+    				if(nid < runeIdsv.length) {
+	    				if(runeIdsv[nid] == null) {
+	    					runeIdsv[nid]=cName;
+	    				} else {
+	    					CelestialWizardry.log.error("Attempted to overwrite rune: " + cName);
+	    				}
+    				}
+    			}
+    			if(nid == -1 || nid == 0) {
     				CelestialWizardry.log.error("Unable to register rune: " + cName);
     			}
     		}
@@ -80,11 +85,16 @@ public abstract class RuneRegistry
     public static void onCreateConfig() {
     	Set<String> runeNames = runeMap.keySet();
     	if(!runeNames.isEmpty()) {
-    		runeIdsv = new String[runeNames.size()];
+    		runeIdsv = new String[runeNames.size()+1];
     		Iterator<String> iter = runeNames.iterator();
-    		int i=0;
+    		int i=1;
     		while(iter.hasNext()) {
+    			if(i >= runeIdsv.length) {
+    				CelestialWizardry.log.error("Ran out of space in runeIdsv!");
+    				break;
+    			}
     			runeIdsv[i]=iter.next();
+    			i++;
     		}
     		configLoaded = true;
     	} else {
@@ -92,6 +102,7 @@ public abstract class RuneRegistry
     	}
     }
     
+    /**Are the numIds set up*/
     public static boolean isConfigLoaded() {
     	return configLoaded;
     }
@@ -113,8 +124,8 @@ public abstract class RuneRegistry
     		CelestialWizardry.log.warn("Trying to get rune by it's numberic id before config is loaded");
     	}
     	
-    	if(id < runeIds.size() && id >= 0 && runeMap.containsKey(runeIds.get(id))) {
-    		return runeMap.get(runeIds.get(id));
+    	if(id < runeIdsv.length && id > 0 && runeMap.containsKey(runeIdsv[id])) {
+    		return runeMap.get(runeIdsv[id]);
     	}
     	
     	CelestialWizardry.log.warn("Trying to get null rune, skipping!");
@@ -124,5 +135,20 @@ public abstract class RuneRegistry
     
     public static void reset() {
     	runeIdsv = null;
+    	configLoaded = false;
+    }
+    
+    /**Don't use this for iterating through the array! Use "getRuneIdsvLength()" instead. Only for visual purposes.*/
+    public static int getRuneCount() {
+    	return runeIdsv == null ? -1 : runeIdsv.length-1;
+    }
+    
+    /**This should be used when iterating through the registered runes instead of getRuneCount()*/
+    public static int getRuneIdsvLength() {
+    	return runeIdsv == null ? -1 : runeIdsv.length;
+    }
+    
+    public static String getRuneNameForId(int id) {
+    	return runeIdsv == null ? null : id < runeIdsv.length ? runeIdsv[id] : null; 
     }
 }

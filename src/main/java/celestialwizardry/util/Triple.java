@@ -1,36 +1,38 @@
 package celestialwizardry.util;
 
-public class Triple {
+public class Triple<D, E, F> {
 	
-	private Object a,b,c;
+	private D a;
+	private E b;
+	private F c;
 	
-	public Triple(Object a, Object b, Object c) {
+	public Triple(D a, E b, F c) {
 		this.a=a;
 		this.b=b;
 		this.c=c;
 	}
 	
-	public Object getA() {
+	public D getA() {
 		return this.a;
 	}
 	
-	public Object getB() {
+	public E getB() {
 		return this.b;
 	}
 	
-	public Object getC() {
+	public F getC() {
 		return this.c;
 	}
 	
-	public void setA(Object o) {
+	public void setA(D o) {
 		this.a=o;
 	}
 	
-	public void setB(Object o) {
+	public void setB(E o) {
 		this.b=o;
 	}
 	
-	public void setC(Object o) {
+	public void setC(F o) {
 		this.c=o;
 	}
 	

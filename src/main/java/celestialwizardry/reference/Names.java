@@ -31,6 +31,7 @@ public class Names
         public static final String PAGE = "page";
         public static final String MAGICAL_PEN = "magicalPen";
         public static final String MATRIX = "matrix";
+		public static final String SOARYN_CHEST_PLCR = "soarynChestPlcr";
     }
 
     public static class NBT

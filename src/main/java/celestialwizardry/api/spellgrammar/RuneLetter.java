@@ -2,20 +2,20 @@ package celestialwizardry.api.spellgrammar;
 
 import java.util.List;
 
-public class RuneLocation extends RuneCategory {
+public class RuneLetter extends RuneCategory {
 
-	public RuneLocation(float complexity, boolean takesAttribute) {
-		super(complexity, takesAttribute, null);
+	public RuneLetter(float complexity) {
+		super(complexity, false, null);
 	}
 
 	@Override
 	public String getCategoryIDString() {
-		return "location";
+		return "letter";
 	}
 
 	@Override
 	public List validRuneAttributeTypes() {
 		return null;
 	}
-	
+
 }

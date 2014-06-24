@@ -45,7 +45,7 @@ public class RuneConfig {
 	}
 	
 	private boolean isNumIdFree(int id) {
-		return data.containsValue(id);
+		return !data.containsValue(id);
 	}
 	
 	private boolean isStrIdFree(String id) {
@@ -57,12 +57,29 @@ public class RuneConfig {
 	 * */
 	private int getNextFreeNumId() {
 		if(data != null && data.size()>0) {
-			for(int i=lastFreeIndex+1;i<data.size();i++) {
+			for(int i=lastFreeIndex+1;i<1024;i++) { // Rune hard limit: 1024
 				if(isNumIdFree(i)) {
 					lastFreeIndex = i;
 					return i;
 				}
 			}
+		}
+		return -1;
+		
+	}
+	
+	public void setNumId(String key, int nid) {
+		if(this.data.containsKey(key) && this.data.get(key) == 0 && nid != 0) {
+			this.data.put(key, nid);
+		}
+	}
+	
+	/**@return the numeric id for the rune, -1 if it fails*/
+	public int setNumIdAutoFor(String key) {
+		if(this.data.containsKey(key) && this.data.get(key) == 0) {
+			int numId = getNextFreeNumId();
+			this.data.put(key,numId);
+			return numId;
 		}
 		return -1;
 		

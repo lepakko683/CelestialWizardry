@@ -7,7 +7,7 @@ public class RuneControl extends RuneCategory
     //AND, IF, NOT, etc
 	
 	public RuneControl(float complexity) {
-		super(complexity, false); // TODO
+		super(complexity, false, null); // TODO
 	}
 
 	@Override

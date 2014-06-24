@@ -8,7 +8,7 @@ public class RuneAction extends RuneCategory
 	private String actionString;
 	
 	public RuneAction(float complexity, String actionString, boolean takesAttribute) {
-		super(complexity, takesAttribute);
+		super(complexity, takesAttribute, null);
 	}
 
 	@Override

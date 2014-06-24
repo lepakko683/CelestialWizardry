@@ -10,7 +10,7 @@ public class AttributeRune extends RuneCategory implements IAttributeRune {
 	private IAttribute attrOfThis;
 	
 	public AttributeRune(float complexity, Object attrData, boolean takesAttribute) {
-		super(complexity, takesAttribute);
+		super(complexity, takesAttribute, null);
 		this.attrData = attrData;
 	}
 

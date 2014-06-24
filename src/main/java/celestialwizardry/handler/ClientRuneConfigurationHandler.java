@@ -3,8 +3,10 @@ package celestialwizardry.handler;
 import java.util.ArrayList;
 import java.util.List;
 
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import celestialwizardry.api.event.CWRuneconfigResetEvent;
 import celestialwizardry.config.RuneConfig;
 import celestialwizardry.network.message.MessageRuneConfig;
 import celestialwizardry.registry.RuneRegistry;
@@ -29,11 +31,12 @@ public class ClientRuneConfigurationHandler {
 		
 	}
 	
-	public static RuneConfig buildRuneConfig() {
-		return RuneConfig.buildConfigFromStringArray((String[])runeConfBuffer.toArray());
+	private static void buildRuneConfig() {
+		runeConfigFromServer = RuneConfig.buildConfigFromStringArray((String[])runeConfBuffer.toArray());
 	}
 	
 	public static void reset() {
+		runeConfBuffer.clear();
 		
 	}
 	

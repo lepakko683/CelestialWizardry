@@ -40,6 +40,7 @@ public class ModItems
     public static final ItemPage page = new ItemPage();
     public static final ItemMagicalPen magicalPen = new ItemMagicalPen();
     public static final ItemMatrix matrix = new ItemMatrix();
+    public static final ItemSoarynChestPlcr soarynChestPlcr = new ItemSoarynChestPlcr();
 
     public static void init()
     {
@@ -57,6 +58,7 @@ public class ModItems
         register(page, Names.Items.PAGE);
         register(magicalPen, Names.Items.MAGICAL_PEN);
         register(matrix, Names.Items.MATRIX);
+        register(soarynChestPlcr, Names.Items.SOARYN_CHEST_PLCR);
     }
 
     private static void register(Item item, String name)

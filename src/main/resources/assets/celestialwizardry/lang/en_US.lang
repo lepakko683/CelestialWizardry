@@ -23,6 +23,7 @@ item.celestialwizardry:crystal.mystical.name=Mystical Crystal
 item.celestialwizardry:crystal.pure.name=Pure Crystal
 item.celestialwizardry:crystal.celestial.name=Celestial Crystal
 item.celestialwizardry:crystal.perfect.name=Perfect Crystal
+item.celestialwizardry:soarynChestPlcr.name=Soaryn Chest Placer
 item.celestialwizardry:invalid.name=Invalid Item
 
 # Block localizations
