@@ -5,6 +5,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 import celestialwizardry.client.handler.ClientRenderTickEventHandler;
 import celestialwizardry.client.handler.KeyInputEventHandler;
 import celestialwizardry.handler.ClientTickEventHandler;
+import celestialwizardry.handler.DisconnectEHandler;
 import celestialwizardry.handler.EntityEventHandler;
 import celestialwizardry.handler.ItemExpireEventHandler;
 import celestialwizardry.handler.PlayerEventHandler;
@@ -24,5 +25,6 @@ public class EventHandlers
 	    public static final EntityEventHandler ENTITY_EVENT_HANDLER = new EntityEventHandler();
 	    public static final WorldEventHandler WORLD_EVENT_HANDLER = new WorldEventHandler();
 	    public static final ItemExpireEventHandler ITEM_EXPIRE_EVENT_HANDLER = new ItemExpireEventHandler();
+	    public static final DisconnectEHandler DISCONNECT_EVENT_HANDLER = new DisconnectEHandler();
 	}
 }

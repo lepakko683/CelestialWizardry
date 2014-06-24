@@ -164,10 +164,12 @@ public class RuneConfig {
 		String[] parts = null;
 		
 		for(String s : lines) {
-			parts = s.split("=");
-			
-			if(parts.length == 2) {
-				ret.addEntry(parts[0], Integer.parseInt(parts[1]));
+			if(s != null) {
+				parts = s.split("=");
+				
+				if(parts.length == 2) {
+					ret.addEntry(parts[0], Integer.parseInt(parts[1]));
+				}
 			}
 		}
 		

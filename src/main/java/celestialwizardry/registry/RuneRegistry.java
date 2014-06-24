@@ -35,7 +35,10 @@ public abstract class RuneRegistry
     
     /**Called from *RuneConfigurationHandler. Sets numeric ids for runes from config*/
     public static void setupNumIds(RuneConfig config) {
-    	int runeCount = config.getRuneCount(); 
+    	if(config == null) {
+    		return;
+    	}
+    	int runeCount = config.getRuneCount();
     	if(runeCount == 0) {
     		CelestialWizardry.log.error("Attempted to setup runeconfig but config's runecount is zero.");
     		return; // TODO throw exception

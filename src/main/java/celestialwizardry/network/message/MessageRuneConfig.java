@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import celestialwizardry.CelestialWizardry;
+import celestialwizardry.config.RuneConfigPart;
 import celestialwizardry.handler.ClientRuneConfigurationHandler;
 import io.netty.buffer.ByteBuf;
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
@@ -13,11 +14,11 @@ import cpw.mods.fml.relauncher.Side;
 
 public class MessageRuneConfig implements IMessage, IMessageHandler<MessageRuneConfig, IMessage> {
 	
+	public static final int entryHardLimit = 5;
+	
 	private static final char entryEndChar = ';';
 	private static final char escChar = '/';
 	private static final char endOfEntries = '#';
-	
-	public static final int entryHardLimit = 5; 
 	
 	/**the id of this message*/
 	public int msgId;
@@ -29,13 +30,35 @@ public class MessageRuneConfig implements IMessage, IMessageHandler<MessageRuneC
 	public int fullEntryCount;
 	public String[] entryLines;
 	
+	public MessageRuneConfig() {}
+	
+	public MessageRuneConfig(int msgId, int msgCount, int entryCount, int fullEntryCount, String[] entryLines) {
+		this.msgId = msgId;
+		this.msgCount = msgCount;
+		this.entryCount = entryCount;
+		this.fullEntryCount = fullEntryCount;
+		this.entryLines = entryLines;
+	}
+	
+	public MessageRuneConfig(int msgId, int msgCount, int fullEntryCount, RuneConfigPart entries) {
+		this.msgId = msgId;
+		this.msgCount = msgCount;
+		this.entryCount = entries.getLineCount();
+		this.fullEntryCount = fullEntryCount;
+		String[] lines = new String[this.entryCount];
+		for(int i=0;i<this.entryCount;i++) {
+			lines[i] = entries.getLine(i);
+		}
+		this.entryLines = lines;
+	}
 	
 	@Override
 	public IMessage onMessage(MessageRuneConfig message, MessageContext ctx) {
-		if(ctx.side == Side.CLIENT) {
-			ClientRuneConfigurationHandler.addEntriesToBuffer(message);
+		ClientRuneConfigurationHandler.addEntriesToBuffer(message);
+		for(int i=0;i<message.entryLines.length;i++) {
+			System.out.println("Received: " + message.entryLines[i]);
 		}
-		return null;
+		return new MessageRuneConfigReply(MessageRuneConfigReply.CODE_OK);
 	}
 
 	@Override
@@ -48,13 +71,15 @@ public class MessageRuneConfig implements IMessage, IMessageHandler<MessageRuneC
 		this.entryLines = new String[entryCount];
 		
 		char cc = endOfEntries;
+		int cysLeft = 1000;
 		int cycles = 0;
-		StringBuilder sb = null;
+		StringBuilder sb = new StringBuilder();
 		List<String> lines = new ArrayList<String>();
-		while((cc = buf.readChar()) != endOfEntries && cycles < entryCount && cycles < entryHardLimit) {
+		while((cc = buf.readChar()) != endOfEntries && cycles < entryCount && cycles < entryHardLimit && cysLeft>1) {
 			if(cc == entryEndChar) {
 				lines.add(sb.toString());
 				sb = new StringBuilder();
+				cycles++;
 			} else {
 				if(cc == escChar) {
 					sb.append(buf.readChar()); // Get the next character after the escChar
@@ -62,9 +87,15 @@ public class MessageRuneConfig implements IMessage, IMessageHandler<MessageRuneC
 					sb.append(cc);
 				}
 			}
-			cycles++;
+			cysLeft--;
 		}
-		this.entryLines = (String[]) lines.toArray();
+		
+		Object[] lines2 = lines.toArray();
+		System.out.println("Reading " + lines2.length + " objects...");
+		this.entryLines = new String[lines2.length];
+		for(int i=0;i<this.entryLines.length;i++) {
+			this.entryLines[i] = lines2[i].toString();
+		}
 	}
 
 	@Override
@@ -73,6 +104,7 @@ public class MessageRuneConfig implements IMessage, IMessageHandler<MessageRuneC
 		if(entryCount != entryLines.length) {
 			CelestialWizardry.log.error("Error at building a message: entryCount doesn't match the length of the entryLines array! Continuing anyway, THIS WILL CAUSE PROBLEMS!!!");
 		}
+		
 		buf.writeInt(msgId);
 		buf.writeInt(msgCount);
 		buf.writeInt(entryCount);
@@ -90,9 +122,12 @@ public class MessageRuneConfig implements IMessage, IMessageHandler<MessageRuneC
 				}
 			}
 			sb.append(entryEndChar);
-			buf.writeBytes(sb.toString().getBytes());
+			try{
+				buf.writeBytes(sb.toString().getBytes("UTF-16"));
+			}catch(Exception e) {}
 			sb = null;
 		}
+		
 		buf.writeChar((int)endOfEntries);
 	}
 	

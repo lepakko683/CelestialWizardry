@@ -13,6 +13,7 @@ import celestialwizardry.reference.Settings;
 import celestialwizardry.util.PlayerHelper;
 import celestialwizardry.util.SpawnHelper;
 import celestialwizardry.util.StringHelper;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -205,17 +206,9 @@ public class PlayerEventHandler
 
             properties.fun = true;
         }
-        /*
-        // TODO: ONLY ON SERVER
-        RuneConfig rConf = ServerRuneConfigurationHandler.getConfigToSendToClients(); 
-        if(rConf == null) {
-        	// FMLServerHandler.instance().getServer().getAllUsernames(); don't delete plz :)
-        	ServerRuneConfigurationHandler.addConfigNeedingPlayer(event.player.getCommandSenderName());
-        } else {
-        	// Send RuneConfig
-        }
         
-        //TODO: send rune configuration
-        */
+        if(event.player instanceof EntityPlayerMP && !event.player.worldObj.isRemote) {
+        	ServerRuneConfigurationHandler.sendRuneConfigTo((EntityPlayerMP)event.player);
+        }
     }
 }

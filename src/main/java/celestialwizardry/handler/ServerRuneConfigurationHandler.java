@@ -15,11 +15,15 @@ import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.Minecraft;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.CompressedStreamTools;
 import net.minecraft.nbt.NBTTagCompound;
 import celestialwizardry.CelestialWizardry;
 import celestialwizardry.api.spellgrammar.Rune;
 import celestialwizardry.config.RuneConfig;
+import celestialwizardry.config.RuneConfigPart;
+import celestialwizardry.network.PacketHandler;
+import celestialwizardry.network.message.MessageRuneConfig;
 import celestialwizardry.registry.RuneRegistry;
 
 public class ServerRuneConfigurationHandler {
@@ -36,7 +40,7 @@ public class ServerRuneConfigurationHandler {
 	
 	//Load after runes have been registered
 	
-	private static List<String> configNeedingPlayers = new ArrayList<String>();
+	private static List<EntityPlayerMP> configNeedingPlayers = new ArrayList<EntityPlayerMP>();
 	
 	private static NBTTagCompound worldRuneConfig = null;
 	private static boolean needToSave = false;
@@ -46,6 +50,8 @@ public class ServerRuneConfigurationHandler {
 	private static boolean configWasJustCreated = false;
 //	private static final char separatorChr = File.separatorChar;
 	private static boolean isClientServer = true;
+	
+	private static RuneConfigPart[] configForPlayers = null;
 	
 	/**Called to setup configData*/
 	private static void init(boolean created) {
@@ -77,7 +83,28 @@ public class ServerRuneConfigurationHandler {
 					}
 				}
 			}
-			
+		}
+		
+		if(!configData.isEmpty()) {
+			String[] data = configData.getAsStringArray();
+			System.out.println("dataLen: " + data.length);
+			configForPlayers = new RuneConfigPart[(int)Math.ceil((double)(data.length)/5)];
+			System.out.println("dataLen: " + data.length + " cForPlrsLen: " + configForPlayers.length + " ddd: " + ((double)(data.length)/5));
+			for(int i=0;i<configForPlayers.length;i++) {
+				String[] confPart = new String[data.length-i*5];
+				System.arraycopy(data, i*5, confPart, 0, data.length-i*5);
+				configForPlayers[i] = new RuneConfigPart(confPart, i);
+				System.out.println("wee!");
+			}
+		}
+		
+		if(configNeedingPlayers != null && configNeedingPlayers.size()>0) {
+			for(int i=0;i<configNeedingPlayers.size();i++) {
+				EntityPlayerMP plr = configNeedingPlayers.get(i);
+				if(plr != null) {
+					sendRuneConfigTo(plr);
+				}
+			}
 		}
 	}
 	
@@ -95,10 +122,6 @@ public class ServerRuneConfigurationHandler {
 		}
 		
 		return ret;
-	}
-	
-	private static void addToConfig(String runeStringID, int runeNumbericID) {
-		worldRuneConfig.setInteger(runeStringID, runeNumbericID);
 	}
 	
 	private static File getWorldRuneConfigFile() {
@@ -317,10 +340,14 @@ public class ServerRuneConfigurationHandler {
 		return configData;
 	}
 	
+	public static RuneConfigPart getConfigPartToSendToClients(int partId) {
+		return null;
+	}
+	
 	public static void onServerStopping() {
 		saveConfigIfNeeded();
 		reset();
-		RuneRegistry.reset(); // Handle elsewhere
+		RuneRegistry.reset(); // TODO: Handle elsewhere
 	}
 	
 	private static void reset() {
@@ -333,10 +360,24 @@ public class ServerRuneConfigurationHandler {
 	}
 	
 	/**Adds userName to the list of players' usernames that still need the runeconfig.*/
-	public static void addConfigNeedingPlayer(String username) {
+	private static void addConfigNeedingPlayer(EntityPlayerMP player) {
 		if(configNeedingPlayers == null) {
-			configNeedingPlayers = new ArrayList<String>();
+			configNeedingPlayers = new ArrayList<EntityPlayerMP>();
 		}
-		configNeedingPlayers.add(username);
+		configNeedingPlayers.add(player);
+	}
+	
+	public static void sendRuneConfigTo(EntityPlayerMP player) {
+		if(configForPlayers != null && configForPlayers.length > 0) {
+			for(int i=0;i<configForPlayers.length;i++) {
+//				MessageRuneConfig mrc = new MessageRuneConfig(i, configForPlayers.length, configData.getRuneCount(), configForPlayers[i]);
+				PacketHandler.INSTANCE.sendTo(new MessageRuneConfig(i, configForPlayers.length, configData.getRuneCount(), configForPlayers[i]), player);
+				System.out.println("send!");
+			}
+			
+		} else {
+			addConfigNeedingPlayer(player);
+		}
+		
 	}
 }

@@ -28,6 +28,10 @@ public abstract class CommonProxy implements IProxy
         // Register item expire event handler
         FMLCommonHandler.instance().bus().register(EventHandlers.Common.ITEM_EXPIRE_EVENT_HANDLER);
         MinecraftForge.EVENT_BUS.register(EventHandlers.Common.ITEM_EXPIRE_EVENT_HANDLER);
+        
+        // Register disconnect event handler (handles both server and client)
+        FMLCommonHandler.instance().bus().register(EventHandlers.Common.DISCONNECT_EVENT_HANDLER);
+        MinecraftForge.EVENT_BUS.register(EventHandlers.Common.DISCONNECT_EVENT_HANDLER);
     }
 
     public void registerTileEntities()
