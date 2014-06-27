@@ -60,6 +60,11 @@ public class StringHelper
         return localize("message." + Resources.RESOURCE_PREFIX + message);
     }
 
+    public static String getConfig(String config)
+    {
+        return localize("configgui." + Resources.RESOURCE_PREFIX + config);
+    }
+
     public static int getSplitStringHeight(FontRenderer fontRenderer, String input, int width)
     {
         List stringRows = fontRenderer.listFormattedStringToWidth(input, width);

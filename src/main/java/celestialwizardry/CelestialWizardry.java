@@ -16,10 +16,13 @@ import celestialwizardry.init.ModItems;
 import celestialwizardry.network.GuiHandler;
 import celestialwizardry.network.PacketHandler;
 import celestialwizardry.proxy.IProxy;
+import celestialwizardry.reference.EventHandlers;
 import celestialwizardry.reference.Reference;
 import celestialwizardry.reference.Version;
 import celestialwizardry.spellbook.SpellBook;
 import celestialwizardry.world.WorldGenerator;
+
+import net.minecraftforge.common.config.Configuration;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.Mod;
@@ -33,7 +36,6 @@ import cpw.mods.fml.common.event.FMLServerStoppingEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
-import net.minecraft.client.Minecraft;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -42,7 +44,7 @@ import org.apache.logging.log4j.Logger;
  * The main mod class of Minecraft mod Celestial Wizardry
  */
 @Mod(modid = Reference.MOD_ID, name = Reference.MOD_NAME, version = Version.VERSION,
-     certificateFingerprint = Reference.FINGERPRINT, dependencies = Reference.DEPENDENCIES)
+     certificateFingerprint = Reference.FINGERPRINT, dependencies = Reference.DEPENDENCIES, guiFactory = Reference.GUI_FACTORY_CLASS)
 public class CelestialWizardry
 {
     @SidedProxy(clientSide = Reference.CLIENT_PROXY_CLASS, serverSide = Reference.SERVER_PROXY_CLASS)
@@ -113,7 +115,7 @@ public class CelestialWizardry
         configSpells.setConfiguration("Spells");
 
         // Initialize configuration settings
-        SettingHandler.init();
+        SettingHandler.sync();
 
         // Save configuration
         config.save();
@@ -149,6 +151,9 @@ public class CelestialWizardry
 
         // Register gui handler
         NetworkRegistry.INSTANCE.registerGuiHandler(instance, new GuiHandler());
+
+        // Register config change event handler
+        FMLCommonHandler.instance().bus().register(EventHandlers.Common.CONFIG_CHANGED_EVENT_HANDLER);
 
         // Register mod tile entities
         proxy.registerTileEntities();

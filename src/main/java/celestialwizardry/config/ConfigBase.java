@@ -104,6 +104,11 @@ public class ConfigBase
         return modConfiguration.getCategory(category).getValues().keySet();
     }
 
+    public boolean hasChanged()
+    {
+        return modConfiguration.hasChanged();
+    }
+
     public boolean hasCategory(String category)
     {
         return modConfiguration.hasCategory(category);

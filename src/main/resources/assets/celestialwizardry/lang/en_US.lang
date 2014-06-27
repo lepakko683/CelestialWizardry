@@ -33,6 +33,9 @@ tile.celestialwizardry:magicalStone.name=Magical Stone
 tile.celestialwizardry:smallCrystal.name=Small Crystal (WIP)
 tile.celestialwizardry:containedCrystal.name=Contained Crystal
 
+# Config localizations
+configgui.celestialwizardry:configTitle=Celestial Wizardry Configuration
+
 # GUI localizations
 container.celestialwizardry:writingTable=Writing Table
 container.celestialwizardry:spellBookInventory=Spells

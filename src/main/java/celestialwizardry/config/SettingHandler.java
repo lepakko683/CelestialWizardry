@@ -8,7 +8,7 @@ import celestialwizardry.reference.Settings;
  */
 public class SettingHandler
 {
-    public static void init()
+    public static void sync()
     {
         /**
          * General
@@ -55,5 +55,10 @@ public class SettingHandler
         Settings.hardcoreRecipes = CelestialWizardry.config
                 .get(category, Settings.ConfigNames.HARDCORE_RECIPES, Settings.DefaultValues.HARDCORE_RECIPES,
                      Settings.Comments.HARDCORE_RECIPES);
+
+        if (CelestialWizardry.config.hasChanged())
+        {
+            CelestialWizardry.config.save();
+        }
     }
 }
