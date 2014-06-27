@@ -3,6 +3,7 @@ package celestialwizardry;
 import java.io.File;
 
 import celestialwizardry.api.CWApi;
+import celestialwizardry.client.render.Renderables;
 import celestialwizardry.config.Config;
 import celestialwizardry.config.SettingHandler;
 import celestialwizardry.config.spell.ConfigSpells;
@@ -163,6 +164,9 @@ public class CelestialWizardry
 
         // Register mod renders
         proxy.registerRenderer();
+        
+        // Initialize renderables
+        Renderables.init();
 
         // Register world generator
         GameRegistry.registerWorldGenerator(new WorldGenerator(), 0);

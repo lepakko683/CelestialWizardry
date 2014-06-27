@@ -3,14 +3,15 @@ package celestialwizardry.block;
 import celestialwizardry.CelestialWizardry;
 import celestialwizardry.client.render.RenderOBJBlock;
 import celestialwizardry.item.ItemMagicalInk;
+import celestialwizardry.item.ItemPage;
 import celestialwizardry.reference.GuiIds;
 import celestialwizardry.reference.Names;
 import celestialwizardry.tileentity.TileEntityWritingTable;
-
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemBook;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
@@ -65,6 +66,7 @@ public class BlockWritingTable extends BlockCW implements ITileEntityProvider
 //        }
 //    }
 
+    // TODO: Cleanup!
     @Override
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int par6, float par7,
                                     float par8, float par9)
@@ -77,20 +79,29 @@ public class BlockWritingTable extends BlockCW implements ITileEntityProvider
         {
             if (!world.isRemote)
             {
-                if (player.getCurrentEquippedItem() != null && player.getCurrentEquippedItem()
-                        .getItem() instanceof ItemMagicalInk)
-                {
-                    ItemStack ink = player.getCurrentEquippedItem();
-
-                    if (world.getTileEntity(x, y, z) instanceof TileEntityWritingTable)
+            	TileEntity te = world.getTileEntity(x, y, z);
+            	if(te instanceof TileEntityWritingTable) {
+            		ItemStack currentItem = player.getCurrentEquippedItem();
+            		if(currentItem == null) {
+            			if(((TileEntityWritingTable) te).getStackInSlot(TileEntityWritingTable.MIDDLE_INVENTORY_INDEX) != null) {
+            				player.setCurrentItemOrArmor(0, ((TileEntityWritingTable) te).getStackInSlot(TileEntityWritingTable.MIDDLE_INVENTORY_INDEX).copy());
+            				((TileEntityWritingTable) te).setInventorySlotContents(TileEntityWritingTable.MIDDLE_INVENTORY_INDEX, null);
+            				return true;
+            			}
+            			player.openGui(CelestialWizardry.instance, GuiIds.WRITING_TABLE, world, x, y, z);
+            			return true;
+            		}
+            		if(putItemInMainSlot((TileEntityWritingTable)te, currentItem)) {
+            			return true;
+            		}
+            		
+            		if (player.getCurrentEquippedItem().getItem() instanceof ItemMagicalInk)
                     {
-                        TileEntityWritingTable table = (TileEntityWritingTable) world.getTileEntity(x, y, z);
-
-                        ItemStack slot = table.getStackInSlot(TileEntityWritingTable.INK_INVENTORY_INDEX);
+                        ItemStack slot = ((TileEntityWritingTable)te).getStackInSlot(TileEntityWritingTable.INK_INVENTORY_INDEX);
 
                         if (slot == null)
                         {
-                            table.setInventorySlotContents(TileEntityWritingTable.INK_INVENTORY_INDEX, ink.copy());
+                        	((TileEntityWritingTable)te).setInventorySlotContents(TileEntityWritingTable.INK_INVENTORY_INDEX, currentItem.copy());
                             player.destroyCurrentEquippedItem();
                         }
                         else
@@ -98,14 +109,10 @@ public class BlockWritingTable extends BlockCW implements ITileEntityProvider
                             player.openGui(CelestialWizardry.instance, GuiIds.WRITING_TABLE, world, x, y, z);
                         }
                     }
-                }
-                else
-                {
-                    if (world.getTileEntity(x, y, z) instanceof TileEntityWritingTable)
-                    {
-                        player.openGui(CelestialWizardry.instance, GuiIds.WRITING_TABLE, world, x, y, z);
-                    }
-                }
+            	}
+            	
+            	
+                
             }
 
             return true;
@@ -182,5 +189,14 @@ public class BlockWritingTable extends BlockCW implements ITileEntityProvider
     public TileEntity createNewTileEntity(World world, int meta)
     {
         return new TileEntityWritingTable();
+    }
+    
+    private boolean putItemInMainSlot(TileEntityWritingTable te, ItemStack stack) {
+    	if(stack.getItem() instanceof ItemBook || stack.getItem() instanceof ItemPage) {
+    		te.setInventorySlotContents(TileEntityWritingTable.MIDDLE_INVENTORY_INDEX, stack);
+    		return true;
+    	}
+    	
+    	return false;
     }
 }

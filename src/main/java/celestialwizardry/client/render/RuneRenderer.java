@@ -10,12 +10,14 @@ import cpw.mods.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class RuneRenderer implements IResourceManagerReloadListener {
 	
-	private final ResourceLocation runeTextureLocation;
+	private final ResourceLocation currentRuneTexture = null;
+	
+	private String[] modidRuneTexLocs = null;
 	
 	private Colour currColor;
 	
-	public RuneRenderer(ResourceLocation runeTexLoc) {
-		this.runeTextureLocation = runeTexLoc;
+	public RuneRenderer() {
+		
 	}
 	
 	public int getRuneWidth(int runeId) {

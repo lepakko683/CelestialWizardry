@@ -26,6 +26,8 @@ public class Resources
         public static final ResourceLocation GUI_SPELL_BOOK_OLD = ResourceLocationHelper
                 .getResourceLocation(GUI_SHEET_LOCATION + "spellBookOld.png");
         
+        public static final ResourceLocation PAGE = ResourceLocationHelper.getResourceLocation("textures/items/page.png");
+        
         
     }
 

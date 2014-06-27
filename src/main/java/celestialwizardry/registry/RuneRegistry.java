@@ -11,9 +11,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import net.minecraft.util.ResourceLocation;
+
 public abstract class RuneRegistry
 {
 	// Rune id 0 is intentionally unused!!!
+	public static Map<String,ResourceLocation[]> runeTexLocs = new HashMap<String, ResourceLocation[]>();
     public static Map<String, Rune> runeMap = new HashMap<String, Rune>();
     private static String[] runeIdsv = null;
     
@@ -81,6 +84,12 @@ public abstract class RuneRegistry
         	configLoaded = true;
     	} else {
     		CelestialWizardry.log.error("Trying to setup numberic ids and runeIds isn't empty!"); // TODO throw exception
+    	}
+    }
+    
+    public static void registerRuneTextureLocations(String modid, ResourceLocation[] locs) {
+    	if(!runeTexLocs.containsKey(modid)) {
+    		runeTexLocs.put(modid, locs);
     	}
     }
     
