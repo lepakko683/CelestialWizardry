@@ -126,11 +126,11 @@ Celestial Wizardry crashes every time? Have a suggestion? Found a bug? Create an
 
 ###Developers
 ***
-* **PizzAna** ([@PizzAna_](http://twitter.com/PizzAna_) on twitter)
+* **@PizzAna** ([@PizzAna_](http://twitter.com/PizzAna_) on twitter)
 	* Code
 	* Design
 	
-* **Okkapel** (aka Lepakko683, [@Le683](http://twitter.com/Le683) on twitter)
+* **@lepakko683** (aka Okkapel, [@Le683](http://twitter.com/Le683) on twitter)
 	* Design
 	* Textures & models
 	* Code
@@ -138,6 +138,8 @@ Celestial Wizardry crashes every time? Have a suggestion? Found a bug? Create an
 
 ###Blamelist
 ***
-* **Okkapel**
+* **@lepakko683**
 	* All rune stuff
 	* Spell system
+* **@PizzAna**
+	* Build script
