@@ -1,5 +1,7 @@
 package celestialwizardry.proxy;
 
+import net.minecraft.world.World;
+
 public interface IProxy
 {
     public void registerEventHandlers();
@@ -9,8 +11,4 @@ public interface IProxy
     public void registerKeyBindings();
 
     public void registerRenderer();
-    
-    public void setupClientRuneconfig();
-    
-    public void setupServerRuneconfig();
 }

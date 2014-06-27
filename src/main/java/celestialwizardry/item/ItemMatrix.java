@@ -1,13 +1,13 @@
 package celestialwizardry.item;
 
 import celestialwizardry.api.ILockedItem;
+import celestialwizardry.api.energy.EnergyMagic;
 import celestialwizardry.api.energy.EnergyType;
 import celestialwizardry.api.matrix.IMatrix;
 import celestialwizardry.api.matrix.internal.ICWMatrix;
 import celestialwizardry.reference.Names;
 import celestialwizardry.reference.Resources;
 import celestialwizardry.reference.Settings;
-import celestialwizardry.registry.EnergyRegistry;
 import celestialwizardry.util.EnergyHelper;
 import celestialwizardry.util.KeyboardHelper;
 import celestialwizardry.util.NBTHelper;
@@ -61,10 +61,10 @@ public class ItemMatrix extends ItemSingle implements IMatrix, ICWMatrix, ILocke
         if (stack.stackTagCompound != null && NBTHelper.hasTag(stack, Names.NBT.ENERGY))
         {
             String name = stack.stackTagCompound.getString(Names.NBT.ENERGY);
-            return EnergyRegistry.getEnergyType(name);
+            // TODO return EnergyRegistry.getEnergyType(name);
         }
 
-        return null;
+        return EnergyType.DEFAULT_ENERGY;
     }
 
     /**
@@ -115,34 +115,21 @@ public class ItemMatrix extends ItemSingle implements IMatrix, ICWMatrix, ILocke
 
         if (!NBTHelper.hasTag(stack, Names.NBT.ENERGY))
         {
-            NBTHelper.setString(stack, Names.NBT.ENERGY, type.getEnergyName());
-            NBTHelper.setFloat(stack, Names.NBT.ENERGY_STORED,
-                               amount <= getMaxEnergy(stack) ? (amount < 0f ? 0f : amount) : getMaxEnergy(stack));
-            return true;
+            return setEnergy(stack, amount, type);
         }
 
-        if (NBTHelper.getString(stack, Names.NBT.ENERGY).equals(name))
+        if (getEnergyType(stack).getEnergyName().equals(name))
         {
-            float energyStored = NBTHelper.getFloat(stack, Names.NBT.ENERGY_STORED);
-            amount = amount + energyStored;
-            NBTHelper.setFloat(stack, Names.NBT.ENERGY_STORED,
-                               amount <= getMaxEnergy(stack) ? (amount < 0f ? 0f : amount) : getMaxEnergy(stack));
-            return true;
+            return setEnergy(stack, getEnergyStored(stack) + amount);
         }
         else
         {
-            String energyName = NBTHelper.getString(stack, Names.NBT.ENERGY);
-            float energyStored = NBTHelper.getFloat(stack, Names.NBT.ENERGY_STORED);
-            EnergyType energyType = EnergyRegistry.getEnergyType(energyName);
+            EnergyType energyType = getEnergyType(stack);
 
             if (transform && EnergyHelper.canTransformInto(type, energyType))
             {
-                float ratio = EnergyHelper.getTransformRatio(type, energyType);
-                amount = amount * ratio;
-                amount = amount + energyStored;
-                NBTHelper.setFloat(stack, Names.NBT.ENERGY_STORED,
-                                   amount <= getMaxEnergy(stack) ? (amount < 0f ? 0f : amount) : getMaxEnergy(stack));
-                return true;
+                amount = amount * EnergyHelper.getTransformRatio(type, energyType);
+                return setEnergy(stack, getEnergyStored(stack) + amount);
             }
         }
 
@@ -222,7 +209,57 @@ public class ItemMatrix extends ItemSingle implements IMatrix, ICWMatrix, ILocke
     @Override
     public boolean setFull(ItemStack stack, EnergyType type)
     {
-        return false; // TODO
+        return setEnergy(stack, getMaxEnergy(stack), type);
+    }
+
+    /**
+     * Removes all {@link celestialwizardry.api.energy.EnergyType} that is stored in the {@link
+     * celestialwizardry.api.matrix.IMatrix}
+     *
+     * @param stack the {@link celestialwizardry.api.matrix.IMatrix} {@link net.minecraft.item.ItemStack}
+     *
+     * @return returns true if the {@link celestialwizardry.api.energy.EnergyType} was successfully emptied
+     */
+    @Override
+    public boolean setEmpty(ItemStack stack)
+    {
+        return setEnergy(stack, 0f);
+    }
+
+    /**
+     * Tries to set the matrix {@link celestialwizardry.api.energy.EnergyType} to certain amount
+     *
+     * @param stack  the {@link net.minecraft.item.ItemStack} to get {@link celestialwizardry.api.energy.EnergyType}
+     *               set
+     * @param amount the amount of {@link celestialwizardry.api.energy.EnergyType} to set
+     *
+     * @return returns true if the {@link celestialwizardry.api.energy.EnergyType} was successfully set
+     */
+    @Override
+    public boolean setEnergy(ItemStack stack, float amount)
+    {
+        return setEnergy(stack, amount, getEnergyType(stack));
+    }
+
+    /**
+     * Tries to set the matrix {@link celestialwizardry.api.energy.EnergyType} to certain amount
+     *
+     * @param stack  the {@link net.minecraft.item.ItemStack} to get {@link celestialwizardry.api.energy.EnergyType}
+     *               set
+     * @param amount the amount of {@link celestialwizardry.api.energy.EnergyType} to set
+     * @param type   the {@link celestialwizardry.api.energy.EnergyType} that the {@link net.minecraft.item.ItemStack}
+     *               {@link celestialwizardry.api.energy.EnergyType} is being set to
+     *
+     * @return returns true if the {@link celestialwizardry.api.energy.EnergyType} was successfully set
+     */
+    @Override
+    public boolean setEnergy(ItemStack stack, float amount, EnergyType type)
+    {
+        NBTHelper.setString(stack, Names.NBT.ENERGY, type.getEnergyName());
+        NBTHelper.setFloat(stack, Names.NBT.ENERGY_STORED, celestialwizardry.util.MathHelper.clampZero_float(amount,
+                                                                                                             getMaxEnergy(
+                                                                                                                     stack)));
+        return true;
     }
 
     /**

@@ -45,8 +45,6 @@ public class Resources
         public static final ResourceLocation TEXTURE_BELL = new ResourceLocation("textures/blocks/gold_block.png");
         public static final ResourceLocation TEXTURE_CONTAINED_CRYSTAL = new ResourceLocation("textures/blocks/stone.png");
 
-        
-        
         // Model files (.OBJs)
         public static final ResourceLocation MODEL_WRITING_TABLE = ResourceLocationHelper
                 .getResourceLocation(MODEL_LOCATION + "WritingTable.obj");
@@ -65,6 +63,23 @@ public class Resources
 		
 		public static final ResourceLocation MODEL_CRYSTAL_SIMPLE_QUADS = ResourceLocationHelper
         		.getResourceLocation(MODEL_LOCATION + "CrystalSimpleQuads.obj");
+
+        public static class Crystals
+        {
+            public static final ResourceLocation TEXTURE_CRYSTAL_CONDUCTIVE = new ResourceLocation("textures/blocks/lapis_block.png");
+
+            public static final ResourceLocation MODEL_CRYSTAL_SIMPLE = ResourceLocationHelper.getResourceLocation(
+                    MODEL_LOCATION + "crystalSimple.obj");
+            public static final ResourceLocation MODEL_CRYSTAL_COMPLEX = ResourceLocationHelper.getResourceLocation(
+                    MODEL_LOCATION + "crystalComplex.obj");
+        }
+    }
+
+    public static class Particles
+    {
+        public static final String MISC_LOCATION = "textures/misc/";
+
+        public static final ResourceLocation TEST_FX_LARGE = ResourceLocationHelper.getResourceLocation(MISC_LOCATION + "testFXLarge.png");
     }
     
     public static class Misc

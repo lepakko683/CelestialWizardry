@@ -91,6 +91,36 @@ public interface IMatrix
     public boolean setFull(ItemStack stack, EnergyType type);
 
     /**
+     * Removes all {@link EnergyType} that is stored in the {@link IMatrix}
+     *
+     * @param stack the {@link IMatrix} {@link ItemStack}
+     *
+     * @return returns true if the {@link EnergyType} was successfully emptied
+     */
+    public boolean setEmpty(ItemStack stack);
+
+    /**
+     * Tries to set the matrix {@link EnergyType} to certain amount
+     *
+     * @param stack  the {@link ItemStack} to get {@link EnergyType} set
+     * @param amount the amount of {@link EnergyType} to set
+     *
+     * @return returns true if the {@link EnergyType} was successfully set
+     */
+    public boolean setEnergy(ItemStack stack, float amount);
+
+    /**
+     * Tries to set the matrix {@link EnergyType} to certain amount
+     *
+     * @param stack  the {@link ItemStack} to get {@link EnergyType} set
+     * @param amount the amount of {@link EnergyType} to set
+     * @param type   the {@link EnergyType} that the {@link ItemStack} {@link EnergyType} is being set to
+     *
+     * @return returns true if the {@link EnergyType} was successfully set
+     */
+    public boolean setEnergy(ItemStack stack, float amount, EnergyType type);
+
+    /**
      * Returns the maximum amount of {@link EnergyType} that can be stored inside this matrix
      *
      * @param stack the {@link ItemStack} to check the maximum amount of {@link EnergyType} from

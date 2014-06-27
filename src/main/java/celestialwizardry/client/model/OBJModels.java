@@ -17,7 +17,10 @@ public class OBJModels
 //	public static OBJModelBlock modelCrystalContained = new OBJModelBlock(Resources.Models.MODEL_CRYSTAL_CONTAINED);
 	public static OBJModelBlock modelCrystalContained = new OBJModelBlock(Resources.Models.MODEL_CRYSTAL_CONTAINED_QUADS);
 	public static OBJModelBlock modelCrystalSimpleQ = new OBJModelBlock(Resources.Models.MODEL_CRYSTAL_SIMPLE_QUADS);
-	
+
+    public static WavefrontObject modelCrystalSimple = new WavefrontObject(Resources.Models.Crystals.MODEL_CRYSTAL_SIMPLE);
+    public static WavefrontObject modelCrystalComplex = new WavefrontObject(Resources.Models.Crystals.MODEL_CRYSTAL_COMPLEX);
+
 //    public static WavefrontObject modelWritingTable;
     
     //ITEMS

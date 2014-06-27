@@ -5,6 +5,8 @@ public abstract class EnergyType
     //Solar energy, Lunar energy, earth energy, fire energy, air energy, water energy
     //Mundane energy types: heat, ...
 
+    public static final EnergyType DEFAULT_ENERGY = new EnergyMagic(EnergyType.CWEnergyType.MAGIC_LUNAR);
+
     protected Object energyType;
 
     protected Object energyCategory;
@@ -66,6 +68,12 @@ public abstract class EnergyType
     }
 
     public abstract float crossEnergyTypeTransformLoss(EnergyType target);
+
+    @Override
+    public String toString()
+    {
+        return getEnergyName();
+    }
 
     public static enum CWEnergyType
     {

@@ -8,7 +8,7 @@ public class Names
         public static final String LIVING_ORE = "livingOre";
         public static final String BELL = "bell";
         public static final String MAGICAL_STONE = "magicalStone";
-        public static final String SMALL_CRYSTAL = "smallCrystal";
+        public static final String CRYSTAL_CONDUCTIVE = "crystalConductive";
         public static final String CONTAINED_CRYSTAL = "containedCrystal";
     }
 
@@ -31,7 +31,7 @@ public class Names
         public static final String PAGE = "page";
         public static final String MAGICAL_PEN = "magicalPen";
         public static final String MATRIX = "matrix";
-		public static final String SOARYN_CHEST_PLCR = "soarynChestPlcr";
+        public static final String SOARYN_CHEST_PLCR = "soarynChestPlcr";
     }
 
     public static class NBT
@@ -52,6 +52,13 @@ public class Names
         public static final String ENERGY = "energy";
         public static final String ENERGY_STORED = "energyStored";
         public static final String OPENERS = "openers";
+        public static final String BOUND_X = "boundX";
+        public static final String BOUND_Y = "boundY";
+        public static final String BOUND_Z = "boundZ";
+        public static final String OPEN = "open";
+        public static final String BOUNDING = "bounding";
+        public static final String BUFFER = "buffer";
+        public static final String BUFFER_SIZE = "bufferSize";
     }
 
     public static class Containers

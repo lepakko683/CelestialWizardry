@@ -2,16 +2,15 @@ package celestialwizardry.client.render;
 
 import celestialwizardry.block.BlockBell;
 import celestialwizardry.block.BlockContainedCrystal;
+import celestialwizardry.block.BlockCrystalConductive;
 import celestialwizardry.block.BlockWritingTable;
 import celestialwizardry.client.model.OBJModels;
 import celestialwizardry.reference.Resources;
-import celestialwizardry.util.RenderHelper;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.IIcon;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.IBlockAccess;
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
@@ -44,25 +43,30 @@ public class RenderOBJBlock implements ISimpleBlockRenderingHandler
                 GL11.glScalef(1f, 1f, 1f);
                 OBJModels.modelWritingTable.renderAll();
             }
-            if (block instanceof BlockBell)
+            else if (block instanceof BlockBell)
             {
-            	FMLClientHandler.instance().getClient().renderEngine.bindTexture(Resources.Models.TEXTURE_BELL);
-            	GL11.glTranslatef(0f, -1.3f, 0f);
-            	GL11.glScalef(2f, 2f, 2f);
+                FMLClientHandler.instance().getClient().renderEngine.bindTexture(Resources.Models.TEXTURE_BELL);
+                GL11.glTranslatef(0f, -1.3f, 0f);
+                GL11.glScalef(2f, 2f, 2f);
 //            	OBJModels.modelBell.renderPart("dinger_Planee");
-            	GL11.glDisable(GL11.GL_CULL_FACE);
-            	OBJModels.modelBell.renderAll();
-            	GL11.glEnable(GL11.GL_CULL_FACE);
+                GL11.glDisable(GL11.GL_CULL_FACE);
+                OBJModels.modelBell.renderAll();
+                GL11.glEnable(GL11.GL_CULL_FACE);
             }
             if (block instanceof BlockContainedCrystal)
             {
-            	FMLClientHandler.instance().getClient().renderEngine.bindTexture(Resources.Models.TEXTURE_CONTAINED_CRYSTAL);
-            	GL11.glTranslatef(0f, -.5f, 0f);
+                FMLClientHandler.instance().getClient().renderEngine
+                        .bindTexture(Resources.Models.TEXTURE_CONTAINED_CRYSTAL);
+                GL11.glTranslatef(0f, -.5f, 0f);
 //            	GL11.glScalef(2f, 2f, 2f);
-            	OBJModels.modelCrystalContained.renderAll();
-            	FMLClientHandler.instance().getClient().renderEngine.bindTexture(Resources.Models.TEXTURE_BELL);
-            	OBJModels.modelCrystalSimpleQ.renderAll();
-            	
+                OBJModels.modelCrystalContained.renderAll();
+                FMLClientHandler.instance().getClient().renderEngine.bindTexture(Resources.Models.TEXTURE_BELL);
+                OBJModels.modelCrystalSimpleQ.renderAll();
+            }
+            else if (block instanceof BlockCrystalConductive)
+            {
+                FMLClientHandler.instance().getClient().renderEngine.bindTexture(Resources.Models.Crystals.TEXTURE_CRYSTAL_CONDUCTIVE);
+                crystalSimpleGL11();
             }
 
             GL11.glPopMatrix();
@@ -112,4 +116,15 @@ public class RenderOBJBlock implements ISimpleBlockRenderingHandler
         return ID;
     }
 
+    protected void crystalSimpleGL11()
+    {
+        GL11.glTranslatef(0f, -1f, 0f); // TODO: tweak to render correctly in inventory & in hand
+        GL11.glScalef(.7f, .7f, .7f);
+        OBJModels.modelCrystalSimple.renderAll();
+    }
+
+    protected void crystalComplexGL11()
+    {
+
+    }
 }

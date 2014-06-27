@@ -1,5 +1,6 @@
 package celestialwizardry.proxy;
 
+import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -18,16 +19,4 @@ public class ServerProxy extends CommonProxy
         // NO-OP
     }
 
-	@Override
-	public void setupClientRuneconfig() {
-		// Do nothing
-		
-	}
-
-	@Override
-	public void setupServerRuneconfig() {
-		// TODO Do Something
-		
-	}
-    
 }

@@ -6,16 +6,18 @@ import celestialwizardry.client.render.RenderEntityBell;
 import celestialwizardry.client.render.RenderMagicalStone;
 import celestialwizardry.client.render.RenderOBJBlock;
 import celestialwizardry.client.render.RenderWritingTable;
+import celestialwizardry.client.render.crystal.RenderCrystalSimple;
 import celestialwizardry.client.settings.KeyBindings;
 import celestialwizardry.entity.EntityBell;
 import celestialwizardry.init.ModItems;
 import celestialwizardry.reference.EventHandlers;
+import celestialwizardry.reference.Resources;
 import celestialwizardry.reference.Settings;
 import celestialwizardry.tileentity.TileEntityBell;
+import celestialwizardry.tileentity.TileEntityCrystalConductive;
 import celestialwizardry.tileentity.TileEntityWritingTable;
-import net.minecraft.client.renderer.texture.IIconRegister;
+
 import net.minecraftforge.client.MinecraftForgeClient;
-import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.FMLCommonHandler;
@@ -35,7 +37,7 @@ public class ClientProxy extends CommonProxy
 
         // Register key input handler
         FMLCommonHandler.instance().bus().register(EventHandlers.Client.KEY_INPUT_EVENT_HANDLER);
-        
+
         // Register client render tick handler
         FMLCommonHandler.instance().bus().register(EventHandlers.Client.CLIENT_RENDER_TICK_EVENT_HANDLER);
     }
@@ -57,21 +59,14 @@ public class ClientProxy extends CommonProxy
 
         RenderingRegistry.registerBlockHandler(new RenderOBJBlock());
         RenderingRegistry.registerBlockHandler(new RenderMagicalStone());
-        
+
         RenderingRegistry.registerEntityRenderingHandler(EntityBell.class, new RenderEntityBell());
 //        RenderingRegistry.registerEntityRenderingHandler(EntityLivingOre.class, new RenderOreGolem());
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityWritingTable.class, new RenderWritingTable());
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBell.class, new RenderBell());
+
+        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityCrystalConductive.class, new RenderCrystalSimple(
+                Resources.Models.Crystals.TEXTURE_CRYSTAL_CONDUCTIVE));
     }
-
-	@Override
-	public void setupClientRuneconfig() {
-		// TODO: Do something
-	}
-
-	@Override
-	public void setupServerRuneconfig() {
-		// Do nothing
-	}
 
 }
