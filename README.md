@@ -2,7 +2,7 @@ CelestialWizardry
 =================
 
 ##Welcome to CelestialWizardry GitHub repository!
-**LATEST OFFICIAL VERSION**: [N/A for Minecraft 1.7.2](https://github.com/PizzAna/CelestialWizardry)
+**LATEST OFFICIAL VERSION**: [N/A for Minecraft 1.7.2](https://github.com/Celestibytes/CelestialWizardry)
 
 **IF YOU WANT TO BUILD CELESTIAL WIZARDRY, YOU SHOULD WAIT BECAUSE BUILD SCRIPT IS NOT STABLE!**
 
@@ -61,7 +61,7 @@ This section assumes that you're using the command-line version of Git.
 
 1. Open up your command line.
 2. Navigate to a place where you want to download Celestial Wizardry's source (eg `C:\Github\CelestialWizardry\`) by executing `cd [folder location]`.  This location is known as `mcdev` from now on.
-3. Execute `git clone https://github.com/PizzAna/CelestialWizardry.git`.  This will download Celestial Wizardry's source into `mcdev`.
+3. Execute `git clone https://github.com/Celestibytes/CelestialWizardry.git`.  This will download Celestial Wizardry's source into `mcdev`.
 4. Right now, you should have a directory that looks something like:
 
 ***
@@ -97,7 +97,7 @@ You think you can improve our code? Good! Just make sure you follow these few si
 
 1. Always keep your code clean and well documented, so it's easier for us to see what you have done.
 2. It is discouraged to copy other people's code. Believe it or not, we don't need you to do that.
-3. While it is not very important, you should follow the formatting settings located [here](https://github.com/PizzAna/CelestialWizardry/blob/master/settings.jar). They are exported from PizzAna's IntelliJ Idea workspace and I'm not sure if they work in Eclipse. If they don't work for you or you don't want to use them, PizzAna does clean the code up pretty frequently.
+3. While it is not very important, you should follow the formatting settings located [here](https://github.com/Celestibytes/CelestialWizardry/blob/master/settings.jar). They are exported from PizzAna's IntelliJ Idea workspace and I'm not sure if they work in Eclipse. If they don't work for you or you don't want to use them, PizzAna does clean the code up pretty frequently.
 
 ####Submitting a PR
 So you found a bug in our code? Think you can make it more efficient? Want to help in general? Great!
@@ -114,7 +114,7 @@ So you found a bug in our code? Think you can make it more efficient? Want to he
 Celestial Wizardry crashes every time? Have a suggestion? Found a bug? Create an issue now!
 
 1. Make sure your issue hasn't already been answered or fixed. Also think about whether your issue is a valid one before submitting it.
-2. Go to [the issues page](https://github.com/PizzAna/CelestialWizardry/issues).
+2. Go to [the issues page](https://github.com/Celestibytes/CelestialWizardry/issues).
 3. Click `New Issue` right below `Star` and `Fork`.
 4. Enter your Issue's title (something that summarizes your issue), and then create a detailed description ("Hey, could you add/change xxx?" or "Hey, found an exploit:  stuff").
 	* If you are reporting a bug report from an unofficial version, make sure you include the following:
