@@ -43,6 +43,7 @@ public class Resources
                 .getResourceLocation(MODEL_TEXTURE_LOCATION + "writingTable.png");
         
         public static final ResourceLocation TEXTURE_BELL = new ResourceLocation("textures/blocks/gold_block.png");
+        public static final ResourceLocation TEXTURE_CONTAINED_CRYSTAL = new ResourceLocation("textures/blocks/stone.png");
 
         // Model files (.OBJs)
         public static final ResourceLocation MODEL_WRITING_TABLE = ResourceLocationHelper

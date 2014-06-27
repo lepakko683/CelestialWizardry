@@ -35,10 +35,10 @@ public class BlockCrystalConductive extends BlockCrystal
 
         if (world.getTileEntity(x, y, z) instanceof TileEntityCrystalConductive)
         {
-            if (((TileEntityCrystalConductive) world.getTileEntity(x, y, z)).open)
+            /* if (((TileEntityCrystalConductive) world.getTileEntity(x, y, z)).open)
             {
                 world.spawnParticle(Particles.LARGE_SMOKE, (double) x + random.nextDouble(), (double) y + 1, (double) z + random.nextDouble(), 0D, 0D, 0D);
-            }
+            } */
         }
     }
 
@@ -55,7 +55,7 @@ public class BlockCrystalConductive extends BlockCrystal
     @Override
     public TileEntity createNewTileEntity(World world, int var2)
     {
-        return new TileEntityCrystalConductive();
+        return new TileEntityCrystalConductive(this);
     }
 
     /* ======================================== ITileEntityProvider END ===================================== */
