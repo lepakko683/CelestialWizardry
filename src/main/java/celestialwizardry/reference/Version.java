@@ -9,4 +9,5 @@ public class Version
     public static final String FORGE = "10.12.2.1121";
     public static final String MINECRAFT = "1.7.2";
     public static final String BAUBLES = "1.0.0.16";
+    public static final String BAUBLES_MC = "1.7.2"
 }
