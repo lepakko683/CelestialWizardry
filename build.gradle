@@ -21,7 +21,7 @@ buildscript {
         }
     }
     dependencies {
-        classpath 'net.minecraftforge.gradle:CelestiGradle:0.2-SNAPSHOT'
+        classpath 'io.github.pizzana:CelestiGradle:0.2.0'
     }
 }
 
@@ -76,7 +76,7 @@ processResources {
     }
 }
 
-version = project.mc + "-" + project.version // TODO Maybe handle this cg side
+version = project.mc + "-" + project.version
 
 apply plugin: 'cwpackage'
 
