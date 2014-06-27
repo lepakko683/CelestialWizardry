@@ -21,7 +21,7 @@ buildscript {
         }
     }
     dependencies {
-        classpath 'net.minecraftforge.gradle:CelestialGradle:0.2-SNAPSHOT'
+        classpath 'net.minecraftforge.gradle:CelestiGradle:0.2-SNAPSHOT'
     }
 }
 
