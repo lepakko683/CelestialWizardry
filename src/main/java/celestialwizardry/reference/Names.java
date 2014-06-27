@@ -9,12 +9,13 @@ public class Names
         public static final String BELL = "bell";
         public static final String MAGICAL_STONE = "magicalStone";
         public static final String SMALL_CRYSTAL = "smallCrystal";
+        public static final String CONTAINED_CRYSTAL = "containedCrystal";
     }
 
     public static class Items
     {
         public static final String MATERIAL = "material";
-        public static final String[] MATERIALS = {"magicalIntelligenceCore", "magicalPebble", "netherPearl"};
+        public static final String[] MATERIALS = {"magicalIntelligenceCore", "magicalPebble", "netherPearl", "mysteriousMatter"};
 
         public static final String CRYSTAL = "crystal";
         public static final String[] CRYSTALS = {"stone", "mystical", "pure", "celestial", "perfect"};
@@ -30,6 +31,7 @@ public class Names
         public static final String PAGE = "page";
         public static final String MAGICAL_PEN = "magicalPen";
         public static final String MATRIX = "matrix";
+		public static final String SOARYN_CHEST_PLCR = "soarynChestPlcr";
     }
 
     public static class NBT

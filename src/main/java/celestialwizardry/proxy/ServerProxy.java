@@ -17,5 +17,17 @@ public class ServerProxy extends CommonProxy
     {
         // NO-OP
     }
+
+	@Override
+	public void setupClientRuneconfig() {
+		// Do nothing
+		
+	}
+
+	@Override
+	public void setupServerRuneconfig() {
+		// TODO Do Something
+		
+	}
     
 }

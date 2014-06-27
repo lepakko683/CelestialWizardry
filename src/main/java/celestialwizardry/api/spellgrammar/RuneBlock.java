@@ -13,7 +13,7 @@ public class RuneBlock extends RuneCategory {
 	private Object blockType;
 	
 	public RuneBlock(float complexity, Object blockType, String runeName) {
-		super(complexity, true);
+		super(complexity, true, null);
 //		this.block = block;
 	}
 

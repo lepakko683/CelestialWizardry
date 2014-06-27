@@ -5,7 +5,7 @@ import java.util.List;
 public class RuneLocation extends RuneCategory {
 
 	public RuneLocation(float complexity, boolean takesAttribute) {
-		super(complexity, takesAttribute);
+		super(complexity, takesAttribute, null);
 	}
 
 	@Override

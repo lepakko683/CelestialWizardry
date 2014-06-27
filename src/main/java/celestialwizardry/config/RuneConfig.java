@@ -36,6 +36,7 @@ public class RuneConfig {
 		return data==null ? true : data.isEmpty();
 	}
 	
+	/**Warning: missing method body!*/
 	private String getStrId(int numId) {
 		if(!isEmpty() && !isNumIdFree(numId)) {
 //			return;
@@ -44,11 +45,11 @@ public class RuneConfig {
 	}
 	
 	private boolean isNumIdFree(int id) {
-		return data.containsValue(id);
+		return !data.containsValue(id);
 	}
 	
 	private boolean isStrIdFree(String id) {
-		return data.containsKey(id);
+		return !data.containsKey(id);
 	}
 	
 	/**
@@ -56,12 +57,29 @@ public class RuneConfig {
 	 * */
 	private int getNextFreeNumId() {
 		if(data != null && data.size()>0) {
-			for(int i=lastFreeIndex+1;i<data.size();i++) {
+			for(int i=lastFreeIndex+1;i<1024;i++) { // Rune hard limit: 1024
 				if(isNumIdFree(i)) {
 					lastFreeIndex = i;
 					return i;
 				}
 			}
+		}
+		return -1;
+		
+	}
+	
+	public void setNumId(String key, int nid) {
+		if(this.data.containsKey(key) && this.data.get(key) == 0 && nid != 0) {
+			this.data.put(key, nid);
+		}
+	}
+	
+	/**@return the numeric id for the rune, -1 if it fails*/
+	public int setNumIdAutoFor(String key) {
+		if(this.data.containsKey(key) && this.data.get(key) == 0) {
+			int numId = getNextFreeNumId();
+			this.data.put(key,numId);
+			return numId;
 		}
 		return -1;
 		
@@ -115,5 +133,46 @@ public class RuneConfig {
 			return true;
 		}
 		return false;
+	}
+	
+	public String[] getAsStringArray() {
+		if(data.size()==0) {
+			return null;
+		}
+		String[] ret = new String[data.size()];
+		Iterator<Entry<String, Integer>> iter = this.data.entrySet().iterator();
+		Entry<String, Integer> ent = null;
+		int i = 0;
+		while(iter.hasNext()) {
+			ent = iter.next();
+			ret[i] = (ent.getKey() + "=" + ent.getValue());
+			i++;
+		}
+		return ret;
+	}
+	
+	public int getRuneCount() {
+		return data.size();
+	}
+	
+	public static RuneConfig buildConfigFromStringArray(String[] lines) {
+		if(lines == null || lines.length == 0) {
+			return null;
+		}
+		
+		RuneConfig ret = new RuneConfig();
+		String[] parts = null;
+		
+		for(String s : lines) {
+			if(s != null) {
+				parts = s.split("=");
+				
+				if(parts.length == 2) {
+					ret.addEntry(parts[0], Integer.parseInt(parts[1]));
+				}
+			}
+		}
+		
+		return ret;
 	}
 }

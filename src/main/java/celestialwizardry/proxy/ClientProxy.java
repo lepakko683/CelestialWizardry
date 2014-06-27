@@ -31,13 +31,13 @@ public class ClientProxy extends CommonProxy
         super.registerEventHandlers();
 
         // Register client tick handler
-        FMLCommonHandler.instance().bus().register(EventHandlers.CLIENT_TICK_EVENT_HANDLER);
+        FMLCommonHandler.instance().bus().register(EventHandlers.Client.CLIENT_TICK_EVENT_HANDLER);
 
         // Register key input handler
-        FMLCommonHandler.instance().bus().register(EventHandlers.KEY_INPUT_EVENT_HANDLER);
+        FMLCommonHandler.instance().bus().register(EventHandlers.Client.KEY_INPUT_EVENT_HANDLER);
         
         // Register client render tick handler
-        FMLCommonHandler.instance().bus().register(EventHandlers.CLIENT_RENDER_TICK_EVENT_HANDLER);
+        FMLCommonHandler.instance().bus().register(EventHandlers.Client.CLIENT_RENDER_TICK_EVENT_HANDLER);
     }
 
     @Override
@@ -63,5 +63,15 @@ public class ClientProxy extends CommonProxy
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityWritingTable.class, new RenderWritingTable());
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBell.class, new RenderBell());
     }
+
+	@Override
+	public void setupClientRuneconfig() {
+		// TODO: Do something
+	}
+
+	@Override
+	public void setupServerRuneconfig() {
+		// Do nothing
+	}
 
 }

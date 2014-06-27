@@ -64,13 +64,21 @@ public class InitRunes {
 	
 	
 	
-	@SideOnly(Side.SERVER)
-	public void serverInitRunes() {
+//	@SideOnly(Side.SERVER)
+//	public void serverInitRunes() {
 //		RuneRegistry.
-	}
+//	}
+//	
+//	@SideOnly(Side.CLIENT)
+//	public void clientInitRunes(/*RuneConfig rc*/) {
+//		
+//	}
 	
-	@SideOnly(Side.CLIENT)
-	public void clientInitRunes(/*RuneConfig rc*/) {
-		
+	public static void init() {
+		RuneRegistry.registerRune(runeEntityPig);
+		RuneRegistry.registerRune(runeEntityCow);
+		RuneRegistry.registerRune(runeEntityChicken);
+		RuneRegistry.registerRune(runeEntityBat);
+		System.out.println("INIT RUNES!!!");
 	}
 }

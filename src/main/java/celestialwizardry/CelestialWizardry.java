@@ -1,11 +1,16 @@
 package celestialwizardry;
 
+import java.io.File;
+
 import celestialwizardry.api.CWApi;
+import celestialwizardry.client.render.Renderables;
 import celestialwizardry.config.Config;
 import celestialwizardry.config.SettingHandler;
 import celestialwizardry.config.spell.ConfigSpells;
 import celestialwizardry.entity.EntityBell;
 import celestialwizardry.handler.CraftingHandler;
+import celestialwizardry.handler.ServerRuneConfigurationHandler;
+import celestialwizardry.init.InitRunes;
 import celestialwizardry.init.ModBlocks;
 import celestialwizardry.init.ModItems;
 import celestialwizardry.network.GuiHandler;
@@ -15,7 +20,7 @@ import celestialwizardry.reference.Reference;
 import celestialwizardry.reference.Version;
 import celestialwizardry.spellbook.SpellBook;
 import celestialwizardry.world.WorldGenerator;
-
+import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
@@ -28,6 +33,7 @@ import cpw.mods.fml.common.event.FMLServerStoppingEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
+import net.minecraft.client.Minecraft;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -75,12 +81,14 @@ public class CelestialWizardry
 	@Mod.EventHandler
 	public void onServerStart(FMLServerStartingEvent event) {
 		CelestialWizardry.log.info("SERVER STARTING EVENT!!!!!");
-		System.out.println("Server folder name: " + event.getServer().getFolderName());
+		System.out.println("Server folder name: " + event.getServer().getFolderName() + " @ CW.class");
+		ServerRuneConfigurationHandler.onServerStarting(new File(FMLCommonHandler.instance().getSavesDirectory(), event.getServer().getFolderName()));
 	}
 	
 	@Mod.EventHandler
 	public void onServerStop(FMLServerStoppingEvent event) {
         CelestialWizardry.log.info("SERVER STOPPING EVENT!!!!!");
+        ServerRuneConfigurationHandler.onServerStopping();
 	}
 
     @Mod.EventHandler
@@ -156,6 +164,9 @@ public class CelestialWizardry
 
         // Register mod renders
         proxy.registerRenderer();
+        
+        // Initialize renderables
+        Renderables.init();
 
         // Register world generator
         GameRegistry.registerWorldGenerator(new WorldGenerator(), 0);
@@ -172,6 +183,9 @@ public class CelestialWizardry
 
         // Tell everyone that we are starting post-initialization
         log.info("Starting post-initialization");
+        
+        // Initialize runes
+        InitRunes.init();
 
         // Initialize the spell configuration
         ConfigSpells.init();

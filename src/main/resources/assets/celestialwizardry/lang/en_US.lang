@@ -17,11 +17,13 @@ item.celestialwizardry:matrix.tier.4.name=Celestial Matrix
 item.celestialwizardry:matrix.tier.5.name=Perfect Matrix
 item.celestialwizardry:material.magicalPebble.name=Magical Pebble
 item.celestialwizardry:material.magicalIntelligenceCore.name=Magical Intelligence Core
+item.celestialwizardry:material.mysteriousMatter.name=Mysterious Matter
 item.celestialwizardry:crystal.stone.name=Stone Crystal
 item.celestialwizardry:crystal.mystical.name=Mystical Crystal
 item.celestialwizardry:crystal.pure.name=Pure Crystal
 item.celestialwizardry:crystal.celestial.name=Celestial Crystal
 item.celestialwizardry:crystal.perfect.name=Perfect Crystal
+item.celestialwizardry:soarynChestPlcr.name=Soaryn Chest Placer
 item.celestialwizardry:invalid.name=Invalid Item
 
 # Block localizations
@@ -29,6 +31,7 @@ tile.celestialwizardry:writingTable.name=Writing Table
 tile.celestialwizardry:livingOre.name=Living Ore
 tile.celestialwizardry:magicalStone.name=Magical Stone
 tile.celestialwizardry:smallCrystal.name=Small Crystal (WIP)
+tile.celestialwizardry:containedCrystal.name=Contained Crystal
 
 # GUI localizations
 container.celestialwizardry:writingTable=Writing Table

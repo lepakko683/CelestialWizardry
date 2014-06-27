@@ -20,8 +20,12 @@ public abstract class Rune
 	
 	private int numbericID = -1;
 	
-    public Rune(float complexity, boolean takesAttribute)
+    public Rune(float complexity, boolean takesAttribute, String runeId)
     {
+    	if(runeId != null && runeId.length()>0) {
+    		this.runeid = runeId.toLowerCase();
+    	}
+    	 
     }
 	
     public abstract List validRuneAttributeTypes();

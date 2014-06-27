@@ -3,14 +3,20 @@ package celestialwizardry.tileentity;
 import java.util.List;
 import java.util.ArrayList;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import celestialwizardry.api.writing.IWriter;
 import celestialwizardry.client.IRenderableObject;
+import celestialwizardry.client.render.IRenderable;
+import celestialwizardry.client.render.Renderables;
 import celestialwizardry.network.PacketHandler;
 import celestialwizardry.network.message.MessageTileEntityWritingTable;
 import celestialwizardry.reference.Names;
-
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.inventory.IInventory;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemBook;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
@@ -18,8 +24,8 @@ import net.minecraft.network.Packet;
 
 public class TileEntityWritingTable extends TileEntityCW implements IInventory
 {
-    public static final int INVENTORY_SIZE = 1;
-    public static final int INK_INVENTORY_INDEX = 0;
+    public static final int INVENTORY_SIZE = 5;
+    public static final int INK_INVENTORY_INDEX = 0; // == LEFT_TOP or RIGHT_TOP
     public static final int PEN_INVENTORY_INDEX = 1;
     /**The current item on the middle of the table*/
     public static final int MIDDLE_INVENTORY_INDEX = 2;
@@ -244,9 +250,22 @@ public class TileEntityWritingTable extends TileEntityCW implements IInventory
         return null;
     }
 
-    public IRenderableObject getMainObject()
+    @SideOnly(Side.CLIENT)
+    public IRenderable getMainObject()
     {
-        return null;
+    	if(this.inventory[MIDDLE_INVENTORY_INDEX] == null) {
+    		return null;
+    	}
+    	Item it = this.inventory[MIDDLE_INVENTORY_INDEX].getItem();
+    	if(it != null) {
+    		System.out.println("helloo!");
+    		if(it instanceof ItemBook) {
+    			return Renderables.renderBookOnWritingTable;
+    		}
+    		return this.inventory[MIDDLE_INVENTORY_INDEX].getItem() instanceof IRenderable ? (IRenderable) this.inventory[MIDDLE_INVENTORY_INDEX].getItem() : null;
+    	}
+    	return null;
+    	
     }
 
     public IRenderableObject getTopLeft()
@@ -265,6 +284,4 @@ public class TileEntityWritingTable extends TileEntityCW implements IInventory
     	
     	return ret;
     }
-    
-
 }

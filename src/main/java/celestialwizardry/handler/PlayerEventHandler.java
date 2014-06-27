@@ -4,6 +4,7 @@ import celestialwizardry.CelestialWizardry;
 import celestialwizardry.api.energy.EnergyElemental;
 import celestialwizardry.api.matrix.IMatrix;
 import celestialwizardry.api.matrix.internal.ICWMatrix;
+import celestialwizardry.config.RuneConfig;
 import celestialwizardry.entity.ModEntityProperties;
 import celestialwizardry.init.ModItems;
 import celestialwizardry.item.ItemMatrix;
@@ -12,7 +13,7 @@ import celestialwizardry.reference.Settings;
 import celestialwizardry.util.PlayerHelper;
 import celestialwizardry.util.SpawnHelper;
 import celestialwizardry.util.StringHelper;
-
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -20,6 +21,7 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.nbt.NBTTagString;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent;
+import cpw.mods.fml.server.FMLServerHandler;
 
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
@@ -205,6 +207,8 @@ public class PlayerEventHandler
             properties.fun = true;
         }
         
-        //TODO: send rune configuration
+        if(event.player instanceof EntityPlayerMP && !event.player.worldObj.isRemote) {
+        	ServerRuneConfigurationHandler.sendRuneConfigTo((EntityPlayerMP)event.player);
+        }
     }
 }

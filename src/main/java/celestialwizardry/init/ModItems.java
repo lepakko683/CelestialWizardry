@@ -18,6 +18,7 @@ public class ModItems
     public static final ItemStack magicalIntelligenceCore = material.addItem(0, Names.Items.MATERIALS[0]);
     public static final ItemStack magicalPebble = material.addItem(1, Names.Items.MATERIALS[1]);
     public static final ItemStack netherPearl = material.addItem(2, Names.Items.MATERIALS[2]);
+    public static final ItemStack mysteriousMatter = material.addItem(3, Names.Items.MATERIALS[3]);
 
     // Crystals
     public static final ItemCrystal crystal = new ItemCrystal();
@@ -39,6 +40,7 @@ public class ModItems
     public static final ItemPage page = new ItemPage();
     public static final ItemMagicalPen magicalPen = new ItemMagicalPen();
     public static final ItemMatrix matrix = new ItemMatrix();
+    public static final ItemSoarynChestPlcr soarynChestPlcr = new ItemSoarynChestPlcr();
 
     public static void init()
     {
@@ -56,6 +58,7 @@ public class ModItems
         register(page, Names.Items.PAGE);
         register(magicalPen, Names.Items.MAGICAL_PEN);
         register(matrix, Names.Items.MATRIX);
+        register(soarynChestPlcr, Names.Items.SOARYN_CHEST_PLCR);
     }
 
     private static void register(Item item, String name)

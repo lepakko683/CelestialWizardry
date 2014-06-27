@@ -1,0 +1,42 @@
+CelestialWizardry - Spell Parsing System (v1):
+
+	Parsing process:
+		Find Control Rune for line (top priority)
+		Find Action Rune for line (less important)
+		--> ???
+	
+	predefined:
+		caster
+	
+	"variables":
+		target
+		
+	Actions ("keywords")
+		Puts (Item)
+		Spawn (Entity/Block/Item)
+		Teleport ()
+		Set (variable) Is (value)
+		
+		
+	->Setting "variables": Set target Is Block Caster Looking_At | Set target Is Player Caster Looking_At
+	
+	Part of a group:
+		All
+		Random_multiple
+		Random_single
+	
+	Examples:
+		If target Name Is "Soaryn" Put Chest In Inventory Of target
+		If Caster Facing North Spawn Creeper Under Block Caster Looking_At
+		For All Players Around Caster [Action] ...
+	
+	
+	
+	
+	*** *** ***
+	
+	Control:
+		For [targets] [Action ...]
+		If [conditional = true] [Action] [target(s)]
+	
+	
