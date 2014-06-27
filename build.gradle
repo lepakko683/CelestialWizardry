@@ -17,7 +17,7 @@ buildscript {
         }
         maven {
             name = "cg"
-            url = "https://raw.githubusercontent.com/PizzAna/maven/master/"
+            url = "https://raw.githubusercontent.com/Celestibytes/maven/master/"
         }
     }
     dependencies {
@@ -25,7 +25,7 @@ buildscript {
     }
 }
 
-import static net.minecraftforge.gradle.user.patch.UserPatchBasePlugin.*;
+import static net.minecraftforge.gradle.user.cg.util.GrepJava.*;
 
 apply plugin: 'maven'
 apply plugin: 'signing'
@@ -33,7 +33,6 @@ apply plugin: 'forge'
 
 group 'io.github.pizzana'
 archivesBaseName = project.getName()
-// TODO Remove that System.getenv (potential NPE)
 version = getVersionFromJava(getProject(), "VERSION")
 
 ext.mc = getVersionFromJava(getProject(), "MINECRAFT")
@@ -65,12 +64,12 @@ processResources {
     }
 }
 
-version = project.mc + "." + project.version // TODO Maybe handle this cg side
+version = project.mc + "-" + project.version // TODO Maybe handle this cg side
 
 apply plugin: 'package'
 
 signing {
-    sign configurations.archives
+    sign configurations.allArchives
 }
 
 uploadArchives {
