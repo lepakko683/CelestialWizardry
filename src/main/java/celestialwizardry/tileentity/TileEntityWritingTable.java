@@ -11,6 +11,7 @@ import celestialwizardry.client.render.IRenderable;
 import celestialwizardry.client.render.Renderables;
 import celestialwizardry.network.PacketHandler;
 import celestialwizardry.network.message.MessageTileEntityWritingTable;
+import celestialwizardry.network.message.MessageUpdateTileEntityStack;
 import celestialwizardry.reference.Names;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
@@ -125,8 +126,13 @@ public class TileEntityWritingTable extends TileEntityCW implements IInventory
         {
             stack.stackSize = getInventoryStackLimit();
         }
+        
+        if(!this.worldObj.isRemote) {
+//        	PacketHandler.INSTANCE.sendToDimension(new MessageUpdateTileEntityStack(x, y, z, slotId, stack), DIMENSION); TODO!!! 
+        }
     }
-
+    
+    	
     /**
      * Returns the name of the inventory
      */
