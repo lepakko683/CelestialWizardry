@@ -121,6 +121,7 @@ processResources {
     inputs.property "version", project.version
     inputs.property "mc_version", config.mc_version
     inputs.property "baubles_version", config.baubles_version
+	inputs.property "baubles_mc", config.baubles_mc
     inputs.property "baubles_root", config.baubles_root
 
     // Exclude .xcf files since they are for development only
@@ -134,7 +135,7 @@ processResources {
 
         // Replace version, mc_version, baubles_version and baubles_root
         expand 'version': project.version, 'mc_version': config.mc_version,
-               'baubles_version': config.baubles_version, 'baubles_root': config.baubles_root
+               'baubles_version': config.baubles_version, 'baubles_mc': config.baubles_mc, 'baubles_root': config.baubles_root
     }
 
     // Copy everything excluding info files
@@ -195,7 +196,7 @@ artifacts {
     archives sourcesJar
 }
 
-ext.baubles_file = "Baubles-deobf-${config.mc_version}-${config.baubles_version}.jar"
+ext.baubles_file = "Baubles-deobf-${config.baubles_mc}-${config.baubles_version}.jar"
 ext.baubles_url = "${config.baubles_root}${project.baubles_file}"
 ext.baubles_dir = "./libs/${project.baubles_file}"
 ext.libs_dir = "./libs/"

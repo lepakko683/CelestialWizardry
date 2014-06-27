@@ -1,7 +1,7 @@
 {
     "repo": "${baubles_root}",
-    "file": "Baubles-${mc_version}-${baubles_version}.jar",
-    "dev": "Baubles-deobf-${mc_version}-${baubles_version}.jar",
+    "file": "Baubles-${baubles_mc}-${baubles_version}.jar",
+    "dev": "Baubles-deobf-${baubles_mc}-${baubles_version}.jar",
     "class": "baubles.common.Baubles",
     "version": "${baubles_version}"
 }
