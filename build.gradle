@@ -33,7 +33,17 @@ apply plugin: 'forge'
 
 group 'io.github.pizzana'
 archivesBaseName = project.getName()
-version = getVersionFromJava(getProject(), "VERSION")
+
+if(System.getenv().BUILD_NUMBER != null)
+{
+    ext.buildNumber = "${System.getenv().BUILD_NUMBER}"
+}
+else 
+{
+    ext.buildNumber = "null"
+}
+
+version = getVersionFromJava(getProject(), "VERSION") + project.buildNumber
 
 ext.mc = getVersionFromJava(getProject(), "MINECRAFT")
 ext.forge = getVersionFromJava(getProject(), "FORGE")
