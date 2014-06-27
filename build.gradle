@@ -69,7 +69,7 @@ version = project.mc + "-" + project.version // TODO Maybe handle this cg side
 apply plugin: 'package'
 
 signing {
-    sign configurations.allArchives
+    sign configurations.archives
 }
 
 uploadArchives {
