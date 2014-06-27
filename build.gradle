@@ -43,7 +43,7 @@ else
     ext.buildNumber = "null"
 }
 
-version = getVersionFromJava(getProject(), "VERSION") + project.buildNumber
+version = getVersionFromJava(getProject(), "VERSION") + "." + project.buildNumber
 
 ext.mc = getVersionFromJava(getProject(), "MINECRAFT")
 ext.forge = getVersionFromJava(getProject(), "FORGE")
