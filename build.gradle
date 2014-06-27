@@ -4,295 +4,77 @@
  *
  * @author PizzAna
  */
-
 buildscript {
-
-    // Add dependencies for the build script
     repositories {
         mavenCentral()
         maven {
             name = "forge"
-            url = "http://files.minecraftforge.net/maven"
+            url = "http://files.minecraftforge.net/maven/"
         }
         maven {
             name = "sonatype"
             url = "https://oss.sonatype.org/content/repositories/snapshots/"
         }
+        maven {
+            name = "cg"
+            url = "https://raw.githubusercontent.com/PizzAna/maven/master/"
+        }
     }
     dependencies {
-        classpath 'net.minecraftforge.gradle:ForgeGradle:1.2-SNAPSHOT'
+        classpath 'net.minecraftforge.gradle:CelestialGradle:0.2-SNAPSHOT'
     }
 }
 
-// Add dependency repositories
-repositories {
-
-}
+import static net.minecraftforge.gradle.user.patch.UserPatchBasePlugin.*;
 
 apply plugin: 'maven'
 apply plugin: 'signing'
 apply plugin: 'forge'
 
-// http://maven.apache.org/guides/mini/guide-naming-conventions.html
 group 'io.github.pizzana'
+archivesBaseName = project.getName()
+// TODO Remove that System.getenv (potential NPE)
+version = getVersionFromJava(getProject(), "VERSION")
 
-// The name used in final archive artifacts
-archivesBaseName = "CelestialWizardry"
+ext.mc = getVersionFromJava(getProject(), "MINECRAFT")
+ext.forge = getVersionFromJava(getProject(), "FORGE")
+ext.baubles = getVersionFromJava(getProject(), "BAUBLES")
+ext.baubles_root = getPropertyFromJava(getProject(), "src/main/java/celestialwizardry/reference/Reference.java", "BAUBLES_ROOT")
 
-// The main property file
-ext.configFile = file "build.properties"
-
-// Load the main property file. It shall from now be referenced as simply config or project.config
-configFile.withReader {
-    def prop = new Properties()
-    prop.load(it)
-    project.ext.config = new ConfigSlurper().parse prop
-}
-
-// Add code dependencies
-dependencies {
-    /**
-     * You may put jars on which you depend on in ./libs
-     * or you may define them like so:
-     *
-     * compile "some.group:artifact:version:classifier"
-     * compile "some.group:artifact:version"
-     *
-     * Real examples:
-     *
-     * compile 'com.mod-buildcraft:buildcraft:6.0.8:dev'  // Adds BuildCraft to the development environment
-     * compile 'com.googlecode.efficient-java-matrix-library:ejml:0.24' // Adds ejml to the development environment
-     *
-     * For more info:
-     *
-     * http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
-     * http://www.gradle.org/docs/current/userguide/dependency_management.html
-     */
-}
-
-// Finds and sets version data
-task buildInfo {
-
-    def cmd = "git rev-parse --short HEAD"
-    def proc = cmd.execute()
-    proc.waitFor()
-    if (proc.exitValue() == 0)
-    {
-        ext.revision = proc.text.trim()
-    }
-    else
-    {
-        ext.revision = "NULL"
-    }
-
-    if (System.getenv().BUILD_NUMBER != null)
-    {
-        ext.build_number = "${System.getenv().BUILD_NUMBER}"
-    }
-    else
-    {
-        ext.build_number = "${project.buildInfo.revision}"
-    }
-}
-
-version = "${config.mod_version}.${project.buildInfo.build_number}"
-
-// Print out the minecraft forge version
-println config.mc_version + "-" + config.forge_version
-
-// Setup the forge minecraft plugin data. Specify the preferred forge/minecraft version and assets directory here
 minecraft {
-    version = config.mc_version + "-" + config.forge_version
-    assetDir = 'run/assets'
-
-    replaceIn "reference/Version.java"
-    replace "@VERSION@", project.version
-
-    replaceIn "reference/Reference.java"
-    if (project.hasProperty("cw_signature"))
-    {
-        replace "@FINGERPRINT@", project.cw_signature
-    }
+    version = project.mc + "-" + project.forge
+    assetDir = "run/assets"
 }
 
 processResources {
-
-    // This will ensure that this task is redone when the versions or Baubles root directory change.
     inputs.property "version", project.version
-    inputs.property "mc_version", config.mc_version
-    inputs.property "baubles_version", config.baubles_version
-    inputs.property "baubles_root", config.baubles_root
+    inputs.property "mc_version", project.mc
+    inputs.property "baubles_version", project.baubles
+    inputs.property "baubles_root", project.baubles_root
 
-    // Exclude .xcf files since they are for development only
     exclude '**/*.xcf'
 
-    // Replace properties in info files
     from(sourceSets.main.resources.srcDirs) {
-
-        // Include only info files
         include '*.info'
 
-        // Replace version, mc_version, baubles_version and baubles_root
-        expand 'version': project.version, 'mc_version': config.mc_version,
-               'baubles_version': config.baubles_version, 'baubles_root': config.baubles_root
+        expand 'version': project.version, 'mc_version': project.mc, 'baubles_version': project.baubles, 'baubles_root': project.baubles_root
     }
 
-    // Copy everything excluding info files
     from(sourceSets.main.resources.srcDirs) {
-        // Exclude info files
         exclude '**/*.info'
     }
 }
 
-// Set the version for archive names
-version = "${project.minecraft.version}-${project.version}"
+version = project.mc + "." + project.version // TODO Maybe handle this cg side
 
-// Set the common manifest for archives
-def commonManifest = {
-    attributes 'FMLCorePlugin': 'celestialwizardry.codechicken.core.launch.DepLoader'
-    attributes 'FMLCorePluginContainsFMLMod': 'true'
-}
+apply plugin: 'package'
 
-// Make the universal jar
-jar {
-    manifest commonManifest
-}
-
-// Make the api jar
-/* task apiJar(type: Jar) {
-    from('./build/sources/java/') {
-        // Include only the api package
-        include 'celestialwizardry/api/*'
-    }
-    classifier = 'api'
-} */
-
-// Make the deobsfucated developer jar
-/* task deobfJar(type: Jar) {
-    from sourceSets.main.output
-    classifier = 'deobf'
-    manifest commonManifest
-} */
-
-// Make the javadoc jar
-task javadocJar(type: Jar, dependsOn: "javadoc") {
-    from './build/docs/javadoc'
-    classifier = 'javadoc'
-}
-
-// Make the source jar
-task sourcesJar(type: Jar) {
-    from './build/sources/java/'
-    from './build/resources/main/'
-    classifier = 'sources'
-}
-
-// Tell the archive system about the extra archives
-artifacts {
-    // archives apiJar
-    // archives deobfJar
-    archives javadocJar
-    archives sourcesJar
-}
-
-ext.baubles_file = "Baubles-deobf-${config.mc_version}-${config.baubles_version}.jar"
-ext.baubles_url = "${config.baubles_root}${project.baubles_file}"
-ext.baubles_dir = "./libs/${project.baubles_file}"
-ext.libs_dir = "./libs/"
-
-// Download libs and place them to libs folder
-task getLibs(dependsOn: "extractUserDev") {
-    doLast {
-        ant.delete(dir: project.libs_dir)
-        ant.mkdir(dir: project.libs_dir)
-        ant.get(src: project.baubles_url, dest: project.baubles_dir)
-    }
-}
-
-// Make getting libs dependency for setting up the workspace
-tasks.setupDevWorkspace.dependsOn project.tasks.getLibs
-tasks.setupDecompWorkspace.dependsOn project.tasks.getLibs
-
-// Keystore location
-if (!project.hasProperty("keystore_location"))
-{
-    ext.keystore_location = "."
-}
-
-// Keystore alias
-if (!project.hasProperty("cw_keystore_alias"))
-{
-    ext.cw_keystore_alias = ""
-}
-
-// Keystore password
-if (!project.hasProperty("keystore_password"))
-{
-    ext.keystore_password = ""
-}
-
-task signJar(dependsOn: "build") {
-    inputs.file jar.getArchivePath()
-    inputs.file keystore_location
-    inputs.property "cw_keystore_alias", cw_keystore_alias
-    inputs.property "keystore_password", keystore_password
-    outputs.file jar.getArchivePath()
-
-    // Only sign if the keystore exists
-    onlyIf {
-        return keystore_location != "."
-    }
-
-    // Sign the jar
-    doLast {
-        ant.signjar(
-                destDir: jar.destinationDir,
-                jar: jar.getArchivePath(),
-                keystore: keystore_location,
-                alias: cw_keystore_alias,
-                storepass: keystore_password
-        )
-    }
-}
-
-import net.minecraftforge.gradle.delayed.DelayedFile
-import net.minecraftforge.gradle.delayed.DelayedString
-import net.minecraftforge.gradle.tasks.dev.ChangelogTask
-
-task createChangelog(type: ChangelogTask) {
-
-    if (("${System.getenv().JOB_NAME}" != null) && project.hasProperty("jenkins_server") &&
-            project.hasProperty("jenkins_password"))
-    {
-        def jobName = "${System.getenv().JOB_NAME}"
-        def buildNumber = "${System.getenv().BUILD_NUMBER}"
-
-        setServerRoot(new DelayedString(project, project.jenkins_server))
-        setJobName(new DelayedString(project, jobName.toString()))
-        setAuthName(new DelayedString(project, project.jenkins_user))
-        setAuthPassword(new DelayedString(project, project.jenkins_password))
-        setTargetBuild({buildNumber.toString()});
-        setOutput(
-                new DelayedFile(project, 'build/libs/' + project.getName() + '-' + project.version + '-changelog.txt'));
-    }
-
-    onlyIf {
-        return (("${System.getenv().JOB_NAME}" != null) && project.hasProperty("jenkins_server") &&
-                project.hasProperty("jenkins_password"))
-    }
-}
-
-tasks.build.dependsOn project.tasks.createChangelog
-
-// Sign the archives for the central repository
 signing {
-    required {project.hasProperty("releases") && project.hasProperty("snapshots")}
     sign configurations.archives
 }
 
-// Configure an upload task
 uploadArchives {
-    repositories {
+    /* repositories {
         if (project.hasProperty("releases") && project.hasProperty("snapshots"))
         {
             mavenDeployer {
@@ -345,8 +127,5 @@ uploadArchives {
                 }
             }
         }
-    }
+    } */
 }
-
-// Uploading archives should be after signing the jar
-uploadArchives.dependsOn tasks.signJar
