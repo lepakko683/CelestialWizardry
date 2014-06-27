@@ -1,9 +1,9 @@
 package celestialwizardry.tileentity;
 
 import celestialwizardry.api.crystal.ICrystal;
+import celestialwizardry.api.energy.EnergyRegistry;
 import celestialwizardry.api.energy.EnergyType;
 import celestialwizardry.block.BlockCrystal;
-import celestialwizardry.registry.EnergyRegistry;
 
 import net.minecraft.block.Block;
 import net.minecraft.nbt.NBTTagCompound;
@@ -47,15 +47,52 @@ public class TileEntityCrystalConductive extends TileEntityCrystal
     }
 
     /**
-     * The maximum amount of {@link celestialwizardry.api.energy.EnergyType} that can be stored in the {@link
-     * celestialwizardry.api.crystal.ICrystal}.
+     * The current {@link celestialwizardry.api.energy.EnergyType} stored inside the {@link celestialwizardry.api.crystal.ICrystal}.
      *
-     * @return The maximum buffer size
+     * @return the current {@link celestialwizardry.api.energy.EnergyType} stored inside the {@link celestialwizardry.api.crystal.ICrystal}.
      */
     @Override
-    public float getMaxBuffer()
+    public EnergyType getCurrentEnergyType()
     {
-        return MAX_BUFFER;
+        return null;
+    }
+
+    /**
+     * Sets the {@link celestialwizardry.api.crystal.ICrystal}'s {@link celestialwizardry.api.energy.EnergyType} to
+     * given one.
+     *
+     * @param energyType the {@link celestialwizardry.api.energy.EnergyType} to set
+     *
+     * @return true if the {@link celestialwizardry.api.energy.EnergyType} was changed
+     */
+    @Override
+    public boolean setCurrentEnergyType(EnergyType energyType)
+    {
+        return false;
+    }
+
+    /**
+     * Sets the {@link celestialwizardry.api.crystal.ICrystal}'s energy buffer full.
+     *
+     * @return true if the operation was successful
+     */
+    @Override
+    public boolean setFull()
+    {
+        return false;
+    }
+
+    /**
+     * Sets the {@link celestialwizardry.api.crystal.ICrystal}'s energy buffer full of certain {@link celestialwizardry.api.energy.EnergyType}.
+     *
+     * @param energyType the {@link celestialwizardry.api.energy.EnergyType} to set
+     *
+     * @return true if the operation was successful
+     */
+    @Override
+    public boolean setFull(EnergyType energyType)
+    {
+        return false;
     }
 
     /**

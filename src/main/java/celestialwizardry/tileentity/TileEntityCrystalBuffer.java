@@ -3,6 +3,7 @@ package celestialwizardry.tileentity;
 import celestialwizardry.api.crystal.EnergyPacket;
 import celestialwizardry.api.crystal.ICrystalBuffer;
 import celestialwizardry.api.crystal.ICrystal;
+import celestialwizardry.block.BlockCrystal;
 import celestialwizardry.reference.Names;
 
 import net.minecraft.nbt.NBTTagCompound;
@@ -13,6 +14,11 @@ import java.util.List;
 public abstract class TileEntityCrystalBuffer extends TileEntityCrystal implements ICrystalBuffer
 {
     protected List<EnergyPacket> buffer = new ArrayList<EnergyPacket>(); // TODO Write to NBT
+
+    public TileEntityCrystalBuffer(BlockCrystal blockCrystal)
+    {
+        super(blockCrystal);
+    }
 
     /* ======================================== ICrystalBuffer START ===================================== */
 

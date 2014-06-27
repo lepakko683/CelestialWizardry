@@ -24,4 +24,8 @@ public interface ICrystalBuffer extends ICrystal
      * @return list of the {@link EnergyPacket}s in the buffer
      */
     public List<EnergyPacket> getBuffer();
+
+    public void onPacketSent(EnergyPacket packet);
+
+    public void onPacketReceived(EnergyPacket packet);
 }

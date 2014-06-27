@@ -27,20 +27,6 @@ public interface ICrystal
     public List<EnergyType> acceptableEnergies(World world);
 
     /**
-     * The maximum amount of {@link EnergyType} that can be stored in the {@link ICrystal}.
-     *
-     * @return The maximum buffer size
-     */
-    public float getMaxBuffer();
-
-    /**
-     * The current amount of {@link EnergyType} that is stored in the {@link ICrystal}.
-     *
-     * @return The current buffer size
-     */
-    public float getCurrentBuffer();
-
-    /**
      * The current {@link EnergyType} stored inside the {@link ICrystal}.
      *
      * @return the current {@link EnergyType} stored inside the {@link ICrystal}.
@@ -57,25 +43,6 @@ public interface ICrystal
     public boolean setCurrentEnergyType(EnergyType energyType);
 
     /**
-     * Sets the energy stored inside the {@link ICrystal} to certain amount.
-     *
-     * @param amount the amount to set
-     *
-     * @return true if the operation was successful
-     */
-    public boolean setBuffer(float amount);
-
-    /**
-     * Sets the energy stored inside the {@link ICrystal} to certain amount and {@link EnergyType}.
-     *
-     * @param amount     the amount to set
-     * @param energyType the {@link EnergyType} to set
-     *
-     * @return true if the operation was successful
-     */
-    public boolean setBuffer(float amount, EnergyType energyType);
-
-    /**
      * Sets the {@link ICrystal}'s energy buffer full.
      *
      * @return true if the operation was successful
@@ -90,34 +57,6 @@ public interface ICrystal
      * @return true if the operation was successful
      */
     public boolean setFull(EnergyType energyType);
-
-    /**
-     * Can this {@link ICrystal} receive energy
-     *
-     * @return is this {@link ICrystal} able to receive energy
-     */
-    public boolean canReceive();
-
-    /**
-     * Can this {@link ICrystal} send energy
-     *
-     * @return is this {@link ICrystal} able to send energy
-     */
-    public boolean canSend();
-
-    /**
-     * Receives given amount of energy
-     *
-     * @param amount the amount to receive
-     */
-    public void receive(float amount);
-
-    /**
-     * Sends (decreases) given amount of energy
-     *
-     * @param amount the amount to send (decrease)
-     */
-    public void send(float amount);
 
     /**
      * Get the multiplier of energy to input into the block, 1.0 is the original amount of energy in the packet. 0.9,
@@ -145,24 +84,6 @@ public interface ICrystal
     public boolean canBoundTo(World world, ICrystal crystal);
 
     /**
-     * Bounds the blockCrystal {@link TileEntity} to other blockCrystal {@link TileEntity} for input.
-     *
-     * @param x the x coordinate of the other blockCrystal {@link TileEntity}
-     * @param y the y coordinate of the other blockCrystal {@link TileEntity}
-     * @param z the z coordinate of the other blockCrystal {@link TileEntity}
-     *
-     * @return true if the bound was success
-     */
-    public boolean setInputBound(int x, int y, int z);
-
-    /**
-     * The bounded crystal for input.
-     *
-     * @return The bounded crystal for input.
-     */
-    public ICrystal getInputBound();
-
-    /**
      * Bounds the blockCrystal {@link TileEntity} to other blockCrystal {@link TileEntity} for output.
      *
      * @param x the x coordinate of the other blockCrystal {@link TileEntity}
@@ -171,14 +92,14 @@ public interface ICrystal
      *
      * @return true if the bound was success
      */
-    public boolean setOutputBound(int x, int y, int z);
+    public boolean setBound(int x, int y, int z);
 
     /**
      * The bounded crystal for output.
      *
      * @return The bounded crystal for output.
      */
-    public ICrystal getOutputBound();
+    public ICrystal getBound();
 
     /**
      * The x position of the crystal tile.
