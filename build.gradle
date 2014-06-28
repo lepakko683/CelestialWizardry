@@ -21,7 +21,7 @@ buildscript {
         }
     }
     dependencies {
-        classpath 'io.github.pizzana:CelestiGradle:0.2.1'
+        classpath 'io.github.pizzana:CelestiGradle:0.3.0'
     }
 }
 
@@ -30,7 +30,7 @@ import static net.minecraftforge.gradle.user.cg.util.GrepJava.*;
 apply plugin: 'maven'
 apply plugin: 'signing'
 apply plugin: 'forge'
-// apply plugin: 'baubles'
+apply plugin: 'baubles'
 
 group 'io.github.pizzana'
 archivesBaseName = project.getName()
