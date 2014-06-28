@@ -1,7 +1,7 @@
 package celestialwizardry.crystal.tileentity;
 
-import celestialwizardry.api.crystal.EnergyPacket;
-import celestialwizardry.api.crystal.ICrystal;
+import celestialwizardry.crystal.api.crystal.EnergyPacket;
+import celestialwizardry.crystal.api.crystal.ICrystal;
 import celestialwizardry.api.energy.EnergyRegistry;
 import celestialwizardry.api.energy.EnergyType;
 import celestialwizardry.crystal.block.BlockCrystal;
@@ -28,7 +28,7 @@ public class TileEntityCrystalConductive extends TileEntityCrystalBuffer
     /* ======================================== ICrystalBuffer START ===================================== */
 
     /**
-     * The maximum size of a {@link celestialwizardry.api.crystal.EnergyPacket} that can be stored in the {@link
+     * The maximum size of a {@link celestialwizardry.crystal.api.crystal.EnergyPacket} that can be stored in the {@link
      * ICrystal}.
      *
      * @return The maximum size
@@ -40,7 +40,7 @@ public class TileEntityCrystalConductive extends TileEntityCrystalBuffer
     }
 
     /**
-     * The maximum amount of {@link celestialwizardry.api.crystal.EnergyPacket}s that can be stored in the {@link
+     * The maximum amount of {@link celestialwizardry.crystal.api.crystal.EnergyPacket}s that can be stored in the {@link
      * ICrystal}.
      *
      * @return the maximum amount
@@ -110,14 +110,14 @@ public class TileEntityCrystalConductive extends TileEntityCrystalBuffer
     }
 
     /**
-     * Can this {@link celestialwizardry.api.crystal.ICrystal} be bounded to given {@link
-     * celestialwizardry.api.crystal.ICrystal}.
+     * Can this {@link celestialwizardry.crystal.api.crystal.ICrystal} be bounded to given {@link
+     * celestialwizardry.crystal.api.crystal.ICrystal}.
      *
-     * @param world   the {@link net.minecraft.world.World} this {@link celestialwizardry.api.crystal.ICrystal} is
-     * @param crystal the {@link celestialwizardry.api.crystal.ICrystal} this {@link celestialwizardry.api.crystal
+     * @param world   the {@link net.minecraft.world.World} this {@link celestialwizardry.crystal.api.crystal.ICrystal} is
+     * @param crystal the {@link celestialwizardry.crystal.api.crystal.ICrystal} this {@link celestialwizardry.crystal.api.crystal
      *                .ICrystal} is going to be bounded with
      *
-     * @return can this {@link celestialwizardry.api.crystal.ICrystal} to the {@link celestialwizardry.api.crystal
+     * @return can this {@link celestialwizardry.crystal.api.crystal.ICrystal} to the {@link celestialwizardry.crystal.api.crystal
      * .ICrystal}
      */
     @Override

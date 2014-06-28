@@ -1,9 +1,9 @@
 package celestialwizardry.crystal.tileentity;
 
-import celestialwizardry.api.crystal.EnergyPacket;
-import celestialwizardry.api.crystal.ICrystal;
-import celestialwizardry.api.crystal.ICrystalBuffer;
-import celestialwizardry.api.crystal.ICrystalPool;
+import celestialwizardry.crystal.api.crystal.EnergyPacket;
+import celestialwizardry.crystal.api.crystal.ICrystal;
+import celestialwizardry.crystal.api.crystal.ICrystalBuffer;
+import celestialwizardry.crystal.api.crystal.ICrystalPool;
 import celestialwizardry.crystal.block.BlockCrystal;
 import celestialwizardry.crystal.util.PacketBuilder;
 import celestialwizardry.reference.Names;

@@ -1,4 +1,4 @@
-package celestialwizardry.api.crystal;
+package celestialwizardry.crystal.api.crystal;
 
 import celestialwizardry.api.CWApi;
 import celestialwizardry.api.energy.EnergyRegistry;

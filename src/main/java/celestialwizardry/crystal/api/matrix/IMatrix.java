@@ -1,4 +1,4 @@
-package celestialwizardry.api.matrix;
+package celestialwizardry.crystal.api.matrix;
 
 import celestialwizardry.api.energy.EnergyType;
 

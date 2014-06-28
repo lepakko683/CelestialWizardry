@@ -1,4 +1,4 @@
-package celestialwizardry.api.crystal;
+package celestialwizardry.crystal.api.crystal;
 
 import java.util.List;
 

@@ -1,7 +1,7 @@
 package celestialwizardry.crystal.block;
 
 import celestialwizardry.api.IStaff;
-import celestialwizardry.api.crystal.ICrystal;
+import celestialwizardry.crystal.api.crystal.ICrystal;
 import celestialwizardry.block.BlockCW;
 import celestialwizardry.client.render.RenderOBJBlock;
 import celestialwizardry.reference.Names;

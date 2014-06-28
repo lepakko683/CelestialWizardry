@@ -2,8 +2,8 @@ package celestialwizardry.crystal.item;
 
 import celestialwizardry.api.ILockedItem;
 import celestialwizardry.api.energy.EnergyType;
-import celestialwizardry.api.matrix.IMatrix;
-import celestialwizardry.api.matrix.internal.ICWMatrix;
+import celestialwizardry.crystal.api.matrix.IMatrix;
+import celestialwizardry.crystal.api.matrix.internal.ICWMatrix;
 import celestialwizardry.item.ItemSingle;
 import celestialwizardry.reference.Names;
 import celestialwizardry.reference.Resources;
@@ -214,9 +214,9 @@ public class ItemMatrix extends ItemSingle implements IMatrix, ICWMatrix, ILocke
 
     /**
      * Removes all {@link celestialwizardry.api.energy.EnergyType} that is stored in the {@link
-     * celestialwizardry.api.matrix.IMatrix}
+     * celestialwizardry.crystal.api.matrix.IMatrix}
      *
-     * @param stack the {@link celestialwizardry.api.matrix.IMatrix} {@link net.minecraft.item.ItemStack}
+     * @param stack the {@link celestialwizardry.crystal.api.matrix.IMatrix} {@link net.minecraft.item.ItemStack}
      *
      * @return returns true if the {@link celestialwizardry.api.energy.EnergyType} was successfully emptied
      */

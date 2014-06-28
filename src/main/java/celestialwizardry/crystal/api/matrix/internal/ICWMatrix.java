@@ -1,6 +1,6 @@
-package celestialwizardry.api.matrix.internal;
+package celestialwizardry.crystal.api.matrix.internal;
 
-import celestialwizardry.api.matrix.IMatrix;
+import celestialwizardry.crystal.api.matrix.IMatrix;
 
 import net.minecraft.item.ItemStack;
 
