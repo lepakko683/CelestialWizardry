@@ -9,8 +9,8 @@
 *.properties text
 
 # 3D model stuff
-*.mtl eol=lf
-*.obj eol=lf
+#*.mtl eol=lf
+#*.obj eol=lf
 
 
 # Binary
@@ -23,3 +23,5 @@
 *.jar binary
 *.7z binary
 *.db binary
+*.mtl binary
+*.obj binary
