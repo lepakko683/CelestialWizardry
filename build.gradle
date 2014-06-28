@@ -82,6 +82,7 @@ version = project.mc + "-" + project.version
 apply plugin: 'cwpackage'
 
 signing {
+	required {project.hasProperty("signing.keyId") && project.hasProperty("signing.password")}
     sign configurations.archives
 }
 
