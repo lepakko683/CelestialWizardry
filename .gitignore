@@ -20,6 +20,7 @@
 # Gradle
 /.gradle
 /build
+/gradle.properties
 
 # ForgeGradle
 /run
