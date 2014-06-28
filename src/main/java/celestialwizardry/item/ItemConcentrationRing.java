@@ -1,6 +1,7 @@
 package celestialwizardry.item;
 
 import celestialwizardry.reference.Names;
+import celestialwizardry.reference.Reference;
 import celestialwizardry.reference.Resources;
 import celestialwizardry.util.StringHelper;
 
@@ -14,6 +15,7 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
+import cpw.mods.fml.common.Optional;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -24,6 +26,7 @@ import baubles.common.lib.PlayerHandler;
 
 import java.util.List;
 
+@Optional.Interface(modid = Reference.BAUBLES_ID, iface = Reference.BAUBLES_IFACE)
 public class ItemConcentrationRing extends ItemSingle implements IBauble
 {
     private IIcon itemIcons[];
@@ -105,6 +108,7 @@ public class ItemConcentrationRing extends ItemSingle implements IBauble
     }
 
     @Override
+    @Optional.Method(modid = Reference.BAUBLES_ID)
     public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player)
     {
         if (!world.isRemote)
@@ -138,6 +142,7 @@ public class ItemConcentrationRing extends ItemSingle implements IBauble
      * @param itemstack
      */
     @Override
+    @Optional.Method(modid = Reference.BAUBLES_ID)
     public BaubleType getBaubleType(ItemStack itemstack)
     {
         return BaubleType.RING;
@@ -150,6 +155,7 @@ public class ItemConcentrationRing extends ItemSingle implements IBauble
      * @param player
      */
     @Override
+    @Optional.Method(modid = Reference.BAUBLES_ID)
     public void onWornTick(ItemStack itemstack, EntityLivingBase player)
     {
 
@@ -162,6 +168,7 @@ public class ItemConcentrationRing extends ItemSingle implements IBauble
      * @param player
      */
     @Override
+    @Optional.Method(modid = Reference.BAUBLES_ID)
     public void onEquipped(ItemStack itemstack, EntityLivingBase player)
     {
 
@@ -174,6 +181,7 @@ public class ItemConcentrationRing extends ItemSingle implements IBauble
      * @param player
      */
     @Override
+    @Optional.Method(modid = Reference.BAUBLES_ID)
     public void onUnequipped(ItemStack itemstack, EntityLivingBase player)
     {
         player.attackEntityFrom(DamageSource.magic, 1.1f);
@@ -186,6 +194,7 @@ public class ItemConcentrationRing extends ItemSingle implements IBauble
      * @param player
      */
     @Override
+    @Optional.Method(modid = Reference.BAUBLES_ID)
     public boolean canEquip(ItemStack itemstack, EntityLivingBase player)
     {
         return true;
@@ -198,6 +207,7 @@ public class ItemConcentrationRing extends ItemSingle implements IBauble
      * @param player
      */
     @Override
+    @Optional.Method(modid = Reference.BAUBLES_ID)
     public boolean canUnequip(ItemStack itemstack, EntityLivingBase player)
     {
         return true;

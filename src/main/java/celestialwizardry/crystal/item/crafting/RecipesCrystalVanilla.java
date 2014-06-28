@@ -65,15 +65,11 @@ public class RecipesCrystalVanilla
 
         // Tier 2
         add(new ItemStack(CrystalItems.matrix, 1, 1), "scs", "cmc", "scs", 's', ModBlocks.magicalStone, 'c',
-            CrystalItems.mysticalCrystal, 'm', new ItemStack(
-
-
-                CrystalItems.matrix, 1, 0));
+            CrystalItems.mysticalCrystal, 'm', new ItemStack(CrystalItems.matrix, 1, 0));
 
         // Tier 3
         add(new ItemStack(CrystalItems.matrix, 1, 2), "scs", "cmc", "scs", 's', CrystalItems.mysticalCrystal, 'c',
-            CrystalItems.pureCrystal, 'm', new ItemStack(
-                        CrystalItems.matrix, 1, 1));
+            CrystalItems.pureCrystal, 'm', new ItemStack(CrystalItems.matrix, 1, 1));
 
         // Tier 4
 

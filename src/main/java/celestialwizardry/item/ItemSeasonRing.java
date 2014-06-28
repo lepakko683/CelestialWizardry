@@ -1,6 +1,7 @@
 package celestialwizardry.item;
 
 import celestialwizardry.reference.Names;
+import celestialwizardry.reference.Reference;
 import celestialwizardry.reference.Settings;
 import celestialwizardry.util.HolidayHelper;
 
@@ -11,11 +12,14 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
+import cpw.mods.fml.common.Optional;
+
 import baubles.api.BaubleType;
 import baubles.api.IBauble;
 import baubles.common.container.InventoryBaubles;
 import baubles.common.lib.PlayerHandler;
 
+@Optional.Interface(modid = Reference.BAUBLES_ID, iface = Reference.BAUBLES_IFACE)
 public class ItemSeasonRing extends ItemSingle implements IBauble
 {
     private int count = 0;
@@ -28,6 +32,7 @@ public class ItemSeasonRing extends ItemSingle implements IBauble
     }
 
     @Override
+    @Optional.Method(modid = Reference.BAUBLES_ID)
     public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player)
     {
         if (!world.isRemote)
@@ -61,6 +66,7 @@ public class ItemSeasonRing extends ItemSingle implements IBauble
      * @param itemstack
      */
     @Override
+    @Optional.Method(modid = Reference.BAUBLES_ID)
     public BaubleType getBaubleType(ItemStack itemstack)
     {
         return BaubleType.RING;
@@ -73,6 +79,7 @@ public class ItemSeasonRing extends ItemSingle implements IBauble
      * @param player
      */
     @Override
+    @Optional.Method(modid = Reference.BAUBLES_ID)
     public void onWornTick(ItemStack itemstack, EntityLivingBase player)
     {
         if (Settings.enableSeasonal && HolidayHelper.isBirthday())
@@ -101,6 +108,7 @@ public class ItemSeasonRing extends ItemSingle implements IBauble
      * @param player
      */
     @Override
+    @Optional.Method(modid = Reference.BAUBLES_ID)
     public void onEquipped(ItemStack itemstack, EntityLivingBase player)
     {
 
@@ -113,6 +121,7 @@ public class ItemSeasonRing extends ItemSingle implements IBauble
      * @param player
      */
     @Override
+    @Optional.Method(modid = Reference.BAUBLES_ID)
     public void onUnequipped(ItemStack itemstack, EntityLivingBase player)
     {
 
@@ -125,6 +134,7 @@ public class ItemSeasonRing extends ItemSingle implements IBauble
      * @param player
      */
     @Override
+    @Optional.Method(modid = Reference.BAUBLES_ID)
     public boolean canEquip(ItemStack itemstack, EntityLivingBase player)
     {
         return true;
@@ -137,6 +147,7 @@ public class ItemSeasonRing extends ItemSingle implements IBauble
      * @param player
      */
     @Override
+    @Optional.Method(modid = Reference.BAUBLES_ID)
     public boolean canUnequip(ItemStack itemstack, EntityLivingBase player)
     {
         return !(Settings.enableSeasonal && HolidayHelper.isBirthday());
