@@ -21,7 +21,7 @@ buildscript {
         }
     }
     dependencies {
-        classpath 'io.github.pizzana:CelestiGradle:0.2.0'
+        classpath 'io.github.pizzana:CelestiGradle:0.2.1'
     }
 }
 
