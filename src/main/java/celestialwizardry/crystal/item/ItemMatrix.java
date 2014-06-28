@@ -1,10 +1,10 @@
-package celestialwizardry.item;
+package celestialwizardry.crystal.item;
 
 import celestialwizardry.api.ILockedItem;
-import celestialwizardry.api.energy.EnergyMagic;
 import celestialwizardry.api.energy.EnergyType;
 import celestialwizardry.api.matrix.IMatrix;
 import celestialwizardry.api.matrix.internal.ICWMatrix;
+import celestialwizardry.item.ItemSingle;
 import celestialwizardry.reference.Names;
 import celestialwizardry.reference.Resources;
 import celestialwizardry.reference.Settings;

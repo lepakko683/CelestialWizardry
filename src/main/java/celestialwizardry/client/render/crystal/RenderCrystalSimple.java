@@ -1,6 +1,5 @@
 package celestialwizardry.client.render.crystal;
 
-import celestialwizardry.block.BlockCrystal;
 import celestialwizardry.client.model.OBJModels;
 
 import net.minecraft.util.ResourceLocation;

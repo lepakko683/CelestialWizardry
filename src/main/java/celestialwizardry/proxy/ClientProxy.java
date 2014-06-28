@@ -14,7 +14,7 @@ import celestialwizardry.reference.EventHandlers;
 import celestialwizardry.reference.Resources;
 import celestialwizardry.reference.Settings;
 import celestialwizardry.tileentity.TileEntityBell;
-import celestialwizardry.tileentity.TileEntityCrystalConductive;
+import celestialwizardry.crystal.tileentity.TileEntityCrystalConductive;
 import celestialwizardry.tileentity.TileEntityWritingTable;
 
 import net.minecraftforge.client.MinecraftForgeClient;
@@ -64,9 +64,6 @@ public class ClientProxy extends CommonProxy
 //        RenderingRegistry.registerEntityRenderingHandler(EntityLivingOre.class, new RenderOreGolem());
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityWritingTable.class, new RenderWritingTable());
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBell.class, new RenderBell());
-
-        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityCrystalConductive.class, new RenderCrystalSimple(
-                Resources.Models.Crystals.TEXTURE_CRYSTAL_CONDUCTIVE));
     }
 
 }

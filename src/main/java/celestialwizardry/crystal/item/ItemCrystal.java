@@ -1,5 +1,6 @@
-package celestialwizardry.item;
+package celestialwizardry.crystal.item;
 
+import celestialwizardry.item.ItemCW;
 import celestialwizardry.reference.Names;
 
 public class ItemCrystal extends ItemCW

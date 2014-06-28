@@ -7,6 +7,7 @@ import celestialwizardry.client.render.Renderables;
 import celestialwizardry.config.Config;
 import celestialwizardry.config.SettingHandler;
 import celestialwizardry.config.spell.ConfigSpells;
+import celestialwizardry.crystal.Crystals;
 import celestialwizardry.entity.EntityBell;
 import celestialwizardry.handler.CraftingHandler;
 import celestialwizardry.handler.ServerRuneConfigurationHandler;
@@ -135,6 +136,9 @@ public class CelestialWizardry
 
         // Register mod key bindings
 //        proxy.registerKeyBindings(); >:)
+
+        // Pre-initialize the crystals
+        Crystals.preInit();
         
         // Tell everyone that we have successfully pre-initialized
         log.info("Finished pre-initialization after " + (System.currentTimeMillis() - start) + " ms");
@@ -176,6 +180,9 @@ public class CelestialWizardry
         // Register world generator
         GameRegistry.registerWorldGenerator(new WorldGenerator(), 0);
 
+        // Initialize the crystals
+        Crystals.init();
+
         // Tell everyone that we have successfully initialized
         log.info("Finished initialization after " + (System.currentTimeMillis() - start) + " ms");
     }
@@ -194,6 +201,9 @@ public class CelestialWizardry
 
         // Initialize the spell configuration
         ConfigSpells.init();
+
+        // Post-initialize the crystals
+        Crystals.postInit();
 
         // Tell everyone that we have successfully post-initialized
         log.info("Finished post-initialization after " + (System.currentTimeMillis() - start) + " ms");

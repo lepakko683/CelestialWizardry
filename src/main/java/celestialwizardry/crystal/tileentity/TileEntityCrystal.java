@@ -1,10 +1,12 @@
-package celestialwizardry.tileentity;
+package celestialwizardry.crystal.tileentity;
 
 import celestialwizardry.api.crystal.ICrystal;
 import celestialwizardry.api.energy.EnergyRegistry;
 import celestialwizardry.api.energy.EnergyType;
-import celestialwizardry.block.BlockCrystal;
+import celestialwizardry.crystal.block.BlockCrystal;
+import celestialwizardry.crystal.util.PacketBuilder;
 import celestialwizardry.reference.Names;
+import celestialwizardry.tileentity.TileEntityCW;
 
 import net.minecraft.block.Block;
 import net.minecraft.nbt.NBTTagCompound;
@@ -180,4 +182,6 @@ public abstract class TileEntityCrystal extends TileEntityCW implements ICrystal
     }
 
     /* ======================================== TileEntity END ===================================== */
+
+    public abstract PacketBuilder getBuilder();
 }

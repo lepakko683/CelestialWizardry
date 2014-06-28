@@ -1,14 +1,10 @@
-package celestialwizardry.block;
+package celestialwizardry.crystal.block;
 
-import celestialwizardry.client.render.crystal.RenderCrystalSimple;
-import celestialwizardry.init.ModBlocks;
+import celestialwizardry.crystal.tileentity.TileEntityCrystalConductive;
 import celestialwizardry.reference.Names;
-import celestialwizardry.reference.Particles;
-import celestialwizardry.tileentity.TileEntityCrystalConductive;
 
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
-
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -37,7 +33,8 @@ public class BlockCrystalConductive extends BlockCrystal
         {
             /* if (((TileEntityCrystalConductive) world.getTileEntity(x, y, z)).open)
             {
-                world.spawnParticle(Particles.LARGE_SMOKE, (double) x + random.nextDouble(), (double) y + 1, (double) z + random.nextDouble(), 0D, 0D, 0D);
+                world.spawnParticle(Particles.LARGE_SMOKE, (double) x + random.nextDouble(), (double) y + 1,
+                (double) z + random.nextDouble(), 0D, 0D, 0D);
             } */
         }
     }

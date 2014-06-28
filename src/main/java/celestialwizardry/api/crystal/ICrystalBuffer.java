@@ -25,7 +25,17 @@ public interface ICrystalBuffer extends ICrystal
      */
     public List<EnergyPacket> getBuffer();
 
+    /**
+     * Called when this {@link ICrystal} sends a {@link EnergyPacket}.
+     *
+     * @param packet the sent {@link EnergyPacket}
+     */
     public void onPacketSent(EnergyPacket packet);
 
+    /**
+     * Called when this {@link ICrystal} receives a {@link EnergyPacket}.
+     *
+     * @param packet the received {@link EnergyPacket}
+     */
     public void onPacketReceived(EnergyPacket packet);
 }

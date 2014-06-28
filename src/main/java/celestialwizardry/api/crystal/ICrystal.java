@@ -27,38 +27,6 @@ public interface ICrystal
     public List<EnergyType> acceptableEnergies(World world);
 
     /**
-     * The current {@link EnergyType} stored inside the {@link ICrystal}.
-     *
-     * @return the current {@link EnergyType} stored inside the {@link ICrystal}.
-     */
-    public EnergyType getCurrentEnergyType();
-
-    /**
-     * Sets the {@link ICrystal}'s {@link EnergyType} to given one.
-     *
-     * @param energyType the {@link EnergyType} to set
-     *
-     * @return true if the {@link EnergyType} was changed
-     */
-    public boolean setCurrentEnergyType(EnergyType energyType);
-
-    /**
-     * Sets the {@link ICrystal}'s energy buffer full.
-     *
-     * @return true if the operation was successful
-     */
-    public boolean setFull();
-
-    /**
-     * Sets the {@link ICrystal}'s energy buffer full of certain {@link EnergyType}.
-     *
-     * @param energyType the {@link EnergyType} to set
-     *
-     * @return true if the operation was successful
-     */
-    public boolean setFull(EnergyType energyType);
-
-    /**
      * Get the multiplier of energy to input into the block, 1.0 is the original amount of energy in the packet. 0.9,
      * for example, is 90%, so 10% of the energy in the packet will get dissipated.
      *

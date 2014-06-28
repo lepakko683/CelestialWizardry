@@ -1,6 +1,5 @@
 package celestialwizardry.client.render.crystal;
 
-import celestialwizardry.block.BlockCrystal;
 import celestialwizardry.util.ActiveNumber;
 
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;

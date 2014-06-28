@@ -3,7 +3,7 @@ package celestialwizardry.proxy;
 import celestialwizardry.reference.EventHandlers;
 import celestialwizardry.reference.Names;
 import celestialwizardry.tileentity.TileEntityBell;
-import celestialwizardry.tileentity.TileEntityCrystalConductive;
+import celestialwizardry.crystal.tileentity.TileEntityCrystalConductive;
 import celestialwizardry.tileentity.TileEntityWritingTable;
 
 import net.minecraftforge.common.MinecraftForge;
@@ -40,6 +40,5 @@ public abstract class CommonProxy implements IProxy
     {
         GameRegistry.registerTileEntity(TileEntityWritingTable.class, "tile." + Names.Blocks.WRITING_TABLE);
         GameRegistry.registerTileEntity(TileEntityBell.class, "tile." + Names.Blocks.BELL);
-        GameRegistry.registerTileEntity(TileEntityCrystalConductive.class, "tile." + Names.Blocks.CRYSTAL_CONDUCTIVE);
     }
 }

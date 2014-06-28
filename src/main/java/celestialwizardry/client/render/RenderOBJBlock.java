@@ -2,7 +2,7 @@ package celestialwizardry.client.render;
 
 import celestialwizardry.block.BlockBell;
 import celestialwizardry.block.BlockContainedCrystal;
-import celestialwizardry.block.BlockCrystalConductive;
+import celestialwizardry.crystal.block.BlockCrystalConductive;
 import celestialwizardry.block.BlockWritingTable;
 import celestialwizardry.client.model.OBJModels;
 import celestialwizardry.reference.Resources;

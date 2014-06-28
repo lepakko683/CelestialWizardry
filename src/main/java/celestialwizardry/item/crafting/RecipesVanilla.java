@@ -45,44 +45,6 @@ public class RecipesVanilla
 
         // Nether Pearl
         add(ModItems.netherPearl, " s ", "sts", " s ", 's', hc ? Items.nether_star : Items.ghast_tear, 't', hc ? Items.ghast_tear : Items.nether_star);
-
-        /* ======================================== CRYSTAL START ===================================== */
-
-        // TODO These aren't expensive enough >:)
-
-        // Tier 1
-        add(ModItems.stoneCrystal, "scs", "cec", "scs", 's', ModItems.magicalPebble, 'c', hc ? Items.diamond : ModBlocks.magicalStone, 'e', hc ? Items.emerald : Items.diamond);
-
-        // Tier 2
-        add(ModItems.mysticalCrystal, "scs", "cec", "scs", 's', ModBlocks.magicalStone, 'c', ModItems.stoneCrystal, 'e', Items.emerald);
-
-        // Tier 3
-        add(ModItems.pureCrystal, "scs", "cec", "scs", 's', ModItems.stoneCrystal, 'c', ModItems.mysticalCrystal, 'e', Blocks.emerald_block);
-
-        // Tier 4
-        add(ModItems.celestialCrystal, "scs", "cec", "scs", 's', ModItems.mysticalCrystal, 'c', ModItems.pureCrystal, 'e', Items.nether_star);
-
-        // Tier 5
-        add(ModItems.perfectCrystal, "scs", "cec", "scs", 's', ModItems.pureCrystal, 'c', ModItems.celestialCrystal, 'e', ModItems.netherPearl);
-
-        /* ======================================== CRYSTAL END ===================================== */
-
-        /* ======================================== MATRIX START ===================================== */
-
-        // Tier 1
-        add(new ItemStack(ModItems.matrix, 1, 0), "scs", "cec", "scs", 's', ModItems.magicalPebble, 'c', ModItems.stoneCrystal, 'e', Items.ender_pearl);
-
-        // Tier 2
-        add(new ItemStack(ModItems.matrix, 1, 1), "scs", "cmc", "scs", 's', ModBlocks.magicalStone, 'c', ModItems.mysticalCrystal, 'm', new ItemStack(ModItems.matrix, 1, 0));
-
-        // Tier 3
-        add(new ItemStack(ModItems.matrix, 1, 2), "scs", "cmc", "scs", 's', ModItems.mysticalCrystal, 'c', ModItems.pureCrystal, 'm', new ItemStack(ModItems.matrix, 1, 1));
-
-        // Tier 4
-
-        // Tier 5
-
-        /* ======================================== MATRIX END ===================================== */
     }
 
     private static void add(ItemStack output, Object... input)

@@ -1,5 +1,6 @@
 package celestialwizardry.api.crystal;
 
+import celestialwizardry.api.CWApi;
 import celestialwizardry.api.energy.EnergyRegistry;
 import celestialwizardry.api.energy.EnergyType;
 
@@ -22,6 +23,9 @@ public final class EnergyPacket
     public EnergyPacket(String s)
     {
         this(Float.valueOf(s.substring(0, s.indexOf("."))), EnergyRegistry.getEnergyType(s.substring(s.indexOf(".") + 1)));
+        CWApi.apiLog.info("Constructing a EnergyPacket from String " + s);
+        CWApi.apiLog.info("Energy amount " + s.substring(0, s.indexOf(".")));
+        CWApi.apiLog.info("Energy type " + EnergyRegistry.getEnergyType(s.substring(s.indexOf(".") + 1)));
     }
 
     public float getSize()

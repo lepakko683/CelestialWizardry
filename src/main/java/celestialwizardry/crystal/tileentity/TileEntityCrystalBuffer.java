@@ -1,9 +1,11 @@
-package celestialwizardry.tileentity;
+package celestialwizardry.crystal.tileentity;
 
 import celestialwizardry.api.crystal.EnergyPacket;
-import celestialwizardry.api.crystal.ICrystalBuffer;
 import celestialwizardry.api.crystal.ICrystal;
-import celestialwizardry.block.BlockCrystal;
+import celestialwizardry.api.crystal.ICrystalBuffer;
+import celestialwizardry.api.crystal.ICrystalPool;
+import celestialwizardry.crystal.block.BlockCrystal;
+import celestialwizardry.crystal.util.PacketBuilder;
 import celestialwizardry.reference.Names;
 
 import net.minecraft.nbt.NBTTagCompound;
@@ -13,7 +15,7 @@ import java.util.List;
 
 public abstract class TileEntityCrystalBuffer extends TileEntityCrystal implements ICrystalBuffer
 {
-    protected List<EnergyPacket> buffer = new ArrayList<EnergyPacket>(); // TODO Write to NBT
+    protected List<EnergyPacket> buffer = new ArrayList<EnergyPacket>();
 
     public TileEntityCrystalBuffer(BlockCrystal blockCrystal)
     {
@@ -21,28 +23,6 @@ public abstract class TileEntityCrystalBuffer extends TileEntityCrystal implemen
     }
 
     /* ======================================== ICrystalBuffer START ===================================== */
-
-    /**
-     * The maximum size of a {@link EnergyPacket} that can be stored in the {@link ICrystal}.
-     *
-     * @return The maximum size
-     */
-    @Override
-    public float getMaxPacketSize()
-    {
-        return 0;
-    }
-
-    /**
-     * The maximum amount of {@link EnergyPacket}s that can be stored in the {@link ICrystal}.
-     *
-     * @return the maximum amount
-     */
-    @Override
-    public int getMaxPackets()
-    {
-        return 0;
-    }
 
     /**
      * The current {@link EnergyPacket} buffer of this {@link ICrystal}
@@ -54,10 +34,6 @@ public abstract class TileEntityCrystalBuffer extends TileEntityCrystal implemen
     {
         return buffer;
     }
-
-    /* ======================================== ICrystalBuffer END ===================================== */
-
-    /* ======================================== ICrystal START ===================================== */
 
     /**
      * Called when this {@link ICrystal} sends a {@link EnergyPacket}.
@@ -80,6 +56,11 @@ public abstract class TileEntityCrystalBuffer extends TileEntityCrystal implemen
     {
 
     }
+
+    /* ======================================== ICrystalBuffer END ===================================== */
+
+    /* ======================================== ICrystal START ===================================== */
+
 
     /* ======================================== ICrystal END ===================================== */
 
@@ -119,4 +100,43 @@ public abstract class TileEntityCrystalBuffer extends TileEntityCrystal implemen
     }
 
     /* ======================================== TileEntity END ===================================== */
+
+    public ICrystalPool findPool()
+    {
+        if (worldObj.getTileEntity(xCoord + 1, yCoord, zCoord) instanceof ICrystalPool)
+        {
+            return (ICrystalPool) worldObj.getTileEntity(xCoord + 1, yCoord, zCoord);
+        }
+        else if (worldObj.getTileEntity(xCoord - 1, yCoord, zCoord) instanceof ICrystalPool)
+        {
+            return (ICrystalPool) worldObj.getTileEntity(xCoord - 1, yCoord, zCoord);
+        }
+        else if (worldObj.getTileEntity(xCoord, yCoord, zCoord + 1) instanceof ICrystalPool)
+        {
+            return (ICrystalPool) worldObj.getTileEntity(xCoord, yCoord, zCoord + 1);
+        }
+        else if (worldObj.getTileEntity(xCoord, yCoord, zCoord - 1) instanceof ICrystalPool)
+        {
+            return (ICrystalPool) worldObj.getTileEntity(xCoord, yCoord, zCoord - 1);
+        }
+
+        return null;
+    }
+
+    public EnergyPacket constructPacket()
+    {
+        ICrystalPool pool = findPool();
+
+        if (pool == null)
+        {
+            return null;
+        }
+
+        PacketBuilder builder = getBuilder();
+
+        builder.setEnergyType(pool.getEnergyType());
+        builder.append(pool.takeEnergy(builder.max));
+
+        return builder.toPacket();
+    }
 }

@@ -1,11 +1,10 @@
-package celestialwizardry.block;
+package celestialwizardry.crystal.block;
 
 import celestialwizardry.api.IStaff;
 import celestialwizardry.api.crystal.ICrystal;
+import celestialwizardry.block.BlockCW;
 import celestialwizardry.client.render.RenderOBJBlock;
-import celestialwizardry.init.ModItems;
 import celestialwizardry.reference.Names;
-import celestialwizardry.reference.Settings;
 import celestialwizardry.util.NBTHelper;
 import celestialwizardry.util.StringHelper;
 
@@ -56,7 +55,8 @@ public abstract class BlockCrystal extends BlockCW implements ITileEntityProvide
                         {
                             if (crystal.setBound(x, y, z))
                             {
-                                player.addChatComponentMessage(new ChatComponentText(StringHelper.getMessage("crystalsBound")));
+                                player.addChatComponentMessage(
+                                        new ChatComponentText(StringHelper.getMessage("crystalsBound")));
                                 return true;
                             }
                         }

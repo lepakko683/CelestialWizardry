@@ -1,5 +1,6 @@
 package celestialwizardry.init;
 
+import celestialwizardry.crystal.init.CrystalItems;
 import celestialwizardry.item.*;
 import celestialwizardry.reference.Names;
 
@@ -20,15 +21,6 @@ public class ModItems
     public static final ItemStack netherPearl = material.addItem(2, Names.Items.MATERIALS[2]);
     public static final ItemStack mysteriousMatter = material.addItem(3, Names.Items.MATERIALS[3]);
 
-    // Crystals
-    public static final ItemCrystal crystal = new ItemCrystal();
-
-    public static final ItemStack stoneCrystal = crystal.addItem(0, Names.Items.CRYSTALS[0]);
-    public static final ItemStack mysticalCrystal = crystal.addItem(1, Names.Items.CRYSTALS[1]);
-    public static final ItemStack pureCrystal = crystal.addItem(2, Names.Items.CRYSTALS[2]);
-    public static final ItemStack celestialCrystal = crystal.addItem(3, Names.Items.CRYSTALS[3]);
-    public static final ItemStack perfectCrystal = crystal.addItem(4, Names.Items.CRYSTALS[4]);
-
     // Single items
     public static final ItemMagicalInk magicalInk = new ItemMagicalInk();
     public static final ItemStaff staff = new ItemStaff();
@@ -39,13 +31,11 @@ public class ModItems
     public static final ItemSeasonRing seasonRing = new ItemSeasonRing();
     public static final ItemPage page = new ItemPage();
     public static final ItemMagicalPen magicalPen = new ItemMagicalPen();
-    public static final ItemMatrix matrix = new ItemMatrix();
     public static final ItemSoarynChestPlcr soarynChestPlcr = new ItemSoarynChestPlcr();
 
     public static void init()
     {
         register(material, Names.Items.MATERIAL);
-        register(crystal, Names.Items.CRYSTAL);
 
         // Single items
         register(magicalInk, Names.Items.MAGICAL_INK);
@@ -57,11 +47,10 @@ public class ModItems
         register(seasonRing, Names.Items.SEASON_RING);
         register(page, Names.Items.PAGE);
         register(magicalPen, Names.Items.MAGICAL_PEN);
-        register(matrix, Names.Items.MATRIX);
         register(soarynChestPlcr, Names.Items.SOARYN_CHEST_PLCR);
     }
 
-    private static void register(Item item, String name)
+    public static void register(Item item, String name)
     {
         GameRegistry.registerItem(item, "item." + name);
     }

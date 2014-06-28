@@ -1,13 +1,10 @@
 package celestialwizardry.handler;
 
 import celestialwizardry.CelestialWizardry;
-import celestialwizardry.api.energy.EnergyElemental;
-import celestialwizardry.api.matrix.IMatrix;
-import celestialwizardry.api.matrix.internal.ICWMatrix;
-import celestialwizardry.config.RuneConfig;
+import celestialwizardry.crystal.init.CrystalItems;
 import celestialwizardry.entity.ModEntityProperties;
 import celestialwizardry.init.ModItems;
-import celestialwizardry.item.ItemMatrix;
+import celestialwizardry.crystal.item.ItemMatrix;
 import celestialwizardry.reference.Names;
 import celestialwizardry.reference.Settings;
 import celestialwizardry.util.PlayerHelper;
@@ -21,7 +18,6 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.nbt.NBTTagString;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent;
-import cpw.mods.fml.server.FMLServerHandler;
 
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
@@ -166,11 +162,11 @@ public class PlayerEventHandler
 
         if (!properties.fun)
         {
-            ItemMatrix matrix = ModItems.matrix;
+            ItemMatrix matrix = CrystalItems.matrix;
 
             if (PlayerHelper.isPizzAna(event.player))
             {
-                ItemStack stack = new ItemStack(ModItems.matrix, 1, matrix.getDamageFromTier(5));
+                ItemStack stack = new ItemStack(CrystalItems.matrix, 1, matrix.getDamageFromTier(5));
                 String name = StringHelper.BRIGHT_BLUE + "PizzAna's Matrix" + StringHelper.END;
 
                 NBTTagCompound tagCompound = new NBTTagCompound();
@@ -188,7 +184,7 @@ public class PlayerEventHandler
 
             if (PlayerHelper.isForgeDevName(event.player))
             {
-                ItemStack stack = new ItemStack(ModItems.matrix, 1, matrix.getDamageFromTier(1));
+                ItemStack stack = new ItemStack(CrystalItems.matrix, 1, matrix.getDamageFromTier(1));
                 String name = StringHelper.WHITE + "ForgeDeveloper's Matrix" + StringHelper.END;
 
                 NBTTagCompound tagCompound = new NBTTagCompound();
