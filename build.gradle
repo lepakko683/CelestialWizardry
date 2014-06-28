@@ -16,16 +16,17 @@ buildscript {
             url = "https://oss.sonatype.org/content/repositories/snapshots/"
         }
         maven {
-            name = "cg"
+            name = "cbs"
             url = "https://raw.githubusercontent.com/Celestibytes/maven/master/"
         }
     }
     dependencies {
         classpath 'io.github.pizzana:CelestiGradle:0.3.0'
+        classpath 'io.github.pizzana:potential-octo-spice:0.1.2'
     }
 }
 
-import static net.minecraftforge.gradle.user.cg.util.GrepJava.*;
+import static io.github.pizzana.util.GrepJava.*;
 
 apply plugin: 'maven'
 apply plugin: 'signing'
