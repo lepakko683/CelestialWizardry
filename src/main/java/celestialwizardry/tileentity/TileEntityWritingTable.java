@@ -126,9 +126,9 @@ public class TileEntityWritingTable extends TileEntityCW implements IInventory
         {
             stack.stackSize = getInventoryStackLimit();
         }
-        
-        if(!this.worldObj.isRemote) {
-//        	PacketHandler.INSTANCE.sendToDimension(new MessageUpdateTileEntityStack(x, y, z, slotId, stack), DIMENSION); TODO!!! 
+        System.out.println("setInvSlotConts @ " + (this.worldObj.isRemote ? "CLIENT" : "SERVER"));
+        if(!this.worldObj.isRemote && stack != null) {
+        	PacketHandler.INSTANCE.sendToDimension(new MessageUpdateTileEntityStack(this.xCoord, this.yCoord, this.zCoord, slot, stack), this.worldObj.provider.dimensionId); 
         }
     }
     

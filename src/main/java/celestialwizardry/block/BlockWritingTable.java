@@ -11,6 +11,7 @@ import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemBook;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -71,6 +72,7 @@ public class BlockWritingTable extends BlockCW implements ITileEntityProvider
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int par6, float par7,
                                     float par8, float par9)
     {
+    	System.out.println("Click!");
         if (player.isSneaking())
         {
             return false;
@@ -134,7 +136,6 @@ public class BlockWritingTable extends BlockCW implements ITileEntityProvider
             int dir = Math.abs(Math.round(entityLiving.rotationYaw / 90));
             dir = dir == 4 ? 0 : dir;
 
-
             switch (dir)
             {
                 case 0:
@@ -192,8 +193,10 @@ public class BlockWritingTable extends BlockCW implements ITileEntityProvider
     }
     
     private boolean putItemInMainSlot(TileEntityWritingTable te, ItemStack stack) {
+    	System.out.println("setConts");
     	if(stack.getItem() instanceof ItemBook || stack.getItem() instanceof ItemPage) {
-    		te.setInventorySlotContents(TileEntityWritingTable.MIDDLE_INVENTORY_INDEX, stack);
+    		te.setInventorySlotContents(TileEntityWritingTable.MIDDLE_INVENTORY_INDEX, stack.copy());
+    		
     		return true;
     	}
     	

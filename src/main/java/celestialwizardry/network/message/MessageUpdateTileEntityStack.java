@@ -3,6 +3,7 @@ package celestialwizardry.network.message;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.chunk.Chunk;
 import io.netty.buffer.ByteBuf;
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
@@ -42,9 +43,15 @@ public class MessageUpdateTileEntityStack implements IMessage, IMessageHandler<M
 	@Override
 	public MessageUpdateTileEntityStack onMessage(MessageUpdateTileEntityStack message, MessageContext ctx) {
 		if(message.stack != null) {
+			Chunk chunk = FMLClientHandler.instance().getClient().theWorld.getChunkProvider().provideChunk(message.x >> 4, message.z >> 4);
+			if(chunk == null || chunk.isEmpty()) {
+				return null;
+			}
 			TileEntity te = FMLClientHandler.instance().getClient().theWorld.getTileEntity(x, y, z);
-			if(te instanceof IInventory) {
-				((IInventory)te).setInventorySlotContents(slotId, stack);
+			if(te != null && te instanceof IInventory) {
+				if(((IInventory)te).getSizeInventory()<message.slotId) {
+					((IInventory)te).setInventorySlotContents(slotId, stack);
+				}
 			}
 		}
 		return null;
