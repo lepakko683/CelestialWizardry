@@ -27,17 +27,13 @@ public class Renderables {
 		
 		@Override
 		public void render(double x, double y, double z, Object[] extraData) {
-			System.out.println("Render");
 			FMLClientHandler.instance().getClient().renderEngine.bindTexture(bookTextureTemp);
-			GL11.glPushMatrix();
-			GL11.glTranslated(x+.5d, y+.88d, z+.5d);
-			
+
 			GL11.glTranslatef(.14f, 0f, 0f);
 			GL11.glRotatef(70f, 0f, 0f, 1f);
-
+			
 			GL11.glScalef(.15f, .15f, .15f);
 			book.render((Entity)null, 5f, 1f, 0f, 1.2f, 0f, 6f / 16f);
-			GL11.glPopMatrix();
 		}
 		
 	}

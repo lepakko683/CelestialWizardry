@@ -48,6 +48,13 @@ public class TileEntityWritingTable extends TileEntityCW implements IInventory
     {
         return inventory.length;
     }
+    
+    @Override
+    public void updateEntity() {
+    	super.updateEntity();
+    	if(worldObj.isRemote) {
+    	}
+    }
 
     /**
      * Returns the stack in slot i
@@ -120,16 +127,20 @@ public class TileEntityWritingTable extends TileEntityCW implements IInventory
     @Override
     public void setInventorySlotContents(int slot, ItemStack stack)
     {
+    	System.out.println("setContents! @ " + (this.worldObj.isRemote ? "CLIENT" : "SERVER"));
         inventory[slot] = stack;
 
         if (stack != null && stack.stackSize > getInventoryStackLimit())
         {
             stack.stackSize = getInventoryStackLimit();
         }
-        System.out.println("setInvSlotConts @ " + (this.worldObj.isRemote ? "CLIENT" : "SERVER"));
-        if(!this.worldObj.isRemote && stack != null) {
+        System.out.println("Middle Slot: " + this.inventory[MIDDLE_INVENTORY_INDEX]);
+        if(!this.worldObj.isRemote) {
+        	System.out.println("Middle Slot: " + stack + " @ server");
+        	System.out.println("DimId: " + this.worldObj.provider.dimensionId);
         	PacketHandler.INSTANCE.sendToDimension(new MessageUpdateTileEntityStack(this.xCoord, this.yCoord, this.zCoord, slot, stack), this.worldObj.provider.dimensionId); 
         }
+        System.out.println("SinvSlotConts " + this.xCoord + " " + this.yCoord + " " + this.zCoord);
     }
     
     	
@@ -264,7 +275,6 @@ public class TileEntityWritingTable extends TileEntityCW implements IInventory
     	}
     	Item it = this.inventory[MIDDLE_INVENTORY_INDEX].getItem();
     	if(it != null) {
-    		System.out.println("helloo!");
     		if(it instanceof ItemBook) {
     			return Renderables.renderBookOnWritingTable;
     		}

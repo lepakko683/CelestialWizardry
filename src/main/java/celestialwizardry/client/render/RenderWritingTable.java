@@ -61,12 +61,11 @@ public class RenderWritingTable extends TileEntitySpecialRenderer
 		GL11.glPopMatrix();
 
 		if(mainObject != null) {
-			System.out.println("redner");
 			GL11.glPushMatrix();
 			
 			GL11.glTranslated(x+.5d, y+.88d, z+.5d);
 			GL11.glRotatef(rot-90f, 0f, 1f, 0f);
-			mainObject.render(x, y, z, null);
+			mainObject.render(x, y, z, new Object[]{true});
 			
 			GL11.glPopMatrix();
 		}
