@@ -4,6 +4,7 @@ import celestialwizardry.api.IStaff;
 import celestialwizardry.crystal.api.crystal.ICrystal;
 import celestialwizardry.block.BlockCW;
 import celestialwizardry.client.render.RenderOBJBlock;
+import celestialwizardry.crystal.client.render.RenderCrystalBlock;
 import celestialwizardry.crystal.reference.CrystalNames;
 import celestialwizardry.reference.Names;
 import celestialwizardry.util.NBTHelper;
@@ -98,7 +99,7 @@ public abstract class BlockCrystal extends BlockCW implements ITileEntityProvide
     @Override
     public int getRenderType()
     {
-        return RenderOBJBlock.ID;
+        return RenderCrystalBlock.ID;
     }
 
     @Override

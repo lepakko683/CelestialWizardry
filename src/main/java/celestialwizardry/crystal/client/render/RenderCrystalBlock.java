@@ -14,12 +14,13 @@ import net.minecraft.init.Blocks;
 import net.minecraft.world.IBlockAccess;
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
+import cpw.mods.fml.client.registry.RenderingRegistry;
 
 import org.lwjgl.opengl.GL11;
 
 public class RenderCrystalBlock implements ISimpleBlockRenderingHandler
 {
-    public static final int ID = RenderOBJBlock.ID;
+    public static final int ID = RenderingRegistry.getNextAvailableRenderId();
 
     @Override
     public void renderInventoryBlock(Block block, int metadata, int modelID, RenderBlocks renderer)
