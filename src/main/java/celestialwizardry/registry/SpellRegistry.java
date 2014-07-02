@@ -2,6 +2,7 @@ package celestialwizardry.registry;
 
 import celestialwizardry.CelestialWizardry;
 import celestialwizardry.api.spell.Spell;
+import celestialwizardry.util.LogHelper;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -16,12 +17,12 @@ public abstract class SpellRegistry
 
         if (!spellMap.containsKey(name))
         {
-            CelestialWizardry.log.info("Registering spell " + name);
+            LogHelper.info("Registering spell " + name);
             spellMap.put(name, spell);
         }
         else
         {
-            CelestialWizardry.log.warn("Trying to register duplicate spell, skipping!");
+            LogHelper.warn("Trying to register duplicate spell, skipping!");
         }
     }
 
@@ -32,7 +33,7 @@ public abstract class SpellRegistry
             return spellMap.get(name);
         }
 
-        CelestialWizardry.log.warn("Trying to get null spell, skipping!");
+        LogHelper.warn("Trying to get null spell, skipping!");
 
         return null;
     }

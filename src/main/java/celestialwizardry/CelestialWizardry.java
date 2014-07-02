@@ -21,6 +21,7 @@ import celestialwizardry.reference.EventHandlers;
 import celestialwizardry.reference.Reference;
 import celestialwizardry.reference.Version;
 import celestialwizardry.spellbook.SpellBook;
+import celestialwizardry.util.LogHelper;
 import celestialwizardry.world.WorldGenerator;
 
 import net.minecraftforge.common.config.Configuration;
@@ -54,9 +55,6 @@ public class CelestialWizardry
     @Mod.Instance(Reference.MOD_ID)
     public static CelestialWizardry instance;
 
-    // Mod logger
-    public static final Logger log = LogManager.getLogger(Reference.MOD_NAME.replace(" ", ""));
-
     // Mod configuration
     public static final Config config = new Config(Version.VERSION);
 
@@ -83,14 +81,14 @@ public class CelestialWizardry
     
 	@Mod.EventHandler
 	public void onServerStart(FMLServerStartingEvent event) {
-		CelestialWizardry.log.info("SERVER STARTING EVENT!!!!!");
+		LogHelper.info("SERVER STARTING EVENT!!!!!");
 		System.out.println("Server folder name: " + event.getServer().getFolderName() + " @ CW.class");
 		ServerRuneConfigurationHandler.onServerStarting(new File(FMLCommonHandler.instance().getSavesDirectory(), event.getServer().getFolderName()));
 	}
 	
 	@Mod.EventHandler
 	public void onServerStop(FMLServerStoppingEvent event) {
-        CelestialWizardry.log.info("SERVER STOPPING EVENT!!!!!");
+        LogHelper.info("SERVER STOPPING EVENT!!!!!");
         ServerRuneConfigurationHandler.onServerStopping();
 	}
 
@@ -104,7 +102,7 @@ public class CelestialWizardry
         CWApi.apiLog = LogManager.getLogger("CWApi");
 
         // Tell everyone that we are starting pre-initialization
-        log.info("Starting pre-initialization");
+        LogHelper.info("Starting pre-initialization");
 
         // Set configuration directory
         config.setConfigDir(event, Reference.MOD_ID.toLowerCase());
@@ -141,7 +139,7 @@ public class CelestialWizardry
         Crystals.preInit();
         
         // Tell everyone that we have successfully pre-initialized
-        log.info("Finished pre-initialization after " + (System.currentTimeMillis() - start) + " ms");
+        LogHelper.info("Finished pre-initialization after " + (System.currentTimeMillis() - start) + " ms");
     }
 
     @Mod.EventHandler
@@ -151,7 +149,7 @@ public class CelestialWizardry
         long start = System.currentTimeMillis();
 
         // Tell everyone that we are starting initialization
-        log.info("Starting initialization");
+        LogHelper.info("Starting initialization");
 
         // Register gui handler
         NetworkRegistry.INSTANCE.registerGuiHandler(instance, new GuiHandler());
@@ -181,7 +179,7 @@ public class CelestialWizardry
         Crystals.init();
 
         // Tell everyone that we have successfully initialized
-        log.info("Finished initialization after " + (System.currentTimeMillis() - start) + " ms");
+        LogHelper.info("Finished initialization after " + (System.currentTimeMillis() - start) + " ms");
     }
 
     @Mod.EventHandler
@@ -191,7 +189,7 @@ public class CelestialWizardry
         long start = System.currentTimeMillis();
 
         // Tell everyone that we are starting post-initialization
-        log.info("Starting post-initialization");
+        LogHelper.info("Starting post-initialization");
         
         // Initialize runes
         InitRunes.init();
@@ -203,6 +201,6 @@ public class CelestialWizardry
         Crystals.postInit();
 
         // Tell everyone that we have successfully post-initialized
-        log.info("Finished post-initialization after " + (System.currentTimeMillis() - start) + " ms");
+        LogHelper.info("Finished post-initialization after " + (System.currentTimeMillis() - start) + " ms");
     }
 }

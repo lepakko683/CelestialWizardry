@@ -11,6 +11,7 @@ import celestialwizardry.api.event.CWRuneconfigResetEvent;
 import celestialwizardry.config.RuneConfig;
 import celestialwizardry.network.message.MessageRuneConfig;
 import celestialwizardry.registry.RuneRegistry;
+import celestialwizardry.util.LogHelper;
 
 
 @SideOnly(Side.CLIENT)
@@ -33,7 +34,8 @@ public class ClientRuneConfigurationHandler {
 			runeConfBuffer.add(msg.entryLines[i]);
 		}
 		if(runeConfBuffer.size() == msg.fullEntryCount && !configSetup) {
-			CelestialWizardry.log.info("Building RuneConfig on CLIENT from " + runeConfBuffer.size() + "/" + msg.fullEntryCount + " entries.");
+            LogHelper.info("Building RuneConfig on CLIENT from " + runeConfBuffer.size() + "/" + msg.fullEntryCount
+                                   + " entries.");
 			buildRuneConfig();
 			RuneRegistry.setupNumIds(runeConfigFromServer);
 			configSetup = true;

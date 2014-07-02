@@ -3,6 +3,7 @@ package celestialwizardry.registry;
 import celestialwizardry.CelestialWizardry;
 import celestialwizardry.api.spellgrammar.Rune;
 import celestialwizardry.config.RuneConfig;
+import celestialwizardry.util.LogHelper;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -28,12 +29,12 @@ public abstract class RuneRegistry
         String name = Rune.getFullIdOf(rune);
         
         if(!runeMap.containsKey(name)) {
-        	CelestialWizardry.log.info("Registering rune " + name);
+            LogHelper.info("Registering rune " + name);
         	runeMap.put(name, rune);
         	return;
         }
-        
-        CelestialWizardry.log.warn("Trying to register duplicate rune, skipping!");
+
+        LogHelper.warn("Trying to register duplicate rune, skipping!");
     }
     
     /**Called from *RuneConfigurationHandler. Sets numeric ids for runes from config*/
@@ -43,11 +44,11 @@ public abstract class RuneRegistry
     	}
     	int runeCount = config.getRuneCount();
     	if(runeCount == 0) {
-    		CelestialWizardry.log.error("Attempted to setup runeconfig but config's runecount is zero.");
+            LogHelper.error("Attempted to setup runeconfig but config's runecount is zero.");
     		return; // TODO throw exception
     	}
     	if(runeIdsv != null) {
-    		CelestialWizardry.log.error("Attempted to setup runeconfig but runeIdsv array wasn't null (runeconfig might have already been set up. If not you will most likely crash.).");
+            LogHelper.error("Attempted to setup runeconfig but runeIdsv array wasn't null (runeconfig might have already been set up. If not you will most likely crash.).");
     		return; // TODO throw exception
     	}
     	runeIdsv = new String[runeMap.size()];
@@ -73,17 +74,17 @@ public abstract class RuneRegistry
 	    				if(runeIdsv[nid] == null) {
 	    					runeIdsv[nid]=cName;
 	    				} else {
-	    					CelestialWizardry.log.error("Attempted to overwrite rune: " + cName);
+                            LogHelper.error("Attempted to overwrite rune: " + cName);
 	    				}
     				}
     			}
     			if(nid == -1 || nid == 0) {
-    				CelestialWizardry.log.error("Unable to register rune: " + cName);
+                    LogHelper.error("Unable to register rune: " + cName);
     			}
     		}
         	configLoaded = true;
     	} else {
-    		CelestialWizardry.log.error("Trying to setup numberic ids and runeIds isn't empty!"); // TODO throw exception
+            LogHelper.error("Trying to setup numberic ids and runeIds isn't empty!"); // TODO throw exception
     	}
     }
     
@@ -102,7 +103,7 @@ public abstract class RuneRegistry
     		int i=1;
     		while(iter.hasNext()) {
     			if(i >= runeIdsv.length) {
-    				CelestialWizardry.log.error("Ran out of space in runeIdsv!");
+                    LogHelper.error("Ran out of space in runeIdsv!");
     				break;
     			}
     			runeIdsv[i]=iter.next();
@@ -110,7 +111,7 @@ public abstract class RuneRegistry
     		}
     		configLoaded = true;
     	} else {
-    		CelestialWizardry.log.error("Can't set ids for no runes (no runes are registered)!"); // TODO throw exception
+            LogHelper.error("Can't set ids for no runes (no runes are registered)!"); // TODO throw exception
     	}
     }
     
@@ -124,8 +125,8 @@ public abstract class RuneRegistry
     	if(runeMap.containsKey(name)) {
     		return runeMap.get(name);
     	}
-    	
-        CelestialWizardry.log.warn("Trying to get null rune, skipping!");
+
+        LogHelper.warn("Trying to get null rune, skipping!");
 
         return null;
     }
@@ -133,14 +134,14 @@ public abstract class RuneRegistry
     public static Rune getRuneByNumId(int id) {
     	
     	if(!configLoaded) {
-    		CelestialWizardry.log.warn("Trying to get rune by it's numberic id before config is loaded");
+            LogHelper.warn("Trying to get rune by it's numberic id before config is loaded");
     	}
     	
     	if(id < runeIdsv.length && id > 0 && runeMap.containsKey(runeIdsv[id])) {
     		return runeMap.get(runeIdsv[id]);
     	}
-    	
-    	CelestialWizardry.log.warn("Trying to get null rune, skipping!");
+
+        LogHelper.warn("Trying to get null rune, skipping!");
     	
     	return null;
     }
