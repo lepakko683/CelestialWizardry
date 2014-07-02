@@ -4,6 +4,7 @@ import celestialwizardry.crystal.api.crystal.ICrystal;
 import celestialwizardry.crystal.reference.CrystalNames;
 
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
 import java.util.ArrayList;
@@ -33,6 +34,7 @@ public final class CrystalNetwork
     public void writeToNBT(NBTTagCompound tagCompound)
     {
         NBTTagCompound cnetwork = new NBTTagCompound();
+        NBTTagCompound crystalCompound = new NBTTagCompound();
 
         int i = 0;
 
@@ -43,12 +45,14 @@ public final class CrystalNetwork
             tagC.setInteger(CrystalNames.NBT.X, crystal.getXPos());
             tagC.setInteger(CrystalNames.NBT.Y, crystal.getYPos());
             tagC.setInteger(CrystalNames.NBT.Z, crystal.getZPos());
+            tagC.setInteger(CrystalNames.NBT.INDEX, i);
 
-            cnetwork.setTag(CrystalNames.NBT.CRYSTAL_PREFIX + i, tagC);
+            crystalCompound.setTag(CrystalNames.NBT.CRYSTAL_PREFIX + i, tagC);
 
             i++;
         }
 
+        cnetwork.setTag(CrystalNames.NBT.CRYSTALS, crystalCompound);
         cnetwork.setInteger(CrystalNames.NBT.COUNT, i);
 
         tagCompound.setTag(CrystalNames.NBT.CNETWORK, cnetwork);
@@ -61,12 +65,36 @@ public final class CrystalNetwork
 
     public void readFromWorld(World world)
     {
-        readFromNBT(world.getWorldInfo().getNBTTagCompound());
+        readFromNBT(world.getWorldInfo().getNBTTagCompound(), world);
     }
 
-    public void readFromNBT(NBTTagCompound tagCompound)
+    public void readFromNBT(NBTTagCompound tagCompound, World world) throws NullPointerException
     {
-        // TODO Remember to check in for loop if the tag is the count tag
+        NBTTagCompound cnetwork = tagCompound.getCompoundTag(CrystalNames.NBT.CNETWORK);
+        NBTTagCompound crystalCompound = cnetwork.getCompoundTag(CrystalNames.NBT.CRYSTALS);
+
+        for (Object o : crystalCompound.func_150296_c())
+        {
+            NBTTagCompound tagC = crystalCompound.getCompoundTag(String.valueOf(o));
+
+            int x = tagC.getInteger(CrystalNames.NBT.X);
+            int y = tagC.getInteger(CrystalNames.NBT.Y);
+            int z = tagC.getInteger(CrystalNames.NBT.Z);
+
+            int index = tagC.getInteger(CrystalNames.NBT.INDEX);
+
+            TileEntity entity = world.getTileEntity(x, y, z);
+
+            if (entity != null && entity instanceof ICrystal)
+            {
+                ICrystal crystal = (ICrystal) entity;
+                crystals.add(index, crystal);
+            }
+            else
+            {
+                throw new NullPointerException("World " + world.getWorldInfo().getWorldName() + " has empty index " + index + " in crystal list");
+            }
+        }
     }
 
     public void clear()

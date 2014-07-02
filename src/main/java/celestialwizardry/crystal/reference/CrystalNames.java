@@ -33,6 +33,8 @@ public class CrystalNames
         public static final String X = "x";
         public static final String Y = "y";
         public static final String Z = "z";
+        public static final String INDEX = "index";
+        public static final String CRYSTALS = "crystals";
         public static final String CRYSTAL_PREFIX = "crystal.";
     }
 
