@@ -27,6 +27,8 @@ public class CrystalNames
         public static final String BOUND_Z = "boundZ";
         public static final String ENERGY = "energy";
         public static final String ENERGY_STORED = "energyStored";
+        public static final String HAS_CNETWORK = "hascnetwork";
+        public static final String CNETWORK = "cnetwork";
     }
 
     public static class Containers

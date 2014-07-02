@@ -12,6 +12,8 @@ public class Crystals
     @SidedProxy(clientSide = CrystalReference.CLIENT_PROXY_CLASS, serverSide = CrystalReference.SERVER_PROXY_CLASS)
     public static ICrystalProxy proxy;
 
+    public static CrystalSession session;
+
     public static void preInit()
     {
         CrystalItems.init();
