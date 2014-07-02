@@ -1,36 +1,42 @@
 package celestialwizardry.api.spellgrammar;
 
-import java.util.List;
-
 import net.minecraft.entity.ai.attributes.IAttribute;
 
-public class AttributeRune extends RuneCategory implements IAttributeRune {
+import java.util.List;
 
-	private Object attrData;
-	private IAttribute attrOfThis;
-	
-	public AttributeRune(float complexity, Object attrData, boolean takesAttribute) {
-		super(complexity, takesAttribute, null);
-		this.attrData = attrData;
-	}
+public class AttributeRune extends RuneCategory implements IAttributeRune
+{
 
-	@Override
-	public Object getAttributeData() {
-		return attrData;
-	}
-	
-	public IAttribute getAttributeOfThisAttr() {
-		return attrOfThis;
-	}
+    private Object attrData;
+    private IAttribute attrOfThis;
 
-	@Override
-	public String getCategoryIDString() {
-		return "attribute";
-	}
+    public AttributeRune(float complexity, Object attrData, boolean takesAttribute)
+    {
+        super(complexity, takesAttribute, null);
+        this.attrData = attrData;
+    }
 
-	@Override
-	public List validRuneAttributeTypes() {
-		return null;
-	}
-	
+    @Override
+    public Object getAttributeData()
+    {
+        return attrData;
+    }
+
+    public IAttribute getAttributeOfThisAttr()
+    {
+        return attrOfThis;
+    }
+
+    @Override
+    public String getCategoryIDString()
+    {
+        return "attribute";
+    }
+
+    @Override
+    public List validRuneAttributeTypes()
+    {
+        return null;
+    }
+
 }

@@ -1,5 +1,6 @@
-package celestialwizardry.api;
+package celestialwizardry.crystal.api;
 
+import celestialwizardry.api.CWApi;
 import celestialwizardry.api.util.ApiLogHelper;
 
 import net.minecraft.block.Block;
@@ -9,9 +10,9 @@ import net.minecraft.item.ItemStack;
 /**
  * Allows you to access mod items
  */
-public class ItemApi
+public class CrystalItemApi
 {
-    private static final String PACKAGE = CWApi.CW_PACKAGE + "init.";
+    private static final String PACKAGE = CWApi.CW_PACKAGE + "crystal.init.";
 
     /**
      * Allows you to get item from string.
@@ -27,7 +28,7 @@ public class ItemApi
 
         try
         {
-            String clazz = PACKAGE + "ModItems";
+            String clazz = PACKAGE + "CrystalItems";
             Object obj = Class.forName(clazz).getField(field).get(null);
 
             if (obj instanceof Item)
@@ -61,7 +62,7 @@ public class ItemApi
 
         try
         {
-            String clazz = PACKAGE + "ModBlocks";
+            String clazz = PACKAGE + "CrystalBlocks";
             Object obj = Class.forName(clazz).getField(field).get(null);
 
             if (obj instanceof Block)

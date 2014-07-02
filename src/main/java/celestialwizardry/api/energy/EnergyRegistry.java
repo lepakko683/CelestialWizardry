@@ -1,7 +1,5 @@
 package celestialwizardry.api.energy;
 
-import celestialwizardry.CelestialWizardry;
-import celestialwizardry.api.energy.EnergyType;
 import celestialwizardry.util.LogHelper;
 
 import java.util.HashMap;
@@ -16,11 +14,12 @@ public abstract class EnergyRegistry
     public static void registerEnergyType(EnergyType energy)
     {
         String name = energy.getEnergyName();
-        
-        if(name == null || name.length() == 0) {
-        	LogHelper.error("Trying to register nameless energy type of class \"" + energy.getClass().getName()
+
+        if (name == null || name.length() == 0)
+        {
+            LogHelper.error("Trying to register nameless energy type of class \"" + energy.getClass().getName()
                                     + "\", Skipping.");
-        	return;
+            return;
         }
 
         if (!energyMap.containsKey(name))

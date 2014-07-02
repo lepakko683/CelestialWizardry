@@ -5,19 +5,22 @@ import java.util.List;
 public class RuneControl extends RuneCategory
 {
     //AND, IF, NOT, etc
-	
-	public RuneControl(float complexity) {
-		super(complexity, false, null); // TODO
-	}
 
-	@Override
-	public String getCategoryIDString() {
-		return "control";
-	}
+    public RuneControl(float complexity)
+    {
+        super(complexity, false, null); // TODO
+    }
 
-	@Override
-	public List validRuneAttributeTypes() {
-		return null;
-	}
-	
+    @Override
+    public String getCategoryIDString()
+    {
+        return "control";
+    }
+
+    @Override
+    public List validRuneAttributeTypes()
+    {
+        return null;
+    }
+
 }

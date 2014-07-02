@@ -6,14 +6,16 @@ import celestialwizardry.api.spellbook.SpellBookEntry;
 import celestialwizardry.api.spellgrammar.Rune;
 import celestialwizardry.api.util.ApiLogHelper;
 
-import org.apache.logging.log4j.Logger;
-
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.List;
 
 public final class CWApi
 {
+    public static final String VERSION = "0.1";
+    public static final String ID = "cwapi|";
+    public static final String MOD_ID = "celestialwizardry";
+
     public static final String CW_PACKAGE = "celestialwizardry.";
 
     private static final String REGISTRY_PACKAGE = CW_PACKAGE + "registry.";
