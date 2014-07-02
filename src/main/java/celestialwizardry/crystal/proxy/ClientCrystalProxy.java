@@ -4,7 +4,6 @@ import celestialwizardry.crystal.client.render.RenderCrystalBlock;
 import celestialwizardry.crystal.client.render.RenderCrystalSimple;
 import celestialwizardry.crystal.reference.CrystalResources;
 import celestialwizardry.crystal.tileentity.TileEntityCrystalConductive;
-import celestialwizardry.reference.Resources;
 
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;

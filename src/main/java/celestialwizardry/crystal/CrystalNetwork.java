@@ -1,5 +1,6 @@
 package celestialwizardry.crystal;
 
+import celestialwizardry.CelestialWizardry;
 import celestialwizardry.crystal.api.crystal.ICrystal;
 import celestialwizardry.crystal.reference.CrystalNames;
 
@@ -12,9 +13,9 @@ import java.util.List;
 
 public final class CrystalNetwork
 {
-    public final World world;
+    private final World world;
 
-    public List<ICrystal> crystals = new ArrayList<ICrystal>();
+    private List<ICrystal> crystals = new ArrayList<ICrystal>();
 
     public CrystalNetwork(World world)
     {
@@ -49,6 +50,10 @@ public final class CrystalNetwork
 
             crystalCompound.setTag(CrystalNames.NBT.CRYSTAL_PREFIX + i, tagC);
 
+            CelestialWizardry.log
+                    .info("Writing ICrystal to world " + world.getWorldInfo().getWorldName() + ": " + crystal.getXPos()
+                                  + ", " + crystal.getYPos() + ", " + crystal.getZPos() + ", " + i);
+
             i++;
         }
 
@@ -65,10 +70,10 @@ public final class CrystalNetwork
 
     public void readFromWorld(World world)
     {
-        readFromNBT(world.getWorldInfo().getNBTTagCompound(), world);
+        readFromNBT(world.getWorldInfo().getNBTTagCompound());
     }
 
-    public void readFromNBT(NBTTagCompound tagCompound, World world) throws NullPointerException
+    public void readFromNBT(NBTTagCompound tagCompound) throws NullPointerException
     {
         NBTTagCompound cnetwork = tagCompound.getCompoundTag(CrystalNames.NBT.CNETWORK);
         NBTTagCompound crystalCompound = cnetwork.getCompoundTag(CrystalNames.NBT.CRYSTALS);
@@ -89,10 +94,16 @@ public final class CrystalNetwork
             {
                 ICrystal crystal = (ICrystal) entity;
                 crystals.add(index, crystal);
+
+                CelestialWizardry.log
+                        .info("Reading ICrystal from world " + world.getWorldInfo().getWorldName() + ": " + crystal
+                                .getXPos() + ", " + crystal.getYPos() + ", " + crystal.getZPos() + ", " + index);
             }
             else
             {
-                throw new NullPointerException("World " + world.getWorldInfo().getWorldName() + " has empty index " + index + " in crystal list");
+                throw new NullPointerException(
+                        "World " + world.getWorldInfo().getWorldName() + " has empty index " + index
+                                + " in crystal list");
             }
         }
     }
@@ -111,6 +122,16 @@ public final class CrystalNetwork
     {
         tagCompound.removeTag(CrystalNames.NBT.HAS_CNETWORK);
         tagCompound.removeTag(CrystalNames.NBT.CNETWORK);
+    }
+
+    public World getWorld()
+    {
+        return world;
+    }
+
+    public List getCrystals()
+    {
+        return crystals;
     }
 
     public static CrystalNetwork create(World world)
@@ -134,6 +155,8 @@ public final class CrystalNetwork
 
     public static boolean hasNetwork(World world)
     {
-        return world.getWorldInfo().getNBTTagCompound().hasKey(CrystalNames.NBT.HAS_CNETWORK) && world.getWorldInfo().getNBTTagCompound().getBoolean(CrystalNames.NBT.HAS_CNETWORK) && world.getWorldInfo().getNBTTagCompound().hasKey(CrystalNames.NBT.CNETWORK);
+        return world.getWorldInfo().getNBTTagCompound().hasKey(CrystalNames.NBT.HAS_CNETWORK) && world.getWorldInfo()
+                .getNBTTagCompound().getBoolean(CrystalNames.NBT.HAS_CNETWORK) && world.getWorldInfo()
+                .getNBTTagCompound().hasKey(CrystalNames.NBT.CNETWORK);
     }
 }

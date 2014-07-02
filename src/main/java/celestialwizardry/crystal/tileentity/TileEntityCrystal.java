@@ -1,8 +1,8 @@
 package celestialwizardry.crystal.tileentity;
 
-import celestialwizardry.crystal.api.crystal.ICrystal;
 import celestialwizardry.api.energy.EnergyRegistry;
 import celestialwizardry.api.energy.EnergyType;
+import celestialwizardry.crystal.api.crystal.ICrystal;
 import celestialwizardry.crystal.block.BlockCrystal;
 import celestialwizardry.crystal.reference.CrystalNames;
 import celestialwizardry.crystal.util.PacketBuilder;
@@ -71,12 +71,13 @@ public abstract class TileEntityCrystal extends TileEntityCW implements ICrystal
      * Can this {@link celestialwizardry.crystal.api.crystal.ICrystal} be bounded to given {@link celestialwizardry.api
      * .blockCrystal.ICrystal}.
      *
-     * @param world   the {@link net.minecraft.world.World} this {@link celestialwizardry.crystal.api.crystal.ICrystal} is
-     * @param crystal the {@link celestialwizardry.crystal.api.crystal.ICrystal} this {@link celestialwizardry.crystal.api.crystal
-     *                .ICrystal} is going to be bounded with
+     * @param world   the {@link net.minecraft.world.World} this {@link celestialwizardry.crystal.api.crystal.ICrystal}
+     *                is
+     * @param crystal the {@link celestialwizardry.crystal.api.crystal.ICrystal} this {@link
+     *                celestialwizardry.crystal.api.crystal .ICrystal} is going to be bounded with
      *
-     * @return can this {@link celestialwizardry.crystal.api.crystal.ICrystal} to the {@link celestialwizardry.crystal.api.crystal
-     * .ICrystal}
+     * @return can this {@link celestialwizardry.crystal.api.crystal.ICrystal} to the {@link
+     * celestialwizardry.crystal.api.crystal .ICrystal}
      */
     @Override
     public boolean canBoundTo(World world, ICrystal crystal)

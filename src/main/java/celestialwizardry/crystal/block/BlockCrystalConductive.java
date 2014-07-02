@@ -1,9 +1,7 @@
 package celestialwizardry.crystal.block;
 
-import celestialwizardry.crystal.init.CrystalBlocks;
 import celestialwizardry.crystal.reference.CrystalNames;
 import celestialwizardry.crystal.tileentity.TileEntityCrystalConductive;
-import celestialwizardry.reference.Names;
 
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;

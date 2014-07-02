@@ -257,9 +257,10 @@ public class ItemMatrix extends ItemSingle implements IMatrix, ICWMatrix, ILocke
     public boolean setEnergy(ItemStack stack, float amount, EnergyType type)
     {
         NBTHelper.setString(stack, CrystalNames.NBT.ENERGY, type.getEnergyName());
-        NBTHelper.setFloat(stack, CrystalNames.NBT.ENERGY_STORED, celestialwizardry.util.MathHelper.clampZero_float(amount,
-                                                                                                             getMaxEnergy(
-                                                                                                                     stack)));
+        NBTHelper.setFloat(stack, CrystalNames.NBT.ENERGY_STORED,
+                           celestialwizardry.util.MathHelper.clampZero_float(amount,
+                                                                             getMaxEnergy(
+                                                                                     stack)));
         return true;
     }
 
@@ -498,7 +499,8 @@ public class ItemMatrix extends ItemSingle implements IMatrix, ICWMatrix, ILocke
     public String getUnlocalizedName(ItemStack itemStack)
     {
         return String
-                .format("item.%s%s.%s.%s", Resources.RESOURCE_PREFIX, CrystalNames.Items.MATRIX, "tier", getTier(itemStack));
+                .format("item.%s%s.%s.%s", Resources.RESOURCE_PREFIX, CrystalNames.Items.MATRIX, "tier",
+                        getTier(itemStack));
     }
 
     @Override

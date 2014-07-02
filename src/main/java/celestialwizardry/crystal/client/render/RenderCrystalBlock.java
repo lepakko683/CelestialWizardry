@@ -1,8 +1,5 @@
 package celestialwizardry.crystal.client.render;
 
-import celestialwizardry.block.BlockContainedCrystal;
-import celestialwizardry.client.model.OBJModels;
-import celestialwizardry.client.render.RenderOBJBlock;
 import celestialwizardry.crystal.block.BlockCrystalConductive;
 import celestialwizardry.crystal.client.model.CrystalModels;
 import celestialwizardry.crystal.reference.CrystalResources;
@@ -10,7 +7,6 @@ import celestialwizardry.crystal.reference.CrystalResources;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.init.Blocks;
 import net.minecraft.world.IBlockAccess;
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;

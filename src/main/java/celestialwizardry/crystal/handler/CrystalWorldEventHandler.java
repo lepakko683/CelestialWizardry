@@ -33,6 +33,9 @@ public class CrystalWorldEventHandler
     @SubscribeEvent
     public void onSave(WorldEvent.Save event)
     {
-        // TODO Save crystal network here event.world.getWorldInfo().getNBTTagCompound().
+        if (Crystals.session.getNetwork().getWorld().equals(event.world))
+        {
+            Crystals.session.getNetwork().write();
+        }
     }
 }

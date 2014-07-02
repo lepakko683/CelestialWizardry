@@ -1,6 +1,5 @@
 package celestialwizardry.crystal.reference;
 
-import celestialwizardry.reference.Reference;
 import celestialwizardry.reference.Resources;
 import celestialwizardry.util.ResourceLocationHelper;
 
@@ -22,7 +21,8 @@ public class CrystalResources
         public static final String MODEL_TEXTURE_LOCATION = Resources.Models.MODEL_TEXTURE_LOCATION;
         public static final String MODEL_LOCATION = Resources.Models.MODEL_LOCATION;
 
-        public static final ResourceLocation TEXTURE_CRYSTAL_CONDUCTIVE = new ResourceLocation("textures/blocks/lapis_block.png");
+        public static final ResourceLocation TEXTURE_CRYSTAL_CONDUCTIVE = new ResourceLocation(
+                "textures/blocks/lapis_block.png");
 
         public static final ResourceLocation MODEL_CRYSTAL_SIMPLE = ResourceLocationHelper.getResourceLocation(
                 MODEL_LOCATION + "crystalSimple.obj");

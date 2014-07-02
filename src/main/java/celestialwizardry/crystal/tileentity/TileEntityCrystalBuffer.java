@@ -7,7 +7,6 @@ import celestialwizardry.crystal.api.crystal.ICrystalPool;
 import celestialwizardry.crystal.block.BlockCrystal;
 import celestialwizardry.crystal.reference.CrystalNames;
 import celestialwizardry.crystal.util.PacketBuilder;
-import celestialwizardry.reference.Names;
 
 import net.minecraft.nbt.NBTTagCompound;
 

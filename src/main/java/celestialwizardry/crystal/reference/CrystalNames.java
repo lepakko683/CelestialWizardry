@@ -1,7 +1,5 @@
 package celestialwizardry.crystal.reference;
 
-import celestialwizardry.reference.Resources;
-
 public class CrystalNames
 {
     public static class Blocks

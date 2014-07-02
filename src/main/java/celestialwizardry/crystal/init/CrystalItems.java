@@ -4,7 +4,6 @@ import celestialwizardry.crystal.item.ItemCrystal;
 import celestialwizardry.crystal.item.ItemMatrix;
 import celestialwizardry.crystal.reference.CrystalNames;
 import celestialwizardry.init.ModItems;
-import celestialwizardry.reference.Names;
 
 import net.minecraft.item.ItemStack;
 

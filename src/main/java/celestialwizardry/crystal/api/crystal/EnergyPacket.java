@@ -22,7 +22,8 @@ public final class EnergyPacket
 
     public EnergyPacket(String s)
     {
-        this(Float.valueOf(s.substring(0, s.indexOf("."))), EnergyRegistry.getEnergyType(s.substring(s.indexOf(".") + 1)));
+        this(Float.valueOf(s.substring(0, s.indexOf("."))),
+             EnergyRegistry.getEnergyType(s.substring(s.indexOf(".") + 1)));
         CWApi.apiLog.info("Constructing a EnergyPacket from String " + s);
         CWApi.apiLog.info("Energy amount " + s.substring(0, s.indexOf(".")));
         CWApi.apiLog.info("Energy type " + EnergyRegistry.getEnergyType(s.substring(s.indexOf(".") + 1)));
