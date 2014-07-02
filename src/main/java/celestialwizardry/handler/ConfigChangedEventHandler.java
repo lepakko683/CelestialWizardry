@@ -12,7 +12,7 @@ public class ConfigChangedEventHandler
     @SubscribeEvent
     public void onConfigChanged(ConfigChangedEvent.OnConfigChangedEvent event)
     {
-        if (event.modID.equals(Reference.MOD_ID))
+        if (event.modID.equalsIgnoreCase(Reference.MOD_ID))
         {
             SettingHandler.sync();
         }
