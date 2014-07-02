@@ -2,7 +2,7 @@ CelestialWizardry
 =================
 
 ##Welcome to CelestialWizardry GitHub repository!
-**LATEST OFFICIAL VERSION**: [N/A for Minecraft 1.7.10](https://github.com/Celestibytes/CelestialWizardry)
+**LATEST OFFICIAL VERSION**: [N/A for Minecraft 1.7.10](#compile-celestial-wizardry)
 
 **Celestial Wizardry's IRC channel**: \#CelestialWizardryMod on irc.esper.net
 
