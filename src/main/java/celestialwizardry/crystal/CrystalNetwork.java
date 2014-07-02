@@ -44,7 +44,7 @@ public final class CrystalNetwork
             tagC.setInteger(CrystalNames.NBT.Y, crystal.getYPos());
             tagC.setInteger(CrystalNames.NBT.Z, crystal.getZPos());
 
-            cnetwork.setTag(CrystalNames.NBT.CRYSTAL_PREFIX + 1, tagC);
+            cnetwork.setTag(CrystalNames.NBT.CRYSTAL_PREFIX + i, tagC);
 
             i++;
         }
