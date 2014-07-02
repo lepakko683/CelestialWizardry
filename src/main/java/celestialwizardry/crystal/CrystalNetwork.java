@@ -22,6 +22,16 @@ public final class CrystalNetwork
         this.world = world;
     }
 
+    public void addCrystal(ICrystal crystal)
+    {
+        crystals.add(crystal);
+    }
+
+    public void removeCrystal(ICrystal crystal)
+    {
+        crystals.remove(crystal);
+    }
+
     public void write()
     {
         writeToWorld(world);
@@ -134,23 +144,9 @@ public final class CrystalNetwork
         return crystals;
     }
 
-    public static CrystalNetwork create(World world)
+    public static void init()
     {
-        CrystalNetwork network = new CrystalNetwork(world);
 
-        if (hasNetwork(world))
-        {
-            network.clear();
-        }
-
-        network.write();
-
-        return network;
-    }
-
-    public static CrystalNetwork getFromWorld(World world)
-    {
-        return null;
     }
 
     public static boolean hasNetwork(World world)
