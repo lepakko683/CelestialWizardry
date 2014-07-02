@@ -15,6 +15,12 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class ClientCrystalProxy extends CommonCrystalProxy
 {
     @Override
+    public void registerEventHandlers()
+    {
+        // NO-OP
+    }
+
+    @Override
     public void registerRenderer()
     {
         RenderingRegistry.registerBlockHandler(new RenderCrystalBlock());
