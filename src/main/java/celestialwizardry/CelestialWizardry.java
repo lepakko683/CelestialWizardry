@@ -98,9 +98,6 @@ public class CelestialWizardry
         // Set the start time for tracking
         long start = System.currentTimeMillis();
 
-        // Initialize mod api logger
-        CWApi.apiLog = LogManager.getLogger("CWApi");
-
         // Tell everyone that we are starting pre-initialization
         LogHelper.info("Starting pre-initialization");
 
