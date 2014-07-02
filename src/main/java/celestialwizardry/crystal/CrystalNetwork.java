@@ -1,13 +1,19 @@
 package celestialwizardry.crystal;
 
+import celestialwizardry.crystal.api.crystal.ICrystal;
 import celestialwizardry.crystal.reference.CrystalNames;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public final class CrystalNetwork
 {
     public final World world;
+
+    public List<ICrystal> crystals = new ArrayList<ICrystal>();
 
     public CrystalNetwork(World world)
     {
@@ -26,7 +32,41 @@ public final class CrystalNetwork
 
     public void writeToNBT(NBTTagCompound tagCompound)
     {
-        // TODO
+        NBTTagCompound cnetwork = new NBTTagCompound();
+
+        int i = 0;
+
+        for (ICrystal crystal : crystals)
+        {
+            NBTTagCompound tagC = new NBTTagCompound();
+
+            tagC.setInteger(CrystalNames.NBT.X, crystal.getXPos());
+            tagC.setInteger(CrystalNames.NBT.Y, crystal.getYPos());
+            tagC.setInteger(CrystalNames.NBT.Z, crystal.getZPos());
+
+            cnetwork.setTag(CrystalNames.NBT.CRYSTAL_PREFIX + 1, tagC);
+
+            i++;
+        }
+
+        cnetwork.setInteger(CrystalNames.NBT.COUNT, i);
+
+        tagCompound.setTag(CrystalNames.NBT.CNETWORK, cnetwork);
+    }
+
+    public void read()
+    {
+        readFromWorld(world);
+    }
+
+    public void readFromWorld(World world)
+    {
+        readFromNBT(world.getWorldInfo().getNBTTagCompound());
+    }
+
+    public void readFromNBT(NBTTagCompound tagCompound)
+    {
+        // TODO Remember to check in for loop if the tag is the count tag
     }
 
     public void clear()
@@ -59,8 +99,13 @@ public final class CrystalNetwork
         return network;
     }
 
+    public static CrystalNetwork getFromWorld(World world)
+    {
+        return null;
+    }
+
     public static boolean hasNetwork(World world)
     {
-        return world.getWorldInfo().getNBTTagCompound().hasKey(CrystalNames.NBT.HAS_CNETWORK) && world.getWorldInfo().getNBTTagCompound().getBoolean(CrystalNames.NBT.HAS_CNETWORK);
+        return world.getWorldInfo().getNBTTagCompound().hasKey(CrystalNames.NBT.HAS_CNETWORK) && world.getWorldInfo().getNBTTagCompound().getBoolean(CrystalNames.NBT.HAS_CNETWORK) && world.getWorldInfo().getNBTTagCompound().hasKey(CrystalNames.NBT.CNETWORK);
     }
 }

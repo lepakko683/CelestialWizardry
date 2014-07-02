@@ -29,6 +29,11 @@ public class CrystalNames
         public static final String ENERGY_STORED = "energyStored";
         public static final String HAS_CNETWORK = "hascnetwork";
         public static final String CNETWORK = "cnetwork";
+        public static final String COUNT = "count";
+        public static final String X = "x";
+        public static final String Y = "y";
+        public static final String Z = "z";
+        public static final String CRYSTAL_PREFIX = "crystal.";
     }
 
     public static class Containers

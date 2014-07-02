@@ -20,7 +20,7 @@ public class CrystalWorldEventHandler
 
         if (info.hasKey(CrystalNames.NBT.HAS_CNETWORK))
         {
-            network = null; // TODO
+            network = CrystalNetwork.getFromWorld(event.world);
         }
         else
         {
