@@ -4,6 +4,7 @@ import celestialwizardry.api.ILockedItem;
 import celestialwizardry.api.energy.EnergyType;
 import celestialwizardry.crystal.api.matrix.IMatrix;
 import celestialwizardry.crystal.api.matrix.internal.ICWMatrix;
+import celestialwizardry.crystal.reference.CrystalNames;
 import celestialwizardry.item.ItemSingle;
 import celestialwizardry.reference.Names;
 import celestialwizardry.reference.Resources;
@@ -39,7 +40,7 @@ public class ItemMatrix extends ItemSingle implements IMatrix, ICWMatrix, ILocke
     {
         super();
         this.setMaxStackSize(1);
-        this.setUnlocalizedName(Names.Items.MATRIX);
+        this.setUnlocalizedName(CrystalNames.Items.MATRIX);
         this.setHasSubtypes(true);
         this.setMaxDamage(0);
     }
@@ -58,9 +59,9 @@ public class ItemMatrix extends ItemSingle implements IMatrix, ICWMatrix, ILocke
     @Override
     public EnergyType getEnergyType(ItemStack stack)
     {
-        if (stack.stackTagCompound != null && NBTHelper.hasTag(stack, Names.NBT.ENERGY))
+        if (stack.stackTagCompound != null && NBTHelper.hasTag(stack, CrystalNames.NBT.ENERGY))
         {
-            String name = stack.stackTagCompound.getString(Names.NBT.ENERGY);
+            String name = stack.stackTagCompound.getString(CrystalNames.NBT.ENERGY);
             // TODO return EnergyRegistry.getEnergyType(name);
         }
 
@@ -78,9 +79,9 @@ public class ItemMatrix extends ItemSingle implements IMatrix, ICWMatrix, ILocke
     @Override
     public float getEnergyStored(ItemStack stack)
     {
-        if (stack.stackTagCompound != null && NBTHelper.hasTag(stack, Names.NBT.ENERGY))
+        if (stack.stackTagCompound != null && NBTHelper.hasTag(stack, CrystalNames.NBT.ENERGY))
         {
-            String name = stack.stackTagCompound.getString(Names.NBT.ENERGY);
+            String name = stack.stackTagCompound.getString(CrystalNames.NBT.ENERGY);
 
             if (NBTHelper.hasTag(stack, name))
             {
@@ -113,7 +114,7 @@ public class ItemMatrix extends ItemSingle implements IMatrix, ICWMatrix, ILocke
             stack.setTagCompound(new NBTTagCompound());
         }
 
-        if (!NBTHelper.hasTag(stack, Names.NBT.ENERGY))
+        if (!NBTHelper.hasTag(stack, CrystalNames.NBT.ENERGY))
         {
             return setEnergy(stack, amount, type);
         }
@@ -255,8 +256,8 @@ public class ItemMatrix extends ItemSingle implements IMatrix, ICWMatrix, ILocke
     @Override
     public boolean setEnergy(ItemStack stack, float amount, EnergyType type)
     {
-        NBTHelper.setString(stack, Names.NBT.ENERGY, type.getEnergyName());
-        NBTHelper.setFloat(stack, Names.NBT.ENERGY_STORED, celestialwizardry.util.MathHelper.clampZero_float(amount,
+        NBTHelper.setString(stack, CrystalNames.NBT.ENERGY, type.getEnergyName());
+        NBTHelper.setFloat(stack, CrystalNames.NBT.ENERGY_STORED, celestialwizardry.util.MathHelper.clampZero_float(amount,
                                                                                                              getMaxEnergy(
                                                                                                                      stack)));
         return true;
@@ -490,14 +491,14 @@ public class ItemMatrix extends ItemSingle implements IMatrix, ICWMatrix, ILocke
     @Override
     public String getUnlocalizedName()
     {
-        return String.format("item.%s%s", Resources.RESOURCE_PREFIX, Names.Items.MATRIX);
+        return String.format("item.%s%s", Resources.RESOURCE_PREFIX, CrystalNames.Items.MATRIX);
     }
 
     @Override
     public String getUnlocalizedName(ItemStack itemStack)
     {
         return String
-                .format("item.%s%s.%s.%s", Resources.RESOURCE_PREFIX, Names.Items.MATRIX, "tier", getTier(itemStack));
+                .format("item.%s%s.%s.%s", Resources.RESOURCE_PREFIX, CrystalNames.Items.MATRIX, "tier", getTier(itemStack));
     }
 
     @Override
@@ -527,7 +528,7 @@ public class ItemMatrix extends ItemSingle implements IMatrix, ICWMatrix, ILocke
         for (int i = 0; i < MAX_ENERGIES.length; i++)
         {
             icons[i] = iconRegister
-                    .registerIcon(Resources.RESOURCE_PREFIX + Names.Items.MATRIX + "." + "tier." + (i + 1));
+                    .registerIcon(Resources.RESOURCE_PREFIX + CrystalNames.Items.MATRIX + "." + "tier." + (i + 1));
         }
     }
 

@@ -1,5 +1,7 @@
 package celestialwizardry.crystal.block;
 
+import celestialwizardry.crystal.init.CrystalBlocks;
+import celestialwizardry.crystal.reference.CrystalNames;
 import celestialwizardry.crystal.tileentity.TileEntityCrystalConductive;
 import celestialwizardry.reference.Names;
 
@@ -15,7 +17,7 @@ public class BlockCrystalConductive extends BlockCrystal
     public BlockCrystalConductive()
     {
         super();
-        this.setBlockName(Names.Blocks.CRYSTAL_CONDUCTIVE);
+        this.setBlockName(CrystalNames.Blocks.CRYSTAL_CONDUCTIVE);
     }
 
     /* ======================================== Block START ===================================== */

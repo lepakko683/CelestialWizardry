@@ -1,4 +1,4 @@
-package celestialwizardry.client.render.crystal;
+package celestialwizardry.crystal.client.render;
 
 import celestialwizardry.util.ActiveNumber;
 

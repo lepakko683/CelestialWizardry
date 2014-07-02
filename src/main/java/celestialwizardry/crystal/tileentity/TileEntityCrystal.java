@@ -4,8 +4,8 @@ import celestialwizardry.crystal.api.crystal.ICrystal;
 import celestialwizardry.api.energy.EnergyRegistry;
 import celestialwizardry.api.energy.EnergyType;
 import celestialwizardry.crystal.block.BlockCrystal;
+import celestialwizardry.crystal.reference.CrystalNames;
 import celestialwizardry.crystal.util.PacketBuilder;
-import celestialwizardry.reference.Names;
 import celestialwizardry.tileentity.TileEntityCW;
 
 import net.minecraft.block.Block;
@@ -167,18 +167,18 @@ public abstract class TileEntityCrystal extends TileEntityCW implements ICrystal
     public void readFromNBT(NBTTagCompound nbtTagCompound)
     {
         super.readFromNBT(nbtTagCompound);
-        boundX = nbtTagCompound.getInteger(Names.NBT.BOUND_X);
-        boundY = nbtTagCompound.getInteger(Names.NBT.BOUND_Y);
-        boundZ = nbtTagCompound.getInteger(Names.NBT.BOUND_Z);
+        boundX = nbtTagCompound.getInteger(CrystalNames.NBT.BOUND_X);
+        boundY = nbtTagCompound.getInteger(CrystalNames.NBT.BOUND_Y);
+        boundZ = nbtTagCompound.getInteger(CrystalNames.NBT.BOUND_Z);
     }
 
     @Override
     public void writeToNBT(NBTTagCompound nbtTagCompound)
     {
         super.writeToNBT(nbtTagCompound);
-        nbtTagCompound.setInteger(Names.NBT.BOUND_X, boundX);
-        nbtTagCompound.setInteger(Names.NBT.BOUND_Y, boundY);
-        nbtTagCompound.setInteger(Names.NBT.BOUND_Z, boundZ);
+        nbtTagCompound.setInteger(CrystalNames.NBT.BOUND_X, boundX);
+        nbtTagCompound.setInteger(CrystalNames.NBT.BOUND_Y, boundY);
+        nbtTagCompound.setInteger(CrystalNames.NBT.BOUND_Z, boundZ);
     }
 
     /* ======================================== TileEntity END ===================================== */

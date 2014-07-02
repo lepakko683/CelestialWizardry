@@ -1,6 +1,7 @@
-package celestialwizardry.client.render.crystal;
+package celestialwizardry.crystal.client.render;
 
 import celestialwizardry.client.model.OBJModels;
+import celestialwizardry.crystal.client.model.CrystalModels;
 
 import net.minecraft.util.ResourceLocation;
 import cpw.mods.fml.relauncher.Side;
@@ -11,7 +12,7 @@ public class RenderCrystalSimple extends RenderCrystal
 {
     public RenderCrystalSimple(ResourceLocation texture)
     {
-        super(OBJModels.modelCrystalSimple, texture);
+        super(CrystalModels.modelCrystalSimple, texture);
     }
 
     public RenderCrystalSimple(String texture)

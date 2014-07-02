@@ -4,6 +4,7 @@ import celestialwizardry.api.IStaff;
 import celestialwizardry.crystal.api.crystal.ICrystal;
 import celestialwizardry.block.BlockCW;
 import celestialwizardry.client.render.RenderOBJBlock;
+import celestialwizardry.crystal.reference.CrystalNames;
 import celestialwizardry.reference.Names;
 import celestialwizardry.util.NBTHelper;
 import celestialwizardry.util.StringHelper;
@@ -40,12 +41,12 @@ public abstract class BlockCrystal extends BlockCW implements ITileEntityProvide
         {
             if (player.getCurrentEquippedItem().getItem() instanceof IStaff)
             {
-                if (NBTHelper.getBoolean(player.getCurrentEquippedItem(), Names.NBT.BOUNDING))
+                if (NBTHelper.getBoolean(player.getCurrentEquippedItem(), CrystalNames.NBT.BOUNDING))
                 {
-                    NBTHelper.setBoolean(player.getCurrentEquippedItem(), Names.NBT.BOUNDING, false);
-                    int cX = NBTHelper.getInt(player.getCurrentEquippedItem(), Names.NBT.BOUND_X);
-                    int cY = NBTHelper.getInt(player.getCurrentEquippedItem(), Names.NBT.BOUND_Y);
-                    int cZ = NBTHelper.getInt(player.getCurrentEquippedItem(), Names.NBT.BOUND_Z);
+                    NBTHelper.setBoolean(player.getCurrentEquippedItem(), CrystalNames.NBT.BOUNDING, false);
+                    int cX = NBTHelper.getInt(player.getCurrentEquippedItem(), CrystalNames.NBT.BOUND_X);
+                    int cY = NBTHelper.getInt(player.getCurrentEquippedItem(), CrystalNames.NBT.BOUND_Y);
+                    int cZ = NBTHelper.getInt(player.getCurrentEquippedItem(), CrystalNames.NBT.BOUND_Z);
 
                     if (world.getTileEntity(cX, cY, cZ) instanceof ICrystal)
                     {
@@ -69,11 +70,11 @@ public abstract class BlockCrystal extends BlockCW implements ITileEntityProvide
                 {
                     if (world.getTileEntity(x, y, z) instanceof ICrystal)
                     {
-                        NBTHelper.setBoolean(player.getCurrentEquippedItem(), Names.NBT.BOUNDING, true);
+                        NBTHelper.setBoolean(player.getCurrentEquippedItem(), CrystalNames.NBT.BOUNDING, true);
 
-                        NBTHelper.setInteger(player.getCurrentEquippedItem(), Names.NBT.BOUND_X, x);
-                        NBTHelper.setInteger(player.getCurrentEquippedItem(), Names.NBT.BOUND_Y, y);
-                        NBTHelper.setInteger(player.getCurrentEquippedItem(), Names.NBT.BOUND_Z, z);
+                        NBTHelper.setInteger(player.getCurrentEquippedItem(), CrystalNames.NBT.BOUND_X, x);
+                        NBTHelper.setInteger(player.getCurrentEquippedItem(), CrystalNames.NBT.BOUND_Y, y);
+                        NBTHelper.setInteger(player.getCurrentEquippedItem(), CrystalNames.NBT.BOUND_Z, z);
 
                         return true;
                     }

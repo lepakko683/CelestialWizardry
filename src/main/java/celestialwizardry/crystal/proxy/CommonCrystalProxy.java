@@ -1,5 +1,7 @@
 package celestialwizardry.crystal.proxy;
 
+import celestialwizardry.crystal.init.CrystalBlocks;
+import celestialwizardry.crystal.reference.CrystalNames;
 import celestialwizardry.crystal.tileentity.TileEntityCrystalConductive;
 import celestialwizardry.reference.Names;
 
@@ -9,6 +11,6 @@ public abstract class CommonCrystalProxy implements ICrystalProxy
 {
     public void registerTileEntities()
     {
-        GameRegistry.registerTileEntity(TileEntityCrystalConductive.class, "tile." + Names.Blocks.CRYSTAL_CONDUCTIVE);
+        GameRegistry.registerTileEntity(TileEntityCrystalConductive.class, "tile." + CrystalNames.Blocks.CRYSTAL_CONDUCTIVE);
     }
 }

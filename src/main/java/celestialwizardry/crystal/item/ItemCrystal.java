@@ -1,13 +1,13 @@
 package celestialwizardry.crystal.item;
 
+import celestialwizardry.crystal.reference.CrystalNames;
 import celestialwizardry.item.ItemCW;
-import celestialwizardry.reference.Names;
 
 public class ItemCrystal extends ItemCW
 {
     public ItemCrystal()
     {
         super();
-        this.setUnlocalizedName(Names.Items.CRYSTAL);
+        this.setUnlocalizedName(CrystalNames.Items.CRYSTAL);
     }
 }
