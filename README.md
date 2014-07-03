@@ -2,9 +2,7 @@ CelestialWizardry
 =================
 
 ##Welcome to CelestialWizardry GitHub repository!
-**LATEST OFFICIAL VERSION**: [N/A for Minecraft 1.7.2](https://github.com/Celestibytes/CelestialWizardry)
-
-**IF YOU WANT TO BUILD CELESTIAL WIZARDRY, YOU SHOULD WAIT BECAUSE BUILD SCRIPT IS NOT STABLE!**
+**LATEST OFFICIAL VERSION**: [N/A for Minecraft 1.7.10](#compile-celestial-wizardry)
 
 **Celestial Wizardry's IRC channel**: \#CelestialWizardryMod on irc.esper.net
 
@@ -18,7 +16,7 @@ CelestialWizardry
 
 ###Compiling Celestial Wizardry
 IMPORTANT: Please report any issues you have, there might be some problems with the documentation!
-Also make sure you know EXACTLY what you're doing!  It's not any of our faults if your OS crashes, becomes corrupted, etc.
+Also make sure you know EXACTLY what you're doing! It's not any of our faults if your OS crashes, becomes corrupted, etc.
 ***
 [Setup Java](#setup-java)
 
@@ -78,8 +76,8 @@ This section assumes that you're using the command-line version of Git.
 2. Execute `gradle build`. If you did everything right, `BUILD SUCCESSFUL` will be displayed after it finishes.  This should be relatively quick.
     * If you see `BUILD FAILED`, check the error output (it should be right around `BUILD FAILED`), fix everything (if possible), and try again.
 3. Navigate to `mcdev\CelestialWizardry\build\libs`.
-    *  You should see `.jar` file named `CelestialWizardry-1.7.2-*.jar`, `CelestialWizardry-1.7.2-*-javadoc.jar` and `CelestialWizardry-1.7.2-*-sources.jar`.
-4. Copy the `CelestialWizardry-1.7.2-*.jar` jar into your Minecraft mods folder, and you are done!
+    *  You should see `.jar` file named `CelestialWizardry-1.7.10-*.jar`, `CelestialWizardry-1.7.10-*-javadoc.jar` and `CelestialWizardry-1.7.10-*-sources.jar`.
+4. Copy the `CelestialWizardry-1.7.10-*.jar` jar into your Minecraft mods folder, and you are done!
 
 ####Updating Your Repository
 In order to get the most up-to-date builds, you'll have to periodically update your local repository.
@@ -129,12 +127,12 @@ Celestial Wizardry crashes every time? Have a suggestion? Found a bug? Create an
 * **PizzAna** ([@PizzAna_](http://twitter.com/PizzAna_) on twitter)
 	* Code
 	* Design
-	
+
 * **Okkapel** (aka lepakko683, [@Le683](http://twitter.com/Le683) on twitter)
 	* Design
 	* Textures & models
 	* Code
-	
+
 
 ###Blamelist
 ***
@@ -142,4 +140,4 @@ Celestial Wizardry crashes every time? Have a suggestion? Found a bug? Create an
 	* All rune stuff
 	* Spell system
 * **PizzAna**
-	* Build script
+	* Build script (Issue tracker [here](https://github.com/Celestibytes/CelestiGradle/issues).)

@@ -63,11 +63,6 @@ public class RenderOBJBlock implements ISimpleBlockRenderingHandler
                 FMLClientHandler.instance().getClient().renderEngine.bindTexture(Resources.Models.TEXTURE_BELL);
                 OBJModels.modelCrystalSimpleQ.renderAll();
             }
-            else if (block instanceof BlockCrystalConductive)
-            {
-                FMLClientHandler.instance().getClient().renderEngine.bindTexture(Resources.Models.Crystals.TEXTURE_CRYSTAL_CONDUCTIVE);
-                crystalSimpleGL11();
-            }
 
             GL11.glPopMatrix();
         }
@@ -114,17 +109,5 @@ public class RenderOBJBlock implements ISimpleBlockRenderingHandler
     public int getRenderId()
     {
         return ID;
-    }
-
-    protected void crystalSimpleGL11()
-    {
-        GL11.glTranslatef(0f, -1f, 0f); // TODO: tweak to render correctly in inventory & in hand
-        GL11.glScalef(.7f, .7f, .7f);
-        OBJModels.modelCrystalSimple.renderAll();
-    }
-
-    protected void crystalComplexGL11()
-    {
-
     }
 }

@@ -6,6 +6,8 @@ import java.util.List;
 import celestialwizardry.CelestialWizardry;
 import celestialwizardry.config.RuneConfigPart;
 import celestialwizardry.handler.ClientRuneConfigurationHandler;
+import celestialwizardry.util.LogHelper;
+
 import io.netty.buffer.ByteBuf;
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
@@ -102,7 +104,9 @@ public class MessageRuneConfig implements IMessage, IMessageHandler<MessageRuneC
 	// This method is very likely to contain bugs
 	public void toBytes(ByteBuf buf) {
 		if(entryCount != entryLines.length) {
-			CelestialWizardry.log.error("Error at building a message: entryCount doesn't match the length of the entryLines array! Continuing anyway, THIS WILL CAUSE PROBLEMS!!!");
+            LogHelper
+                    .error("Error at building a message: entryCount doesn't match the length of the entryLines array!" +
+                                   " Continuing anyway, THIS WILL CAUSE PROBLEMS!!!");
 		}
 		
 		buf.writeInt(msgId);

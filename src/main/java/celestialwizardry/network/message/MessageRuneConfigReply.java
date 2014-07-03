@@ -1,6 +1,8 @@
 package celestialwizardry.network.message;
 
 import celestialwizardry.CelestialWizardry;
+import celestialwizardry.util.LogHelper;
+
 import io.netty.buffer.ByteBuf;
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
@@ -30,11 +32,11 @@ public class MessageRuneConfigReply implements  IMessage, IMessageHandler<Messag
 	@Override
 	public IMessage onMessage(MessageRuneConfigReply message, MessageContext ctx) {
 		if(message.code == CODE_RESEND) {
-			CelestialWizardry.log.info("Config part send failed, resending...");
+            LogHelper.info("Config part send failed, resending...");
 			return null; //new MessageRuneConfig(); // TODO!
 		}
 		if(message.code == CODE_OK) {
-			CelestialWizardry.log.info("Config part sent successfully!");
+            LogHelper.info("Config part sent successfully!");
 			return null;
 		}
 		return null;

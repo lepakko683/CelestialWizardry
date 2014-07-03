@@ -1,10 +1,12 @@
 package celestialwizardry.crystal.proxy;
 
-import celestialwizardry.client.render.crystal.RenderCrystalSimple;
+import celestialwizardry.crystal.client.render.RenderCrystalBlock;
+import celestialwizardry.crystal.client.render.RenderCrystalSimple;
+import celestialwizardry.crystal.reference.CrystalResources;
 import celestialwizardry.crystal.tileentity.TileEntityCrystalConductive;
-import celestialwizardry.reference.Resources;
 
 import cpw.mods.fml.client.registry.ClientRegistry;
+import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -12,9 +14,17 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class ClientCrystalProxy extends CommonCrystalProxy
 {
     @Override
+    public void registerEventHandlers()
+    {
+        // NO-OP
+    }
+
+    @Override
     public void registerRenderer()
     {
+        RenderingRegistry.registerBlockHandler(new RenderCrystalBlock());
+
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityCrystalConductive.class, new RenderCrystalSimple(
-                Resources.Models.Crystals.TEXTURE_CRYSTAL_CONDUCTIVE));
+                CrystalResources.Models.TEXTURE_CRYSTAL_CONDUCTIVE));
     }
 }

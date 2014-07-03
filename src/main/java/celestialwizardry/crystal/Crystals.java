@@ -24,6 +24,9 @@ public class Crystals
         // Register crystal tile entities
         proxy.registerTileEntities();
 
+        // Register Crystal Event Handlers
+        proxy.registerEventHandlers();
+
         // Register crystal renders
         proxy.registerRenderer();
     }

@@ -1,5 +1,7 @@
 package celestialwizardry.api;
 
+import celestialwizardry.api.util.ApiLogHelper;
+
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -9,7 +11,7 @@ import net.minecraft.item.ItemStack;
  */
 public class ItemApi
 {
-    private static final String PACKAGE = "celestialwizardry.init.";
+    private static final String PACKAGE = CWApi.CW_PACKAGE + "init.";
 
     /**
      * Allows you to get item from string.
@@ -39,7 +41,7 @@ public class ItemApi
         }
         catch (Exception ex)
         {
-            CWApi.apiLog.warn("Could not retrieve item identified by " + field);
+            ApiLogHelper.warn("Could not retrieve item identified by " + field);
         }
 
         return stack;
@@ -73,7 +75,7 @@ public class ItemApi
         }
         catch (Exception ex)
         {
-            CWApi.apiLog.warn("Could not retrieve block identified by " + field);
+            ApiLogHelper.warn("Could not retrieve block identified by " + field);
         }
 
         return stack;

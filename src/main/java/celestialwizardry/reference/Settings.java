@@ -121,10 +121,15 @@ public class Settings
     {
         public static final String SEPARATOR = Configuration.CATEGORY_SPLITTER;
 
-        public static final String GENERAL = Configuration.CATEGORY_GENERAL;
-        public static final String SPELLS = "spells";
-        public static final String CLIENT = "client";
-        public static final String TWEAKS = "tweaks";
+        public static final String[] SUPER_CATEGORIES = {Configuration.CATEGORY_GENERAL, "spells", "client", "tweaks"};
+
+        public static final String GENERAL = SUPER_CATEGORIES[0];
+
+        public static final String SPELLS = SUPER_CATEGORIES[1];
+
+        public static final String CLIENT = SUPER_CATEGORIES[2];
+
+        public static final String TWEAKS = SUPER_CATEGORIES[3];
         public static final String DIFFICULTY = TWEAKS + SEPARATOR + "difficulty";
     }
 }

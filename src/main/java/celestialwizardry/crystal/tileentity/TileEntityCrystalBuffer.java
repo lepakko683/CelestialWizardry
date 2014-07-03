@@ -5,8 +5,8 @@ import celestialwizardry.crystal.api.crystal.ICrystal;
 import celestialwizardry.crystal.api.crystal.ICrystalBuffer;
 import celestialwizardry.crystal.api.crystal.ICrystalPool;
 import celestialwizardry.crystal.block.BlockCrystal;
+import celestialwizardry.crystal.reference.CrystalNames;
 import celestialwizardry.crystal.util.PacketBuilder;
-import celestialwizardry.reference.Names;
 
 import net.minecraft.nbt.NBTTagCompound;
 
@@ -71,9 +71,9 @@ public abstract class TileEntityCrystalBuffer extends TileEntityCrystal implemen
     {
         super.readFromNBT(nbtTagCompound);
 
-        NBTTagCompound bufferCompound = nbtTagCompound.getCompoundTag(Names.NBT.BUFFER);
+        NBTTagCompound bufferCompound = nbtTagCompound.getCompoundTag(CrystalNames.NBT.BUFFER);
 
-        for (int i = 0; i < nbtTagCompound.getInteger(Names.NBT.BUFFER_SIZE); i++)
+        for (int i = 0; i < nbtTagCompound.getInteger(CrystalNames.NBT.BUFFER_SIZE); i++)
         {
             buffer.add(new EnergyPacket(bufferCompound.getString(String.valueOf(i))));
         }
@@ -95,8 +95,8 @@ public abstract class TileEntityCrystalBuffer extends TileEntityCrystal implemen
             }
         }
 
-        nbtTagCompound.setTag(Names.NBT.BUFFER, bufferCompound);
-        nbtTagCompound.setInteger(Names.NBT.BUFFER_SIZE, buffer.size());
+        nbtTagCompound.setTag(CrystalNames.NBT.BUFFER, bufferCompound);
+        nbtTagCompound.setInteger(CrystalNames.NBT.BUFFER_SIZE, buffer.size());
     }
 
     /* ======================================== TileEntity END ===================================== */

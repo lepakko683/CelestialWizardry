@@ -6,15 +6,12 @@ import celestialwizardry.client.render.RenderEntityBell;
 import celestialwizardry.client.render.RenderMagicalStone;
 import celestialwizardry.client.render.RenderOBJBlock;
 import celestialwizardry.client.render.RenderWritingTable;
-import celestialwizardry.client.render.crystal.RenderCrystalSimple;
 import celestialwizardry.client.settings.KeyBindings;
 import celestialwizardry.entity.EntityBell;
 import celestialwizardry.init.ModItems;
 import celestialwizardry.reference.EventHandlers;
-import celestialwizardry.reference.Resources;
 import celestialwizardry.reference.Settings;
 import celestialwizardry.tileentity.TileEntityBell;
-import celestialwizardry.crystal.tileentity.TileEntityCrystalConductive;
 import celestialwizardry.tileentity.TileEntityWritingTable;
 
 import net.minecraftforge.client.MinecraftForgeClient;

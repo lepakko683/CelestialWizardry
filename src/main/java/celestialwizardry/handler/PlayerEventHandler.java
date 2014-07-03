@@ -7,6 +7,7 @@ import celestialwizardry.init.ModItems;
 import celestialwizardry.crystal.item.ItemMatrix;
 import celestialwizardry.reference.Names;
 import celestialwizardry.reference.Settings;
+import celestialwizardry.util.LogHelper;
 import celestialwizardry.util.PlayerHelper;
 import celestialwizardry.util.SpawnHelper;
 import celestialwizardry.util.StringHelper;
@@ -39,7 +40,7 @@ public class PlayerEventHandler
             entityProperties.saveNBTData(event.player.getEntityData());
         }
 
-        CelestialWizardry.log.info("Player logged in! Name: " + event.player.getDisplayName());
+        LogHelper.info("Player logged in! Name: " + event.player.getDisplayName());
 
         ModEntityProperties properties = ModEntityProperties.get(event.player);
 
@@ -49,7 +50,7 @@ public class PlayerEventHandler
             {
                 ItemStack stack = new ItemStack(ModItems.spellBook);
 
-                CelestialWizardry.log.info("Giving spellBook to " + event.player.getDisplayName());
+                LogHelper.info("Giving spellBook to " + event.player.getDisplayName());
 
                 if (PlayerHelper.isPizzAna(event.player))
                 {
@@ -144,9 +145,7 @@ public class PlayerEventHandler
             properties.hasIntelligence = true;
             properties.intelligence = Settings.startingIntelligence;
 
-            CelestialWizardry.log
-                    .info("Initialized intelligence (" + properties.intelligence + ") for player " + event.player
-                            .getDisplayName());
+            LogHelper.info("Initialized intelligence (" + properties.intelligence + ") for player " + event.player.getDisplayName());
         }
 
         if (!properties.hasExp)
@@ -154,10 +153,7 @@ public class PlayerEventHandler
             properties.hasExp = true;
             properties.exp = 0;
 
-            CelestialWizardry.log.info(
-                    "Initialized experience (" + properties.intelligence + ") for player " + event.player
-                            .getDisplayName()
-                                      );
+            LogHelper.info("Initialized experience (" + properties.intelligence + ") for player " + event.player.getDisplayName());
         }
 
         if (!properties.fun)

@@ -1,11 +1,11 @@
 package celestialwizardry.crystal.tileentity;
 
-import celestialwizardry.crystal.api.crystal.ICrystal;
 import celestialwizardry.api.energy.EnergyRegistry;
 import celestialwizardry.api.energy.EnergyType;
+import celestialwizardry.crystal.api.crystal.ICrystal;
 import celestialwizardry.crystal.block.BlockCrystal;
+import celestialwizardry.crystal.reference.CrystalNames;
 import celestialwizardry.crystal.util.PacketBuilder;
-import celestialwizardry.reference.Names;
 import celestialwizardry.tileentity.TileEntityCW;
 
 import net.minecraft.block.Block;
@@ -71,12 +71,13 @@ public abstract class TileEntityCrystal extends TileEntityCW implements ICrystal
      * Can this {@link celestialwizardry.crystal.api.crystal.ICrystal} be bounded to given {@link celestialwizardry.api
      * .blockCrystal.ICrystal}.
      *
-     * @param world   the {@link net.minecraft.world.World} this {@link celestialwizardry.crystal.api.crystal.ICrystal} is
-     * @param crystal the {@link celestialwizardry.crystal.api.crystal.ICrystal} this {@link celestialwizardry.crystal.api.crystal
-     *                .ICrystal} is going to be bounded with
+     * @param world   the {@link net.minecraft.world.World} this {@link celestialwizardry.crystal.api.crystal.ICrystal}
+     *                is
+     * @param crystal the {@link celestialwizardry.crystal.api.crystal.ICrystal} this {@link
+     *                celestialwizardry.crystal.api.crystal .ICrystal} is going to be bounded with
      *
-     * @return can this {@link celestialwizardry.crystal.api.crystal.ICrystal} to the {@link celestialwizardry.crystal.api.crystal
-     * .ICrystal}
+     * @return can this {@link celestialwizardry.crystal.api.crystal.ICrystal} to the {@link
+     * celestialwizardry.crystal.api.crystal .ICrystal}
      */
     @Override
     public boolean canBoundTo(World world, ICrystal crystal)
@@ -167,18 +168,18 @@ public abstract class TileEntityCrystal extends TileEntityCW implements ICrystal
     public void readFromNBT(NBTTagCompound nbtTagCompound)
     {
         super.readFromNBT(nbtTagCompound);
-        boundX = nbtTagCompound.getInteger(Names.NBT.BOUND_X);
-        boundY = nbtTagCompound.getInteger(Names.NBT.BOUND_Y);
-        boundZ = nbtTagCompound.getInteger(Names.NBT.BOUND_Z);
+        boundX = nbtTagCompound.getInteger(CrystalNames.NBT.BOUND_X);
+        boundY = nbtTagCompound.getInteger(CrystalNames.NBT.BOUND_Y);
+        boundZ = nbtTagCompound.getInteger(CrystalNames.NBT.BOUND_Z);
     }
 
     @Override
     public void writeToNBT(NBTTagCompound nbtTagCompound)
     {
         super.writeToNBT(nbtTagCompound);
-        nbtTagCompound.setInteger(Names.NBT.BOUND_X, boundX);
-        nbtTagCompound.setInteger(Names.NBT.BOUND_Y, boundY);
-        nbtTagCompound.setInteger(Names.NBT.BOUND_Z, boundZ);
+        nbtTagCompound.setInteger(CrystalNames.NBT.BOUND_X, boundX);
+        nbtTagCompound.setInteger(CrystalNames.NBT.BOUND_Y, boundY);
+        nbtTagCompound.setInteger(CrystalNames.NBT.BOUND_Z, boundZ);
     }
 
     /* ======================================== TileEntity END ===================================== */

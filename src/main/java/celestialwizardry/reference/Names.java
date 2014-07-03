@@ -8,7 +8,6 @@ public class Names
         public static final String LIVING_ORE = "livingOre";
         public static final String BELL = "bell";
         public static final String MAGICAL_STONE = "magicalStone";
-        public static final String CRYSTAL_CONDUCTIVE = "crystalConductive";
         public static final String CONTAINED_CRYSTAL = "containedCrystal";
     }
 
@@ -16,9 +15,6 @@ public class Names
     {
         public static final String MATERIAL = "material";
         public static final String[] MATERIALS = {"magicalIntelligenceCore", "magicalPebble", "netherPearl", "mysteriousMatter"};
-
-        public static final String CRYSTAL = "crystal";
-        public static final String[] CRYSTALS = {"stone", "mystical", "pure", "celestial", "perfect"};
 
         public static final String MAGICAL_INK = "magicalInk";
         public static final String STAFF = "staff";
@@ -30,7 +26,6 @@ public class Names
         public static final String SEASON_RING = "seasonRing";
         public static final String PAGE = "page";
         public static final String MAGICAL_PEN = "magicalPen";
-        public static final String MATRIX = "matrix";
         public static final String SOARYN_CHEST_PLCR = "soarynChestPlcr";
     }
 
@@ -49,16 +44,8 @@ public class Names
         public static final String NAME = "Name";
         public static final String LORE = "Lore";
         public static final String BACKUP_NAME = "backupName";
-        public static final String ENERGY = "energy";
-        public static final String ENERGY_STORED = "energyStored";
         public static final String OPENERS = "openers";
-        public static final String BOUND_X = "boundX";
-        public static final String BOUND_Y = "boundY";
-        public static final String BOUND_Z = "boundZ";
         public static final String OPEN = "open";
-        public static final String BOUNDING = "bounding";
-        public static final String BUFFER = "buffer";
-        public static final String BUFFER_SIZE = "bufferSize";
     }
 
     public static class Containers

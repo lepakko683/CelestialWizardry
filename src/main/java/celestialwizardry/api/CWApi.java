@@ -4,8 +4,7 @@ import celestialwizardry.api.spell.Spell;
 import celestialwizardry.api.spellbook.SpellBookCategory;
 import celestialwizardry.api.spellbook.SpellBookEntry;
 import celestialwizardry.api.spellgrammar.Rune;
-
-import org.apache.logging.log4j.Logger;
+import celestialwizardry.api.util.ApiLogHelper;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -13,9 +12,11 @@ import java.util.List;
 
 public final class CWApi
 {
-    public static Logger apiLog = null;
+    public static final String VERSION = "0.1";
+    public static final String ID = "cwapi|";
+    public static final String MOD_ID = "celestialwizardry";
 
-    private static final String CW_PACKAGE = "celestialwizardry.";
+    public static final String CW_PACKAGE = "celestialwizardry.";
 
     private static final String REGISTRY_PACKAGE = CW_PACKAGE + "registry.";
     private static final String SPELL_REGISTRY = REGISTRY_PACKAGE + "SpellRegistry";
@@ -44,32 +45,32 @@ public final class CWApi
         }
         catch (ClassNotFoundException e)
         {
-            CWApi.apiLog.warn("Failed to invoke method " + SPELL_REGISTRY + ".registerSpell");
+            ApiLogHelper.warn("Failed to invoke method " + SPELL_REGISTRY + ".registerSpell");
             e.printStackTrace();
         }
         catch (IllegalAccessException e)
         {
-            CWApi.apiLog.warn("Failed to invoke method " + SPELL_REGISTRY + ".registerSpell");
+            ApiLogHelper.warn("Failed to invoke method " + SPELL_REGISTRY + ".registerSpell");
             e.printStackTrace();
         }
         catch (IllegalArgumentException e)
         {
-            CWApi.apiLog.warn("Failed to invoke method " + SPELL_REGISTRY + ".registerSpell");
+            ApiLogHelper.warn("Failed to invoke method " + SPELL_REGISTRY + ".registerSpell");
             e.printStackTrace();
         }
         catch (NoSuchMethodException e)
         {
-            CWApi.apiLog.warn("Failed to invoke method " + SPELL_REGISTRY + ".registerSpell");
+            ApiLogHelper.warn("Failed to invoke method " + SPELL_REGISTRY + ".registerSpell");
             e.printStackTrace();
         }
         catch (SecurityException e)
         {
-            CWApi.apiLog.warn("Failed to invoke method " + SPELL_REGISTRY + ".registerSpell");
+            ApiLogHelper.warn("Failed to invoke method " + SPELL_REGISTRY + ".registerSpell");
             e.printStackTrace();
         }
         catch (InvocationTargetException e)
         {
-            CWApi.apiLog.warn("Failed to invoke method " + SPELL_REGISTRY + ".registerSpell");
+            ApiLogHelper.warn("Failed to invoke method " + SPELL_REGISTRY + ".registerSpell");
             e.printStackTrace();
         }
     }
@@ -92,32 +93,32 @@ public final class CWApi
         }
         catch (ClassNotFoundException e)
         {
-            CWApi.apiLog.warn("Failed to invoke method " + SPELL_REGISTRY + ".getSpell");
+            ApiLogHelper.warn("Failed to invoke method " + SPELL_REGISTRY + ".getSpell");
             e.printStackTrace();
         }
         catch (IllegalAccessException e)
         {
-            CWApi.apiLog.warn("Failed to invoke method " + SPELL_REGISTRY + ".getSpell");
+            ApiLogHelper.warn("Failed to invoke method " + SPELL_REGISTRY + ".getSpell");
             e.printStackTrace();
         }
         catch (IllegalArgumentException e)
         {
-            CWApi.apiLog.warn("Failed to invoke method " + SPELL_REGISTRY + ".getSpell");
+            ApiLogHelper.warn("Failed to invoke method " + SPELL_REGISTRY + ".getSpell");
             e.printStackTrace();
         }
         catch (NoSuchMethodException e)
         {
-            CWApi.apiLog.warn("Failed to invoke method " + SPELL_REGISTRY + ".getSpell");
+            ApiLogHelper.warn("Failed to invoke method " + SPELL_REGISTRY + ".getSpell");
             e.printStackTrace();
         }
         catch (SecurityException e)
         {
-            CWApi.apiLog.warn("Failed to invoke method " + SPELL_REGISTRY + ".getSpell");
+            ApiLogHelper.warn("Failed to invoke method " + SPELL_REGISTRY + ".getSpell");
             e.printStackTrace();
         }
         catch (InvocationTargetException e)
         {
-            CWApi.apiLog.warn("Failed to invoke method " + SPELL_REGISTRY + ".getSpell");
+            ApiLogHelper.warn("Failed to invoke method " + SPELL_REGISTRY + ".getSpell");
             e.printStackTrace();
         }
 
@@ -143,32 +144,32 @@ public final class CWApi
         }
         catch (ClassNotFoundException e)
         {
-            CWApi.apiLog.warn("Failed to invoke method " + CONFIG_SPELLS + ".handleSpellCost");
+            ApiLogHelper.warn("Failed to invoke method " + CONFIG_SPELLS + ".handleSpellCost");
             e.printStackTrace();
         }
         catch (IllegalAccessException e)
         {
-            CWApi.apiLog.warn("Failed to invoke method " + CONFIG_SPELLS + ".handleSpellCost");
+            ApiLogHelper.warn("Failed to invoke method " + CONFIG_SPELLS + ".handleSpellCost");
             e.printStackTrace();
         }
         catch (IllegalArgumentException e)
         {
-            CWApi.apiLog.warn("Failed to invoke method " + CONFIG_SPELLS + ".handleSpellCost");
+            ApiLogHelper.warn("Failed to invoke method " + CONFIG_SPELLS + ".handleSpellCost");
             e.printStackTrace();
         }
         catch (NoSuchMethodException e)
         {
-            CWApi.apiLog.warn("Failed to invoke method " + CONFIG_SPELLS + ".handleSpellCost");
+            ApiLogHelper.warn("Failed to invoke method " + CONFIG_SPELLS + ".handleSpellCost");
             e.printStackTrace();
         }
         catch (SecurityException e)
         {
-            CWApi.apiLog.warn("Failed to invoke method " + CONFIG_SPELLS + ".handleSpellCost");
+            ApiLogHelper.warn("Failed to invoke method " + CONFIG_SPELLS + ".handleSpellCost");
             e.printStackTrace();
         }
         catch (InvocationTargetException e)
         {
-            CWApi.apiLog.warn("Failed to invoke method " + CONFIG_SPELLS + ".handleSpellCost");
+            ApiLogHelper.warn("Failed to invoke method " + CONFIG_SPELLS + ".handleSpellCost");
             e.printStackTrace();
         }
 
@@ -193,32 +194,32 @@ public final class CWApi
         }
         catch (ClassNotFoundException e)
         {
-            CWApi.apiLog.warn("Failed to invoke method " + SPELL_BOOK_REGISTRY + ".addCategory");
+            ApiLogHelper.warn("Failed to invoke method " + SPELL_BOOK_REGISTRY + ".addCategory");
             e.printStackTrace();
         }
         catch (IllegalAccessException e)
         {
-            CWApi.apiLog.warn("Failed to invoke method " + SPELL_BOOK_REGISTRY + ".addCategory");
+            ApiLogHelper.warn("Failed to invoke method " + SPELL_BOOK_REGISTRY + ".addCategory");
             e.printStackTrace();
         }
         catch (IllegalArgumentException e)
         {
-            CWApi.apiLog.warn("Failed to invoke method " + SPELL_BOOK_REGISTRY + ".addCategory");
+            ApiLogHelper.warn("Failed to invoke method " + SPELL_BOOK_REGISTRY + ".addCategory");
             e.printStackTrace();
         }
         catch (NoSuchMethodException e)
         {
-            CWApi.apiLog.warn("Failed to invoke method " + SPELL_BOOK_REGISTRY + ".addCategory");
+            ApiLogHelper.warn("Failed to invoke method " + SPELL_BOOK_REGISTRY + ".addCategory");
             e.printStackTrace();
         }
         catch (SecurityException e)
         {
-            CWApi.apiLog.warn("Failed to invoke method " + SPELL_BOOK_REGISTRY + ".addCategory");
+            ApiLogHelper.warn("Failed to invoke method " + SPELL_BOOK_REGISTRY + ".addCategory");
             e.printStackTrace();
         }
         catch (InvocationTargetException e)
         {
-            CWApi.apiLog.warn("Failed to invoke method " + SPELL_BOOK_REGISTRY + ".addCategory");
+            ApiLogHelper.warn("Failed to invoke method " + SPELL_BOOK_REGISTRY + ".addCategory");
             e.printStackTrace();
         }
     }
@@ -240,27 +241,27 @@ public final class CWApi
         }
         catch (ClassNotFoundException e)
         {
-            CWApi.apiLog.warn("Failed to invoke method " + SPELL_BOOK_REGISTRY + ".getAllCategories");
+            ApiLogHelper.warn("Failed to invoke method " + SPELL_BOOK_REGISTRY + ".getAllCategories");
         }
         catch (IllegalAccessException e)
         {
-            CWApi.apiLog.warn("Failed to invoke method " + SPELL_BOOK_REGISTRY + ".getAllCategories");
+            ApiLogHelper.warn("Failed to invoke method " + SPELL_BOOK_REGISTRY + ".getAllCategories");
         }
         catch (IllegalArgumentException e)
         {
-            CWApi.apiLog.warn("Failed to invoke method " + SPELL_BOOK_REGISTRY + ".getAllCategories");
+            ApiLogHelper.warn("Failed to invoke method " + SPELL_BOOK_REGISTRY + ".getAllCategories");
         }
         catch (NoSuchMethodException e)
         {
-            CWApi.apiLog.warn("Failed to invoke method " + SPELL_BOOK_REGISTRY + ".getAllCategories");
+            ApiLogHelper.warn("Failed to invoke method " + SPELL_BOOK_REGISTRY + ".getAllCategories");
         }
         catch (SecurityException e)
         {
-            CWApi.apiLog.warn("Failed to invoke method " + SPELL_BOOK_REGISTRY + ".getAllCategories");
+            ApiLogHelper.warn("Failed to invoke method " + SPELL_BOOK_REGISTRY + ".getAllCategories");
         }
         catch (InvocationTargetException e)
         {
-            CWApi.apiLog.warn("Failed to invoke method " + SPELL_BOOK_REGISTRY + ".getAllCategories");
+            ApiLogHelper.warn("Failed to invoke method " + SPELL_BOOK_REGISTRY + ".getAllCategories");
         }
 
         return null;
@@ -283,32 +284,32 @@ public final class CWApi
         }
         catch (ClassNotFoundException e)
         {
-            CWApi.apiLog.warn("Failed to invoke method " + SPELL_BOOK_REGISTRY + ".addEntry");
+            ApiLogHelper.warn("Failed to invoke method " + SPELL_BOOK_REGISTRY + ".addEntry");
             e.printStackTrace();
         }
         catch (IllegalAccessException e)
         {
-            CWApi.apiLog.warn("Failed to invoke method " + SPELL_BOOK_REGISTRY + ".addEntry");
+            ApiLogHelper.warn("Failed to invoke method " + SPELL_BOOK_REGISTRY + ".addEntry");
             e.printStackTrace();
         }
         catch (IllegalArgumentException e)
         {
-            CWApi.apiLog.warn("Failed to invoke method " + SPELL_BOOK_REGISTRY + ".addEntry");
+            ApiLogHelper.warn("Failed to invoke method " + SPELL_BOOK_REGISTRY + ".addEntry");
             e.printStackTrace();
         }
         catch (NoSuchMethodException e)
         {
-            CWApi.apiLog.warn("Failed to invoke method " + SPELL_BOOK_REGISTRY + ".addEntry");
+            ApiLogHelper.warn("Failed to invoke method " + SPELL_BOOK_REGISTRY + ".addEntry");
             e.printStackTrace();
         }
         catch (SecurityException e)
         {
-            CWApi.apiLog.warn("Failed to invoke method " + SPELL_BOOK_REGISTRY + ".addEntry");
+            ApiLogHelper.warn("Failed to invoke method " + SPELL_BOOK_REGISTRY + ".addEntry");
             e.printStackTrace();
         }
         catch (InvocationTargetException e)
         {
-            CWApi.apiLog.warn("Failed to invoke method " + SPELL_BOOK_REGISTRY + ".addEntry");
+            ApiLogHelper.warn("Failed to invoke method " + SPELL_BOOK_REGISTRY + ".addEntry");
             e.printStackTrace();
         }
     }
@@ -331,32 +332,32 @@ public final class CWApi
         }
         catch (ClassNotFoundException e)
         {
-            CWApi.apiLog.warn("Failed to invoke method " + RUNE_REGISTRY + ".registerRune");
+            ApiLogHelper.warn("Failed to invoke method " + RUNE_REGISTRY + ".registerRune");
             e.printStackTrace();
         }
         catch (IllegalAccessException e)
         {
-            CWApi.apiLog.warn("Failed to invoke method " + RUNE_REGISTRY + ".registerRune");
+            ApiLogHelper.warn("Failed to invoke method " + RUNE_REGISTRY + ".registerRune");
             e.printStackTrace();
         }
         catch (IllegalArgumentException e)
         {
-            CWApi.apiLog.warn("Failed to invoke method " + RUNE_REGISTRY + ".registerRune");
+            ApiLogHelper.warn("Failed to invoke method " + RUNE_REGISTRY + ".registerRune");
             e.printStackTrace();
         }
         catch (NoSuchMethodException e)
         {
-            CWApi.apiLog.warn("Failed to invoke method " + RUNE_REGISTRY + ".registerRune");
+            ApiLogHelper.warn("Failed to invoke method " + RUNE_REGISTRY + ".registerRune");
             e.printStackTrace();
         }
         catch (SecurityException e)
         {
-            CWApi.apiLog.warn("Failed to invoke method " + RUNE_REGISTRY + ".registerRune");
+            ApiLogHelper.warn("Failed to invoke method " + RUNE_REGISTRY + ".registerRune");
             e.printStackTrace();
         }
         catch (InvocationTargetException e)
         {
-            CWApi.apiLog.warn("Failed to invoke method " + RUNE_REGISTRY + ".registerRune");
+            ApiLogHelper.warn("Failed to invoke method " + RUNE_REGISTRY + ".registerRune");
             e.printStackTrace();
         }
     }
@@ -379,32 +380,32 @@ public final class CWApi
         }
         catch (ClassNotFoundException e)
         {
-            CWApi.apiLog.warn("Failed to invoke method " + RUNE_REGISTRY + ".getRune");
+            ApiLogHelper.warn("Failed to invoke method " + RUNE_REGISTRY + ".getRune");
             e.printStackTrace();
         }
         catch (IllegalAccessException e)
         {
-            CWApi.apiLog.warn("Failed to invoke method " + RUNE_REGISTRY + ".getRune");
+            ApiLogHelper.warn("Failed to invoke method " + RUNE_REGISTRY + ".getRune");
             e.printStackTrace();
         }
         catch (IllegalArgumentException e)
         {
-            CWApi.apiLog.warn("Failed to invoke method " + RUNE_REGISTRY + ".getRune");
+            ApiLogHelper.warn("Failed to invoke method " + RUNE_REGISTRY + ".getRune");
             e.printStackTrace();
         }
         catch (NoSuchMethodException e)
         {
-            CWApi.apiLog.warn("Failed to invoke method " + RUNE_REGISTRY + ".getRune");
+            ApiLogHelper.warn("Failed to invoke method " + RUNE_REGISTRY + ".getRune");
             e.printStackTrace();
         }
         catch (SecurityException e)
         {
-            CWApi.apiLog.warn("Failed to invoke method " + RUNE_REGISTRY + ".getRune");
+            ApiLogHelper.warn("Failed to invoke method " + RUNE_REGISTRY + ".getRune");
             e.printStackTrace();
         }
         catch (InvocationTargetException e)
         {
-            CWApi.apiLog.warn("Failed to invoke method " + RUNE_REGISTRY + ".getRune");
+            ApiLogHelper.warn("Failed to invoke method " + RUNE_REGISTRY + ".getRune");
             e.printStackTrace();
         }
 

@@ -21,7 +21,7 @@ buildscript {
         }
     }
     dependencies {
-        classpath 'io.github.pizzana:CelestiGradle:0.3.0'
+        classpath 'io.github.pizzana:CelestiGradle:0.4-SNAPSHOT'
         classpath 'io.github.pizzana:potential-octo-spice:0.1.2'
     }
 }
@@ -40,7 +40,7 @@ if(System.getenv().BUILD_NUMBER != null)
 {
     ext.buildNumber = "${System.getenv().BUILD_NUMBER}"
 }
-else 
+else
 {
     ext.buildNumber = "null"
 }

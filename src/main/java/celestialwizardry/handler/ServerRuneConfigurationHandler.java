@@ -25,6 +25,7 @@ import celestialwizardry.config.RuneConfigPart;
 import celestialwizardry.network.PacketHandler;
 import celestialwizardry.network.message.MessageRuneConfig;
 import celestialwizardry.registry.RuneRegistry;
+import celestialwizardry.util.LogHelper;
 
 public class ServerRuneConfigurationHandler {
 	public static final String CONFIG_FILE_NAME = "celestialWizardry_runeConfiguration.dat";
@@ -190,7 +191,7 @@ public class ServerRuneConfigurationHandler {
 				try {
 					WORLD_DIR.mkdirs();
 				} catch(Exception e) {
-					CelestialWizardry.log.error("Failed to create config directory");
+                    LogHelper.error("Failed to create config directory");
 					e.printStackTrace();
 				}
 			}
@@ -203,7 +204,7 @@ public class ServerRuneConfigurationHandler {
 			}
 			
 			if(!deleteSucceeded) {
-				CelestialWizardry.log.warn("The deletion of the old rune configuration file failed. This might cause problems!");
+                LogHelper.warn("The deletion of the old rune configuration file failed. This might cause problems!");
 			}
 			
 			mainConfigFile = getWorldRuneConfigFile();
@@ -212,7 +213,7 @@ public class ServerRuneConfigurationHandler {
 				fos = new FileOutputStream(mainConfigFile);
 			} catch(Exception e) {
 				e.printStackTrace();
-				CelestialWizardry.log.error("Couldn't open FileOutputStream for mainConfigFile");
+                LogHelper.error("Couldn't open FileOutputStream for mainConfigFile");
 				return false;
 			}
 			
@@ -221,7 +222,7 @@ public class ServerRuneConfigurationHandler {
 				fos.close();
 			} catch(Exception e) {
 				e.printStackTrace();
-				CelestialWizardry.log.error("Something went wrong with writing into the world rune config file");
+                LogHelper.error("Something went wrong with writing into the world rune config file");
 				return false;
 			}
 			
@@ -232,14 +233,14 @@ public class ServerRuneConfigurationHandler {
 			}
 			
 			if(!deleteSucceeded) {
-				CelestialWizardry.log.warn("The deletion of the old rune configuration backup file failed. This might cause problems!");
+                LogHelper.warn("The deletion of the old rune configuration backup file failed. This might cause problems!");
 			}
 			
 			try {
 				fos = new FileOutputStream(backupConfigFile);
 			} catch(Exception e) {
 				e.printStackTrace();
-				CelestialWizardry.log.error("Couldn't open FileOutputStream for backupConfigFile");
+                LogHelper.error("Couldn't open FileOutputStream for backupConfigFile");
 				return false;
 			}
 			
@@ -248,13 +249,13 @@ public class ServerRuneConfigurationHandler {
 				fos.close();
 			} catch(Exception e) {
 				e.printStackTrace();
-				CelestialWizardry.log.error("Something went wrong with writing into the world rune config backup file");
+                LogHelper.error("Something went wrong with writing into the world rune config backup file");
 				return false;
 			}
 			
 		} catch(Exception e) {
 			e.printStackTrace();
-			CelestialWizardry.log.error("Something went wrong with saving the world rune config!");
+            LogHelper.error("Something went wrong with saving the world rune config!");
 			return false;
 		}
 		return true;
@@ -276,15 +277,15 @@ public class ServerRuneConfigurationHandler {
 		
 		String runeName = null;
 
-		CelestialWizardry.log.info("Going to add " + RuneRegistry.getRuneCount() + " runes to the runeconfig.");
+        LogHelper.info("Going to add " + RuneRegistry.getRuneCount() + " runes to the runeconfig.");
 		for(int i=1;i<RuneRegistry.getRuneIdsvLength();i++) {
 			runeName = RuneRegistry.getRuneNameForId(i);
 			
 			if(runeName != null) {
 				ret.setInteger(runeName, i);
-				CelestialWizardry.log.info("adding rune \"" + runeName + "\" to the config.");
+                LogHelper.info("adding rune \"" + runeName + "\" to the config.");
 			} else {
-				CelestialWizardry.log.error("Rune \"" + runeName + "\" wasn't added to the config!!!");
+                LogHelper.error("Rune \"" + runeName + "\" wasn't added to the config!!!");
 			}
 		}
 		configWasJustCreated = true;
@@ -307,22 +308,22 @@ public class ServerRuneConfigurationHandler {
 		
 		if(fileExists(configFile)) {
 			// The normal case when the world has already been created and is just being loaded.
-			
-			CelestialWizardry.log.info("Loading runeconfig for current world...");
+
+            LogHelper.info("Loading runeconfig for current world...");
 			worldRuneConfig = loadWorldRuneConfig(configFile);
 		}
 		if(worldRuneConfig == null && fileExists(configFileBackup)) {
 			// For some reason the main config file doesn't exist but the backup does, let's try to load that.
-			
-			CelestialWizardry.log.warn("Main config file wasn't found, attempting to load the backup...");
+
+            LogHelper.warn("Main config file wasn't found, attempting to load the backup...");
 			worldRuneConfig = loadWorldRuneConfig(configFileBackup);
 		}
 		if(worldRuneConfig == null) {
 			// Config file nor backup was loaded, we assume world is just being created.
-			
-			CelestialWizardry.log.warn("No config was found/loaded, creating a new one... (You don't need to mind this if world is being created.)");
+
+            LogHelper.warn("No config was found/loaded, creating a new one... (You don't need to mind this if world is being created.)");
 			worldRuneConfig = createConfigFromRegistry();
-			CelestialWizardry.log.info("Runeconfig save succeeded: " + saveWorldRuneConfig());
+            LogHelper.info("Runeconfig save succeeded: " + saveWorldRuneConfig());
 			if(worldRuneConfig != null) {
 				init(true);
 			}
@@ -331,7 +332,7 @@ public class ServerRuneConfigurationHandler {
 			if((worldRuneConfig != null && !worldRuneConfig.hasNoTags())) {
 				init(false);
 			} else {
-				CelestialWizardry.log.error("Something went horribly wrong, ServerRuneConfigurationHandler was about to init, but world rune config still wasn't loaded!");
+                LogHelper.error("Something went horribly wrong, ServerRuneConfigurationHandler was about to init, but world rune config still wasn't loaded!");
 			}
 		}
 	}

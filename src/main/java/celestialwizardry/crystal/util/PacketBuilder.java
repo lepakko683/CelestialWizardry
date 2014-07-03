@@ -1,7 +1,7 @@
 package celestialwizardry.crystal.util;
 
-import celestialwizardry.crystal.api.crystal.EnergyPacket;
 import celestialwizardry.api.energy.EnergyType;
+import celestialwizardry.crystal.api.crystal.EnergyPacket;
 import celestialwizardry.util.MathHelper;
 
 /**

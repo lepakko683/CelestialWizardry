@@ -1,19 +1,9 @@
 package celestialwizardry.config.gui;
 
-import celestialwizardry.CelestialWizardry;
-import celestialwizardry.reference.Reference;
-import celestialwizardry.reference.Settings;
-import celestialwizardry.util.StringHelper;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
-import net.minecraftforge.common.config.ConfigElement;
 import cpw.mods.fml.client.IModGuiFactory;
-import cpw.mods.fml.client.config.GuiConfig;
-import cpw.mods.fml.client.config.IConfigElement;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Set;
 
 public class CWGuiFactory implements IModGuiFactory
@@ -49,7 +39,7 @@ public class CWGuiFactory implements IModGuiFactory
     @Override
     public Class<? extends GuiScreen> mainConfigGuiClass()
     {
-        return CWConfigGui.class;
+        return CWGuiConfig.class;
     }
 
     /**
@@ -86,25 +76,5 @@ public class CWGuiFactory implements IModGuiFactory
     public RuntimeOptionGuiHandler getHandlerFor(RuntimeOptionCategoryElement element)
     {
         return null;
-    }
-
-    public static class CWConfigGui extends GuiConfig
-    {
-        public CWConfigGui(GuiScreen parentScreen)
-        {
-            super(parentScreen, getConfigElements(), Reference.MOD_ID, false, false,
-                  StringHelper.getConfig("configTitle") /* GuiConfig.getAbridgedConfigPath(CelestialWizardry.config
-                  .toString() */);
-        }
-
-        private static List<IConfigElement> getConfigElements()
-        {
-            List<IConfigElement> list = new ArrayList<IConfigElement>();
-            list.add(new ConfigElement(CelestialWizardry.config.getCategory(Settings.Categories.GENERAL)));
-            list.add(new ConfigElement(CelestialWizardry.config.getCategory(Settings.Categories.SPELLS)));
-            list.add(new ConfigElement(CelestialWizardry.config.getCategory(Settings.Categories.CLIENT)));
-            list.add(new ConfigElement(CelestialWizardry.config.getCategory(Settings.Categories.TWEAKS)));
-            return list;
-        }
     }
 }
