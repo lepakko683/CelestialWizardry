@@ -1,15 +1,23 @@
 package celestialwizardry.client.handler;
 
+import org.lwjgl.opengl.GL11;
+
 import celestialwizardry.client.DebugOverLay;
+import celestialwizardry.client.render.RuneRenderer;
 import celestialwizardry.util.Colour;
+import celestialwizardry.util.ResourceLocationHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.Gui;
+import net.minecraft.util.ResourceLocation;
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.TickEvent;
 
 public class ClientRenderTickEventHandler {
+	
+	private static ResourceLocation runeSheet = ResourceLocationHelper.getResourceLocation("textures/runes/runeSheet01.png");
+	private static RuneRenderer runeRend = new RuneRenderer(runeSheet);
 	
 	@SubscribeEvent
 	public void onRenderTick(TickEvent.RenderTickEvent event) {
@@ -18,6 +26,11 @@ public class ClientRenderTickEventHandler {
 			
 			if(currGui == null) {
 //				Gui.drawRect(0, 0, 50, 50, Colour.packARGB(90, 255, 0, 255));
+				
+//				GL11.glEnable(GL11.GL_BLEND);
+//				GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+//				runeRend.renderRunes(null, 10, 10, 1f);
+//				GL11.glDisable(GL11.GL_BLEND);
 				
 			}
 		}

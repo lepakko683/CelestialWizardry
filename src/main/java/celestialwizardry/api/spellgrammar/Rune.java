@@ -16,7 +16,8 @@ public abstract class Rune
 	/**The id of the mod that owns(/has added) this rune*/
 	private String modId = null;
 	private boolean requiresPostfix;
-	private boolean requiresAttribute; 
+	private boolean requiresAttribute;
+	private byte textureCrds = 0;
 	
 	private int numbericID = -1;
 	
@@ -25,9 +26,9 @@ public abstract class Rune
     	if(runeId != null && runeId.length()>0) {
     		this.runeid = runeId.toLowerCase();
     	}
-    	 
     }
 	
+    /**To be removed!*/
     public abstract List validRuneAttributeTypes();
 
 	public String getRuneID()
@@ -43,6 +44,22 @@ public abstract class Rune
 	public Rune setRequiresAttribute() {
 		this.requiresAttribute = true;
 		return this;
+	}
+	
+	public Rune setTexCoords(int x, int y) {
+		if(x<0 || x>15 || y<0 || y>15 ){
+			return this;
+		}
+		this.textureCrds = (byte) ( (x << 4 ) | (y) ); // Is this too complicated? :P
+		return this;
+	}
+	
+	public int getTexCrdX() {
+		return this.textureCrds >> 4;
+	}
+	
+	public int getTexCrdY() {
+		return this.textureCrds & 0xF;
 	}
 	
     /**Returns -1 if rune config haven't been loaded yet*/

@@ -75,14 +75,14 @@ public class MessageRuneConfig implements IMessage, IMessageHandler<MessageRuneC
 		int cycles = 0;
 		StringBuilder sb = new StringBuilder();
 		List<String> lines = new ArrayList<String>();
-		while((cc = buf.readChar()) != endOfEntries && cycles < entryCount && cycles < entryHardLimit && cysLeft>1) {
+		while((cc = (char)buf.readByte()) != endOfEntries && cycles < entryCount && cycles < entryHardLimit && cysLeft>1) {
 			if(cc == entryEndChar) {
 				lines.add(sb.toString());
 				sb = new StringBuilder();
 				cycles++;
 			} else {
 				if(cc == escChar) {
-					sb.append(buf.readChar()); // Get the next character after the escChar
+					sb.append((char)buf.readByte()); // Get the next character after the escChar
 				} else {
 					sb.append(cc);
 				}
@@ -123,7 +123,7 @@ public class MessageRuneConfig implements IMessage, IMessageHandler<MessageRuneC
 			}
 			sb.append(entryEndChar);
 			try{
-				buf.writeBytes(sb.toString().getBytes("UTF-16"));
+				buf.writeBytes(sb.toString().getBytes("UTF-8"));
 			}catch(Exception e) {}
 			sb = null;
 		}

@@ -9,6 +9,8 @@ public class Colour
             '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'
     };
 
+	public static final Colour WHITE = new Colour(1f, 1f, 1f, 1f);
+
     private float red, green, blue, alpha;
 
     public Colour(float r, float g, float b, float a)

@@ -24,7 +24,7 @@ public class ItemPage extends ItemSingle implements IRenderable, ITextContainer
 		RenderHelper.bindTexture(Resources.Textures.PAGE);
 		if(extraData != null) {
 			if(extraData.length >= 1 && extraData[0] instanceof Boolean) {
-				if((Boolean)extraData[0]) {//Render on writingTable?
+				if((Boolean)extraData[0]) { // Render on writingTable
 					GL11.glScalef(.9f, .9f, .9f);
 					GL11.glTranslatef(.09f, .010f, 0f);
 					GL11.glRotatef(90f, 0f, 1f, 0f);
