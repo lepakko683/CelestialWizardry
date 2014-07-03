@@ -1,5 +1,5 @@
-@API(apiVersion = CWApi.VERSION, owner = CWApi.ID + "core", provides = CWApi.ID + "crystals")
-package celestialwizardry.crystal.api;
+@API(apiVersion = CWApi.VERSION, owner = CWApi.ID + "core",
+     provides = CWApi.ID + "crystals") package celestialwizardry.crystal.api;
 
 import celestialwizardry.api.CWApi;
 

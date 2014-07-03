@@ -7,11 +7,11 @@ import celestialwizardry.item.ItemPage;
 import celestialwizardry.reference.GuiIds;
 import celestialwizardry.reference.Names;
 import celestialwizardry.tileentity.TileEntityWritingTable;
+
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemBook;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -72,7 +72,7 @@ public class BlockWritingTable extends BlockCW implements ITileEntityProvider
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int par6, float par7,
                                     float par8, float par9)
     {
-    	System.out.println("Click!");
+        System.out.println("Click!");
         if (player.isSneaking())
         {
             return false;
@@ -81,29 +81,39 @@ public class BlockWritingTable extends BlockCW implements ITileEntityProvider
         {
             if (!world.isRemote)
             {
-            	TileEntity te = world.getTileEntity(x, y, z);
-            	if(te instanceof TileEntityWritingTable) {
-            		ItemStack currentItem = player.getCurrentEquippedItem();
-            		if(currentItem == null) {
-            			if(((TileEntityWritingTable) te).getStackInSlot(TileEntityWritingTable.MIDDLE_INVENTORY_INDEX) != null) {
-            				player.setCurrentItemOrArmor(0, ((TileEntityWritingTable) te).getStackInSlot(TileEntityWritingTable.MIDDLE_INVENTORY_INDEX).copy());
-            				((TileEntityWritingTable) te).setInventorySlotContents(TileEntityWritingTable.MIDDLE_INVENTORY_INDEX, null);
-            				return true;
-            			}
-            			player.openGui(CelestialWizardry.instance, GuiIds.WRITING_TABLE, world, x, y, z);
-            			return true;
-            		}
-            		if(putItemInMainSlot((TileEntityWritingTable)te, currentItem)) {
-            			return true;
-            		}
-            		
-            		if (player.getCurrentEquippedItem().getItem() instanceof ItemMagicalInk)
+                TileEntity te = world.getTileEntity(x, y, z);
+                if (te instanceof TileEntityWritingTable)
+                {
+                    ItemStack currentItem = player.getCurrentEquippedItem();
+                    if (currentItem == null)
                     {
-                        ItemStack slot = ((TileEntityWritingTable)te).getStackInSlot(TileEntityWritingTable.INK_INVENTORY_INDEX);
+                        if (((TileEntityWritingTable) te).getStackInSlot(TileEntityWritingTable.MIDDLE_INVENTORY_INDEX)
+                                != null)
+                        {
+                            player.setCurrentItemOrArmor(0, ((TileEntityWritingTable) te)
+                                    .getStackInSlot(TileEntityWritingTable.MIDDLE_INVENTORY_INDEX).copy());
+                            ((TileEntityWritingTable) te)
+                                    .setInventorySlotContents(TileEntityWritingTable.MIDDLE_INVENTORY_INDEX, null);
+                            return true;
+                        }
+                        player.openGui(CelestialWizardry.instance, GuiIds.WRITING_TABLE, world, x, y, z);
+                        return true;
+                    }
+                    if (putItemInMainSlot((TileEntityWritingTable) te, currentItem))
+                    {
+                        return true;
+                    }
+
+                    if (player.getCurrentEquippedItem().getItem() instanceof ItemMagicalInk)
+                    {
+                        ItemStack slot = ((TileEntityWritingTable) te)
+                                .getStackInSlot(TileEntityWritingTable.INK_INVENTORY_INDEX);
 
                         if (slot == null)
                         {
-                        	((TileEntityWritingTable)te).setInventorySlotContents(TileEntityWritingTable.INK_INVENTORY_INDEX, currentItem.copy());
+                            ((TileEntityWritingTable) te)
+                                    .setInventorySlotContents(TileEntityWritingTable.INK_INVENTORY_INDEX,
+                                                              currentItem.copy());
                             player.destroyCurrentEquippedItem();
                         }
                         else
@@ -111,10 +121,9 @@ public class BlockWritingTable extends BlockCW implements ITileEntityProvider
                             player.openGui(CelestialWizardry.instance, GuiIds.WRITING_TABLE, world, x, y, z);
                         }
                     }
-            	}
-            	
-            	
-                
+                }
+
+
             }
 
             return true;
@@ -191,15 +200,17 @@ public class BlockWritingTable extends BlockCW implements ITileEntityProvider
     {
         return new TileEntityWritingTable();
     }
-    
-    private boolean putItemInMainSlot(TileEntityWritingTable te, ItemStack stack) {
-    	System.out.println("setConts");
-    	if(stack.getItem() instanceof ItemBook || stack.getItem() instanceof ItemPage) {
-    		te.setInventorySlotContents(TileEntityWritingTable.MIDDLE_INVENTORY_INDEX, stack.copy());
-    		
-    		return true;
-    	}
-    	
-    	return false;
+
+    private boolean putItemInMainSlot(TileEntityWritingTable te, ItemStack stack)
+    {
+        System.out.println("setConts");
+        if (stack.getItem() instanceof ItemBook || stack.getItem() instanceof ItemPage)
+        {
+            te.setInventorySlotContents(TileEntityWritingTable.MIDDLE_INVENTORY_INDEX, stack.copy());
+
+            return true;
+        }
+
+        return false;
     }
 }

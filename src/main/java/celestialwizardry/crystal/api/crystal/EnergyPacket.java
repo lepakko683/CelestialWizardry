@@ -1,6 +1,5 @@
 package celestialwizardry.crystal.api.crystal;
 
-import celestialwizardry.api.CWApi;
 import celestialwizardry.api.energy.EnergyRegistry;
 import celestialwizardry.api.energy.EnergyType;
 import celestialwizardry.api.util.ApiLogHelper;

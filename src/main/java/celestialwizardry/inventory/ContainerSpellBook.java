@@ -46,12 +46,14 @@ public class ContainerSpellBook extends Container
     {
         return super.transferStackInSlot(player, slot); // TODO
     }
-    
+
     @Override //mouseButtonNumber 0 = left, 1 = right, 2 = wheel/middle
-    public ItemStack slotClick(int slotIndex, int mouseButtonNumber, int par3, EntityPlayer par4EntityPlayer) {
+    public ItemStack slotClick(int slotIndex, int mouseButtonNumber, int par3, EntityPlayer par4EntityPlayer)
+    {
 //    	System.out.println("As binary string: " + Integer.toBinaryString(par3));
 //    	System.out.println("par1: " + slotIndex + " par2: " + mouseButtonNumber + " par3: " + par3);
-//    	System.out.println("world remote: " + (par4EntityPlayer != null ? par4EntityPlayer.worldObj.isRemote : "playerNull"));
-    	return super.slotClick(slotIndex, mouseButtonNumber, par3, par4EntityPlayer);
+//    	System.out.println("world remote: " + (par4EntityPlayer != null ? par4EntityPlayer.worldObj.isRemote :
+// "playerNull"));
+        return super.slotClick(slotIndex, mouseButtonNumber, par3, par4EntityPlayer);
     }
 }

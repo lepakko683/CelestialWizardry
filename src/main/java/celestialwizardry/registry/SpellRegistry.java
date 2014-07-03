@@ -1,6 +1,5 @@
 package celestialwizardry.registry;
 
-import celestialwizardry.CelestialWizardry;
 import celestialwizardry.api.spell.Spell;
 import celestialwizardry.util.LogHelper;
 

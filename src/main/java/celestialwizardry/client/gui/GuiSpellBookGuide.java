@@ -1,7 +1,6 @@
 package celestialwizardry.client.gui;
 
 import celestialwizardry.api.spellbook.SpellBookCategory;
-import celestialwizardry.handler.ClientTickEventHandler;
 import celestialwizardry.registry.SpellBookRegistry;
 import celestialwizardry.util.StringHelper;
 

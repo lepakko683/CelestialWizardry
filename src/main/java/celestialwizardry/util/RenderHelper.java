@@ -98,14 +98,14 @@ public final class RenderHelper
 
         GL11.glColor4f(1F, 1F, 1F, 1F);
     }
-    
+
     public static void drawGradientRect(int x1, int y1, float z, int x2, int y2, int colorA, int colorB)
     {
         float alphaA = (colorA >> 24 & 255) / 255F;
         float redA = (colorA >> 16 & 255) / 255F;
         float greenA = (colorA >> 8 & 255) / 255F;
         float blueA = (colorA & 255) / 255F;
-        
+
         float alphaB = (colorB >> 24 & 255) / 255F;
         float redB = (colorB >> 16 & 255) / 255F;
         float greenB = (colorB >> 8 & 255) / 255F;
@@ -133,16 +133,19 @@ public final class RenderHelper
         GL11.glEnable(GL11.GL_ALPHA_TEST);
         GL11.glEnable(GL11.GL_TEXTURE_2D);
     }
-    
-    public static double scaleUVCoord(double coord, double c1, double c2) {
-    	return Math.min(c1, c2)+(Math.abs(c2-c1)*coord);
+
+    public static double scaleUVCoord(double coord, double c1, double c2)
+    {
+        return Math.min(c1, c2) + (Math.abs(c2 - c1) * coord);
     }
-    
-    public static void bindTexture(ResourceLocation rl) {
-    	FMLClientHandler.instance().getClient().renderEngine.bindTexture(rl);
+
+    public static void bindTexture(ResourceLocation rl)
+    {
+        FMLClientHandler.instance().getClient().renderEngine.bindTexture(rl);
     }
-    
-    public static void setupRenderingForBillboard(double yaw, double pitch) {
-    	System.out.println("Yaw: " + yaw + " pitch: " + pitch);
+
+    public static void setupRenderingForBillboard(double yaw, double pitch)
+    {
+        System.out.println("Yaw: " + yaw + " pitch: " + pitch);
     }
 }

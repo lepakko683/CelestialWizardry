@@ -2,10 +2,10 @@ package celestialwizardry.client.render;
 
 import celestialwizardry.block.BlockBell;
 import celestialwizardry.block.BlockContainedCrystal;
-import celestialwizardry.crystal.block.BlockCrystalConductive;
 import celestialwizardry.block.BlockWritingTable;
 import celestialwizardry.client.model.OBJModels;
 import celestialwizardry.reference.Resources;
+
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
@@ -77,26 +77,28 @@ public class RenderOBJBlock implements ISimpleBlockRenderingHandler
     public boolean renderWorldBlock(IBlockAccess worlda, int x, int y, int z, Block block, int modelID,
                                     RenderBlocks renderer)
     {
-    	if(modelID == ID) {
-    		Tessellator tes = Tessellator.instance;
-    		if(block instanceof BlockContainedCrystal) {
-    			tes.setBrightness(block.getMixedBrightnessForBlock(worlda, x, y, z));
-    			int l = block.colorMultiplier(worlda, x, y, z);
-    			float red = (l >> 16) & 0xFF;
-    			float green = (l >> 8) & 0xFF;
-    			float blue = l & 0xFF;
-    			tes.setColorOpaque_F(red, green, blue);
-    			
-    			OBJModels.modelCrystalContained.tessellateAllWAS(tes, ic, x+.5d, y, z+.5d);
-    			
+        if (modelID == ID)
+        {
+            Tessellator tes = Tessellator.instance;
+            if (block instanceof BlockContainedCrystal)
+            {
+                tes.setBrightness(block.getMixedBrightnessForBlock(worlda, x, y, z));
+                int l = block.colorMultiplier(worlda, x, y, z);
+                float red = (l >> 16) & 0xFF;
+                float green = (l >> 8) & 0xFF;
+                float blue = l & 0xFF;
+                tes.setColorOpaque_F(red, green, blue);
+
+                OBJModels.modelCrystalContained.tessellateAllWAS(tes, ic, x + .5d, y, z + .5d);
+
 //    			tes.setColorOpaque_F(1f, 0f, 1f);
-    			
-    			OBJModels.modelCrystalSimpleQ.tessellateAllWAS(tes, Blocks.lava.getIcon(0, 0), x+.5d, y, z+.5d);
-    			
-    			return true;
-    		}
-    	}
-    	return false;
+
+                OBJModels.modelCrystalSimpleQ.tessellateAllWAS(tes, Blocks.lava.getIcon(0, 0), x + .5d, y, z + .5d);
+
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override

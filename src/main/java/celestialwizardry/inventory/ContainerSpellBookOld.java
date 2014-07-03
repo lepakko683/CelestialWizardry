@@ -40,8 +40,9 @@ public class ContainerSpellBookOld extends Container
             for (int columnIndex = 0; columnIndex < inventoryColumns; ++columnIndex)
             {
                 this.addSlotToContainer(
-                        new SlotSpellBookOld(this, inventorySpellBookOld, player, columnIndex + rowIndex * inventoryColumns,
-                                          8 + columnIndex * 18, 18 + rowIndex * 18)
+                        new SlotSpellBookOld(this, inventorySpellBookOld, player,
+                                             columnIndex + rowIndex * inventoryColumns,
+                                             8 + columnIndex * 18, 18 + rowIndex * 18)
                                        );
             }
         }

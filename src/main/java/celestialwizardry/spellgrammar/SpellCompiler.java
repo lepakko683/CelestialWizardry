@@ -1,8 +1,10 @@
 package celestialwizardry.spellgrammar;
 
-public class SpellCompiler {
-	
-	public static void compileSpell() {
-		
-	}
+public class SpellCompiler
+{
+
+    public static void compileSpell()
+    {
+
+    }
 }

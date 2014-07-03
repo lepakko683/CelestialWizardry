@@ -9,11 +9,17 @@ import cpw.mods.fml.common.gameevent.TickEvent;
 
 public class ClientTickEventHandler
 {
-	/**Used to animate the opening of the book*/
+    /**
+     * Used to animate the opening of the book
+     */
     public static int ticksWithBookOpen = 0;
-    /**Used to animate page flip*/
+    /**
+     * Used to animate page flip
+     */
     public static int pageFlipTicks = 0;
-    /**Used to determine the direction which the page is flipped*/
+    /**
+     * Used to determine the direction which the page is flipped
+     */
     private static boolean flipleft = true;
 
     @SubscribeEvent
@@ -34,20 +40,26 @@ public class ClientTickEventHandler
                 {
                     ticksWithBookOpen++;
                 }
-                if(flipleft) {
-                	if (pageFlipTicks > 0)
+                if (flipleft)
+                {
+                    if (pageFlipTicks > 0)
                     {
                         pageFlipTicks--;
                     }
-                } else if(!flipleft) {
-                	if(pageFlipTicks < 5) {
-                		pageFlipTicks++;
-                	} else {
-                		flipleft = true;
-                		pageFlipTicks = 0;
-                	}
                 }
-                
+                else if (!flipleft)
+                {
+                    if (pageFlipTicks < 5)
+                    {
+                        pageFlipTicks++;
+                    }
+                    else
+                    {
+                        flipleft = true;
+                        pageFlipTicks = 0;
+                    }
+                }
+
             }
             else
             {
@@ -69,16 +81,18 @@ public class ClientTickEventHandler
 
     public static void notifyPageChange(boolean flipleftv)
     {
-    	if(flipleftv && pageFlipTicks == 0) {
-    		// left
-    		flipleft = true;
-    		pageFlipTicks = 5;
-    		return;
-    	}
-    	if(pageFlipTicks == 0) {
-    		// right
-    		flipleft = false;
-    	}
+        if (flipleftv && pageFlipTicks == 0)
+        {
+            // left
+            flipleft = true;
+            pageFlipTicks = 5;
+            return;
+        }
+        if (pageFlipTicks == 0)
+        {
+            // right
+            flipleft = false;
+        }
 //        if (pageFlipTicks == 0)
 //        {
 //            pageFlipTicks = 5;

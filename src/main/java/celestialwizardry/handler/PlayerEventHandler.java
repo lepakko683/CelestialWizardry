@@ -1,16 +1,16 @@
 package celestialwizardry.handler;
 
-import celestialwizardry.CelestialWizardry;
 import celestialwizardry.crystal.init.CrystalItems;
+import celestialwizardry.crystal.item.ItemMatrix;
 import celestialwizardry.entity.ModEntityProperties;
 import celestialwizardry.init.ModItems;
-import celestialwizardry.crystal.item.ItemMatrix;
 import celestialwizardry.reference.Names;
 import celestialwizardry.reference.Settings;
 import celestialwizardry.util.LogHelper;
 import celestialwizardry.util.PlayerHelper;
 import celestialwizardry.util.SpawnHelper;
 import celestialwizardry.util.StringHelper;
+
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -145,7 +145,8 @@ public class PlayerEventHandler
             properties.hasIntelligence = true;
             properties.intelligence = Settings.startingIntelligence;
 
-            LogHelper.info("Initialized intelligence (" + properties.intelligence + ") for player " + event.player.getDisplayName());
+            LogHelper.info("Initialized intelligence (" + properties.intelligence + ") for player " + event.player
+                    .getDisplayName());
         }
 
         if (!properties.hasExp)
@@ -153,7 +154,8 @@ public class PlayerEventHandler
             properties.hasExp = true;
             properties.exp = 0;
 
-            LogHelper.info("Initialized experience (" + properties.intelligence + ") for player " + event.player.getDisplayName());
+            LogHelper.info("Initialized experience (" + properties.intelligence + ") for player " + event.player
+                    .getDisplayName());
         }
 
         if (!properties.fun)
@@ -198,9 +200,10 @@ public class PlayerEventHandler
 
             properties.fun = true;
         }
-        
-        if(event.player instanceof EntityPlayerMP && !event.player.worldObj.isRemote) {
-        	ServerRuneConfigurationHandler.sendRuneConfigTo((EntityPlayerMP)event.player);
+
+        if (event.player instanceof EntityPlayerMP && !event.player.worldObj.isRemote)
+        {
+            ServerRuneConfigurationHandler.sendRuneConfigTo((EntityPlayerMP) event.player);
         }
     }
 }

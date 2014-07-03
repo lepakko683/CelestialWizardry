@@ -1,6 +1,5 @@
 package celestialwizardry.handler;
 
-import celestialwizardry.CelestialWizardry;
 import celestialwizardry.config.SettingHandler;
 import celestialwizardry.reference.Reference;
 

@@ -2,5 +2,7 @@ package celestialwizardry.reference;
 
 public enum Key
 {
-    UNKNOWN, CAST, CHANGE
+    UNKNOWN,
+    CAST,
+    CHANGE
 }

@@ -2,7 +2,6 @@ package celestialwizardry.client.gui;
 
 import celestialwizardry.api.spellbook.SpellBookCategory;
 import celestialwizardry.api.spellbook.SpellBookEntry;
-import celestialwizardry.handler.ClientTickEventHandler;
 import celestialwizardry.util.StringHelper;
 
 import net.minecraft.client.gui.GuiButton;

@@ -4,7 +4,6 @@ import celestialwizardry.init.ModBlocks;
 import celestialwizardry.init.ModItems;
 import celestialwizardry.reference.Settings;
 
-import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.ShapedOreRecipe;
@@ -44,7 +43,8 @@ public class RecipesVanilla
         addCompress(new ItemStack(ModBlocks.magicalStone), ModItems.magicalPebble);
 
         // Nether Pearl
-        add(ModItems.netherPearl, " s ", "sts", " s ", 's', hc ? Items.nether_star : Items.ghast_tear, 't', hc ? Items.ghast_tear : Items.nether_star);
+        add(ModItems.netherPearl, " s ", "sts", " s ", 's', hc ? Items.nether_star : Items.ghast_tear, 't',
+            hc ? Items.ghast_tear : Items.nether_star);
     }
 
     private static void add(ItemStack output, Object... input)

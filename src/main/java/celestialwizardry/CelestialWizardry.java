@@ -1,8 +1,5 @@
 package celestialwizardry;
 
-import java.io.File;
-
-import celestialwizardry.api.CWApi;
 import celestialwizardry.client.render.Renderables;
 import celestialwizardry.config.Config;
 import celestialwizardry.config.SettingHandler;
@@ -17,14 +14,12 @@ import celestialwizardry.init.ModItems;
 import celestialwizardry.network.GuiHandler;
 import celestialwizardry.network.PacketHandler;
 import celestialwizardry.proxy.IProxy;
-import celestialwizardry.reference.EventHandlers;
 import celestialwizardry.reference.Reference;
 import celestialwizardry.reference.Version;
 import celestialwizardry.spellbook.SpellBook;
 import celestialwizardry.util.LogHelper;
 import celestialwizardry.world.WorldGenerator;
 
-import net.minecraftforge.common.config.Configuration;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.Mod;
@@ -39,14 +34,14 @@ import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import java.io.File;
 
 /**
  * The main mod class of Minecraft mod Celestial Wizardry
  */
 @Mod(modid = Reference.MOD_ID, name = Reference.MOD_NAME, version = Version.VERSION,
-     certificateFingerprint = Reference.FINGERPRINT, dependencies = Reference.DEPENDENCIES, guiFactory = Reference.GUI_FACTORY_CLASS)
+     certificateFingerprint = Reference.FINGERPRINT, dependencies = Reference.DEPENDENCIES,
+     guiFactory = Reference.GUI_FACTORY_CLASS)
 public class CelestialWizardry
 {
     @SidedProxy(clientSide = Reference.CLIENT_PROXY_CLASS, serverSide = Reference.SERVER_PROXY_CLASS)
@@ -60,7 +55,7 @@ public class CelestialWizardry
 
     // Spell configuration
     public static final ConfigSpells configSpells = new ConfigSpells(Version.VERSION);
-    
+
     @Mod.EventHandler
     public void invalidFingerprint(FMLFingerprintViolationEvent event)
     {
@@ -78,19 +73,22 @@ public class CelestialWizardry
                                   "version of the mod.");
         }
     }
-    
-	@Mod.EventHandler
-	public void onServerStart(FMLServerStartingEvent event) {
-		LogHelper.info("SERVER STARTING EVENT!!!!!");
-		System.out.println("Server folder name: " + event.getServer().getFolderName() + " @ CW.class");
-		ServerRuneConfigurationHandler.onServerStarting(new File(FMLCommonHandler.instance().getSavesDirectory(), event.getServer().getFolderName()));
-	}
-	
-	@Mod.EventHandler
-	public void onServerStop(FMLServerStoppingEvent event) {
+
+    @Mod.EventHandler
+    public void onServerStart(FMLServerStartingEvent event)
+    {
+        LogHelper.info("SERVER STARTING EVENT!!!!!");
+        System.out.println("Server folder name: " + event.getServer().getFolderName() + " @ CW.class");
+        ServerRuneConfigurationHandler.onServerStarting(
+                new File(FMLCommonHandler.instance().getSavesDirectory(), event.getServer().getFolderName()));
+    }
+
+    @Mod.EventHandler
+    public void onServerStop(FMLServerStoppingEvent event)
+    {
         LogHelper.info("SERVER STOPPING EVENT!!!!!");
         ServerRuneConfigurationHandler.onServerStopping();
-	}
+    }
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event)
@@ -134,7 +132,7 @@ public class CelestialWizardry
 
         // Pre-initialize the crystals
         Crystals.preInit();
-        
+
         // Tell everyone that we have successfully pre-initialized
         LogHelper.info("Finished pre-initialization after " + (System.currentTimeMillis() - start) + " ms");
     }
@@ -165,7 +163,7 @@ public class CelestialWizardry
 
         // Register mod renders
         proxy.registerRenderer();
-        
+
         // Initialize renderables
         Renderables.init();
 
@@ -187,7 +185,7 @@ public class CelestialWizardry
 
         // Tell everyone that we are starting post-initialization
         LogHelper.info("Starting post-initialization");
-        
+
         // Initialize runes
         InitRunes.init();
 

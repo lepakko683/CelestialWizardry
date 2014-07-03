@@ -1,10 +1,10 @@
 package celestialwizardry.crafting;
 
+import celestialwizardry.api.energy.EnergyType;
+
 import net.minecraft.item.ItemStack;
 
 import java.util.List;
-
-import celestialwizardry.api.energy.EnergyType;
 
 public class FusionCraftingHandler
 {
@@ -14,8 +14,9 @@ public class FusionCraftingHandler
     {
 
     }
-    
-    public static boolean enoughEnergy(FusionCraftingRecipe rec, EnergyType eTypes[], int eAmounts[]) {
-    	return false;
+
+    public static boolean enoughEnergy(FusionCraftingRecipe rec, EnergyType eTypes[], int eAmounts[])
+    {
+        return false;
     }
 }

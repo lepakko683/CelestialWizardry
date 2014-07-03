@@ -1,5 +1,6 @@
 package celestialwizardry.registry;
 
-public class RuneDefinitionRegistry {
-	
+public class RuneDefinitionRegistry
+{
+
 }

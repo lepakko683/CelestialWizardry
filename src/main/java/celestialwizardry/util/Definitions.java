@@ -1,5 +1,6 @@
 package celestialwizardry.util;
 
-public class Definitions {
-	
+public class Definitions
+{
+
 }

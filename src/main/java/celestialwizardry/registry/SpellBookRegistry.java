@@ -1,6 +1,5 @@
 package celestialwizardry.registry;
 
-import celestialwizardry.CelestialWizardry;
 import celestialwizardry.api.spellbook.SpellBookCategory;
 import celestialwizardry.api.spellbook.SpellBookEntry;
 import celestialwizardry.util.LogHelper;
@@ -35,7 +34,8 @@ public abstract class SpellBookRegistry
      */
     public static void addEntry(SpellBookEntry entry, SpellBookCategory category)
     {
-        LogHelper.info("Adding new spell book entry " + entry.getUnlocalizedName() + " to category " + category.getUnlocalizedName());
+        LogHelper.info("Adding new spell book entry " + entry.getUnlocalizedName() + " to category " + category
+                .getUnlocalizedName());
         allEntries.add(entry);
         category.entries.add(entry);
     }

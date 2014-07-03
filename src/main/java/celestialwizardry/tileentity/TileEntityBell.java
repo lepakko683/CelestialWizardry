@@ -1,9 +1,11 @@
 package celestialwizardry.tileentity;
 
-public class TileEntityBell extends TileEntityCW {
-	
-	@Override
-	public boolean canUpdate() {
-		return true;
-	}
+public class TileEntityBell extends TileEntityCW
+{
+
+    @Override
+    public boolean canUpdate()
+    {
+        return true;
+    }
 }

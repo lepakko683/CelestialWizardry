@@ -5,39 +5,43 @@ import java.util.List;
 
 public abstract class Rune
 {
-	public class RuneConsts
+    public class RuneConsts
     {
         public static final String RUNE_ACTION_TELEPORT = "teleport";
         public static final String RUNE_ACTION_ACCELERATE = "accelerate";
         public static final String RUNE_ACTION_SPAWN = "spawn";
     }
-	
-	private String runeid = null;
-	/**The id of the mod that owns(/has added) this rune*/
-	private String modId = null;
-	private boolean requiresPostfix;
-	private boolean requiresAttribute;
-	private byte textureCrds = 0;
-	
-	private int numbericID = -1;
-	
+
+    private String runeid = null;
+    /**
+     * The id of the mod that owns(/has added) this rune
+     */
+    private String modId = null;
+    private boolean requiresPostfix;
+    private boolean requiresAttribute;
+    private byte textureCrds = 0;
+
+    private int numbericID = -1;
+
     public Rune(float complexity, boolean takesAttribute, String runeId)
     {
-    	if (runeId != null && runeId.length() > 0)
+        if (runeId != null && runeId.length() > 0)
         {
             this.runeid = runeId.toLowerCase();
         }
     }
-	
-    /**To be removed!*/
+
+    /**
+     * To be removed!
+     */
     public abstract List validRuneAttributeTypes();
 
-	public String getRuneID()
-	{
-		return runeid;
-	}
-	
-	public Rune setRequiresPostfix()
+    public String getRuneID()
+    {
+        return runeid;
+    }
+
+    public Rune setRequiresPostfix()
     {
         this.requiresPostfix = true;
         return this;
@@ -48,24 +52,29 @@ public abstract class Rune
         this.requiresAttribute = true;
         return this;
     }
-	
+
     // >:)
-	public Rune setTexCoords(int x, int y) { if(x<0 || x>15 || y<0 /*HAHA!*/ || y>15 ) 
-	{ return this; } this.textureCrds
-	= /*Is this too complicated? :P */ (byte) ( (x << 4 ) | (y) );
-	return this; 
-	}
-	
-	public int getTexCrdX()
-	{
-		return this.textureCrds >> 4;
-	}
-	
-	public int getTexCrdY()
-	{
-		return this.textureCrds & 0xF;
-	}
-	
+    public Rune setTexCoords(int x, int y)
+    {
+        if (x < 0 || x > 15 || y < 0 /*HAHA!*/ || y > 15)
+        {
+            return this;
+        }
+        this.textureCrds
+                = /*Is this too complicated? :P */ (byte) ((x << 4) | (y));
+        return this;
+    }
+
+    public int getTexCrdX()
+    {
+        return this.textureCrds >> 4;
+    }
+
+    public int getTexCrdY()
+    {
+        return this.textureCrds & 0xF;
+    }
+
     /**
      * Returns -1 if rune config haven't been loaded yet
      */

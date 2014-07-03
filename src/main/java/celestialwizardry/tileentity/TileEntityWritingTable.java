@@ -1,10 +1,5 @@
 package celestialwizardry.tileentity;
 
-import java.util.List;
-import java.util.ArrayList;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import celestialwizardry.api.writing.IWriter;
 import celestialwizardry.client.IRenderableObject;
 import celestialwizardry.client.render.IRenderable;
@@ -13,8 +8,8 @@ import celestialwizardry.network.PacketHandler;
 import celestialwizardry.network.message.MessageTileEntityWritingTable;
 import celestialwizardry.network.message.MessageUpdateTileEntityStack;
 import celestialwizardry.reference.Names;
+
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBook;
@@ -22,13 +17,20 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.network.Packet;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class TileEntityWritingTable extends TileEntityCW implements IInventory
 {
     public static final int INVENTORY_SIZE = 5;
     public static final int INK_INVENTORY_INDEX = 0; // == LEFT_TOP or RIGHT_TOP
     public static final int PEN_INVENTORY_INDEX = 1;
-    /**The current item on the middle of the table*/
+    /**
+     * The current item on the middle of the table
+     */
     public static final int MIDDLE_INVENTORY_INDEX = 2;
     public static final int LEFT_TOP_INVENTORY_INDEX = 3;
     public static final int RIGHT_TOP_INVENTORY_INDEX = 4;
@@ -48,12 +50,14 @@ public class TileEntityWritingTable extends TileEntityCW implements IInventory
     {
         return inventory.length;
     }
-    
+
     @Override
-    public void updateEntity() {
-    	super.updateEntity();
-    	if(worldObj.isRemote) {
-    	}
+    public void updateEntity()
+    {
+        super.updateEntity();
+        if (worldObj.isRemote)
+        {
+        }
     }
 
     /**
@@ -127,7 +131,7 @@ public class TileEntityWritingTable extends TileEntityCW implements IInventory
     @Override
     public void setInventorySlotContents(int slot, ItemStack stack)
     {
-    	System.out.println("setContents! @ " + (this.worldObj.isRemote ? "CLIENT" : "SERVER"));
+        System.out.println("setContents! @ " + (this.worldObj.isRemote ? "CLIENT" : "SERVER"));
         inventory[slot] = stack;
 
         if (stack != null && stack.stackSize > getInventoryStackLimit())
@@ -135,15 +139,18 @@ public class TileEntityWritingTable extends TileEntityCW implements IInventory
             stack.stackSize = getInventoryStackLimit();
         }
         System.out.println("Middle Slot: " + this.inventory[MIDDLE_INVENTORY_INDEX]);
-        if(!this.worldObj.isRemote) {
-        	System.out.println("Middle Slot: " + stack + " @ server");
-        	System.out.println("DimId: " + this.worldObj.provider.dimensionId);
-        	PacketHandler.INSTANCE.sendToDimension(new MessageUpdateTileEntityStack(this.xCoord, this.yCoord, this.zCoord, slot, stack), this.worldObj.provider.dimensionId); 
+        if (!this.worldObj.isRemote)
+        {
+            System.out.println("Middle Slot: " + stack + " @ server");
+            System.out.println("DimId: " + this.worldObj.provider.dimensionId);
+            PacketHandler.INSTANCE.sendToDimension(
+                    new MessageUpdateTileEntityStack(this.xCoord, this.yCoord, this.zCoord, slot, stack),
+                    this.worldObj.provider.dimensionId);
         }
         System.out.println("SinvSlotConts " + this.xCoord + " " + this.yCoord + " " + this.zCoord);
     }
-    
-    	
+
+
     /**
      * Returns the name of the inventory
      */
@@ -251,14 +258,18 @@ public class TileEntityWritingTable extends TileEntityCW implements IInventory
     {
         return PacketHandler.INSTANCE.getPacketFrom(new MessageTileEntityWritingTable(this));
     }
-    
-    /**Checks whether it is possible to continue writing. Used when copying books if it should continue copying.*/
-    public boolean canWrite() {
-    	return false; //
+
+    /**
+     * Checks whether it is possible to continue writing. Used when copying books if it should continue copying.
+     */
+    public boolean canWrite()
+    {
+        return false; //
     }
-    
-    public String getMainObjectType() {
-    	return "book";
+
+    public String getMainObjectType()
+    {
+        return "book";
     }
 
     //Get data for rendering details TODO: organize into a single method 
@@ -270,18 +281,22 @@ public class TileEntityWritingTable extends TileEntityCW implements IInventory
     @SideOnly(Side.CLIENT)
     public IRenderable getMainObject()
     {
-    	if(this.inventory[MIDDLE_INVENTORY_INDEX] == null) {
-    		return null;
-    	}
-    	Item it = this.inventory[MIDDLE_INVENTORY_INDEX].getItem();
-    	if(it != null) {
-    		if(it instanceof ItemBook) {
-    			return Renderables.renderBookOnWritingTable;
-    		}
-    		return this.inventory[MIDDLE_INVENTORY_INDEX].getItem() instanceof IRenderable ? (IRenderable) this.inventory[MIDDLE_INVENTORY_INDEX].getItem() : null;
-    	}
-    	return null;
-    	
+        if (this.inventory[MIDDLE_INVENTORY_INDEX] == null)
+        {
+            return null;
+        }
+        Item it = this.inventory[MIDDLE_INVENTORY_INDEX].getItem();
+        if (it != null)
+        {
+            if (it instanceof ItemBook)
+            {
+                return Renderables.renderBookOnWritingTable;
+            }
+            return this.inventory[MIDDLE_INVENTORY_INDEX].getItem() instanceof IRenderable
+                    ? (IRenderable) this.inventory[MIDDLE_INVENTORY_INDEX].getItem() : null;
+        }
+        return null;
+
     }
 
     public IRenderableObject getTopLeft()
@@ -293,11 +308,11 @@ public class TileEntityWritingTable extends TileEntityCW implements IInventory
     {
         return null;
     }
-    
-    public List<IRenderableObject> getRenderables() 
+
+    public List<IRenderableObject> getRenderables()
     {
-    	List<IRenderableObject> ret = new ArrayList<IRenderableObject>(3); //TODO: 3 + Items in the top slots
-    	
-    	return ret;
+        List<IRenderableObject> ret = new ArrayList<IRenderableObject>(3); //TODO: 3 + Items in the top slots
+
+        return ret;
     }
 }

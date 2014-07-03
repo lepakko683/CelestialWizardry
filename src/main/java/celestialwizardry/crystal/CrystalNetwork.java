@@ -1,6 +1,5 @@
 package celestialwizardry.crystal;
 
-import celestialwizardry.CelestialWizardry;
 import celestialwizardry.crystal.api.crystal.ICrystal;
 import celestialwizardry.crystal.reference.CrystalNames;
 import celestialwizardry.util.LogHelper;
@@ -61,7 +60,8 @@ public final class CrystalNetwork
 
             crystalCompound.setTag(CrystalNames.NBT.CRYSTAL_PREFIX + i, tagC);
 
-            LogHelper.info("Writing ICrystal to world " + world.getWorldInfo().getWorldName() + ": " + crystal.getXPos() + ", " + crystal.getYPos() + ", " + crystal.getZPos() + ", " + i);
+            LogHelper.info("Writing ICrystal to world " + world.getWorldInfo().getWorldName() + ": " + crystal.getXPos()
+                                   + ", " + crystal.getYPos() + ", " + crystal.getZPos() + ", " + i);
 
             i++;
         }
@@ -104,7 +104,8 @@ public final class CrystalNetwork
                 ICrystal crystal = (ICrystal) entity;
                 crystals.add(index, crystal);
 
-                LogHelper.info("Reading ICrystal from world " + world.getWorldInfo().getWorldName() + ": " + crystal.getXPos() + ", " + crystal.getYPos() + ", " + crystal.getZPos() + ", " + index);
+                LogHelper.info("Reading ICrystal from world " + world.getWorldInfo().getWorldName() + ": " + crystal
+                        .getXPos() + ", " + crystal.getYPos() + ", " + crystal.getZPos() + ", " + index);
             }
             else
             {

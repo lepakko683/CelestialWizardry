@@ -1,6 +1,5 @@
 package celestialwizardry.init;
 
-import celestialwizardry.crystal.init.CrystalItems;
 import celestialwizardry.item.*;
 import celestialwizardry.reference.Names;
 

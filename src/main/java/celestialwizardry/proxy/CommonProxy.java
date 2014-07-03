@@ -3,7 +3,6 @@ package celestialwizardry.proxy;
 import celestialwizardry.reference.EventHandlers;
 import celestialwizardry.reference.Names;
 import celestialwizardry.tileentity.TileEntityBell;
-import celestialwizardry.crystal.tileentity.TileEntityCrystalConductive;
 import celestialwizardry.tileentity.TileEntityWritingTable;
 
 import net.minecraftforge.common.MinecraftForge;
@@ -26,11 +25,11 @@ public abstract class CommonProxy implements IProxy
         // Register world event handler
         FMLCommonHandler.instance().bus().register(EventHandlers.Common.WORLD_EVENT_HANDLER);
         MinecraftForge.EVENT_BUS.register(EventHandlers.Common.WORLD_EVENT_HANDLER);
-        
+
         // Register item expire event handler
         FMLCommonHandler.instance().bus().register(EventHandlers.Common.ITEM_EXPIRE_EVENT_HANDLER);
         MinecraftForge.EVENT_BUS.register(EventHandlers.Common.ITEM_EXPIRE_EVENT_HANDLER);
-        
+
         // Register disconnect event handler (handles both server and client)
         FMLCommonHandler.instance().bus().register(EventHandlers.Common.DISCONNECT_EVENT_HANDLER);
         MinecraftForge.EVENT_BUS.register(EventHandlers.Common.DISCONNECT_EVENT_HANDLER);

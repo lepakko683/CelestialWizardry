@@ -1,5 +1,6 @@
 package celestialwizardry.client.gui.cwgui;
 
-public class GuiDefaultPlayerInventoryElement extends GuiInventoryElement {
+public class GuiDefaultPlayerInventoryElement extends GuiInventoryElement
+{
 
 }
