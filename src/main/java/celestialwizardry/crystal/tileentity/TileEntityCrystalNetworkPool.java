@@ -1,6 +1,7 @@
 package celestialwizardry.crystal.tileentity;
 
 import celestialwizardry.api.energy.EnergyType;
+import celestialwizardry.crystal.api.crystal.EnergyPacket;
 import celestialwizardry.crystal.api.crystal.ICrystalNetworkPool;
 import celestialwizardry.crystal.util.PacketBuilder;
 import celestialwizardry.util.LogHelper;
@@ -35,9 +36,16 @@ public abstract class TileEntityCrystalNetworkPool extends TileEntityCrystalNetw
      * celestialwizardry.crystal.api.crystal.ICrystalNetworkPool} can give
      */
     @Override
-    public float takeEnergy(float amount)
+    public EnergyPacket takePacket(float amount)
     {
-        return 0;
+        PacketBuilder builder = getBuilder();
+
+        builder.setEnergyType(getEnergyType());
+        builder.append(amount);
+
+        pool = MathHelper.clampZero_float(getPoolSize() - amount, getMaxPoolSize());
+
+        return builder.toPacket();
     }
 
     /**

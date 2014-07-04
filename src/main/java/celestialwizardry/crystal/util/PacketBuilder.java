@@ -4,12 +4,9 @@ import celestialwizardry.api.energy.EnergyType;
 import celestialwizardry.crystal.api.crystal.EnergyPacket;
 import celestialwizardry.util.MathHelper;
 
-/**
- * TODO
- */
 public final class PacketBuilder
 {
-    private float energy;
+    private float energy = 0;
     private EnergyType type;
     public final float max;
 

@@ -26,13 +26,13 @@ public interface ICrystalNetworkPool extends ICrystalNetwork
     public float getMaxPoolSize();
 
     /**
-     * Takes energy from the {@link ICrystalNetworkPool}'s {@link EnergyType} pool
+     * Takes a {@link EnergyPacket} from the {@link ICrystalNetworkPool}'s {@link EnergyType} pool
      *
      * @param amount the requested amount of {@link EnergyType}
      *
-     * @return returns the amount of {@link EnergyType} the {@link ICrystalNetworkPool} can give
+     * @return returns the {@link EnergyPacket} that the {@link ICrystalNetworkPool} can give
      */
-    public float takeEnergy(float amount);
+    public EnergyPacket takePacket(float amount);
 
     /**
      * Adds {@link EnergyType} to the pool
