@@ -17,10 +17,6 @@ import java.util.List;
 
 public abstract class TileEntityCrystal extends TileEntityCW implements ICrystal
 {
-    protected int boundX;
-    protected int boundY;
-    protected int boundZ;
-
     /* ======================================== ICrystal START ===================================== */
 
     /**
@@ -47,66 +43,6 @@ public abstract class TileEntityCrystal extends TileEntityCW implements ICrystal
     public float getEnergyYieldMultiplier()
     {
         return 1f;
-    }
-
-    /**
-     * Can this {@link celestialwizardry.crystal.api.crystal.ICrystal} be bounded to given {@link celestialwizardry.api
-     * .blockCrystal.ICrystal}.
-     *
-     * @param world   the {@link net.minecraft.world.World} this {@link celestialwizardry.crystal.api.crystal.ICrystal}
-     *                is
-     * @param crystal the {@link celestialwizardry.crystal.api.crystal.ICrystal} this {@link
-     *                celestialwizardry.crystal.api.crystal .ICrystal} is going to be bounded with
-     *
-     * @return can this {@link celestialwizardry.crystal.api.crystal.ICrystal} to the {@link
-     * celestialwizardry.crystal.api.crystal .ICrystal}
-     */
-    @Override
-    public boolean canBoundTo(World world, ICrystal crystal)
-    {
-        return true;
-    }
-
-    /**
-     * Bounds the blockCrystal {@link TileEntity} to other blockCrystal {@link TileEntity} for output.
-     *
-     * @param x the x coordinate of the other blockCrystal {@link TileEntity}
-     * @param y the y coordinate of the other blockCrystal {@link TileEntity}
-     * @param z the z coordinate of the other blockCrystal {@link TileEntity}
-     *
-     * @return true if the bound was success
-     */
-    @Override
-    public boolean setBound(int x, int y, int z)
-    {
-        if (worldObj.getTileEntity(x, y, z) instanceof ICrystal)
-        {
-            ICrystal crystal = (ICrystal) worldObj.getTileEntity(x, y, z);
-
-            if (canBoundTo(worldObj, crystal))
-            {
-                boundX = x;
-                boundY = y;
-                boundZ = z;
-
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    /**
-     * The bounded crystal for output.
-     *
-     * @return The bounded crystal for output.
-     */
-    @Override
-    public ICrystal getBound()
-    {
-        return ((worldObj.getTileEntity(boundX, boundY, boundZ) != null) && (worldObj
-                .getTileEntity(boundX, boundY, boundZ) instanceof ICrystal)) ? (ICrystal) worldObj
-                .getTileEntity(boundX, boundY, boundZ) : null;
     }
 
     /**
@@ -151,9 +87,6 @@ public abstract class TileEntityCrystal extends TileEntityCW implements ICrystal
     {
         super.readFromNBT(nbtTagCompound);
         LogHelper.info("Reading " + toString() + " from NBT");
-        boundX = nbtTagCompound.getInteger(CrystalNames.NBT.BOUND_X);
-        boundY = nbtTagCompound.getInteger(CrystalNames.NBT.BOUND_Y);
-        boundZ = nbtTagCompound.getInteger(CrystalNames.NBT.BOUND_Z);
     }
 
     @Override
@@ -161,9 +94,6 @@ public abstract class TileEntityCrystal extends TileEntityCW implements ICrystal
     {
         super.writeToNBT(nbtTagCompound);
         LogHelper.info("Writing " + toString() + " to NBT");
-        nbtTagCompound.setInteger(CrystalNames.NBT.BOUND_X, boundX);
-        nbtTagCompound.setInteger(CrystalNames.NBT.BOUND_Y, boundY);
-        nbtTagCompound.setInteger(CrystalNames.NBT.BOUND_Z, boundZ);
     }
 
     /* ======================================== TileEntity END ===================================== */

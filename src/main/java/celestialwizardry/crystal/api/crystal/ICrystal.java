@@ -33,34 +33,6 @@ public interface ICrystal
     public float getEnergyYieldMultiplier();
 
     /**
-     * Can this {@link ICrystal} be bounded to given {@link ICrystal}.
-     *
-     * @param world   the {@link World} this {@link ICrystal} is
-     * @param crystal the {@link ICrystal} this {@link ICrystal} is going to be bounded with
-     *
-     * @return can this {@link ICrystal} to the {@link ICrystal}
-     */
-    public boolean canBoundTo(World world, ICrystal crystal);
-
-    /**
-     * Bounds the blockCrystal {@link TileEntity} to other blockCrystal {@link TileEntity} for output.
-     *
-     * @param x the x coordinate of the other blockCrystal {@link TileEntity}
-     * @param y the y coordinate of the other blockCrystal {@link TileEntity}
-     * @param z the z coordinate of the other blockCrystal {@link TileEntity}
-     *
-     * @return true if the bound was success
-     */
-    public boolean setBound(int x, int y, int z);
-
-    /**
-     * The bounded crystal for output.
-     *
-     * @return The bounded crystal for output.
-     */
-    public ICrystal getBound();
-
-    /**
      * The x position of the crystal tile.
      *
      * @return x position

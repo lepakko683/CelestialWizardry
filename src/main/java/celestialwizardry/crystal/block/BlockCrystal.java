@@ -70,54 +70,7 @@ public abstract class BlockCrystal extends BlockCW implements ITileEntityProvide
     {
         if (!world.isRemote)
         {
-            if (player.getCurrentEquippedItem() != null)
-            {
-                if (player.getCurrentEquippedItem().getItem() instanceof IStaff)
-                {
-                    if (NBTHelper.getBoolean(player.getCurrentEquippedItem(), CrystalNames.NBT.BOUNDING))
-                    {
-                        NBTHelper.setBoolean(player.getCurrentEquippedItem(), CrystalNames.NBT.BOUNDING, false);
-                        int cX = NBTHelper.getInt(player.getCurrentEquippedItem(), CrystalNames.NBT.BOUND_X);
-                        int cY = NBTHelper.getInt(player.getCurrentEquippedItem(), CrystalNames.NBT.BOUND_Y);
-                        int cZ = NBTHelper.getInt(player.getCurrentEquippedItem(), CrystalNames.NBT.BOUND_Z);
-
-                        if (world.getTileEntity(cX, cY, cZ) instanceof ICrystal)
-                        {
-                            ICrystal crystal = (ICrystal) world.getTileEntity(cX, cY, cZ);
-
-                            if (world.getTileEntity(x, y, z) instanceof ICrystal)
-                            {
-                                if (crystal.setBound(x, y, z))
-                                {
-                                    player.addChatComponentMessage(
-                                            new ChatComponentText(StringHelper.getMessage("crystalsBound")));
-                                    return true;
-                                }
-                            }
-                        }
-
-                        // TODO Add case specific messages
-                        player.addChatComponentMessage(
-                                new ChatComponentText(StringHelper.getMessage("crystalsBoundFail")));
-                    }
-                    else
-                    {
-                        if (world.getTileEntity(x, y, z) instanceof ICrystal)
-                        {
-                            NBTHelper.setBoolean(player.getCurrentEquippedItem(), CrystalNames.NBT.BOUNDING, true);
-
-                            NBTHelper.setInteger(player.getCurrentEquippedItem(), CrystalNames.NBT.BOUND_X, x);
-                            NBTHelper.setInteger(player.getCurrentEquippedItem(), CrystalNames.NBT.BOUND_Y, y);
-                            NBTHelper.setInteger(player.getCurrentEquippedItem(), CrystalNames.NBT.BOUND_Z, z);
-
-                            return true;
-                        }
-                    }
-                }
-            }
-            else
-            {
-            }
+            // NO-OP (yet)
         }
 
         return super.onBlockActivated(world, x, y, z, player, par6, par7, par8, par9);
