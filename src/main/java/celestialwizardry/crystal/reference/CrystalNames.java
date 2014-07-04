@@ -26,6 +26,7 @@ public class CrystalNames
         public static final String Y = "y";
         public static final String Z = "z";
         public static final String INDEX = "index";
+        public static final String POOL = "pool";
     }
 
     public static class Containers

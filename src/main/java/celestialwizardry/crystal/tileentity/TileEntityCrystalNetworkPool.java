@@ -3,9 +3,12 @@ package celestialwizardry.crystal.tileentity;
 import celestialwizardry.api.energy.EnergyType;
 import celestialwizardry.crystal.api.crystal.EnergyPacket;
 import celestialwizardry.crystal.api.crystal.ICrystalNetworkPool;
+import celestialwizardry.crystal.reference.CrystalNames;
 import celestialwizardry.crystal.util.PacketBuilder;
 import celestialwizardry.util.LogHelper;
 import celestialwizardry.util.MathHelper;
+
+import net.minecraft.nbt.NBTTagCompound;
 
 public abstract class TileEntityCrystalNetworkPool extends TileEntityCrystalNetwork implements ICrystalNetworkPool
 {
@@ -73,6 +76,24 @@ public abstract class TileEntityCrystalNetworkPool extends TileEntityCrystalNetw
     }
 
     /* ======================================== ICrystalNetworkPool END ===================================== */
+
+    /* ======================================== TileEntity START ===================================== */
+
+    @Override
+    public void readFromNBT(NBTTagCompound nbtTagCompound)
+    {
+        super.readFromNBT(nbtTagCompound);
+        pool = nbtTagCompound.getFloat(CrystalNames.NBT.POOL);
+    }
+
+    @Override
+    public void writeToNBT(NBTTagCompound nbtTagCompound)
+    {
+        super.writeToNBT(nbtTagCompound);
+        nbtTagCompound.setFloat(CrystalNames.NBT.POOL, pool);
+    }
+
+    /* ======================================== TileEntity END ===================================== */
 
     /* ======================================== TileEntityCrystal START ===================================== */
 

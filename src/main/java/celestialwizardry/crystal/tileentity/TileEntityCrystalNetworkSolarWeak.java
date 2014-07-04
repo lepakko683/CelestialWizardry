@@ -100,7 +100,7 @@ public class TileEntityCrystalNetworkSolarWeak extends TileEntityCrystalNetworkP
                         light = 15;
                     }
 
-                    addEnergy(0.1F * light, FIRE);
+                    addEnergy(1F * light, FIRE);
                 }
             }
         }

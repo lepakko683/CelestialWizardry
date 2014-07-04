@@ -1,9 +1,13 @@
 package celestialwizardry.crystal.block;
 
+import celestialwizardry.crystal.api.crystal.ICrystalNetworkBuffer;
+import celestialwizardry.crystal.api.crystal.ICrystalNetworkPool;
 import celestialwizardry.crystal.reference.CrystalNames;
 import celestialwizardry.crystal.tileentity.TileEntityCrystalNetworkConductiveWeak;
 
+import net.minecraft.block.Block;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -19,6 +23,23 @@ public class BlockCrystalConductiveWeak extends BlockCrystal
     }
 
     /* ======================================== Block START ===================================== */
+
+    @Override
+    public void onNeighborChange(IBlockAccess world, int x, int y, int z, int tileX, int tileY, int tileZ)
+    {
+        if (world instanceof World && !(((World) world).isRemote))
+        {
+            super.onNeighborChange(world, x, y, z, tileX, tileY, tileZ);
+
+            if (world.getTileEntity(x, y, z) instanceof ICrystalNetworkBuffer)
+            {
+                if (world.getTileEntity(tileX, tileY, tileZ) instanceof ICrystalNetworkPool)
+                {
+                    ((ICrystalNetworkBuffer) world.getTileEntity(x, y, z)).setPool(tileX, tileY, tileZ);
+                }
+            }
+        }
+    }
 
     /**
      * A randomly called display update to be able to add particles or other items for display

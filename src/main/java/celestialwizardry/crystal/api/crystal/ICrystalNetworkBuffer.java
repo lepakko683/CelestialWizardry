@@ -38,4 +38,6 @@ public interface ICrystalNetworkBuffer extends ICrystalNetwork
      * @param packet the received {@link EnergyPacket}
      */
     public void onPacketReceived(EnergyPacket packet);
+
+    public void setPool(int x, int y, int z);
 }

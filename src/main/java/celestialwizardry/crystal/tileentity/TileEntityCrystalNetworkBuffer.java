@@ -6,6 +6,7 @@ import celestialwizardry.crystal.api.crystal.ICrystalNetworkBuffer;
 import celestialwizardry.crystal.api.crystal.ICrystalNetworkPool;
 import celestialwizardry.crystal.reference.CrystalNames;
 import celestialwizardry.crystal.util.PacketBuilder;
+import celestialwizardry.util.LogHelper;
 
 import net.minecraft.nbt.NBTTagCompound;
 
@@ -15,6 +16,10 @@ import java.util.List;
 public abstract class TileEntityCrystalNetworkBuffer extends TileEntityCrystalNetwork implements ICrystalNetworkBuffer
 {
     protected List<EnergyPacket> buffer = new ArrayList<EnergyPacket>();
+    protected ICrystalNetworkPool pool; // TODO To NBT and Crystal Network
+    protected int poolX;
+    protected int poolY;
+    protected int poolZ;
 
     /* ======================================== ICrystalBuffer START ===================================== */
 
@@ -49,6 +54,16 @@ public abstract class TileEntityCrystalNetworkBuffer extends TileEntityCrystalNe
     public void onPacketReceived(EnergyPacket packet)
     {
 
+    }
+
+    @Override
+    public void setPool(int x, int y, int z)
+    {
+        if (worldObj.getTileEntity(x, y, z) instanceof ICrystalNetworkPool)
+        {
+            pool = (ICrystalNetworkPool) worldObj.getTileEntity(x, y, z);
+            LogHelper.info("Set pool " + pool.toString() + " to " + toString()); // TODO Debug level
+        }
     }
 
     /* ======================================== ICrystalBuffer END ===================================== */
