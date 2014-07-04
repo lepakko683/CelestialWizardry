@@ -2,7 +2,7 @@ package celestialwizardry.crystal.api.crystal;
 
 import celestialwizardry.api.energy.EnergyType;
 
-public interface ICrystalPool extends ICrystal
+public interface ICrystalPool extends INetworkCrystal
 {
     public EnergyType getEnergyType();
 

@@ -1,7 +1,5 @@
 package celestialwizardry.crystal.reference;
 
-import celestialwizardry.crystal.handler.CrystalWorldEventHandler;
-
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -15,6 +13,6 @@ public class CrystalEventHandlers
 
     public static class Common
     {
-        public static final CrystalWorldEventHandler CRYSTAL_WORLD_EVENT_HANDLER = new CrystalWorldEventHandler();
+
     }
 }

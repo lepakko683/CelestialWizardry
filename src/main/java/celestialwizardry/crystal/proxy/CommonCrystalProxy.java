@@ -13,7 +13,7 @@ public abstract class CommonCrystalProxy implements ICrystalProxy
     public void registerEventHandlers()
     {
         // Register world event handler
-        FMLCommonHandler.instance().bus().register(CrystalEventHandlers.Common.CRYSTAL_WORLD_EVENT_HANDLER);
+        // TODO FMLCommonHandler.instance().bus().register(CrystalEventHandlers.Common.CRYSTAL_WORLD_EVENT_HANDLER);
     }
 
     public void registerTileEntities()

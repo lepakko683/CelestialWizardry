@@ -3,14 +3,18 @@ package celestialwizardry.crystal.block;
 import celestialwizardry.api.IStaff;
 import celestialwizardry.block.BlockCW;
 import celestialwizardry.crystal.api.crystal.ICrystal;
+import celestialwizardry.crystal.api.crystal.INetworkCrystal;
 import celestialwizardry.crystal.client.render.RenderCrystalBlock;
 import celestialwizardry.crystal.reference.CrystalNames;
 import celestialwizardry.util.NBTHelper;
 import celestialwizardry.util.StringHelper;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -33,56 +37,87 @@ public abstract class BlockCrystal extends BlockCW implements ITileEntityProvide
     /* ======================================== Block START ===================================== */
 
     @Override
+    public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entityLiving, ItemStack itemStack)
+    {
+        if (!world.isRemote)
+        {
+            if (world.getTileEntity(x, y, z) instanceof INetworkCrystal)
+            {
+                ((INetworkCrystal) world.getTileEntity(x, y, z)).onAdded();
+            }
+        }
+
+        super.onBlockPlacedBy(world, x, y, z, entityLiving, itemStack);
+    }
+
+    @Override
+    public void breakBlock(World world, int x, int y, int z, Block block, int meta)
+    {
+        if (!world.isRemote)
+        {
+            if (world.getTileEntity(x, y, z) instanceof INetworkCrystal)
+            {
+                ((INetworkCrystal) world.getTileEntity(x, y, z)).onRemoved();
+            }
+        }
+
+        super.breakBlock(world, x, y, z, block, meta);
+    }
+
+    @Override
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int par6, float par7,
                                     float par8, float par9)
     {
-        if (player.getCurrentEquippedItem() != null)
+        if (!world.isRemote)
         {
-            if (player.getCurrentEquippedItem().getItem() instanceof IStaff)
+            if (player.getCurrentEquippedItem() != null)
             {
-                if (NBTHelper.getBoolean(player.getCurrentEquippedItem(), CrystalNames.NBT.BOUNDING))
+                if (player.getCurrentEquippedItem().getItem() instanceof IStaff)
                 {
-                    NBTHelper.setBoolean(player.getCurrentEquippedItem(), CrystalNames.NBT.BOUNDING, false);
-                    int cX = NBTHelper.getInt(player.getCurrentEquippedItem(), CrystalNames.NBT.BOUND_X);
-                    int cY = NBTHelper.getInt(player.getCurrentEquippedItem(), CrystalNames.NBT.BOUND_Y);
-                    int cZ = NBTHelper.getInt(player.getCurrentEquippedItem(), CrystalNames.NBT.BOUND_Z);
-
-                    if (world.getTileEntity(cX, cY, cZ) instanceof ICrystal)
+                    if (NBTHelper.getBoolean(player.getCurrentEquippedItem(), CrystalNames.NBT.BOUNDING))
                     {
-                        ICrystal crystal = (ICrystal) world.getTileEntity(cX, cY, cZ);
+                        NBTHelper.setBoolean(player.getCurrentEquippedItem(), CrystalNames.NBT.BOUNDING, false);
+                        int cX = NBTHelper.getInt(player.getCurrentEquippedItem(), CrystalNames.NBT.BOUND_X);
+                        int cY = NBTHelper.getInt(player.getCurrentEquippedItem(), CrystalNames.NBT.BOUND_Y);
+                        int cZ = NBTHelper.getInt(player.getCurrentEquippedItem(), CrystalNames.NBT.BOUND_Z);
 
-                        if (world.getTileEntity(x, y, z) instanceof ICrystal)
+                        if (world.getTileEntity(cX, cY, cZ) instanceof ICrystal)
                         {
-                            if (crystal.setBound(x, y, z))
+                            ICrystal crystal = (ICrystal) world.getTileEntity(cX, cY, cZ);
+
+                            if (world.getTileEntity(x, y, z) instanceof ICrystal)
                             {
-                                player.addChatComponentMessage(
-                                        new ChatComponentText(StringHelper.getMessage("crystalsBound")));
-                                return true;
+                                if (crystal.setBound(x, y, z))
+                                {
+                                    player.addChatComponentMessage(
+                                            new ChatComponentText(StringHelper.getMessage("crystalsBound")));
+                                    return true;
+                                }
                             }
                         }
+
+                        // TODO Add case specific messages
+                        player.addChatComponentMessage(
+                                new ChatComponentText(StringHelper.getMessage("crystalsBoundFail")));
                     }
-
-                    // TODO Add case specific messages
-                    player.addChatComponentMessage(new ChatComponentText(StringHelper.getMessage("crystalsBoundFail")));
-                }
-                else
-                {
-                    if (world.getTileEntity(x, y, z) instanceof ICrystal)
+                    else
                     {
-                        NBTHelper.setBoolean(player.getCurrentEquippedItem(), CrystalNames.NBT.BOUNDING, true);
+                        if (world.getTileEntity(x, y, z) instanceof ICrystal)
+                        {
+                            NBTHelper.setBoolean(player.getCurrentEquippedItem(), CrystalNames.NBT.BOUNDING, true);
 
-                        NBTHelper.setInteger(player.getCurrentEquippedItem(), CrystalNames.NBT.BOUND_X, x);
-                        NBTHelper.setInteger(player.getCurrentEquippedItem(), CrystalNames.NBT.BOUND_Y, y);
-                        NBTHelper.setInteger(player.getCurrentEquippedItem(), CrystalNames.NBT.BOUND_Z, z);
+                            NBTHelper.setInteger(player.getCurrentEquippedItem(), CrystalNames.NBT.BOUND_X, x);
+                            NBTHelper.setInteger(player.getCurrentEquippedItem(), CrystalNames.NBT.BOUND_Y, y);
+                            NBTHelper.setInteger(player.getCurrentEquippedItem(), CrystalNames.NBT.BOUND_Z, z);
 
-                        return true;
+                            return true;
+                        }
                     }
                 }
             }
-        }
-        else
-        {
-            // NO-OP
+            else
+            {
+            }
         }
 
         return super.onBlockActivated(world, x, y, z, player, par6, par7, par8, par9);

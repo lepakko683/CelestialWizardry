@@ -61,7 +61,6 @@ public abstract class TileEntityCrystalBuffer extends TileEntityCrystal implemen
 
     /* ======================================== ICrystal START ===================================== */
 
-
     /* ======================================== ICrystal END ===================================== */
 
     /* ======================================== TileEntity START ===================================== */
