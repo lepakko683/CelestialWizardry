@@ -4,13 +4,11 @@ import celestialwizardry.api.energy.EnergyRegistry;
 import celestialwizardry.api.energy.EnergyType;
 import celestialwizardry.crystal.api.crystal.ICrystal;
 import celestialwizardry.crystal.api.crystal.INetworkCrystal;
-import celestialwizardry.crystal.block.BlockCrystal;
 import celestialwizardry.crystal.reference.CrystalNames;
 import celestialwizardry.crystal.util.PacketBuilder;
 import celestialwizardry.tileentity.TileEntityCW;
 import celestialwizardry.util.LogHelper;
 
-import net.minecraft.block.Block;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
@@ -20,23 +18,10 @@ import java.util.List;
 
 public abstract class TileEntityCrystal extends TileEntityCW implements INetworkCrystal
 {
-    protected static final CrystalNetwork NETWORK = new CrystalNetwork();
+    private static List<ICrystal> crystals = new ArrayList<ICrystal>();
     protected int boundX;
     protected int boundY;
     protected int boundZ;
-
-    public TileEntityCrystal()
-    {
-        if (!NETWORK.initialized)
-        {
-            NETWORK.setWorld(worldObj);
-        }
-    }
-
-    public static CrystalNetwork getNetwork()
-    {
-        return NETWORK;
-    }
 
     /* ======================================== ICrystal START ===================================== */
 
@@ -166,13 +151,13 @@ public abstract class TileEntityCrystal extends TileEntityCW implements INetwork
     @Override
     public void onAdded()
     {
-        NETWORK.addCrystal(this);
+        addCrystal(this);
     }
 
     @Override
     public void onRemoved()
     {
-        NETWORK.removeCrystal(this);
+        removeCrystal(this);
     }
 
     /* ======================================== INetworkCrystal END ===================================== */
@@ -189,7 +174,7 @@ public abstract class TileEntityCrystal extends TileEntityCW implements INetwork
 
         LogHelper.info("Reading " + toString() + " from NBT");
 
-        NETWORK.readCrystal(nbtTagCompound, this);
+        crystals.add(nbtTagCompound.getInteger(CrystalNames.NBT.INDEX), this);
     }
 
     @Override
@@ -202,76 +187,28 @@ public abstract class TileEntityCrystal extends TileEntityCW implements INetwork
 
         LogHelper.info("Writing " + toString() + " to NBT");
 
-        NETWORK.writeCrystal(nbtTagCompound, this);
+        nbtTagCompound.setInteger(CrystalNames.NBT.INDEX, crystals.indexOf(this));
     }
 
     /* ======================================== TileEntity END ===================================== */
 
     public abstract PacketBuilder getBuilder();
 
+    public static void addCrystal(ICrystal crystal)
+    {
+        crystals.add(crystal);
+        LogHelper.info("Added " + crystal.toString() + " to crystal list.");
+    }
+
+    public static void removeCrystal(ICrystal crystal)
+    {
+        crystals.remove(crystal);
+        LogHelper.info("Removed " + crystal.toString() + " from crystal list.");
+    }
+
     @Override
     public String toString()
     {
         return this.getClass().getSimpleName() + ".x:" + getXPos() + ".y:" + getYPos() + ".z:" + getZPos();
-    }
-
-    public static final class CrystalNetwork
-    {
-        private List<ICrystal> crystals = new ArrayList<ICrystal>();
-
-        private World world;
-        private boolean initialized = false;
-
-        private CrystalNetwork()
-        {
-        }
-
-        public void setWorld(World world)
-        {
-            this.world = world;
-            initialized = true;
-        }
-
-        public void addCrystal(ICrystal crystal)
-        {
-            crystals.add(crystal);
-            LogHelper.info("Added " + crystal.toString() + " to crystal list.");
-        }
-
-        public void removeCrystal(ICrystal crystal)
-        {
-            crystals.remove(crystal);
-            LogHelper.info("Removed " + crystal.toString() + " from crystal list.");
-        }
-
-        public void readCrystal(NBTTagCompound tagCompound, ICrystal crystal)
-        {
-            crystals.add(tagCompound.getInteger(CrystalNames.NBT.INDEX), crystal);
-            LogHelper.info("Reading crystal " + crystal.toString() + " from NBT");
-        }
-
-        public void writeCrystal(NBTTagCompound tagCompound, ICrystal crystal)
-        {
-            tagCompound.setInteger(CrystalNames.NBT.INDEX, crystals.indexOf(crystal));
-            LogHelper.info("Writing crystal " + crystal.toString() + " to NBT");
-        }
-
-        public World getWorld()
-        {
-            return world;
-        }
-
-        public List getCrystals()
-        {
-            return crystals;
-        }
-
-        public void crystalDebugDump()
-        {
-            for (ICrystal crystal : crystals)
-            {
-                LogHelper.debug(crystal.toString());
-            }
-        }
     }
 }
