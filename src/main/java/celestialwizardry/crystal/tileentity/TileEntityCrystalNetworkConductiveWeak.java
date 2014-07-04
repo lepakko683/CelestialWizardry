@@ -12,7 +12,7 @@ import net.minecraft.world.World;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TileEntityCrystalNetworkConductive extends TileEntityCrystalNetworkBuffer
+public class TileEntityCrystalNetworkConductiveWeak extends TileEntityCrystalNetworkBuffer
 {
     private static final int MAX_DISTANCE = 5;
 

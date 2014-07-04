@@ -1,7 +1,7 @@
 package celestialwizardry.crystal.block;
 
 import celestialwizardry.crystal.reference.CrystalNames;
-import celestialwizardry.crystal.tileentity.TileEntityCrystalNetworkConductive;
+import celestialwizardry.crystal.tileentity.TileEntityCrystalNetworkConductiveWeak;
 
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
@@ -10,12 +10,12 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 import java.util.Random;
 
-public class BlockCrystalConductive extends BlockCrystal
+public class BlockCrystalConductiveWeak extends BlockCrystal
 {
-    public BlockCrystalConductive()
+    public BlockCrystalConductiveWeak()
     {
         super();
-        this.setBlockName(CrystalNames.Blocks.CRYSTAL_CONDUCTIVE);
+        this.setBlockName(CrystalNames.Blocks.CRYSTAL_CONDUCTIVE_WEAK);
     }
 
     /* ======================================== Block START ===================================== */
@@ -29,7 +29,7 @@ public class BlockCrystalConductive extends BlockCrystal
     {
         super.randomDisplayTick(world, x, y, z, random);
 
-        if (world.getTileEntity(x, y, z) instanceof TileEntityCrystalNetworkConductive)
+        if (world.getTileEntity(x, y, z) instanceof TileEntityCrystalNetworkConductiveWeak)
         {
             /* if (((TileEntityCrystalConductive) world.getTileEntity(x, y, z)).open)
             {
@@ -52,7 +52,7 @@ public class BlockCrystalConductive extends BlockCrystal
     @Override
     public TileEntity createNewTileEntity(World world, int var2)
     {
-        return new TileEntityCrystalNetworkConductive();
+        return new TileEntityCrystalNetworkConductiveWeak();
     }
 
     /* ======================================== ITileEntityProvider END ===================================== */

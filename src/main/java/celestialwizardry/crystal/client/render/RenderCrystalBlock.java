@@ -1,6 +1,6 @@
 package celestialwizardry.crystal.client.render;
 
-import celestialwizardry.crystal.block.BlockCrystalConductive;
+import celestialwizardry.crystal.block.BlockCrystalConductiveWeak;
 import celestialwizardry.crystal.client.model.CrystalModels;
 import celestialwizardry.crystal.reference.CrystalResources;
 
@@ -25,10 +25,10 @@ public class RenderCrystalBlock implements ISimpleBlockRenderingHandler
         {
             GL11.glPushMatrix();
 
-            if (block instanceof BlockCrystalConductive)
+            if (block instanceof BlockCrystalConductiveWeak)
             {
                 FMLClientHandler.instance().getClient().renderEngine
-                        .bindTexture(CrystalResources.Models.TEXTURE_CRYSTAL_CONDUCTIVE);
+                        .bindTexture(CrystalResources.Models.TEXTURE_CRYSTAL_CONDUCTIVE_WEAK);
                 crystalSimpleGL11();
             }
 
