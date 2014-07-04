@@ -35,13 +35,6 @@ public interface ICrystal
     public float getEnergyYieldMultiplier();
 
     /**
-     * The {@link Block} instance that implements {@link ICrystal}.
-     *
-     * @return the {@link Block}
-     */
-    public Block getBlock();
-
-    /**
      * Can this {@link ICrystal} be bounded to given {@link ICrystal}.
      *
      * @param world   the {@link World} this {@link ICrystal} is

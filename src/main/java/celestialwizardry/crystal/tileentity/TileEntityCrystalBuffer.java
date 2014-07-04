@@ -17,11 +17,6 @@ public abstract class TileEntityCrystalBuffer extends TileEntityCrystal implemen
 {
     protected List<EnergyPacket> buffer = new ArrayList<EnergyPacket>();
 
-    public TileEntityCrystalBuffer(BlockCrystal blockCrystal)
-    {
-        super(blockCrystal);
-    }
-
     /* ======================================== ICrystalBuffer START ===================================== */
 
     /**

@@ -52,7 +52,7 @@ public class BlockCrystalConductive extends BlockCrystal
     @Override
     public TileEntity createNewTileEntity(World world, int var2)
     {
-        return new TileEntityCrystalConductive(this);
+        return new TileEntityCrystalConductive();
     }
 
     /* ======================================== ITileEntityProvider END ===================================== */

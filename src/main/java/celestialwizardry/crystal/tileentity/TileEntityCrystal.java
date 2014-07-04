@@ -18,18 +18,15 @@ import net.minecraft.world.World;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class TileEntityCrystal extends TileEntityCW implements ICrystal, INetworkCrystal
+public abstract class TileEntityCrystal extends TileEntityCW implements INetworkCrystal
 {
     protected static final CrystalNetwork NETWORK = new CrystalNetwork();
-    protected final BlockCrystal blockCrystal;
     protected int boundX;
     protected int boundY;
     protected int boundZ;
 
-    public TileEntityCrystal(BlockCrystal blockCrystal)
+    public TileEntityCrystal()
     {
-        this.blockCrystal = blockCrystal;
-
         if (!NETWORK.initialized)
         {
             NETWORK.setWorld(worldObj);
@@ -67,17 +64,6 @@ public abstract class TileEntityCrystal extends TileEntityCW implements ICrystal
     public float getEnergyYieldMultiplier()
     {
         return 1f;
-    }
-
-    /**
-     * The {@link net.minecraft.block.Block} instance that implements {@link ICrystal}.
-     *
-     * @return the {@link net.minecraft.block.Block}
-     */
-    @Override
-    public Block getBlock()
-    {
-        return blockCrystal;
     }
 
     /**

@@ -1,5 +1,6 @@
 package celestialwizardry.proxy;
 
+import celestialwizardry.crystal.Crystals;
 import celestialwizardry.reference.EventHandlers;
 import celestialwizardry.reference.Names;
 import celestialwizardry.tileentity.TileEntityBell;
@@ -38,9 +39,13 @@ public abstract class CommonProxy implements IProxy
         FMLCommonHandler.instance().bus().register(EventHandlers.Common.CONFIG_CHANGED_EVENT_HANDLER);
     }
 
+    @Override
     public void registerTileEntities()
     {
         GameRegistry.registerTileEntity(TileEntityWritingTable.class, "tile." + Names.Blocks.WRITING_TABLE);
         GameRegistry.registerTileEntity(TileEntityBell.class, "tile." + Names.Blocks.BELL);
+
+        // Register crystal tile entities
+        Crystals.proxy.registerTileEntities();
     }
 }

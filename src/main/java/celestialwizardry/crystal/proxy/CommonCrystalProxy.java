@@ -18,7 +18,6 @@ public abstract class CommonCrystalProxy implements ICrystalProxy
 
     public void registerTileEntities()
     {
-        GameRegistry.registerTileEntity(TileEntityCrystalConductive.class,
-                                        "tile." + CrystalNames.Blocks.CRYSTAL_CONDUCTIVE);
+        GameRegistry.registerTileEntity(TileEntityCrystalConductive.class, "tile." + CrystalNames.Blocks.CRYSTAL_CONDUCTIVE);
     }
 }

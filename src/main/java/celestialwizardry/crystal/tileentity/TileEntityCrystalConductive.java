@@ -20,11 +20,6 @@ public class TileEntityCrystalConductive extends TileEntityCrystalBuffer
 
     protected boolean hasReceivedInitialPacket = false;
 
-    public TileEntityCrystalConductive(BlockCrystal crystal)
-    {
-        super(crystal);
-    }
-
     /* ======================================== ICrystalBuffer START ===================================== */
 
     /**
@@ -159,17 +154,6 @@ public class TileEntityCrystalConductive extends TileEntityCrystalBuffer
         }
 
         return false;
-    }
-
-    /**
-     * The {@link net.minecraft.block.Block} instance that implements {@link ICrystal}.
-     *
-     * @return the {@link net.minecraft.block.Block}
-     */
-    @Override
-    public Block getBlock()
-    {
-        return blockCrystal;
     }
 
     /* ======================================== ICrystal END ===================================== */

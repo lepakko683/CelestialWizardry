@@ -31,9 +31,6 @@ public class Crystals
 
     public static void init()
     {
-        // Register crystal tile entities
-        proxy.registerTileEntities();
-
         // Register Crystal Event Handlers
         proxy.registerEventHandlers();
 
