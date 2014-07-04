@@ -2,7 +2,7 @@ package celestialwizardry.crystal.api.crystal;
 
 import java.util.List;
 
-public interface ICrystalBuffer extends INetworkCrystal
+public interface ICrystalNetworkBuffer extends ICrystalNetwork
 {
     /**
      * The maximum size of a {@link EnergyPacket} that can be stored in the {@link ICrystal}.

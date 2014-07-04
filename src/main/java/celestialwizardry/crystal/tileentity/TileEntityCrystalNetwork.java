@@ -1,7 +1,7 @@
 package celestialwizardry.crystal.tileentity;
 
 import celestialwizardry.crystal.api.crystal.ICrystal;
-import celestialwizardry.crystal.api.crystal.INetworkCrystal;
+import celestialwizardry.crystal.api.crystal.ICrystalNetwork;
 import celestialwizardry.crystal.reference.CrystalNames;
 import celestialwizardry.util.LogHelper;
 
@@ -10,7 +10,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class TileEntityNetworkCrystal extends TileEntityCrystal implements INetworkCrystal
+public abstract class TileEntityCrystalNetwork extends TileEntityCrystal implements ICrystalNetwork
 {
     protected static List<ICrystal> crystals = new ArrayList<ICrystal>();
 

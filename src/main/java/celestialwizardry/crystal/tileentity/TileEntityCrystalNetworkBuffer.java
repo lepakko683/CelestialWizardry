@@ -2,8 +2,8 @@ package celestialwizardry.crystal.tileentity;
 
 import celestialwizardry.crystal.api.crystal.EnergyPacket;
 import celestialwizardry.crystal.api.crystal.ICrystal;
-import celestialwizardry.crystal.api.crystal.ICrystalBuffer;
-import celestialwizardry.crystal.api.crystal.ICrystalPool;
+import celestialwizardry.crystal.api.crystal.ICrystalNetworkBuffer;
+import celestialwizardry.crystal.api.crystal.ICrystalNetworkPool;
 import celestialwizardry.crystal.reference.CrystalNames;
 import celestialwizardry.crystal.util.PacketBuilder;
 
@@ -12,7 +12,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class TileEntityCrystalBuffer extends TileEntityNetworkCrystal implements ICrystalBuffer
+public abstract class TileEntityCrystalNetworkBuffer extends TileEntityCrystalNetwork implements ICrystalNetworkBuffer
 {
     protected List<EnergyPacket> buffer = new ArrayList<EnergyPacket>();
 
@@ -94,23 +94,23 @@ public abstract class TileEntityCrystalBuffer extends TileEntityNetworkCrystal i
 
     /* ======================================== TileEntity END ===================================== */
 
-    public ICrystalPool findPool()
+    public ICrystalNetworkPool findPool()
     {
-        if (worldObj.getTileEntity(xCoord + 1, yCoord, zCoord) instanceof ICrystalPool)
+        if (worldObj.getTileEntity(xCoord + 1, yCoord, zCoord) instanceof ICrystalNetworkPool)
         {
-            return (ICrystalPool) worldObj.getTileEntity(xCoord + 1, yCoord, zCoord);
+            return (ICrystalNetworkPool) worldObj.getTileEntity(xCoord + 1, yCoord, zCoord);
         }
-        else if (worldObj.getTileEntity(xCoord - 1, yCoord, zCoord) instanceof ICrystalPool)
+        else if (worldObj.getTileEntity(xCoord - 1, yCoord, zCoord) instanceof ICrystalNetworkPool)
         {
-            return (ICrystalPool) worldObj.getTileEntity(xCoord - 1, yCoord, zCoord);
+            return (ICrystalNetworkPool) worldObj.getTileEntity(xCoord - 1, yCoord, zCoord);
         }
-        else if (worldObj.getTileEntity(xCoord, yCoord, zCoord + 1) instanceof ICrystalPool)
+        else if (worldObj.getTileEntity(xCoord, yCoord, zCoord + 1) instanceof ICrystalNetworkPool)
         {
-            return (ICrystalPool) worldObj.getTileEntity(xCoord, yCoord, zCoord + 1);
+            return (ICrystalNetworkPool) worldObj.getTileEntity(xCoord, yCoord, zCoord + 1);
         }
-        else if (worldObj.getTileEntity(xCoord, yCoord, zCoord - 1) instanceof ICrystalPool)
+        else if (worldObj.getTileEntity(xCoord, yCoord, zCoord - 1) instanceof ICrystalNetworkPool)
         {
-            return (ICrystalPool) worldObj.getTileEntity(xCoord, yCoord, zCoord - 1);
+            return (ICrystalNetworkPool) worldObj.getTileEntity(xCoord, yCoord, zCoord - 1);
         }
 
         return null;
@@ -118,7 +118,7 @@ public abstract class TileEntityCrystalBuffer extends TileEntityNetworkCrystal i
 
     public EnergyPacket constructPacket()
     {
-        ICrystalPool pool = findPool();
+        ICrystalNetworkPool pool = findPool();
 
         if (pool == null)
         {

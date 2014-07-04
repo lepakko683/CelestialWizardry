@@ -5,7 +5,7 @@ package celestialwizardry.crystal.api.crystal;
  * <p/>
  * It is more efficient to use this instead of {@link ICrystal}
  */
-public interface INetworkCrystal extends ICrystal
+public interface ICrystalNetwork extends ICrystal
 {
     public void onAdded();
 

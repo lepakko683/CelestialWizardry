@@ -13,7 +13,6 @@ import java.util.List;
  * The energy sending and receiving handling should always happen in the outputting (the {@link ICrystal} that SENDS
  * energy) side to avoid any conflicts.
  */
-@SuppressWarnings("unused") // TODO Remove (here for seeing only the real warnings)
 public interface ICrystal
 {
     /**

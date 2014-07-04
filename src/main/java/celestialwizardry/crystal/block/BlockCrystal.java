@@ -3,7 +3,7 @@ package celestialwizardry.crystal.block;
 import celestialwizardry.api.IStaff;
 import celestialwizardry.block.BlockCW;
 import celestialwizardry.crystal.api.crystal.ICrystal;
-import celestialwizardry.crystal.api.crystal.INetworkCrystal;
+import celestialwizardry.crystal.api.crystal.ICrystalNetwork;
 import celestialwizardry.crystal.client.render.RenderCrystalBlock;
 import celestialwizardry.crystal.reference.CrystalNames;
 import celestialwizardry.util.NBTHelper;
@@ -41,9 +41,9 @@ public abstract class BlockCrystal extends BlockCW implements ITileEntityProvide
     {
         if (!world.isRemote)
         {
-            if (world.getTileEntity(x, y, z) instanceof INetworkCrystal)
+            if (world.getTileEntity(x, y, z) instanceof ICrystalNetwork)
             {
-                ((INetworkCrystal) world.getTileEntity(x, y, z)).onAdded();
+                ((ICrystalNetwork) world.getTileEntity(x, y, z)).onAdded();
             }
         }
 
@@ -55,9 +55,9 @@ public abstract class BlockCrystal extends BlockCW implements ITileEntityProvide
     {
         if (!world.isRemote)
         {
-            if (world.getTileEntity(x, y, z) instanceof INetworkCrystal)
+            if (world.getTileEntity(x, y, z) instanceof ICrystalNetwork)
             {
-                ((INetworkCrystal) world.getTileEntity(x, y, z)).onRemoved();
+                ((ICrystalNetwork) world.getTileEntity(x, y, z)).onRemoved();
             }
         }
 
