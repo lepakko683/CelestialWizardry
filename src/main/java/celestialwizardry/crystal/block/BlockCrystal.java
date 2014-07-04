@@ -1,13 +1,8 @@
 package celestialwizardry.crystal.block;
 
-import celestialwizardry.api.IStaff;
 import celestialwizardry.block.BlockCW;
-import celestialwizardry.crystal.api.crystal.ICrystal;
 import celestialwizardry.crystal.api.crystal.ICrystalNetwork;
 import celestialwizardry.crystal.client.render.RenderCrystalBlock;
-import celestialwizardry.crystal.reference.CrystalNames;
-import celestialwizardry.util.NBTHelper;
-import celestialwizardry.util.StringHelper;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
@@ -15,7 +10,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ChatComponentText;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
@@ -101,4 +96,17 @@ public abstract class BlockCrystal extends BlockCW implements ITileEntityProvide
     }
 
     /* ======================================== Block END ===================================== */
+
+    /* ======================================== ITileEntityProvider START ===================================== */
+
+    /**
+     * Returns a new instance of a block's tile entity class. Called on placing the block.
+     *
+     * @param world
+     * @param var2
+     */
+    @Override
+    public abstract TileEntity createNewTileEntity(World world, int var2);
+
+    /* ======================================== ITileEntityProvider END ===================================== */
 }

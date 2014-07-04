@@ -4,6 +4,7 @@ import celestialwizardry.crystal.client.render.RenderCrystalBlock;
 import celestialwizardry.crystal.client.render.RenderCrystalSimple;
 import celestialwizardry.crystal.reference.CrystalResources;
 import celestialwizardry.crystal.tileentity.TileEntityCrystalNetworkConductiveWeak;
+import celestialwizardry.crystal.tileentity.TileEntityCrystalNetworkSolarWeak;
 
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
@@ -24,7 +25,10 @@ public class ClientCrystalProxy extends CommonCrystalProxy
     {
         RenderingRegistry.registerBlockHandler(new RenderCrystalBlock());
 
-        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityCrystalNetworkConductiveWeak.class, new RenderCrystalSimple(
-                CrystalResources.Models.TEXTURE_CRYSTAL_CONDUCTIVE_WEAK));
+        ClientRegistry
+                .bindTileEntitySpecialRenderer(TileEntityCrystalNetworkConductiveWeak.class, new RenderCrystalSimple(
+                        CrystalResources.Models.TEXTURE_CRYSTAL_CONDUCTIVE_WEAK));
+        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityCrystalNetworkSolarWeak.class, new RenderCrystalSimple(
+                CrystalResources.Models.TEXTURE_CRYSTAL_SOLAR_WEAK));
     }
 }

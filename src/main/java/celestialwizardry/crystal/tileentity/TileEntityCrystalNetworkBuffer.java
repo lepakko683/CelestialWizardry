@@ -94,6 +94,16 @@ public abstract class TileEntityCrystalNetworkBuffer extends TileEntityCrystalNe
 
     /* ======================================== TileEntity END ===================================== */
 
+    /* ======================================== TileEntityCrystal START ===================================== */
+
+    @Override
+    public PacketBuilder getBuilder()
+    {
+        return new PacketBuilder(getMaxPacketSize());
+    }
+
+    /* ======================================== TileEntityCrystal END ===================================== */
+
     public ICrystalNetworkPool findPool()
     {
         if (worldObj.getTileEntity(xCoord + 1, yCoord, zCoord) instanceof ICrystalNetworkPool)
@@ -114,22 +124,5 @@ public abstract class TileEntityCrystalNetworkBuffer extends TileEntityCrystalNe
         }
 
         return null;
-    }
-
-    public EnergyPacket constructPacket()
-    {
-        ICrystalNetworkPool pool = findPool();
-
-        if (pool == null)
-        {
-            return null;
-        }
-
-        PacketBuilder builder = getBuilder();
-
-        builder.setEnergyType(pool.getEnergyType());
-        builder.append(pool.takeEnergy(builder.max));
-
-        return builder.toPacket();
     }
 }

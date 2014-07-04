@@ -5,6 +5,7 @@ public class CrystalNames
     public static class Blocks
     {
         public static final String CRYSTAL_CONDUCTIVE_WEAK = "crystalConductiveWeak";
+        public static final String CRYSTAL_SOLAR_WEAK = "crystalSolarWeak";
     }
 
     public static class Items

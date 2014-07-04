@@ -15,7 +15,8 @@ public interface ICrystalBound extends ICrystal
     public boolean canBoundTo(World world, ICrystal crystal);
 
     /**
-     * Bounds the blockCrystal {@link net.minecraft.tileentity.TileEntity} to other blockCrystal {@link net.minecraft.tileentity.TileEntity} for output.
+     * Bounds the blockCrystal {@link net.minecraft.tileentity.TileEntity} to other blockCrystal {@link
+     * net.minecraft.tileentity.TileEntity} for output.
      *
      * @param x the x coordinate of the other blockCrystal {@link net.minecraft.tileentity.TileEntity}
      * @param y the y coordinate of the other blockCrystal {@link net.minecraft.tileentity.TileEntity}

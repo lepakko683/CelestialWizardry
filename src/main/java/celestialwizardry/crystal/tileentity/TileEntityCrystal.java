@@ -3,13 +3,11 @@ package celestialwizardry.crystal.tileentity;
 import celestialwizardry.api.energy.EnergyRegistry;
 import celestialwizardry.api.energy.EnergyType;
 import celestialwizardry.crystal.api.crystal.ICrystal;
-import celestialwizardry.crystal.reference.CrystalNames;
 import celestialwizardry.crystal.util.PacketBuilder;
 import celestialwizardry.tileentity.TileEntityCW;
 import celestialwizardry.util.LogHelper;
 
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
 import java.util.ArrayList;

@@ -4,7 +4,6 @@ import celestialwizardry.api.energy.EnergyRegistry;
 import celestialwizardry.api.energy.EnergyType;
 import celestialwizardry.crystal.api.crystal.EnergyPacket;
 import celestialwizardry.crystal.api.crystal.ICrystal;
-import celestialwizardry.crystal.util.PacketBuilder;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
@@ -130,10 +129,4 @@ public class TileEntityCrystalNetworkConductiveWeak extends TileEntityCrystalNet
     }
 
     /* ======================================== TileEntity END ===================================== */
-
-    @Override
-    public PacketBuilder getBuilder()
-    {
-        return new PacketBuilder(getMaxPacketSize());
-    }
 }
