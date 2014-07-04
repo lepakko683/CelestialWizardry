@@ -8,5 +8,6 @@ package celestialwizardry.crystal.api.crystal;
 public interface INetworkCrystal extends ICrystal
 {
     public void onAdded();
+
     public void onRemoved();
 }

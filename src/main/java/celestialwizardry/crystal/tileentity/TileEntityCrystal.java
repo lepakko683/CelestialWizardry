@@ -3,7 +3,6 @@ package celestialwizardry.crystal.tileentity;
 import celestialwizardry.api.energy.EnergyRegistry;
 import celestialwizardry.api.energy.EnergyType;
 import celestialwizardry.crystal.api.crystal.ICrystal;
-import celestialwizardry.crystal.api.crystal.INetworkCrystal;
 import celestialwizardry.crystal.reference.CrystalNames;
 import celestialwizardry.crystal.util.PacketBuilder;
 import celestialwizardry.tileentity.TileEntityCW;
@@ -16,9 +15,8 @@ import net.minecraft.world.World;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class TileEntityCrystal extends TileEntityCW implements INetworkCrystal
+public abstract class TileEntityCrystal extends TileEntityCW implements ICrystal
 {
-    private static List<ICrystal> crystals = new ArrayList<ICrystal>();
     protected int boundX;
     protected int boundY;
     protected int boundZ;
@@ -146,65 +144,31 @@ public abstract class TileEntityCrystal extends TileEntityCW implements INetwork
 
     /* ======================================== ICrystal END ===================================== */
 
-    /* ======================================== INetworkCrystal START ===================================== */
-
-    @Override
-    public void onAdded()
-    {
-        addCrystal(this);
-    }
-
-    @Override
-    public void onRemoved()
-    {
-        removeCrystal(this);
-    }
-
-    /* ======================================== INetworkCrystal END ===================================== */
-
     /* ======================================== TileEntity START ===================================== */
 
     @Override
     public void readFromNBT(NBTTagCompound nbtTagCompound)
     {
         super.readFromNBT(nbtTagCompound);
+        LogHelper.info("Reading " + toString() + " from NBT");
         boundX = nbtTagCompound.getInteger(CrystalNames.NBT.BOUND_X);
         boundY = nbtTagCompound.getInteger(CrystalNames.NBT.BOUND_Y);
         boundZ = nbtTagCompound.getInteger(CrystalNames.NBT.BOUND_Z);
-
-        LogHelper.info("Reading " + toString() + " from NBT");
-
-        crystals.add(nbtTagCompound.getInteger(CrystalNames.NBT.INDEX), this);
     }
 
     @Override
     public void writeToNBT(NBTTagCompound nbtTagCompound)
     {
         super.writeToNBT(nbtTagCompound);
+        LogHelper.info("Writing " + toString() + " to NBT");
         nbtTagCompound.setInteger(CrystalNames.NBT.BOUND_X, boundX);
         nbtTagCompound.setInteger(CrystalNames.NBT.BOUND_Y, boundY);
         nbtTagCompound.setInteger(CrystalNames.NBT.BOUND_Z, boundZ);
-
-        LogHelper.info("Writing " + toString() + " to NBT");
-
-        nbtTagCompound.setInteger(CrystalNames.NBT.INDEX, crystals.indexOf(this));
     }
 
     /* ======================================== TileEntity END ===================================== */
 
     public abstract PacketBuilder getBuilder();
-
-    public static void addCrystal(ICrystal crystal)
-    {
-        crystals.add(crystal);
-        LogHelper.info("Added " + crystal.toString() + " to crystal list.");
-    }
-
-    public static void removeCrystal(ICrystal crystal)
-    {
-        crystals.remove(crystal);
-        LogHelper.info("Removed " + crystal.toString() + " from crystal list.");
-    }
 
     @Override
     public String toString()

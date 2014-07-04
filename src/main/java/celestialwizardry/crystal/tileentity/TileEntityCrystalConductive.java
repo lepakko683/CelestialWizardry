@@ -4,10 +4,8 @@ import celestialwizardry.api.energy.EnergyRegistry;
 import celestialwizardry.api.energy.EnergyType;
 import celestialwizardry.crystal.api.crystal.EnergyPacket;
 import celestialwizardry.crystal.api.crystal.ICrystal;
-import celestialwizardry.crystal.block.BlockCrystal;
 import celestialwizardry.crystal.util.PacketBuilder;
 
-import net.minecraft.block.Block;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 

@@ -4,7 +4,6 @@ import celestialwizardry.crystal.api.crystal.EnergyPacket;
 import celestialwizardry.crystal.api.crystal.ICrystal;
 import celestialwizardry.crystal.api.crystal.ICrystalBuffer;
 import celestialwizardry.crystal.api.crystal.ICrystalPool;
-import celestialwizardry.crystal.block.BlockCrystal;
 import celestialwizardry.crystal.reference.CrystalNames;
 import celestialwizardry.crystal.util.PacketBuilder;
 
@@ -13,7 +12,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class TileEntityCrystalBuffer extends TileEntityCrystal implements ICrystalBuffer
+public abstract class TileEntityCrystalBuffer extends TileEntityNetworkCrystal implements ICrystalBuffer
 {
     protected List<EnergyPacket> buffer = new ArrayList<EnergyPacket>();
 
