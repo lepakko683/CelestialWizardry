@@ -13,7 +13,7 @@ import java.util.List;
 
 public class TileEntityCrystalNetworkConductiveWeak extends TileEntityCrystalNetworkBuffer
 {
-    private static final int MAX_DISTANCE = 5;
+    private static final int MAX_DISTANCE = 2;
 
     protected boolean hasReceivedInitialPacket = false;
 
@@ -122,5 +122,13 @@ public class TileEntityCrystalNetworkConductiveWeak extends TileEntityCrystalNet
     public void updateEntity()
     {
         super.updateEntity();
+
+        if (!worldObj.isRemote)
+        {
+            if (sender != null)
+            {
+
+            }
+        }
     }
 }

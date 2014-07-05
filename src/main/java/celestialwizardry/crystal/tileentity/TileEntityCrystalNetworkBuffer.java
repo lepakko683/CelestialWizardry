@@ -2,10 +2,12 @@ package celestialwizardry.crystal.tileentity;
 
 import celestialwizardry.crystal.api.crystal.EnergyPacket;
 import celestialwizardry.crystal.api.crystal.ICrystal;
+import celestialwizardry.crystal.api.crystal.ICrystalNetwork;
 import celestialwizardry.crystal.api.crystal.ICrystalNetworkBuffer;
 import celestialwizardry.crystal.api.crystal.ICrystalNetworkPool;
 import celestialwizardry.crystal.reference.CrystalNames;
 import celestialwizardry.crystal.util.PacketBuilder;
+import celestialwizardry.util.LogHelper;
 
 import net.minecraft.nbt.NBTTagCompound;
 
@@ -25,6 +27,21 @@ public abstract class TileEntityCrystalNetworkBuffer extends TileEntityCrystalNe
     public void sendPacket()
     {
 
+    }
+
+    @Override
+    public void setDest(int x, int y, int z)
+    {
+        if (worldObj.getTileEntity(x, y, z) instanceof ICrystalNetwork)
+        {
+            dest = (ICrystalNetwork) worldObj.getTileEntity(x, y, z);
+            LogHelper.info("Set dest " + dest.toString() + " for " + toString()); // TODO Debug level
+        }
+        else
+        {
+            dest = null;
+            LogHelper.info("Set dest null for " + toString()); // TODO Debug level
+        }
     }
 
     /**

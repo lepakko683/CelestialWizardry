@@ -16,7 +16,6 @@ public abstract class TileEntityCrystalNetworkPool extends TileEntityCrystalNetw
     protected static final int DEFAULT_COOLDOWN = 60;
     protected EnergyType currentEnergy;
     protected float pool = 0F;
-    protected ICrystalNetworkBuffer dest = null;
 
     /**
      * Sends a {@link EnergyPacket} to the target {@link celestialwizardry.crystal.api.crystal.ICrystal}

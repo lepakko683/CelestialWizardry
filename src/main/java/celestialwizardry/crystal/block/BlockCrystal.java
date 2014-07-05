@@ -1,8 +1,10 @@
 package celestialwizardry.crystal.block;
 
 import celestialwizardry.block.BlockCW;
+import celestialwizardry.crystal.api.crystal.ICrystal;
 import celestialwizardry.crystal.api.crystal.ICrystalNetwork;
 import celestialwizardry.crystal.client.render.RenderCrystalBlock;
+import celestialwizardry.crystal.event.CrystalEvent;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
@@ -13,6 +15,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+
+import cpw.mods.fml.common.FMLCommonHandler;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,7 +40,7 @@ public abstract class BlockCrystal extends BlockCW implements ITileEntityProvide
         {
             if (world.getTileEntity(x, y, z) instanceof ICrystalNetwork)
             {
-                ((ICrystalNetwork) world.getTileEntity(x, y, z)).onAdded();
+                FMLCommonHandler.instance().bus().post(new CrystalEvent.CrystalPlacedEvent((ICrystalNetwork) world.getTileEntity(x, y, z), world));
             }
         }
 
@@ -50,7 +54,7 @@ public abstract class BlockCrystal extends BlockCW implements ITileEntityProvide
         {
             if (world.getTileEntity(x, y, z) instanceof ICrystalNetwork)
             {
-                ((ICrystalNetwork) world.getTileEntity(x, y, z)).onRemoved();
+                FMLCommonHandler.instance().bus().post(new CrystalEvent.CrystalBreakEvent((ICrystalNetwork) world.getTileEntity(x, y, z), world));
             }
         }
 

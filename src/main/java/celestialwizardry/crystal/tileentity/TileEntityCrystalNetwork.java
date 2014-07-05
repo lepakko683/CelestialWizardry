@@ -3,10 +3,13 @@ package celestialwizardry.crystal.tileentity;
 import celestialwizardry.crystal.api.crystal.EnergyPacket;
 import celestialwizardry.crystal.api.crystal.ICrystal;
 import celestialwizardry.crystal.api.crystal.ICrystalNetwork;
+import celestialwizardry.crystal.event.CrystalEvent;
 import celestialwizardry.crystal.reference.CrystalNames;
 import celestialwizardry.util.LogHelper;
 
 import net.minecraft.nbt.NBTTagCompound;
+
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +18,7 @@ public abstract class TileEntityCrystalNetwork extends TileEntityCrystal impleme
 {
     protected static List<ICrystal> crystals = new ArrayList<ICrystal>();
     protected int cooldown = 0;
+    protected ICrystalNetwork dest = null;
 
     @Override
     public void onAdded()
@@ -67,6 +71,8 @@ public abstract class TileEntityCrystalNetwork extends TileEntityCrystal impleme
 
     public abstract int defaultCooldown();
 
+    public abstract void setDest(int x, int y, int z);
+
     @Override
     public void readFromNBT(NBTTagCompound nbtTagCompound)
     {
@@ -105,5 +111,20 @@ public abstract class TileEntityCrystalNetwork extends TileEntityCrystal impleme
     {
         crystals.remove(crystal);
         LogHelper.debug("Removed " + crystal.toString() + " from crystal list.");
+    }
+
+    public static class CrystalNetworkEventHandler
+    {
+        @SubscribeEvent
+        public void onCrystalBreakEvent(CrystalEvent.CrystalBreakEvent event)
+        {
+            ((ICrystalNetwork) event.crystal).onRemoved();
+        }
+
+        @SubscribeEvent
+        public void onCrystalPlacedEvent(CrystalEvent.CrystalPlacedEvent event)
+        {
+            ((ICrystalNetwork) event.crystal).onAdded();
+        }
     }
 }
