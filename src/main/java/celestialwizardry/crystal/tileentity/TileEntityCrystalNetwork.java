@@ -1,5 +1,6 @@
 package celestialwizardry.crystal.tileentity;
 
+import celestialwizardry.crystal.api.crystal.EnergyPacket;
 import celestialwizardry.crystal.api.crystal.ICrystal;
 import celestialwizardry.crystal.api.crystal.ICrystalNetwork;
 import celestialwizardry.crystal.reference.CrystalNames;
@@ -28,6 +29,34 @@ public abstract class TileEntityCrystalNetwork extends TileEntityCrystal impleme
         removeCrystal(this);
     }
 
+    /**
+     * Sends a {@link EnergyPacket} to the target {@link ICrystal}
+     */
+    @Override
+    public abstract void sendPacket();
+
+    /**
+     * Called when this {@link ICrystal} sends a {@link celestialwizardry.crystal.api.crystal.EnergyPacket}.
+     *
+     * @param packet the sent {@link celestialwizardry.crystal.api.crystal.EnergyPacket}
+     */
+    @Override
+    public void onPacketSent(EnergyPacket packet)
+    {
+
+    }
+
+    /**
+     * Called when this {@link ICrystal} receives a {@link celestialwizardry.crystal.api.crystal.EnergyPacket}.
+     *
+     * @param packet the received {@link celestialwizardry.crystal.api.crystal.EnergyPacket}
+     */
+    @Override
+    public void onPacketReceived(EnergyPacket packet)
+    {
+
+    }
+
     /* ======================================== INetworkCrystal END ===================================== */
 
     /* ======================================== TileEntity START ===================================== */
@@ -51,12 +80,12 @@ public abstract class TileEntityCrystalNetwork extends TileEntityCrystal impleme
     public static void addCrystal(ICrystal crystal)
     {
         crystals.add(crystal);
-        LogHelper.info("Added " + crystal.toString() + " to crystal list.");
+        LogHelper.debug("Added " + crystal.toString() + " to crystal list.");
     }
 
     public static void removeCrystal(ICrystal crystal)
     {
         crystals.remove(crystal);
-        LogHelper.info("Removed " + crystal.toString() + " from crystal list.");
+        LogHelper.debug("Removed " + crystal.toString() + " from crystal list.");
     }
 }

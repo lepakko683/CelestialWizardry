@@ -15,6 +15,7 @@ import java.util.List;
 public class TileEntityCrystalNetworkSolarWeak extends TileEntityCrystalNetworkPool
 {
     private static final float MAX_POOL_SIZE = 10000F;
+    private static final float DEFAULT_PACKET_SIZE = 10F;
     private static final EnergyType FIRE = new EnergyElemental(EnergyType.CWEnergyType.ELEMENTAL_FIRE);
 
     /* ======================================== ICrystal START ===================================== */
@@ -117,4 +118,17 @@ public class TileEntityCrystalNetworkSolarWeak extends TileEntityCrystalNetworkP
     }
 
     /* ======================================== TileEntityCrystal END ===================================== */
+
+    /* ======================================== TileEntityCrystalNetworkPool START
+    ===================================== */
+
+    @Override
+    public float defaultPacketSize()
+    {
+        return DEFAULT_PACKET_SIZE;
+    }
+
+    /* ======================================== TileEntityCrystalNetworkPool END
+    ===================================== */
+
 }

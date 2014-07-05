@@ -2,6 +2,7 @@ package celestialwizardry.crystal.tileentity;
 
 import celestialwizardry.api.energy.EnergyType;
 import celestialwizardry.crystal.api.crystal.EnergyPacket;
+import celestialwizardry.crystal.api.crystal.ICrystalNetworkBuffer;
 import celestialwizardry.crystal.api.crystal.ICrystalNetworkPool;
 import celestialwizardry.crystal.reference.CrystalNames;
 import celestialwizardry.crystal.util.PacketBuilder;
@@ -14,6 +15,35 @@ public abstract class TileEntityCrystalNetworkPool extends TileEntityCrystalNetw
 {
     protected EnergyType currentEnergy;
     protected float pool = 0F;
+    protected ICrystalNetworkBuffer dest = null;
+
+    /* ======================================== ICrystalNetwork START ===================================== */
+
+    /**
+     * Sends a {@link EnergyPacket} to the target {@link celestialwizardry.crystal.api.crystal.ICrystal}
+     */
+    @Override
+    public void sendPacket()
+    {
+        if (dest != null)
+        {
+            PacketBuilder builder = getBuilder();
+
+            builder.setEnergyType(getEnergyType());
+
+            float amount = getPoolSize() >= defaultPacketSize() ? defaultPacketSize() : Math.max(getPoolSize(), 0);
+            pool = MathHelper.clampZero_float(getPoolSize() - amount, getMaxPoolSize());
+
+            builder.append(amount);
+
+            EnergyPacket packet = builder.toPacket();
+
+            onPacketSent(packet);
+            dest.onPacketReceived(packet);
+        }
+    }
+
+    /* ======================================== ICrystalNetwork END ===================================== */
 
     /* ======================================== ICrystalNetworkPool START ===================================== */
 
@@ -38,7 +68,6 @@ public abstract class TileEntityCrystalNetworkPool extends TileEntityCrystalNetw
      * @return returns the amount of {@link celestialwizardry.api.energy.EnergyType} the {@link
      * celestialwizardry.crystal.api.crystal.ICrystalNetworkPool} can give
      */
-    @Override
     public EnergyPacket takePacket(float amount)
     {
         PacketBuilder builder = getBuilder();
@@ -75,6 +104,21 @@ public abstract class TileEntityCrystalNetworkPool extends TileEntityCrystalNetw
         return true;
     }
 
+    @Override
+    public void setDest(int x, int y, int z)
+    {
+        if (worldObj.getTileEntity(x, y, z) instanceof ICrystalNetworkBuffer)
+        {
+            dest = (ICrystalNetworkBuffer) worldObj.getTileEntity(x, y, z);
+            LogHelper.info("Set dest " + dest.toString() + " for " + toString()); // TODO Debug level
+        }
+        else
+        {
+            dest = null;
+            LogHelper.info("Set dest null for " + toString()); // TODO Debug level
+        }
+    }
+
     /* ======================================== ICrystalNetworkPool END ===================================== */
 
     /* ======================================== TileEntity START ===================================== */
@@ -104,4 +148,6 @@ public abstract class TileEntityCrystalNetworkPool extends TileEntityCrystalNetw
     }
 
     /* ======================================== TileEntityCrystal END ===================================== */
+
+    public abstract float defaultPacketSize();
 }

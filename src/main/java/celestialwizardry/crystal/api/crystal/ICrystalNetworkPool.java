@@ -26,15 +26,6 @@ public interface ICrystalNetworkPool extends ICrystalNetwork
     public float getMaxPoolSize();
 
     /**
-     * Takes a {@link EnergyPacket} from the {@link ICrystalNetworkPool}'s {@link EnergyType} pool
-     *
-     * @param amount the requested amount of {@link EnergyType}
-     *
-     * @return returns the {@link EnergyPacket} that the {@link ICrystalNetworkPool} can give
-     */
-    public EnergyPacket takePacket(float amount);
-
-    /**
      * Adds {@link EnergyType} to the pool
      *
      * @param amount the amount that will be added
@@ -43,4 +34,6 @@ public interface ICrystalNetworkPool extends ICrystalNetwork
      * @return true if the operation was successful
      */
     public boolean addEnergy(float amount, EnergyType type);
+
+    public void setDest(int x, int y, int z);
 }

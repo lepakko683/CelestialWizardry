@@ -34,28 +34,6 @@ public abstract class TileEntityCrystalNetworkBuffer extends TileEntityCrystalNe
         return buffer;
     }
 
-    /**
-     * Called when this {@link ICrystal} sends a {@link EnergyPacket}.
-     *
-     * @param packet the sent {@link EnergyPacket}
-     */
-    @Override
-    public void onPacketSent(EnergyPacket packet)
-    {
-
-    }
-
-    /**
-     * Called when this {@link ICrystal} receives a {@link EnergyPacket}.
-     *
-     * @param packet the received {@link EnergyPacket}
-     */
-    @Override
-    public void onPacketReceived(EnergyPacket packet)
-    {
-
-    }
-
     @Override
     public void setPool(int x, int y, int z)
     {

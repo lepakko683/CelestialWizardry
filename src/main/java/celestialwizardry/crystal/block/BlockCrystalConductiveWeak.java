@@ -35,10 +35,16 @@ public class BlockCrystalConductiveWeak extends BlockCrystal
             {
                 if (world.getTileEntity(tileX, tileY, tileZ) instanceof ICrystalNetworkPool)
                 {
-                    ((ICrystalNetworkBuffer) world.getTileEntity(x, y, z)).setPool(tileX, tileY, tileZ);
+                    ((ICrystalNetworkPool) world.getTileEntity(tileX, tileY, tileZ)).setDest(x, y, z);
                 }
             }
         }
+    }
+
+    @Override
+    public void breakBlock(World world, int x, int y, int z, Block block, int meta)
+    {
+        super.breakBlock(world, x, y, z, block, meta);
     }
 
     /**

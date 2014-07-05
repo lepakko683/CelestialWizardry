@@ -7,7 +7,7 @@ import celestialwizardry.util.MathHelper;
 public final class PacketBuilder
 {
     private float energy = 0;
-    private EnergyType type;
+    private EnergyType type = null;
     public final float max;
 
     public PacketBuilder()
