@@ -67,6 +67,8 @@ public class TileEntityCrystalNetworkSolarWeak extends TileEntityCrystalNetworkP
     @Override
     public void updateEntity()
     {
+        super.updateEntity();
+
         if (worldObj != null && !worldObj.isRemote && worldObj.getTotalWorldTime() % 20L == 0L)
         {
             blockType = getBlockType();

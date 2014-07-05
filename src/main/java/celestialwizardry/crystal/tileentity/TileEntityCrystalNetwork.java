@@ -14,8 +14,7 @@ import java.util.List;
 public abstract class TileEntityCrystalNetwork extends TileEntityCrystal implements ICrystalNetwork
 {
     protected static List<ICrystal> crystals = new ArrayList<ICrystal>();
-
-    /* ======================================== INetworkCrystal START ===================================== */
+    protected int cooldown = 0;
 
     @Override
     public void onAdded()
@@ -43,7 +42,10 @@ public abstract class TileEntityCrystalNetwork extends TileEntityCrystal impleme
     @Override
     public void onPacketSent(EnergyPacket packet)
     {
-
+        if (cooldown > -1)
+        {
+            cooldown = defaultCooldown();
+        }
     }
 
     /**
@@ -57,9 +59,12 @@ public abstract class TileEntityCrystalNetwork extends TileEntityCrystal impleme
 
     }
 
-    /* ======================================== INetworkCrystal END ===================================== */
+    public boolean canSend()
+    {
+        return cooldown == 0;
+    }
 
-    /* ======================================== TileEntity START ===================================== */
+    public abstract int defaultCooldown();
 
     @Override
     public void readFromNBT(NBTTagCompound nbtTagCompound)
@@ -75,7 +80,19 @@ public abstract class TileEntityCrystalNetwork extends TileEntityCrystal impleme
         nbtTagCompound.setInteger(CrystalNames.NBT.INDEX, crystals.indexOf(this));
     }
 
-    /* ======================================== TileEntity END ===================================== */
+    @Override
+    public void updateEntity()
+    {
+        super.updateEntity();
+
+        if (!worldObj.isRemote)
+        {
+            if (cooldown > 0)
+            {
+                cooldown--;
+            }
+        }
+    }
 
     public static void addCrystal(ICrystal crystal)
     {

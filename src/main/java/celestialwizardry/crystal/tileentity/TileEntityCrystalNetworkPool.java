@@ -13,11 +13,10 @@ import net.minecraft.nbt.NBTTagCompound;
 
 public abstract class TileEntityCrystalNetworkPool extends TileEntityCrystalNetwork implements ICrystalNetworkPool
 {
+    protected static final int DEFAULT_COOLDOWN = 60;
     protected EnergyType currentEnergy;
     protected float pool = 0F;
     protected ICrystalNetworkBuffer dest = null;
-
-    /* ======================================== ICrystalNetwork START ===================================== */
 
     /**
      * Sends a {@link EnergyPacket} to the target {@link celestialwizardry.crystal.api.crystal.ICrystal}
@@ -25,27 +24,22 @@ public abstract class TileEntityCrystalNetworkPool extends TileEntityCrystalNetw
     @Override
     public void sendPacket()
     {
-        if (dest != null)
-        {
-            PacketBuilder builder = getBuilder();
+        PacketBuilder builder = getBuilder();
 
-            builder.setEnergyType(getEnergyType());
+        builder.setEnergyType(getEnergyType());
 
-            float amount = getPoolSize() >= defaultPacketSize() ? defaultPacketSize() : Math.max(getPoolSize(), 0);
-            pool = MathHelper.clampZero_float(getPoolSize() - amount, getMaxPoolSize());
+        float amount = getPoolSize() >= defaultPacketSize() ? defaultPacketSize() : Math.max(getPoolSize(), 0);
+        pool = MathHelper.clampZero_float(getPoolSize() - amount, getMaxPoolSize());
 
-            builder.append(amount);
+        builder.append(amount);
 
-            EnergyPacket packet = builder.toPacket();
+        EnergyPacket packet = builder.toPacket();
 
-            onPacketSent(packet);
-            dest.onPacketReceived(packet);
-        }
+        onPacketSent(packet);
+        dest.onPacketReceived(packet);
+
+        LogHelper.info("Sent a EnergyPacket from " + toString() + " to " + dest.toString()); // TODO Debug level
     }
-
-    /* ======================================== ICrystalNetwork END ===================================== */
-
-    /* ======================================== ICrystalNetworkPool START ===================================== */
 
     @Override
     public EnergyType getEnergyType()
@@ -57,27 +51,6 @@ public abstract class TileEntityCrystalNetworkPool extends TileEntityCrystalNetw
     public float getPoolSize()
     {
         return pool;
-    }
-
-    /**
-     * Takes energy from the {@link celestialwizardry.crystal.api.crystal.ICrystalNetworkPool}'s {@link
-     * celestialwizardry.api.energy.EnergyType} pool
-     *
-     * @param amount the requested amount of {@link celestialwizardry.api.energy.EnergyType}
-     *
-     * @return returns the amount of {@link celestialwizardry.api.energy.EnergyType} the {@link
-     * celestialwizardry.crystal.api.crystal.ICrystalNetworkPool} can give
-     */
-    public EnergyPacket takePacket(float amount)
-    {
-        PacketBuilder builder = getBuilder();
-
-        builder.setEnergyType(getEnergyType());
-        builder.append(amount);
-
-        pool = MathHelper.clampZero_float(getPoolSize() - amount, getMaxPoolSize());
-
-        return builder.toPacket();
     }
 
     /**
@@ -119,35 +92,61 @@ public abstract class TileEntityCrystalNetworkPool extends TileEntityCrystalNetw
         }
     }
 
-    /* ======================================== ICrystalNetworkPool END ===================================== */
-
-    /* ======================================== TileEntity START ===================================== */
+    @Override
+    public int defaultCooldown()
+    {
+        return DEFAULT_COOLDOWN;
+    }
 
     @Override
     public void readFromNBT(NBTTagCompound nbtTagCompound)
     {
         super.readFromNBT(nbtTagCompound);
+
         pool = nbtTagCompound.getFloat(CrystalNames.NBT.POOL);
+
+        int x = nbtTagCompound.getInteger(CrystalNames.NBT.DEST_X);
+        int y = nbtTagCompound.getInteger(CrystalNames.NBT.DEST_Y);
+        int z = nbtTagCompound.getInteger(CrystalNames.NBT.DEST_Z);
+
+        setDest(x, y, z);
     }
 
     @Override
     public void writeToNBT(NBTTagCompound nbtTagCompound)
     {
         super.writeToNBT(nbtTagCompound);
+
         nbtTagCompound.setFloat(CrystalNames.NBT.POOL, pool);
+
+        nbtTagCompound.setInteger(CrystalNames.NBT.DEST_X, dest.getXPos());
+        nbtTagCompound.setInteger(CrystalNames.NBT.DEST_Y, dest.getYPos());
+        nbtTagCompound.setInteger(CrystalNames.NBT.DEST_Z, dest.getZPos());
     }
 
-    /* ======================================== TileEntity END ===================================== */
+    @Override
+    public void updateEntity()
+    {
+        super.updateEntity();
 
-    /* ======================================== TileEntityCrystal START ===================================== */
+        if (!worldObj.isRemote)
+        {
+            if (canSend())
+            {
+                // TODO Redstone (or similar) on off control
+                if (dest != null)
+                {
+                    sendPacket();
+                }
+            }
+        }
+    }
 
     @Override
     public PacketBuilder getBuilder()
     {
         return new PacketBuilder(getMaxPoolSize() / 10);
     }
-
-    /* ======================================== TileEntityCrystal END ===================================== */
 
     public abstract float defaultPacketSize();
 }

@@ -24,6 +24,4 @@ public interface ICrystalNetworkBuffer extends ICrystalNetwork
      * @return list of the {@link EnergyPacket}s in the buffer
      */
     public List<EnergyPacket> getBuffer();
-
-    public void setPool(int x, int y, int z);
 }

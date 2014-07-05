@@ -16,12 +16,15 @@ import java.util.List;
 public abstract class TileEntityCrystalNetworkBuffer extends TileEntityCrystalNetwork implements ICrystalNetworkBuffer
 {
     protected List<EnergyPacket> buffer = new ArrayList<EnergyPacket>();
-    protected ICrystalNetworkPool pool; // TODO To NBT and Crystal Network
-    protected int poolX;
-    protected int poolY;
-    protected int poolZ;
 
-    /* ======================================== ICrystalBuffer START ===================================== */
+    /**
+     * Sends a {@link celestialwizardry.crystal.api.crystal.EnergyPacket} to the target {@link celestialwizardry.crystal.api.crystal.ICrystal}
+     */
+    @Override
+    public void sendPacket()
+    {
+
+    }
 
     /**
      * The current {@link EnergyPacket} buffer of this {@link ICrystal}
@@ -35,22 +38,10 @@ public abstract class TileEntityCrystalNetworkBuffer extends TileEntityCrystalNe
     }
 
     @Override
-    public void setPool(int x, int y, int z)
+    public int defaultCooldown()
     {
-        if (worldObj.getTileEntity(x, y, z) instanceof ICrystalNetworkPool)
-        {
-            pool = (ICrystalNetworkPool) worldObj.getTileEntity(x, y, z);
-            LogHelper.info("Set pool " + pool.toString() + " to " + toString()); // TODO Debug level
-        }
+        return 0; // TODO
     }
-
-    /* ======================================== ICrystalBuffer END ===================================== */
-
-    /* ======================================== ICrystal START ===================================== */
-
-    /* ======================================== ICrystal END ===================================== */
-
-    /* ======================================== TileEntity START ===================================== */
 
     @Override
     public void readFromNBT(NBTTagCompound nbtTagCompound)
@@ -85,17 +76,11 @@ public abstract class TileEntityCrystalNetworkBuffer extends TileEntityCrystalNe
         nbtTagCompound.setInteger(CrystalNames.NBT.BUFFER_SIZE, buffer.size());
     }
 
-    /* ======================================== TileEntity END ===================================== */
-
-    /* ======================================== TileEntityCrystal START ===================================== */
-
     @Override
     public PacketBuilder getBuilder()
     {
         return new PacketBuilder(getMaxPacketSize());
     }
-
-    /* ======================================== TileEntityCrystal END ===================================== */
 
     public ICrystalNetworkPool findPool()
     {
