@@ -40,7 +40,7 @@ public abstract class BlockCrystal extends BlockCW implements ITileEntityProvide
         {
             if (world.getTileEntity(x, y, z) instanceof ICrystalNetwork)
             {
-                FMLCommonHandler.instance().bus().post(new CrystalEvent.CrystalPlacedEvent((ICrystalNetwork) world.getTileEntity(x, y, z), world));
+                ((ICrystalNetwork) world.getTileEntity(x, y, z)).onAdded();
             }
         }
 
@@ -54,7 +54,7 @@ public abstract class BlockCrystal extends BlockCW implements ITileEntityProvide
         {
             if (world.getTileEntity(x, y, z) instanceof ICrystalNetwork)
             {
-                FMLCommonHandler.instance().bus().post(new CrystalEvent.CrystalBreakEvent((ICrystalNetwork) world.getTileEntity(x, y, z), world));
+                ((ICrystalNetwork) world.getTileEntity(x, y, z)).onRemoved();
             }
         }
 

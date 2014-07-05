@@ -60,8 +60,7 @@ public abstract class TileEntityCrystalNetwork extends TileEntityCrystal impleme
     @Override
     public void onPacketReceived(EnergyPacket packet)
     {
-        // TODO Debug level
-        LogHelper.info(toString() + " received a EnergyPacket " + packet.toString() + " from " + packet.getCompiler().toString());
+        LogHelper.debug(toString() + " received a EnergyPacket " + packet.toString() + " from " + packet.getCompiler().toString());
     }
 
     public boolean canSend()
@@ -104,13 +103,13 @@ public abstract class TileEntityCrystalNetwork extends TileEntityCrystal impleme
     public static void addCrystal(ICrystal crystal)
     {
         crystals.add(crystal);
-        LogHelper.debug("Added " + crystal.toString() + " to crystal list.");
+        LogHelper.info("Added " + crystal.toString() + " to crystal list.");
     }
 
     public static void removeCrystal(ICrystal crystal)
     {
         crystals.remove(crystal);
-        LogHelper.debug("Removed " + crystal.toString() + " from crystal list.");
+        LogHelper.info("Removed " + crystal.toString() + " from crystal list.");
     }
 
     public static class CrystalNetworkEventHandler

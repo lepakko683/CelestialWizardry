@@ -23,9 +23,6 @@ public class Crystals
 
     public static void init()
     {
-        // Register Crystal Event Handlers
-        proxy.registerEventHandlers();
-
         // Register crystal renders
         proxy.registerRenderer();
     }

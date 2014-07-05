@@ -35,12 +35,12 @@ public abstract class TileEntityCrystalNetworkBuffer extends TileEntityCrystalNe
         if (worldObj.getTileEntity(x, y, z) instanceof ICrystalNetwork)
         {
             dest = (ICrystalNetwork) worldObj.getTileEntity(x, y, z);
-            LogHelper.info("Set dest " + dest.toString() + " for " + toString()); // TODO Debug level
+            LogHelper.debug("Set dest " + dest.toString() + " for " + toString());
         }
         else
         {
             dest = null;
-            LogHelper.info("Set dest null for " + toString()); // TODO Debug level
+            LogHelper.debug("Set dest null for " + toString());
         }
     }
 

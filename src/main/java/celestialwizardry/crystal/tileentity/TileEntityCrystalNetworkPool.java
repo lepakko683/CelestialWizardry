@@ -37,7 +37,7 @@ public abstract class TileEntityCrystalNetworkPool extends TileEntityCrystalNetw
         onPacketSent(packet);
         dest.onPacketReceived(packet);
 
-        LogHelper.info("Sent a EnergyPacket from " + toString() + " to " + dest.toString()); // TODO Debug level
+        LogHelper.debug("Sent a EnergyPacket from " + toString() + " to " + dest.toString());
     }
 
     @Override
@@ -82,12 +82,12 @@ public abstract class TileEntityCrystalNetworkPool extends TileEntityCrystalNetw
         if (worldObj.getTileEntity(x, y, z) instanceof ICrystalNetworkBuffer)
         {
             dest = (ICrystalNetworkBuffer) worldObj.getTileEntity(x, y, z);
-            LogHelper.info("Set dest " + dest.toString() + " for " + toString()); // TODO Debug level
+            LogHelper.debug("Set dest " + dest.toString() + " for " + toString());
         }
         else
         {
             dest = null;
-            LogHelper.info("Set dest null for " + toString()); // TODO Debug level
+            LogHelper.debug("Set dest null for " + toString());
         }
     }
 
