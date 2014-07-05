@@ -30,6 +30,7 @@ public class CrystalNames
         public static final String DEST_X = "destX";
         public static final String DEST_Y = "destY";
         public static final String DEST_Z = "destZ";
+        public static final String CRYSTAL = "c";
     }
 
     public static class Containers

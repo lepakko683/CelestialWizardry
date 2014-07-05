@@ -52,7 +52,20 @@ public abstract class TileEntityCrystalNetworkBuffer extends TileEntityCrystalNe
 
         for (int i = 0; i < nbtTagCompound.getInteger(CrystalNames.NBT.BUFFER_SIZE); i++)
         {
-            buffer.add(new EnergyPacket(bufferCompound.getString(String.valueOf(i))));
+            NBTTagCompound c = nbtTagCompound.getCompoundTag(CrystalNames.NBT.CRYSTAL + i);
+
+            int x = c.getInteger(CrystalNames.NBT.X);
+            int y = c.getInteger(CrystalNames.NBT.Y);
+            int z = c.getInteger(CrystalNames.NBT.Z);
+
+            ICrystal sender = null;
+
+            if (worldObj.getTileEntity(x, y, z) instanceof ICrystal)
+            {
+                sender = (ICrystal) worldObj.getTileEntity(x, y, z);
+            }
+
+            buffer.add(new EnergyPacket(bufferCompound.getString(String.valueOf(i)), sender));
         }
     }
 
@@ -68,7 +81,17 @@ public abstract class TileEntityCrystalNetworkBuffer extends TileEntityCrystalNe
             if (buffer.get(i) != null)
             {
                 EnergyPacket packet = buffer.get(i);
+                ICrystal crystal = packet.getSender();
+
                 bufferCompound.setString(String.valueOf(i), packet.toString());
+
+                NBTTagCompound c = new NBTTagCompound();
+
+                c.setInteger(CrystalNames.NBT.X, crystal.getXPos());
+                c.setInteger(CrystalNames.NBT.Y, crystal.getYPos());
+                c.setInteger(CrystalNames.NBT.Z, crystal.getZPos());
+
+                nbtTagCompound.setTag(CrystalNames.NBT.CRYSTAL + i, c);
             }
         }
 
@@ -82,6 +105,7 @@ public abstract class TileEntityCrystalNetworkBuffer extends TileEntityCrystalNe
         return new PacketBuilder(getMaxPacketSize());
     }
 
+    @SuppressWarnings("unused")
     public ICrystalNetworkPool findPool()
     {
         if (worldObj.getTileEntity(xCoord + 1, yCoord, zCoord) instanceof ICrystalNetworkPool)

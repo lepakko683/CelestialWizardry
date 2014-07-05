@@ -8,22 +8,23 @@ public final class EnergyPacket
 {
     private final float size;
     private final EnergyType energyType;
+    private final ICrystal sender;
 
-    public EnergyPacket(float size, EnergyType energyType)
+    public EnergyPacket(float size, EnergyType energyType, ICrystal crystal)
     {
         this.size = size;
         this.energyType = energyType;
+        sender = crystal;
     }
 
-    public EnergyPacket(EnergyType energyType)
+    public EnergyPacket(EnergyType energyType, ICrystal crystal)
     {
-        this(0F, energyType);
+        this(0F, energyType, crystal);
     }
 
-    public EnergyPacket(String s)
+    public EnergyPacket(String s, ICrystal crystal)
     {
-        this(Float.valueOf(s.substring(0, s.indexOf("."))),
-             EnergyRegistry.getEnergyType(s.substring(s.indexOf(".") + 1)));
+        this(Float.valueOf(s.substring(0, s.indexOf("."))), EnergyRegistry.getEnergyType(s.substring(s.indexOf(".") + 1)), crystal);
         ApiLogHelper.info("Constructing a EnergyPacket from String " + s);
         ApiLogHelper.info("Energy amount " + s.substring(0, s.indexOf(".")));
         ApiLogHelper.info("Energy type " + EnergyRegistry.getEnergyType(s.substring(s.indexOf(".") + 1)));
@@ -37,6 +38,11 @@ public final class EnergyPacket
     public EnergyType getEnergyType()
     {
         return energyType;
+    }
+
+    public ICrystal getSender()
+    {
+        return sender;
     }
 
     @Override
