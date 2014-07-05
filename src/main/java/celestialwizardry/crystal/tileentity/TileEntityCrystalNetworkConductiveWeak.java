@@ -113,6 +113,12 @@ public class TileEntityCrystalNetworkConductiveWeak extends TileEntityCrystalNet
     }
 
     @Override
+    public EnergyPacket handlePacket(EnergyPacket packet)
+    {
+        return super.handlePacket(packet);
+    }
+
+    @Override
     public void updateEntity()
     {
         super.updateEntity();

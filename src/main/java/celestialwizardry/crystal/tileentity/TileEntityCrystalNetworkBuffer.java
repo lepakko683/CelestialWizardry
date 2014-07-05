@@ -15,6 +15,7 @@ import java.util.List;
 public abstract class TileEntityCrystalNetworkBuffer extends TileEntityCrystalNetwork implements ICrystalNetworkBuffer
 {
     protected List<EnergyPacket> buffer = new ArrayList<EnergyPacket>();
+    protected ICrystal sender;
 
     /**
      * Sends a {@link celestialwizardry.crystal.api.crystal.EnergyPacket} to the target {@link
@@ -24,6 +25,23 @@ public abstract class TileEntityCrystalNetworkBuffer extends TileEntityCrystalNe
     public void sendPacket()
     {
 
+    }
+
+    /**
+     * Called when this {@link ICrystal} receives a {@link EnergyPacket}.
+     *
+     * @param packet the received {@link EnergyPacket}
+     */
+    @Override
+    public void onPacketReceived(EnergyPacket packet)
+    {
+        super.onPacketReceived(packet);
+
+        sender = packet.getCompiler();
+
+        EnergyPacket energyPacket = handlePacket(packet);
+
+        buffer.add(energyPacket);
     }
 
     /**
@@ -81,7 +99,7 @@ public abstract class TileEntityCrystalNetworkBuffer extends TileEntityCrystalNe
             if (buffer.get(i) != null)
             {
                 EnergyPacket packet = buffer.get(i);
-                ICrystal crystal = packet.getSender();
+                ICrystal crystal = packet.getCompiler();
 
                 bufferCompound.setString(String.valueOf(i), packet.toString());
 
@@ -102,7 +120,17 @@ public abstract class TileEntityCrystalNetworkBuffer extends TileEntityCrystalNe
     @Override
     public PacketBuilder getBuilder()
     {
-        return new PacketBuilder(getMaxPacketSize());
+        return new PacketBuilder(getMaxPacketSize(), this);
+    }
+
+    public EnergyPacket handlePacket(EnergyPacket packet)
+    {
+        PacketBuilder builder = getBuilder();
+
+        builder.setEnergyType(packet.getEnergyType());
+        builder.append(packet.getSize() * getEnergyYieldMultiplier());
+
+        return builder.toPacket();
     }
 
     @SuppressWarnings("unused")

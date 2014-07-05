@@ -145,7 +145,7 @@ public abstract class TileEntityCrystalNetworkPool extends TileEntityCrystalNetw
     @Override
     public PacketBuilder getBuilder()
     {
-        return new PacketBuilder(getMaxPoolSize() / 10);
+        return new PacketBuilder(getMaxPoolSize() / 10, this);
     }
 
     public abstract float defaultPacketSize();

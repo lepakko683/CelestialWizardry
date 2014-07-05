@@ -56,7 +56,8 @@ public abstract class TileEntityCrystalNetwork extends TileEntityCrystal impleme
     @Override
     public void onPacketReceived(EnergyPacket packet)
     {
-
+        // TODO Debug level
+        LogHelper.info(toString() + " received a EnergyPacket " + packet.toString() + " from " + packet.getCompiler().toString());
     }
 
     public boolean canSend()

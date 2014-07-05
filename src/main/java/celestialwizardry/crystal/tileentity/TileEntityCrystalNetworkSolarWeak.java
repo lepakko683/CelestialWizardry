@@ -102,7 +102,7 @@ public class TileEntityCrystalNetworkSolarWeak extends TileEntityCrystalNetworkP
     @Override
     public PacketBuilder getBuilder()
     {
-        return new PacketBuilder(100f);
+        return new PacketBuilder(100f, this);
     }
 
     @Override

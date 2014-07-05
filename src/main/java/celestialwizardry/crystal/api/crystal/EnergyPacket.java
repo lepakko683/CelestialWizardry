@@ -8,13 +8,13 @@ public final class EnergyPacket
 {
     private final float size;
     private final EnergyType energyType;
-    private final ICrystal sender;
+    private final ICrystal compiler;
 
     public EnergyPacket(float size, EnergyType energyType, ICrystal crystal)
     {
         this.size = size;
         this.energyType = energyType;
-        sender = crystal;
+        compiler = crystal;
     }
 
     public EnergyPacket(EnergyType energyType, ICrystal crystal)
@@ -40,9 +40,9 @@ public final class EnergyPacket
         return energyType;
     }
 
-    public ICrystal getSender()
+    public ICrystal getCompiler()
     {
-        return sender;
+        return compiler;
     }
 
     @Override
