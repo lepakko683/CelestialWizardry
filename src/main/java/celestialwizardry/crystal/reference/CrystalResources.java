@@ -23,6 +23,8 @@ public class CrystalResources
 
         public static final ResourceLocation TEXTURE_CRYSTAL_CONDUCTIVE_WEAK = new ResourceLocation(
                 "textures/blocks/lapis_block.png");
+        public static final ResourceLocation TEXTURE_CRYSTAL_SOLAR_WEAK = new ResourceLocation(
+                "textures/blocks/glowstone.png");
 
         public static final ResourceLocation MODEL_CRYSTAL_SIMPLE = ResourceLocationHelper.getResourceLocation(
                 MODEL_LOCATION + "crystalSimple.obj");

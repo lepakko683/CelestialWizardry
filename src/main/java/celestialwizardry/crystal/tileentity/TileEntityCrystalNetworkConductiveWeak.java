@@ -4,7 +4,6 @@ import celestialwizardry.api.energy.EnergyRegistry;
 import celestialwizardry.api.energy.EnergyType;
 import celestialwizardry.crystal.api.crystal.EnergyPacket;
 import celestialwizardry.crystal.api.crystal.ICrystal;
-import celestialwizardry.crystal.util.PacketBuilder;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
@@ -14,11 +13,9 @@ import java.util.List;
 
 public class TileEntityCrystalNetworkConductiveWeak extends TileEntityCrystalNetworkBuffer
 {
-    private static final int MAX_DISTANCE = 5;
+    private static final int MAX_DISTANCE = 2;
 
     protected boolean hasReceivedInitialPacket = false;
-
-    /* ======================================== ICrystalBuffer START ===================================== */
 
     /**
      * The maximum size of a {@link celestialwizardry.crystal.api.crystal.EnergyPacket} that can be stored in the {@link
@@ -66,10 +63,6 @@ public class TileEntityCrystalNetworkConductiveWeak extends TileEntityCrystalNet
         super.onPacketReceived(packet);
     }
 
-    /* ======================================== ICrystalBuffer END ===================================== */
-
-    /* ======================================== ICrystal START ===================================== */
-
     /**
      * Get the {@link celestialwizardry.api.energy.EnergyType}s this {@link ICrystal} can handle.
      *
@@ -102,10 +95,6 @@ public class TileEntityCrystalNetworkConductiveWeak extends TileEntityCrystalNet
         return 0.95f;
     }
 
-    /* ======================================== ICrystal END ===================================== */
-
-    /* ======================================== TileEntity START ===================================== */
-
     @Override
     public void readFromNBT(NBTTagCompound nbtTagCompound)
     {
@@ -124,16 +113,22 @@ public class TileEntityCrystalNetworkConductiveWeak extends TileEntityCrystalNet
     }
 
     @Override
+    public EnergyPacket handlePacket(EnergyPacket packet)
+    {
+        return super.handlePacket(packet);
+    }
+
+    @Override
     public void updateEntity()
     {
         super.updateEntity();
-    }
 
-    /* ======================================== TileEntity END ===================================== */
+        if (!worldObj.isRemote)
+        {
+            if (sender != null)
+            {
 
-    @Override
-    public PacketBuilder getBuilder()
-    {
-        return new PacketBuilder(getMaxPacketSize());
+            }
+        }
     }
 }

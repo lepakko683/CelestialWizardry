@@ -38,6 +38,9 @@ public abstract class CommonProxy implements IProxy
 
         // Register config change event handler
         FMLCommonHandler.instance().bus().register(EventHandlers.Common.CONFIG_CHANGED_EVENT_HANDLER);
+
+        // Register Crystal Event Handlers
+        Crystals.proxy.registerEventHandlers();
     }
 
     @Override

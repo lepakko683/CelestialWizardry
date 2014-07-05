@@ -3,13 +3,11 @@ package celestialwizardry.crystal.tileentity;
 import celestialwizardry.api.energy.EnergyRegistry;
 import celestialwizardry.api.energy.EnergyType;
 import celestialwizardry.crystal.api.crystal.ICrystal;
-import celestialwizardry.crystal.reference.CrystalNames;
 import celestialwizardry.crystal.util.PacketBuilder;
 import celestialwizardry.tileentity.TileEntityCW;
 import celestialwizardry.util.LogHelper;
 
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
 import java.util.ArrayList;
@@ -17,8 +15,6 @@ import java.util.List;
 
 public abstract class TileEntityCrystal extends TileEntityCW implements ICrystal
 {
-    /* ======================================== ICrystal START ===================================== */
-
     /**
      * Get the {@link celestialwizardry.api.energy.EnergyType}s this {@link ICrystal} can handle.
      *
@@ -78,10 +74,6 @@ public abstract class TileEntityCrystal extends TileEntityCW implements ICrystal
         return zCoord;
     }
 
-    /* ======================================== ICrystal END ===================================== */
-
-    /* ======================================== TileEntity START ===================================== */
-
     @Override
     public void readFromNBT(NBTTagCompound nbtTagCompound)
     {
@@ -95,8 +87,6 @@ public abstract class TileEntityCrystal extends TileEntityCW implements ICrystal
         super.writeToNBT(nbtTagCompound);
         LogHelper.info("Writing " + toString() + " to NBT");
     }
-
-    /* ======================================== TileEntity END ===================================== */
 
     public abstract PacketBuilder getBuilder();
 

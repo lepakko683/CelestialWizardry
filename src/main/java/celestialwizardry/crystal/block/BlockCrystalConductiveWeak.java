@@ -1,9 +1,13 @@
 package celestialwizardry.crystal.block;
 
+import celestialwizardry.crystal.api.crystal.ICrystalNetworkBuffer;
+import celestialwizardry.crystal.api.crystal.ICrystalNetworkPool;
 import celestialwizardry.crystal.reference.CrystalNames;
 import celestialwizardry.crystal.tileentity.TileEntityCrystalNetworkConductiveWeak;
 
+import net.minecraft.block.Block;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -18,7 +22,28 @@ public class BlockCrystalConductiveWeak extends BlockCrystal
         this.setBlockName(CrystalNames.Blocks.CRYSTAL_CONDUCTIVE_WEAK);
     }
 
-    /* ======================================== Block START ===================================== */
+    @Override
+    public void onNeighborChange(IBlockAccess world, int x, int y, int z, int tileX, int tileY, int tileZ)
+    {
+        if (world instanceof World && !(((World) world).isRemote))
+        {
+            super.onNeighborChange(world, x, y, z, tileX, tileY, tileZ);
+
+            if (world.getTileEntity(x, y, z) instanceof ICrystalNetworkBuffer)
+            {
+                if (world.getTileEntity(tileX, tileY, tileZ) instanceof ICrystalNetworkPool)
+                {
+                    ((ICrystalNetworkPool) world.getTileEntity(tileX, tileY, tileZ)).setDest(x, y, z);
+                }
+            }
+        }
+    }
+
+    @Override
+    public void breakBlock(World world, int x, int y, int z, Block block, int meta)
+    {
+        super.breakBlock(world, x, y, z, block, meta);
+    }
 
     /**
      * A randomly called display update to be able to add particles or other items for display
@@ -39,10 +64,6 @@ public class BlockCrystalConductiveWeak extends BlockCrystal
         }
     }
 
-    /* ======================================== Block END ===================================== */
-
-    /* ======================================== ITileEntityProvider START ===================================== */
-
     /**
      * Returns a new instance of a block's tile entity class. Called on placing the block.
      *
@@ -54,6 +75,4 @@ public class BlockCrystalConductiveWeak extends BlockCrystal
     {
         return new TileEntityCrystalNetworkConductiveWeak();
     }
-
-    /* ======================================== ITileEntityProvider END ===================================== */
 }

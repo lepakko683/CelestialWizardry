@@ -2,10 +2,12 @@ package celestialwizardry.crystal.tileentity;
 
 import celestialwizardry.crystal.api.crystal.EnergyPacket;
 import celestialwizardry.crystal.api.crystal.ICrystal;
+import celestialwizardry.crystal.api.crystal.ICrystalNetwork;
 import celestialwizardry.crystal.api.crystal.ICrystalNetworkBuffer;
 import celestialwizardry.crystal.api.crystal.ICrystalNetworkPool;
 import celestialwizardry.crystal.reference.CrystalNames;
 import celestialwizardry.crystal.util.PacketBuilder;
+import celestialwizardry.util.LogHelper;
 
 import net.minecraft.nbt.NBTTagCompound;
 
@@ -15,8 +17,49 @@ import java.util.List;
 public abstract class TileEntityCrystalNetworkBuffer extends TileEntityCrystalNetwork implements ICrystalNetworkBuffer
 {
     protected List<EnergyPacket> buffer = new ArrayList<EnergyPacket>();
+    protected ICrystal sender;
 
-    /* ======================================== ICrystalBuffer START ===================================== */
+    /**
+     * Sends a {@link celestialwizardry.crystal.api.crystal.EnergyPacket} to the target {@link
+     * celestialwizardry.crystal.api.crystal.ICrystal}
+     */
+    @Override
+    public void sendPacket()
+    {
+
+    }
+
+    @Override
+    public void setDest(int x, int y, int z)
+    {
+        if (worldObj.getTileEntity(x, y, z) instanceof ICrystalNetwork)
+        {
+            dest = (ICrystalNetwork) worldObj.getTileEntity(x, y, z);
+            LogHelper.debug("Set dest " + dest.toString() + " for " + toString());
+        }
+        else
+        {
+            dest = null;
+            LogHelper.debug("Set dest null for " + toString());
+        }
+    }
+
+    /**
+     * Called when this {@link ICrystal} receives a {@link EnergyPacket}.
+     *
+     * @param packet the received {@link EnergyPacket}
+     */
+    @Override
+    public void onPacketReceived(EnergyPacket packet)
+    {
+        super.onPacketReceived(packet);
+
+        sender = packet.getCompiler();
+
+        EnergyPacket energyPacket = handlePacket(packet);
+
+        buffer.add(energyPacket);
+    }
 
     /**
      * The current {@link EnergyPacket} buffer of this {@link ICrystal}
@@ -29,35 +72,11 @@ public abstract class TileEntityCrystalNetworkBuffer extends TileEntityCrystalNe
         return buffer;
     }
 
-    /**
-     * Called when this {@link ICrystal} sends a {@link EnergyPacket}.
-     *
-     * @param packet the sent {@link EnergyPacket}
-     */
     @Override
-    public void onPacketSent(EnergyPacket packet)
+    public int defaultCooldown()
     {
-
+        return 0; // TODO
     }
-
-    /**
-     * Called when this {@link ICrystal} receives a {@link EnergyPacket}.
-     *
-     * @param packet the received {@link EnergyPacket}
-     */
-    @Override
-    public void onPacketReceived(EnergyPacket packet)
-    {
-
-    }
-
-    /* ======================================== ICrystalBuffer END ===================================== */
-
-    /* ======================================== ICrystal START ===================================== */
-
-    /* ======================================== ICrystal END ===================================== */
-
-    /* ======================================== TileEntity START ===================================== */
 
     @Override
     public void readFromNBT(NBTTagCompound nbtTagCompound)
@@ -68,7 +87,20 @@ public abstract class TileEntityCrystalNetworkBuffer extends TileEntityCrystalNe
 
         for (int i = 0; i < nbtTagCompound.getInteger(CrystalNames.NBT.BUFFER_SIZE); i++)
         {
-            buffer.add(new EnergyPacket(bufferCompound.getString(String.valueOf(i))));
+            NBTTagCompound c = nbtTagCompound.getCompoundTag(CrystalNames.NBT.CRYSTAL + i);
+
+            int x = c.getInteger(CrystalNames.NBT.X);
+            int y = c.getInteger(CrystalNames.NBT.Y);
+            int z = c.getInteger(CrystalNames.NBT.Z);
+
+            ICrystal sender = null;
+
+            if (worldObj.getTileEntity(x, y, z) instanceof ICrystal)
+            {
+                sender = (ICrystal) worldObj.getTileEntity(x, y, z);
+            }
+
+            buffer.add(new EnergyPacket(bufferCompound.getString(String.valueOf(i)), sender));
         }
     }
 
@@ -84,7 +116,17 @@ public abstract class TileEntityCrystalNetworkBuffer extends TileEntityCrystalNe
             if (buffer.get(i) != null)
             {
                 EnergyPacket packet = buffer.get(i);
+                ICrystal crystal = packet.getCompiler();
+
                 bufferCompound.setString(String.valueOf(i), packet.toString());
+
+                NBTTagCompound c = new NBTTagCompound();
+
+                c.setInteger(CrystalNames.NBT.X, crystal.getXPos());
+                c.setInteger(CrystalNames.NBT.Y, crystal.getYPos());
+                c.setInteger(CrystalNames.NBT.Z, crystal.getZPos());
+
+                nbtTagCompound.setTag(CrystalNames.NBT.CRYSTAL + i, c);
             }
         }
 
@@ -92,8 +134,23 @@ public abstract class TileEntityCrystalNetworkBuffer extends TileEntityCrystalNe
         nbtTagCompound.setInteger(CrystalNames.NBT.BUFFER_SIZE, buffer.size());
     }
 
-    /* ======================================== TileEntity END ===================================== */
+    @Override
+    public PacketBuilder getBuilder()
+    {
+        return new PacketBuilder(getMaxPacketSize(), this);
+    }
 
+    public EnergyPacket handlePacket(EnergyPacket packet)
+    {
+        PacketBuilder builder = getBuilder();
+
+        builder.setEnergyType(packet.getEnergyType());
+        builder.append(packet.getSize() * getEnergyYieldMultiplier());
+
+        return builder.toPacket();
+    }
+
+    @SuppressWarnings("unused")
     public ICrystalNetworkPool findPool()
     {
         if (worldObj.getTileEntity(xCoord + 1, yCoord, zCoord) instanceof ICrystalNetworkPool)
@@ -114,22 +171,5 @@ public abstract class TileEntityCrystalNetworkBuffer extends TileEntityCrystalNe
         }
 
         return null;
-    }
-
-    public EnergyPacket constructPacket()
-    {
-        ICrystalNetworkPool pool = findPool();
-
-        if (pool == null)
-        {
-            return null;
-        }
-
-        PacketBuilder builder = getBuilder();
-
-        builder.setEnergyType(pool.getEnergyType());
-        builder.append(pool.takeEnergy(builder.max));
-
-        return builder.toPacket();
     }
 }

@@ -1,11 +1,15 @@
 package celestialwizardry.crystal.tileentity;
 
+import celestialwizardry.crystal.api.crystal.EnergyPacket;
 import celestialwizardry.crystal.api.crystal.ICrystal;
 import celestialwizardry.crystal.api.crystal.ICrystalNetwork;
+import celestialwizardry.crystal.event.CrystalEvent;
 import celestialwizardry.crystal.reference.CrystalNames;
 import celestialwizardry.util.LogHelper;
 
 import net.minecraft.nbt.NBTTagCompound;
+
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,8 +17,8 @@ import java.util.List;
 public abstract class TileEntityCrystalNetwork extends TileEntityCrystal implements ICrystalNetwork
 {
     protected static List<ICrystal> crystals = new ArrayList<ICrystal>();
-
-    /* ======================================== INetworkCrystal START ===================================== */
+    protected int cooldown = 0;
+    protected ICrystalNetwork dest = null;
 
     @Override
     public void onAdded()
@@ -28,9 +32,45 @@ public abstract class TileEntityCrystalNetwork extends TileEntityCrystal impleme
         removeCrystal(this);
     }
 
-    /* ======================================== INetworkCrystal END ===================================== */
+    /**
+     * Sends a {@link EnergyPacket} to the target {@link ICrystal}
+     */
+    @Override
+    public abstract void sendPacket();
 
-    /* ======================================== TileEntity START ===================================== */
+    /**
+     * Called when this {@link ICrystal} sends a {@link celestialwizardry.crystal.api.crystal.EnergyPacket}.
+     *
+     * @param packet the sent {@link celestialwizardry.crystal.api.crystal.EnergyPacket}
+     */
+    @Override
+    public void onPacketSent(EnergyPacket packet)
+    {
+        if (cooldown > -1)
+        {
+            cooldown = defaultCooldown();
+        }
+    }
+
+    /**
+     * Called when this {@link ICrystal} receives a {@link celestialwizardry.crystal.api.crystal.EnergyPacket}.
+     *
+     * @param packet the received {@link celestialwizardry.crystal.api.crystal.EnergyPacket}
+     */
+    @Override
+    public void onPacketReceived(EnergyPacket packet)
+    {
+        LogHelper.debug(toString() + " received a EnergyPacket " + packet.toString() + " from " + packet.getCompiler().toString());
+    }
+
+    public boolean canSend()
+    {
+        return cooldown == 0;
+    }
+
+    public abstract int defaultCooldown();
+
+    public abstract void setDest(int x, int y, int z);
 
     @Override
     public void readFromNBT(NBTTagCompound nbtTagCompound)
@@ -46,7 +86,19 @@ public abstract class TileEntityCrystalNetwork extends TileEntityCrystal impleme
         nbtTagCompound.setInteger(CrystalNames.NBT.INDEX, crystals.indexOf(this));
     }
 
-    /* ======================================== TileEntity END ===================================== */
+    @Override
+    public void updateEntity()
+    {
+        super.updateEntity();
+
+        if (!worldObj.isRemote)
+        {
+            if (cooldown > 0)
+            {
+                cooldown--;
+            }
+        }
+    }
 
     public static void addCrystal(ICrystal crystal)
     {
@@ -58,5 +110,20 @@ public abstract class TileEntityCrystalNetwork extends TileEntityCrystal impleme
     {
         crystals.remove(crystal);
         LogHelper.info("Removed " + crystal.toString() + " from crystal list.");
+    }
+
+    public static class CrystalNetworkEventHandler
+    {
+        @SubscribeEvent
+        public void onCrystalBreakEvent(CrystalEvent.CrystalBreakEvent event)
+        {
+            ((ICrystalNetwork) event.crystal).onRemoved();
+        }
+
+        @SubscribeEvent
+        public void onCrystalPlacedEvent(CrystalEvent.CrystalPlacedEvent event)
+        {
+            ((ICrystalNetwork) event.crystal).onAdded();
+        }
     }
 }

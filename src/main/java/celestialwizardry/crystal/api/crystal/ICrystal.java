@@ -2,7 +2,6 @@ package celestialwizardry.crystal.api.crystal;
 
 import celestialwizardry.api.energy.EnergyType;
 
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
 import java.util.List;

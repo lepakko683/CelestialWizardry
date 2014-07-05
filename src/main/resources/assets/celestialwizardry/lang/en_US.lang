@@ -32,6 +32,7 @@ tile.celestialwizardry:livingOre.name=Living Ore
 tile.celestialwizardry:magicalStone.name=Magical Stone
 tile.celestialwizardry:containedCrystal.name=Contained Crystal
 tile.celestialwizardry:crystalConductiveWeak.name=Weak Crystal of Conductivity (WIP)
+tile.celestialwizardry:crystalSolarWeak.name=Weak Crystal of Solarization
 
 # Config localizations
 configgui.celestialwizardry:configTitle=Celestial Wizardry Configuration

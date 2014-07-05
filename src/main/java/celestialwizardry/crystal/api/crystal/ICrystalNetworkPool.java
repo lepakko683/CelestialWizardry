@@ -4,16 +4,36 @@ import celestialwizardry.api.energy.EnergyType;
 
 public interface ICrystalNetworkPool extends ICrystalNetwork
 {
+    /**
+     * The current {@link EnergyType} stored inside this pool
+     *
+     * @return the current {@link EnergyType} stored inside this pool
+     */
     public EnergyType getEnergyType();
 
-    public float getAmount();
+    /**
+     * Gives the current size of the pool
+     *
+     * @return the current size of the pool
+     */
+    public float getPoolSize();
 
     /**
-     * Takes energy from the {@link ICrystalNetworkPool}'s {@link EnergyType} pool
+     * Gives the maximum size of the pool
      *
-     * @param amount the requested amount of {@link EnergyType}
-     *
-     * @return returns the amount of {@link EnergyType} the {@link ICrystalNetworkPool} can give
+     * @return the maximum size of the pool
      */
-    public float takeEnergy(float amount);
+    public float getMaxPoolSize();
+
+    /**
+     * Adds {@link EnergyType} to the pool
+     *
+     * @param amount the amount that will be added
+     * @param type   the {@link EnergyType} to be added
+     *
+     * @return true if the operation was successful
+     */
+    public boolean addEnergy(float amount, EnergyType type);
+
+    public void setDest(int x, int y, int z);
 }
