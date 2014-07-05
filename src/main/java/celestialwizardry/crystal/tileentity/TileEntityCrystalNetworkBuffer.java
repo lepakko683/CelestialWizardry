@@ -6,7 +6,6 @@ import celestialwizardry.crystal.api.crystal.ICrystalNetworkBuffer;
 import celestialwizardry.crystal.api.crystal.ICrystalNetworkPool;
 import celestialwizardry.crystal.reference.CrystalNames;
 import celestialwizardry.crystal.util.PacketBuilder;
-import celestialwizardry.util.LogHelper;
 
 import net.minecraft.nbt.NBTTagCompound;
 
@@ -18,7 +17,8 @@ public abstract class TileEntityCrystalNetworkBuffer extends TileEntityCrystalNe
     protected List<EnergyPacket> buffer = new ArrayList<EnergyPacket>();
 
     /**
-     * Sends a {@link celestialwizardry.crystal.api.crystal.EnergyPacket} to the target {@link celestialwizardry.crystal.api.crystal.ICrystal}
+     * Sends a {@link celestialwizardry.crystal.api.crystal.EnergyPacket} to the target {@link
+     * celestialwizardry.crystal.api.crystal.ICrystal}
      */
     @Override
     public void sendPacket()

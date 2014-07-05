@@ -15,8 +15,6 @@ import java.util.List;
 
 public abstract class TileEntityCrystal extends TileEntityCW implements ICrystal
 {
-    /* ======================================== ICrystal START ===================================== */
-
     /**
      * Get the {@link celestialwizardry.api.energy.EnergyType}s this {@link ICrystal} can handle.
      *
@@ -76,10 +74,6 @@ public abstract class TileEntityCrystal extends TileEntityCW implements ICrystal
         return zCoord;
     }
 
-    /* ======================================== ICrystal END ===================================== */
-
-    /* ======================================== TileEntity START ===================================== */
-
     @Override
     public void readFromNBT(NBTTagCompound nbtTagCompound)
     {
@@ -93,8 +87,6 @@ public abstract class TileEntityCrystal extends TileEntityCW implements ICrystal
         super.writeToNBT(nbtTagCompound);
         LogHelper.info("Writing " + toString() + " to NBT");
     }
-
-    /* ======================================== TileEntity END ===================================== */
 
     public abstract PacketBuilder getBuilder();
 

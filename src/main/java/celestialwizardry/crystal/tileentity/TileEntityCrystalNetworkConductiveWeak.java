@@ -17,8 +17,6 @@ public class TileEntityCrystalNetworkConductiveWeak extends TileEntityCrystalNet
 
     protected boolean hasReceivedInitialPacket = false;
 
-    /* ======================================== ICrystalBuffer START ===================================== */
-
     /**
      * The maximum size of a {@link celestialwizardry.crystal.api.crystal.EnergyPacket} that can be stored in the {@link
      * ICrystal}.
@@ -65,10 +63,6 @@ public class TileEntityCrystalNetworkConductiveWeak extends TileEntityCrystalNet
         super.onPacketReceived(packet);
     }
 
-    /* ======================================== ICrystalBuffer END ===================================== */
-
-    /* ======================================== ICrystal START ===================================== */
-
     /**
      * Get the {@link celestialwizardry.api.energy.EnergyType}s this {@link ICrystal} can handle.
      *
@@ -101,10 +95,6 @@ public class TileEntityCrystalNetworkConductiveWeak extends TileEntityCrystalNet
         return 0.95f;
     }
 
-    /* ======================================== ICrystal END ===================================== */
-
-    /* ======================================== TileEntity START ===================================== */
-
     @Override
     public void readFromNBT(NBTTagCompound nbtTagCompound)
     {
@@ -127,6 +117,4 @@ public class TileEntityCrystalNetworkConductiveWeak extends TileEntityCrystalNet
     {
         super.updateEntity();
     }
-
-    /* ======================================== TileEntity END ===================================== */
 }

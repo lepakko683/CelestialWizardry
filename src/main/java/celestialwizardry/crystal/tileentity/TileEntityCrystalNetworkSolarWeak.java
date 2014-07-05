@@ -18,8 +18,6 @@ public class TileEntityCrystalNetworkSolarWeak extends TileEntityCrystalNetworkP
     private static final float DEFAULT_PACKET_SIZE = 10F;
     private static final EnergyType FIRE = new EnergyElemental(EnergyType.CWEnergyType.ELEMENTAL_FIRE);
 
-    /* ======================================== ICrystal START ===================================== */
-
     /**
      * Get the {@link celestialwizardry.api.energy.EnergyType}s this {@link celestialwizardry.crystal.api.crystal
      * .ICrystal} can handle.
@@ -38,10 +36,6 @@ public class TileEntityCrystalNetworkSolarWeak extends TileEntityCrystalNetworkP
         return list;
     }
 
-    /* ======================================== ICrystal END ===================================== */
-
-    /* ======================================== ICrystalNetworkPool START ===================================== */
-
     @Override
     public EnergyType getEnergyType()
     {
@@ -59,10 +53,6 @@ public class TileEntityCrystalNetworkSolarWeak extends TileEntityCrystalNetworkP
     {
         return MAX_POOL_SIZE;
     }
-
-    /* ======================================== ICrystalNetworkPool END ===================================== */
-
-    /* ======================================== TileEntity START ===================================== */
 
     @Override
     public void updateEntity()
@@ -109,28 +99,15 @@ public class TileEntityCrystalNetworkSolarWeak extends TileEntityCrystalNetworkP
         }
     }
 
-    /* ======================================== TileEntity END ===================================== */
-
-    /* ======================================== TileEntityCrystal START ===================================== */
-
     @Override
     public PacketBuilder getBuilder()
     {
         return new PacketBuilder(100f);
     }
 
-    /* ======================================== TileEntityCrystal END ===================================== */
-
-    /* ======================================== TileEntityCrystalNetworkPool START
-    ===================================== */
-
     @Override
     public float defaultPacketSize()
     {
         return DEFAULT_PACKET_SIZE;
     }
-
-    /* ======================================== TileEntityCrystalNetworkPool END
-    ===================================== */
-
 }

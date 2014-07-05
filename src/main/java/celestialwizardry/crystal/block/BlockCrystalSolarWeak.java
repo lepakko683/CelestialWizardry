@@ -17,8 +17,6 @@ public class BlockCrystalSolarWeak extends BlockCrystal
         this.setBlockName(CrystalNames.Blocks.CRYSTAL_SOLAR_WEAK);
     }
 
-    /* ======================================== Block START ===================================== */
-
     @Override
     public void onNeighborChange(IBlockAccess world, int x, int y, int z, int tileX, int tileY, int tileZ)
     {
@@ -40,10 +38,6 @@ public class BlockCrystalSolarWeak extends BlockCrystal
         }
     }
 
-    /* ======================================== Block END ===================================== */
-
-    /* ======================================== ITileEntityProvider START ===================================== */
-
     /**
      * Returns a new instance of a block's tile entity class. Called on placing the block.
      *
@@ -55,6 +49,4 @@ public class BlockCrystalSolarWeak extends BlockCrystal
     {
         return new TileEntityCrystalNetworkSolarWeak();
     }
-
-    /* ======================================== ITileEntityProvider END ===================================== */
 }

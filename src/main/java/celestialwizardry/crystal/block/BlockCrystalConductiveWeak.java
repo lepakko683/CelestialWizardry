@@ -22,8 +22,6 @@ public class BlockCrystalConductiveWeak extends BlockCrystal
         this.setBlockName(CrystalNames.Blocks.CRYSTAL_CONDUCTIVE_WEAK);
     }
 
-    /* ======================================== Block START ===================================== */
-
     @Override
     public void onNeighborChange(IBlockAccess world, int x, int y, int z, int tileX, int tileY, int tileZ)
     {
@@ -66,10 +64,6 @@ public class BlockCrystalConductiveWeak extends BlockCrystal
         }
     }
 
-    /* ======================================== Block END ===================================== */
-
-    /* ======================================== ITileEntityProvider START ===================================== */
-
     /**
      * Returns a new instance of a block's tile entity class. Called on placing the block.
      *
@@ -81,6 +75,4 @@ public class BlockCrystalConductiveWeak extends BlockCrystal
     {
         return new TileEntityCrystalNetworkConductiveWeak();
     }
-
-    /* ======================================== ITileEntityProvider END ===================================== */
 }
