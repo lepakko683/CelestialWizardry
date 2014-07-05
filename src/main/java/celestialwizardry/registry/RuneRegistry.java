@@ -3,7 +3,6 @@ package celestialwizardry.registry;
 import celestialwizardry.api.spellgrammar.Rune;
 import celestialwizardry.config.RuneConfig;
 import celestialwizardry.util.LogHelper;
-
 import net.minecraft.util.ResourceLocation;
 
 import java.util.HashMap;
@@ -11,17 +10,42 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
-public abstract class RuneRegistry
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
+public class RuneRegistry
 {
+	// STATIC BEGIN
+	
+	public static RuneRegistry clientSide = null;
+    public static RuneRegistry serverSide = null;
+	
     // Rune id 0 is intentionally unused!!!
     public static Map<String, ResourceLocation[]> runeTexLocs = new HashMap<String, ResourceLocation[]>();
     public static Map<String, Rune> runeMap = new HashMap<String, Rune>();
-    private static String[] runeIdsv = null;
+    
+    @SideOnly(Side.CLIENT)
+    public static void initClientSide() {
+    	clientSide = new RuneRegistry(Side.CLIENT);
+    }
+    
+    public static void initServerSide() {
+    	serverSide = new RuneRegistry(Side.SERVER);
+    }
+    
+    // STATIC END
+    
+    private String[] runeIdsv = null;
+    public final Side side;
 
     /**
      * Are the numIds set up
      */
-    private static boolean configLoaded = false;
+    private boolean configLoaded = false;
+    
+    public RuneRegistry(Side side) {
+    	this.side = side;
+    }
 
     public static void registerRune(Rune rune)
     {
@@ -40,7 +64,7 @@ public abstract class RuneRegistry
     /**
      * Called from *RuneConfigurationHandler. Sets numeric ids for runes from config
      */
-    public static void setupNumIds(RuneConfig config)
+    public void setupNumIds(RuneConfig config)
     {
         if (config == null)
         {
@@ -108,7 +132,7 @@ public abstract class RuneRegistry
         }
     }
 
-    public static void registerRuneTextureLocations(String modid, ResourceLocation[] locs)
+    public void registerRuneTextureLocations(String modid, ResourceLocation[] locs)
     {
         if (!runeTexLocs.containsKey(modid))
         {
@@ -119,7 +143,7 @@ public abstract class RuneRegistry
     /**
      * Called at world creation from *RuneConfigurationHandler to "set" the numeric ids without the config file.
      */
-    public static void onCreateConfig()
+    public void onCreateConfig()
     {
         Set<String> runeNames = runeMap.keySet();
         if (!runeNames.isEmpty())
@@ -148,7 +172,7 @@ public abstract class RuneRegistry
     /**
      * Are the numIds set up
      */
-    public static boolean isConfigLoaded()
+    public boolean isConfigLoaded()
     {
         return configLoaded;
     }
@@ -165,7 +189,7 @@ public abstract class RuneRegistry
         return null;
     }
 
-    public static Rune getRuneByNumId(int id)
+    public Rune getRuneByNumId(int id)
     {
 
         if (!configLoaded)
@@ -183,7 +207,7 @@ public abstract class RuneRegistry
         return null;
     }
 
-    public static void reset()
+    public void reset()
     {
         runeIdsv = null;
         configLoaded = false;
@@ -192,7 +216,7 @@ public abstract class RuneRegistry
     /**
      * Don't use this for iterating through the array! Use "getRuneIdsvLength()" instead. Only for visual purposes.
      */
-    public static int getRuneCount()
+    public int getRuneCount()
     {
         return runeIdsv == null ? -1 : runeIdsv.length - 1;
     }
@@ -200,12 +224,12 @@ public abstract class RuneRegistry
     /**
      * This should be used when iterating through the registered runes instead of getRuneCount()
      */
-    public static int getRuneIdsvLength()
+    public int getRuneIdsvLength()
     {
         return runeIdsv == null ? -1 : runeIdsv.length;
     }
 
-    public static String getRuneNameForId(int id)
+    public String getRuneNameForId(int id)
     {
         return runeIdsv == null ? null : id < runeIdsv.length ? runeIdsv[id] : null;
     }

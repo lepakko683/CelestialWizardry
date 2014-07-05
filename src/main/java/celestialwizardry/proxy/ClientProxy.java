@@ -11,9 +11,9 @@ import celestialwizardry.entity.EntityBell;
 import celestialwizardry.init.ModItems;
 import celestialwizardry.reference.EventHandlers;
 import celestialwizardry.reference.Settings;
+import celestialwizardry.registry.RuneRegistry;
 import celestialwizardry.tileentity.TileEntityBell;
 import celestialwizardry.tileentity.TileEntityWritingTable;
-
 import net.minecraftforge.client.MinecraftForgeClient;
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
@@ -61,6 +61,11 @@ public class ClientProxy extends CommonProxy
 //        RenderingRegistry.registerEntityRenderingHandler(EntityLivingOre.class, new RenderOreGolem());
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityWritingTable.class, new RenderWritingTable());
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBell.class, new RenderBell());
+    }
+    
+    public void initializeRuneRegistries(){
+    	super.initializeRuneRegistries();
+    	RuneRegistry.initClientSide();
     }
 
 }

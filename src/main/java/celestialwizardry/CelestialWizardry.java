@@ -123,6 +123,9 @@ public class CelestialWizardry
         // Initialize mod entities
 //        ModEntities.init(); DISABLED!!!
         EntityRegistry.registerModEntity(EntityBell.class, "Bell", 1, CelestialWizardry.instance, 64, 1, true);
+        
+        // Initialize runeRegistries
+        proxy.initializeRuneRegistries();
 
         // Initialize mod packet handler
         PacketHandler.init();

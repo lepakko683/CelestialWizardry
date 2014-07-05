@@ -22,11 +22,17 @@ public class ClientRuneConfigurationHandler
 
     public static void setupRuneConfig(RuneConfig rc)
     {
-        RuneRegistry.setupNumIds(rc);
+    	if(RuneRegistry.clientSide == null) {
+    		return;
+    	}
+        RuneRegistry.clientSide.setupNumIds(rc);
     }
 
     public static void addEntriesToBuffer(MessageRuneConfig msg)
     {
+    	if(RuneRegistry.clientSide == null) {
+    		return;
+    	}
         if (runeConfBuffer == null)
         {
             runeConfBuffer = new ArrayList<String>();
@@ -41,7 +47,7 @@ public class ClientRuneConfigurationHandler
             LogHelper.info("Building RuneConfig on CLIENT from " + runeConfBuffer.size() + "/" + msg.fullEntryCount
                                    + " entries.");
             buildRuneConfig();
-            RuneRegistry.setupNumIds(runeConfigFromServer);
+            RuneRegistry.clientSide.setupNumIds(runeConfigFromServer);
             configSetup = true;
             runeConfBuffer.clear();
         }

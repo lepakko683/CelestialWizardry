@@ -14,14 +14,14 @@ public class RuneConfResetEHandler
     {
         if (event.side == Side.CLIENT)
         {
-            RuneRegistry.reset();
+            RuneRegistry.clientSide.reset();
             ClientRuneConfigurationHandler.reset();
             return;
         }
 
         if (event.side == Side.SERVER)
         {
-
+        	RuneRegistry.serverSide.reset();
         }
     }
 }

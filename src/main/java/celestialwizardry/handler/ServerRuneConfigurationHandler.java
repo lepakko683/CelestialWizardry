@@ -58,7 +58,7 @@ public class ServerRuneConfigurationHandler
         configData = createConfigData();
         if (!created)
         {
-            RuneRegistry.setupNumIds(configData);
+            RuneRegistry.serverSide.setupNumIds(configData);
 
             Iterator<String> names = configData.getRuneNames().iterator();
             String name = null;
@@ -219,11 +219,11 @@ public class ServerRuneConfigurationHandler
         }
         try
         {
-            if (!dirExists(WORLD_DIR))
+            if (!dirExists(getWorldRuneConfigDir()))
             {
                 try
                 {
-                    WORLD_DIR.mkdirs();
+                    getWorldRuneConfigDir().mkdirs();
                 }
                 catch (Exception e)
                 {
@@ -334,14 +334,14 @@ public class ServerRuneConfigurationHandler
     {
 
         NBTTagCompound ret = new NBTTagCompound();
-        RuneRegistry.onCreateConfig();
+        RuneRegistry.serverSide.onCreateConfig();
 
         String runeName = null;
 
-        LogHelper.info("Going to add " + RuneRegistry.getRuneCount() + " runes to the runeconfig.");
-        for (int i = 1; i < RuneRegistry.getRuneIdsvLength(); i++)
+        LogHelper.info("Going to add " + RuneRegistry.serverSide.getRuneCount() + " runes to the runeconfig.");
+        for (int i = 1; i < RuneRegistry.serverSide.getRuneIdsvLength(); i++)
         {
-            runeName = RuneRegistry.getRuneNameForId(i);
+            runeName = RuneRegistry.serverSide.getRuneNameForId(i);
 
             if (runeName != null)
             {
@@ -432,7 +432,7 @@ public class ServerRuneConfigurationHandler
     {
         saveConfigIfNeeded();
         reset();
-        RuneRegistry.reset(); // TODO: Handle elsewhere
+        RuneRegistry.serverSide.reset(); // TODO: Handle elsewhere
     }
 
     private static void reset()

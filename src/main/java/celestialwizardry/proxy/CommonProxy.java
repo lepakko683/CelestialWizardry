@@ -3,12 +3,13 @@ package celestialwizardry.proxy;
 import celestialwizardry.crystal.Crystals;
 import celestialwizardry.reference.EventHandlers;
 import celestialwizardry.reference.Names;
+import celestialwizardry.registry.RuneRegistry;
 import celestialwizardry.tileentity.TileEntityBell;
 import celestialwizardry.tileentity.TileEntityWritingTable;
-
 import net.minecraftforge.common.MinecraftForge;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.registry.GameRegistry;
+import cpw.mods.fml.relauncher.Side;
 
 public abstract class CommonProxy implements IProxy
 {
@@ -47,5 +48,9 @@ public abstract class CommonProxy implements IProxy
 
         // Register crystal tile entities
         Crystals.proxy.registerTileEntities();
+    }
+    
+    public void initializeRuneRegistries(){
+    	RuneRegistry.initServerSide();
     }
 }
