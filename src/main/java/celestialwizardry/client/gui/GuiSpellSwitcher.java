@@ -1,8 +1,11 @@
 package celestialwizardry.client.gui;
 
+import org.lwjgl.opengl.GL11;
+
 import celestialwizardry.util.Colour;
 import celestialwizardry.util.ResourceLocationHelper;
 import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.util.ResourceLocation;
 
 public class GuiSpellSwitcher extends GuiScreen {
@@ -11,8 +14,8 @@ public class GuiSpellSwitcher extends GuiScreen {
 	private int borderMaxX;
 	private int borderMaxY;
 	
-	private final int width = 124;
-	private final int height = 124;
+	private final int l_width = 124;
+	private final int l_height = 124;
 	
 	private final ResourceLocation texture;
 
@@ -33,19 +36,42 @@ public class GuiSpellSwitcher extends GuiScreen {
 		bindTex(texture);
 		
 		renderBackground();
-		renderPoint(60, 60, 16, Colour.WHITE);
+		renderCloud(60, 30, 9, 2f);
+		renderCloud(60, 62, 19, 2f);
+		
+		renderPoint(40, 60, 16, Colour.WHITE);
 		Colour.resetGLColor();
 	}
 	
-	private void renderCloud(int x, int y) {
+	private void renderCloud(int x, int y, int cloud, float size) {
+		if(cloud >= 5*16 || cloud < 0) {
+			return;
+		}
+		float cloudTexOffsX = (float)(cloud % 16) / 16f;
+		float cloudTexOffsY = ( (float)(Math.floor(cloud/16f))*16f + 11f*16f ) / 256f;
+		float l = 16f/256f;
+		Tessellator tes = Tessellator.instance;
+		GL11.glEnable(GL11.GL_BLEND);
+		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE); // These values are so much fun to play with :D
+		GL11.glDisable(GL11.GL_CULL_FACE);
+		
+		tes.startDrawingQuads();
+		tes.setColorRGBA_F(.5f, 0f, .7f, .5f);
+		tes.addVertexWithUV((double)(x-8*size), (double)(y-8*size), (double)zLevel, cloudTexOffsX    , cloudTexOffsY);
+		tes.addVertexWithUV((double)(x+8*size), (double)(y-8*size), (double)zLevel, cloudTexOffsX + l, cloudTexOffsY);
+		tes.addVertexWithUV((double)(x+8*size), (double)(y+8*size), (double)zLevel, cloudTexOffsX + l, cloudTexOffsY + l);
+		tes.addVertexWithUV((double)(x-8*size), (double)(y+8*size), (double)zLevel, cloudTexOffsX    , cloudTexOffsY + l);
+		tes.draw();
+		GL11.glEnable(GL11.GL_CULL_FACE);
+		GL11.glDisable(GL11.GL_BLEND);
 		
 	}
 	
 	private void renderBackground() {
-		CELESTIAL.setGLColor();
-		drawTexturedModalRect(3, 3, 134, 1, width-2, height-2);
+		SOLAR.setGLColor();
+		drawTexturedModalRect(3, 3, 134, 1, l_width-2, l_height-2);
 		Colour.resetGLColor();
-		drawTexturedModalRect(0, 0, 0, 0, width+4, height+4);
+		drawTexturedModalRect(0, 0, 0, 0, l_width+4, l_height+4);
 	}
 	
 	private void renderPoint(int x, int y, int size, Colour color) {
