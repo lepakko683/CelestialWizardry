@@ -1,6 +1,7 @@
 package celestialwizardry.network;
 
 import celestialwizardry.client.gui.GuiSpellBookGuide;
+import celestialwizardry.client.gui.GuiSpellSwitcher;
 import celestialwizardry.client.gui.inventory.GuiSpellBookOldInventory;
 import celestialwizardry.client.gui.inventory.GuiWritingTable;
 import celestialwizardry.inventory.ContainerSpellBook;
@@ -9,7 +10,6 @@ import celestialwizardry.inventory.ContainerWritingTable;
 import celestialwizardry.inventory.InventorySpellBookOld;
 import celestialwizardry.reference.GuiIds;
 import celestialwizardry.tileentity.TileEntityWritingTable;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 import cpw.mods.fml.common.network.IGuiHandler;
@@ -76,6 +76,10 @@ public class GuiHandler implements IGuiHandler
         else if (ID == GuiIds.SPELL_BOOK_INVENTORY)
         {
             return new GuiSpellBookOldInventory(player, new InventorySpellBookOld(player.getHeldItem()));
+        }
+        else if (ID == GuiIds.SPELL_SWITCHER)
+        {
+        	return new GuiSpellSwitcher();
         }
 
         return null;
