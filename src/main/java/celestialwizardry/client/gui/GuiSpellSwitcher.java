@@ -38,8 +38,11 @@ public class GuiSpellSwitcher extends GuiScreen {
 		renderBackground();
 		renderCloud(60, 30, 9, 2f);
 		renderCloud(60, 62, 19, 2f);
+		renderCloud(30, 62, 15, 1.5f);
+		renderCloud(90, 90, 16, 3f);
 		
-		renderPoint(40, 60, 16, Colour.WHITE);
+		
+		renderPoint(40, 60, 16, LUNAR);
 		Colour.resetGLColor();
 	}
 	
@@ -47,6 +50,8 @@ public class GuiSpellSwitcher extends GuiScreen {
 		if(cloud >= 5*16 || cloud < 0) {
 			return;
 		}
+		float offsX = (width/2)-((l_width+4)/2);
+		float offsY = (height/2)-((l_height+4)/2);
 		float cloudTexOffsX = (float)(cloud % 16) / 16f;
 		float cloudTexOffsY = ( (float)(Math.floor(cloud/16f))*16f + 11f*16f ) / 256f;
 		float l = 16f/256f;
@@ -57,10 +62,10 @@ public class GuiSpellSwitcher extends GuiScreen {
 		
 		tes.startDrawingQuads();
 		tes.setColorRGBA_F(.5f, 0f, .7f, .5f);
-		tes.addVertexWithUV((double)(x-8*size), (double)(y-8*size), (double)zLevel, cloudTexOffsX    , cloudTexOffsY);
-		tes.addVertexWithUV((double)(x+8*size), (double)(y-8*size), (double)zLevel, cloudTexOffsX + l, cloudTexOffsY);
-		tes.addVertexWithUV((double)(x+8*size), (double)(y+8*size), (double)zLevel, cloudTexOffsX + l, cloudTexOffsY + l);
-		tes.addVertexWithUV((double)(x-8*size), (double)(y+8*size), (double)zLevel, cloudTexOffsX    , cloudTexOffsY + l);
+		tes.addVertexWithUV((double)(x-8*size)+offsX, (double)(y-8*size)+offsY, (double)zLevel, cloudTexOffsX    , cloudTexOffsY);
+		tes.addVertexWithUV((double)(x+8*size)+offsX, (double)(y-8*size)+offsY, (double)zLevel, cloudTexOffsX + l, cloudTexOffsY);
+		tes.addVertexWithUV((double)(x+8*size)+offsX, (double)(y+8*size)+offsY, (double)zLevel, cloudTexOffsX + l, cloudTexOffsY + l);
+		tes.addVertexWithUV((double)(x-8*size)+offsX, (double)(y+8*size)+offsY, (double)zLevel, cloudTexOffsX    , cloudTexOffsY + l);
 		tes.draw();
 		GL11.glEnable(GL11.GL_CULL_FACE);
 		GL11.glDisable(GL11.GL_BLEND);
@@ -69,18 +74,24 @@ public class GuiSpellSwitcher extends GuiScreen {
 	
 	private void renderBackground() {
 		SOLAR.setGLColor();
-		drawTexturedModalRect(3, 3, 134, 1, l_width-2, l_height-2);
+		drawTexturedModalRect((width/2)-((l_width-2)/2), (height/2)-((l_height-2)/2), 134, 1, l_width-2, l_height-2);
 		Colour.resetGLColor();
-		drawTexturedModalRect(0, 0, 0, 0, l_width+4, l_height+4);
+		drawTexturedModalRect((width/2)-((l_width+4)/2), (height/2)-((l_height+4)/2), 0, 0, l_width+4, l_height+4);
 	}
 	
 	private void renderPoint(int x, int y, int size, Colour color) {
-		color.setGLColor();
+		float offsX = (width/2)-((l_width+4)/2);
+		float offsY = (height/2)-((l_height+4)/2);
+//		color.setGLColor();
+		GL11.glColor4f(1f, 1f, 1f, .2f);
+		GL11.glEnable(GL11.GL_BLEND);
+		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 		if(size < 1 || size > 16) {
-			drawTexturedModalRect(x, y, 0, 128, 1, 1);
+			drawTexturedModalRect(x+(int)offsX, y+(int)offsY, 0, 128, 1, 1);
 		} else {
-			drawTexturedModalRect(x-(int)Math.floor(size/2), y-(int)Math.floor(size/2), (size - 1) * 16, 128, size, size);
+			drawTexturedModalRect(x-(int)Math.floor(size/2)+(int)offsX, y-(int)Math.floor(size/2)+(int)offsY, (size - 1) * 16, 128, size, size);
 		}
+		GL11.glDisable(GL11.GL_BLEND);
 	}
 	
 	private void bindTex(ResourceLocation rc) {
