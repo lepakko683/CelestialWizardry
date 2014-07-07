@@ -21,7 +21,7 @@ buildscript {
         }
     }
     dependencies {
-        classpath 'io.github.pizzana:CelestiGradle:0.4-SNAPSHOT'
+        classpath 'io.github.pizzana:CelestiGradle:0.5-SNAPSHOT'
         classpath 'io.github.pizzana:potential-octo-spice:0.1.2'
     }
 }
@@ -56,6 +56,12 @@ ext.baubles_root = getPropertyFromJava(getProject(), "src/main/java/celestialwiz
 minecraft {
     version = project.mc + "-" + project.forge
     assetDir = "run/assets"
+
+    replaceIn "reference/Reference.java"
+    if (project.hasProperty("signature"))
+    {
+        replace "@FINGERPRINT@", project.signature
+    }
 }
 
 processResources {
@@ -80,7 +86,13 @@ processResources {
 
 version = project.mc + "-" + project.version
 
-apply plugin: 'cwpackage'
+// Keystore location
+if (!project.hasProperty("keystore_location"))
+{
+    ext.keystore_location = "."
+}
+
+apply plugin: 'cwrelease'
 
 signing {
 	required {project.hasProperty("signing.keyId") && project.hasProperty("signing.password")}
