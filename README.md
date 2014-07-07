@@ -140,4 +140,4 @@ Celestial Wizardry crashes every time? Have a suggestion? Found a bug? Create an
 	* All rune stuff
 	* Spell system
 * **PizzAna**
-	* Build script (Issue tracker [here](https://github.com/Celestibytes/CelestiGradle/issues).)
+	* Build script (Issue tracker [here](https://github.com/Celestibytes/CelestiGradle/issues))
