@@ -16,10 +16,11 @@ CelestialWizardry
 
 [Blamelist](#blamelist) - Just so you know who to blame when something doesn't work.
 
-[Eta](#eta) - For the people who just can't wait.
+[ETA](#eta) - For the people who just can't wait.
 
 ###Branches
 * **develop** - This is the most unstable branch but it contains the latest features.
+* **master** - Always contains the source of the latest official (not necessarily stable) release.
 
 ###Compiling Celestial Wizardry
 IMPORTANT: Please report any issues you have, there might be some problems with the documentation!
