@@ -14,7 +14,22 @@ public class HolidayHelper
     static Calendar holidayStart = Calendar.getInstance();
     static Calendar holidayEnd = Calendar.getInstance();
 
+    /**
+     * Is it an author's birthday
+     *
+     * @return the boolean
+     */
     public static boolean isBirthday()
+    {
+        return isPizzAnaBirthday() || isOkkapelBirthday();
+    }
+
+    /**
+     * Is it PizzAna's birthday
+     *
+     * @return the boolean
+     */
+    public static boolean isPizzAnaBirthday()
     {
         setDate(holidayStart, Calendar.MAY, 3);
         setDate(holidayEnd, Calendar.MAY, 5);
@@ -24,6 +39,26 @@ public class HolidayHelper
         return curTime.after(holidayStart) && curTime.before(holidayEnd);
     }
 
+    /**
+     * Is it Okkapel's birthday
+     *
+     * @return the boolean
+     */
+    public static boolean isOkkapelBirthday()
+    {
+        setDate(holidayStart, Calendar.JULY, 7);
+        setDate(holidayEnd, Calendar.JULY, 9);
+
+        curTime = Calendar.getInstance();
+
+        return curTime.after(holidayStart) && curTime.before(holidayEnd);
+    }
+
+    /**
+     * Is it halloween
+     *
+     * @return the boolean
+     */
     public static boolean isHalloween()
     {
         setDate(holidayStart, Calendar.OCTOBER, 30);
@@ -34,6 +69,11 @@ public class HolidayHelper
         return curTime.after(holidayStart) && curTime.before(holidayEnd);
     }
 
+    /**
+     * Is it christmas
+     *
+     * @return the boolean
+     */
     public static boolean isChristmas()
     {
         setDate(holidayStart, Calendar.DECEMBER, 24);
