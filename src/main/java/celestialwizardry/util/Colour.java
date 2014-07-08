@@ -10,6 +10,7 @@ public class Colour
     };
 
     public static final Colour WHITE = new Colour(1f, 1f, 1f, 1f);
+    public static final Colour GREEN = new Colour(0f, 1f, 0f, 1f);
 
     private float red, green, blue, alpha;
 
@@ -160,6 +161,20 @@ public class Colour
         int lnum = retRed % 16;
         System.out.println(fnum + " " + lnum);
         return null;
+    }
+    
+    public Colour lighten(float amount) {
+    	if(amount<=0f) {
+    		return this;
+    	}
+    	this.red = MathHelper.clampFloat(this.red+amount, 0f, 1f);
+    	this.green = MathHelper.clampFloat(this.green+amount, 0f, 1f);
+    	this.blue = MathHelper.clampFloat(this.blue+amount, 0f, 1f);
+		return this;
+    }
+    
+    public Colour getCopy() {
+    	return new Colour(this.red, this.green, this.blue, this.alpha);
     }
 
     private static int hexDigitToDec(char c)

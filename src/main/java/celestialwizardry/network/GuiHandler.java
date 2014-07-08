@@ -4,6 +4,7 @@ import celestialwizardry.client.gui.GuiSpellBookGuide;
 import celestialwizardry.client.gui.GuiSpellSwitcher;
 import celestialwizardry.client.gui.inventory.GuiSpellBookOldInventory;
 import celestialwizardry.client.gui.inventory.GuiWritingTable;
+import celestialwizardry.client.gui.spellbook.GuiSpellBook;
 import celestialwizardry.inventory.ContainerSpellBook;
 import celestialwizardry.inventory.ContainerSpellBookOld;
 import celestialwizardry.inventory.ContainerWritingTable;
@@ -71,7 +72,8 @@ public class GuiHandler implements IGuiHandler
         }
         else if (ID == GuiIds.SPELL_BOOK)
         {
-            return new GuiSpellBookGuide(player.inventory);
+//            return new GuiSpellBookGuide(player.inventory);
+            return new GuiSpellBook(player.inventory);
         }
         else if (ID == GuiIds.SPELL_BOOK_INVENTORY)
         {

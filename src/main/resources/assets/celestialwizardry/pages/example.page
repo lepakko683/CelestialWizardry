@@ -1,0 +1,13 @@
+cw.page.guide.example {
+title="Example page"
+text="This is just an example.
+You can use newlines here, but they are ignored.&N
+Runes: &R &R &R &R &N
+Recipes: &C &C #Automatic newline
+Images: &I &I
+"
+runes=[127,0,0,1]
+recipes=[smelting(result(minecraft:stone),from(minecraft:cobblestone)), brewing(result(minecraft:potion.nightvision),from(minecraft:potion.awkward),adding(minecraft:golden_carrot))]
+images=["images/exampleImage.png", "images/anotherExample"]
+}
+//Recipe types: smelting, crafting, brewing
