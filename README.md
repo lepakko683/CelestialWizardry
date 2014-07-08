@@ -6,6 +6,8 @@ CelestialWizardry
 
 **Celestial Wizardry's IRC channel**: \#CelestialWizardryMod on irc.esper.net
 
+[Branches](#branches) - Info about branches
+
 [Compiling Mod](#compiling-celestial-wizardry) - For those that want the latest unreleased features.
 
 [Contributing](#contributing) - For those that want to help out.
@@ -13,6 +15,11 @@ CelestialWizardry
 [Developers](#developers) - List of developers of Celestial Wizardry.
 
 [Blamelist](#blamelist) - Just so you know who to blame when something doesn't work.
+
+[Eta](#eta) - For the people who just can't wait.
+
+###Branches
+* **develop** - This is the most unstable branch but it contains the latest features.
 
 ###Compiling Celestial Wizardry
 IMPORTANT: Please report any issues you have, there might be some problems with the documentation!
@@ -141,3 +148,7 @@ Celestial Wizardry crashes every time? Have a suggestion? Found a bug? Create an
 	* Spell system
 * **PizzAna**
 	* Build script (Issue tracker [here](https://github.com/Celestibytes/CelestiGradle/issues))
+
+###ETA
+***
+Don't ask for ETA. Follow our tweets for any hints on the release date. Our plan with the releases is to release pre-releases for every major feature.
