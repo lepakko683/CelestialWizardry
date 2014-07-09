@@ -21,7 +21,7 @@ buildscript {
         }
     }
     dependencies {
-        classpath 'io.github.pizzana:CelestiGradle:0.5-SNAPSHOT'
+        classpath 'io.github.pizzana:CelestiGradle:0.5.0'
         classpath 'io.github.pizzana:potential-octo-spice:0.1.2'
     }
 }
