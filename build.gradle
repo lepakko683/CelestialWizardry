@@ -30,6 +30,7 @@ import static io.github.pizzana.util.GrepJava.*;
 
 apply plugin: 'maven'
 apply plugin: 'signing'
+apply plugin: 'forge'
 
 group 'io.github.pizzana'
 archivesBaseName = project.getName()
