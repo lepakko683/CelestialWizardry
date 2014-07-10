@@ -161,7 +161,7 @@ public class Colour
         this.alpha = v;
     }
 
-    /**Note: this only uses the leftmost 24 bits.*/
+    /**Note: this only uses the rightmost 24 bits.*/
     public int getPackedRGB()
     {
         return (getRedI() << 16) | (getGreenI() << 8) | (getBlueI());
@@ -177,7 +177,7 @@ public class Colour
         return (getAlphaI() << 24) | (getRedI() << 16) | (getGreenI() << 8) | (getBlueI());
     }
     
-    /**Note: this only uses the leftmost 12 bits.*/
+    /**Note: this only uses the rightmost 12 bits.*/
     public short getPackedShortRGB() {
     	return (short) ((getRed4BitI() << 8) | (getGreen4BitI() << 4) | getBlue4BitI()); 
     }
@@ -271,7 +271,7 @@ public class Colour
         return ((red << 24) | (green << 16) | (blue << 8) | (alpha));
     }
     
-    /**Note: this only uses the leftmost 24 Bits*/
+    /**Note: this only uses the rightmost 24 Bits*/
     public static int packRGB(int red, int green, int blue)
     {
         return ((red << 16) | (green << 8) | (blue));
@@ -281,7 +281,7 @@ public class Colour
     	return (short)((alpha << 12) | (red << 8) | (green << 4) | (blue));
     }
     
-    /**Note: this only uses the leftmost 12 Bits*/
+    /**Note: this only uses the rightmost 12 Bits*/
     public static short pack16BitRGB(int alpha, int red, int green, int blue) {
     	return (short)((red << 8) | (green << 4) | (blue));
     }
