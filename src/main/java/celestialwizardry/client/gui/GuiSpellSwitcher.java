@@ -5,6 +5,7 @@ import org.lwjgl.opengl.GL11;
 import celestialwizardry.util.Colour;
 import celestialwizardry.util.ResourceLocationHelper;
 import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.util.ResourceLocation;
 
@@ -18,6 +19,8 @@ public class GuiSpellSwitcher extends GuiScreen {
 	private final int l_height = 124;
 	
 	private final ResourceLocation texture;
+	
+	private static final boolean renderClouds = OpenGlHelper.func_153193_b();
 
 	private static Colour SOLAR;
 	private static Colour LUNAR;
@@ -102,4 +105,42 @@ public class GuiSpellSwitcher extends GuiScreen {
 	public boolean doesGuiPauseGame() {
 		return false;
 	}
+	
+	private static final String cloudFragShader = 
+    		"" +
+    		"" +
+    		"void main() {\n" +
+    		"	gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);\n" +
+    		"}\n" +
+//    		"" +
+//    		"" +
+//    		"" +
+//    		"" +
+//    		"" +
+//    		"" +
+//    		"" +
+//    		"" +
+//    		"" +
+//    		"" +
+//    		"" +
+    		"";
+	
+	private static final String cloudVertShader = 
+    		"" +
+    		"" +
+    		"void main() {\n" +
+    		"	gl_Position = ftransform();\n" +
+    		"}\n" +
+//    		"" +
+//    		"" +
+//    		"" +
+//    		"" +
+//    		"" +
+//    		"" +
+//    		"" +
+//    		"" +
+//    		"" +
+//    		"" +
+//    		"" +
+    		"";
 }

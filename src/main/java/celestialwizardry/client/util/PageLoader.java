@@ -50,6 +50,11 @@ public class PageLoader {
 		return null;
 	}
 	
+	private static final String recipeCrafting2X2 = "crafting2x2";
+	private static final String recipeCrafting3X3 = "crafting3x3";
+	private static final String recipeSmelting = "smelting";
+	private static final String recipeBrewing = "brewing";
+	
 	private static void readRecipes() {}
 	
 	private static void readImages() {}

@@ -6,6 +6,7 @@ import celestialwizardry.handler.ClientTickEventHandler;
 import celestialwizardry.inventory.ContainerSpellBook;
 import celestialwizardry.reference.Resources;
 import celestialwizardry.util.Colour;
+import celestialwizardry.util.LogH;
 import celestialwizardry.util.StringHelper;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -15,6 +16,7 @@ import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiLabel;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
@@ -36,7 +38,8 @@ public class GuiSpellBook extends GuiContainer {
 	
 	protected PageRenderer pageRenderer;
 	
-	protected int currentPageIndex;
+	/**The current page opened on the left, -1 if there is no page on the left*/
+	protected int currentPageIndex = -1;
 	
 	private static Page[] allPages;
 	
@@ -94,12 +97,8 @@ public class GuiSpellBook extends GuiContainer {
 		Colour.resetGLColor();
 		this.mc.getTextureManager().bindTexture(Resources.Textures.GUI_SPELL_BOOK_PAGES);
 
-        // Render pages
-		// Left page
-        this.drawTexturedModalRect(guiLeft+ 11, guiTop + 14, 11, 13, 196/2, 141);
-        
-        // Right page
-        this.drawTexturedModalRect(guiLeft+ 11 + 196/2, guiTop + 14, 11+196/2, 13, 196/2, 141);
+        renderPage(Direction.LEFT, null);
+        renderPage(Direction.RIGHT, null);
         
         // For debug - renders green boxes around all ButtonBookmarks
         renderaButtons(mouseX, mouseY, true);
@@ -113,10 +112,38 @@ public class GuiSpellBook extends GuiContainer {
 	}
 	
 	public void renderPages() {
-		
+		if(allPages == null || containedPages == null) {
+			LogH.err("Array allPages and/or ArrayList containedPages is null");
+			return;
+		}
+		if(currentPageIndex < -1) {
+			LogH.err("Current page index out of bounds!!!");
+			return;
+		}
+		if(currentPageIndex > -1) {
+			renderPage(Direction.LEFT, allPages[containedPages.get(currentPageIndex).intValue()]);
+		}
 	}
 	
-	public void renderPage(Direction side) {
+	public void renderPage(Direction side, Page page) {
+//		if(page == null) {
+//			return; // TODO
+//		}
+		int xOffset = guiLeft + 11;
+		int uOffset = 11;
+		if(side == Direction.RIGHT) {
+			xOffset += 196/2;
+			uOffset += 196/2;
+		}
+		// Left page
+//        this.drawTexturedModalRect(guiLeft+ 11, guiTop + 14, 11, 13, 196/2, 141);
+        
+        // Right page
+//        this.drawTexturedModalRect(guiLeft+ 11 + 196/2, guiTop + 14, 11+196/2, 13, 196/2, 141);
+		
+		this.drawTexturedModalRect(xOffset, guiTop + 14, uOffset, 13, 196/2, 141);
+		
+//		page.renderPage(null); // TODO
 		
 	}
 	
@@ -234,5 +261,6 @@ public class GuiSpellBook extends GuiContainer {
 		}
     	
     }
+    				
 
 }
