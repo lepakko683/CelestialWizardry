@@ -22,11 +22,11 @@ buildscript {
     }
     dependencies {
         classpath 'io.github.pizzana:CelestiGradle:1.0-SNAPSHOT'
-        classpath 'io.github.pizzana:potential-octo-spice:0.1.2'
+        classpath 'io.github.pizzana:JKaffe:0.1.0'
     }
 }
 
-import static io.github.pizzana.util.GrepJava.*;
+import static io.github.pizzana.jkaffe.util.PropertyHelper.Source*;
 
 apply plugin: 'maven'
 apply plugin: 'signing'
