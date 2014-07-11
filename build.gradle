@@ -44,12 +44,12 @@ else
     ext.buildNumber = "null"
 }
 
-version = getCWVersionFromJava(getProject(), "VERSION") + "." + project.buildNumber
+version = getCWVersion(getProject(), "VERSION") + "." + project.buildNumber
 
-ext.mc = getCWVersionFromJava(getProject(), "MINECRAFT")
-ext.forge = getCWVersionFromJava(getProject(), "FORGE")
-ext.baubles = getCWVersionFromJava(getProject(), "BAUBLES")
-ext.baubles_mc = getCWVersionFromJava(getProject(), "BAUBLES_MC")
+ext.mc = getCWVersion(getProject(), "MINECRAFT")
+ext.forge = getCWVersion(getProject(), "FORGE")
+ext.baubles = getCWVersion(getProject(), "BAUBLES")
+ext.baubles_mc = getCWVersion(getProject(), "BAUBLES_MC")
 ext.baubles_root = getPropertyFromJava(getProject(), "src/main/java/celestialwizardry/reference/Reference.java", "BAUBLES_ROOT")
 
 minecraft {
