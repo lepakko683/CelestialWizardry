@@ -17,16 +17,16 @@ buildscript {
         }
         maven {
             name = "cbs"
-            url = "https://raw.githubusercontent.com/Celestibytes/maven/master/"
+            url = "https://raw.githubusercontent.com/PizzAna/maven/master/"
         }
     }
     dependencies {
-        classpath 'io.github.pizzana:CelestiGradle:1.0-SNAPSHOT'
-        classpath 'io.github.pizzana:JKaffe:0.1.0'
+        classpath 'io.github.pizzana:CelestiGradle:1.0.0'
+        classpath 'io.github.pizzana:JKaffe:1.0.0'
     }
 }
 
-import static io.github.pizzana.jkaffe.util.PropertyHelper.Source.*;
+import static io.github.pizzana.jkaffe.util.gradle.ProjectPropertyHelper.Source.*;
 
 apply plugin: 'maven'
 apply plugin: 'signing'
@@ -50,7 +50,7 @@ ext.mc = getCWVersion(getProject(), "MINECRAFT")
 ext.forge = getCWVersion(getProject(), "FORGE")
 ext.baubles = getCWVersion(getProject(), "BAUBLES")
 ext.baubles_mc = getCWVersion(getProject(), "BAUBLES_MC")
-ext.baubles_root = getPropertyFromJava(getProject(), "src/main/java/celestialwizardry/reference/Reference.java", "BAUBLES_ROOT")
+ext.baubles_root = getProperty(getProject(), "src/main/java/celestialwizardry/reference/Reference.java", "BAUBLES_ROOT")
 
 minecraft {
     version = project.mc + "-" + project.forge
