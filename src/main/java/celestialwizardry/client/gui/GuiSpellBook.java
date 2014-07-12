@@ -3,8 +3,8 @@ package celestialwizardry.client.gui;
 import celestialwizardry.handler.ClientTickEventHandler;
 import celestialwizardry.inventory.ContainerSpellBook;
 import celestialwizardry.reference.Resources;
+import celestialwizardry.util.CWStringHelper;
 import celestialwizardry.util.Colour;
-import celestialwizardry.util.StringHelper;
 
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
@@ -53,15 +53,15 @@ public abstract class GuiSpellBook extends GuiContainer
         buttonList.clear();
 
         guide = new GuiButtonInvisible(100, guiLeft - 48 + 5 + 8 * 2, guiTop + 20 + 2, 48, 19,
-                                       StringHelper.localize("bookmark." + Resources.RESOURCE_PREFIX + "guide"));
+                                       CWStringHelper.localize("bookmark." + Resources.RESOURCE_PREFIX + "guide"));
         buttonList.add(guide);
 
         notes = new GuiButtonInvisible(101, guiLeft - 48 + 5 + 8 * 2, guiTop + 40 + 2, 48, 19,
-                                       StringHelper.localize("bookmark." + Resources.RESOURCE_PREFIX + "notes"));
+                                       CWStringHelper.localize("bookmark." + Resources.RESOURCE_PREFIX + "notes"));
         buttonList.add(notes);
 
         spells = new GuiButtonInvisible(102, guiLeft - 48 + 5 + 8 * 2, guiTop + 60 + 2, 48, 19,
-                                        StringHelper.localize("bookmark." + Resources.RESOURCE_PREFIX + "spells"));
+                                        CWStringHelper.localize("bookmark." + Resources.RESOURCE_PREFIX + "spells"));
         buttonList.add(spells);
 
         anInteger = 3;

@@ -2,7 +2,7 @@ package celestialwizardry.client.gui;
 
 import celestialwizardry.api.spellbook.SpellBookCategory;
 import celestialwizardry.api.spellbook.SpellBookEntry;
-import celestialwizardry.util.StringHelper;
+import celestialwizardry.util.CWStringHelper;
 
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -28,7 +28,7 @@ public class GuiSpellBookCategory extends GuiSpellBookGuide
         super(player);
 
         this.category = category;
-        title = StringHelper.localize(category.getUnlocalizedName());
+        title = CWStringHelper.localize(category.getUnlocalizedName());
     }
 
     @Override
@@ -64,7 +64,7 @@ public class GuiSpellBookCategory extends GuiSpellBookGuide
 
             if (entry != null)
             {
-                button.displayString = (entry.isPriority() ? EnumChatFormatting.ITALIC : "") + StringHelper
+                button.displayString = (entry.isPriority() ? EnumChatFormatting.ITALIC : "") + CWStringHelper
                         .localize(entry.getUnlocalizedName());
             }
             else

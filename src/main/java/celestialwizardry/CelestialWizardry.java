@@ -34,6 +34,8 @@ import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 
+import celestibytes.core.mod.CelestiMod;
+
 import java.io.File;
 
 /**
@@ -42,7 +44,7 @@ import java.io.File;
 @Mod(modid = Reference.MOD_ID, name = Reference.MOD_NAME, version = Version.VERSION,
      certificateFingerprint = Reference.FINGERPRINT, dependencies = Reference.DEPENDENCIES,
      guiFactory = Reference.GUI_FACTORY_CLASS)
-public class CelestialWizardry
+public class CelestialWizardry extends CelestiMod
 {
     @SidedProxy(clientSide = Reference.CLIENT_PROXY_CLASS, serverSide = Reference.SERVER_PROXY_CLASS)
     public static IProxy proxy;
@@ -200,5 +202,23 @@ public class CelestialWizardry
 
         // Tell everyone that we have successfully post-initialized
         LogHelper.info("Finished post-initialization after " + (System.currentTimeMillis() - start) + " ms");
+    }
+
+    @Override
+    public String getId()
+    {
+        return CelestialWizardry.class.getAnnotation(Mod.class).modid();
+    }
+
+    @Override
+    public String getName()
+    {
+        return CelestialWizardry.class.getAnnotation(Mod.class).name();
+    }
+
+    @Override
+    public String getVersion()
+    {
+        return CelestialWizardry.class.getAnnotation(Mod.class).version();
     }
 }

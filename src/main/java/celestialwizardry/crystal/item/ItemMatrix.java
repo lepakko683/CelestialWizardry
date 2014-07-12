@@ -9,10 +9,10 @@ import celestialwizardry.item.ItemSingle;
 import celestialwizardry.reference.Names;
 import celestialwizardry.reference.Resources;
 import celestialwizardry.reference.Settings;
+import celestialwizardry.util.CWStringHelper;
 import celestialwizardry.util.EnergyHelper;
 import celestialwizardry.util.KeyboardHelper;
 import celestialwizardry.util.NBTHelper;
-import celestialwizardry.util.StringHelper;
 
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
@@ -360,19 +360,19 @@ public class ItemMatrix extends ItemSingle implements IMatrix, ICWMatrix, ILocke
         }
         else if (getTier(stack) == 2)
         {
-            ret.append(StringHelper.YELLOW);
+            ret.append(CWStringHelper.YELLOW);
         }
         else if (getTier(stack) == 3)
         {
-            ret.append(StringHelper.BRIGHT_BLUE);
+            ret.append(CWStringHelper.BRIGHT_BLUE);
         }
         else if (getTier(stack) == 4)
         {
-            ret.append(StringHelper.PINK);
+            ret.append(CWStringHelper.PINK);
         }
 
         ret.append(super.getItemStackDisplayName(stack));
-        ret.append(StringHelper.END);
+        ret.append(CWStringHelper.END);
         ret.append(" (WIP)");
 
         return ret.toString();
@@ -383,13 +383,13 @@ public class ItemMatrix extends ItemSingle implements IMatrix, ICWMatrix, ILocke
     @SuppressWarnings("unchecked")
     public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean adv)
     {
-        list.add(StringHelper.RED + "WIP" + StringHelper.END); // TODO Remove
+        list.add(CWStringHelper.RED + "WIP" + CWStringHelper.END); // TODO Remove
 
         super.addInformation(stack, player, list, adv);
 
         if (Settings.shiftForDetails && !KeyboardHelper.isShiftKeyDown())
         {
-            list.add(StringHelper.getShiftText());
+            list.add(CWStringHelper.getShiftText());
         }
 
         if (!KeyboardHelper.isShiftKeyDown())
@@ -397,23 +397,23 @@ public class ItemMatrix extends ItemSingle implements IMatrix, ICWMatrix, ILocke
             return;
         }
 
-        list.add(StringHelper.getTooltip("tier") + " " + getTier(stack));
+        list.add(CWStringHelper.getTooltip("tier") + " " + getTier(stack));
 
         if (stack.stackTagCompound == null)
         {
-            list.add(StringHelper.getTooltip("maxStorage") + ": " + String.valueOf(getMaxEnergy(stack)));
-            list.add(StringHelper.getTooltip("noOwner"));
+            list.add(CWStringHelper.getTooltip("maxStorage") + ": " + String.valueOf(getMaxEnergy(stack)));
+            list.add(CWStringHelper.getTooltip("noOwner"));
         }
         else
         {
             if (getEnergyStored(stack) == 0)
             {
-                list.add(StringHelper.getTooltip("maxStorage") + ": " + String.valueOf(getMaxEnergy(stack)));
+                list.add(CWStringHelper.getTooltip("maxStorage") + ": " + String.valueOf(getMaxEnergy(stack)));
             }
             else
             {
-                list.add(StringHelper.getTooltip("energyType") + ": " + getEnergyType(stack).getEnergyName());
-                list.add(StringHelper.getTooltip("energyStored") + ": " + getEnergyStored(stack) + '/' + String
+                list.add(CWStringHelper.getTooltip("energyType") + ": " + getEnergyType(stack).getEnergyName());
+                list.add(CWStringHelper.getTooltip("energyStored") + ": " + getEnergyStored(stack) + '/' + String
                         .valueOf(getMaxEnergy(stack)));
             }
 
@@ -421,31 +421,32 @@ public class ItemMatrix extends ItemSingle implements IMatrix, ICWMatrix, ILocke
             {
                 if (getOwner(stack).equalsIgnoreCase("PizzAna"))
                 {
-                    list.add(StringHelper.getTooltip("pizzanaMatrix"));
-                    list.add(StringHelper.BRIGHT_GREEN + StringHelper.ITALIC + StringHelper.getTooltip("bestWizards")
-                                     + StringHelper.END);
+                    list.add(CWStringHelper.getTooltip("pizzanaMatrix"));
+                    list.add(CWStringHelper.BRIGHT_GREEN + CWStringHelper.ITALIC + CWStringHelper
+                            .getTooltip("bestWizards")
+                                     + CWStringHelper.END);
                 }
                 else if (getOwner(stack).equalsIgnoreCase("ForgeDevName"))
                 {
-                    list.add(StringHelper.getTooltip("forgeMatrix"));
-                    list.add(StringHelper.WHITE + StringHelper.ITALIC + StringHelper.getTooltip("devWizards")
-                                     + StringHelper.END);
+                    list.add(CWStringHelper.getTooltip("forgeMatrix"));
+                    list.add(CWStringHelper.WHITE + CWStringHelper.ITALIC + CWStringHelper.getTooltip("devWizards")
+                                     + CWStringHelper.END);
                 }
                 else
                 {
                     if (getOwner(stack).equals(player.getDisplayName()))
                     {
-                        list.add(StringHelper.getTooltip("yourMatrix"));
+                        list.add(CWStringHelper.getTooltip("yourMatrix"));
                     }
                     else
                     {
-                        list.add(StringHelper.getTooltip("owner") + ": " + getOwner(stack));
+                        list.add(CWStringHelper.getTooltip("owner") + ": " + getOwner(stack));
                     }
                 }
             }
             else
             {
-                list.add(StringHelper.getTooltip("noOwner"));
+                list.add(CWStringHelper.getTooltip("noOwner"));
             }
         }
     }
@@ -465,7 +466,7 @@ public class ItemMatrix extends ItemSingle implements IMatrix, ICWMatrix, ILocke
         else
         {
             player.addChatComponentMessage(new ChatComponentText(
-                    String.format(StringHelper.getMessage("stolenMatrix"), player.getDisplayName())));
+                    String.format(CWStringHelper.getMessage("stolenMatrix"), player.getDisplayName())));
 
             NBTTagCompound openers = new NBTTagCompound();
 

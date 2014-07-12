@@ -4,7 +4,7 @@ import celestialwizardry.inventory.ContainerWritingTable;
 import celestialwizardry.reference.Names;
 import celestialwizardry.reference.Resources;
 import celestialwizardry.tileentity.TileEntityWritingTable;
-import celestialwizardry.util.StringHelper;
+import celestialwizardry.util.CWStringHelper;
 
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -29,10 +29,10 @@ public class GuiWritingTable extends GuiContainer
     @Override
     protected void drawGuiContainerForegroundLayer(int x, int y)
     {
-        String containerName = StringHelper.localize(tileEntityWritingTable.getInventoryName());
+        String containerName = CWStringHelper.localize(tileEntityWritingTable.getInventoryName());
         fontRendererObj
                 .drawString(containerName, xSize / 2 - fontRendererObj.getStringWidth(containerName) / 2, 6, 4210752);
-        fontRendererObj.drawString(StringHelper.localize(Names.Containers.VANILLA_INVENTORY), 8, ySize - 93, 4210752);
+        fontRendererObj.drawString(CWStringHelper.localize(Names.Containers.VANILLA_INVENTORY), 8, ySize - 93, 4210752);
     }
 
     @Override

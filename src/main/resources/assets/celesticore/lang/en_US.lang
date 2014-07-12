@@ -1,0 +1,12 @@
+# Config localizations
+configgui.celesticore:configTitle=CelestiCore Configuration
+
+# Tooltip localizations
+tooltip.celestialwizardry:noNBT=No NBT Tags found
+tooltip.celestialwizardry:NBT=NBT Tags found
+tooltip.celestialwizardry:holdShift1=Hold
+tooltip.celestialwizardry:holdShift2=Shift
+tooltip.celestialwizardry:holdShift3=for Info
+tooltip.celestialwizardry:holdControl1=Hold
+tooltip.celestialwizardry:holdControl2=Control
+tooltip.celestialwizardry:holdControl3=for Info

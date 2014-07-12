@@ -2,7 +2,7 @@ package celestialwizardry.client.gui;
 
 import celestialwizardry.api.spellbook.SpellBookCategory;
 import celestialwizardry.registry.SpellBookRegistry;
-import celestialwizardry.util.StringHelper;
+import celestialwizardry.util.CWStringHelper;
 
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -59,7 +59,7 @@ public class GuiSpellBookGuide extends GuiSpellBook
 
             if (category != null)
             {
-                button.displayString = StringHelper.localize(category.getUnlocalizedName());
+                button.displayString = CWStringHelper.localize(category.getUnlocalizedName());
             }
             else
             {

@@ -1,12 +1,12 @@
-package celestialwizardry.util;
-
-import celestialwizardry.reference.Resources;
+package celestibytes.core.util;
 
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.util.StatCollector;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
+
+import celestibytes.core.reference.Resources;
 
 import java.util.List;
 
@@ -45,7 +45,7 @@ public class StringHelper
             "holdControl1") + " " + BRIGHT_GREEN + ITALIC + getTooltip(
             "holdControl2") + " " + END + LIGHT_GRAY + getTooltip("holdControl3") + END;
 
-    private StringHelper()
+    protected StringHelper()
     {
 
     }

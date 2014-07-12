@@ -3,10 +3,10 @@ package celestialwizardry.item;
 import celestialwizardry.creativetab.CreativeTab;
 import celestialwizardry.reference.Resources;
 import celestialwizardry.reference.Settings;
+import celestialwizardry.util.CWStringHelper;
 import celestialwizardry.util.IconRegistry;
 import celestialwizardry.util.ItemHelper;
 import celestialwizardry.util.KeyboardHelper;
-import celestialwizardry.util.StringHelper;
 
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
@@ -171,13 +171,13 @@ public abstract class ItemCW extends Item
         {
             if (!KeyboardHelper.isControlKeyDown())
             {
-                list.add(StringHelper.getControlText());
+                list.add(CWStringHelper.getControlText());
                 return;
             }
 
             if (stack.hasTagCompound())
             {
-                list.add(StringHelper.getTooltip("NBT"));
+                list.add(CWStringHelper.getTooltip("NBT"));
                 NBTTagCompound tagCompound = stack.getTagCompound();
 
                 for (Object o : tagCompound.func_150296_c())
@@ -188,7 +188,7 @@ public abstract class ItemCW extends Item
             }
             else
             {
-                list.add(StringHelper.getTooltip("noNBT"));
+                list.add(CWStringHelper.getTooltip("noNBT"));
             }
         }
     }

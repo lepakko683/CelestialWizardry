@@ -6,10 +6,10 @@ import celestialwizardry.entity.ModEntityProperties;
 import celestialwizardry.init.ModItems;
 import celestialwizardry.reference.Names;
 import celestialwizardry.reference.Settings;
+import celestialwizardry.util.CWStringHelper;
 import celestialwizardry.util.LogHelper;
 import celestialwizardry.util.PlayerHelper;
 import celestialwizardry.util.SpawnHelper;
-import celestialwizardry.util.StringHelper;
 
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Items;
@@ -55,8 +55,8 @@ public class PlayerEventHandler
                 if (PlayerHelper.isPizzAna(event.player))
                 {
                     NBTTagCompound tagCompound = new NBTTagCompound();
-                    String name = StringHelper.ORANGE + "PizzAna's Spell Book" + StringHelper.END;
-                    String lore1 = StringHelper.RED + StringHelper.ITALIC + "You should not touch this!";
+                    String name = CWStringHelper.ORANGE + "PizzAna's Spell Book" + CWStringHelper.END;
+                    String lore1 = CWStringHelper.RED + CWStringHelper.ITALIC + "You should not touch this!";
 
                     tagCompound.setTag(Names.NBT.DISPLAY, new NBTTagCompound());
                     tagCompound.getCompoundTag(Names.NBT.DISPLAY).setString(Names.NBT.NAME, name);
@@ -75,7 +75,7 @@ public class PlayerEventHandler
                 if (PlayerHelper.isForgeDevName(event.player))
                 {
                     NBTTagCompound tagCompound = new NBTTagCompound();
-                    String name = StringHelper.WHITE + "Forge Developer's Spell Book" + StringHelper.END;
+                    String name = CWStringHelper.WHITE + "Forge Developer's Spell Book" + CWStringHelper.END;
 
                     tagCompound.setTag(Names.NBT.DISPLAY, new NBTTagCompound());
                     tagCompound.getCompoundTag(Names.NBT.DISPLAY).setString(Names.NBT.NAME, name);
@@ -95,10 +95,10 @@ public class PlayerEventHandler
             if (PlayerHelper.isPizzAna(event.player))
             {
                 ItemStack stack = new ItemStack(Items.spider_eye);
-                String name = StringHelper.WHITE + "PizzAna's Eye" + StringHelper.END;
-                String lore1 = StringHelper.GREEN + StringHelper.ITALIC + "He is everywhere, he sees you"
-                        + StringHelper.END;
-                String lore2 = StringHelper.GREEN + StringHelper.ITALIC + "and what you do!" + StringHelper.END;
+                String name = CWStringHelper.WHITE + "PizzAna's Eye" + CWStringHelper.END;
+                String lore1 = CWStringHelper.GREEN + CWStringHelper.ITALIC + "He is everywhere, he sees you"
+                        + CWStringHelper.END;
+                String lore2 = CWStringHelper.GREEN + CWStringHelper.ITALIC + "and what you do!" + CWStringHelper.END;
 
                 NBTTagCompound tagCompound = new NBTTagCompound();
 
@@ -119,9 +119,9 @@ public class PlayerEventHandler
             if (PlayerHelper.isLepakko683(event.player))
             {
                 ItemStack stack = new ItemStack(Items.feather);
-                String name = StringHelper.WHITE + "Feather Of a Phoenix Disguised As a Chicken Aka a Chicken's Feather"
-                        + StringHelper.END;
-                String lore1 = StringHelper.GREEN + StringHelper.ITALIC + "Nothing special, really.";
+                String name = CWStringHelper.WHITE + "Feather Of a Phoenix Disguised As a Chicken Aka a Chicken's Feather"
+                        + CWStringHelper.END;
+                String lore1 = CWStringHelper.GREEN + CWStringHelper.ITALIC + "Nothing special, really.";
 
                 NBTTagCompound tagCompound = new NBTTagCompound();
                 tagCompound.setTag(Names.NBT.DISPLAY, new NBTTagCompound());
@@ -165,7 +165,7 @@ public class PlayerEventHandler
             if (PlayerHelper.isPizzAna(event.player))
             {
                 ItemStack stack = new ItemStack(CrystalItems.matrix, 1, matrix.getDamageFromTier(5));
-                String name = StringHelper.BRIGHT_BLUE + "PizzAna's Matrix" + StringHelper.END;
+                String name = CWStringHelper.BRIGHT_BLUE + "PizzAna's Matrix" + CWStringHelper.END;
 
                 NBTTagCompound tagCompound = new NBTTagCompound();
 
@@ -183,7 +183,7 @@ public class PlayerEventHandler
             if (PlayerHelper.isForgeDevName(event.player))
             {
                 ItemStack stack = new ItemStack(CrystalItems.matrix, 1, matrix.getDamageFromTier(1));
-                String name = StringHelper.WHITE + "ForgeDeveloper's Matrix" + StringHelper.END;
+                String name = CWStringHelper.WHITE + "ForgeDeveloper's Matrix" + CWStringHelper.END;
 
                 NBTTagCompound tagCompound = new NBTTagCompound();
 

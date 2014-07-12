@@ -1,9 +1,7 @@
-package celestialwizardry.config;
+package celestibytes.core.config;
 
 import net.minecraftforge.common.config.Configuration;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-
-import celestibytes.core.config.ConfigBase;
 
 import java.io.File;
 

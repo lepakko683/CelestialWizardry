@@ -10,22 +10,18 @@ import celestialwizardry.handler.ClientTickEventHandler;
 import celestialwizardry.inventory.ContainerSpellBook;
 import celestialwizardry.reference.Resources;
 import celestialwizardry.registry.SpellBookPages;
+import celestialwizardry.util.CWStringHelper;
 import celestialwizardry.util.Colour;
 import celestialwizardry.util.LogH;
-import celestialwizardry.util.StringHelper;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiButton;
-import net.minecraft.client.gui.GuiLabel;
-import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.inventory.GuiContainer;
-import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.Container;
 
 @SideOnly(Side.CLIENT)
 public class GuiSpellBook extends GuiContainer {
@@ -119,13 +115,13 @@ public class GuiSpellBook extends GuiContainer {
 		super.initGui();
 		buttonList.clear();
 		
-		guide = new ButtonBookmark(BUTTON_ID_GUIDE, StringHelper.localize("bookmark." + Resources.RESOURCE_PREFIX + "guide"), BookmarkType.GUIDE, Direction.LEFT);
+		guide = new ButtonBookmark(100, CWStringHelper.localize("bookmark." + Resources.RESOURCE_PREFIX + "guide"), BookmarkType.GUIDE, Direction.LEFT);
 		buttonList.add(guide);
 		
-		notes = new ButtonBookmark(BUTTON_ID_NOTES, StringHelper.localize("bookmark." + Resources.RESOURCE_PREFIX + "notes"), BookmarkType.NOTES, Direction.LEFT);
+		notes = new ButtonBookmark(100, CWStringHelper.localize("bookmark." + Resources.RESOURCE_PREFIX + "notes"), BookmarkType.NOTES, Direction.LEFT);
 		buttonList.add(notes);
 		
-		spells = new ButtonBookmark(BUTTON_ID_SPELLS, StringHelper.localize("bookmark." + Resources.RESOURCE_PREFIX + "spells"), BookmarkType.SPELLS, Direction.LEFT);
+		spells = new ButtonBookmark(100, CWStringHelper.localize("bookmark." + Resources.RESOURCE_PREFIX + "spells"), BookmarkType.SPELLS, Direction.LEFT);
 		buttonList.add(spells);
 		
 		backward = new ButtonFlipPage(BUTTON_ID_BACKWARD, Direction.LEFT, "").setGuiPos(this.guiLeft, this.guiTop);

@@ -3,7 +3,7 @@ package celestialwizardry.item;
 import celestialwizardry.reference.Names;
 import celestialwizardry.reference.Reference;
 import celestialwizardry.reference.Resources;
-import celestialwizardry.util.StringHelper;
+import celestialwizardry.util.CWStringHelper;
 
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
@@ -99,11 +99,11 @@ public class ItemConcentrationRing extends ItemSingle implements IBauble
         // if meta == 0
         if (meta == 1)
         {
-            list.add(StringHelper.BLUE + StringHelper.getTooltip("lunar") + StringHelper.END);
+            list.add(CWStringHelper.BLUE + CWStringHelper.getTooltip("lunar") + CWStringHelper.END);
         }
         else if (meta == 2)
         {
-            list.add(StringHelper.YELLOW + StringHelper.getTooltip("solar") + StringHelper.END);
+            list.add(CWStringHelper.YELLOW + CWStringHelper.getTooltip("solar") + CWStringHelper.END);
         }
     }
 

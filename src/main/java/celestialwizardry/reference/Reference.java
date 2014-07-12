@@ -18,8 +18,7 @@ public class Reference
 
     public static final String FINGERPRINT = "@FINGERPRINT@";
 
-    // TODO Add the core mod here
-    public static final String DEPENDENCIES = "required-after:Forge@[10.12.1.1110,);required-after:Baubles";
+    public static final String DEPENDENCIES = "required-after:celesticore;required-after:Baubles";
 
     public static final String BAUBLES_ROOT = "https://dl.dropboxusercontent.com/u/47135879/";
     public static final String BAUBLES_ID = "Baubles";

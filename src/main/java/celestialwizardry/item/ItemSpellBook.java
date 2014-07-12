@@ -4,8 +4,8 @@ import celestialwizardry.CelestialWizardry;
 import celestialwizardry.api.ILockedItem;
 import celestialwizardry.reference.GuiIds;
 import celestialwizardry.reference.Names;
+import celestialwizardry.util.CWStringHelper;
 import celestialwizardry.util.NBTHelper;
-import celestialwizardry.util.StringHelper;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -42,7 +42,7 @@ public class ItemSpellBook extends ItemSingle implements ILockedItem
         else
         {
             player.addChatComponentMessage(new ChatComponentText(
-                    String.format(StringHelper.getMessage("stolenBook"), player.getDisplayName())));
+                    String.format(CWStringHelper.getMessage("stolenBook"), player.getDisplayName())));
 
             NBTTagCompound openers = new NBTTagCompound();
 

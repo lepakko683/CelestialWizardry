@@ -1,7 +1,7 @@
 package celestialwizardry.client.gui.spellbookold;
 
 import celestialwizardry.reference.Resources;
-import celestialwizardry.util.StringHelper;
+import celestialwizardry.util.CWStringHelper;
 
 import net.minecraft.util.EnumChatFormatting;
 import cpw.mods.fml.relauncher.Side;
@@ -22,8 +22,8 @@ public class GuiButtonBackWithShift extends GuiButtonBack
     @Override
     public List<String> getTooltip()
     {
-        return Arrays.asList(StringHelper.localize("misc." + Resources.RESOURCE_PREFIX + "back"),
-                             EnumChatFormatting.GRAY + StringHelper
+        return Arrays.asList(CWStringHelper.localize("misc." + Resources.RESOURCE_PREFIX + "back"),
+                             EnumChatFormatting.GRAY + CWStringHelper
                                      .localize("misc." + Resources.RESOURCE_PREFIX + "clickToIndex")
                             );
     }

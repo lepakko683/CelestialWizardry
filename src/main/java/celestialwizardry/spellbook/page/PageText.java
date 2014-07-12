@@ -2,8 +2,8 @@ package celestialwizardry.spellbook.page;
 
 import celestialwizardry.api.spellbook.SpellBookPage;
 import celestialwizardry.api.spellbook.internal.IGuiSpellBookEntry;
+import celestialwizardry.util.CWStringHelper;
 import celestialwizardry.util.FontHelper;
-import celestialwizardry.util.StringHelper;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
@@ -38,7 +38,7 @@ public class PageText extends SpellBookPage
         FontRenderer renderer = Minecraft.getMinecraft().fontRenderer;
         boolean unicode = renderer.getUnicodeFlag();
         renderer.setUnicodeFlag(true);
-        String text = StringHelper.localize(unlocalizedText).replaceAll("&", "\u00a7");
+        String text = CWStringHelper.localize(unlocalizedText).replaceAll("&", "\u00a7");
         String[] textEntries = text.split("<br>");
 
         String lastFormat = "";
