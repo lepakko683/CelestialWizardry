@@ -45,6 +45,8 @@ public class ItemPage extends ItemSingle implements IRenderable, ITextContainer
         tes.addVertexWithUV(-.4d, 0d, -.4d, 0d, 1d);
         tes.draw();
     }
+    
+    
 
     @Override
     public boolean isRunic()

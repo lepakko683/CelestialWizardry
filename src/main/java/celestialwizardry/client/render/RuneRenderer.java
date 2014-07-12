@@ -27,7 +27,7 @@ public class RuneRenderer implements IResourceManagerReloadListener
 
     public int getRuneWidth(int runeId)
     {
-        return -1;
+        return 5;
     }
 
     public int getWidthOfRunes(int runes[])

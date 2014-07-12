@@ -78,4 +78,21 @@ public class Resources
         public static final ResourceLocation TEXTURE_MAGICAL_STONE_INNER = ResourceLocationHelper
                 .getResourceLocation(BLOCK_TEXTURE_LOCATION + "magicalStoneOLD.png");
     }
+    
+    public static class Pages
+    {
+    	public static final String[] runePages = new String[] {
+    		
+    	};
+    	/**Note: the id has nothing to do with the numid of the rune!.*/
+    	public static ResourceLocation getRunePageRL(int id) {
+    		if(id>=0 && id<runePages.length) {
+    			
+    		}
+    		return null;
+    	}
+    	
+    	
+    	
+    }
 }

@@ -16,6 +16,7 @@ import org.lwjgl.opengl.GL11;
 
 public class RenderMagicalStone implements ISimpleBlockRenderingHandler
 {
+	// Note: No mods were decompiled in the creation of this rendering code -OkkapeL
 
     public static final int ID = RenderingRegistry.getNextAvailableRenderId();
 

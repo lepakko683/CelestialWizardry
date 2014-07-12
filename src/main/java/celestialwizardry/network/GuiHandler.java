@@ -73,7 +73,7 @@ public class GuiHandler implements IGuiHandler
         else if (ID == GuiIds.SPELL_BOOK)
         {
 //            return new GuiSpellBookGuide(player.inventory);
-            return new GuiSpellBook(player.inventory);
+            return new GuiSpellBook(player);
         }
         else if (ID == GuiIds.SPELL_BOOK_INVENTORY)
         {
