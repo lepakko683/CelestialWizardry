@@ -1,24 +1,23 @@
-package celestialwizardry.config.gui;
-
-import celestialwizardry.CelestialWizardry;
-import celestialwizardry.reference.Reference;
-import celestialwizardry.reference.Settings;
-import celestialwizardry.util.CWStringHelper;
+package celestibytes.core.config.gui;
 
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraftforge.common.config.ConfigElement;
-import cpw.mods.fml.client.config.GuiConfig;
 import cpw.mods.fml.client.config.IConfigElement;
+
+import celestibytes.core.CelestiCore;
+import celestibytes.core.reference.Reference;
+import celestibytes.core.reference.Settings;
+import celestibytes.core.util.StringHelper;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class CWGuiConfig extends GuiConfig
+public class GuiConfig extends cpw.mods.fml.client.config.GuiConfig
 {
-    public CWGuiConfig(GuiScreen parentScreen)
+    public GuiConfig(GuiScreen parentScreen)
     {
         super(parentScreen, getConfigElements(), Reference.MOD_ID, false, false,
-              CWStringHelper.getConfig("configTitle") /* GuiConfig.getAbridgedConfigPath(CelestialWizardry.config
+              StringHelper.getConfig("configTitle") /* GuiConfig.getAbridgedConfigPath(CelestialWizardry.config
               .toString() */);
     }
 
@@ -28,7 +27,7 @@ public class CWGuiConfig extends GuiConfig
 
         for (String s : Settings.Categories.SUPER_CATEGORIES)
         {
-            list.add(new ConfigElement(CelestialWizardry.config.getCategory(s)));
+            list.add(new ConfigElement(CelestiCore.config.getCategory(s)));
         }
 
         return list;

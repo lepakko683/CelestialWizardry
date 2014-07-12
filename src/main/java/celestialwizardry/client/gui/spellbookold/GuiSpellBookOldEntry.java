@@ -4,7 +4,7 @@ import celestialwizardry.api.spellbook.SpellBookEntry;
 import celestialwizardry.api.spellbook.SpellBookPage;
 import celestialwizardry.api.spellbook.internal.IGuiSpellBookEntry;
 import celestialwizardry.handler.ClientTickEventHandler;
-import celestialwizardry.util.StringHelper;
+import celestialwizardry.util.CWStringHelper;
 
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
@@ -28,7 +28,7 @@ public class GuiSpellBookOldEntry extends GuiSpellBookOld implements IGuiSpellBo
         this.entry = entry;
         this.parent = parent;
 
-        title = StringHelper.localize(entry.getUnlocalizedName());
+        title = CWStringHelper.localize(entry.getUnlocalizedName());
     }
 
     @Override

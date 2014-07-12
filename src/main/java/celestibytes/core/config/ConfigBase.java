@@ -1,4 +1,4 @@
-package celestialwizardry.config;
+package celestibytes.core.config;
 
 import net.minecraftforge.common.config.ConfigCategory;
 import net.minecraftforge.common.config.Configuration;

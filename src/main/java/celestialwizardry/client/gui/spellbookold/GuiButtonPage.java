@@ -1,8 +1,8 @@
 package celestialwizardry.client.gui.spellbookold;
 
 import celestialwizardry.reference.Resources;
+import celestialwizardry.util.CWStringHelper;
 import celestialwizardry.util.RenderHelper;
-import celestialwizardry.util.StringHelper;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
@@ -40,10 +40,10 @@ public class GuiButtonPage extends GuiButton
 
             if (k == 2)
             {
-                RenderHelper.renderTooltip(par2, par3, Arrays.asList(StringHelper.localize(
+                RenderHelper.renderTooltip(par2, par3, Arrays.asList(CWStringHelper.localize(
                         right ? "misc." + Resources.RESOURCE_PREFIX + "nextPage"
                                 : "misc." + Resources.RESOURCE_PREFIX + "prevPage"
-                                                                                          )));
+                                                                                            )));
             }
         }
     }

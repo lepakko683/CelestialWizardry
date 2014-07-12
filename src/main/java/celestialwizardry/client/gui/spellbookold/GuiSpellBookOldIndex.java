@@ -4,7 +4,7 @@ import celestialwizardry.api.spellbook.SpellBookCategory;
 import celestialwizardry.api.spellbook.SpellBookEntry;
 import celestialwizardry.client.gui.GuiButtonInvisible;
 import celestialwizardry.handler.ClientTickEventHandler;
-import celestialwizardry.util.StringHelper;
+import celestialwizardry.util.CWStringHelper;
 
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.util.EnumChatFormatting;
@@ -31,7 +31,7 @@ public class GuiSpellBookOldIndex extends GuiSpellBookOld
     public GuiSpellBookOldIndex(SpellBookCategory category)
     {
         this.category = category;
-        title = StringHelper.localize(category.getUnlocalizedName());
+        title = CWStringHelper.localize(category.getUnlocalizedName());
     }
 
     @Override
@@ -73,7 +73,7 @@ public class GuiSpellBookOldIndex extends GuiSpellBookOld
 
             if (entry != null)
             {
-                button.displayString = (entry.isPriority() ? EnumChatFormatting.ITALIC : "") + StringHelper
+                button.displayString = (entry.isPriority() ? EnumChatFormatting.ITALIC : "") + CWStringHelper
                         .localize(entry.getUnlocalizedName());
             }
             else

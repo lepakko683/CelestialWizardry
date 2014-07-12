@@ -4,7 +4,7 @@ import celestialwizardry.api.spellbook.IAddonEntry;
 import celestialwizardry.api.spellbook.SpellBookEntry;
 import celestialwizardry.api.spellbook.SpellBookPage;
 import celestialwizardry.api.spellbook.internal.IGuiSpellBookEntry;
-import celestialwizardry.util.StringHelper;
+import celestialwizardry.util.CWStringHelper;
 
 import net.minecraft.entity.player.InventoryPlayer;
 import cpw.mods.fml.relauncher.Side;
@@ -27,11 +27,11 @@ public class GuiSpellBookEntry extends GuiSpellBookGuide implements IGuiSpellBoo
         this.entry = entry;
         this.parent = parent;
 
-        title = StringHelper.localize(entry.getUnlocalizedName());
+        title = CWStringHelper.localize(entry.getUnlocalizedName());
 
         if (entry instanceof IAddonEntry)
         {
-            subtitle = StringHelper.localize(((IAddonEntry) entry).getSubtitle());
+            subtitle = CWStringHelper.localize(((IAddonEntry) entry).getSubtitle());
         }
         else
         {

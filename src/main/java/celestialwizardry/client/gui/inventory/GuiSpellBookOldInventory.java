@@ -4,8 +4,8 @@ import celestialwizardry.inventory.ContainerSpellBookOld;
 import celestialwizardry.inventory.InventorySpellBookOld;
 import celestialwizardry.reference.Names;
 import celestialwizardry.reference.Resources;
+import celestialwizardry.util.CWStringHelper;
 import celestialwizardry.util.NBTHelper;
-import celestialwizardry.util.StringHelper;
 
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.EntityPlayer;
@@ -36,9 +36,9 @@ public class GuiSpellBookOldInventory extends GuiContainer
     @Override
     protected void drawGuiContainerForegroundLayer(int x, int y)
     {
-        fontRendererObj.drawString(StringHelper.localize(inventorySpellBookOld.getInventoryName()), 8, 6, 4210752);
+        fontRendererObj.drawString(CWStringHelper.localize(inventorySpellBookOld.getInventoryName()), 8, 6, 4210752);
         fontRendererObj
-                .drawString(StringHelper.localize(Names.Containers.VANILLA_INVENTORY), 35, ySize - 95 + 2, 4210752);
+                .drawString(CWStringHelper.localize(Names.Containers.VANILLA_INVENTORY), 35, ySize - 95 + 2, 4210752);
     }
 
     @Override

@@ -1,8 +1,8 @@
 package celestialwizardry.client.gui.spellbookold;
 
 import celestialwizardry.reference.Resources;
+import celestialwizardry.util.CWStringHelper;
 import celestialwizardry.util.RenderHelper;
-import celestialwizardry.util.StringHelper;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
@@ -45,6 +45,6 @@ public class GuiButtonBack extends GuiButton
 
     public List<String> getTooltip()
     {
-        return Arrays.asList(StringHelper.localize("misc." + Resources.RESOURCE_PREFIX + "back"));
+        return Arrays.asList(CWStringHelper.localize("misc." + Resources.RESOURCE_PREFIX + "back"));
     }
 }

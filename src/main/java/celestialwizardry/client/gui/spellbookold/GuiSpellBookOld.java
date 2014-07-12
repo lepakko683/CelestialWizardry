@@ -7,7 +7,7 @@ import celestialwizardry.handler.ClientTickEventHandler;
 import celestialwizardry.init.ModItems;
 import celestialwizardry.reference.Resources;
 import celestialwizardry.registry.SpellBookRegistry;
-import celestialwizardry.util.StringHelper;
+import celestialwizardry.util.CWStringHelper;
 
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
@@ -76,7 +76,7 @@ public class GuiSpellBookOld extends GuiScreen
         boolean unicode = fontRendererObj.getUnicodeFlag();
         fontRendererObj.setUnicodeFlag(true);
         fontRendererObj
-                .drawSplitString(StringHelper.localize(UNLOCALIZED_HEADER), left + 15, top + 20, 110,
+                .drawSplitString(CWStringHelper.localize(UNLOCALIZED_HEADER), left + 15, top + 20, 110,
                                  0);
         fontRendererObj.setUnicodeFlag(unicode);
     }
@@ -129,7 +129,7 @@ public class GuiSpellBookOld extends GuiScreen
 
             if (category != null)
             {
-                button.displayString = StringHelper.localize(category.getUnlocalizedName());
+                button.displayString = CWStringHelper.localize(category.getUnlocalizedName());
             }
             else
             {
