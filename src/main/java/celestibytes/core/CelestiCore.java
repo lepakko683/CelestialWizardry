@@ -81,4 +81,22 @@ public class CelestiCore extends CelestiMod
         // Tell everyone that we have successfully post-initialized
         LogHelper.info("Finished post-initialization after " + (System.currentTimeMillis() - start) + " ms");
     }
+
+    @Override
+    public String getId()
+    {
+        return CelestiCore.class.getAnnotation(Mod.class).modid();
+    }
+
+    @Override
+    public String getName()
+    {
+        return CelestiCore.class.getAnnotation(Mod.class).name();
+    }
+
+    @Override
+    public String getVersion()
+    {
+        return CelestiCore.class.getAnnotation(Mod.class).version();
+    }
 }

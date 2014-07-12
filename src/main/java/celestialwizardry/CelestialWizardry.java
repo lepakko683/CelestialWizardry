@@ -203,4 +203,22 @@ public class CelestialWizardry extends CelestiMod
         // Tell everyone that we have successfully post-initialized
         LogHelper.info("Finished post-initialization after " + (System.currentTimeMillis() - start) + " ms");
     }
+
+    @Override
+    public String getId()
+    {
+        return CelestialWizardry.class.getAnnotation(Mod.class).modid();
+    }
+
+    @Override
+    public String getName()
+    {
+        return CelestialWizardry.class.getAnnotation(Mod.class).name();
+    }
+
+    @Override
+    public String getVersion()
+    {
+        return CelestialWizardry.class.getAnnotation(Mod.class).version();
+    }
 }

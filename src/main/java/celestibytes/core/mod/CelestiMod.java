@@ -1,5 +1,7 @@
 package celestibytes.core.mod;
 
-public abstract class CelestiMod
+import celestibytes.core.mod.updater.IUpdateMod;
+
+public abstract class CelestiMod implements IUpdateMod
 {
 }
