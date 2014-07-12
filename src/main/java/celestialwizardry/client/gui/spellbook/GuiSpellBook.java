@@ -115,13 +115,13 @@ public class GuiSpellBook extends GuiContainer {
 		super.initGui();
 		buttonList.clear();
 		
-		guide = new ButtonBookmark(100, CWStringHelper.localize("bookmark." + Resources.RESOURCE_PREFIX + "guide"), BookmarkType.GUIDE, Direction.LEFT);
+		guide = new ButtonBookmark(BUTTON_ID_GUIDE, CWStringHelper.localize("bookmark." + Resources.RESOURCE_PREFIX + "guide"), BookmarkType.GUIDE, Direction.LEFT);
 		buttonList.add(guide);
 		
-		notes = new ButtonBookmark(100, CWStringHelper.localize("bookmark." + Resources.RESOURCE_PREFIX + "notes"), BookmarkType.NOTES, Direction.LEFT);
+		notes = new ButtonBookmark(BUTTON_ID_NOTES, CWStringHelper.localize("bookmark." + Resources.RESOURCE_PREFIX + "notes"), BookmarkType.NOTES, Direction.LEFT);
 		buttonList.add(notes);
 		
-		spells = new ButtonBookmark(100, CWStringHelper.localize("bookmark." + Resources.RESOURCE_PREFIX + "spells"), BookmarkType.SPELLS, Direction.LEFT);
+		spells = new ButtonBookmark(BUTTON_ID_SPELLS, CWStringHelper.localize("bookmark." + Resources.RESOURCE_PREFIX + "spells"), BookmarkType.SPELLS, Direction.LEFT);
 		buttonList.add(spells);
 		
 		backward = new ButtonFlipPage(BUTTON_ID_BACKWARD, Direction.LEFT, "").setGuiPos(this.guiLeft, this.guiTop);
