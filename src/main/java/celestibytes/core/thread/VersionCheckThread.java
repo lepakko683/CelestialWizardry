@@ -34,7 +34,7 @@ public class VersionCheckThread implements Runnable
         this.mod = mod;
         if (url == null)
         {
-            this.url = "";
+            this.url = "https://raw.githubusercontent.com/Celestibytes/" + mod.getId().toLowerCase() + "/develop/version.json";
         }
         else
         {

@@ -14,7 +14,7 @@ public final class CWApi
 {
     public static final String VERSION = "0.1";
     public static final String ID = "cwapi|";
-    public static final String MOD_ID = "celestibytes/celestialwizardry";
+    public static final String MOD_ID = "celestialwizardry";
 
     public static final String CW_PACKAGE = "celestialwizardry.";
 

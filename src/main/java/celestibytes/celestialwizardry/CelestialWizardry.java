@@ -121,7 +121,7 @@ public class CelestialWizardry extends CelestiMod
         config.save();
 
         // Register version checker
-        VersionManagerRegistry.registerVersionManager(new VersionManager(this));
+        VersionManagerRegistry.registerVersionManager(new VersionManager(this, "https://raw.githubusercontent.com/Celestibytes/CelestialWizardry/develop/version.json"));
 
         // Initialize mod items
         ModItems.init();
