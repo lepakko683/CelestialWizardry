@@ -32,7 +32,14 @@ public class VersionCheckThread implements Runnable
     {
         thread = new Thread(this, "Cbs Version Check Thread - " + threadNumber());
         this.mod = mod;
-        this.url = url;
+        if (url == null)
+        {
+            this.url = "";
+        }
+        else
+        {
+            this.url = url;
+        }
     }
 
     public static int threadNumber()
@@ -79,6 +86,9 @@ public class VersionCheckThread implements Runnable
 
                         ModVersion version = ModVersion.parse((String) group.get("version"));
                         ModVersion local = ModVersion.parse(mod.getVersion());
+
+                        String description = (String) group.get("description");
+                        version.setDescription(description);
 
                         if (local.compareTo(version) < 0)
                         {

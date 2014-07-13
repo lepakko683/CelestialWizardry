@@ -7,6 +7,7 @@ public class ModVersion implements Comparable<ModVersion>
     private final int patch;
     private final int rc;
     private final int beta;
+    private String description;
 
     public ModVersion(int major, int minor, int patch)
     {
@@ -188,6 +189,11 @@ public class ModVersion implements Comparable<ModVersion>
 
     public String description()
     {
-        return "null"; // TODO
+        return description;
+    }
+
+    public void setDescription(String description)
+    {
+        this.description = description;
     }
 }

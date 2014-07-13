@@ -35,7 +35,10 @@ import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 import celestibytes.core.mod.CelestiMod;
+import celestibytes.core.mod.version.VersionManager;
 import celestibytes.core.reference.Settings;
+import celestibytes.core.registry.VersionManagerRegistry;
+import celestibytes.core.thread.VersionCheckThread;
 
 import java.io.File;
 
@@ -116,6 +119,9 @@ public class CelestialWizardry extends CelestiMod
 
         // Save configuration
         config.save();
+
+        // Register version checker
+        VersionManagerRegistry.registerVersionManager(new VersionManager(this));
 
         // Initialize mod items
         ModItems.init();
