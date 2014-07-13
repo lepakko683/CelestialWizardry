@@ -35,6 +35,7 @@ import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 import celestibytes.core.mod.CelestiMod;
+import celestibytes.core.reference.Settings;
 
 import java.io.File;
 
@@ -220,5 +221,11 @@ public class CelestialWizardry extends CelestiMod
     public String getVersion()
     {
         return CelestialWizardry.class.getAnnotation(Mod.class).version();
+    }
+
+    @Override
+    public boolean allowVersionNote()
+    {
+        return Settings.enableVersionNotification;
     }
 }
