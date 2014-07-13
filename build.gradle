@@ -49,7 +49,7 @@ ext.mc = getCWVersion(getProject(), "MINECRAFT")
 ext.forge = getCWVersion(getProject(), "FORGE")
 ext.baubles = getCWVersion(getProject(), "BAUBLES")
 ext.baubles_mc = getCWVersion(getProject(), "BAUBLES_MC")
-ext.baubles_root = getProperty(getProject(), "src/main/java/celestialwizardry/reference/Reference.java", "BAUBLES_ROOT")
+ext.baubles_root = getProperty(getProject(), "src/main/java/celestibytes/celestialwizardry/reference/Reference.java", "BAUBLES_ROOT")
 
 minecraft {
     version = project.mc + "-" + project.forge

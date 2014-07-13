@@ -14,9 +14,9 @@ public class SettingHandler
          * General
          */
         String category = Settings.Categories.GENERAL;
-        Settings.enableVersionCheck = CelestiCore.config.get(category, Settings.ConfigNames.ENABLE_VERSION_CHECK,
-                                                             Settings.DefaultValues.ENABLE_VERSION_CHECK,
-                                                             Settings.Comments.ENABLE_VERSION_CHECK);
+        Settings.enableVersionNotification = CelestiCore.config.get(category, Settings.ConfigNames.ENABLE_VERSION_NOTIFICATION,
+                                                             Settings.DefaultValues.ENABLE_VERSION_NOTIFICATION,
+                                                             Settings.Comments.ENABLE_VERSION_NOTIFICATION);
         Settings.debugMode = CelestiCore.config.get(category, Settings.ConfigNames.DEBUG_MODE,
                                                     Settings.DefaultValues.DEBUG_MODE,
                                                     Settings.Comments.DEBUG_MODE);

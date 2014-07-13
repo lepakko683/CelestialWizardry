@@ -11,6 +11,7 @@ import celestibytes.core.config.SettingHandler;
 import celestibytes.core.mod.CelestiMod;
 import celestibytes.core.proxy.IProxy;
 import celestibytes.core.reference.Reference;
+import celestibytes.core.reference.Settings;
 import celestibytes.core.reference.Version;
 import celestibytes.core.util.LogHelper;
 
@@ -38,10 +39,10 @@ public class CelestiCore extends CelestiMod
         LogHelper.info("Starting pre-initialization");
 
         // Set configuration directory
-        config.setConfigDir(event, celestialwizardry.reference.Reference.MOD_ID.toLowerCase());
+        config.setConfigDir(event, celestibytes.celestialwizardry.reference.Reference.MOD_ID.toLowerCase());
 
         // Initialize the configuration
-        config.setConfiguration(celestialwizardry.reference.Reference.MOD_NAME.replace(" ", ""));
+        config.setConfiguration(celestibytes.celestialwizardry.reference.Reference.MOD_NAME.replace(" ", ""));
 
         // Initialize configuration settings
         SettingHandler.sync();
@@ -98,5 +99,11 @@ public class CelestiCore extends CelestiMod
     public String getVersion()
     {
         return CelestiCore.class.getAnnotation(Mod.class).version();
+    }
+
+    @Override
+    public boolean allowVersionNote()
+    {
+        return Settings.enableVersionNotification;
     }
 }
