@@ -75,6 +75,8 @@ public class VersionCheckThread implements Runnable
                 {
                     String groupName = nodeName + mod.getId();
                     Map<String, Object> group = (Map<String, Object>) node;
+
+                    String version = (String) group.get("version");
                 }
             }
         }

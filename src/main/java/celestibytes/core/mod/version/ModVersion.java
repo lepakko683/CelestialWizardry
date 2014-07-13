@@ -32,7 +32,7 @@ public class ModVersion implements Comparable<ModVersion>
         String main = s;
         String[] parts;
 
-        parts = main.split("RC");
+        parts = main.split("-rc.");
 
         if (parts.length > 1)
         {
@@ -40,7 +40,7 @@ public class ModVersion implements Comparable<ModVersion>
             main = parts[0];
         }
 
-        parts = main.split("B");
+        parts = main.split("-beta.");
 
         if (parts.length > 1)
         {

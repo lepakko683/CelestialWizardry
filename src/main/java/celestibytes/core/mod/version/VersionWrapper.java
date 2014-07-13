@@ -15,7 +15,7 @@ public class VersionWrapper implements Comparable<VersionWrapper>
 
     public VersionWrapper(String mc, String version, int build)
     {
-        this(new MinecraftVersion(mc), new ModVersion(version), build);
+        this(new MinecraftVersion(mc), ModVersion.parse(version), build);
     }
 
     public VersionWrapper(MinecraftVersion mc, ModVersion version, int build)
