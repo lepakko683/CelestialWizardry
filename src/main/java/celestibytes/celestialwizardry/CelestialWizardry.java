@@ -38,7 +38,6 @@ import celestibytes.core.mod.CelestiMod;
 import celestibytes.core.mod.version.VersionManager;
 import celestibytes.core.reference.Settings;
 import celestibytes.core.registry.VersionManagerRegistry;
-import celestibytes.core.thread.VersionCheckThread;
 
 import java.io.File;
 

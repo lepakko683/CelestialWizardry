@@ -16,7 +16,7 @@ public final class CWApi
     public static final String ID = "cwapi|";
     public static final String MOD_ID = "celestialwizardry";
 
-    public static final String CW_PACKAGE = "celestialwizardry.";
+    public static final String CW_PACKAGE = "celestibytes.celestialwizardry.";
 
     private static final String REGISTRY_PACKAGE = CW_PACKAGE + "registry.";
     private static final String SPELL_REGISTRY = REGISTRY_PACKAGE + "SpellRegistry";
