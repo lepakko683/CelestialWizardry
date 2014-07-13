@@ -21,7 +21,7 @@ buildscript {
         }
     }
     dependencies {
-        classpath 'io.github.pizzana:CelestiGradle:1.0.2'
+        classpath 'celestibytes.gradle:CelestiGradle:1.0.2'
         classpath 'io.github.pizzana:JKaffe:1.0.1'
     }
 }
