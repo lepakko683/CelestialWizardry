@@ -8,5 +8,7 @@ public interface IMod
 
     public String getVersion();
 
+    public String getMinecraftVersion();
+
     public boolean allowVersionNote();
 }

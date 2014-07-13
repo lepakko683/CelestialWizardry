@@ -1,7 +1,7 @@
 package celestibytes.core.thread;
 
 import celestibytes.core.mod.IMod;
-import celestibytes.core.util.StringHelper;
+import celestibytes.core.mod.version.ModVersion;
 import com.google.common.io.ByteStreams;
 import com.google.gson.Gson;
 
@@ -21,7 +21,7 @@ public class VersionCheckThread implements Runnable
     private final String url;
     private boolean checkComplete = false;
     private boolean newVersionAvailable = false;
-    private boolean criticalUpdate = false;
+    private ModVersion newVersion;
 
     public VersionCheckThread(IMod mod)
     {
@@ -73,10 +73,19 @@ public class VersionCheckThread implements Runnable
 
                 if (node instanceof Map)
                 {
-                    String groupName = nodeName + mod.getId();
-                    Map<String, Object> group = (Map<String, Object>) node;
+                    if (nodeName.equals(mod.getMinecraftVersion()))
+                    {
+                        Map<String, Object> group = (Map<String, Object>) node;
 
-                    String version = (String) group.get("version");
+                        ModVersion version = ModVersion.parse((String) group.get("version"));
+                        ModVersion local = ModVersion.parse(mod.getVersion());
+
+                        if (local.compareTo(version) < 0)
+                        {
+                            newVersionAvailable = true;
+                            newVersion = version;
+                        }
+                    }
                 }
             }
         }
@@ -88,6 +97,8 @@ public class VersionCheckThread implements Runnable
         {
             e.printStackTrace();
         }
+
+        checkComplete = true;
     }
 
     public void start()
@@ -105,13 +116,13 @@ public class VersionCheckThread implements Runnable
         return checkComplete;
     }
 
-    public boolean isCriticalUpdate() {
-
-        return criticalUpdate;
-    }
-
     public boolean newVersionAvailable() {
 
         return newVersionAvailable;
+    }
+
+    public ModVersion getNewVersion()
+    {
+        return newVersion;
     }
 }

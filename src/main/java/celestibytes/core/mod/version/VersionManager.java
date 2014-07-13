@@ -1,5 +1,7 @@
 package celestibytes.core.mod.version;
 
+import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.EnumChatFormatting;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.TickEvent;
 
@@ -49,9 +51,15 @@ public class VersionManager
 
             if (thread.newVersionAvailable())
             {
-                if (!mod.allowVersionNote())
+                if (mod.allowVersionNote())
                 {
-                    return;
+                    ModVersion version = thread.getNewVersion();
+
+                    event.player.addChatMessage(
+                            new ChatComponentText(EnumChatFormatting.GOLD + "[" + mod.getName() + "]").appendText(
+                                    EnumChatFormatting.WHITE + " A new version is available: ").appendText(
+                                    EnumChatFormatting.AQUA + version.toString()));
+                    event.player.addChatMessage(new ChatComponentText(EnumChatFormatting.GRAY + version.description()));
                 }
             }
         }

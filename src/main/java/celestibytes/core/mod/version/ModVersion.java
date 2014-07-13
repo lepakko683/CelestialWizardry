@@ -185,4 +185,9 @@ public class ModVersion implements Comparable<ModVersion>
 
         return 0;
     }
+
+    public String description()
+    {
+        return "null"; // TODO
+    }
 }
