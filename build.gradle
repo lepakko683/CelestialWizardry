@@ -21,7 +21,7 @@ buildscript {
         }
     }
     dependencies {
-        classpath 'io.github.pizzana:CelestiGradle:1.0.0'
+        classpath 'io.github.pizzana:CelestiGradle:1.0.1'
         classpath 'io.github.pizzana:JKaffe:1.0.0'
     }
 }
@@ -29,7 +29,6 @@ buildscript {
 import static io.github.pizzana.jkaffe.util.gradle.ProjectPropertyHelper.Source.*;
 
 apply plugin: 'maven'
-apply plugin: 'signing'
 apply plugin: 'forge'
 
 group 'io.github.pizzana'
@@ -92,11 +91,6 @@ if (!project.hasProperty("keystore_location"))
 }
 
 apply plugin: 'celestibytes'
-
-signing {
-	required {project.hasProperty("signing.keyId") && project.hasProperty("signing.password")}
-    sign configurations.archives
-}
 
 uploadArchives {
     /* repositories {
