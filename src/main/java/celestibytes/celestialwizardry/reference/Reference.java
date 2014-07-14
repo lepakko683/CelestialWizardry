@@ -18,7 +18,7 @@ public class Reference
 
     public static final String FINGERPRINT = "@FINGERPRINT@";
 
-    public static final String DEPENDENCIES = "required-after:Forge@[10.12.1.1110,);required-after:celesticore;required-after:Baubles;before:cwapi|core";
+    public static final String DEPENDENCIES = "required-after:celesticore@[" + celestibytes.core.reference.Version.VERSION + ",);after:Baubles";
 
     public static final String BAUBLES_ROOT = "https://dl.dropboxusercontent.com/u/47135879/";
     public static final String BAUBLES_ID = "Baubles";
