@@ -13,8 +13,8 @@ import java.util.List;
 public final class CWApi
 {
     public static final String VERSION = "0.1";
-    public static final String ID = "cwapi|";
     public static final String MOD_ID = "celestialwizardry";
+    public static final String ID = MOD_ID + "|API|";
 
     public static final String CW_PACKAGE = "celestibytes.celestialwizardry.";
 
