@@ -5,8 +5,13 @@ import cpw.mods.fml.common.FMLCommonHandler;
 import celestibytes.core.mod.IMod;
 import celestibytes.core.mod.version.VersionManager;
 
-public class VersionManagerRegistry
+public final class VersionManagerRegistry
 {
+    private VersionManagerRegistry()
+    {
+
+    }
+
     public static void registerVersionManager(VersionManager manager, IMod mod)
     {
         if (mod.allowVersionCheck())

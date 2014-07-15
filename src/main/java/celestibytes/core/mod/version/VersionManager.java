@@ -9,7 +9,7 @@ import celestibytes.core.mod.IMod;
 import celestibytes.core.registry.VersionManagerRegistry;
 import celestibytes.core.thread.VersionCheckThread;
 
-public class VersionManager
+public final class VersionManager
 {
     private final IMod mod;
     private final VersionCheckThread thread;
