@@ -13,7 +13,7 @@ import celestibytes.core.proxy.IProxy;
 import celestibytes.core.reference.Reference;
 import celestibytes.core.reference.Settings;
 import celestibytes.core.reference.Version;
-import celestibytes.core.util.LogHelper;
+import celestibytes.core.util.log.CoreLogHelper;
 
 @Mod(modid = Reference.MOD_ID, name = Reference.MOD_NAME, version = Reference.MOD_VERSION,
      certificateFingerprint = Reference.FINGERPRINT, dependencies = Reference.DEPENDENCIES,
@@ -36,7 +36,7 @@ public class CelestiCore extends CelestiMod
         long start = System.currentTimeMillis();
 
         // Tell everyone that we are starting pre-initialization
-        LogHelper.info("Starting pre-initialization");
+        CoreLogHelper.info("Starting pre-initialization");
 
         // Set configuration directory
         config.setConfigDir(event, celestibytes.celestialwizardry.reference.Reference.MOD_ID.toLowerCase());
@@ -51,7 +51,7 @@ public class CelestiCore extends CelestiMod
         config.save();
 
         // Tell everyone that we have successfully pre-initialized
-        LogHelper.info("Finished pre-initialization after " + (System.currentTimeMillis() - start) + " ms");
+        CoreLogHelper.info("Finished pre-initialization after " + (System.currentTimeMillis() - start) + " ms");
     }
 
     @Mod.EventHandler
@@ -61,13 +61,13 @@ public class CelestiCore extends CelestiMod
         long start = System.currentTimeMillis();
 
         // Tell everyone that we are starting initialization
-        LogHelper.info("Starting initialization");
+        CoreLogHelper.info("Starting initialization");
 
         // Register Event Handlers
         proxy.registerEventHandlers();
 
         // Tell everyone that we have successfully initialized
-        LogHelper.info("Finished initialization after " + (System.currentTimeMillis() - start) + " ms");
+        CoreLogHelper.info("Finished initialization after " + (System.currentTimeMillis() - start) + " ms");
     }
 
     @Mod.EventHandler
@@ -77,10 +77,10 @@ public class CelestiCore extends CelestiMod
         long start = System.currentTimeMillis();
 
         // Tell everyone that we are starting post-initialization
-        LogHelper.info("Starting post-initialization");
+        CoreLogHelper.info("Starting post-initialization");
 
         // Tell everyone that we have successfully post-initialized
-        LogHelper.info("Finished post-initialization after " + (System.currentTimeMillis() - start) + " ms");
+        CoreLogHelper.info("Finished post-initialization after " + (System.currentTimeMillis() - start) + " ms");
     }
 
     @Override

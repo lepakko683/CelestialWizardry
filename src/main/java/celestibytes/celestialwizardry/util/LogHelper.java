@@ -2,21 +2,21 @@ package celestibytes.celestialwizardry.util;
 
 import celestibytes.celestialwizardry.reference.Reference;
 
-import cpw.mods.fml.common.FMLLog;
+import celestibytes.core.util.log.CoreLogHelper;
 
 import org.apache.logging.log4j.Level;
 
-public class LogHelper
+public class LogHelper extends CoreLogHelper
 {
     private static void log(Level logLevel, Object object, boolean api)
     {
         if (api)
         {
-            FMLLog.log(Reference.MOD_NAME + "Api", logLevel, String.valueOf(object));
+            log(Reference.MOD_NAME + "Api", logLevel, String.valueOf(object));
         }
         else
         {
-            FMLLog.log(Reference.MOD_NAME, logLevel, String.valueOf(object));
+            log(Reference.MOD_NAME, logLevel, String.valueOf(object));
         }
     }
 

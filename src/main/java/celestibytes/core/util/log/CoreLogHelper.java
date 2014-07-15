@@ -1,21 +1,26 @@
-package celestibytes.core.util;
-
-import cpw.mods.fml.common.FMLLog;
+package celestibytes.core.util.log;
 
 import celestibytes.core.reference.Reference;
+
+import cpw.mods.fml.common.FMLLog;
 import org.apache.logging.log4j.Level;
 
-public class LogHelper
+public class CoreLogHelper
 {
+    protected static void log(String targetLog, Level logLevel, Object object)
+    {
+        FMLLog.log(targetLog, logLevel, String.valueOf(object));
+    }
+
     private static void log(Level logLevel, Object object, boolean api)
     {
         if (api)
         {
-            FMLLog.log(Reference.MOD_NAME + "Api", logLevel, String.valueOf(object));
+            log(Reference.MOD_NAME + "Api", logLevel, String.valueOf(object));
         }
         else
         {
-            FMLLog.log(Reference.MOD_NAME, logLevel, String.valueOf(object));
+            log(Reference.MOD_NAME, logLevel, String.valueOf(object));
         }
     }
 
@@ -124,7 +129,7 @@ public class LogHelper
     {
         private static void log(Level logLevel, Object object)
         {
-            LogHelper.log(logLevel, String.valueOf(object), true);
+            CoreLogHelper.log(logLevel, String.valueOf(object), true);
         }
 
         /**
