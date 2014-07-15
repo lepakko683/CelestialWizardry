@@ -11,6 +11,8 @@ public class Settings
      * General
      */
     public static boolean enableSeasonal;
+    public static boolean enableVersionCheck;
+    public static boolean enableVersionNotification;
     public static boolean debugMode;
     public static boolean shiftForDetails;
 
@@ -38,6 +40,8 @@ public class Settings
          * General
          */
         public static final boolean ENABLE_SEASONAL = true;
+        public static final boolean ENABLE_VERSION_CHECK = true;
+        public static final boolean ENABLE_VERSION_NOTIFICATION = true;
         public static final boolean DEBUG_MODE = false;
         public static final boolean SHIFT_FOR_DETAILS = true;
 
@@ -66,6 +70,8 @@ public class Settings
          * General
          */
         public static final String ENABLE_SEASONAL = "enableSeasonal";
+        public static final String ENABLE_VERSION_CHECK = "enableVersionCheck";
+        public static final String ENABLE_VERSION_NOTIFICATION = "enableVersionNotification";
         public static final String DEBUG_MODE = "debugMode";
         public static final String SHIFT_FOR_DETAILS = "shiftForDetails";
 
@@ -94,6 +100,8 @@ public class Settings
          * General
          */
         public static final String ENABLE_SEASONAL = "If true, mod will have some seasonal fun.";
+        public static final String ENABLE_VERSION_CHECK = "If true, mod will automatically check for new version.";
+        public static final String ENABLE_VERSION_NOTIFICATION = "If true, mod will display notification to player if new version is found. Doesn't do anything if " + ConfigNames.ENABLE_VERSION_CHECK + " is false.";
         public static final String DEBUG_MODE = "You should not touch this.";
         public static final String SHIFT_FOR_DETAILS = "If true, you can see extra tooltips by holding shift.";
 

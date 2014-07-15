@@ -15,6 +15,7 @@ import celestibytes.celestialwizardry.network.GuiHandler;
 import celestibytes.celestialwizardry.network.PacketHandler;
 import celestibytes.celestialwizardry.proxy.IProxy;
 import celestibytes.celestialwizardry.reference.Reference;
+import celestibytes.celestialwizardry.reference.Settings;
 import celestibytes.celestialwizardry.reference.Version;
 import celestibytes.celestialwizardry.spellbook.SpellBook;
 import celestibytes.celestialwizardry.util.LogHelper;
@@ -36,7 +37,6 @@ import cpw.mods.fml.common.registry.GameRegistry;
 
 import celestibytes.core.mod.CelestiMod;
 import celestibytes.core.mod.version.VersionManager;
-import celestibytes.core.reference.Settings;
 import celestibytes.core.registry.VersionManagerRegistry;
 
 import java.io.File;
@@ -231,6 +231,6 @@ public class CelestialWizardry extends CelestiMod
     @Override
     public boolean allowVersionNote()
     {
-        return true; // Settings.enableVersionNotification;
+        return Settings.enableVersionNotification;
     }
 }
