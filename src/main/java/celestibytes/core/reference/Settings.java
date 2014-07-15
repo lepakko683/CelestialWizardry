@@ -9,6 +9,7 @@ public class Settings
      */
     public static boolean enableVersionCheck;
     public static boolean enableVersionNotification;
+    public static String channel;
     public static boolean debugMode;
 
     public static class DefaultValues
@@ -18,6 +19,7 @@ public class Settings
          */
         public static final boolean ENABLE_VERSION_CHECK = true;
         public static final boolean ENABLE_VERSION_NOTIFICATION = true;
+        public static final String CHANNEL = "stable";
         public static final boolean DEBUG_MODE = false;
     }
 
@@ -28,6 +30,7 @@ public class Settings
          */
         public static final String ENABLE_VERSION_CHECK = "enableVersionCheck";
         public static final String ENABLE_VERSION_NOTIFICATION = "enableVersionNotification";
+        public static final String CHANNEL = "channel";
         public static final String DEBUG_MODE = "debugMode";
     }
 
@@ -40,6 +43,7 @@ public class Settings
         public static final String ENABLE_VERSION_NOTIFICATION =
                 "If true, mod will display notification to player if new version is found. Doesn't do anything if "
                         + ConfigNames.ENABLE_VERSION_CHECK + " is false.";
+        public static final String CHANNEL = "The channel this mod looks for update. Valid values: stable, rc, beta, alpha.";
         public static final String DEBUG_MODE = "You should not touch this.";
     }
 

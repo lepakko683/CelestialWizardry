@@ -1,7 +1,5 @@
 package celestibytes.core.mod.version;
 
-import celestibytes.core.util.CoreLogH;
-
 /**
  * TODO Handle more cases, like release candidates, betas and alphas.
  */
@@ -12,28 +10,35 @@ public final class ModVersion implements Comparable<ModVersion>
     private final int patch;
     private final boolean prerelease;
     private final String postfix;
-    private String description;
+    private final Channel channel;
+    private String description = "";
 
     public ModVersion(int major, int minor, int patch)
     {
-        this(major, minor, patch, false, null);
+        this(major, minor, patch, false, null, Channel.STABLE);
+    }
+
+    public ModVersion(int major, int minor, int patch, Channel channel)
+    {
+        this(major, minor, patch, false, null, Channel.STABLE);
     }
 
     public ModVersion(int major, int minor, int patch, String postfix)
     {
-        this(major, minor, patch, true, postfix);
+        this(major, minor, patch, true, postfix, parseReleaseType(postfix));
     }
 
-    public ModVersion(int major, int minor, int patch, boolean prerelease, String postfix)
+    public ModVersion(int major, int minor, int patch, boolean prerelease, String postfix, Channel channel)
     {
         this.major = major;
         this.minor = minor;
         this.patch = patch;
         this.prerelease = prerelease;
         this.postfix = postfix;
+        this.channel = channel;
     }
 
-    public static ModVersion parse(String s)
+    public static ModVersion parse(String s, Channel channel)
     {
         int major;
         int minor;
@@ -90,6 +95,28 @@ public final class ModVersion implements Comparable<ModVersion>
         patch = Integer.parseInt(patchS);
 
         return prerelease ? new ModVersion(major, minor, patch, postfix) : new ModVersion(major, minor, patch);
+    }
+
+    private static Channel parseReleaseType(String postfix)
+    {
+        Channel channel = Channel.DEFAULT;
+
+        if (postfix.contains(Channel.ALPHA.getKey()))
+        {
+            channel = Channel.ALPHA;
+        }
+
+        if (postfix.contains(Channel.BETA.getKey()))
+        {
+            channel = Channel.BETA;
+        }
+
+        if (postfix.contains(Channel.RC.getKey()))
+        {
+            channel = Channel.RC;
+        }
+
+        return channel;
     }
 
     public int major()
@@ -162,6 +189,11 @@ public final class ModVersion implements Comparable<ModVersion>
     @Override
     public int compareTo(ModVersion o)
     {
+        if (isStable() && !o.isStable())
+        {
+            return 1;
+        }
+
         if (major != o.major)
         {
             return major < o.major ? -1 : 1;
@@ -175,11 +207,6 @@ public final class ModVersion implements Comparable<ModVersion>
         if (patch != o.patch)
         {
             return patch < o.patch ? -1 : 1;
-        }
-
-        if (isStable() && !o.isStable())
-        {
-            return 1;
         }
 
         if (!isStable() && o.isStable())

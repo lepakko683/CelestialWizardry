@@ -118,4 +118,16 @@ public class CelestiCore extends CelestiMod
     {
         return Settings.enableVersionNotification;
     }
+
+    @Override
+    protected String channel()
+    {
+        return Version.CHANNEL;
+    }
+
+    @Override
+    protected String updateChannel()
+    {
+        return Settings.channel;
+    }
 }

@@ -1,6 +1,7 @@
 package celestibytes.core.thread;
 
 import celestibytes.core.mod.IMod;
+import celestibytes.core.mod.version.Channel;
 import celestibytes.core.mod.version.ModVersion;
 
 import cpw.mods.fml.common.FMLLog;
@@ -11,13 +12,14 @@ import org.apache.logging.log4j.Level;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.Map;
 
 public class VersionCheckThread implements Runnable
 {
+    public static final String DEFAULT_URL = "https://raw.githubusercontent.com/Celestibytes/VersionCheck/master/version.json";
+
     private static int threadNumber = 0;
 
     private final Thread thread;
@@ -39,7 +41,7 @@ public class VersionCheckThread implements Runnable
 
         if (url == null)
         {
-            this.url = "https://raw.githubusercontent.com/Celestibytes/" + mod.getId().toLowerCase() + "/develop/version.json";
+            this.url = DEFAULT_URL;
         }
         else
         {
@@ -61,57 +63,85 @@ public class VersionCheckThread implements Runnable
      * @see Thread#run()
      */
     @Override
-    @SuppressWarnings("unchecked")
     public void run()
     {
         try
         {
-            URLConnection connection = new URL(url).openConnection();
-            connection.setRequestProperty("User-Agent", System.getProperty("java.version"));
-            connection.connect();
-
-            InputStream stream = connection.getInputStream();
-
-            String data = new String(ByteStreams.toByteArray(stream));
-
-            stream.close();
-
-            Map<String, Object> groups = new Gson().fromJson(data, Map.class);
-
-            for (Map.Entry<String, Object> entry : groups.entrySet())
-            {
-                String nodeName = entry.getKey();
-                Object node = entry.getValue();
-
-                if (node instanceof Map)
-                {
-                    if (nodeName.equals(mod.getMinecraftVersion()))
-                    {
-                        Map<String, Object> group = (Map<String, Object>) node;
-
-                        ModVersion remote = ModVersion.parse((String) group.get("version"));
-                        ModVersion local = ModVersion.parse(mod.getVersion());
-
-                        String description = (String) group.get("description");
-                        remote.setDescription(description);
-
-                        if (local.compareTo(remote) < 0)
-                        {
-                            newVersionAvailable = true;
-                            newVersion = remote;
-
-                            FMLLog.log(mod.getTargetLog(), Level.INFO, "A new version (" + newVersion +  ") of " + mod.getName() + " for Minecraft " + mod.getMinecraftVersion() + " is available.");
-                        }
-                    }
-                }
-            }
+            check();
         }
         catch (IOException e)
         {
             e.printStackTrace();
         }
+        finally
+        {
+            checkComplete = true;
+        }
+    }
 
-        checkComplete = true;
+    // TODO Users will be able to configure which channel the mod looks for updates
+    @SuppressWarnings("unchecked")
+    public void check() throws IOException
+    {
+        URLConnection urlConnection = new URL(url).openConnection();
+
+        urlConnection.setRequestProperty("User-Agent", System.getProperty("java.version"));
+        urlConnection.connect();
+
+        InputStream inputStream = urlConnection.getInputStream();
+
+        String json = new String(ByteStreams.toByteArray(inputStream));
+
+        inputStream.close();
+
+        Map<String, Object> entries = new Gson().fromJson(json, Map.class);
+
+        for (Map.Entry<String, Object> entry : entries.entrySet())
+        {
+            if (entry.getKey().equals(mod.getId()) && entry.getValue() instanceof Map)
+            {
+                Map<String, Object> modNode = (Map<String, Object>) entry.getValue();
+
+                if (modNode.containsKey(mod.getMinecraftVersion()) && modNode.get(mod.getMinecraftVersion()) instanceof Map)
+                {
+                    Channel channel = mod.getUpdateChannel();
+                    Map<String, Object> channels = (Map<String, Object>) ((Map<String, Object>) modNode.get(mod.getMinecraftVersion())).get("channels");
+                    // Map<String, Object> map = (Map<String, Object>) channels.get(mod.getUpdateChannel().getKey());
+
+                    String remoteS = null;
+                    String description = "";
+
+                    for (int i = 0; i < Channel.values().length; i++)
+                    {
+                        Map<String, Object> map = (Map<String, Object>) channels.get(channel.getKey());
+
+                        if (channel.getNext() != null && map.get("version").equals(channel.getNext().getKey()))
+                        {
+                            channel = channel.getNext();
+                        }
+                        else
+                        {
+                            remoteS = (String) map.get("version");
+                            description = (String) map.get("description");
+                            break;
+                        }
+                    }
+
+                    ModVersion local = ModVersion.parse(mod.getVersion(), mod.getChannel());
+                    ModVersion remote = ModVersion.parse(remoteS, channel);
+
+                    remote.setDescription(description);
+
+                    if (local.compareTo(remote) < 0)
+                    {
+                        newVersionAvailable = true;
+                        newVersion = remote;
+
+                        FMLLog.log(mod.getTargetLog(), Level.INFO, "A new version (" + newVersion +  ") of " + mod.getName() + " for Minecraft " + mod.getMinecraftVersion() + " is available.");
+                    }
+                }
+            }
+        }
     }
 
     public void start()

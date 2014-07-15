@@ -30,6 +30,9 @@ public class SettingHandler
                 .get(category, Settings.ConfigNames.ENABLE_VERSION_NOTIFICATION,
                      Settings.DefaultValues.ENABLE_VERSION_NOTIFICATION, Settings.Comments.ENABLE_VERSION_NOTIFICATION);
 
+        // channel
+        Settings.channel = CelestialWizardry.config.get(category, Settings.ConfigNames.CHANNEL, Settings.DefaultValues.CHANNEL, Settings.Comments.CHANNEL);
+
         // debugMode
         Settings.debugMode = CelestialWizardry.config
                 .get(category, Settings.ConfigNames.DEBUG_MODE, Settings.DefaultValues.DEBUG_MODE,

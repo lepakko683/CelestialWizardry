@@ -1,6 +1,6 @@
 package celestibytes.core.mod;
 
-import net.minecraft.client.Minecraft;
+import celestibytes.core.mod.version.Channel;
 
 public abstract class CelestiMod implements IMod
 {
@@ -23,4 +23,19 @@ public abstract class CelestiMod implements IMod
     {
         return registered;
     }
+
+    public Channel getChannel()
+    {
+        return Channel.getChannelFromString(channel());
+    }
+
+    protected abstract String channel();
+
+    @Override
+    public Channel getUpdateChannel()
+    {
+        return Channel.getChannelFromString(updateChannel());
+    }
+
+    protected abstract String updateChannel();
 }

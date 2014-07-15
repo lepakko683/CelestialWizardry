@@ -1,5 +1,7 @@
 package celestibytes.core.mod;
 
+import celestibytes.core.mod.version.Channel;
+
 public interface IMod
 {
     public String getId();
@@ -19,4 +21,8 @@ public interface IMod
     public void setRegistered(boolean registered);
 
     public boolean isRegistered();
+
+    public Channel getChannel();
+
+    public Channel getUpdateChannel();
 }

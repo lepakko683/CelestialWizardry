@@ -1,5 +1,7 @@
 package celestibytes.core.config;
 
+import celestibytes.celestialwizardry.CelestialWizardry;
+
 import celestibytes.core.CelestiCore;
 import celestibytes.core.reference.Settings;
 
@@ -25,6 +27,9 @@ public class SettingHandler
                                                                     Settings.ConfigNames.ENABLE_VERSION_NOTIFICATION,
                                                                     Settings.DefaultValues.ENABLE_VERSION_NOTIFICATION,
                                                                     Settings.Comments.ENABLE_VERSION_NOTIFICATION);
+
+        // channel
+        Settings.channel = CelestialWizardry.config.get(category, Settings.ConfigNames.CHANNEL, Settings.DefaultValues.CHANNEL, Settings.Comments.CHANNEL);
 
         // debugMode
         Settings.debugMode = CelestiCore.config.get(category, Settings.ConfigNames.DEBUG_MODE,
