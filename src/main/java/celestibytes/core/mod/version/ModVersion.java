@@ -1,60 +1,93 @@
 package celestibytes.core.mod.version;
 
-public class ModVersion implements Comparable<ModVersion>
+/**
+ * TODO Handle more cases, like release candidates, betas and alphas.
+ */
+public final class ModVersion implements Comparable<ModVersion>
 {
     private final int major;
     private final int minor;
     private final int patch;
-    private final int rc;
-    private final int beta;
+    private final boolean prerelease;
+    private final String postfix;
     private String description;
 
     public ModVersion(int major, int minor, int patch)
     {
-        this(major, minor, patch, 0, 0);
+        this(major, minor, patch, false, null);
     }
 
-    public ModVersion(int major, int minor, int patch, int rc, int beta)
+    public ModVersion(int major, int minor, int patch, String postfix)
+    {
+        this(major, minor, patch, true, postfix);
+    }
+
+    public ModVersion(int major, int minor, int patch, boolean prerelease, String postfix)
     {
         this.major = major;
         this.minor = minor;
         this.patch = patch;
-        this.rc = rc;
-        this.beta = beta;
+        this.prerelease = prerelease;
+        this.postfix = postfix;
     }
 
     public static ModVersion parse(String s)
     {
-        int major = 0;
-        int minor = 0;
-        int patch = 0;
-        int rc = 0;
-        int beta = 0;
-        String main = s;
-        String[] parts;
+        int major;
+        int minor;
+        int patch;
+        boolean prerelease = false;
+        String version = s;
+        String postfix = null;
+        char[] chars;
 
-        parts = main.split("-rc.");
-
-        if (parts.length > 1)
+        if (s.contains("-"))
         {
-            rc = Integer.parseInt(parts[1]);
-            main = parts[0];
+            prerelease = true;
         }
 
-        parts = main.split("-beta.");
-
-        if (parts.length > 1)
+        if (prerelease)
         {
-            beta = Integer.parseInt(parts[1]);
-            main = parts[0];
+            postfix = version.substring(version.indexOf("-"));
+            version = version.replace(postfix, "");
         }
 
-        parts = main.split("\\.");
-        major = Integer.parseInt(parts[0]);
-        minor = Integer.parseInt(parts[1]);
-        patch = Integer.parseInt(parts[2]);
+        chars = version.toCharArray();
 
-        return new ModVersion(major, minor, patch, rc, beta);
+        String majorS = "";
+        String minorS = "";
+        String patchS = "";
+
+        int dots = 0;
+
+        for (char aChar : chars)
+        {
+            if (aChar == '.')
+            {
+                dots++;
+            }
+            else
+            {
+                if (dots == 0)
+                {
+                    majorS = majorS + aChar;
+                }
+                else if (dots == 1)
+                {
+                    minorS = minorS + aChar;
+                }
+                else if (dots == 2)
+                {
+                    patchS = patchS + aChar;
+                }
+            }
+        }
+
+        major = Integer.parseInt(majorS);
+        minor = Integer.parseInt(minorS);
+        patch = Integer.parseInt(patchS);
+
+        return prerelease ? new ModVersion(major, minor, patch, postfix) : new ModVersion(major, minor, patch);
     }
 
     public int major()
@@ -72,37 +105,25 @@ public class ModVersion implements Comparable<ModVersion>
         return patch;
     }
 
-    public int rc()
-    {
-        return rc;
-    }
-
-    public int beta()
-    {
-        return beta;
-    }
-
     public boolean isStable()
     {
-        return rc == 0 & beta == 0;
-    }
-
-    public boolean isRC()
-    {
-        return rc > 0;
-    }
-
-    public boolean isBeta()
-    {
-        return beta > 0;
+        return !prerelease;
     }
 
     @Override
     public String toString()
     {
-        String v = major + "." + minor + "." + patch;
+        return isStable() ? major + "." + minor + "." + patch : major + "." + minor + "." + patch + postfix;
+    }
 
-        return v;
+    public String description()
+    {
+        return description;
+    }
+
+    public void setDescription(String description)
+    {
+        this.description = description;
     }
 
     /**
@@ -128,7 +149,7 @@ public class ModVersion implements Comparable<ModVersion>
      * mathematical <i>signum</i> function, which is defined to return one of <tt>-1</tt>, <tt>0</tt>, or <tt>1</tt>
      * according to whether the value of <i>expression</i> is negative, zero or positive.
      *
-     * @param anotherModVersion the object to be compared.
+     * @param o the object to be compared.
      *
      * @return a negative integer, zero, or a positive integer as this object is less than, equal to, or greater than
      * the specified object.
@@ -137,63 +158,33 @@ public class ModVersion implements Comparable<ModVersion>
      * @throws ClassCastException   if the specified object's type prevents it from being compared to this object.
      */
     @Override
-    public int compareTo(ModVersion anotherModVersion)
+    public int compareTo(ModVersion o)
     {
-        if (this.major() != anotherModVersion.major())
+        if (major != o.major)
         {
-            return this.major() < anotherModVersion.major() ? -1 : 1;
+            return major < o.major ? -1 : 1;
         }
 
-        if (this.minor() != anotherModVersion.minor())
+        if (minor != o.minor)
         {
-            return this.minor() < anotherModVersion.minor() ? -1 : 1;
+            return minor < o.minor ? -1 : 1;
         }
 
-        if (this.patch() != anotherModVersion.patch())
+        if (patch != o.patch)
         {
-            return this.patch() < anotherModVersion.patch() ? -1 : 1;
+            return patch < o.patch ? -1 : 1;
         }
 
-        if (this.isStable() && !anotherModVersion.isStable())
+        if (isStable() && !o.isStable())
         {
             return 1;
         }
 
-        if (this.isRC() && anotherModVersion.isBeta())
-        {
-            return 1;
-        }
-
-        if (!this.isStable() && anotherModVersion.isStable())
+        if (!isStable() && o.isStable())
         {
             return -1;
-        }
-
-        if (this.isBeta() && anotherModVersion.isRC())
-        {
-            return -1;
-        }
-
-        if (this.rc() != anotherModVersion.rc())
-        {
-            return this.rc() < anotherModVersion.rc() ? -1 : 1;
-        }
-
-        if (this.beta() != anotherModVersion.beta())
-        {
-            return this.beta() < anotherModVersion.beta() ? -1 : 1;
         }
 
         return 0;
-    }
-
-    public String description()
-    {
-        return description;
-    }
-
-    public void setDescription(String description)
-    {
-        this.description = description;
     }
 }

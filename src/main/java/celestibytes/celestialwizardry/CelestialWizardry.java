@@ -231,6 +231,6 @@ public class CelestialWizardry extends CelestiMod
     @Override
     public boolean allowVersionNote()
     {
-        return Settings.enableVersionNotification;
+        return true; // Settings.enableVersionNotification;
     }
 }

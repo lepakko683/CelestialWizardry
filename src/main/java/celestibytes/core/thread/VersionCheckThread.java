@@ -32,6 +32,7 @@ public class VersionCheckThread implements Runnable
     {
         thread = new Thread(this, "Cbs Version Check Thread - " + threadNumber());
         this.mod = mod;
+
         if (url == null)
         {
             this.url = "https://raw.githubusercontent.com/Celestibytes/" + mod.getId().toLowerCase() + "/develop/version.json";
@@ -84,24 +85,20 @@ public class VersionCheckThread implements Runnable
                     {
                         Map<String, Object> group = (Map<String, Object>) node;
 
-                        ModVersion version = ModVersion.parse((String) group.get("version"));
+                        ModVersion remote = ModVersion.parse((String) group.get("version"));
                         ModVersion local = ModVersion.parse(mod.getVersion());
 
                         String description = (String) group.get("description");
-                        version.setDescription(description);
+                        remote.setDescription(description);
 
-                        if (local.compareTo(version) < 0)
+                        if (local.compareTo(remote) < 0)
                         {
                             newVersionAvailable = true;
-                            newVersion = version;
+                            newVersion = remote;
                         }
                     }
                 }
             }
-        }
-        catch (MalformedURLException e)
-        {
-            e.printStackTrace();
         }
         catch (IOException e)
         {
