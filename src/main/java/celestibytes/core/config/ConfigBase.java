@@ -8,6 +8,8 @@ import java.util.Set;
 
 public class ConfigBase
 {
+    public static final String DOMAIN = "celestibytes".toLowerCase();
+
     Configuration modConfiguration;
     String modVersion;
 

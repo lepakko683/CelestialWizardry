@@ -7,6 +7,7 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 
 import celestibytes.core.config.Config;
+import celestibytes.core.config.ConfigBase;
 import celestibytes.core.config.SettingHandler;
 import celestibytes.core.mod.CelestiMod;
 import celestibytes.core.mod.version.ModVersion;
@@ -40,10 +41,10 @@ public class CelestiCore extends CelestiMod
         CoreLogHelper.info("Starting pre-initialization");
 
         // Set configuration directory
-        config.setConfigDir(event, celestibytes.celestialwizardry.reference.Reference.MOD_ID.toLowerCase());
+        config.setConfigDir(event, ConfigBase.DOMAIN);
 
         // Initialize the configuration
-        config.setConfiguration(celestibytes.celestialwizardry.reference.Reference.MOD_NAME.replace(" ", ""));
+        config.setConfiguration(Reference.MOD_NAME.replace(" ", ""));
 
         // Initialize configuration settings
         SettingHandler.sync();

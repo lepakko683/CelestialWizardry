@@ -36,6 +36,7 @@ import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 
+import celestibytes.core.config.ConfigBase;
 import celestibytes.core.mod.CelestiMod;
 import celestibytes.core.mod.version.ModVersion;
 import celestibytes.core.mod.version.VersionManager;
@@ -107,7 +108,7 @@ public class CelestialWizardry extends CelestiMod
         LogHelper.info("Starting pre-initialization");
 
         // Set configuration directory
-        config.setConfigDir(event, Reference.MOD_ID.toLowerCase());
+        config.setConfigDir(event, ConfigBase.DOMAIN);
 
         // Initialize the configuration
         config.setConfiguration(Reference.MOD_NAME.replace(" ", ""));

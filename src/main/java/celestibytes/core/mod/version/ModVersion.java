@@ -28,13 +28,27 @@ public final class ModVersion implements Comparable<ModVersion>
         return channel == Channel.STABLE;
     }
 
-    @Override
-    public String toString()
+    public boolean isRC()
     {
-        return isStable() ? major + "." + minor + "." + patch : major + "." + minor + "." + patch + channel.getPostfix() + "." + number;
+        return channel == Channel.RC;
     }
 
-    public String description()
+    public boolean isBeta()
+    {
+        return channel == Channel.BETA;
+    }
+
+    public boolean isAlpha()
+    {
+        return channel == Channel.ALPHA;
+    }
+
+    public Channel getChannel()
+    {
+        return channel;
+    }
+
+    public String getDescription()
     {
         return description;
     }
@@ -42,6 +56,13 @@ public final class ModVersion implements Comparable<ModVersion>
     public void setDescription(String description)
     {
         this.description = description;
+    }
+
+    @Override
+    public String toString()
+    {
+        return isStable() ? major + "." + minor + "." + patch
+                : major + "." + minor + "." + patch + channel.getPostfix() + "." + number;
     }
 
     /**
@@ -78,11 +99,6 @@ public final class ModVersion implements Comparable<ModVersion>
     @Override
     public int compareTo(ModVersion o)
     {
-        if (isStable() && !o.isStable())
-        {
-            return 1;
-        }
-
         if (major != o.major)
         {
             return major < o.major ? -1 : 1;
@@ -98,16 +114,49 @@ public final class ModVersion implements Comparable<ModVersion>
             return patch < o.patch ? -1 : 1;
         }
 
+        if (isStable() && !o.isStable())
+        {
+            return 1;
+        }
+
+        if (isAlpha() && !o.isAlpha())
+        {
+            return -1;
+        }
+
+        if (isBeta() && o.isAlpha())
+        {
+            return 1;
+        }
+
+        if (isBeta() && !o.isBeta())
+        {
+            return -1;
+        }
+
+        if (isRC() && isAlpha())
+        {
+            return 1;
+        }
+
+        if (isRC() && isBeta())
+        {
+            return 1;
+        }
+
         if (!isStable() && o.isStable())
         {
             return -1;
         }
 
-        return 0;
-    }
+        if (channel == o.channel)
+        {
+            if (number != o.number)
+            {
+                return number < o.number ? -1 : 1;
+            }
+        }
 
-    public Channel getChannel()
-    {
-        return channel;
+        return 0;
     }
 }

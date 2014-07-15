@@ -1,14 +1,14 @@
 package celestibytes.core.mod.version;
 
-import net.minecraft.util.ChatComponentText;
-import net.minecraft.util.EnumChatFormatting;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.common.gameevent.TickEvent;
-
 import celestibytes.core.mod.IMod;
 import celestibytes.core.registry.VersionManagerRegistry;
 import celestibytes.core.thread.VersionCheckThread;
 import celestibytes.core.util.StringHelper;
+
+import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.EnumChatFormatting;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.common.gameevent.TickEvent;
 
 public final class VersionManager
 {
@@ -56,8 +56,12 @@ public final class VersionManager
                 {
                     ModVersion version = thread.getNewVersion();
 
-                    event.player.addChatMessage(new ChatComponentText(EnumChatFormatting.GOLD + "[" + mod.getName() + "]").appendText(EnumChatFormatting.WHITE + " " + StringHelper.getMessage("newVersion") + " ").appendText(EnumChatFormatting.AQUA + version.toString()));
-                    event.player.addChatMessage(new ChatComponentText(EnumChatFormatting.GRAY + version.description()));
+                    event.player.addChatMessage(
+                            new ChatComponentText(EnumChatFormatting.GOLD + "[" + mod.getName() + "]").appendText(
+                                    EnumChatFormatting.WHITE + " " + StringHelper.getMessage("newVersion") + " ")
+                                    .appendText(EnumChatFormatting.AQUA + version.toString()));
+                    event.player
+                            .addChatMessage(new ChatComponentText(EnumChatFormatting.GRAY + version.getDescription()));
                 }
             }
         }

@@ -1,5 +1,7 @@
 package celestibytes.core.reference;
 
+import celestibytes.core.thread.VersionCheckThread;
+
 public class Reference
 {
     public static final String MOD_ID = "celesticore";
@@ -12,6 +14,8 @@ public class Reference
     public static final String GUI_FACTORY_CLASS = "celestibytes.core.config.gui.GuiFactory";
 
     public static final String FINGERPRINT = "@FINGERPRINT@";
+
+    public static final String VERSION_URL = VersionCheckThread.DEFAULT_URL;
 
     public static final String DEPENDENCIES = "required-after:Forge@[" + Version.FORGE + "," + Version.FORGE_MAX + ")";
 }

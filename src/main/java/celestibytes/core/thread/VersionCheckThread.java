@@ -20,7 +20,7 @@ import java.util.Map;
 public class VersionCheckThread implements Runnable
 {
     public static final String DEFAULT_URL
-            = "https://raw.githubusercontent.com/Celestibytes/VersionCheck/master/version.json";
+            = "https://raw.githubusercontent.com/Celestibytes/VersionCheck/master/data.json";
 
     private static int threadNumber = 0;
 
@@ -211,13 +211,13 @@ public class VersionCheckThread implements Runnable
 
         if (channelMap.containsKey("major"))
         {
-            if (channelMap.get("major") instanceof Integer)
+            if (channelMap.get("major") instanceof Number)
             {
-                major = (Integer) channelMap.get("major");
+                major = ((Number) channelMap.get("major")).intValue();
             }
             else
             {
-                throw new DerpException("Channel " + channel.getKey() + "'s major value isn't an instance of Integer");
+                throw new DerpException("Channel " + channel.getKey() + "'s major value isn't an instance of Number");
             }
         }
         else
@@ -227,13 +227,13 @@ public class VersionCheckThread implements Runnable
 
         if (channelMap.containsKey("minor"))
         {
-            if (channelMap.get("minor") instanceof Integer)
+            if (channelMap.get("minor") instanceof Number)
             {
-                minor = (Integer) channelMap.get("minor");
+                minor = ((Number) channelMap.get("minor")).intValue();
             }
             else
             {
-                throw new DerpException("Channel " + channel.getKey() + "'s minor value isn't an instance of Integer");
+                throw new DerpException("Channel " + channel.getKey() + "'s minor value isn't an instance of Number");
             }
         }
         else
@@ -243,13 +243,13 @@ public class VersionCheckThread implements Runnable
 
         if (channelMap.containsKey("patch"))
         {
-            if (channelMap.get("patch") instanceof Integer)
+            if (channelMap.get("patch") instanceof Number)
             {
-                patch = (Integer) channelMap.get("patch");
+                patch = ((Number) channelMap.get("patch")).intValue();
             }
             else
             {
-                throw new DerpException("Channel " + channel.getKey() + "'s patch value isn't an instance of Integer");
+                throw new DerpException("Channel " + channel.getKey() + "'s patch value isn't an instance of Number");
             }
         }
         else
@@ -265,14 +265,14 @@ public class VersionCheckThread implements Runnable
         {
             if (channelMap.containsKey("number"))
             {
-                if (channelMap.get("number") instanceof Integer)
+                if (channelMap.get("number") instanceof Number)
                 {
-                    number = (Integer) channelMap.get("number");
+                    number = ((Number) channelMap.get("number")).intValue();
                 }
                 else
                 {
                     throw new DerpException(
-                            "Channel " + channel.getKey() + "'s number value isn't an instance of Integer");
+                            "Channel " + channel.getKey() + "'s number value isn't an instance of Number");
                 }
             }
             else
