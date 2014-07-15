@@ -14,7 +14,7 @@ public class Reference
     public static final String SERVER_PROXY_CLASS = "celestibytes.celestialwizardry.proxy.ServerProxy";
     public static final String CLIENT_PROXY_CLASS = "celestibytes.celestialwizardry.proxy.ClientProxy";
 
-    public static final String GUI_FACTORY_CLASS = "celestialwizardry.config.gui.CWGuiFactory";
+    public static final String GUI_FACTORY_CLASS = "celestibytes.celestialwizardry.config.gui.CWGuiFactory";
 
     public static final String FINGERPRINT = "@FINGERPRINT@";
 
