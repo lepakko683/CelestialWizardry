@@ -1,6 +1,27 @@
 {
-  "1.7.10" : {
-    "version": "0.1.1",
-    "description": "Lalalalala"
+  "_comment": "Users will be able to configure which channel the mod looks for updates",
+  "_comment2": "Also, make a central repo for this json so all the mods using this version checker check from the same file",
+  "celestialwizardry": {
+    "1.7.10" : {
+      "channels": {
+        "stable": {
+         "version": "0.1.1",
+         "description": "Lalalalala"
+        },
+        "rc": {
+          "version": "0.1.2-rc.3",
+          "description": "I'm almost ready for release!"
+       },
+       "beta": {
+          "version": "rc",
+          "description": "rc",
+          "_comment": "This means that there is no new beta releases currently, and mod should look for releases in rc channel"
+       },
+       "alpha": {
+          "version": "0.2.0-alpha.1",
+          "description": "Hello, I'm unstable!"
+        }
+     }
+   }
   }
 }
