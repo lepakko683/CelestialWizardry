@@ -6,6 +6,8 @@ public interface IMod
 
     public String getName();
 
+    public String getTargetLog();
+
     public String getVersion();
 
     public String getMinecraftVersion();

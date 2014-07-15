@@ -1,5 +1,7 @@
 package celestibytes.core.mod.version;
 
+import celestibytes.core.util.CoreLogH;
+
 /**
  * TODO Handle more cases, like release candidates, betas and alphas.
  */

@@ -2,8 +2,12 @@ package celestibytes.core.thread;
 
 import celestibytes.core.mod.IMod;
 import celestibytes.core.mod.version.ModVersion;
+
+import cpw.mods.fml.common.FMLLog;
+
 import com.google.common.io.ByteStreams;
 import com.google.gson.Gson;
+import org.apache.logging.log4j.Level;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -95,6 +99,8 @@ public class VersionCheckThread implements Runnable
                         {
                             newVersionAvailable = true;
                             newVersion = remote;
+
+                            FMLLog.log(mod.getTargetLog(), Level.INFO, "A new version (" + newVersion +  ") of " + mod.getName() + " for Minecraft " + mod.getMinecraftVersion() + " is available.");
                         }
                     }
                 }

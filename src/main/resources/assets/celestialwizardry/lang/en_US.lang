@@ -57,12 +57,6 @@ tooltip.celestialwizardry:forgeMatrix=This matrix belongs to ForgeDevName!
 tooltip.celestialwizardry:devWizards=Only the developer wizards may carry this!
 tooltip.celestialwizardry:owner=Owner
 tooltip.celestialwizardry:noOwner=This matrix has no owner. Claim it by right clicking.
-tooltip.celestialwizardry:holdShift1=Hold
-tooltip.celestialwizardry:holdShift2=Shift
-tooltip.celestialwizardry:holdShift3=for Info
-tooltip.celestialwizardry:holdControl1=Hold
-tooltip.celestialwizardry:holdControl2=Control
-tooltip.celestialwizardry:holdControl3=for Info
 
 # Messages
 message.celestialwizardry:stolenBook=This book belongs to %s and you have no permission to open it!

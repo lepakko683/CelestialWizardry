@@ -96,6 +96,12 @@ public class CelestiCore extends CelestiMod
     }
 
     @Override
+    public String getTargetLog()
+    {
+        return Reference.MOD_NAME;
+    }
+
+    @Override
     public String getVersion()
     {
         return CelestiCore.class.getAnnotation(Mod.class).version();

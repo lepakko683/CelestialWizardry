@@ -1,6 +1,6 @@
 package celestibytes.celestialwizardry.util;
 
-import celestibytes.celestialwizardry.reference.Reference;
+import celestibytes.celestialwizardry.CelestialWizardry;
 
 import celestibytes.core.util.log.CoreLogHelper;
 
@@ -12,11 +12,11 @@ public class LogHelper extends CoreLogHelper
     {
         if (api)
         {
-            log(Reference.MOD_NAME + "Api", logLevel, String.valueOf(object));
+            logApi(CelestialWizardry.instance, logLevel, String.valueOf(object));
         }
         else
         {
-            log(Reference.MOD_NAME, logLevel, String.valueOf(object));
+            log(CelestialWizardry.instance, logLevel, String.valueOf(object));
         }
     }
 

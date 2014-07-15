@@ -20,6 +20,8 @@ public class Reference
 
     public static final String DEPENDENCIES = "required-after:celesticore@[" + celestibytes.core.reference.Version.VERSION + ",);after:Baubles";
 
+    public static final String VERSION_URL = "https://raw.githubusercontent.com/Celestibytes/CelestialWizardry/develop/version.json";
+
     public static final String BAUBLES_ROOT = "https://dl.dropboxusercontent.com/u/47135879/";
     public static final String BAUBLES_ID = "Baubles";
     public static final String BAUBLES_IFACE = "IBauble";

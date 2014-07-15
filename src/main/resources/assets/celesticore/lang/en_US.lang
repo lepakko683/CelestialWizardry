@@ -2,11 +2,14 @@
 configgui.celesticore:configTitle=CelestiCore Configuration
 
 # Tooltip localizations
-tooltip.celestialwizardry:noNBT=No NBT Tags found
-tooltip.celestialwizardry:NBT=NBT Tags found
-tooltip.celestialwizardry:holdShift1=Hold
-tooltip.celestialwizardry:holdShift2=Shift
-tooltip.celestialwizardry:holdShift3=for Info
-tooltip.celestialwizardry:holdControl1=Hold
-tooltip.celestialwizardry:holdControl2=Control
-tooltip.celestialwizardry:holdControl3=for Info
+tooltip.celesticore:noNBT=No NBT Tags found
+tooltip.celesticore:NBT=NBT Tags found
+tooltip.celesticore:holdShift1=Hold
+tooltip.celesticore:holdShift2=Shift
+tooltip.celesticore:holdShift3=for Info
+tooltip.celesticore:holdControl1=Hold
+tooltip.celesticore:holdControl2=Control
+tooltip.celesticore:holdControl3=for Info
+
+# Version check localizations
+message.celesticore:newVersion=A new version is available:

@@ -18,6 +18,7 @@ import celestibytes.celestialwizardry.reference.Reference;
 import celestibytes.celestialwizardry.reference.Settings;
 import celestibytes.celestialwizardry.reference.Version;
 import celestibytes.celestialwizardry.spellbook.SpellBook;
+import celestibytes.celestialwizardry.util.LogH;
 import celestibytes.celestialwizardry.util.LogHelper;
 import celestibytes.celestialwizardry.world.WorldGenerator;
 
@@ -36,6 +37,7 @@ import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 import celestibytes.core.mod.CelestiMod;
+import celestibytes.core.mod.version.ModVersion;
 import celestibytes.core.mod.version.VersionManager;
 import celestibytes.core.registry.VersionManagerRegistry;
 
@@ -120,7 +122,7 @@ public class CelestialWizardry extends CelestiMod
         config.save();
 
         // Register version checker
-        VersionManagerRegistry.registerVersionManager(new VersionManager(this, "https://raw.githubusercontent.com/Celestibytes/CelestialWizardry/develop/version.json"), this);
+        VersionManagerRegistry.registerVersionManager(new VersionManager(this, Reference.VERSION_URL), this);
 
         // Initialize mod items
         ModItems.init();
@@ -220,6 +222,12 @@ public class CelestialWizardry extends CelestiMod
     public String getName()
     {
         return CelestialWizardry.class.getAnnotation(Mod.class).name();
+    }
+
+    @Override
+    public String getTargetLog()
+    {
+        return getName();
     }
 
     @Override
