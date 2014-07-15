@@ -120,7 +120,7 @@ public class CelestialWizardry extends CelestiMod
         config.save();
 
         // Register version checker
-        VersionManagerRegistry.registerVersionManager(new VersionManager(this, "https://raw.githubusercontent.com/Celestibytes/CelestialWizardry/develop/version.json"));
+        VersionManagerRegistry.registerVersionManager(new VersionManager(this, "https://raw.githubusercontent.com/Celestibytes/CelestialWizardry/develop/version.json"), this);
 
         // Initialize mod items
         ModItems.init();
@@ -226,6 +226,12 @@ public class CelestialWizardry extends CelestiMod
     public String getVersion()
     {
         return CelestialWizardry.class.getAnnotation(Mod.class).version();
+    }
+
+    @Override
+    public boolean allowVersionCheck()
+    {
+        return Settings.enableVersionCheck;
     }
 
     @Override

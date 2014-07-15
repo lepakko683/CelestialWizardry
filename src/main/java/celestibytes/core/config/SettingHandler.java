@@ -14,15 +14,21 @@ public class SettingHandler
          * General
          */
         String category = Settings.Categories.GENERAL;
-        Settings.enableVersionNotification = CelestiCore.config.get(category, Settings.ConfigNames.ENABLE_VERSION_NOTIFICATION,
-                                                             Settings.DefaultValues.ENABLE_VERSION_NOTIFICATION,
-                                                             Settings.Comments.ENABLE_VERSION_NOTIFICATION);
+
+        // enableVersionCheck
+        Settings.enableVersionCheck = CelestiCore.config
+                .get(category, Settings.ConfigNames.ENABLE_VERSION_CHECK, Settings.DefaultValues.ENABLE_VERSION_CHECK,
+                     Settings.Comments.ENABLE_VERSION_CHECK);
+
+        // enableVersionNotification
+        Settings.enableVersionNotification = CelestiCore.config.get(category,
+                                                                    Settings.ConfigNames.ENABLE_VERSION_NOTIFICATION,
+                                                                    Settings.DefaultValues.ENABLE_VERSION_NOTIFICATION,
+                                                                    Settings.Comments.ENABLE_VERSION_NOTIFICATION);
+
+        // debugMode
         Settings.debugMode = CelestiCore.config.get(category, Settings.ConfigNames.DEBUG_MODE,
-                                                    Settings.DefaultValues.DEBUG_MODE,
-                                                    Settings.Comments.DEBUG_MODE);
-        Settings.shiftForDetails = CelestiCore.config.get(category, Settings.ConfigNames.SHIFT_FOR_DETAILS,
-                                                          Settings.DefaultValues.SHIFT_FOR_DETAILS,
-                                                          Settings.Comments.SHIFT_FOR_DETAILS);
+                                                    Settings.DefaultValues.DEBUG_MODE, Settings.Comments.DEBUG_MODE);
 
         if (CelestiCore.config.hasChanged())
         {

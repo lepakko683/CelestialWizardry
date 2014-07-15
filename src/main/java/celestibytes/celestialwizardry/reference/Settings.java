@@ -101,7 +101,9 @@ public class Settings
          */
         public static final String ENABLE_SEASONAL = "If true, mod will have some seasonal fun.";
         public static final String ENABLE_VERSION_CHECK = "If true, mod will automatically check for new version.";
-        public static final String ENABLE_VERSION_NOTIFICATION = "If true, mod will display notification to player if new version is found. Doesn't do anything if " + ConfigNames.ENABLE_VERSION_CHECK + " is false.";
+        public static final String ENABLE_VERSION_NOTIFICATION =
+                "If true, mod will display notification to player if new version is found. Doesn't do anything if "
+                        + ConfigNames.ENABLE_VERSION_CHECK + " is false.";
         public static final String DEBUG_MODE = "You should not touch this.";
         public static final String SHIFT_FOR_DETAILS = "If true, you can see extra tooltips by holding shift.";
 

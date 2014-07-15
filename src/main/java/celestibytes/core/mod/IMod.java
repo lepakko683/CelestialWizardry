@@ -10,5 +10,11 @@ public interface IMod
 
     public String getMinecraftVersion();
 
+    public boolean allowVersionCheck();
+
     public boolean allowVersionNote();
+
+    public void setRegistered(boolean registered);
+
+    public boolean isRegistered();
 }

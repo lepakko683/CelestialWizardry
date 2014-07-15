@@ -47,7 +47,7 @@ public class VersionManager
         if (!notificationDisplayed && thread.checkComplete())
         {
             notificationDisplayed = true;
-            VersionManagerRegistry.unregisterVersionManager(this);
+            VersionManagerRegistry.unregisterVersionManager(this, mod);
 
             if (thread.newVersionAvailable())
             {

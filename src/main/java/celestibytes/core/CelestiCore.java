@@ -102,6 +102,12 @@ public class CelestiCore extends CelestiMod
     }
 
     @Override
+    public boolean allowVersionCheck()
+    {
+        return Settings.enableVersionCheck;
+    }
+
+    @Override
     public boolean allowVersionNote()
     {
         return Settings.enableVersionNotification;
