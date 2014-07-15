@@ -1,6 +1,7 @@
 package celestibytes.core.mod;
 
 import celestibytes.core.mod.version.Channel;
+import celestibytes.core.mod.version.ModVersion;
 
 public interface IMod
 {
@@ -11,6 +12,8 @@ public interface IMod
     public String getTargetLog();
 
     public String getVersion();
+
+    public ModVersion getModVersion();
 
     public String getMinecraftVersion();
 

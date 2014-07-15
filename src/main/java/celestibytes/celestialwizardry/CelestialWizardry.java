@@ -237,6 +237,12 @@ public class CelestialWizardry extends CelestiMod
     }
 
     @Override
+    public ModVersion getModVersion()
+    {
+        return Version.MOD_VERSION;
+    }
+
+    @Override
     public boolean allowVersionCheck()
     {
         return Settings.enableVersionCheck;
@@ -251,7 +257,7 @@ public class CelestialWizardry extends CelestiMod
     @Override
     protected String channel()
     {
-        return Version.CHANNEL;
+        return getModVersion().getChannel().getKey();
     }
 
     @Override

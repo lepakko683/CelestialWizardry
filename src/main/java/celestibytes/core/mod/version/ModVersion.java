@@ -1,148 +1,37 @@
 package celestibytes.core.mod.version;
 
-/**
- * TODO Handle more cases, like release candidates, betas and alphas.
- */
 public final class ModVersion implements Comparable<ModVersion>
 {
     private final int major;
     private final int minor;
     private final int patch;
-    private final boolean prerelease;
-    private final String postfix;
     private final Channel channel;
+    private final int number;
     private String description = "";
 
     public ModVersion(int major, int minor, int patch)
     {
-        this(major, minor, patch, false, null, Channel.STABLE);
+        this(major, minor, patch, Channel.STABLE, 0);
     }
 
-    public ModVersion(int major, int minor, int patch, Channel channel)
-    {
-        this(major, minor, patch, false, null, Channel.STABLE);
-    }
-
-    public ModVersion(int major, int minor, int patch, String postfix)
-    {
-        this(major, minor, patch, true, postfix, parseReleaseType(postfix));
-    }
-
-    public ModVersion(int major, int minor, int patch, boolean prerelease, String postfix, Channel channel)
+    public ModVersion(int major, int minor, int patch, Channel channel, int number)
     {
         this.major = major;
         this.minor = minor;
         this.patch = patch;
-        this.prerelease = prerelease;
-        this.postfix = postfix;
         this.channel = channel;
-    }
-
-    public static ModVersion parse(String s, Channel channel)
-    {
-        int major;
-        int minor;
-        int patch;
-        boolean prerelease = false;
-        String version = s;
-        String postfix = null;
-        char[] chars;
-
-        if (s.contains("-"))
-        {
-            prerelease = true;
-        }
-
-        if (prerelease)
-        {
-            postfix = version.substring(version.indexOf("-"));
-            version = version.replace(postfix, "");
-        }
-
-        chars = version.toCharArray();
-
-        String majorS = "";
-        String minorS = "";
-        String patchS = "";
-
-        int dots = 0;
-
-        for (char aChar : chars)
-        {
-            if (aChar == '.')
-            {
-                dots++;
-            }
-            else
-            {
-                if (dots == 0)
-                {
-                    majorS = majorS + aChar;
-                }
-                else if (dots == 1)
-                {
-                    minorS = minorS + aChar;
-                }
-                else if (dots == 2)
-                {
-                    patchS = patchS + aChar;
-                }
-            }
-        }
-
-        major = Integer.parseInt(majorS);
-        minor = Integer.parseInt(minorS);
-        patch = Integer.parseInt(patchS);
-
-        return prerelease ? new ModVersion(major, minor, patch, postfix) : new ModVersion(major, minor, patch);
-    }
-
-    private static Channel parseReleaseType(String postfix)
-    {
-        Channel channel = Channel.DEFAULT;
-
-        if (postfix.contains(Channel.ALPHA.getKey()))
-        {
-            channel = Channel.ALPHA;
-        }
-
-        if (postfix.contains(Channel.BETA.getKey()))
-        {
-            channel = Channel.BETA;
-        }
-
-        if (postfix.contains(Channel.RC.getKey()))
-        {
-            channel = Channel.RC;
-        }
-
-        return channel;
-    }
-
-    public int major()
-    {
-        return major;
-    }
-
-    public int minor()
-    {
-        return minor;
-    }
-
-    public int patch()
-    {
-        return patch;
+        this.number = number;
     }
 
     public boolean isStable()
     {
-        return !prerelease;
+        return channel == Channel.STABLE;
     }
 
     @Override
     public String toString()
     {
-        return isStable() ? major + "." + minor + "." + patch : major + "." + minor + "." + patch + postfix;
+        return isStable() ? major + "." + minor + "." + patch : major + "." + minor + "." + patch + channel.getPostfix() + "." + number;
     }
 
     public String description()
@@ -215,5 +104,10 @@ public final class ModVersion implements Comparable<ModVersion>
         }
 
         return 0;
+    }
+
+    public Channel getChannel()
+    {
+        return channel;
     }
 }

@@ -1,9 +1,12 @@
 package celestibytes.celestialwizardry.reference;
 
+import celestibytes.core.mod.version.Channel;
+import celestibytes.core.mod.version.ModVersion;
+
 public class Version
 {
-    public static final String VERSION = "0.1.0";
-    public static final String CHANNEL = "beta"; // TODO Automate replacing this
+    public static final String VERSION = "0.1.0-beta.1";
+    public static final ModVersion MOD_VERSION = new ModVersion(0, 1, 0, Channel.BETA, 1);
     public static final String FORGE = "10.13.0.1180";
     public static final String MINECRAFT = "1.7.10";
     public static final String BAUBLES = "1.0.0.16";

@@ -9,6 +9,7 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import celestibytes.core.config.Config;
 import celestibytes.core.config.SettingHandler;
 import celestibytes.core.mod.CelestiMod;
+import celestibytes.core.mod.version.ModVersion;
 import celestibytes.core.proxy.IProxy;
 import celestibytes.core.reference.Reference;
 import celestibytes.core.reference.Settings;
@@ -108,6 +109,12 @@ public class CelestiCore extends CelestiMod
     }
 
     @Override
+    public ModVersion getModVersion()
+    {
+        return Version.MOD_VERSION;
+    }
+
+    @Override
     public boolean allowVersionCheck()
     {
         return Settings.enableVersionCheck;
@@ -122,7 +129,7 @@ public class CelestiCore extends CelestiMod
     @Override
     protected String channel()
     {
-        return Version.CHANNEL;
+        return getModVersion().getChannel().getKey();
     }
 
     @Override
