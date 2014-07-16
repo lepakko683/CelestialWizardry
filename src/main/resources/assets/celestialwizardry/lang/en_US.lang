@@ -24,7 +24,6 @@ item.celestialwizardry:crystal.pure.name=Pure Crystal
 item.celestialwizardry:crystal.celestial.name=Celestial Crystal
 item.celestialwizardry:crystal.perfect.name=Perfect Crystal
 item.celestialwizardry:soarynChestPlcr.name=Soaryn Chest Placer
-item.celestialwizardry:invalid.name=Invalid Item
 
 # Blocks
 tile.celestialwizardry:writingTable.name=Writing Table
@@ -44,8 +43,6 @@ container.celestialwizardry:spellBookInventory=Spells
 # Tooltips
 tooltip.celestialwizardry:lunar=Lunar
 tooltip.celestialwizardry:solar=Solar
-tooltip.celestialwizardry:noNBT=No NBT Tags found
-tooltip.celestialwizardry:NBT=NBT Tags found
 tooltip.celestialwizardry:tier=Tier
 tooltip.celestialwizardry:maxStorage=Matrix Capacity
 tooltip.celestialwizardry:energyType=Energy Type

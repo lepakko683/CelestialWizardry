@@ -5,7 +5,7 @@ import celestibytes.core.thread.VersionCheckThread;
 public class Reference
 {
     public static final String MOD_ID = "celesticore";
-    public static final String MOD_NAME = "CelestiCore";
+    public static final String MOD_NAME = "Celestibytes Core";
     public static final String MOD_VERSION = Version.VERSION;
 
     public static final String SERVER_PROXY_CLASS = "celestibytes.core.proxy.ServerProxy";

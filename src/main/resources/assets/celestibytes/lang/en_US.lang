@@ -1,0 +1,18 @@
+# Items
+item.celestibytes:invalid.name=Invalid Item
+
+# Configs
+configgui.celestibytes:configTitle=CelestiCore Configuration
+
+# Tooltips
+tooltip.celestibytes:noNBT=No NBT Tags found
+tooltip.celestibytes:NBT=NBT Tags found
+tooltip.celestibytes:holdShift1=Hold
+tooltip.celestibytes:holdShift2=Shift
+tooltip.celestibytes:holdShift3=for Info
+tooltip.celestibytes:holdControl1=Hold
+tooltip.celestibytes:holdControl2=Control
+tooltip.celestibytes:holdControl3=for Info
+
+# Messages
+message.celestibytes:newVersion=A new version is available:

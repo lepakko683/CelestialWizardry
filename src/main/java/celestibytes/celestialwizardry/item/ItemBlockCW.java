@@ -1,18 +1,13 @@
 package celestibytes.celestialwizardry.item;
 
-import net.minecraft.block.Block;
-import net.minecraft.item.ItemBlock;
+import celestibytes.core.item.ItemBlockBase;
 
-public class ItemBlockCW extends ItemBlock
+import net.minecraft.block.Block;
+
+public class ItemBlockCW extends ItemBlockBase
 {
     public ItemBlockCW(Block block)
     {
         super(block);
-    }
-
-    @Override
-    public int getMetadata(int i)
-    {
-        return i;
     }
 }

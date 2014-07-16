@@ -33,10 +33,10 @@ public class Names
 
     public static class NBT
     {
-        public static final String STATE = "teState";
-        public static final String CUSTOM_NAME = "CustomName";
-        public static final String DIRECTION = "teDirection";
-        public static final String OWNER = "owner";
+        public static final String STATE = celestibytes.core.reference.Names.NBT.STATE;
+        public static final String CUSTOM_NAME = celestibytes.core.reference.Names.NBT.CUSTOM_NAME;
+        public static final String DIRECTION = celestibytes.core.reference.Names.NBT.DIRECTION;
+        public static final String OWNER = celestibytes.core.reference.Names.NBT.OWNER;
         public static final String SPELL_BOOK_GUI_OPEN = "spellBookGuiOpen";
         public static final String SPELL_BOOK_INVENTORY_OPEN = "spellBookInventoryOpen";
         public static final String UUID_MOST_SIG = "UUIDMostSig";
