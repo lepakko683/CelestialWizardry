@@ -380,7 +380,7 @@ public class ItemMatrix extends ItemSingle implements IMatrix, ICWMatrix, ILocke
 
     @Override
     @SideOnly(Side.CLIENT)
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings({"unchecked", "rawtypes"})
     public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean adv)
     {
         list.add(CWStringHelper.RED + "WIP" + CWStringHelper.END); // TODO Remove
@@ -506,7 +506,7 @@ public class ItemMatrix extends ItemSingle implements IMatrix, ICWMatrix, ILocke
 
     @Override
     @SideOnly(Side.CLIENT)
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings({"unchecked", "rawtypes"})
     public void getSubItems(Item item, CreativeTabs creativeTab, List list)
     {
         for (int meta = 0; meta < MAX_ENERGIES.length; ++meta)

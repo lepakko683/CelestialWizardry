@@ -18,6 +18,7 @@ public class RuneEntity extends RuneCategory
     }
 
     @Override
+    @SuppressWarnings("rawtypes")
     public List validRuneAttributeTypes()
     {
         return null;

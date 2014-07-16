@@ -14,6 +14,7 @@ public class RuneVariable extends RuneCategory {
 	}
 
 	@Override
+	@SuppressWarnings("rawtypes")
 	public List validRuneAttributeTypes() {
 		return null;
 	}

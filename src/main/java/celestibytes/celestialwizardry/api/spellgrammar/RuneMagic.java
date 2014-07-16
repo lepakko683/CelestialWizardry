@@ -17,6 +17,7 @@ public class RuneMagic extends RuneCategory
     }
 
     @Override
+    @SuppressWarnings("rawtypes")
     public List validRuneAttributeTypes()
     {
         // TODO Auto-generated method stub

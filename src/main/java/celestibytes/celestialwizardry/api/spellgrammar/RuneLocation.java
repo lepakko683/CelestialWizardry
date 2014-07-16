@@ -17,6 +17,7 @@ public class RuneLocation extends RuneCategory
     }
 
     @Override
+    @SuppressWarnings("rawtypes")
     public List validRuneAttributeTypes()
     {
         return null;

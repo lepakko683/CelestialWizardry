@@ -1,7 +1,6 @@
 package celestibytes.celestialwizardry.api.spellgrammar;
 
 import celestibytes.core.util.Tuple;
-
 import net.minecraft.block.Block;
 
 import java.util.List;
@@ -23,6 +22,7 @@ public class RuneBlock extends RuneCategory
     }
 
     @Override
+    @SuppressWarnings("rawtypes")
     public List validRuneAttributeTypes()
     {
         return null;

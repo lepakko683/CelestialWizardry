@@ -45,6 +45,7 @@ public class PageLoader {
 		} catch (Exception e) {
 			e.printStackTrace();
 			LogHelper.err("Something unexpected went wrong in loadPage(...)");
+			System.err.println("Something unexpected went wrong in loadPage(...)");
 			return null;
 		}
 		try {
@@ -55,6 +56,7 @@ public class PageLoader {
 			StringBuilder linebuffer = new StringBuilder();
 			String pageName = null;
 			String[] pageNameParts = null;
+			boolean readingInnerObjectData = false;
 			
 			while((cc = (char)br.read()) != (char) -1) {
 				if(cc == Characters.COMMENT) {
@@ -67,6 +69,7 @@ public class PageLoader {
 								break;
 							}else{
 								LogH.warn("Missing an LF after CR in a page file. Handling it as a newline... This might cause some buggy behaviour. It's recommended to use LFs over CRLFs.");
+								System.out.println("WARN: " + "Missing an LF after CR in a page file. Handling it as a newline... This might cause some buggy behaviour. It's recommended to use LFs over CRLFs.");
 								cc = cc2;
 								break;
 							}
@@ -75,8 +78,33 @@ public class PageLoader {
 						}
 					} while(cc2 != -1);
 				}
-				if(!readingInnerPageData && cc != Characters.CR && cc != Characters.LF && cc != Characters.WHITESPACE) {
+				if(/*!readingInnerPageData && */cc != Characters.CR && cc != Characters.LF && cc != Characters.WHITESPACE && cc != '{' && cc != '[' && cc != '"' && cc != ']') {
 					linebuffer.append(cc);
+				}
+				
+				if(readingInnerPageData && readingInnerObjectData) {
+					if(cc == '"') {
+						System.out.println("-StringEnd-: " + linebuffer.toString());
+						readingInnerObjectData = false;
+						linebuffer = new StringBuilder();
+						cc = (char)br.read();
+					} else if(cc == ']') {
+						System.out.println("-ArrayEnd-: " + linebuffer.toString());
+						readingInnerObjectData = false;
+						linebuffer = new StringBuilder();
+						cc = (char)br.read();
+					}
+				}
+				if(readingInnerPageData && !readingInnerObjectData) {
+					if(cc == '"') {
+						System.out.println("-String-");
+						readingInnerObjectData = true;
+						linebuffer = new StringBuilder();
+					} else if(cc == '[') {
+						System.out.println("-Array-");
+						readingInnerObjectData = true;
+						linebuffer = new StringBuilder();
+					}
 				}
 				if(cc == '{') {
 					if(!readingInnerPageData) {
@@ -84,6 +112,7 @@ public class PageLoader {
 						
 						pageName = linebuffer.toString().trim();
 						LogH.debug("Loading page \"" + pageName + "\"...");
+						System.out.println("Loading page \"" + pageName + "\"...");
 						pageNameParts = pageName.split(".");
 						
 						
@@ -94,6 +123,7 @@ public class PageLoader {
 			}
 		} catch(Exception e) {
 			LogH.err("Something went wrong with reading a page file");
+			System.err.println("Something went wrong with reading a page file");
 		}
 		
 		try {
@@ -104,7 +134,7 @@ public class PageLoader {
 		return null;
 	}
 	
-	private static int[] parseRunes(BufferedReader br) throws IOException {
+	private static int[] parseRunes(String lst) {
 //		br.r
 		
 		return null;
@@ -115,8 +145,8 @@ public class PageLoader {
 	private static final String recipeSmelting = "smelting";
 	private static final String recipeBrewing = "brewing";
 	
-	private static void parseRecipes() {}
+	private static void parseRecipes(String lst) {}
 	
-	private static void parseImages() {}
+	private static void parseImages(String lst) {}
 	
 }

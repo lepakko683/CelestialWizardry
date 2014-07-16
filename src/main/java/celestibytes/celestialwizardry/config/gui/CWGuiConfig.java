@@ -4,7 +4,6 @@ import celestibytes.celestialwizardry.CelestialWizardry;
 import celestibytes.celestialwizardry.reference.Reference;
 import celestibytes.celestialwizardry.reference.Settings;
 import celestibytes.celestialwizardry.util.CWStringHelper;
-
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraftforge.common.config.ConfigElement;
 import cpw.mods.fml.client.config.GuiConfig;
@@ -12,6 +11,7 @@ import cpw.mods.fml.client.config.IConfigElement;
 
 import java.util.ArrayList;
 import java.util.List;
+
 
 public class CWGuiConfig extends GuiConfig
 {
@@ -21,7 +21,8 @@ public class CWGuiConfig extends GuiConfig
               CWStringHelper.getConfig("configTitle") /* GuiConfig.getAbridgedConfigPath(CelestialWizardry.config
               .toString() */);
     }
-
+    
+    @SuppressWarnings("rawtypes")
     private static List<IConfigElement> getConfigElements()
     {
         List<IConfigElement> list = new ArrayList<IConfigElement>();

@@ -10,6 +10,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.List;
 
+@SuppressWarnings("rawtypes")
 public final class CWApi
 {
     public static final String VERSION = "0.1";

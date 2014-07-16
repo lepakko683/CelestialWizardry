@@ -17,6 +17,7 @@ public class RuneLetter extends RuneCategory
     }
 
     @Override
+    @SuppressWarnings("rawtypes")
     public List validRuneAttributeTypes()
     {
         return null;

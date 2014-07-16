@@ -34,6 +34,7 @@ public class AttributeRune extends RuneCategory implements IAttributeRune
     }
 
     @Override
+    @SuppressWarnings("rawtypes")
     public List validRuneAttributeTypes()
     {
         return null;

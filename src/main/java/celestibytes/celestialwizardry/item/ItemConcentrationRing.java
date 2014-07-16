@@ -79,7 +79,7 @@ public class ItemConcentrationRing extends ItemSingle implements IBauble
 
     @Override
     @SideOnly(Side.CLIENT)
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings({"unchecked", "rawtypes"})
     public void getSubItems(Item item, CreativeTabs tabs, List list)
     {
         for (int meta = 0; meta < Names.Items.CONCENTRATION_RING_SUBTYPES.length; meta++) // Maybe ++meta
@@ -89,7 +89,7 @@ public class ItemConcentrationRing extends ItemSingle implements IBauble
     }
 
     @Override
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings({"unchecked", "rawtypes"})
     public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean adv)
     {
         super.addInformation(stack, player, list, adv);

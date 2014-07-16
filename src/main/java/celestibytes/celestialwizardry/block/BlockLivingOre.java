@@ -2,7 +2,6 @@ package celestibytes.celestialwizardry.block;
 
 import celestibytes.celestialwizardry.entity.EntityLivingOre;
 import celestibytes.celestialwizardry.reference.Names;
-
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.AxisAlignedBB;
@@ -21,6 +20,7 @@ public class BlockLivingOre extends BlockCW
         this.setBlockName(Names.Blocks.LIVING_ORE);
     }
 
+    @SuppressWarnings("rawtypes")
     public void updateTick(World world, int x, int y, int z, Random rand)
     {
         List entities = world.getEntitiesWithinAABB(EntityPlayer.class, AxisAlignedBB

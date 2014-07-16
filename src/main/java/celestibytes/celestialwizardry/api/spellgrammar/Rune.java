@@ -34,6 +34,8 @@ public abstract class Rune
     /**
      * To be removed!
      */
+    @Deprecated
+    @SuppressWarnings("rawtypes")
     public abstract List validRuneAttributeTypes();
 
     public String getRuneID()

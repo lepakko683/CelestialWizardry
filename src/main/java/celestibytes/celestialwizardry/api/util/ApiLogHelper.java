@@ -7,6 +7,7 @@ import cpw.mods.fml.common.FMLLog;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
+@SuppressWarnings("rawtypes")
 public class ApiLogHelper
 {
     private static final String UTIL_PACKAGE = CWApi.CW_PACKAGE + "util.";

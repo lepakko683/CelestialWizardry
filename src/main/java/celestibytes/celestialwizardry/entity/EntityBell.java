@@ -48,6 +48,7 @@ public class EntityBell extends EntityMob
 //		System.out.println("I'm following player: " + (playerToFollow == null ? "none" : playerToFollow));
     }
 
+    @SuppressWarnings("rawtypes")
     private void teleportToPlayer()
     {
         if (playerToFollow != null && playerToFollow.length() > 0 && !this.worldObj.isRemote)
