@@ -1,0 +1,3 @@
+[submodule "CelestiCore"]
+	path = CelestiCore
+	url = ../CelestiCore.git
