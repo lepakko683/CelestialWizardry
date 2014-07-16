@@ -96,7 +96,7 @@ public class BlockWritingTable extends BlockCW implements ITileEntityProvider
                                     .setInventorySlotContents(TileEntityWritingTable.MIDDLE_INVENTORY_INDEX, null);
                             return true;
                         }
-                        player.openGui(CelestialWizardry.instance, GuiIds.WRITING_TABLE, world, x, y, z);
+                        player.openGui(CelestialWizardry.instance, GuiIds.WRITING_TABLE.ordinal(), world, x, y, z);
                         return true;
                     }
                     if (putItemInMainSlot((TileEntityWritingTable) te, currentItem))
@@ -118,7 +118,7 @@ public class BlockWritingTable extends BlockCW implements ITileEntityProvider
                         }
                         else
                         {
-                            player.openGui(CelestialWizardry.instance, GuiIds.WRITING_TABLE, world, x, y, z);
+                            player.openGui(CelestialWizardry.instance, GuiIds.WRITING_TABLE.ordinal(), world, x, y, z);
                         }
                     }
                 }

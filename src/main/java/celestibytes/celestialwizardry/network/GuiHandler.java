@@ -31,16 +31,16 @@ public class GuiHandler implements IGuiHandler
     @Override
     public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z)
     {
-        if (ID == GuiIds.WRITING_TABLE)
+        if (ID == GuiIds.WRITING_TABLE.ordinal())
         {
             TileEntityWritingTable tileEntityWritingTable = (TileEntityWritingTable) world.getTileEntity(x, y, z);
             return new ContainerWritingTable(player.inventory, tileEntityWritingTable);
         }
-        else if (ID == GuiIds.SPELL_BOOK)
+        else if (ID == GuiIds.SPELL_BOOK.ordinal())
         {
             return new ContainerSpellBook(player.inventory);
         }
-        else if (ID == GuiIds.SPELL_BOOK_INVENTORY)
+        else if (ID == GuiIds.SPELL_BOOK_INVENTORY.ordinal())
         {
             return new ContainerSpellBookOld(player, new InventorySpellBookOld(player.getHeldItem()));
         }
@@ -64,21 +64,21 @@ public class GuiHandler implements IGuiHandler
     @Override
     public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z)
     {
-        if (ID == GuiIds.WRITING_TABLE)
+        if (ID == GuiIds.WRITING_TABLE.ordinal())
         {
             TileEntityWritingTable tileEntityWritingTable = (TileEntityWritingTable) world.getTileEntity(x, y, z);
             return new GuiWritingTable(player.inventory, tileEntityWritingTable);
         }
-        else if (ID == GuiIds.SPELL_BOOK)
+        else if (ID == GuiIds.SPELL_BOOK.ordinal())
         {
 //            return new GuiSpellBookGuide(player.inventory);
             return new GuiSpellBook(player);
         }
-        else if (ID == GuiIds.SPELL_BOOK_INVENTORY)
+        else if (ID == GuiIds.SPELL_BOOK_INVENTORY.ordinal())
         {
             return new GuiSpellBookOldInventory(player, new InventorySpellBookOld(player.getHeldItem()));
         }
-        else if (ID == GuiIds.SPELL_SWITCHER)
+        else if (ID == GuiIds.SPELL_SWITCHER.ordinal())
         {
         	return new GuiSpellSwitcher();
         }

@@ -1,9 +1,9 @@
 package celestibytes.celestialwizardry.reference;
 
-public class GuiIds
+public enum GuiIds
 {
-    public static final int WRITING_TABLE = 0;
-    public static final int SPELL_BOOK = 1;
-    public static final int SPELL_BOOK_INVENTORY = 2;
-    public static final int SPELL_SWITCHER = 3;
+    WRITING_TABLE,
+    SPELL_BOOK,
+    SPELL_BOOK_INVENTORY,
+    SPELL_SWITCHER
 }

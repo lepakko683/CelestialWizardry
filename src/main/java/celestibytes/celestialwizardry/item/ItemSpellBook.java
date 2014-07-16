@@ -36,7 +36,7 @@ public class ItemSpellBook extends ItemSingle implements ILockedItem
         {
             if (!player.isSneaking())
             {
-                player.openGui(CelestialWizardry.instance, GuiIds.SPELL_BOOK, player.worldObj, 0, 0, 0);
+                player.openGui(CelestialWizardry.instance, GuiIds.SPELL_BOOK.ordinal(), player.worldObj, 0, 0, 0);
             }
         }
         else

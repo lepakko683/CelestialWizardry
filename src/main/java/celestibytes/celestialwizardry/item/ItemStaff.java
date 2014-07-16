@@ -19,7 +19,7 @@ public class ItemStaff extends ItemSingle implements IStaff
     
     public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
     	if (!player.isSneaking()) {
-            player.openGui(CelestialWizardry.instance, GuiIds.SPELL_SWITCHER, player.worldObj, 0, 0, 0);
+            player.openGui(CelestialWizardry.instance, GuiIds.SPELL_SWITCHER.ordinal(), player.worldObj, 0, 0, 0);
         }
     	return stack;
     }
