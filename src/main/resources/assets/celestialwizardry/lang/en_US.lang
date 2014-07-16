@@ -1,4 +1,4 @@
-# Item localizations
+# Items
 item.celestialwizardry:magicalInk.name=Magical Ink
 item.celestialwizardry:staff.name=Staff
 item.celestialwizardry:scroll.name=Scroll
@@ -26,7 +26,7 @@ item.celestialwizardry:crystal.perfect.name=Perfect Crystal
 item.celestialwizardry:soarynChestPlcr.name=Soaryn Chest Placer
 item.celestialwizardry:invalid.name=Invalid Item
 
-# Block localizations
+# Blocks
 tile.celestialwizardry:writingTable.name=Writing Table
 tile.celestialwizardry:livingOre.name=Living Ore
 tile.celestialwizardry:magicalStone.name=Magical Stone
@@ -34,14 +34,14 @@ tile.celestialwizardry:containedCrystal.name=Contained Crystal
 tile.celestialwizardry:crystalConductiveWeak.name=Weak Crystal of Conductivity (WIP)
 tile.celestialwizardry:crystalSolarWeak.name=Weak Crystal of Solarization
 
-# Config localizations
+# Configs
 configgui.celestialwizardry:configTitle=Celestial Wizardry Configuration
 
-# GUI localizations
+# GUIs
 container.celestialwizardry:writingTable=Writing Table
 container.celestialwizardry:spellBookInventory=Spells
 
-# Tooltip localizations
+# Tooltips
 tooltip.celestialwizardry:lunar=Lunar
 tooltip.celestialwizardry:solar=Solar
 tooltip.celestialwizardry:noNBT=No NBT Tags found
@@ -64,7 +64,10 @@ message.celestialwizardry:stolenMatrix=This matrix belongs to %s and you have no
 message.celestialwizardry:crystalsBound=Crystals were successfully bounded!
 message.celestialwizardry:crystalsBoundFail=Crystals didn't bound.
 
-# SPELL BOOK
+# Creative Tabs
+itemGroup.celestialwizardry=Celestial Wizardry
+
+# SPELL BOOK - These aren't probably needed anymore?
 
 # GUIDE
 bookmark.celestialwizardry:guide=Guide
