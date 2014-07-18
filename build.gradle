@@ -21,7 +21,7 @@ buildscript {
         }
     }
     dependencies {
-        classpath 'io.github.celestibytes:CelestiGradle:1.5.1'
+        classpath 'io.github.celestibytes:CelestiGradle:1.5.2'
         classpath 'io.github.pizzana:JKaffe:1.2.3'
     }
 }
@@ -35,19 +35,11 @@ apply plugin: 'forge'
 group 'io.github.celestibytes'
 archivesBaseName = project.getName()
 
-if (System.getenv().BUILD_NUMBER != null)
-{
-    ext.buildNumber = "${System.getenv().BUILD_NUMBER}"
-}
-else
-{
-    ext.buildNumber = "null"
-}
-
-version = getCWVersion(getProject(), "VERSION_NUMBER") + "." + project.buildNumber
+version = getCWVersion(getProject(), "VERSION_NUMBER")
 
 ext.mc = getCWVersion(getProject(), "MINECRAFT")
 ext.forge = getCWVersion(getProject(), "FORGE")
+ext.coreVersion = getCWVersion(getProject(), "CORE")
 ext.baubles = getCWVersion(getProject(), "BAUBLES")
 ext.baubles_mc = getCWVersion(getProject(), "BAUBLES_MC")
 ext.baubles_root = getProperty(getProject(), "src/main/java/celestibytes/celestialwizardry/reference/Reference.java",
@@ -85,17 +77,6 @@ processResources {
     }
 }
 
-repositories {
-    maven {
-        name = "cbs"
-        url = "http://celestibytes.github.io/maven/"
-    }
-}
-
-dependencies {
-    compile 'io.github.celestibytes:CelestiCore:0.1.0-alpha.5'
-}
-
 version = project.mc + "-" + project.version
 
 // Keystore location
@@ -103,8 +84,6 @@ if (!project.hasProperty("keystore_location"))
 {
     ext.keystore_location = "."
 }
-
-ext.coreVersion = "null"
 
 apply plugin: 'celestibytes'
 
