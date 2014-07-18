@@ -28,11 +28,6 @@ public final class ModVersion implements Comparable<ModVersion>
         return channel == Channel.STABLE;
     }
 
-    public boolean isRC()
-    {
-        return channel == Channel.RC;
-    }
-
     public boolean isBeta()
     {
         return channel == Channel.BETA;
@@ -132,16 +127,6 @@ public final class ModVersion implements Comparable<ModVersion>
         if (isBeta() && !o.isBeta())
         {
             return -1;
-        }
-
-        if (isRC() && isAlpha())
-        {
-            return 1;
-        }
-
-        if (isRC() && isBeta())
-        {
-            return 1;
         }
 
         if (!isStable() && o.isStable())

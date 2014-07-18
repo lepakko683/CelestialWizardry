@@ -3,8 +3,7 @@ package celestibytes.core.mod.version;
 public enum Channel
 {
     STABLE("stable"),
-    RC("rc", STABLE),
-    BETA("beta", RC),
+    BETA("beta", STABLE),
     ALPHA("alpha", BETA);
 
     public static final Channel DEFAULT = STABLE;
@@ -37,11 +36,6 @@ public enum Channel
         if (s.equals(BETA.getKey()))
         {
             channel = BETA;
-        }
-
-        if (s.equals(RC.getKey()))
-        {
-            channel = RC;
         }
 
         if (s.equals(STABLE.getKey()))
