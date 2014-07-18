@@ -14,7 +14,7 @@ import celestibytes.core.mod.version.ModVersion;
 import celestibytes.core.proxy.IProxy;
 import celestibytes.core.reference.Reference;
 import celestibytes.core.reference.Settings;
-import celestibytes.core.reference.Version;
+import celestibytes.core.reference.Versions;
 import celestibytes.core.util.log.CoreLogHelper;
 
 @Mod(modid = Reference.MOD_ID, name = Reference.MOD_NAME, version = Reference.MOD_VERSION,
@@ -29,7 +29,7 @@ public class CelestiCore extends CelestiMod
     public static CelestiCore instance;
 
     // Mod configuration
-    public static final Config config = new Config(Version.VERSION);
+    public static final Config config = new Config(Versions.VERSION);
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event)
@@ -112,7 +112,7 @@ public class CelestiCore extends CelestiMod
     @Override
     public ModVersion getModVersion()
     {
-        return Version.MOD_VERSION;
+        return Versions.MOD_VERSION;
     }
 
     @Override

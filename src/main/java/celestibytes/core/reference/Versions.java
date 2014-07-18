@@ -3,7 +3,7 @@ package celestibytes.core.reference;
 import celestibytes.core.mod.version.Channel;
 import celestibytes.core.mod.version.ModVersion;
 
-public class Version
+public class Versions
 {
     public static final String VERSION = "0.1.0-rc.2";
     public static final ModVersion MOD_VERSION = new ModVersion(0, 1, 0, Channel.RC, 2);
