@@ -39,8 +39,8 @@ public class Names
         public static final String OWNER = celestibytes.core.reference.Names.NBT.OWNER;
         public static final String SPELL_BOOK_GUI_OPEN = "spellBookGuiOpen";
         public static final String SPELL_BOOK_INVENTORY_OPEN = "spellBookInventoryOpen";
-        public static final String UUID_MOST_SIG = "UUIDMostSig";
-        public static final String UUID_LEAST_SIG = "UUIDLeastSig";
+        public static final String UUID_MOST_SIG = celestibytes.core.util.NBTHelper.UUID_MOST_SIG;
+        public static final String UUID_LEAST_SIG = celestibytes.core.util.NBTHelper.UUID_LEAST_SIG;
         public static final String IS_CUSTOM = "isCustom";
         public static final String DISPLAY = "display";
         public static final String NAME = "Name";

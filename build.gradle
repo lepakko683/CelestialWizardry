@@ -17,11 +17,11 @@ buildscript {
         }
         maven {
             name = "cbs"
-            url = "https://raw.githubusercontent.com/PizzAna/maven/master/releases/"
+            url = "http://celestibytes.github.io/maven/"
         }
     }
     dependencies {
-        classpath 'celestibytes.gradle:CelestiGradle:1.3.0'
+        classpath 'celestibytes.gradle:CelestiGradle:1.4.0'
         classpath 'io.github.pizzana:JKaffe:1.2.0'
     }
 }
@@ -93,11 +93,9 @@ if (!project.hasProperty("keystore_location"))
     ext.keystore_location = "."
 }
 
-apply plugin: 'celestibytes'
+ext.coreVersion = project.mc + "-0.1.0-alpha.5"
 
-celestibytes {
-    version = project.mc + "-0.1.0-alpha.1"
-}
+apply plugin: 'celestibytes'
 
 uploadArchives {
     /* repositories {
