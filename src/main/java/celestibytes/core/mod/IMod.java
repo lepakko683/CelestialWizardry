@@ -1,7 +1,7 @@
 package celestibytes.core.mod;
 
-import celestibytes.core.mod.version.Channel;
-import celestibytes.core.mod.version.ModVersion;
+import celestibytes.pizzana.version.Channel;
+import celestibytes.pizzana.version.Version;
 
 public interface IMod
 {
@@ -13,7 +13,7 @@ public interface IMod
 
     public String getVersion();
 
-    public ModVersion getModVersion();
+    public Version getModVersion();
 
     public String getMinecraftVersion();
 

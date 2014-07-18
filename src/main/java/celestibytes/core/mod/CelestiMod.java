@@ -1,6 +1,6 @@
 package celestibytes.core.mod;
 
-import celestibytes.core.mod.version.Channel;
+import celestibytes.pizzana.version.Channel;
 
 public abstract class CelestiMod implements IMod
 {

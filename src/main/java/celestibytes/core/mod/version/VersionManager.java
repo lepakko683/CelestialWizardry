@@ -10,6 +10,8 @@ import net.minecraft.util.EnumChatFormatting;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.TickEvent;
 
+import celestibytes.pizzana.version.Version;
+
 public final class VersionManager
 {
     private final IMod mod;
@@ -54,7 +56,7 @@ public final class VersionManager
             {
                 if (mod.allowVersionNote())
                 {
-                    ModVersion version = thread.getNewVersion();
+                    Version version = thread.getNewVersion();
 
                     event.player.addChatMessage(
                             new ChatComponentText(EnumChatFormatting.GOLD + "[" + mod.getName() + "]").appendText(

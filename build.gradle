@@ -21,20 +21,21 @@ buildscript {
         }
     }
     dependencies {
-        classpath 'celestibytes.gradle:CelestiGradle:1.2.9'
-        classpath 'io.github.pizzana:JKaffe:1.0.1'
+        classpath 'celestibytes.gradle:CelestiGradle:1.3.0'
+        classpath 'io.github.pizzana:JKaffe:1.2.0'
     }
 }
 
-import static io.github.pizzana.jkaffe.util.gradle.ProjectPropertyHelper.Source.*;
+import static io.github.pizzana.jkaffe.util.gradle.ProjectPropertyHelper.Source.getCWVersion;
+import static io.github.pizzana.jkaffe.util.gradle.ProjectPropertyHelper.Source.getProperty;
 
 apply plugin: 'maven'
 apply plugin: 'forge'
 
-group 'io.github.pizzana'
+group 'io.github.celestibytes'
 archivesBaseName = project.getName()
 
-if(System.getenv().BUILD_NUMBER != null)
+if (System.getenv().BUILD_NUMBER != null)
 {
     ext.buildNumber = "${System.getenv().BUILD_NUMBER}"
 }
@@ -43,13 +44,14 @@ else
     ext.buildNumber = "null"
 }
 
-version = getCWVersion(getProject(), "VERSION") + "." + project.buildNumber
+version = getCWVersion(getProject(), "VERSION_NUMBER") + "." + project.buildNumber
 
 ext.mc = getCWVersion(getProject(), "MINECRAFT")
 ext.forge = getCWVersion(getProject(), "FORGE")
 ext.baubles = getCWVersion(getProject(), "BAUBLES")
 ext.baubles_mc = getCWVersion(getProject(), "BAUBLES_MC")
-ext.baubles_root = getProperty(getProject(), "src/main/java/celestibytes/celestialwizardry/reference/Reference.java", "BAUBLES_ROOT")
+ext.baubles_root = getProperty(getProject(), "src/main/java/celestibytes/celestialwizardry/reference/Reference.java",
+                               "BAUBLES_ROOT")
 
 minecraft {
     version = project.mc + "-" + project.forge
@@ -74,7 +76,8 @@ processResources {
     from(sourceSets.main.resources.srcDirs) {
         include '*.info'
 
-        expand 'version': project.version, 'mc_version': project.mc, 'baubles_version': project.baubles, 'baubles_mc': project.baubles_mc, 'baubles_root': project.baubles_root
+        expand 'version': project.version, 'mc_version': project.mc, 'baubles_version': project.baubles,
+               'baubles_mc': project.baubles_mc, 'baubles_root': project.baubles_root
     }
 
     from(sourceSets.main.resources.srcDirs) {
@@ -91,6 +94,10 @@ if (!project.hasProperty("keystore_location"))
 }
 
 apply plugin: 'celestibytes'
+
+celestibytes {
+    version = project.mc + "-0.1.0-alpha.1"
+}
 
 uploadArchives {
     /* repositories {

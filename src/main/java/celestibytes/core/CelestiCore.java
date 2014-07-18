@@ -10,7 +10,8 @@ import celestibytes.core.config.Config;
 import celestibytes.core.config.ConfigBase;
 import celestibytes.core.config.SettingHandler;
 import celestibytes.core.mod.CelestiMod;
-import celestibytes.core.mod.version.ModVersion;
+import celestibytes.pizzana.version.Version;
+
 import celestibytes.core.proxy.IProxy;
 import celestibytes.core.reference.Reference;
 import celestibytes.core.reference.Settings;
@@ -29,7 +30,7 @@ public class CelestiCore extends CelestiMod
     public static CelestiCore instance;
 
     // Mod configuration
-    public static final Config config = new Config(Versions.VERSION);
+    public static final Config config = new Config(Versions.VERSION_NUMBER);
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event)
@@ -110,9 +111,9 @@ public class CelestiCore extends CelestiMod
     }
 
     @Override
-    public ModVersion getModVersion()
+    public Version getModVersion()
     {
-        return Versions.MOD_VERSION;
+        return Versions.VERSION;
     }
 
     @Override

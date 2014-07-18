@@ -11,7 +11,7 @@ public class Reference
 {
     public static final String MOD_ID = "celestialwizardry";
     public static final String MOD_NAME = "Celestial Wizardry";
-    public static final String MOD_VERSION = Versions.VERSION;
+    public static final String MOD_VERSION = Versions.VERSION_NUMBER;
 
     public static final String SERVER_PROXY_CLASS = "celestibytes.celestialwizardry.proxy.ServerProxy";
     public static final String CLIENT_PROXY_CLASS = "celestibytes.celestialwizardry.proxy.ClientProxy";
@@ -20,7 +20,8 @@ public class Reference
 
     public static final String FINGERPRINT = "@FINGERPRINT@";
 
-    public static final String DEPENDENCIES = "required-after:celesticore@[" + celestibytes.core.reference.Versions.VERSION + ",);after:Baubles";
+    public static final String DEPENDENCIES = "required-after:celesticore@[" + celestibytes.core.reference.Versions.VERSION_NUMBER
+            + ",);after:Baubles";
 
     public static final String VERSION_URL = VersionCheckThread.DEFAULT_URL;
 

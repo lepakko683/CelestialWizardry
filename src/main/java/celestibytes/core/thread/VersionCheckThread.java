@@ -2,8 +2,8 @@ package celestibytes.core.thread;
 
 import celestibytes.core.derp.DerpException;
 import celestibytes.core.mod.IMod;
-import celestibytes.core.mod.version.Channel;
-import celestibytes.core.mod.version.ModVersion;
+import celestibytes.pizzana.version.Channel;
+import celestibytes.pizzana.version.Version;
 
 import cpw.mods.fml.common.FMLLog;
 
@@ -29,7 +29,7 @@ public class VersionCheckThread implements Runnable
     private final String url;
     private boolean checkComplete = false;
     private boolean newVersionAvailable = false;
-    private ModVersion newVersion;
+    private Version newVersion;
 
     public VersionCheckThread(IMod mod)
     {
@@ -110,9 +110,9 @@ public class VersionCheckThread implements Runnable
                 if (modNode.containsKey(mod.getMinecraftVersion()) && modNode
                         .get(mod.getMinecraftVersion()) instanceof Map)
                 {
-                    ModVersion remote = readFromMinecraftMap(
+                    Version remote = readFromMinecraftMap(
                             (Map<String, Object>) modNode.get(mod.getMinecraftVersion()));
-                    ModVersion local = mod.getModVersion();
+                    Version local = mod.getModVersion();
 
                     if (local.compareTo(remote) < 0)
                     {
@@ -129,7 +129,7 @@ public class VersionCheckThread implements Runnable
     }
 
     @SuppressWarnings("unchecked")
-    public ModVersion readFromMinecraftMap(Map<String, Object> minecraftMap) throws DerpException
+    public Version readFromMinecraftMap(Map<String, Object> minecraftMap) throws DerpException
     {
         if (minecraftMap.containsKey("channels"))
         {
@@ -150,7 +150,7 @@ public class VersionCheckThread implements Runnable
     }
 
     @SuppressWarnings("unchecked")
-    public ModVersion readFromChannelMap(Map<String, Object> channelMap, Channel channel) throws DerpException
+    public Version readFromChannelMap(Map<String, Object> channelMap, Channel channel) throws DerpException
     {
         String targetChannel = channel.getKey();
         Object ret;
@@ -173,9 +173,9 @@ public class VersionCheckThread implements Runnable
 
         if (!(ret == null || ret.equals("next")))
         {
-            if (ret instanceof ModVersion)
+            if (ret instanceof Version)
             {
-                return (ModVersion) ret;
+                return (Version) ret;
             }
             else
             {
@@ -201,7 +201,7 @@ public class VersionCheckThread implements Runnable
             }
         }
 
-        ModVersion modVersion;
+        Version version;
 
         int major;
         int minor;
@@ -259,7 +259,7 @@ public class VersionCheckThread implements Runnable
 
         if (channel == Channel.STABLE)
         {
-            modVersion = new ModVersion(major, minor, patch);
+            version = new Version(major, minor, patch);
         }
         else
         {
@@ -280,7 +280,7 @@ public class VersionCheckThread implements Runnable
                 throw new DerpException("Channel " + channel.getKey() + " doesn't have value number");
             }
 
-            modVersion = new ModVersion(major, minor, patch, channel, number);
+            version = new Version(major, minor, patch, channel, number);
         }
 
         if (channelMap.containsKey("description"))
@@ -300,9 +300,9 @@ public class VersionCheckThread implements Runnable
             throw new DerpException("Channel " + channel.getKey() + " doesn't have value description");
         }
 
-        modVersion.setDescription(description);
+        version.setDescription(description);
 
-        return modVersion;
+        return version;
     }
 
     public void start()
@@ -327,7 +327,7 @@ public class VersionCheckThread implements Runnable
         return newVersionAvailable;
     }
 
-    public ModVersion getNewVersion()
+    public Version getNewVersion()
     {
         return newVersion;
     }

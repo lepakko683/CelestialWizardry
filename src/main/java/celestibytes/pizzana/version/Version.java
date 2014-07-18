@@ -1,6 +1,6 @@
-package celestibytes.core.mod.version;
+package celestibytes.pizzana.version;
 
-public final class ModVersion implements Comparable<ModVersion>
+public final class Version implements Comparable<Version>
 {
     private final int major;
     private final int minor;
@@ -9,12 +9,12 @@ public final class ModVersion implements Comparable<ModVersion>
     private final int number;
     private String description = "";
 
-    public ModVersion(int major, int minor, int patch)
+    public Version(int major, int minor, int patch)
     {
         this(major, minor, patch, Channel.STABLE, 0);
     }
 
-    public ModVersion(int major, int minor, int patch, Channel channel, int number)
+    public Version(int major, int minor, int patch, Channel channel, int number)
     {
         this.major = major;
         this.minor = minor;
@@ -92,7 +92,7 @@ public final class ModVersion implements Comparable<ModVersion>
      * @throws ClassCastException   if the specified object's type prevents it from being compared to this object.
      */
     @Override
-    public int compareTo(ModVersion o)
+    public int compareTo(Version o)
     {
         if (major != o.major)
         {

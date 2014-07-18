@@ -1,4 +1,4 @@
-package celestibytes.core.mod.version;
+package celestibytes.pizzana.version;
 
 public enum Channel
 {

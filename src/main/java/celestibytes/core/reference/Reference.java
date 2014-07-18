@@ -6,7 +6,7 @@ public class Reference
 {
     public static final String MOD_ID = "celesticore";
     public static final String MOD_NAME = "Celestibytes Core";
-    public static final String MOD_VERSION = Versions.VERSION;
+    public static final String MOD_VERSION = Versions.VERSION_NUMBER;
 
     public static final String SERVER_PROXY_CLASS = "celestibytes.core.proxy.ServerProxy";
     public static final String CLIENT_PROXY_CLASS = "celestibytes.core.proxy.ClientProxy";

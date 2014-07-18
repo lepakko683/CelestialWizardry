@@ -37,7 +37,8 @@ import cpw.mods.fml.common.registry.GameRegistry;
 
 import celestibytes.core.config.ConfigBase;
 import celestibytes.core.mod.CelestiMod;
-import celestibytes.core.mod.version.ModVersion;
+import celestibytes.pizzana.version.Version;
+
 import celestibytes.core.mod.version.VersionManager;
 import celestibytes.core.registry.VersionManagerRegistry;
 
@@ -46,7 +47,7 @@ import java.io.File;
 /**
  * The main mod class of Minecraft mod Celestial Wizardry
  */
-@Mod(modid = Reference.MOD_ID, name = Reference.MOD_NAME, version = Versions.VERSION,
+@Mod(modid = Reference.MOD_ID, name = Reference.MOD_NAME, version = Versions.VERSION_NUMBER,
      certificateFingerprint = Reference.FINGERPRINT, dependencies = Reference.DEPENDENCIES,
      guiFactory = Reference.GUI_FACTORY_CLASS)
 public class CelestialWizardry extends CelestiMod
@@ -58,10 +59,10 @@ public class CelestialWizardry extends CelestiMod
     public static CelestialWizardry instance;
 
     // Mod configuration
-    public static final Config config = new Config(Versions.VERSION);
+    public static final Config config = new Config(Versions.VERSION_NUMBER);
 
     // Spell configuration
-    public static final ConfigSpells configSpells = new ConfigSpells(Versions.VERSION);
+    public static final ConfigSpells configSpells = new ConfigSpells(Versions.VERSION_NUMBER);
 
     @Mod.EventHandler
     public void invalidFingerprint(FMLFingerprintViolationEvent event)
@@ -237,9 +238,9 @@ public class CelestialWizardry extends CelestiMod
     }
 
     @Override
-    public ModVersion getModVersion()
+    public Version getModVersion()
     {
-        return Versions.MOD_VERSION;
+        return Versions.VERSION;
     }
 
     @Override
