@@ -232,13 +232,13 @@ public class CelestialWizardry extends CelestiMod
     }
 
     @Override
-    public String getVersion()
+    public String getVersionNumber()
     {
         return CelestialWizardry.class.getAnnotation(Mod.class).version();
     }
 
     @Override
-    public Version getModVersion()
+    public Version getVersion()
     {
         return Versions.VERSION;
     }
@@ -256,14 +256,8 @@ public class CelestialWizardry extends CelestiMod
     }
 
     @Override
-    protected String channel()
+    public boolean checkForLatest()
     {
-        return getModVersion().getChannel().getKey();
-    }
-
-    @Override
-    protected String updateChannel()
-    {
-        return Settings.channel;
+        return Settings.checkForLatest;
     }
 }

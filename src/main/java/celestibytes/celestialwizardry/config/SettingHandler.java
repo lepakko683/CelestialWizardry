@@ -31,7 +31,7 @@ public class SettingHandler
                      Settings.DefaultValues.ENABLE_VERSION_NOTIFICATION, Settings.Comments.ENABLE_VERSION_NOTIFICATION);
 
         // channel
-        Settings.channel = CelestialWizardry.config.get(category, Settings.ConfigNames.CHANNEL, Settings.DefaultValues.CHANNEL, Settings.Comments.CHANNEL);
+        Settings.checkForLatest = CelestialWizardry.config.get(category, Settings.ConfigNames.CHECK_FOR_LATEST, Settings.DefaultValues.CHECK_FOR_LATEST, Settings.Comments.CHECK_FOR_LATEST);
 
         // debugMode
         Settings.debugMode = CelestialWizardry.config
