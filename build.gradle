@@ -40,6 +40,14 @@ version = getCWVersion(getProject(), "VERSION_NUMBER")
 ext.mc = getCWVersion(getProject(), "MINECRAFT")
 ext.forge = getCWVersion(getProject(), "FORGE")
 ext.coreVersion = getCWVersion(getProject(), "CORE")
+
+def commonManifest = {
+    attributes 'FMLCorePlugin': 'celestibytes.celestialwizardry.codechicken.core.launch.DepLoader'
+    attributes 'FMLCorePluginContainsFMLMod': 'true'
+}
+
+ext.manifest = commonManifest
+
 ext.baubles = getCWVersion(getProject(), "BAUBLES")
 ext.baubles_mc = getCWVersion(getProject(), "BAUBLES_MC")
 ext.baubles_root = getProperty(getProject(), "src/main/java/celestibytes/celestialwizardry/reference/Reference.java",
