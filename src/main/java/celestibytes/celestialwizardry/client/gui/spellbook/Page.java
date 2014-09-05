@@ -53,6 +53,7 @@ public abstract class Page {
 	
 	public static enum PageType {
 		GUIDE,
+		RUNES, // Intentional - multiple runes per page
 		NOTE,
 		SPELL,
 		OTHER;

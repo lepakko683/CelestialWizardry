@@ -4,6 +4,10 @@ import celestibytes.celestialwizardry.client.gui.spellbook.PageRenderer;
 
 public class PageObjectRecipe extends PageObject {
 	
+	public PageObjectRecipe() {
+		super(PageObject.PageObjectType.RECIPE);
+	}
+
 	private int slotDefaultSize = 8;
 
 	@Override

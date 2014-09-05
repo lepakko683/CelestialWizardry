@@ -10,26 +10,13 @@ import java.util.List;
 import net.minecraft.util.ResourceLocation;
 import celestibytes.celestialwizardry.client.gui.spellbook.Page;
 import celestibytes.celestialwizardry.client.gui.spellbook.PageData;
+import celestibytes.celestialwizardry.client.gui.spellbook.object.PageObject.PageObjectType;
+import celestibytes.celestialwizardry.client.gui.spellbook.object.PageStyle;
 import celestibytes.celestialwizardry.reference.Characters;
 import celestibytes.celestialwizardry.util.LogH;
 import celestibytes.celestialwizardry.util.LogHelper;
 
 public class PageLoader {
-	
-	private static final byte CR = 0x0D;      // 13
-	private static final byte LF = 0x0A;      // 10
-	private static final byte SPECIAL = 0x26; // 38 '&'
-	
-	private static final byte RUNE = 'R';
-	private static final byte IMAGE = 'I';
-	private static final byte RECIPE = 'C';
-	
-	private static final byte NEWLINE = 'N';
-	private static final byte HORIZ_LINE = 'H';
-	
-	private static final String[] pageDataObjects = new String[] {"title", "essential", "text", "runes", "recipes", "images"};
-	private static final String FALSE = "false";
-	private static final String TRUE = "true";
 	
 	// Don't mind my messy code :P -OkkapeL
 	
@@ -39,6 +26,9 @@ public class PageLoader {
 	}
 	
 	public static Page loadPage(InputStream is) {
+		if(is == null) {
+			return null;
+		}
 		BufferedReader br = null;
 		try {
 			br = new BufferedReader(new InputStreamReader(is));
@@ -78,32 +68,54 @@ public class PageLoader {
 						}
 					} while(cc2 != -1);
 				}
-				if(/*!readingInnerPageData && */cc != Characters.CR && cc != Characters.LF && cc != Characters.WHITESPACE && cc != '{' && cc != '[' && cc != '"' && cc != ']') {
+				if(/*!readingInnerPageData && */cc != Characters.CR && cc != Characters.LF && cc != Characters.WHITESPACE && cc != '{' && cc != '[' && cc != '"' && cc != ']' && cc != '=' && cc != '}') {
 					linebuffer.append(cc);
 				}
 				
 				if(readingInnerPageData && readingInnerObjectData) {
 					if(cc == '"') {
-						System.out.println("-StringEnd-: " + linebuffer.toString());
+						System.out.println("Value: " + linebuffer.toString());
 						readingInnerObjectData = false;
 						linebuffer = new StringBuilder();
 						cc = (char)br.read();
 					} else if(cc == ']') {
-						System.out.println("-ArrayEnd-: " + linebuffer.toString());
+						System.out.println("Value: " /*+ printArray(parseRunes(linebuffer.toString()))*/);
+						printArray(parseRunes(linebuffer.toString()));
 						readingInnerObjectData = false;
 						linebuffer = new StringBuilder();
 						cc = (char)br.read();
 					}
 				}
 				if(readingInnerPageData && !readingInnerObjectData) {
+					String key = null;
 					if(cc == '"') {
-						System.out.println("-String-");
+//						System.out.println("-String-");
+						System.out.println("Key: " + linebuffer.toString());
+						key = linebuffer.toString();
 						readingInnerObjectData = true;
 						linebuffer = new StringBuilder();
 					} else if(cc == '[') {
-						System.out.println("-Array-");
+//						System.out.println("-Array-");
+						System.out.println("Key: " + linebuffer.toString());
+						key = linebuffer.toString();
 						readingInnerObjectData = true;
 						linebuffer = new StringBuilder();
+					}
+					
+					if(key != null){
+						if(key.equalsIgnoreCase("title")) {
+							System.out.println("TITLE!");
+						} else if(key.equalsIgnoreCase("text")) {
+							System.out.println("TEXT!");
+						} else if(key.equalsIgnoreCase("runes")) {
+							System.out.println("RUNES!");
+						} else if(key.equalsIgnoreCase("images")) {
+							System.out.println("IMAGES!");
+						} else if(key.equalsIgnoreCase("recipes")) {
+							System.out.println("RECIPES!");
+						} else if(key.equalsIgnoreCase("essential")) {
+							System.out.println("ESSENTIAL?");
+						}
 					}
 				}
 				if(cc == '{') {
@@ -111,18 +123,23 @@ public class PageLoader {
 						readingInnerPageData = true;
 						
 						pageName = linebuffer.toString().trim();
-						LogH.debug("Loading page \"" + pageName + "\"...");
+//						LogH.debug("Loading page \"" + pageName + "\"...");
 						System.out.println("Loading page \"" + pageName + "\"...");
 						pageNameParts = pageName.split(".");
-						
-						
-						
+						linebuffer = new StringBuilder();
 					}
 					
 				}
+				if(cc == '}') {
+					if(readingInnerPageData) {
+						readingInnerPageData = false;
+						
+						System.out.println("Finished loading page \"" + pageName + "\".");
+					}
+				}
 			}
 		} catch(Exception e) {
-			LogH.err("Something went wrong with reading a page file");
+//			LogH.err("Something went wrong with reading a page file");
 			System.err.println("Something went wrong with reading a page file");
 		}
 		
@@ -135,7 +152,19 @@ public class PageLoader {
 	}
 	
 	private static int[] parseRunes(String lst) {
-//		br.r
+		String[] prts = lst.split(",");
+		if(prts != null && prts.length > 0) {
+			int[] ret = new int[prts.length];
+			for(int i=0;i<ret.length;i++) {
+				try {
+					ret[i] = Integer.parseInt(prts[i]);
+				} catch(NumberFormatException e) {
+					System.err.println("Not a number!: " + prts[i]);
+					e.printStackTrace();
+				}
+			}
+			return ret;
+		}
 		
 		return null;
 	}
@@ -148,5 +177,22 @@ public class PageLoader {
 	private static void parseRecipes(String lst) {}
 	
 	private static void parseImages(String lst) {}
+	
+	private static void printArray(int[] arr) {
+		if(arr == null) {
+			return;
+		}
+		for(int i : arr) {
+			System.out.print(i + ", ");
+		}
+		System.out.print("\n");
+	}
+	
+	private static PageStyle parsePropertiesFor(PageObjectType type, String str) {
+		
+		
+		
+		return null;
+	}
 	
 }

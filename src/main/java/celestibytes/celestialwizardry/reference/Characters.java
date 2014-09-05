@@ -12,6 +12,7 @@ public class Characters {
 	public static final byte IMAGE = 'I';
 	public static final byte RECIPE = 'C';
 	
+	public static final byte PROPERTIES = 'C';
 	public static final byte NEWLINE = 'N';
 	public static final byte HORIZ_LINE = 'H';
 }
