@@ -72,13 +72,32 @@ public class GuiSpellSwitcher extends GuiScreen {
 		tes.draw();
 		GL11.glEnable(GL11.GL_CULL_FACE);
 		GL11.glDisable(GL11.GL_BLEND);
-		
 	}
 	
 	private void renderBackground() {
 		SOLAR.setGLColor();
-		drawTexturedModalRect((width/2)-((l_width-2)/2), (height/2)-((l_height-2)/2), 134, 1, l_width-2, l_height-2);
+		// Inner
+		Tessellator tes = Tessellator.instance;
+		
+		GL11.glEnable(GL11.GL_STENCIL_TEST);
+		GL11.glStencilFunc(GL11.GL_NEVER, 1, 0xFF);
+		GL11.glStencilOp(GL11.GL_KEEP, GL11.GL_KEEP, GL11.GL_REPLACE);
+		GL11.glStencilMask(0xFF);
+		GL11.glClear(GL11.GL_STENCIL_BUFFER_BIT);
+		tes.startDrawing(GL11.GL_TRIANGLES);
+		
+		// TODO: set up verticies
+//		tes.addVertexWithUV(, p_78374_3_, p_78374_5_, p_78374_7_, p_78374_9_);
+		tes.draw();
+		GL11.glStencilFunc(GL11.GL_EQUAL, 1, 0xFF);
+		GL11.glStencilMask(0x00);
+		
+		// Draw clouds
+		
+		GL11.glDisable(GL11.GL_STENCIL_TEST);
+//		drawTexturedModalRect((width/2)-((l_width-2)/2), (height/2)-((l_height-2)/2), 134, 1, l_width-2, l_height-2);
 		Colour.resetGLColor();
+		// Border
 		drawTexturedModalRect((width/2)-((l_width+4)/2), (height/2)-((l_height+4)/2), 0, 0, l_width+4, l_height+4);
 	}
 	
@@ -106,41 +125,4 @@ public class GuiSpellSwitcher extends GuiScreen {
 		return false;
 	}
 	
-	private static final String cloudFragShader = 
-    		"" +
-    		"" +
-    		"void main() {\n" +
-    		"	gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);\n" +
-    		"}\n" +
-//    		"" +
-//    		"" +
-//    		"" +
-//    		"" +
-//    		"" +
-//    		"" +
-//    		"" +
-//    		"" +
-//    		"" +
-//    		"" +
-//    		"" +
-    		"";
-	
-	private static final String cloudVertShader = 
-    		"" +
-    		"" +
-    		"void main() {\n" +
-    		"	gl_Position = ftransform();\n" +
-    		"}\n" +
-//    		"" +
-//    		"" +
-//    		"" +
-//    		"" +
-//    		"" +
-//    		"" +
-//    		"" +
-//    		"" +
-//    		"" +
-//    		"" +
-//    		"" +
-    		"";
 }
